@@ -7,10 +7,11 @@
 
 #import "YesGraph.h"
 
+
 @implementation YGYesGraphClient
 
 
-+(instancetype)sharedInstance {
++ (instancetype)sharedInstance {
     static dispatch_once_t dispatch_token;
     static YGYesGraphClient *client = nil;
     
@@ -21,9 +22,39 @@
 }
 
 
-+(void)configureWithClientKey:(NSString *)clientKey {
++ (void)configureWithClientKey:(NSString *)clientKey {
     [[self sharedInstance] setClientKey:clientKey];
 }
 
+
+// TODO: IMPLEMENT
+/*
+- (void)identifyWithTraits:(NSDictionary *)traits {
+}
+
+
+- (void)promptForAddressBookAccess {
+}
+
+
+- (NSArray *)readAddressBook {
+}
+
+
+- (void)sendAddressBook {
+}
+
+
+- (void)sendAddressBookIfNeeded {
+}
+
+
+- (void)rankedAddressBook {
+}
+
+
+- (void)rankedAddressBookWithLimit:(NSInteger)limit {
+}
+*/
 
 @end
