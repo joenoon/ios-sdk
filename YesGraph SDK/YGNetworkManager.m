@@ -65,10 +65,16 @@ static NSString *baseUrlString  = @"https://api.yesgraph.com/v0";
     {
         if (nil == connectionError)
         {
+            NSString *dataString    = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"YesGraph Network Success - %@", dataString);
+
             success(response, data);
         }
         else
         {
+            NSString *errorString   = [[connectionError userInfo] description];
+            NSLog(@"YesGraph Network Failure - %@", errorString);
+            
             failure(response, data, connectionError);
         }
     }];
@@ -119,10 +125,16 @@ static NSString *baseUrlString  = @"https://api.yesgraph.com/v0";
      {
          if (nil == connectionError)
          {
+             NSString *dataString    = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+             NSLog(@"YesGraph Network Success - %@", dataString);
+
              success(response, data);
          }
          else
          {
+             NSString *errorString   = [[connectionError userInfo] description];
+             NSLog(@"YesGraph Network Failure - %@", errorString);
+
              failure(response, data, connectionError);
          }
      }];

@@ -20,8 +20,13 @@
 // - (void)rankedAddressBook;
 // - (void)rankedAddressBookWithLimit:(NSInteger)limit;
 
+// Posting Data
 - (void)postAddressBook;
-- (void)fetchAddressBook;
 
+// Fetchin Data
+- (void)fetchRankedAddressBook;
+- (void)fetchRankedAddressBookWithCompletionHandler:(void (^)(NSDictionary *addressBook, NSError *error))completionHandler;
+
+// Test
 - (void)test;
 @end

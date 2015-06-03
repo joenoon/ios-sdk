@@ -92,18 +92,15 @@
     NSString *urlString = @"https://api.yesgraph.com/v0/address-book";
     [networkManager POST:urlString parameters:HACK_DATA success:^(NSURLResponse *response, NSData *responseData)
      {
-         NSString *dataString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-         NSLog(@"YesGraph Network Success - %@", dataString);
      }
                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
      {
-         NSString *errorString   = [[error userInfo] description];
-         NSLog(@"YesGraph Network Failure - %@", errorString);
      }];
 }
 
 
-- (void)fetchAddressBook
+// Fetching Data
+- (void)fetchRankedAddressBook
 {
     if (nil == _userId)
     {
@@ -116,35 +113,48 @@
     
     [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
      {
-         NSString *dataString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-         NSLog(@"YesGraph Network Success - %@", dataString);
      }
                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
      {
-         NSString *errorString   = [[error userInfo] description];
-         NSLog(@"YesGraph Network Failure - %@", errorString);
+     }];
+}
+
+
+- (void)fetchRankedAddressBookWithCompletionHandler:(void (^)(NSDictionary *, NSError *))completionHandler
+{
+    if (nil == _userId)
+    {
+        NSLog(@"YesGraph Error - fetchAddressBook requires the user_id parameter to be set");
+        return;
+    }
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString                 = [NSString stringWithFormat:@"https://api.yesgraph.com/v0/address-book/%@", _userId];
+    
+    [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
+     {
+         NSError *error;
+         NSDictionary *addressBook  = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         completionHandler(addressBook, error);
+     }
+                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         completionHandler(nil, error);
      }];
 }
 
 
 
 - (void)test
-{
-    [self fetchAddressBook];
-    return;
-    
+{    
     YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
     NSString *urlString                 = @"https://api.yesgraph.com/v0/test";
     
     [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
     {
-        NSString *dataString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"YesGraph Network Success - %@", dataString);
     }
                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
     {
-        NSString *errorString   = [[error userInfo] description];
-        NSLog(@"YesGraph Network Failure - %@", errorString);
     }];
 }
 
