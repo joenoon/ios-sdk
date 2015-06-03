@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B318D951B1F8030002FFC5F /* YGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B318D941B1F8030002FFC5F /* YGNetworkManager.m */; };
 		8D90BEBD1B0B6DB9005C6857 /* YesGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90BEBC1B0B6DB9005C6857 /* YesGraph.m */; };
 		8D90BEC31B0B6DB9005C6857 /* libYesGraph SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D90BEB71B0B6DB9005C6857 /* libYesGraph SDK.a */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5B318D931B1F8030002FFC5F /* YGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGNetworkManager.h; sourceTree = "<group>"; };
+		5B318D941B1F8030002FFC5F /* YGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGNetworkManager.m; sourceTree = "<group>"; };
 		8D90BEB71B0B6DB9005C6857 /* libYesGraph SDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libYesGraph SDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D90BEBC1B0B6DB9005C6857 /* YesGraph.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YesGraph.m; sourceTree = "<group>"; };
 		8D90BEC21B0B6DB9005C6857 /* YesGraph SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YesGraph SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +86,8 @@
 			children = (
 				8D90BED11B0B6F49005C6857 /* YesGraph.h */,
 				8D90BEBC1B0B6DB9005C6857 /* YesGraph.m */,
+				5B318D931B1F8030002FFC5F /* YGNetworkManager.h */,
+				5B318D941B1F8030002FFC5F /* YGNetworkManager.m */,
 			);
 			path = "YesGraph SDK";
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B318D951B1F8030002FFC5F /* YGNetworkManager.m in Sources */,
 				8D90BEBD1B0B6DB9005C6857 /* YesGraph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

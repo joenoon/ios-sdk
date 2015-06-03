@@ -6,6 +6,7 @@
 //
 
 #import "YesGraph.h"
+#import "YGNetworkManager.h"
 
 
 @implementation YGYesGraphClient
