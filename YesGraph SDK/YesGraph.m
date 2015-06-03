@@ -28,6 +28,32 @@
 }
 
 
+- (void)setClientKey:(NSString *)clientKey
+{
+    _clientKey  = clientKey;
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    networkManager.clientKey            = clientKey;
+}
+
+
+- (void)test
+{
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString = @"https://api.yesgraph.com/v0/test";
+    [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
+    {
+        NSString *dataString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"YesGraph Network Success - %@", dataString);
+    }
+                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+    {
+        NSString *errorString   = [[error userInfo] description];
+        NSLog(@"YesGraph Network Failure - %@", errorString);
+    }];
+}
+
+
 // TODO: IMPLEMENT
 /*
 - (void)identifyWithTraits:(NSDictionary *)traits {

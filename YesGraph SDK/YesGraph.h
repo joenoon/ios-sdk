@@ -20,4 +20,5 @@
 // - (void)rankedAddressBook;
 // - (void)rankedAddressBookWithLimit:(NSInteger)limit;
 
+- (void)test;
 @end

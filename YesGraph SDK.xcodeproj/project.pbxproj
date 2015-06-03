@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B318D951B1F8030002FFC5F /* YGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B318D941B1F8030002FFC5F /* YGNetworkManager.m */; };
+		5B318D991B1F87C5002FFC5F /* YGNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B318D981B1F87C5002FFC5F /* YGNetworkOperation.m */; };
 		8D90BEBD1B0B6DB9005C6857 /* YesGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D90BEBC1B0B6DB9005C6857 /* YesGraph.m */; };
 		8D90BEC31B0B6DB9005C6857 /* libYesGraph SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D90BEB71B0B6DB9005C6857 /* libYesGraph SDK.a */; };
 /* End PBXBuildFile section */
@@ -37,6 +38,8 @@
 /* Begin PBXFileReference section */
 		5B318D931B1F8030002FFC5F /* YGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGNetworkManager.h; sourceTree = "<group>"; };
 		5B318D941B1F8030002FFC5F /* YGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGNetworkManager.m; sourceTree = "<group>"; };
+		5B318D971B1F87C5002FFC5F /* YGNetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YGNetworkOperation.h; sourceTree = "<group>"; };
+		5B318D981B1F87C5002FFC5F /* YGNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YGNetworkOperation.m; sourceTree = "<group>"; };
 		8D90BEB71B0B6DB9005C6857 /* libYesGraph SDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libYesGraph SDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D90BEBC1B0B6DB9005C6857 /* YesGraph.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YesGraph.m; sourceTree = "<group>"; };
 		8D90BEC21B0B6DB9005C6857 /* YesGraph SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "YesGraph SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +66,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B318D961B1F879F002FFC5F /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				5B318D931B1F8030002FFC5F /* YGNetworkManager.h */,
+				5B318D941B1F8030002FFC5F /* YGNetworkManager.m */,
+				5B318D971B1F87C5002FFC5F /* YGNetworkOperation.h */,
+				5B318D981B1F87C5002FFC5F /* YGNetworkOperation.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		8D90BEAE1B0B6DB9005C6857 = {
 			isa = PBXGroup;
 			children = (
@@ -86,8 +100,7 @@
 			children = (
 				8D90BED11B0B6F49005C6857 /* YesGraph.h */,
 				8D90BEBC1B0B6DB9005C6857 /* YesGraph.m */,
-				5B318D931B1F8030002FFC5F /* YGNetworkManager.h */,
-				5B318D941B1F8030002FFC5F /* YGNetworkManager.m */,
+				5B318D961B1F879F002FFC5F /* Networking */,
 			);
 			path = "YesGraph SDK";
 			sourceTree = "<group>";
@@ -198,6 +211,7 @@
 			files = (
 				5B318D951B1F8030002FFC5F /* YGNetworkManager.m in Sources */,
 				8D90BEBD1B0B6DB9005C6857 /* YesGraph.m in Sources */,
+				5B318D991B1F87C5002FFC5F /* YGNetworkOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -290,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -300,6 +314,7 @@
 		8D90BECC1B0B6DB9005C6857 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -309,6 +324,7 @@
 		8D90BECD1B0B6DB9005C6857 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
