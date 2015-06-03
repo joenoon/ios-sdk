@@ -37,6 +37,66 @@
 }
 
 
+- (void)postAddressBook
+{
+    // HACK for testing
+    NSMutableDictionary *HACK_DATA      = [[NSMutableDictionary alloc] init];
+    HACK_DATA[@"user_id"]               = @"1234";
+    HACK_DATA[@"source"]                = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           @"Erik Olson", @"name",
+                                           @"erik@yesgraph.com", @"email",
+                                           @"gmail", @"type",
+                                           nil];
+    NSMutableArray *HACK_ENTRY_ARRAY    = [[NSMutableArray alloc] init];
+    NSDictionary *HACK_ENTRY_1          = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           @"Ivan Kirigin", @"name",
+                                           @[@"ivan@yesgraph.com"], @"emails",
+                                           @[@"+1 555 123 4567"], @"phones",
+                                           @{@"picture_url":@"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/000/20f/182/1a51498.jpg"}, @"data",
+                                           nil];
+    NSDictionary *HACK_ENTRY_2          = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           @"Jonathan Chu", @"name",
+                                           [NSArray arrayWithObjects:@"jonathan.chu@me.com", nil], @"emails",
+                                           nil];
+    NSDictionary *HACK_ENTRY_3          = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           @"Vincent Driessen", @"name",
+                                           [NSArray arrayWithObjects:@"me@nvie.com", @"vincent@yesgraph.com", nil], @"emails",
+                                           nil];
+    NSDictionary *HACK_ENTRY_4          = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           [NSArray arrayWithObjects:@"post@posterous.com", nil], @"emails",
+                                           nil];
+    NSDictionary *HACK_ENTRY_5          = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           [NSArray arrayWithObjects:@"hous-123456@craigslist.org", nil], @"emails",
+                                           nil];
+    NSDictionary *HACK_ENTRY_6          = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           @"George Hickman", @"name",
+                                           [NSArray arrayWithObjects:@"george@yesgraph.com", nil], @"emails",
+                                           [NSDictionary dictionaryWithObjectsAndKeys:@"foo", @"bar", nil], @"data",
+                                           nil];
+    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_1];
+    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_2];
+    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_3];
+    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_4];
+    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_5];
+    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_6];
+    HACK_DATA[@"entries"]               = HACK_ENTRY_ARRAY;
+    
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString = @"https://api.yesgraph.com/v0/address-book";
+    [networkManager POST:urlString parameters:HACK_DATA success:^(NSURLResponse *response, NSData *responseData)
+     {
+         NSString *dataString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+         NSLog(@"YesGraph Network Success - %@", dataString);
+     }
+                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         NSString *errorString   = [[error userInfo] description];
+         NSLog(@"YesGraph Network Failure - %@", errorString);
+     }];
+}
+
+
 - (void)test
 {
     YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
