@@ -9,7 +9,7 @@
 
 
 @interface YGYesGraphClient : NSObject
-
+@property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSString *clientKey;
 
 + (instancetype)sharedInstance;
@@ -21,6 +21,7 @@
 // - (void)rankedAddressBookWithLimit:(NSInteger)limit;
 
 - (void)postAddressBook;
+- (void)fetchAddressBook;
 
 - (void)test;
 @end

@@ -39,9 +39,15 @@
 
 - (void)postAddressBook
 {
+    if (nil == _userId)
+    {
+        NSLog(@"YesGraph Error - postAddressBook requires the user_id parameter to be set");
+        return;
+    }
+    
     // HACK for testing
     NSMutableDictionary *HACK_DATA      = [[NSMutableDictionary alloc] init];
-    HACK_DATA[@"user_id"]               = @"1234";
+    HACK_DATA[@"user_id"]               = _userId;
     HACK_DATA[@"source"]                = [NSDictionary dictionaryWithObjectsAndKeys:
                                            @"Erik Olson", @"name",
                                            @"erik@yesgraph.com", @"email",
@@ -97,10 +103,39 @@
 }
 
 
+- (void)fetchAddressBook
+{
+    if (nil == _userId)
+    {
+        NSLog(@"YesGraph Error - fetchAddressBook requires the user_id parameter to be set");
+        return;
+    }
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString                 = [NSString stringWithFormat:@"https://api.yesgraph.com/v0/address-book/%@", _userId];
+    
+    [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
+     {
+         NSString *dataString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+         NSLog(@"YesGraph Network Success - %@", dataString);
+     }
+                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         NSString *errorString   = [[error userInfo] description];
+         NSLog(@"YesGraph Network Failure - %@", errorString);
+     }];
+}
+
+
+
 - (void)test
 {
+    [self fetchAddressBook];
+    return;
+    
     YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
-    NSString *urlString = @"https://api.yesgraph.com/v0/test";
+    NSString *urlString                 = @"https://api.yesgraph.com/v0/test";
+    
     [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
     {
         NSString *dataString    = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
