@@ -12,7 +12,8 @@
 @implementation YGYesGraphClient
 
 
-+ (instancetype)sharedInstance {
++ (instancetype)sharedInstance
+{
     static dispatch_once_t dispatch_token;
     static YGYesGraphClient *client = nil;
     
@@ -23,7 +24,8 @@
 }
 
 
-+ (void)configureWithClientKey:(NSString *)clientKey {
++ (void)configureWithClientKey:(NSString *)clientKey
+{
     [[self sharedInstance] setClientKey:clientKey];
 }
 
@@ -37,90 +39,278 @@
 }
 
 
-- (void)postAddressBook
+//-------------------------------------------------------------------
+// Posting Data
+//-------------------------------------------------------------------
+
+// Address Book
+- (void)postAddressBook:(NSArray *)addressBookArray
+              forSource:(NSDictionary *)source
+  withCompletionHandler:(YGCompletionBlock)completionHandler
 {
     if (nil == _userId)
     {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
         NSLog(@"YesGraph Error - postAddressBook requires the user_id parameter to be set");
         return;
     }
     
-    // HACK for testing
-    NSMutableDictionary *HACK_DATA      = [[NSMutableDictionary alloc] init];
-    HACK_DATA[@"user_id"]               = _userId;
-    HACK_DATA[@"source"]                = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           @"Erik Olson", @"name",
-                                           @"erik@yesgraph.com", @"email",
-                                           @"gmail", @"type",
-                                           nil];
-    NSMutableArray *HACK_ENTRY_ARRAY    = [[NSMutableArray alloc] init];
-    NSDictionary *HACK_ENTRY_1          = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           @"Ivan Kirigin", @"name",
-                                           @[@"ivan@yesgraph.com"], @"emails",
-                                           @[@"+1 555 123 4567"], @"phones",
-                                           @{@"picture_url":@"https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/5/000/20f/182/1a51498.jpg"}, @"data",
-                                           nil];
-    NSDictionary *HACK_ENTRY_2          = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           @"Jonathan Chu", @"name",
-                                           [NSArray arrayWithObjects:@"jonathan.chu@me.com", nil], @"emails",
-                                           nil];
-    NSDictionary *HACK_ENTRY_3          = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           @"Vincent Driessen", @"name",
-                                           [NSArray arrayWithObjects:@"me@nvie.com", @"vincent@yesgraph.com", nil], @"emails",
-                                           nil];
-    NSDictionary *HACK_ENTRY_4          = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           [NSArray arrayWithObjects:@"post@posterous.com", nil], @"emails",
-                                           nil];
-    NSDictionary *HACK_ENTRY_5          = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           [NSArray arrayWithObjects:@"hous-123456@craigslist.org", nil], @"emails",
-                                           nil];
-    NSDictionary *HACK_ENTRY_6          = [NSDictionary dictionaryWithObjectsAndKeys:
-                                           @"George Hickman", @"name",
-                                           [NSArray arrayWithObjects:@"george@yesgraph.com", nil], @"emails",
-                                           [NSDictionary dictionaryWithObjectsAndKeys:@"foo", @"bar", nil], @"data",
-                                           nil];
-    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_1];
-    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_2];
-    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_3];
-    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_4];
-    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_5];
-    [HACK_ENTRY_ARRAY addObject:HACK_ENTRY_6];
-    HACK_DATA[@"entries"]               = HACK_ENTRY_ARRAY;
-    // END HACK
-    
-    
-    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
-    NSString *urlString = @"https://api.yesgraph.com/v0/address-book";
-    [networkManager POST:urlString parameters:HACK_DATA success:^(NSURLResponse *response, NSData *responseData)
-     {
-     }
-                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
-     {
-     }];
-}
-
-
-// Fetching Data
-- (void)fetchRankedAddressBook
-{
-    if (nil == _userId)
+    if (nil == addressBookArray)
     {
-        NSLog(@"YesGraph Error - fetchAddressBook requires the user_id parameter to be set");
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postAddressBook requires an address book array");
         return;
     }
     
-    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
-    NSString *urlString                 = [NSString stringWithFormat:@"https://api.yesgraph.com/v0/address-book/%@", _userId];
+    if (nil == source)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postAddressBook requires a source dictionary");
+        return;
+    }
     
-    [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
+    
+    // Note - TODO - might also want to check for well-formed source dictionary before blindly sending
+    //               unsanitized data to the servers
+
+    
+    NSMutableDictionary *dataPayload    = [[NSMutableDictionary alloc] init];
+    dataPayload[@"user_id"]             = _userId;
+    dataPayload[@"source"]              = source;
+    dataPayload[@"entries"]             = addressBookArray;
+
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString = @"https://api.yesgraph.com/v0/address-book";
+    [networkManager POST:urlString
+              parameters:dataPayload
+                 success:^(NSURLResponse *response, NSData *responseData)
      {
+         // Success
+         NSError *error;
+         NSDictionary *responseDictionary   = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         
+         completionHandler(responseDictionary, error);
      }
-                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
      {
+         // Failure
+         completionHandler(nil, error);
      }];
 }
 
 
+
+// Facebook
+- (void)postFacebookData:(NSArray *)friendsArray
+       forFacebookSource:(NSDictionary *)source
+   withCompletionHandler:(YGCompletionBlock)completionHandler
+{
+    if (nil == _userId)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postFacebookData requires the user_id parameter to be set");
+        return;
+    }
+    
+    if (nil == friendsArray)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postFacebookData requires a friends array");
+        return;
+    }
+    
+    if (nil == source)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postFacebookData requires a source dictionary");
+        return;
+    }
+    
+    
+    // Note - TODO - might also want to check for well-formed source dictionary and friends array before
+    //               blindly sending unsanitized data to the servers
+    
+    
+    NSMutableDictionary *dataPayload    = [[NSMutableDictionary alloc] init];
+    dataPayload[@"user_id"]             = _userId;
+    dataPayload[@"self"]                = source;
+    dataPayload[@"friends"]             = friendsArray;
+    
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString = @"https://api.yesgraph.com/v0/facebook";
+    [networkManager POST:urlString
+              parameters:dataPayload
+                 success:^(NSURLResponse *response, NSData *responseData)
+     {
+         // Success
+         NSError *error;
+         NSDictionary *responseDictionary   = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         
+         completionHandler(responseDictionary, error);
+     }
+                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         // Failure
+         completionHandler(nil, error);
+     }];
+}
+
+
+// Users
+- (void)postUserArray:(NSArray *)usersArray
+withCompletionHandler:(YGCompletionBlock)completionHandler
+{
+    if (nil == usersArray)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postUserArray requires a users array");
+        return;
+    }
+    
+    
+    // Note - TODO - might also want to check for well-formed users array before
+    //               blindly sending unsanitized data to the servers
+    
+
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString = @"https://api.yesgraph.com/v0/users";
+    [networkManager POST:urlString
+              parameters:usersArray
+                 success:^(NSURLResponse *response, NSData *responseData)
+     {
+         // Success
+         NSError *error;
+         NSDictionary *responseDictionary   = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         
+         completionHandler(responseDictionary, error);
+     }
+                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         // Failure
+         completionHandler(nil, error);
+     }];
+}
+
+
+
+- (void)postInviteSentToEmail:(NSString *)email
+                      orPhone:(NSString *)phoneNumber
+                       atTime:(NSString *)timestamp
+        withCompletionHandler:(YGCompletionBlock)completionHandler
+{
+    if (nil == _userId)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postInviteSentToEmail requires the user_id parameter to be set");
+        return;
+    }
+    
+    if (nil == email && nil == phoneNumber)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postInviteSentToEmail requires a phone number or email address");
+        return;
+    }
+    
+    
+    // Note - TODO - might also want to check for well-formed input paramaters before
+    //               blindly sending unsanitized data to the servers
+    
+    
+    NSMutableDictionary *dataPayload    = [[NSMutableDictionary alloc] init];
+    dataPayload[@"user_id"]             = _userId;
+    if (nil != email)
+        dataPayload[@"email"]           = email;
+    if (nil != phoneNumber)
+        dataPayload[@"phone"]           = phoneNumber;
+    if (nil != timestamp)
+        dataPayload[@"sent_at"]         = timestamp;
+    
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString = @"https://api.yesgraph.com/v0/invite-sent";
+    [networkManager POST:urlString
+              parameters:dataPayload
+                 success:^(NSURLResponse *response, NSData *responseData)
+     {
+         // Success
+         NSError *error;
+         NSDictionary *responseDictionary   = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         
+         completionHandler(responseDictionary, error);
+     }
+                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         // Failure
+         completionHandler(nil, error);
+     }];
+}
+
+
+
+- (void)postInviteAcceptedWithEmail:(NSString *)email
+                            orPhone:(NSString *)phoneNumber
+                             atTime:(NSString *)timestamp
+              withCompletionHandler:(YGCompletionBlock)completionHandler
+{
+    if (nil == _userId)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postInviteAcceptedWithEmail requires the user_id parameter to be set");
+        return;
+    }
+    
+    if (nil == email && nil == phoneNumber)
+    {
+        // Note - TODO - might want to create an NSError and call the completion handler with the error
+        NSLog(@"YesGraph Error - postInviteAcceptedWithEmail requires a phone number or email address");
+        return;
+    }
+    
+    
+    // Note - TODO - might also want to check for well-formed input paramaters before
+    //               blindly sending unsanitized data to the servers
+    
+    
+    NSMutableDictionary *dataPayload    = [[NSMutableDictionary alloc] init];
+    dataPayload[@"new_user_id"]         = _userId;
+    if (nil != email)
+        dataPayload[@"email"]           = email;
+    if (nil != phoneNumber)
+        dataPayload[@"phone"]           = phoneNumber;
+    if (nil != timestamp)
+        dataPayload[@"accepted_at"]     = timestamp;
+    
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString = @"https://api.yesgraph.com/v0/invite-accepted";
+    [networkManager POST:urlString
+              parameters:dataPayload
+                 success:^(NSURLResponse *response, NSData *responseData)
+     {
+         // Success
+         NSError *error;
+         NSDictionary *responseDictionary   = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         
+         completionHandler(responseDictionary, error);
+     }
+                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         // Failure
+         completionHandler(nil, error);
+     }];
+}
+
+
+
+
+//-------------------------------------------------------------------
+// Fetching Data
+//-------------------------------------------------------------------
+
+// Address Book
 - (void)fetchRankedAddressBookWithCompletionHandler:(void (^)(NSDictionary *, NSError *))completionHandler
 {
     if (nil == _userId)
@@ -137,6 +327,51 @@
          NSError *error;
          NSDictionary *addressBook  = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
          completionHandler(addressBook, error);
+     }
+                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         completionHandler(nil, error);
+     }];
+}
+
+
+
+// Facebook
+- (void)fetchRankedFacebookFriendsWithCompletionHandler:(YGCompletionBlock)completionHandler
+{
+    if (nil == _userId)
+    {
+        NSLog(@"YesGraph Error - fetchRankedFacebookFriendsWithCompletionHandler requires the user_id parameter to be set");
+        return;
+    }
+    
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString                 = [NSString stringWithFormat:@"https://api.yesgraph.com/v0/facebook/%@", _userId];
+    
+    [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
+     {
+         NSError *error;
+         NSDictionary *responseDictionary   = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         completionHandler(responseDictionary, error);
+     }
+                failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
+     {
+         completionHandler(nil, error);
+     }];
+}
+
+
+// Users
+- (void)fetchUsersWithCompletionHandler:(YGCompletionBlock)completionHandler
+{
+    YGNetworkManager *networkManager    = [YGNetworkManager sharedInstance];
+    NSString *urlString                 = [NSString stringWithFormat:@"https://api.yesgraph.com/v0/users"];
+    
+    [networkManager GET:urlString parameters:nil success:^(NSURLResponse *response, NSData *responseData)
+     {
+         NSError *error;
+         NSDictionary *responseDictionary   = [NSJSONSerialization JSONObjectWithData:responseData options:0 error:&error];
+         completionHandler(responseDictionary, error);
      }
                 failure:^(NSURLResponse *response, NSData *responseData, NSError *error)
      {
