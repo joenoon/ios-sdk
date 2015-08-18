@@ -10,4 +10,23 @@
 
 @interface YesGraph : NSObject
 
+/*!
+ *  Shared instance to YesGraph
+ *
+ *  @return instance of YesGraph SDK
+ */
++ (nonnull instancetype)shared;
+
+@end
+
+@interface YesGraph (Initialization)
+
+/*!
+ *  Configure YesGraph SDK with a client key that you receive from your trusted backend using YesGraph Secret Key.
+ *  @note: https://docs.yesgraph.com/v0/docs/connecting-apps
+ *
+ *  @param key client string that is received from YesGraph backend on your trusted backend.
+ */
+- (void)configureWithClientKey:(nonnull NSString *)key;
+
 @end
