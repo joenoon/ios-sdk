@@ -1,6 +1,6 @@
 //
-//  YesGraphSDKTests.m
-//  YesGraphSDKTests
+//  YesGraphSDKNetworkTests.m
+//  YesGraphSDK
 //
 //  Created by Dal Rupnik on 18/08/15.
 //  Copyright © 2015 YesGraph. All rights reserved.
@@ -8,11 +8,11 @@
 
 @import XCTest;
 
-@interface YesGraphSDKTests : XCTestCase
+@interface YesGraphSDKNetworkTests : XCTestCase
 
 @end
 
-@implementation YesGraphSDKTests
+@implementation YesGraphSDKNetworkTests
 
 - (void)setUp {
     [super setUp];
@@ -26,7 +26,7 @@
 
 - (void)testExample {
     // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+    // Use XCTAssert and related functions to verify your tests produce the correct results.
 }
 
 - (void)testPerformanceExample {
