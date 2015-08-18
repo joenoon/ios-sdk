@@ -10,11 +10,5 @@
 
 @interface YSGAddressBookViewController : UITableViewController
 
-/*!
- *  Number of suggestions displayed above contacts.
- *
- *  @discussion: Default value is: 5
- */
-@property (nonatomic, assign) NSUInteger numberOfSuggestions;
 
 @end

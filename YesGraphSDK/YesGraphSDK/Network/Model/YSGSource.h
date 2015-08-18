@@ -8,6 +8,9 @@
 
 @import Foundation;
 
+/*!
+ *  Represents a contact source
+ */
 @interface YSGSource : NSObject
 
 @property (nonnull, nonatomic, copy) NSString *name;

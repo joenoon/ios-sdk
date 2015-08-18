@@ -8,10 +8,14 @@
 
 @import Foundation;
 
+/*!
+ *  Represents a single Address Book contact
+ */
 @interface YSGContact : NSObject
 
 @property (nonnull, nonatomic, copy) NSString *name;
-@property (nullable, nonatomic, copy) NSString *email;
-@property (nullable, nonatomic, copy) NSString *phone;
+@property (nullable, nonatomic, copy) NSArray<NSString *> *emails;
+@property (nullable, nonatomic, copy) NSArray<NSString *> *phones;
+@property (nullable, nonatomic, copy) NSDictionary *data;
 
 @end

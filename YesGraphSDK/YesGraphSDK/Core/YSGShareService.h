@@ -8,6 +8,23 @@
 
 @import Foundation;
 
+@class YSGShareService;
+
+/*!
+ *  Message block is called every time share service needs a message
+ *
+ *  @param service  service instance that is asking for the message
+ *  @param userInfo additional information about current message, such as sms or email incase of invite flow
+ *
+ *  @return string to use with share service
+ */
+typedef NSString * _Nonnull (^ShareMessageBlock)( YSGShareService* _Nonnull service, NSDictionary * _Nullable userInfo);
+
+/*!
+ *  Share service for YesGraph share sheet
+ */
 @interface YSGShareService : NSObject
+
+@property (nullable, nonatomic, assign) ShareMessageBlock messageBlock;
 
 @end
