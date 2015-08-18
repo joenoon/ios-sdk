@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 YesGraph. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 //! Project version number for YesGraphSDK.
 FOUNDATION_EXPORT double YesGraphSDKVersionNumber;
 
 //! Project version string for YesGraphSDK.
 FOUNDATION_EXPORT const unsigned char YesGraphSDKVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <YesGraphSDK/PublicHeader.h>
-
+#import <YesGraphSDK/YesGraph.h>
+#import <YesGraphSDK/YSGShareService.h>
+#import <YesGraphSDK/YSGClient.h>
+#import <YesGraphSDK/YSGShareSheetViewController.h>
 

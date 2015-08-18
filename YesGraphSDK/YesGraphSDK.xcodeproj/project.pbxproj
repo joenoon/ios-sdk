@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		385B64B11B831BAE00C55F60 /* YSGClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64AF1B831BAE00C55F60 /* YSGClient.h */; };
+		385B64B21B831BAE00C55F60 /* YSGClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64B01B831BAE00C55F60 /* YSGClient.m */; };
+		385B64B51B831C0B00C55F60 /* YSGShareService.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64B31B831C0B00C55F60 /* YSGShareService.h */; };
+		385B64B61B831C0B00C55F60 /* YSGShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64B41B831C0B00C55F60 /* YSGShareService.m */; };
+		385B64BA1B831C2B00C55F60 /* YSGFacebookService.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64B81B831C2B00C55F60 /* YSGFacebookService.h */; };
+		385B64BB1B831C2B00C55F60 /* YSGFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64B91B831C2B00C55F60 /* YSGFacebookService.m */; };
+		385B64BE1B831C3600C55F60 /* YSGTwitterService.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64BC1B831C3600C55F60 /* YSGTwitterService.h */; };
+		385B64BF1B831C3600C55F60 /* YSGTwitterService.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64BD1B831C3600C55F60 /* YSGTwitterService.m */; };
+		385B64C21B831C3F00C55F60 /* YSGInviteService.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64C01B831C3F00C55F60 /* YSGInviteService.h */; };
+		385B64C31B831C3F00C55F60 /* YSGInviteService.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64C11B831C3F00C55F60 /* YSGInviteService.m */; };
+		385B64C61B831C7900C55F60 /* YSGShareSheetViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64C41B831C7900C55F60 /* YSGShareSheetViewController.h */; };
+		385B64C71B831C7900C55F60 /* YSGShareSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64C51B831C7900C55F60 /* YSGShareSheetViewController.m */; };
+		385B64CA1B831CA900C55F60 /* YSGAddressBookViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64C81B831CA900C55F60 /* YSGAddressBookViewController.h */; };
+		385B64CB1B831CA900C55F60 /* YSGAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64C91B831CA900C55F60 /* YSGAddressBookViewController.m */; };
+		385B64CF1B831D4800C55F60 /* YesGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64CD1B831D4800C55F60 /* YesGraph.h */; };
+		385B64D01B831D4800C55F60 /* YesGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64CE1B831D4800C55F60 /* YesGraph.m */; };
+		38CB82781B831F70004A0FE3 /* AutoCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CB82761B831F70004A0FE3 /* AutoCoding.h */; };
+		38CB82791B831F70004A0FE3 /* AutoCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CB82771B831F70004A0FE3 /* AutoCoding.m */; };
 		38CC16C31B831606008477C7 /* YesGraphSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CC16C21B831606008477C7 /* YesGraphSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38CC16C91B831606008477C7 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC16BD1B831606008477C7 /* YesGraphSDK.framework */; };
 		38CC16D01B831606008477C7 /* YesGraphSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC16CF1B831606008477C7 /* YesGraphSDKTests.m */; };
@@ -23,6 +41,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		385B64AF1B831BAE00C55F60 /* YSGClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGClient.h; sourceTree = "<group>"; };
+		385B64B01B831BAE00C55F60 /* YSGClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGClient.m; sourceTree = "<group>"; };
+		385B64B31B831C0B00C55F60 /* YSGShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareService.h; sourceTree = "<group>"; };
+		385B64B41B831C0B00C55F60 /* YSGShareService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGShareService.m; sourceTree = "<group>"; };
+		385B64B81B831C2B00C55F60 /* YSGFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGFacebookService.h; sourceTree = "<group>"; };
+		385B64B91B831C2B00C55F60 /* YSGFacebookService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGFacebookService.m; sourceTree = "<group>"; };
+		385B64BC1B831C3600C55F60 /* YSGTwitterService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGTwitterService.h; sourceTree = "<group>"; };
+		385B64BD1B831C3600C55F60 /* YSGTwitterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGTwitterService.m; sourceTree = "<group>"; };
+		385B64C01B831C3F00C55F60 /* YSGInviteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGInviteService.h; sourceTree = "<group>"; };
+		385B64C11B831C3F00C55F60 /* YSGInviteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGInviteService.m; sourceTree = "<group>"; };
+		385B64C41B831C7900C55F60 /* YSGShareSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareSheetViewController.h; sourceTree = "<group>"; };
+		385B64C51B831C7900C55F60 /* YSGShareSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGShareSheetViewController.m; sourceTree = "<group>"; };
+		385B64C81B831CA900C55F60 /* YSGAddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGAddressBookViewController.h; sourceTree = "<group>"; };
+		385B64C91B831CA900C55F60 /* YSGAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGAddressBookViewController.m; sourceTree = "<group>"; };
+		385B64CD1B831D4800C55F60 /* YesGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesGraph.h; sourceTree = "<group>"; };
+		385B64CE1B831D4800C55F60 /* YesGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraph.m; sourceTree = "<group>"; };
+		38CB82761B831F70004A0FE3 /* AutoCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCoding.h; sourceTree = "<group>"; };
+		38CB82771B831F70004A0FE3 /* AutoCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCoding.m; sourceTree = "<group>"; };
 		38CC16BD1B831606008477C7 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38CC16C11B831606008477C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38CC16C21B831606008477C7 /* YesGraphSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YesGraphSDK.h; sourceTree = "<group>"; };
@@ -50,6 +86,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		385B64B71B831C0E00C55F60 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				385B64B81B831C2B00C55F60 /* YSGFacebookService.h */,
+				385B64B91B831C2B00C55F60 /* YSGFacebookService.m */,
+				385B64BC1B831C3600C55F60 /* YSGTwitterService.h */,
+				385B64BD1B831C3600C55F60 /* YSGTwitterService.m */,
+				385B64C01B831C3F00C55F60 /* YSGInviteService.h */,
+				385B64C11B831C3F00C55F60 /* YSGInviteService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		385B64CC1B831D0800C55F60 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				385B64CD1B831D4800C55F60 /* YesGraph.h */,
+				385B64CE1B831D4800C55F60 /* YesGraph.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		38CB82741B831F41004A0FE3 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				38CB82751B831F70004A0FE3 /* AutoCoding */,
+			);
+			name = Library;
+			path = AutoCoding;
+			sourceTree = "<group>";
+		};
+		38CB82751B831F70004A0FE3 /* AutoCoding */ = {
+			isa = PBXGroup;
+			children = (
+				38CB82761B831F70004A0FE3 /* AutoCoding.h */,
+				38CB82771B831F70004A0FE3 /* AutoCoding.m */,
+			);
+			path = AutoCoding;
+			sourceTree = "<group>";
+		};
 		38CC16B31B831606008477C7 = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +148,14 @@
 			isa = PBXGroup;
 			children = (
 				38CC16C21B831606008477C7 /* YesGraphSDK.h */,
+				67E649F34D3C3CE238EF6D5D /* AddressBook */,
+				67E64AE32FF2B520BDB012B3 /* Core */,
+				38CB82741B831F41004A0FE3 /* Library */,
+				385B64CC1B831D0800C55F60 /* Main */,
+				67E6405C0BEB8A13CA6A505F /* Network */,
+				385B64B71B831C0E00C55F60 /* Service */,
 				38CC16C01B831606008477C7 /* Supporting Files */,
+				67E640836455FF8D309175D1 /* UI */,
 			);
 			path = YesGraphSDK;
 			sourceTree = "<group>";
@@ -102,6 +185,42 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		67E6405C0BEB8A13CA6A505F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				385B64AF1B831BAE00C55F60 /* YSGClient.h */,
+				385B64B01B831BAE00C55F60 /* YSGClient.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		67E640836455FF8D309175D1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				385B64C41B831C7900C55F60 /* YSGShareSheetViewController.h */,
+				385B64C51B831C7900C55F60 /* YSGShareSheetViewController.m */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		67E649F34D3C3CE238EF6D5D /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				385B64C81B831CA900C55F60 /* YSGAddressBookViewController.h */,
+				385B64C91B831CA900C55F60 /* YSGAddressBookViewController.m */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
+		67E64AE32FF2B520BDB012B3 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				385B64B31B831C0B00C55F60 /* YSGShareService.h */,
+				385B64B41B831C0B00C55F60 /* YSGShareService.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -109,7 +228,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				385B64BA1B831C2B00C55F60 /* YSGFacebookService.h in Headers */,
+				385B64BE1B831C3600C55F60 /* YSGTwitterService.h in Headers */,
+				385B64CF1B831D4800C55F60 /* YesGraph.h in Headers */,
+				385B64C61B831C7900C55F60 /* YSGShareSheetViewController.h in Headers */,
 				38CC16C31B831606008477C7 /* YesGraphSDK.h in Headers */,
+				38CB82781B831F70004A0FE3 /* AutoCoding.h in Headers */,
+				385B64C21B831C3F00C55F60 /* YSGInviteService.h in Headers */,
+				385B64B11B831BAE00C55F60 /* YSGClient.h in Headers */,
+				385B64B51B831C0B00C55F60 /* YSGShareService.h in Headers */,
+				385B64CA1B831CA900C55F60 /* YSGAddressBookViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +338,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				385B64D01B831D4800C55F60 /* YesGraph.m in Sources */,
+				385B64BB1B831C2B00C55F60 /* YSGFacebookService.m in Sources */,
+				385B64BF1B831C3600C55F60 /* YSGTwitterService.m in Sources */,
+				385B64C71B831C7900C55F60 /* YSGShareSheetViewController.m in Sources */,
+				385B64B21B831BAE00C55F60 /* YSGClient.m in Sources */,
+				38CB82791B831F70004A0FE3 /* AutoCoding.m in Sources */,
+				385B64B61B831C0B00C55F60 /* YSGShareService.m in Sources */,
+				385B64CB1B831CA900C55F60 /* YSGAddressBookViewController.m in Sources */,
+				385B64C31B831C3F00C55F60 /* YSGInviteService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
