@@ -8,6 +8,8 @@
 
 #import "YSGShareService.h"
 
+extern NSString *_Nonnull const YSGInviteContactsKey;
+
 /*!
  *  Invite service prepared to send email and sms contacts
  */
@@ -19,8 +21,42 @@
  */
 @property (nonnull, nonatomic, copy) NSString *requestContactPermissionMessage;
 
-@property (nonatomic, assign) BOOL messageService;
-@property (nonatomic, assign) BOOL emailService;
+#pragma mark - Invite configuration
+
+/*!
+ *  If phone number contacts should be displayed.
+ *
+ *  @discussion: Default value: YES
+ */
+@property (nonatomic, assign) BOOL usePhone;
+
+/*!
+ *  If email contacts should be displayed.
+ *
+ *  @discussion: Default value: YES
+ */
+@property (nonatomic, assign) BOOL useEmail;
+
+/*!
+ *  If invite service should support multiple selection of user contacts.
+ *
+ *  @discussion: Default value: YES
+ */
+@property (nonatomic, assign) BOOL multipleSelection;
+
+/*!
+ *  If native message screen should be used - displays the iOS modal message send screen.
+ *
+ *  @discussion: Default value: YES
+ */
+@property (nonatomic, assign) BOOL nativeMessageSheet;
+
+/*!
+ *  If native email screen should be used - displays the iOS modal email send screen.
+ *
+ *  @discussion: Default value: YES
+ */
+@property (nonatomic, assign) BOOL nativeEmailSheet;
 
 /*!
  *  Number of suggestions displayed above contacts. Use 0 to disable suggestions.
@@ -28,5 +64,12 @@
  *  @discussion: Default value is: 5
  */
 @property (nonatomic, assign) NSUInteger numberOfSuggestions;
+
+/*!
+ *  Whether invite selection will display a search bar on top
+ *
+ *  @discussion: Default value is: YES
+ */
+@property (nonatomic, assign) BOOL allowSearch;
 
 @end

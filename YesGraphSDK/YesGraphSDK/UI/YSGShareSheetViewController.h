@@ -12,13 +12,4 @@
 
 @interface YSGShareSheetViewController : UIViewController
 
-/*!
- *  Returns new instance of Share Sheet view controller
- *
- *  @param services to use in share sheet
- *
- *  @return new view controller instance to be displayed
- */
-+ (instancetype)shareSheetWithServices:(NSArray<YSGShareService *> *)services;
-
 @end

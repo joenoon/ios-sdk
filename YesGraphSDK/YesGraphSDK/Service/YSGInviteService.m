@@ -8,6 +8,8 @@
 
 #import "YSGInviteService.h"
 
+NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
+
 @implementation YSGInviteService
 
 @end

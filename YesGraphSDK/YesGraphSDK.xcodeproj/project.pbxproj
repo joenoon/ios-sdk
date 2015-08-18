@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3800EE961B83769C007E0C43 /* YSGShareSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3800EE941B83769C007E0C43 /* YSGShareSheetController.h */; };
+		3800EE971B83769C007E0C43 /* YSGShareSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3800EE951B83769C007E0C43 /* YSGShareSheetController.m */; };
 		3852B2CF1B833E1600544FBA /* YSGContact.h in Headers */ = {isa = PBXBuildFile; fileRef = 3852B2CD1B833E1600544FBA /* YSGContact.h */; };
 		3852B2D01B833E1600544FBA /* YSGContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852B2CE1B833E1600544FBA /* YSGContact.m */; };
 		3852B2D31B833E7600544FBA /* YSGSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 3852B2D11B833E7600544FBA /* YSGSource.h */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3800EE941B83769C007E0C43 /* YSGShareSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareSheetController.h; sourceTree = "<group>"; };
+		3800EE951B83769C007E0C43 /* YSGShareSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGShareSheetController.m; sourceTree = "<group>"; };
 		3852B2CD1B833E1600544FBA /* YSGContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGContact.h; sourceTree = "<group>"; };
 		3852B2CE1B833E1600544FBA /* YSGContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGContact.m; sourceTree = "<group>"; };
 		3852B2D11B833E7600544FBA /* YSGSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGSource.h; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 			children = (
 				385B64B31B831C0B00C55F60 /* YSGShareService.h */,
 				385B64B41B831C0B00C55F60 /* YSGShareService.m */,
+				3800EE941B83769C007E0C43 /* YSGShareSheetController.h */,
+				3800EE951B83769C007E0C43 /* YSGShareSheetController.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 				3852B2CF1B833E1600544FBA /* YSGContact.h in Headers */,
 				38CC16C31B831606008477C7 /* YesGraphSDK.h in Headers */,
 				38CB82781B831F70004A0FE3 /* AutoCoding.h in Headers */,
+				3800EE961B83769C007E0C43 /* YSGShareSheetController.h in Headers */,
 				385B64C21B831C3F00C55F60 /* YSGInviteService.h in Headers */,
 				385B64B11B831BAE00C55F60 /* YSGClient.h in Headers */,
 				3852B2D31B833E7600544FBA /* YSGSource.h in Headers */,
@@ -364,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3852B2D01B833E1600544FBA /* YSGContact.m in Sources */,
+				3800EE971B83769C007E0C43 /* YSGShareSheetController.m in Sources */,
 				385B64D01B831D4800C55F60 /* YesGraph.m in Sources */,
 				385B64BB1B831C2B00C55F60 /* YSGFacebookService.m in Sources */,
 				3852B2D41B833E7600544FBA /* YSGSource.m in Sources */,

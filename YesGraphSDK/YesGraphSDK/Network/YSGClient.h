@@ -8,8 +8,16 @@
 
 @import Foundation;
 
+#import "YSGContact.h"
+#import "YSGSource.h"
+
+/*!
+ *  Provides direct API access to YesGraph API
+ */
 @interface YSGClient : NSObject
 
 + (instancetype)shared;
+
+- (void)updateAddressBookWithContactList:(NSArray <YSGContact *> * _Nonnull )contacts withSource:(YSGSource * _Nonnull)source completion:(void (^)(NSError *error))completion;
 
 @end
