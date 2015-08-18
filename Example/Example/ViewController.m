@@ -8,20 +8,22 @@
 
 #import "ViewController.h"
 
+//#import <YesGraphSDK/YesGraphSDK.h>
+
+//@import YesGraphSDK;
+
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
+    
+    //[YesGraph shared];
 }
 
 @end

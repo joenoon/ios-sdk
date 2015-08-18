@@ -6,6 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+@import Foundation;
+
 //! Project version number for YesGraphSDK.
 FOUNDATION_EXPORT double YesGraphSDKVersionNumber;
 

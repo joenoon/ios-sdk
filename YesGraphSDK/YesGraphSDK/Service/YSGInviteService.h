@@ -13,6 +13,12 @@
  */
 @interface YSGInviteService : YSGShareService
 
+/*!
+ *  This message is displayed to the user before contacts permissions is requested. If user agrees with the message,
+ *  the user is asked for permission to Address Book.
+ */
+@property (nonnull, nonatomic, copy) NSString *requestContactPermissionMessage;
+
 @property (nonatomic, assign) BOOL messageService;
 @property (nonatomic, assign) BOOL emailService;
 
