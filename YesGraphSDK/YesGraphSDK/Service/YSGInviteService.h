@@ -10,6 +10,8 @@
 
 extern NSString *_Nonnull const YSGInviteContactsKey;
 
+@class YSGContactManager;
+
 /*!
  *  Invite service prepared to send email and sms contacts
  */
@@ -71,5 +73,19 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
  *  @discussion: Default value is: YES
  */
 @property (nonatomic, assign) BOOL allowSearch;
+
+/*!
+ *  Contacts
+ */
+@property (nonnull, nonatomic, readonly) YSGContactManager *contactManager;
+
+/*!
+ *  Initialize with contact manager
+ *
+ *  @param contactManager manager to work with contacts
+ *
+ *  @return instance of invite service
+ */
+- (instancetype _Nonnull)initWithContactManager:(YSGContactManager * _Nonnull)contactManager;
 
 @end

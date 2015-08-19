@@ -13,10 +13,24 @@
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
 
-@interface YSGAddressBookViewController () <UITableViewDataSource, UITableViewDelegate>
+CGFloat const YSGSearchBarHeight = 44.0;
+
+@interface YSGAddressBookViewController () <UISearchBarDelegate>
+
+//
+// UI
+//
+
+@property (nonatomic, strong) UISearchBar *searchBar;
+
+//
+// Data
+//
 
 @property (nonatomic, copy) NSArray <YSGContact *> *suggestions;
 @property (nonatomic, copy) NSArray <YSGContact *> *contacts;
+
+@property (nonatomic, copy) NSArray <YSGContact *> *filteredContacts;
 
 @end
 
@@ -51,9 +65,22 @@
     
     if (self.service.allowSearch)
     {
+        self.searchBar = [[UISearchBar alloc] init];
         
+        self.searchBar.delegate = self;
+        
+        self.tableView.tableHeaderView = self.searchBar;
     }
 }
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+    
+    self.searchBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, YSGSearchBarHeight);
+}
+
+#pragma mark - UISearchBarDelegate
 
 #pragma mark - UITableViewDataSource
 
@@ -102,5 +129,6 @@
     
 }
 
+#pragma mark - Private Methods
 
 @end

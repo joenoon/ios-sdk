@@ -7,12 +7,25 @@
 //
 
 @import Foundation;
+@import UIKit;
 
 /*!
  *  Use the theme to stylize YesGraph UI
  */
 @interface YSGTheme : NSObject
 
+/*!
+ *  Main color of the Share UI
+ *
+ *  @discussion: Default: Red color
+ */
+@property (nonnull, nonatomic, strong) UIColor *mainColor;
+
+/*!
+ *  Font family of the Share UI
+ *
+ *  @discussion: Default: System font
+ */
 @property (nonnull, nonatomic, copy) NSString *fontFamily;
 
 @end
