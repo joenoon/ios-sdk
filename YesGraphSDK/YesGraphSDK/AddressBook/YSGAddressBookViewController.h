@@ -8,7 +8,10 @@
 
 @import UIKit;
 
+#import "YSGInviteService.h"
+
 @interface YSGAddressBookViewController : UITableViewController
 
+@property (nullable, nonatomic, weak) YSGInviteService *service;
 
 @end

@@ -12,6 +12,7 @@
 #import "YSGShareService.h"
 
 @class YSGShareSheetController;
+@class YSGTheme;
 
 @protocol YSGShareSheetDelegate <NSObject>
 
@@ -42,11 +43,17 @@
 @end
 
 /*!
- *  Main share sheet coontroller(entry point)
+ *  Main share sheet coontroller (entry point)
  */
 @interface YSGShareSheetController : UIViewController
 
 @property (nullable, nonatomic, weak) id<YSGShareSheetDelegate> delegate;
+
+@end
+
+#pragma mark - YSGShareSheetController Initialization
+
+@interface YSGShareSheetController (Initialization)
 
 /*!
  *  Returns new instance of Share Sheet view controller
@@ -58,7 +65,7 @@
 + (instancetype _Nonnull)shareSheetControllerWithServices:(NSArray<YSGShareService *> * _Nonnull)services;
 
 /*!
- *  Designated initializer
+ *  Convenience initializer without theme
  *
  *  @param services to share with
  *  @param delegate to receive change messages
@@ -66,5 +73,16 @@
  *  @return instance of share sheet
  */
 - (instancetype _Nonnull)initWithServices:(NSArray<YSGShareService *> * _Nonnull)services delegate:(id<YSGShareSheetDelegate> _Nullable)delegate;
+
+/*!
+ *  Designated initializer
+ *
+ *  @param services to share with
+ *  @param delegate to receive change messages
+ *  @param style theme object
+ *
+ *  @return instance of share sheet
+ */
+- (instancetype _Nonnull)initWithServices:(NSArray<YSGShareService *> * _Nonnull)services delegate:(id<YSGShareSheetDelegate> _Nullable)delegate theme:(YSGTheme * _Nullable)theme;
 
 @end

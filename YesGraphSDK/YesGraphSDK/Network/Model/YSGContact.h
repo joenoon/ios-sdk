@@ -18,4 +18,14 @@
 @property (nullable, nonatomic, copy) NSArray<NSString *> *phones;
 @property (nullable, nonatomic, copy) NSDictionary *data;
 
+- (NSString *)phone;
+- (NSString *)email;
+
+/*!
+ *  Returns contact string
+ *
+ *  @return <#return value description#>
+ */
+- (NSString *)contactString;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 @import Foundation;
+@import UIKit;
 
 @class YSGShareService;
 
@@ -26,5 +27,9 @@ typedef NSString * _Nonnull (^ShareMessageBlock)( YSGShareService* _Nonnull serv
 @interface YSGShareService : NSObject
 
 @property (nullable, nonatomic, assign) ShareMessageBlock messageBlock;
+
+@property (nullable, nonatomic, strong) UIImage *serviceImage;
+
+@property (nonnull, nonatomic, readonly) NSString *name;
 
 @end
