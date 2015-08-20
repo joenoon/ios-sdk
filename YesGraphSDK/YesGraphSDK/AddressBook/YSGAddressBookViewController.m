@@ -34,6 +34,8 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 @property (nonatomic, copy) NSArray <NSArray <YSGContact *> *> *sortedContacts;
 
+@property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
+
 @end
 
 @implementation YSGAddressBookViewController
@@ -88,7 +90,14 @@ CGFloat const YSGSearchBarHeight = 44.0;
     //
     
     [self.service.contactManager fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts) {
+        //
+        // Cut away first suggested contacts
+        //
         
+        self.contacts = contacts;
+        
+        self.suggestions = [self suggestedContactsWithContacts:contacts];
+        self.sortedContacts = [self sortedContactsWithContactList:contacts];
     }];
 }
 
@@ -100,6 +109,16 @@ CGFloat const YSGSearchBarHeight = 44.0;
 }
 
 #pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    // Clean table
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -170,7 +189,26 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 - (NSArray <NSArray <YSGContact *> *> *)sortedContactsWithContactList:(NSArray <YSGContact *> *)contacts
 {
+    return nil;
+}
+
+- (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *)contacts
+{
+    NSMutableArray <YSGContact *> * suggested = [NSMutableArray array];
     
+    for (NSUInteger i = 0; i < self.service.numberOfSuggestions; i++)
+    {
+        if (i < contacts.count)
+        {
+            [suggested addObject:contacts[i]];
+        }
+        else
+        {
+            break;
+        }
+    }
+    
+    return suggested.copy;
 }
 
 @end
