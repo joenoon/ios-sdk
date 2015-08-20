@@ -8,24 +8,26 @@
 
 @import Foundation;
 
+#import "YSGJSONParsable.h"
+
 /*!
  *  Represents a single Address Book contact
  */
-@interface YSGContact : NSObject
+@interface YSGContact : NSObject <YSGJSONParsable>
 
 @property (nonnull, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSArray<NSString *> *emails;
 @property (nullable, nonatomic, copy) NSArray<NSString *> *phones;
 @property (nullable, nonatomic, copy) NSDictionary *data;
 
-- (NSString *)phone;
-- (NSString *)email;
+- (nullable NSString *)phone;
+- (nullable NSString *)email;
 
 /*!
- *  Returns contact string
+ *  Returns contact string based on email or phone, defaulting to phone
  *
- *  @return <#return value description#>
+ *  @return string with at least one contact
  */
-- (NSString *)contactString;
+- (nullable NSString *)contactString;
 
 @end

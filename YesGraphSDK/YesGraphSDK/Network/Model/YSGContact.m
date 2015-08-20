@@ -10,4 +10,19 @@
 
 @implementation YSGContact
 
+- (NSString *)phone
+{
+    return self.phones.firstObject;
+}
+
+- (NSString *)email
+{
+    return self.emails.firstObject;
+}
+
+- (NSString *)contactString
+{
+    return self.phone ?: self.email;
+}
+
 @end

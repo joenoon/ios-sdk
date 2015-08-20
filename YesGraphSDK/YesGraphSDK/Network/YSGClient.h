@@ -16,8 +16,14 @@
  */
 @interface YSGClient : NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
+@property (nonatomic, copy, nullable) NSString *clientKey;
+
 + (instancetype)shared;
 
-- (void)updateAddressBookWithContactList:(NSArray <YSGContact *> * _Nonnull )contacts withSource:(YSGSource * _Nonnull)source completion:(void (^)(NSError *error))completion;
+- (void)updateAddressBookWithContactList:(NSArray <YSGContact *> *)contacts withSource:(YSGSource *)source completion:(nullable void (^)(NSError *__nullable error))completion;
+
+NS_ASSUME_NONNULL_END
 
 @end
