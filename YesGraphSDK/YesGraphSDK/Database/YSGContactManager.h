@@ -20,6 +20,6 @@
 
 + (instancetype)shared;
 
-- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *))completion;
+- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *contacts, NSError *error))completion;
 
 @end

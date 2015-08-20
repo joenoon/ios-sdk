@@ -89,7 +89,7 @@ CGFloat const YSGSearchBarHeight = 44.0;
     // Load contact data
     //
     
-    [self.service.contactManager fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts) {
+    [self.service.contactManager fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts, NSError *error) {
         
         self.contacts = contacts;
         

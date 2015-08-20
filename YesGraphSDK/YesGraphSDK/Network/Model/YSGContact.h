@@ -15,7 +15,9 @@
  */
 @interface YSGContact : NSObject <YSGJSONParsable>
 
-@property (nonnull, nonatomic, copy) NSString *name;
+NS_ASSUME_NONNULL_BEGIN
+
+@property (nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSArray<NSString *> *emails;
 @property (nullable, nonatomic, copy) NSArray<NSString *> *phones;
 @property (nullable, nonatomic, copy) NSDictionary *data;
@@ -29,5 +31,7 @@
  *  @return string with at least one contact
  */
 - (nullable NSString *)contactString;
+
+NS_ASSUME_NONNULL_END
 
 @end
