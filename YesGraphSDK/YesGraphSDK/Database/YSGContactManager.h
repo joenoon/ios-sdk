@@ -11,7 +11,7 @@
 #import "YSGContact.h"
 
 /*!
- *  Contact manager
+ *  Contact manager to do all work with contacts
  */
 @interface YSGContactManager : NSObject
 
@@ -20,8 +20,6 @@
 
 + (instancetype)shared;
 
-- (NSArray<YSGContact *> *)contactListInLocalAddressBook;
-
-- (void)cacheContactList:(NSArray<YSGContact *> *)contacts;
+- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *))completion;
 
 @end

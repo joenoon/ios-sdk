@@ -10,6 +10,7 @@
 @import Contacts;
 
 #import "YSGClient.h"
+#import "YSGContactManager.h"
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
 
@@ -31,7 +32,7 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 @property (nonatomic, copy) NSArray <YSGContact *> *contacts;
 
-@property (nonatomic, copy) NSArray <YSGContact *> *filteredContacts;
+@property (nonatomic, copy) NSArray <NSArray <YSGContact *> *> *sortedContacts;
 
 @end
 
@@ -45,8 +46,12 @@ CGFloat const YSGSearchBarHeight = 44.0;
     {
         return self.suggestions;
     }
+    else if (self.suggestions.count)
+    {
+        return self.sortedContacts[section - 1];
+    }
     
-    return self.contacts;
+    return self.sortedContacts[section];
 }
 
 - (YSGContact *)contactForIndexPath:(NSIndexPath *)indexPath
@@ -74,6 +79,17 @@ CGFloat const YSGSearchBarHeight = 44.0;
     }
     
     self.tableView.editing = YES;
+    
+    self.tableView.allowsSelectionDuringEditing = YES;
+    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    
+    //
+    // Load contact data
+    //
+    
+    [self.service.contactManager fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts) {
+        
+    }];
 }
 
 - (void)viewWillLayoutSubviews
@@ -89,12 +105,14 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    NSInteger sections = self.sortedContacts.count;
+    
     if (self.suggestions.count)
     {
-        return 2;
+        sections++;
     }
     
-    return 1;
+    return sections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -125,6 +143,22 @@ CGFloat const YSGSearchBarHeight = 44.0;
     return cell;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
+{
+    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+}
+
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,5 +167,10 @@ CGFloat const YSGSearchBarHeight = 44.0;
 }
 
 #pragma mark - Private Methods
+
+- (NSArray <NSArray <YSGContact *> *> *)sortedContactsWithContactList:(NSArray <YSGContact *> *)contacts
+{
+    
+}
 
 @end

@@ -10,4 +10,16 @@
 
 @implementation YSGContactManager
 
+#pragma mark - Public Methods
+
+- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *))completion
+{
+    if (!completion)
+    {
+        return;
+    }
+}
+
+#pragma mark - Private Methods
+
 @end
