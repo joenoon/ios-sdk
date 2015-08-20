@@ -6,6 +6,9 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+@import Contacts;
+@import AddressBook;
+
 #import "YSGContactManager.h"
 
 @implementation YSGContactManager
@@ -21,5 +24,10 @@
 }
 
 #pragma mark - Private Methods
+
+- (void)fetchLocalAddressBookWithCompletion:(void (^)(NSArray<YSGContact *> *))completion
+{
+    
+}
 
 @end

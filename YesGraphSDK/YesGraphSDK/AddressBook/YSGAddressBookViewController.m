@@ -90,14 +90,13 @@ CGFloat const YSGSearchBarHeight = 44.0;
     //
     
     [self.service.contactManager fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts) {
-        //
-        // Cut away first suggested contacts
-        //
         
         self.contacts = contacts;
         
         self.suggestions = [self suggestedContactsWithContacts:contacts];
         self.sortedContacts = [self sortedContactsWithContactList:contacts];
+        
+        self.searchResults = nil;
     }];
 }
 
