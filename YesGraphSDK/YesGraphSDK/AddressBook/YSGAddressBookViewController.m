@@ -28,6 +28,7 @@ CGFloat const YSGSearchBarHeight = 44.0;
 //
 
 @property (nonatomic, copy) NSArray <YSGContact *> *suggestions;
+
 @property (nonatomic, copy) NSArray <YSGContact *> *contacts;
 
 @property (nonatomic, copy) NSArray <YSGContact *> *filteredContacts;
@@ -71,6 +72,8 @@ CGFloat const YSGSearchBarHeight = 44.0;
         
         self.tableView.tableHeaderView = self.searchBar;
     }
+    
+    self.tableView.editing = YES;
 }
 
 - (void)viewWillLayoutSubviews

@@ -19,6 +19,14 @@
 @optional
 
 /*!
+ *  Called when user selected to use a specific share service
+ *
+ *  @param shareSheetController instance
+ *  @param service              share service that will be used
+ */
+- (void)shareSheetController:(YSGShareSheetController * _Nonnull)shareSheetController didSelectService:(YSGShareService * _Nonnull)service;
+
+/*!
  *  If share service does not have a message block set, the delegate is asked to provide a message.
  *  @warning: If no message is available, an exception will be raised.
  *
@@ -39,6 +47,13 @@
  *  @param error                error during sharing
  */
 - (void)shareSheetController:(YSGShareSheetController * _Nonnull)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error;
+
+/*!
+ *  Called when user finished sharing
+ *
+ *  @param shareSheetController instance
+ */
+- (void)shareSheetControllerDidFinish:(YSGShareSheetController * _Nonnull)shareSheetController;
 
 @end
 
