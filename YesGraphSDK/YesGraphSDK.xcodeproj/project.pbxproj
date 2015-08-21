@@ -17,6 +17,8 @@
 		380937431B84D1AA00FBF888 /* YSGAddressBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380937411B84D1AA00FBF888 /* YSGAddressBookCell.m */; };
 		380937461B84D3F600FBF888 /* YSGContactManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 380937441B84D3F600FBF888 /* YSGContactManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		380937471B84D3F600FBF888 /* YSGContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 380937451B84D3F600FBF888 /* YSGContactManager.m */; };
+		3817840B1B877370008B8315 /* YSGErrorConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 381784091B877370008B8315 /* YSGErrorConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3817840C1B877370008B8315 /* YSGErrorConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3817840A1B877370008B8315 /* YSGErrorConstants.m */; };
 		383A723E1B87548B00DC3880 /* YSGJSONParsable.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CE6EA81B8617460037FE79 /* YSGJSONParsable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3846CBA51B85E6EB00963CE6 /* YSGAddressBookOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3846CBA31B85E6EB00963CE6 /* YSGAddressBookOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3846CBA61B85E6EB00963CE6 /* YSGAddressBookOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3846CBA41B85E6EB00963CE6 /* YSGAddressBookOperation.m */; };
@@ -71,6 +73,8 @@
 		380937411B84D1AA00FBF888 /* YSGAddressBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGAddressBookCell.m; sourceTree = "<group>"; };
 		380937441B84D3F600FBF888 /* YSGContactManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YSGContactManager.h; path = Database/YSGContactManager.h; sourceTree = "<group>"; };
 		380937451B84D3F600FBF888 /* YSGContactManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YSGContactManager.m; path = Database/YSGContactManager.m; sourceTree = "<group>"; };
+		381784091B877370008B8315 /* YSGErrorConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGErrorConstants.h; sourceTree = "<group>"; };
+		3817840A1B877370008B8315 /* YSGErrorConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGErrorConstants.m; sourceTree = "<group>"; };
 		3846CBA31B85E6EB00963CE6 /* YSGAddressBookOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGAddressBookOperation.h; sourceTree = "<group>"; };
 		3846CBA41B85E6EB00963CE6 /* YSGAddressBookOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGAddressBookOperation.m; sourceTree = "<group>"; };
 		3852B2CD1B833E1600544FBA /* YSGContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGContact.h; sourceTree = "<group>"; };
@@ -316,6 +320,8 @@
 				385B64B41B831C0B00C55F60 /* YSGShareService.m */,
 				3800EE941B83769C007E0C43 /* YSGShareSheetController.h */,
 				3800EE951B83769C007E0C43 /* YSGShareSheetController.m */,
+				381784091B877370008B8315 /* YSGErrorConstants.h */,
+				3817840A1B877370008B8315 /* YSGErrorConstants.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -338,6 +344,7 @@
 				3809373E1B84D0EA00FBF888 /* YSGTheme.h in Headers */,
 				380937461B84D3F600FBF888 /* YSGContactManager.h in Headers */,
 				3800EE961B83769C007E0C43 /* YSGShareSheetController.h in Headers */,
+				3817840B1B877370008B8315 /* YSGErrorConstants.h in Headers */,
 				385B64C21B831C3F00C55F60 /* YSGInviteService.h in Headers */,
 				380937421B84D1AA00FBF888 /* YSGAddressBookCell.h in Headers */,
 				385B64B11B831BAE00C55F60 /* YSGClient.h in Headers */,
@@ -464,6 +471,7 @@
 				385B64B61B831C0B00C55F60 /* YSGShareService.m in Sources */,
 				385B64CB1B831CA900C55F60 /* YSGAddressBookViewController.m in Sources */,
 				385B64C31B831C3F00C55F60 /* YSGInviteService.m in Sources */,
+				3817840C1B877370008B8315 /* YSGErrorConstants.m in Sources */,
 				3809373A1B84CBE000FBF888 /* YSGRankedContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

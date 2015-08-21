@@ -6,8 +6,10 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface YSGShareSheetServiceCell : UICollectionViewCell
+
+@property (nonatomic, copy) NSString *text;
 
 @end

@@ -23,7 +23,9 @@
 
 - (IBAction)shareButtonTap:(UIButton *)sender
 {
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:nil delegate:self];
+    YSGInviteService *service = [[YSGInviteService alloc] initWithContactManager:[YSGContactManager shared]];
+    
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ service ] delegate:self];
     
     [self presentViewController:shareController animated:YES completion:nil];
 }

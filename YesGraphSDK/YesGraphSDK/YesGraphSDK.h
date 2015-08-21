@@ -24,3 +24,4 @@ FOUNDATION_EXPORT const unsigned char YesGraphSDKVersionString[];
 #import <YesGraphSDK/YSGShareSheetController.h>
 
 #import <YesGraphSDK/YSGInviteService.h>
+#import <YesGraphSDK/YSGContactManager.h>

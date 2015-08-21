@@ -10,7 +10,6 @@
 @import UIKit;
 
 @class YSGShareService;
-@class YSGShareSheetController;
 
 /*!
  *  Message block is called every time share service needs a message
@@ -23,9 +22,12 @@
 typedef NSString * _Nonnull (^ShareMessageBlock)(YSGShareService* _Nonnull service, NSDictionary * _Nullable userInfo);
 
 /*!
- *  Share service for YesGraph share sheet
+ *  Share service for YesGraph share sheet, abstract implementation. This class should not
+ *  be initialized directly.
  */
 @interface YSGShareService : NSObject
+
+NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, assign) ShareMessageBlock messageBlock;
 
@@ -33,6 +35,8 @@ typedef NSString * _Nonnull (^ShareMessageBlock)(YSGShareService* _Nonnull servi
 
 @property (nonnull, nonatomic, readonly) NSString *name;
 
-- (void)triggerServiceWithShareSheet:(YSGShareSheetController *)shareSheet;
+- (void)triggerServiceWithViewController:(UIViewController *)viewController;
+
+NS_ASSUME_NONNULL_END
 
 @end
