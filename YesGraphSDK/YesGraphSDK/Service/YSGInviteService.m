@@ -32,6 +32,8 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     if (self)
     {
         self.contactManager = contactManager;
+        
+        self.allowSearch = YES;
     }
     
     return self;

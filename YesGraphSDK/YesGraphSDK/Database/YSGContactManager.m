@@ -39,6 +39,8 @@
     {
         return;
     }
+    
+    [self fetchLocalAddressBookWithCompletion:completion];
 }
 
 #pragma mark - Private Methods
@@ -61,7 +63,7 @@
     NSError *error;
     
     [store enumerateContactsWithFetchRequest:fetchRequest error:&error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop) {
-        
+        [contacts addObject:[self contactFromContact:contact]];
     }];
     
     if (completion)
