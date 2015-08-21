@@ -9,7 +9,7 @@
 #import "YSGShareSheetController.h"
 #import "YSGShareSheetServiceCell.h"
 
-NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifier";
+static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifier";
 
 @interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate>
 

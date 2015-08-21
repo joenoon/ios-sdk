@@ -16,6 +16,8 @@
 
 CGFloat const YSGSearchBarHeight = 44.0;
 
+static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdentifier";
+
 @interface YSGAddressBookViewController () <UISearchBarDelegate>
 
 //
@@ -82,6 +84,8 @@ CGFloat const YSGSearchBarHeight = 44.0;
         self.tableView.tableHeaderView = self.searchBar;
     }
     
+    [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
+    
     self.tableView.editing = YES;
     
     self.tableView.allowsSelectionDuringEditing = YES;
@@ -142,13 +146,11 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"AddressBookCell";
-    
-    YSGAddressBookCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    YSGAddressBookCell * cell = [tableView dequeueReusableCellWithIdentifier:YSGAddressBookCellIdentifier forIndexPath:indexPath];
     
     if (!cell)
     {
-        cell = [[YSGAddressBookCell alloc] initWithReuseIdentifier:cellIdentifier];
+        cell = [[YSGAddressBookCell alloc] initWithReuseIdentifier:YSGAddressBookCellIdentifier];
     }
     
     //
