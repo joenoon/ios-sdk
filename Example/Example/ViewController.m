@@ -8,9 +8,9 @@
 
 #import "ViewController.h"
 
-//#import <YesGraphSDK/YesGraphSDK.h>
+//#import "YesGraph.h"
 
-//@import YesGraphSDK;
+@import YesGraphSDK;
 
 @interface ViewController ()
 
@@ -21,6 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     
     
     //[YesGraph shared];
