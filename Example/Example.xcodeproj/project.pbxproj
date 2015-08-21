@@ -14,7 +14,7 @@
 		3805E1691B831B1B004463B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3805E1681B831B1B004463B8 /* Images.xcassets */; };
 		3805E16C1B831B1B004463B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3805E16A1B831B1B004463B8 /* LaunchScreen.xib */; };
 		3805E1781B831B1B004463B8 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1771B831B1B004463B8 /* ExampleTests.m */; };
-		38CB82731B831F2F004A0FE3 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CB82721B831F2F004A0FE3 /* YesGraphSDK.framework */; };
+		381784081B875F27008B8315 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381784071B875F27008B8315 /* YesGraphSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,7 @@
 		3805E1711B831B1B004463B8 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3805E1761B831B1B004463B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3805E1771B831B1B004463B8 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
-		38CB82721B831F2F004A0FE3 /* YesGraphSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YesGraphSDK.framework; path = "../YesGraphSDK/build/Debug-iphoneos/YesGraphSDK.framework"; sourceTree = "<group>"; };
+		381784071B875F27008B8315 /* YesGraphSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YesGraphSDK.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/YesGraph-egufbipkadfjwagfbzivrmnnkfja/Build/Products/Debug-iphoneos/YesGraphSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38CB82731B831F2F004A0FE3 /* YesGraphSDK.framework in Frameworks */,
+				381784081B875F27008B8315 /* YesGraphSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +126,7 @@
 		385B64D31B831DD900C55F60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38CB82721B831F2F004A0FE3 /* YesGraphSDK.framework */,
+				381784071B875F27008B8315 /* YesGraphSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

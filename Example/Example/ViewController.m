@@ -8,11 +8,9 @@
 
 #import "ViewController.h"
 
-//#import "YesGraph.h"
-
 @import YesGraphSDK;
 
-@interface ViewController ()
+@interface ViewController () <YSGShareSheetDelegate>
 
 @end
 
@@ -21,10 +19,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (IBAction)shareButtonTap:(UIButton *)sender
+{
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:nil delegate:self];
     
-    
-    
-    //[YesGraph shared];
+    [self presentViewController:shareController animated:YES completion:nil];
 }
 
 @end

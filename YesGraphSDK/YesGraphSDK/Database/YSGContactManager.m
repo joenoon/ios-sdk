@@ -21,6 +21,18 @@
 
 #pragma mark - Public Methods
 
++ (instancetype)shared
+{
+    static id shared = nil;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        shared = [[self alloc] init];
+    });
+    
+    return shared;
+}
+
 - (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *contacts, NSError *error))completion
 {
     if (!completion)
