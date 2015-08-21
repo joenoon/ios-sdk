@@ -58,10 +58,27 @@
 @end
 
 /*!
- *  Main share sheet coontroller (entry point)
+ *  Main share sheet controller (entry point)
  */
 @interface YSGShareSheetController : UIViewController
 
+/*!
+ *  Referel URL that is displayed and can be copied
+ *
+ *  @discussion: If this is nil, no copy box is displayed.
+ */
+@property (nullable, nonatomic, copy) NSString *referralURL;
+
+/*!
+ *  Image that is displayed on the share sheet.
+ *
+ *  @discussion: If it is nil, no image view is generated
+ */
+@property (nullable, nonatomic, strong) UIImage *shareImage;
+
+/*!
+ *  Delegate to receive messages
+ */
 @property (nullable, nonatomic, weak) id<YSGShareSheetDelegate> delegate;
 
 @end

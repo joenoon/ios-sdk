@@ -8,7 +8,17 @@
 
 #import "YSGShareSheetController.h"
 
+@interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate>
+
+@property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, strong) YSGTheme *theme;
+
+@end
+
 @implementation YSGShareSheetController
+
+#pragma mark - Initialization
 
 + (instancetype _Nonnull)shareSheetControllerWithServices:(NSArray<YSGShareService *> * _Nonnull)services
 {
@@ -16,6 +26,11 @@
 }
 
 - (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(id<YSGShareSheetDelegate>)delegate
+{
+    return [self initWithServices:services delegate:delegate theme:nil];
+}
+
+- (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(id<YSGShareSheetDelegate>)delegate theme:(YSGTheme * _Nullable)theme
 {
     self = [super init];
     
@@ -25,6 +40,26 @@
     }
     
     return self;
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    //
+    // Setup views
+    //
+}
+
+#pragma mark - UICollectionViewDataSource
+
+#pragma mark - UICollectionViewDelegate
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
 }
 
 @end
