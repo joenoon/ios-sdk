@@ -43,6 +43,8 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 {
     YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
     
+    addressBookViewController.service = self;
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
     
     [viewController presentViewController:navigationController animated:YES completion:nil];

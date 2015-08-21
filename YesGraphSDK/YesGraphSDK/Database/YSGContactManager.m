@@ -19,6 +19,18 @@
 
 @implementation YSGContactManager
 
+#pragma mark - Getters and Setters
+
+- (CNContactFormatter *)formatter
+{
+    if (!_formatter)
+    {
+        _formatter = [[CNContactFormatter alloc] init];
+    }
+    
+    return _formatter;
+}
+
 #pragma mark - Public Methods
 
 + (instancetype)shared
@@ -49,7 +61,7 @@
 {
     if (!self.hasContactsPermission)
     {
-        return;
+        //return;
     }
     
     NSArray <NSString *> *keysToFetch = @[ [CNContactFormatter descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName], CNContactEmailAddressesKey, CNContactPhoneNumbersKey ];

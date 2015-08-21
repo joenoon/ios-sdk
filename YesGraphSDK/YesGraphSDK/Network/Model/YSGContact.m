@@ -10,6 +10,11 @@
 
 @implementation YSGContact
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@ - %@", self.name, self.contactString];
+}
+
 - (NSString *)phone
 {
     return self.phones.firstObject;
