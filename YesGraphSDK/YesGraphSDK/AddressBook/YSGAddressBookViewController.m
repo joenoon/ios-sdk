@@ -34,7 +34,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 @property (nonatomic, copy) NSArray <YSGContact *> *contacts;
 
-@property (nonatomic, copy) NSArray <NSArray <YSGContact *> *> *sortedContacts;
+@property (nonatomic, copy) NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedContacts;
 
 @property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
 
@@ -44,7 +44,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 #pragma mark - Getters and Setters
 
-- (NSArray *)contactsForSection:(NSInteger)section
+- (NSArray <YSGContact *> *)contactsForSection:(NSInteger)section
 {
     if (self.suggestions.count && section == 0)
     {
@@ -52,10 +52,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     }
     else if (self.suggestions.count)
     {
-        return self.sortedContacts[section - 1];
+        NSString *identifier = [self tableView:self.tableView titleForHeaderInSection:section - 1];
+        
+        return self.sortedContacts[identifier];
     }
     
-    return self.sortedContacts[section];
+    NSString *identifier = [self tableView:self.tableView titleForHeaderInSection:section];
+    
+    return self.sortedContacts[identifier];
 }
 
 - (YSGContact *)contactForIndexPath:(NSIndexPath *)indexPath
@@ -81,7 +85,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         
         self.searchBar.delegate = self;
         
-        self.tableView.tableHeaderView = self.searchBar;
+        //self.tableView.tableHeaderView = self.searchBar;
     }
     
     [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
@@ -167,6 +171,15 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if (self.suggestions.count && section == 0)
+    {
+        return @"Suggestions";
+    }
+    else if (self.suggestions.count)
+    {
+        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
+    }
+    
     return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
 }
 
@@ -177,9 +190,13 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index
 {
+    if (self.suggestions.count)
+    {
+        return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index + 1];
+    }
+    
     return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
 }
-
 
 #pragma mark - UITableViewDelegate
 
@@ -190,9 +207,34 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 #pragma mark - Private Methods
 
-- (NSArray <NSArray <YSGContact *> *> *)sortedContactsWithContactList:(NSArray <YSGContact *> *)contacts
+- (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedContactsWithContactList:(NSArray <YSGContact *> *)contacts
 {
-    return nil;
+    NSMutableDictionary <NSString *, NSMutableArray <YSGContact *> * > *contactList = [NSMutableDictionary dictionary];
+    
+    for (YSGContact *contact in contacts)
+    {
+        NSString *letter = [contact.name substringToIndex:1];
+        
+        if (!contactList[letter])
+        {
+            contactList[letter] = [NSMutableArray array];
+        }
+        
+        [contactList[letter] addObject:contact];
+    }
+    
+    NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    
+    NSMutableDictionary <NSString *, NSArray <YSGContact *> * > *sortedList = [NSMutableDictionary dictionary];
+    
+    for (NSString* letter in contactList)
+    {
+        NSArray *contacts = contactList[letter];
+        
+        sortedList[letter] = [contacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
+    }
+    
+    return sortedList.copy;
 }
 
 - (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *)contacts
