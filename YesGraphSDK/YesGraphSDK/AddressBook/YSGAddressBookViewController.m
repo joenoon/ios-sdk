@@ -67,6 +67,8 @@ CGFloat const YSGSearchBarHeight = 44.0;
 {
     [super viewDidLoad];
     
+    self.title = @"Contacts";
+    
     //
     // Add the search
     //
