@@ -35,6 +35,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 @property (nonatomic, copy) NSArray <YSGContact *> *contacts;
 
 @property (nonatomic, copy) NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedContacts;
+/*!
+ *  Used to order letters in section title, as NSDictionary is unordered.
+ */
+@property (nonatomic, copy) NSArray <NSString *> *letters;
+
+//
+// Search
+//
 
 @property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
 
@@ -43,6 +51,17 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 @implementation YSGAddressBookViewController
 
 #pragma mark - Getters and Setters
+
+- (void)setContacts:(NSArray<YSGContact *> *)contacts
+{
+    _contacts = contacts;
+    
+    self.suggestions = [self suggestedContactsWithContacts:contacts];
+    self.sortedContacts = [self sortedContactsWithContactList:contacts];
+    self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    self.searchResults = nil;
+}
 
 - (NSArray <YSGContact *> *)contactsForSection:(NSInteger)section
 {
@@ -102,11 +121,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [self.service.contactManager fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts, NSError *error) {
         
         self.contacts = contacts;
-        
-        self.suggestions = [self suggestedContactsWithContacts:contacts];
-        self.sortedContacts = [self sortedContactsWithContactList:contacts];
-        
-        self.searchResults = nil;
     }];
 }
 
@@ -177,10 +191,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     }
     else if (self.suggestions.count)
     {
-        return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
+        return self.letters[section - 1];
+        
+        //return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
     }
     
-    return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
+    return self.letters[section];
+    
+    //return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView

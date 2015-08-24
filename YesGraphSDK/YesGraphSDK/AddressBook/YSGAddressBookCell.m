@@ -10,6 +10,11 @@
 
 @implementation YSGAddressBookCell
 
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    return [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+}
+
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     return [self initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
