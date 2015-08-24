@@ -83,6 +83,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (NSArray <YSGContact *> *)contactsForSection:(NSInteger)section
 {
+    if (self.searchResults)
+    {
+        return self.searchResults;
+    }
+    
     if (self.suggestions.count && section == 0)
     {
         return self.suggestions;
@@ -116,7 +121,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         
         self.searchBar.delegate = self;
         
-        //self.tableView.tableHeaderView = self.searchBar;
+        self.tableView.tableHeaderView = self.searchBar;
     }
     
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
@@ -192,17 +197,40 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     // Clean table
+    
+    self.searchResults = nil;
+    
+    [self.tableView reloadData];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    self.searchResults = nil;
+    
+    [self.tableView reloadData];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
     
+    self.searchResults = [self.contacts filteredArrayUsingPredicate:predicate];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    //
+    // Search is handled specifically
+    //
+    if (self.searchResults)
+    {
+        return 1;
+    }
+    
     NSInteger sections = self.sortedContacts.count;
     
     if (self.suggestions.count)
@@ -241,6 +269,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    if (self.searchResults)
+    {
+        return nil;
+    }
+    
     if (self.suggestions.count && section == 0)
     {
         return @"Suggestions";
@@ -272,14 +305,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YSGContact *contact = [self contactsForSection:indexPath.section][indexPath.row];
+    YSGContact *contact = [self contactForIndexPath:indexPath];
     
     [self.selectedContacts addObject:contact];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YSGContact *contact = [self contactsForSection:indexPath.section][indexPath.row];
+    YSGContact *contact = [self contactForIndexPath:indexPath];
     
     [self.selectedContacts removeObject:contact];
 }
