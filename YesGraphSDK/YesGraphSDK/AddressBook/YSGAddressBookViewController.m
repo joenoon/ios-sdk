@@ -84,12 +84,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     {
         return self.suggestions;
     }
-    else if (self.suggestions.count)
-    {
-        NSString *identifier = [self tableView:self.tableView titleForHeaderInSection:section - 1];
-        
-        return self.sortedContacts[identifier];
-    }
     
     NSString *identifier = [self tableView:self.tableView titleForHeaderInSection:section];
     
@@ -169,7 +163,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     if (!self.selectedContacts.count)
     {
-        [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:@"Please select at least one contact" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:@"Please select at least one contact." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
         
         return;
     }
@@ -270,7 +264,16 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    YSGContact *contact = [self contactsForSection:indexPath.section][indexPath.row];
     
+    [self.selectedContacts addObject:contact];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    YSGContact *contact = [self contactsForSection:indexPath.section][indexPath.row];
+    
+    [self.selectedContacts removeObject:contact];
 }
 
 #pragma mark - Private Methods
