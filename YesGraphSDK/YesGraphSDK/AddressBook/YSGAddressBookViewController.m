@@ -72,7 +72,10 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     _contacts = contacts;
     
     self.suggestions = [self suggestedContactsWithContacts:contacts];
-    self.sortedContacts = [self sortedContactsWithContactList:contacts];
+    
+    NSArray<YSGContact *> *trimmedContacts = [contacts subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contacts.count - self.service.numberOfSuggestions)];
+    
+    self.sortedContacts = [self sortedContactsWithContactList:trimmedContacts];
     self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     self.searchResults = nil;
@@ -168,7 +171,13 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         return;
     }
     
-    NSString *message = [NSString stringWithFormat:@"Invited %ld contacts.", (long)self.selectedContacts.count];
+    NSMutableString *message = [[NSMutableString alloc] initWithString:@"Invited: "];
+    
+    for (YSGContact *contact in self.selectedContacts)
+    {
+        [message appendString:contact.name];
+        [message appendString:@", "];
+    }
     
     [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     
@@ -236,13 +245,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     else if (self.suggestions.count)
     {
         return self.letters[section - 1];
-        
-        //return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section - 1];
     }
     
     return self.letters[section];
-    
-    //return [[[UILocalizedIndexedCollation currentCollation] sectionTitles] objectAtIndex:section];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
