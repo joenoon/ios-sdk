@@ -28,7 +28,7 @@
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ service ] delegate:self];
     
-    [self presentViewController:shareController animated:YES completion:nil];
+    [self.navigationController pushViewController:shareController animated:YES];
 }
 
 @end

@@ -40,6 +40,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
  */
 @property (nonatomic, copy) NSArray <NSString *> *letters;
 
+/*!
+ *  Selected contacts
+ */
+@property (nonatomic, copy) NSMutableArray <YSGContact *> *selectedContacts;
+
 //
 // Search
 //
@@ -51,6 +56,16 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 @implementation YSGAddressBookViewController
 
 #pragma mark - Getters and Setters
+
+- (NSMutableArray <YSGContact *> *)selectedContacts
+{
+    if (!_selectedContacts)
+    {
+        _selectedContacts = [NSMutableArray array];
+    }
+    
+    return _selectedContacts;
+}
 
 - (void)setContacts:(NSArray<YSGContact *> *)contacts
 {
@@ -115,6 +130,18 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     
     //
+    // Add navigation buttons
+    //
+    
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonTap:)];
+    
+    UIBarButtonItem *inviteButton = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStylePlain target:self action:@selector(inviteButtonTap:)];
+    
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.rightBarButtonItem = inviteButton;
+
+    
+    //
     // Load contact data
     //
     
@@ -129,6 +156,29 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [super viewWillLayoutSubviews];
     
     self.searchBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, YSGSearchBarHeight);
+}
+
+#pragma mark - Actions
+
+- (void)cancelButtonTap:(UIBarButtonItem *)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)inviteButtonTap:(UIBarButtonItem *)sender
+{
+    if (!self.selectedContacts.count)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:@"Please select at least one contact" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        
+        return;
+    }
+    
+    NSString *message = [NSString stringWithFormat:@"Invited %ld contacts.", (long)self.selectedContacts.count];
+    
+    [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -210,10 +260,10 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     if (self.suggestions.count)
     {
-        return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index + 1];
+        return [self.letters indexOfObject:title] + 1;
     }
     
-    return [[UILocalizedIndexedCollation currentCollation] sectionForSectionIndexTitleAtIndex:index];
+    return  [self.letters indexOfObject:title];
 }
 
 #pragma mark - UITableViewDelegate
