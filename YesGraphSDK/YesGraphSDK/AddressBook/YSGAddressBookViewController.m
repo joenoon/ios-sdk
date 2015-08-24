@@ -119,6 +119,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         //self.tableView.tableHeaderView = self.searchBar;
     }
     
+    self.navigationController.navigationBar.tintColor = [UIColor redColor];
+    self.view.tintColor = [UIColor redColor];
+    
     [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
     
     self.tableView.editing = YES;
@@ -262,7 +265,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         return [self.letters indexOfObject:title] + 1;
     }
     
-    return  [self.letters indexOfObject:title];
+    return [self.letters indexOfObject:title];
 }
 
 #pragma mark - UITableViewDelegate
