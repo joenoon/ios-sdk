@@ -64,6 +64,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    flowLayout.itemSize = CGSizeMake(100.0, 100.0);
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -73,6 +74,10 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    //
+    //
+    //
     
     UICollectionView *collectionView = self.collectionView;
     

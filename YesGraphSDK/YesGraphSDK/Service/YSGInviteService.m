@@ -22,7 +22,7 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 
 - (NSString *)name
 {
-    return @"Invite";
+    return @"Contacts";
 }
 
 - (instancetype)initWithContactManager:(YSGContactManager *)contactManager
