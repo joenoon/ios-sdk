@@ -29,6 +29,33 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 #pragma mark - Getters and Setters
 
+- (NSString *)contactAccessPromptTitle
+{
+    if (!_contactAccessPromptTitle)
+    {
+        return @"Invite friends";
+    }
+    
+    return _contactAccessPromptTitle;
+}
+
+- (NSString *)contactAccessPromptMessage
+{
+    if (!_contactAccessPromptMessage)
+    {
+        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        
+        if (appName)
+        {
+            appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+        }
+        
+        return (appName.length) ? [NSString stringWithFormat:@"Share contacts with %@ app to find friends to invite?", appName] : @"Share contacts to find friends to invite?";
+    }
+    
+    return _contactAccessPromptMessage;
+}
+
 - (BOOL)didAskForPermission
 {
     return [[NSUserDefaults standardUserDefaults] boolForKey:YSGLocalContactSourcePermissionKey];
@@ -114,7 +141,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     
     if (!self.didAskForPermission)
     {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Invite friends get free AAA" message:@"Share contacts with AAA app to find friends to invite?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:self.contactAccessPromptTitle message:self.contactAccessPromptMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *dontAllowAction = [UIAlertAction actionWithTitle:@"Don't allow" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
         {
             

@@ -23,7 +23,10 @@
 
 - (IBAction)shareButtonTap:(UIButton *)sender
 {
-    YSGInviteService *service = [[YSGInviteService alloc] initWithContactSource:[YSGLocalContactSource new]];
+    YSGLocalContactSource *localSource = [YSGLocalContactSource new];
+    localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
+    
+    YSGInviteService *service = [[YSGInviteService alloc] initWithContactSource:localSource];
     service.numberOfSuggestions = 3;
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ service ] delegate:self];
