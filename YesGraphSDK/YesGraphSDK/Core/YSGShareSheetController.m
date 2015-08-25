@@ -127,6 +127,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     YSGShareService *service = self.services[indexPath.row];
     
+    if ([self.delegate respondsToSelector:@selector(shareSheetController:didSelectService:)])
+    {
+        [self.delegate shareSheetController:self didSelectService:service];
+    }
+    
     [service triggerServiceWithViewController:self];
 }
 
