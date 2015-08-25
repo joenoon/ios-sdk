@@ -8,8 +8,15 @@
 
 @import UIKit;
 
+/*!
+ *  Share sheet displays service
+ */
 @interface YSGShareSheetServiceCell : UICollectionViewCell
 
 @property (nonatomic, copy) NSString *text;
+
+@property (nonatomic, strong) UIColor *color;
+
+@property (nonatomic, copy) UIImage *image;
 
 @end

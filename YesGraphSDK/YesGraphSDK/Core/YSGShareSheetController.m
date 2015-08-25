@@ -23,6 +23,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 @implementation YSGShareSheetController
 
+#pragma mark - Getters and Setters
+
 #pragma mark - Initialization
 
 + (instancetype _Nonnull)shareSheetControllerWithServices:(NSArray<YSGShareService *> * _Nonnull)services
@@ -37,7 +39,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 - (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(id<YSGShareSheetDelegate>)delegate theme:(YSGTheme * _Nullable)theme
 {
-    self = [super init];
+    self = [super initWithNibName:nil bundle:nil];
     
     if (self)
     {
@@ -59,6 +61,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
     
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     //
     // Setup views
     //
@@ -75,23 +79,49 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
+    
     //
+    // Referral link view
     //
-    //
+    
+    UIView* footer = [[UIView alloc] init];
+    footer.translatesAutoresizingMaskIntoConstraints = NO;
+    footer.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    
+    UIView* header = [[UIView alloc] init];
+    header.translatesAutoresizingMaskIntoConstraints = NO;
+    header.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+    
+    [self.view addSubview:header];
+    [self.view addSubview:footer];
     
     UICollectionView *collectionView = self.collectionView;
     
-    NSDictionary *views = NSDictionaryOfVariableBindings(collectionView);
-    
     [self.view addSubview:self.collectionView];
     
-    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"|-10-[collectionView]-10-|" options:0 metrics:nil views:views];
+    UIView *superview = self.view;
+    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView);
+    
+    //
+    // Constraints
+    //
+    
+    NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[collectionView]-10-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-100-[collectionView]-100-|" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[header]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:horizontalConstraints];
+    
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[footer]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:horizontalConstraints];
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(60)]" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.2 constant:1]];
     
     [self.view layoutIfNeeded];
 
