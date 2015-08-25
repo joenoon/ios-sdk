@@ -197,9 +197,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)inviteButtonTap:(UIBarButtonItem *)sender
 {
-    [self.service triggerInviteFlowWithContacts:self.selectedContacts];
+    [self.service triggerInviteFlowWithContacts:self.selectedContacts.allObjects];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)updateUI

@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return instance of share sheet
  */
-- (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(nullable id<YSGShareSheetDelegate>)delegate theme:(nullable YSGTheme *)theme NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithServices:(nonnull NSArray<YSGShareService *> *)services delegate:(nullable id<YSGShareSheetDelegate>)delegate theme:(nullable YSGTheme *)theme NS_DESIGNATED_INITIALIZER;
 
 NS_ASSUME_NONNULL_END
 
@@ -111,7 +111,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return new view controller instance to be displayed
  */
-+ (instancetype)shareSheetControllerWithServices:(NSArray<YSGShareService *> *)services;
++ (instancetype)shareSheetControllerWithServices:(nonnull NSArray<YSGShareService *> *)services;
 
 /*!
  *  Convenience initializer without theme

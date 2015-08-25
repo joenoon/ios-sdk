@@ -8,6 +8,9 @@
 
 @import UIKit;
 
+/*!
+ *  These utility methods are used to present alert controller anywhere in the app, similar to UIAlertView.
+ */
 @interface UIAlertController (YSGDisplay)
 
 - (void)ysg_show;

@@ -81,7 +81,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 - (BOOL)useContactsFramework
 {
-    return NSClassFromString(@"CNContact") != nil;
+    return [[CNContactStore alloc] init] != nil;
 }
 
 - (CNContactFormatter *)formatter
