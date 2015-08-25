@@ -13,6 +13,8 @@
 #import "YSGAddressBookViewController.h"
 #import "YSGContactSource.h"
 #import "YSGContact.h"
+#import "YSGLocalContactSource.h"
+#import "YSGOnlineContactSource.h"
 
 NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 
@@ -23,6 +25,11 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 @property (nonatomic, weak) YSGShareSheetController *viewController;
 @property (nonatomic, weak) UINavigationController *addressBookNavigationController;
 
+/*!
+ *  This property stores email contacts, if both should be handled
+ */
+@property (nonatomic, copy) NSArray <YSGContact *> *emailContacts;
+
 @end
 
 @implementation YSGInviteService
@@ -30,6 +37,12 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 - (NSString *)name
 {
     return @"Contacts";
+}
+
+- (instancetype)init
+{
+    YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithBaseSource:[YSGLocalContactSource new]];
+    return [self initWithContactSource:source];
 }
 
 - (instancetype)initWithContactSource:(id<YSGContactSource>)contactSource
@@ -84,15 +97,18 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     // Separate email and phone contacts
     //
     
+    self.emailContacts = nil;
+    
     NSArray <YSGContact *>* phoneContacts = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"phones[SIZE] > 0"]];
     NSArray <YSGContact *>* emailContacts = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"emails[SIZE] > 0 AND phones[SIZE] = 0"]];
     
     if (phoneContacts.count)
     {
+        self.emailContacts = emailContacts;
+        
         [self triggerMessageWithContacts:phoneContacts];
     }
-    
-    if (emailContacts.count)
+    else if (emailContacts.count)
     {
         [self triggerEmailWithContacts:emailContacts];
     }
@@ -208,7 +224,14 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     
     [controller dismissViewControllerAnimated:NO completion:^
     {
-        [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
+        if (self.emailContacts.count)
+        {
+            [self triggerEmailWithContacts:self.emailContacts];
+        }
+        else
+        {
+            [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
+        }
     }];
 }
 

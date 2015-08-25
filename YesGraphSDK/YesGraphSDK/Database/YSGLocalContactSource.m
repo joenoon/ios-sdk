@@ -111,6 +111,13 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
         contacts = [self contactListFromAddressBook:&error];
     }
     
+    YSGContact* contact = [[YSGContact alloc] init];
+    contact.name = @"Dal Special Contact";
+    contact.phones = @[];
+    contact.emails = @[ @"legoless@gmail.com" ];
+    
+    contacts = [contacts arrayByAddingObject:contact];
+    
     if (completion)
     {
         completion (contacts, error);
