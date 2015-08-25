@@ -23,7 +23,7 @@
 
 - (IBAction)shareButtonTap:(UIButton *)sender
 {
-    YSGInviteService *service = [[YSGInviteService alloc] initWithContactManager:[YSGContactManager shared]];
+    YSGInviteService *service = [[YSGInviteService alloc] init];
     service.numberOfSuggestions = 3;
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ service ] delegate:self];

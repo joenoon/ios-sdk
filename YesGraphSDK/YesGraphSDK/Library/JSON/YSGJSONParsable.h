@@ -10,6 +10,6 @@
 
 @protocol YSGJSONParsable <NSObject>
 
-- (instancetype _Nonnull)initWithDictionary:(NSDictionary * _Nonnull) error:(NSError ** _Nullable)error;
+- (nonnull instancetype)initWithDictionary:(nonnull NSDictionary *)dictionary error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
 @end

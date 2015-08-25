@@ -12,4 +12,6 @@
 
 @interface YSGLocalContactSource : NSObject <YSGContactSource>
 
+@property (nonatomic, readonly) BOOL hasPermission;
+
 @end

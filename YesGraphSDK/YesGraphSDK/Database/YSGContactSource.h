@@ -12,6 +12,7 @@
 
 @protocol YSGContactSource <NSObject>
 
+- (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion;
 - (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *contacts, NSError *error))completion;
 
 @end

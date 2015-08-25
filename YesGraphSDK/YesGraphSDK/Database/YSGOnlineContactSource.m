@@ -30,6 +30,11 @@
 
 #pragma mark - YSGContactSource
 
+- (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion
+{
+    [self.baseSource requestContactPermission:completion];
+}
+
 - (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *, NSError *))completion
 {
     //

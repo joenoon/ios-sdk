@@ -163,13 +163,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.rightBarButtonItem = inviteButton;
 
-    
     //
     // Load contact data
     //
     
-    [self.service.contactManager fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts, NSError *error) {
-        
+    [self.service.contactSource fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts, NSError *error)
+    {
         self.contacts = contacts;
     }];
 }

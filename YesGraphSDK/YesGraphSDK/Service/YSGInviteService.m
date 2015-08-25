@@ -9,12 +9,13 @@
 #import "YSGInviteService.h"
 #import "YSGShareSheetController.h"
 #import "YSGAddressBookViewController.h"
+#import "YSGContactSource.h"
 
 NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 
 @interface YSGInviteService ()
 
-@property (nonatomic, strong) YSGContactManager *contactManager;
+@property (nonatomic, strong, readwrite) id<YSGContactSource> contactSource;
 
 @end
 
@@ -25,13 +26,13 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     return @"Contacts";
 }
 
-- (instancetype)initWithContactManager:(YSGContactManager *)contactManager
+- (instancetype)initWithContactSource:(id<YSGContactSource>)contactSource
 {
     self = [super init];
     
     if (self)
     {
-        self.contactManager = contactManager;
+        self.contactSource = contactSource;
         
         self.allowSearch = YES;
     }

@@ -17,7 +17,7 @@
 		380937431B84D1AA00FBF888 /* YSGAddressBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380937411B84D1AA00FBF888 /* YSGAddressBookCell.m */; };
 		380937461B84D3F600FBF888 /* YSGContactManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 380937441B84D3F600FBF888 /* YSGContactManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		380937471B84D3F600FBF888 /* YSGContactManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 380937451B84D3F600FBF888 /* YSGContactManager.m */; };
-		380ED94E1B8C5DA600AD9783 /* YSGLocalContactSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 380ED94C1B8C5DA600AD9783 /* YSGLocalContactSource.h */; settings = {ASSET_TAGS = (); }; };
+		380ED94E1B8C5DA600AD9783 /* YSGLocalContactSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 380ED94C1B8C5DA600AD9783 /* YSGLocalContactSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		380ED94F1B8C5DA600AD9783 /* YSGLocalContactSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 380ED94D1B8C5DA600AD9783 /* YSGLocalContactSource.m */; settings = {ASSET_TAGS = (); }; };
 		3817840B1B877370008B8315 /* YSGErrorConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 381784091B877370008B8315 /* YSGErrorConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3817840C1B877370008B8315 /* YSGErrorConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3817840A1B877370008B8315 /* YSGErrorConstants.m */; };
@@ -43,7 +43,7 @@
 		385B64CB1B831CA900C55F60 /* YSGAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64C91B831CA900C55F60 /* YSGAddressBookViewController.m */; };
 		385B64CF1B831D4800C55F60 /* YesGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64CD1B831D4800C55F60 /* YesGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		385B64D01B831D4800C55F60 /* YesGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64CE1B831D4800C55F60 /* YesGraph.m */; };
-		38C77C291B8C5EA200D14E05 /* YSGOnlineContactSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C77C271B8C5EA200D14E05 /* YSGOnlineContactSource.h */; settings = {ASSET_TAGS = (); }; };
+		38C77C291B8C5EA200D14E05 /* YSGOnlineContactSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C77C271B8C5EA200D14E05 /* YSGOnlineContactSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38C77C2A1B8C5EA200D14E05 /* YSGOnlineContactSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C77C281B8C5EA200D14E05 /* YSGOnlineContactSource.m */; settings = {ASSET_TAGS = (); }; };
 		38C77C2B1B8C6DED00D14E05 /* YSGContactSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 380ED94B1B8C5D5A00AD9783 /* YSGContactSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38CC16C31B831606008477C7 /* YesGraphSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CC16C21B831606008477C7 /* YesGraphSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };

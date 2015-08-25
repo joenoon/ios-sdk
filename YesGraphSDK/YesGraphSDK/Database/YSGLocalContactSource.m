@@ -65,6 +65,11 @@
     }
 }
 
+- (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion
+{
+    
+}
+
 #pragma mark - Private Methods
 
 #pragma mark - Contacts Framework

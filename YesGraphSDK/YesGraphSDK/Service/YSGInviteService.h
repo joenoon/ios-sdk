@@ -7,15 +7,19 @@
 //
 
 #import "YSGShareService.h"
+#import "YSGContactSource.h"
 
 extern NSString *_Nonnull const YSGInviteContactsKey;
-
-@class YSGContactManager;
 
 /*!
  *  Invite service prepared to send email and sms contacts
  */
 @interface YSGInviteService : YSGShareService
+
+/*!
+ *  Contact source that invite service uses for contacts
+ */
+@property (nonnull, nonatomic, strong, readonly) id<YSGContactSource> contactSource;
 
 /*!
  *  This message is displayed to the user before contacts permissions is requested. If user agrees with the message,
@@ -75,17 +79,12 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
 @property (nonatomic, assign) BOOL allowSearch;
 
 /*!
- *  Contacts
- */
-@property (nonnull, nonatomic, readonly) YSGContactManager *contactManager;
-
-/*!
  *  Initialize with contact manager
  *
  *  @param contactManager manager to work with contacts
  *
  *  @return instance of invite service
  */
-- (instancetype _Nonnull)initWithContactManager:(YSGContactManager * _Nonnull)contactManager;
+- (instancetype _Nonnull)initWithContactSource:(nonnull id<YSGContactSource>)contactSource;
 
 @end
