@@ -13,12 +13,14 @@
 #import "YSGContactManager.h"
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
+#import "YSGStyling.h"
+#import "YSGTheme.h"
 
 CGFloat const YSGSearchBarHeight = 44.0;
 
 static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdentifier";
 
-@interface YSGAddressBookViewController () <UISearchBarDelegate, UISearchResultsUpdating>
+@interface YSGAddressBookViewController () <UISearchBarDelegate, UISearchResultsUpdating, YSGStyling>
 
 //
 // UI
@@ -111,6 +113,15 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return [self contactsForSection:indexPath.section][indexPath.row];
 }
 
+#pragma mark - YSGStyling
+
+- (void)applyTheme:(YSGTheme *)theme
+{
+    self.searchController.searchBar.tintColor = [UIColor redColor];
+    self.navigationController.navigationBar.tintColor = [UIColor redColor];
+    self.view.tintColor = [UIColor redColor];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -131,19 +142,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         self.searchController.dimsBackgroundDuringPresentation = NO;
         self.searchController.searchBar.delegate = self;
         
-        self.tableView.tableHeaderView = self.searchController.searchBar;
-        
         self.definesPresentationContext = YES;
         
         [self.searchController.searchBar sizeToFit];
         
-        self.searchController.searchBar.tintColor = [UIColor redColor];
         self.searchController.searchBar.showsCancelButton = NO;
+        
+        self.tableView.tableHeaderView = self.searchController.searchBar;
     }
-    
-    self.navigationController.navigationBar.tintColor = [UIColor redColor];
-    self.view.tintColor = [UIColor redColor];
-    
     
     [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
     
@@ -166,6 +172,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     //
     // Load contact data
     //
+    
+    [self applyTheme:[YSGTheme new]];
     
     [self.service.contactSource fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts, NSError *error)
     {
