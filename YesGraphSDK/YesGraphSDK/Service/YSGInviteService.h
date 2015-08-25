@@ -78,6 +78,8 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
  */
 @property (nonatomic, assign) BOOL allowSearch;
 
+#pragma mark - Initialization
+
 /*!
  *  Initialize with contact manager
  *
@@ -85,6 +87,10 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
  *
  *  @return instance of invite service
  */
-- (instancetype _Nonnull)initWithContactSource:(nonnull id<YSGContactSource>)contactSource;
+- (instancetype _Nonnull)initWithContactSource:(nonnull id<YSGContactSource>)contactSource NS_DESIGNATED_INITIALIZER;
+
+#pragma mark - Triggers
+
+- (void)beginInviteFlowWithContacts:(NSArray <YSGContact *> *)contacts;
 
 @end

@@ -24,7 +24,7 @@
  *  @param shareSheetController instance
  *  @param service              share service that will be used
  */
-- (void)shareSheetController:(YSGShareSheetController * _Nonnull)shareSheetController didSelectService:(YSGShareService * _Nonnull)service;
+- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didSelectService:(nonnull YSGShareService *)service;
 
 /*!
  *  If share service does not have a message block set, the delegate is asked to provide a message.
@@ -36,7 +36,7 @@
  *
  *  @return message to use
  */
-- (NSString * _Nonnull)shareSheetController:(YSGShareSheetController * _Nonnull)shareSheetController messageForService:(YSGShareService * _Nonnull)service userInfo:(NSDictionary * _Nullable)userInfo;
+- (nonnull NSString *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo;
 
 /*!
  *  Called when share sheet invited contacts
@@ -46,14 +46,14 @@
  *  @param userInfo             userInfo that were selected (if available and no error)
  *  @param error                error during sharing
  */
-- (void)shareSheetController:(YSGShareSheetController * _Nonnull)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(NSDictionary * _Nullable)userInfo error:(NSError * _Nullable)error;
+- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(nullable NSDictionary *)userInfo error:(nullable NSError *)error;
 
 /*!
  *  Called when user finished sharing
  *
  *  @param shareSheetController instance
  */
-- (void)shareSheetControllerDidFinish:(YSGShareSheetController * _Nonnull)shareSheetController;
+- (void)shareSheetControllerDidFinish:(nonnull YSGShareSheetController *)shareSheetController;
 
 @end
 
@@ -61,6 +61,8 @@
  *  Main share sheet controller (entry point)
  */
 @interface YSGShareSheetController : UIViewController
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  Referel URL that is displayed and can be copied
@@ -81,31 +83,6 @@
  */
 @property (nullable, nonatomic, weak) id<YSGShareSheetDelegate> delegate;
 
-@end
-
-#pragma mark - YSGShareSheetController Initialization
-
-@interface YSGShareSheetController (Initialization)
-
-/*!
- *  Returns new instance of Share Sheet view controller
- *
- *  @param services to use in share sheet
- *
- *  @return new view controller instance to be displayed
- */
-+ (instancetype _Nonnull)shareSheetControllerWithServices:(NSArray<YSGShareService *> * _Nonnull)services;
-
-/*!
- *  Convenience initializer without theme
- *
- *  @param services to share with
- *  @param delegate to receive change messages
- *
- *  @return instance of share sheet
- */
-- (instancetype _Nonnull)initWithServices:(NSArray<YSGShareService *> * _Nonnull)services delegate:(id<YSGShareSheetDelegate> _Nullable)delegate;
-
 /*!
  *  Designated initializer
  *
@@ -115,6 +92,37 @@
  *
  *  @return instance of share sheet
  */
-- (instancetype _Nonnull)initWithServices:(NSArray<YSGShareService *> * _Nonnull)services delegate:(id<YSGShareSheetDelegate> _Nullable)delegate theme:(YSGTheme * _Nullable)theme;
+- (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(nullable id<YSGShareSheetDelegate>)delegate theme:(nullable YSGTheme *)theme NS_DESIGNATED_INITIALIZER;
+
+NS_ASSUME_NONNULL_END
+
+@end
+
+#pragma mark - YSGShareSheetController Initialization
+
+@interface YSGShareSheetController (Initialization)
+
+NS_ASSUME_NONNULL_BEGIN
+
+/*!
+ *  Returns new instance of Share Sheet view controller
+ *
+ *  @param services to use in share sheet
+ *
+ *  @return new view controller instance to be displayed
+ */
++ (instancetype)shareSheetControllerWithServices:(NSArray<YSGShareService *> *)services;
+
+/*!
+ *  Convenience initializer without theme
+ *
+ *  @param services to share with
+ *  @param delegate to receive change messages
+ *
+ *  @return instance of share sheet
+ */
+- (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(nullable id<YSGShareSheetDelegate>)delegate;
+
+NS_ASSUME_NONNULL_END
 
 @end

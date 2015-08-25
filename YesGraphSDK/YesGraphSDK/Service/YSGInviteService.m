@@ -6,6 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+@import MessageUI;
+
 #import "YSGInviteService.h"
 #import "YSGShareSheetController.h"
 #import "YSGAddressBookViewController.h"
@@ -64,6 +66,16 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
     
     [viewController presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)contacts
+{
+    
+}
+
+- (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)contacts
+{
+    
 }
 
 @end
