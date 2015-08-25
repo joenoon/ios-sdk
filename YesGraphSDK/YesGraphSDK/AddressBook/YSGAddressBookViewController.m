@@ -73,10 +73,18 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     self.suggestions = [self suggestedContactsWithContacts:contacts];
     
-    NSArray<YSGContact *> *trimmedContacts = [contacts subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contacts.count - self.service.numberOfSuggestions)];
-    
-    self.sortedContacts = [self sortedContactsWithContactList:trimmedContacts];
-    self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    if (contacts.count)
+    {
+        NSArray<YSGContact *> *trimmedContacts = [contacts subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contacts.count - self.service.numberOfSuggestions)];
+        
+        self.sortedContacts = [self sortedContactsWithContactList:trimmedContacts];
+        self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    }
+    else
+    {
+        self.sortedContacts = nil;
+        self.letters = nil;
+    }
     
     self.searchResults = nil;
 }

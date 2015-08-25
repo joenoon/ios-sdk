@@ -6,8 +6,17 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
-@interface YSGOnlineContactSource : NSObject
+#import "YSGContactSource.h"
+
+@interface YSGOnlineContactSource : NSObject <YSGContactSource>
+
+/*!
+ *  Base source is used when online YesGraph address book contacts are not available
+ */
+@property (nonnull, nonatomic, readonly) id<YSGContactSource> baseSource;
+
+- (nonnull instancetype)initWithBaseSource:(nonnull id<YSGContactSource>)baseSource;
 
 @end

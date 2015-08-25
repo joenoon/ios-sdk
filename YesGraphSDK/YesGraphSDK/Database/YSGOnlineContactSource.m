@@ -8,6 +8,34 @@
 
 #import "YSGOnlineContactSource.h"
 
+@interface YSGOnlineContactSource ()
+
+@property (nonatomic, strong, readwrite) id<YSGContactSource> baseSource;
+
+@end
+
 @implementation YSGOnlineContactSource
+
+- (instancetype)initWithBaseSource:(id<YSGContactSource>)baseSource
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.baseSource = baseSource;
+    }
+    
+    return self;
+}
+
+#pragma mark - YSGContactSource
+
+- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *, NSError *))completion
+{
+    //
+    // TODO: Go online and fetch from YesGraph
+    //
+    [self.baseSource fetchContactListWithCompletion:completion];
+}
 
 @end

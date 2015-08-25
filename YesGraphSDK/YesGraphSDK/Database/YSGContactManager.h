@@ -16,6 +16,11 @@
  */
 @interface YSGContactManager : NSObject <YSGContactSource>
 
-+ (instancetype)shared;
+/*!
+ *  Default contact source used by contact manager
+ */
+@property (nonnull, nonatomic, strong) id<YSGContactSource> defaultSource;
+
++ (nonnull instancetype)shared;
 
 @end

@@ -45,6 +45,7 @@
 		385B64D01B831D4800C55F60 /* YesGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64CE1B831D4800C55F60 /* YesGraph.m */; };
 		38C77C291B8C5EA200D14E05 /* YSGOnlineContactSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C77C271B8C5EA200D14E05 /* YSGOnlineContactSource.h */; settings = {ASSET_TAGS = (); }; };
 		38C77C2A1B8C5EA200D14E05 /* YSGOnlineContactSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C77C281B8C5EA200D14E05 /* YSGOnlineContactSource.m */; settings = {ASSET_TAGS = (); }; };
+		38C77C2B1B8C6DED00D14E05 /* YSGContactSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 380ED94B1B8C5D5A00AD9783 /* YSGContactSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38CC16C31B831606008477C7 /* YesGraphSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CC16C21B831606008477C7 /* YesGraphSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38CC16C91B831606008477C7 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC16BD1B831606008477C7 /* YesGraphSDK.framework */; };
 		38CC16D01B831606008477C7 /* YesGraphSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC16CF1B831606008477C7 /* YesGraphSDKTests.m */; };
@@ -347,6 +348,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38C77C2B1B8C6DED00D14E05 /* YSGContactSource.h in Headers */,
 				380ED94E1B8C5DA600AD9783 /* YSGLocalContactSource.h in Headers */,
 				385B64BA1B831C2B00C55F60 /* YSGFacebookService.h in Headers */,
 				380937391B84CBE000FBF888 /* YSGRankedContact.h in Headers */,

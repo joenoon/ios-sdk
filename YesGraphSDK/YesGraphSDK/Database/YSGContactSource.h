@@ -8,6 +8,8 @@
 
 @class YSGContact;
 
+@import Foundation;
+
 @protocol YSGContactSource <NSObject>
 
 - (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *contacts, NSError *error))completion;

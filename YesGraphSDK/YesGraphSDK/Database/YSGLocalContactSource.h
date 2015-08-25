@@ -10,6 +10,6 @@
 
 #import "YSGContactSource.h"
 
-@interface YSGLocalContactSource : NSObject
+@interface YSGLocalContactSource : NSObject <YSGContactSource>
 
 @end
