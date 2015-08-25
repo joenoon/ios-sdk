@@ -18,13 +18,13 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdentifier";
 
-@interface YSGAddressBookViewController () <UISearchBarDelegate>
+@interface YSGAddressBookViewController () <UISearchBarDelegate, UISearchResultsUpdating>
 
 //
 // UI
 //
 
-@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UISearchController *searchController;
 
 //
 // Data
@@ -117,15 +117,24 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     if (self.service.allowSearch)
     {
-        self.searchBar = [[UISearchBar alloc] init];
+        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
         
-        self.searchBar.delegate = self;
+        self.searchController.searchResultsUpdater = self;
+        self.searchController.dimsBackgroundDuringPresentation = NO;
+        self.searchController.searchBar.delegate = self;
         
-        self.tableView.tableHeaderView = self.searchBar;
+        self.tableView.tableHeaderView = self.searchController.searchBar;
+        
+        self.definesPresentationContext = YES;
+        
+        [self.searchController.searchBar sizeToFit];
+        
+        self.searchController.searchBar.tintColor = [UIColor redColor];
     }
     
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
     self.view.tintColor = [UIColor redColor];
+    
     
     [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
     
@@ -159,8 +168,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
-    self.searchBar.frame = CGRectMake(0, 0, self.view.bounds.size.width, YSGSearchBarHeight);
 }
 
 #pragma mark - Actions
@@ -190,6 +197,13 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UISearchResultsUpdating
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    [self searchBar:searchController.searchBar textDidChange:searchController.searchBar.text];
 }
 
 #pragma mark - UISearchBarDelegate
