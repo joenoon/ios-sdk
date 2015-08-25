@@ -179,6 +179,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     {
         self.contacts = contacts;
     }];
+    
+    [self updateUI];
 }
 
 - (void)viewWillLayoutSubviews
@@ -195,13 +197,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)inviteButtonTap:(UIBarButtonItem *)sender
 {
-    if (!self.selectedContacts.count)
-    {
-        [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:@"Please select at least one contact." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
-        
-        return;
-    }
-    
     NSMutableString *message = [[NSMutableString alloc] initWithString:@"Invited: "];
     
     for (YSGContact *contact in self.selectedContacts)
@@ -213,6 +208,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)updateUI
+{
+    self.navigationItem.rightBarButtonItem.enabled = self.selectedContacts.count > 0;
 }
 
 #pragma mark - UISearchResultsUpdating
@@ -351,6 +351,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     YSGContact *contact = [self contactForIndexPath:indexPath];
     
     [self.selectedContacts addObject:contact];
+    
+    [self updateUI];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -358,6 +360,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     YSGContact *contact = [self contactForIndexPath:indexPath];
     
     [self.selectedContacts removeObject:contact];
+    
+    [self updateUI];
 }
 
 #pragma mark - Private Methods
