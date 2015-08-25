@@ -14,7 +14,8 @@
 		3805E1691B831B1B004463B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3805E1681B831B1B004463B8 /* Images.xcassets */; };
 		3805E16C1B831B1B004463B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3805E16A1B831B1B004463B8 /* LaunchScreen.xib */; };
 		3805E1781B831B1B004463B8 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1771B831B1B004463B8 /* ExampleTests.m */; };
-		381784081B875F27008B8315 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 381784071B875F27008B8315 /* YesGraphSDK.framework */; };
+		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
+		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +27,20 @@
 			remoteInfo = Example;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		38C77C591B8C77E200D14E05 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3805E1581B831B1B004463B8 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -41,7 +56,7 @@
 		3805E1711B831B1B004463B8 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3805E1761B831B1B004463B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3805E1771B831B1B004463B8 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
-		381784071B875F27008B8315 /* YesGraphSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YesGraphSDK.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/YesGraph-egufbipkadfjwagfbzivrmnnkfja/Build/Products/Debug-iphoneos/YesGraphSDK.framework"; sourceTree = "<group>"; };
+		38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				381784081B875F27008B8315 /* YesGraphSDK.framework in Frameworks */,
+				38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +141,7 @@
 		385B64D31B831DD900C55F60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				381784071B875F27008B8315 /* YesGraphSDK.framework */,
+				38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -141,6 +156,7 @@
 				3805E1541B831B1B004463B8 /* Sources */,
 				3805E1551B831B1B004463B8 /* Frameworks */,
 				3805E1561B831B1B004463B8 /* Resources */,
+				38C77C591B8C77E200D14E05 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
