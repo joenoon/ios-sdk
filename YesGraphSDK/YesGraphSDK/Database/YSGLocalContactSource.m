@@ -6,11 +6,15 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+@import UIKit;
 @import Contacts;
 @import AddressBook;
 
+#import "UIAlertController+YSGDisplay.h"
 #import "YSGContact.h"
 #import "YSGLocalContactSource.h"
+
+static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSourcePermissionKey";
 
 @interface YSGLocalContactSource ()
 
@@ -24,6 +28,34 @@
 @implementation YSGLocalContactSource
 
 #pragma mark - Getters and Setters
+
+- (BOOL)didAskForPermission
+{
+    return [[NSUserDefaults standardUserDefaults] boolForKey:YSGLocalContactSourcePermissionKey];
+}
+
+- (void)setDidAskForPermission:(BOOL)didAskForPermission
+{
+    [[NSUserDefaults standardUserDefaults] setBool:didAskForPermission forKey:YSGLocalContactSourcePermissionKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)hasPermission
+{
+    if ([self useContactsFramework])
+    {
+        return [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+    }
+    else
+    {
+        return ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized;
+    }
+}
+
+- (BOOL)useContactsFramework
+{
+    return NSClassFromString(@"CNContact") != nil;
+}
 
 - (CNContactFormatter *)formatter
 {
@@ -39,22 +71,15 @@
 
 - (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *, NSError *))completion
 {
-    //
-    // TODO: Handle contacts permission
-    //
-    
-    if (!self.hasContactsPermission)
-    {
-    }
-    
     NSError* error;
     
-    NSArray<YSGContact *> *contacts = [self contactListFromContacts:&error];
+    NSArray<YSGContact *> *contacts = nil;
     
-    //
-    // On iOS 8 attempt to grab contacts from Address Book
-    //
-    if (contacts == nil && !error)
+    if (self.useContactsFramework)
+    {
+        contacts = [self contactListFromContacts:&error];
+    }
+    else
     {
         contacts = [self contactListFromAddressBook:&error];
     }
@@ -65,9 +90,63 @@
     }
 }
 
+#pragma mark - Permissions
+
 - (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion
 {
+    //
+    // If we already have permission, we do not request it again and just return
+    //
     
+    if (self.hasPermission)
+    {
+        if (completion)
+        {
+            completion(self.hasPermission, nil);
+        }
+        
+        return;
+    }
+    
+    //
+    // First ask user with a specific popup
+    //
+    
+    if (!self.didAskForPermission)
+    {
+        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Invite friends get free AAA" message:@"Share contacts with AAA app to find friends to invite?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *dontAllowAction = [UIAlertAction actionWithTitle:@"Don't allow" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+        {
+            
+        }];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        {
+            //
+            // Remember the decision
+            //
+            
+            self.didAskForPermission = YES;
+            
+            [self requestContactPermission:completion];
+        }];
+        
+        [controller addAction:dontAllowAction];
+        [controller addAction:okAction];
+        
+        [controller ysg_show];
+    }
+    else
+    {
+        if (self.useContactsFramework)
+        {
+            [self requestContactsPermissionWithCompletion:completion];
+        }
+        else
+        {
+            [self requestAddressBookPermissionWithCompletion:completion];
+        }
+    }
 }
 
 #pragma mark - Private Methods
@@ -88,15 +167,6 @@
 
 - (NSArray <YSGContact *> *)contactListFromContacts:(NSError **)error
 {
-    //
-    // Protect against crash on iOS 8, where there is no contacts framework present
-    //
-    
-    if (!NSClassFromString(@"CNContact"))
-    {
-        return nil;
-    }
-    
     NSArray <NSString *> *keysToFetch = @[ [CNContactFormatter descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName], CNContactEmailAddressesKey, CNContactPhoneNumbersKey ];
     
     CNContactStore *store = [[CNContactStore alloc] init];

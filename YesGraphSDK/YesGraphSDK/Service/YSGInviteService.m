@@ -42,6 +42,21 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 
 - (void)triggerServiceWithViewController:(nonnull UIViewController *)viewController
 {
+    [self.contactSource requestContactPermission:^(BOOL granted, NSError *error)
+    {
+        if (granted)
+        {
+            [self openInviteControllerWithController:viewController];
+        }
+        else if (error)
+        {
+            [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        }
+    }];
+}
+
+- (void)openInviteControllerWithController:(nonnull UIViewController *)viewController
+{
     YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
     
     addressBookViewController.service = self;
