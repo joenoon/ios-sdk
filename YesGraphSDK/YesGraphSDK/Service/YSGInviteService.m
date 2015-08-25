@@ -19,6 +19,8 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 
 @property (nonatomic, strong, readwrite) id<YSGContactSource> contactSource;
 
+@property (nonatomic, weak) UIViewController *viewController;
+
 @end
 
 @implementation YSGInviteService
@@ -65,7 +67,14 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
     
+    self.viewController = viewController;
+    
     [viewController presentViewController:navigationController animated:YES completion:nil];
+}
+
+- (void)triggerInviteFlowWithContacts:(NSArray<YSGContact *> *)contacts
+{
+    
 }
 
 - (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)contacts

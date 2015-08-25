@@ -197,15 +197,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)inviteButtonTap:(UIBarButtonItem *)sender
 {
-    NSMutableString *message = [[NSMutableString alloc] initWithString:@"Invited: "];
-    
-    for (YSGContact *contact in self.selectedContacts)
-    {
-        [message appendString:contact.name];
-        [message appendString:@", "];
-    }
-    
-    [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    [self.service triggerInviteFlowWithContacts:self.selectedContacts];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -219,8 +211,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    //[self searchBar:searchController.searchBar textDidChange:searchController.searchBar.text];
-    
     NSString *searchText = searchController.searchBar.text;
     
     if (!searchText.length)

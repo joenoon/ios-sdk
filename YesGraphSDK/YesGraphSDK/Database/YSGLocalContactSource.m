@@ -204,7 +204,12 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     
     [store enumerateContactsWithFetchRequest:fetchRequest error:error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop)
     {
-        [contacts addObject:[self contactFromContact:contact]];
+        YSGContact *userContact = [self contactFromContact:contact];
+        
+        if (userContact.emails.count || userContact.phones.count)
+        {
+            [contacts addObject:userContact];
+        }
     }];
     
     return contacts.copy;
@@ -283,7 +288,10 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             contact.emails = [self recordArrayFromValueRef:emails];
             contact.phones = [self recordArrayFromValueRef:phones];
             
-            [contacts addObject:contact];
+            if (contact.emails.count || contact.phones.count)
+            {
+                [contacts addObject:contact];
+            }
         }
         
         CFRelease(addressBook);

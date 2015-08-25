@@ -91,6 +91,6 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
 
 #pragma mark - Triggers
 
-- (void)beginInviteFlowWithContacts:(NSArray <YSGContact *> *)contacts;
+- (void)triggerInviteFlowWithContacts:(nonnull NSArray <YSGContact *> *)contacts;
 
 @end
