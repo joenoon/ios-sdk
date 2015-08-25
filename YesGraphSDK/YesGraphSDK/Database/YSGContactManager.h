@@ -9,17 +9,13 @@
 @import Foundation;
 
 #import "YSGContact.h"
+#import "YSGContactSource.h"
 
 /*!
  *  Contact manager to do all work with contacts
  */
-@interface YSGContactManager : NSObject
-
-@property (nonatomic, readonly) BOOL didAskForPermission;
-@property (nonatomic, readonly) BOOL hasContactsPermission;
+@interface YSGContactManager : NSObject <YSGContactSource>
 
 + (instancetype)shared;
-
-- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *contacts, NSError *error))completion;
 
 @end

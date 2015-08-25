@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)shared;
 
+- (void)setupWithSecretKey:(NSString *)secretKey;
+
 - (void)updateAddressBookWithContactList:(NSArray <YSGContact *> *)contacts withSource:(YSGSource *)source completion:(nullable void (^)(NSError *__nullable error))completion;
 
 NS_ASSUME_NONNULL_END
