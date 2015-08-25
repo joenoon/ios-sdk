@@ -43,7 +43,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 /*!
  *  Selected contacts
  */
-@property (nonatomic, copy) NSMutableArray <YSGContact *> *selectedContacts;
+@property (nonatomic, copy) NSMutableSet <YSGContact *> *selectedContacts;
 
 //
 // Search
@@ -57,11 +57,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 #pragma mark - Getters and Setters
 
-- (NSMutableArray <YSGContact *> *)selectedContacts
+- (NSMutableSet <YSGContact *> *)selectedContacts
 {
     if (!_selectedContacts)
     {
-        _selectedContacts = [NSMutableArray array];
+        _selectedContacts = [NSMutableSet set];
     }
     
     return _selectedContacts;
@@ -130,6 +130,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         [self.searchController.searchBar sizeToFit];
         
         self.searchController.searchBar.tintColor = [UIColor redColor];
+        self.searchController.searchBar.showsCancelButton = NO;
     }
     
     self.navigationController.navigationBar.tintColor = [UIColor redColor];
@@ -203,32 +204,38 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    [self searchBar:searchController.searchBar textDidChange:searchController.searchBar.text];
+    //[self searchBar:searchController.searchBar textDidChange:searchController.searchBar.text];
+    
+    NSString *searchText = searchController.searchBar.text;
+    
+    if (!searchText.length)
+    {
+        self.searchResults = nil;
+        
+        [self.tableView reloadData];
+        
+        return;
+    }
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
+    
+    self.searchResults = [self.contacts filteredArrayUsingPredicate:predicate];
+    
+    [self.tableView reloadData];
 }
 
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
-    // Clean table
-    
     self.searchResults = nil;
     
     [self.tableView reloadData];
 }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     self.searchResults = nil;
-    
-    [self.tableView reloadData];
-}
-
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
-    
-    self.searchResults = [self.contacts filteredArrayUsingPredicate:predicate];
     
     [self.tableView reloadData];
 }
@@ -277,6 +284,13 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     cell.textLabel.text = contact.name;
     cell.detailTextLabel.text = contact.contactString;
+    
+    cell.selected = [self.selectedContacts containsObject:contact];
+    
+    if ([self.selectedContacts containsObject:contact])
+    {
+        [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
     
     return cell;
 }
