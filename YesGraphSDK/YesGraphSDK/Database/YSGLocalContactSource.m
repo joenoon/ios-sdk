@@ -16,8 +16,8 @@
 
 @property (nonatomic, strong) CNContactFormatter *formatter;
 
-@property (nonatomic, readonly) BOOL didAskForPermission;
-@property (nonatomic, readonly) BOOL hasContactsPermission;
+@property (nonatomic, assign) BOOL didAskForPermission;
+@property (nonatomic, assign) BOOL hasContactsPermission;
 
 @end
 
@@ -45,7 +45,6 @@
     
     if (!self.hasContactsPermission)
     {
-        //return;
     }
     
     NSError* error;
@@ -69,6 +68,18 @@
 #pragma mark - Private Methods
 
 #pragma mark - Contacts Framework
+
+- (void)requestContactsPermissionWithCompletion:(void (^)(BOOL granted, NSError *error))completion
+{
+    CNContactStore *store = [[CNContactStore alloc] init];
+    [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error)
+    {
+        if (completion)
+        {
+            completion(granted, error);
+        }
+    }];
+}
 
 - (NSArray <YSGContact *> *)contactListFromContacts:(NSError **)error
 {
@@ -127,6 +138,19 @@
 }
 
 #pragma mark - Address Book Framework
+
+- (void)requestAddressBookPermissionWithCompletion:(void (^)(BOOL granted, NSError *error))completion
+{
+    ABAddressBookRequestAccessWithCompletion(ABAddressBookCreateWithOptions(NULL, nil), ^(bool granted, CFErrorRef err)
+    {
+        NSError *error = (__bridge NSError *)err;
+        
+        if (completion)
+        {
+            completion(granted, error);
+        }
+    });
+}
 
 - (NSArray <YSGContact *> *)contactListFromAddressBook:(NSError **)error
 {
