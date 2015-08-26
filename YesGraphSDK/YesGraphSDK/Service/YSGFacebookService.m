@@ -6,8 +6,20 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+@import Social;
+
 #import "YSGFacebookService.h"
 
 @implementation YSGFacebookService
+
+- (NSString *)name
+{
+    return @"Facebook";
+}
+
+- (NSString *)serviceType
+{
+    return SLServiceTypeFacebook;
+}
 
 @end

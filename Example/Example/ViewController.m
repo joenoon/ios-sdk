@@ -26,10 +26,10 @@
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     
-    YSGInviteService *service = [[YSGInviteService alloc] initWithContactSource:localSource];
-    service.numberOfSuggestions = 3;
+    YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:localSource];
+    inviteService.numberOfSuggestions = 3;
     
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ service ] delegate:self];
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ [YSGFacebookService new], [YSGTwitterService new], inviteService ] delegate:self];
     
     [self.navigationController pushViewController:shareController animated:YES];
 }

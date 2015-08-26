@@ -6,8 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import "YSGShareService.h"
+#import "YSGSocialService.h"
 
-@interface YSGFacebookService : YSGShareService
+@interface YSGFacebookService : YSGSocialService
 
 @end
