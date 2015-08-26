@@ -6,13 +6,13 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-@class YSGContact;
+@class YSGContactList;
 
 @import Foundation;
 
 @protocol YSGContactSource <NSObject>
 
 - (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion;
-- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *contacts, NSError *error))completion;
+- (void)fetchContactListWithCompletion:(void (^)(YSGContactList *contactList, NSError *error))completion;
 
 @end

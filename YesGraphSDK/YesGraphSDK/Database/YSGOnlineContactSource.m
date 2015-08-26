@@ -35,7 +35,7 @@
     [self.baseSource requestContactPermission:completion];
 }
 
-- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *, NSError *))completion
+- (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
 {
     //
     // TODO: Go online and fetch from YesGraph

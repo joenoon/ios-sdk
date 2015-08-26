@@ -8,6 +8,7 @@
 
 #import "YSGShareService.h"
 #import "YSGContactSource.h"
+#import "YSGContact.h"
 
 extern NSString *_Nonnull const YSGInviteContactsKey;
 

@@ -10,11 +10,11 @@
 @import Contacts;
 
 #import "YSGClient.h"
-#import "YSGContactManager.h"
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
 #import "YSGStyling.h"
 #import "YSGTheme.h"
+#import "YSGContactList.h"
 
 CGFloat const YSGSearchBarHeight = 44.0;
 
@@ -34,7 +34,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 @property (nonatomic, copy) NSArray <YSGContact *> *suggestions;
 
-@property (nonatomic, copy) NSArray <YSGContact *> *contacts;
+//@property (nonatomic, copy) NSArray <YSGContact *> *contacts;
+@property (nonatomic, strong) YSGContactList *contactList;
 
 @property (nonatomic, copy) NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedContacts;
 /*!
@@ -69,15 +70,16 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return _selectedContacts;
 }
 
-- (void)setContacts:(NSArray<YSGContact *> *)contacts
+- (void)setContactList:(YSGContactList *)contactList
 {
-    _contacts = contacts;
+    _contactList = contactList;
     
-    self.suggestions = [self suggestedContactsWithContacts:contacts];
+    self.suggestions = (contactList.useSuggestions) ? [self suggestedContactsWithContacts:contactList.contacts] : nil;
     
-    if (contacts.count)
+    
+    if (contactList.contacts.count)
     {
-        NSArray<YSGContact *> *trimmedContacts = [contacts subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contacts.count - self.service.numberOfSuggestions)];
+        NSArray<YSGContact *> *trimmedContacts = [contactList.contacts subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contactList.contacts.count - self.service.numberOfSuggestions)];
         
         self.sortedContacts = [self sortedContactsWithContactList:trimmedContacts];
         self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
@@ -175,9 +177,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     [self applyTheme:[YSGTheme new]];
     
-    [self.service.contactSource fetchContactListWithCompletion:^(NSArray<YSGContact *> *contacts, NSError *error)
+    [self.service.contactSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
     {
-        self.contacts = contacts;
+        self.contactList = contactList;
     }];
     
     [self updateUI];
@@ -224,7 +226,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
     
-    self.searchResults = [self.contacts filteredArrayUsingPredicate:predicate];
+    self.searchResults = [self.contactList.contacts filteredArrayUsingPredicate:predicate];
     
     [self.tableView reloadData];
 }

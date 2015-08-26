@@ -12,6 +12,7 @@
 
 #import "UIAlertController+YSGDisplay.h"
 #import "YSGContact.h"
+#import "YSGContactList.h"
 #import "YSGLocalContactSource.h"
 
 static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSourcePermissionKey";
@@ -96,7 +97,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 #pragma mark - YSGContactSource
 
-- (void)fetchContactListWithCompletion:(void (^)(NSArray<YSGContact *> *, NSError *))completion
+- (void)fetchContactListWithCompletion:(void (^)(YSGContactList *contactList, NSError *))completion
 {
     NSError* error;
     
@@ -113,7 +114,10 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     
     if (completion)
     {
-        completion (contacts, error);
+        YSGContactList *contactList = [[YSGContactList alloc] init];
+        contactList.contacts = contacts;
+        
+        completion (contactList, error);
     }
 }
 
