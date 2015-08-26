@@ -206,10 +206,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     {
         YSGContact *userContact = [self contactFromContact:contact];
         
-        if (userContact.emails.count || userContact.phones.count)
-        {
-            [contacts addObject:userContact];
-        }
+        [contacts addObjectsFromArray:[self separatedContactsForContact:userContact]];
     }];
     
     return contacts.copy;
@@ -288,10 +285,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             contact.emails = [self recordArrayFromValueRef:emails];
             contact.phones = [self recordArrayFromValueRef:phones];
             
-            if (contact.emails.count || contact.phones.count)
-            {
-                [contacts addObject:contact];
-            }
+            [contacts addObjectsFromArray:[self separatedContactsForContact:contact]];
         }
         
         CFRelease(addressBook);
@@ -321,6 +315,24 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     }
     
     return values.copy;
+}
+
+#pragma mark - Private Methods
+
+- (NSArray<YSGContact *> *)separatedContactsForContact:(YSGContact *)contact
+{
+    if (contact.phones.count == 0 || contact.emails.count == 0)
+    {
+        return @[ contact ];
+    }
+    
+    YSGContact *separatedContact = [[YSGContact alloc] init];
+    separatedContact.name = contact.name;
+    separatedContact.emails = contact.emails;
+    
+    contact.emails = nil;
+    
+    return @[ contact, separatedContact ];
 }
 
 @end
