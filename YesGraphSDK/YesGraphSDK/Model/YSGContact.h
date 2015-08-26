@@ -8,12 +8,12 @@
 
 @import Foundation;
 
-#import "YSGJSONParsable.h"
+#import "YSGParsing.h"
 
 /*!
  *  Represents a single Address Book contact
  */
-@interface YSGContact : NSObject <YSGJSONParsable>
+@interface YSGContact : NSObject <YSGParsable>
 
 NS_ASSUME_NONNULL_BEGIN
 

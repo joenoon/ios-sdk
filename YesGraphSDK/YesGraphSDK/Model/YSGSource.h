@@ -8,12 +8,10 @@
 
 @import Foundation;
 
-#import "YSGJSONParsable.h"
-
 /*!
  *  Represents a contact source
  */
-@interface YSGSource : NSObject <YSGJSONParsable>
+@interface YSGSource : NSObject
 
 @property (nonnull, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *email;
