@@ -13,17 +13,17 @@
 extern NSString *_Nonnull const YSGInviteContactsKey;
 
 /*!
- *  Invite service prepared to send email and sms contacts
+ *  Invite service prepared to send email and sms entries
  */
 @interface YSGInviteService : YSGShareService
 
 /*!
- *  Contact source that invite service uses for contacts
+ *  Contact source that invite service uses for entries
  */
 @property (nonnull, nonatomic, strong, readonly) id<YSGContactSource> contactSource;
 
 /*!
- *  This message is displayed to the user before contacts permissions is requested. If user agrees with the message,
+ *  This message is displayed to the user before entries permissions is requested. If user agrees with the message,
  *  the user is asked for permission to Address Book.
  */
 @property (nonnull, nonatomic, copy) NSString *requestContactPermissionMessage;
@@ -31,21 +31,21 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
 #pragma mark - Invite configuration
 
 /*!
- *  If phone number contacts should be displayed.
+ *  If phone number entries should be displayed.
  *
  *  @discussion: Default value: YES
  */
 @property (nonatomic, assign) BOOL usePhone;
 
 /*!
- *  If email contacts should be displayed.
+ *  If email entries should be displayed.
  *
  *  @discussion: Default value: YES
  */
 @property (nonatomic, assign) BOOL useEmail;
 
 /*!
- *  If invite service should support multiple selection of user contacts.
+ *  If invite service should support multiple selection of user entries.
  *
  *  @discussion: Default value: YES
  */
@@ -66,7 +66,7 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
 @property (nonatomic, assign) BOOL nativeEmailSheet;
 
 /*!
- *  Number of suggestions displayed above contacts. Use 0 to disable suggestions.
+ *  Number of suggestions displayed above entries. Use 0 to disable suggestions.
  *
  *  @discussion: Default value is: 5
  */
@@ -84,7 +84,7 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
 /*!
  *  Initialize with contact manager
  *
- *  @param contactManager manager to work with contacts
+ *  @param contactManager manager to work with entries
  *
  *  @return instance of invite service
  */
@@ -92,6 +92,7 @@ extern NSString *_Nonnull const YSGInviteContactsKey;
 
 #pragma mark - Triggers
 
-- (void)triggerInviteFlowWithContacts:(nonnull NSArray <YSGContact *> *)contacts;
+- (void)triggerInviteFlowWithContacts:(nonnull NSArray <YSGContact *> *)
+entries;
 
 @end

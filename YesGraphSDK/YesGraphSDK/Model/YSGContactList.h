@@ -9,14 +9,19 @@
 @import Foundation;
 
 #import "YSGContact.h"
+#import "YSGSource.h"
+#import "YSGParsing.h"
 
 /*!
  *  Wraps contact list for storage and serialization
  */
-@interface YSGContactList : NSObject
+@interface YSGContactList : NSObject <YSGParsable>
 
 @property (nonatomic, assign) BOOL useSuggestions;
 
-@property (nonnull, nonatomic, copy) NSArray <YSGContact *> *contacts;
+@property (nonnull, nonatomic, copy) NSArray <YSGContact *> *entries;
+
+@property (nullable, nonatomic, strong) NSString *userId;
+@property (nullable, nonatomic, strong) YSGSource *source;
 
 @end

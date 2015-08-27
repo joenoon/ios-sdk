@@ -8,31 +8,54 @@
 
 @import XCTest;
 
+#import "YSGClient.h"
+#import "YSGClient+Private.h"
+
 @interface YesGraphSDKNetworkTests : XCTestCase
+
+@property (nonatomic, strong) YSGClient *client;
 
 @end
 
 @implementation YesGraphSDKNetworkTests
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    self.client = [[YSGClient alloc] init];
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
+- (void)tearDown
+{
     [super tearDown];
+    
+    self.client = nil;
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+- (void)testClientKey
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Client Key Retrieved"];
+    
+    [self.client fetchRandomClientKeyWithSecretKey:@"" completion:^(NSString *clientKey, NSError *error)
+    {
+        if (error)
+        {
+            NSLog(@"Error is: %@", error);
+        }
+        else
+        {
+            XCTAssert(clientKey.length > 0, @"Client key should be at least 1 character long");
+            [expectation fulfill];
+        }
+    }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
     }];
 }
 

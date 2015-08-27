@@ -39,7 +39,7 @@
 - (nonnull NSString *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo;
 
 /*!
- *  Called when share sheet invited contacts
+ *  Called when share sheet invited entries
  *
  *  @param shareSheetController instance
  *  @param service              share service that did the invite

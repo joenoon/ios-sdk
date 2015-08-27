@@ -26,7 +26,7 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 @property (nonatomic, weak) UINavigationController *addressBookNavigationController;
 
 /*!
- *  This property stores email contacts, if both should be handled
+ *  This property stores email entries, if both should be handled
  */
 @property (nonatomic, copy) NSArray <YSGContact *> *emailContacts;
 
@@ -91,16 +91,16 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     [viewController presentViewController:navigationController animated:YES completion:nil];
 }
 
-- (void)triggerInviteFlowWithContacts:(NSArray<YSGContact *> *)contacts
+- (void)triggerInviteFlowWithContacts:(NSArray<YSGContact *> *)entries
 {
     //
-    // Separate email and phone contacts
+    // Separate email and phone entries
     //
     
     self.emailContacts = nil;
     
-    NSArray <YSGContact *>* phoneContacts = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"phones[SIZE] > 0"]];
-    NSArray <YSGContact *>* emailContacts = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"emails[SIZE] > 0 AND phones[SIZE] = 0"]];
+    NSArray <YSGContact *>* phoneContacts = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"phones[SIZE] > 0"]];
+    NSArray <YSGContact *>* emailContacts = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"emails[SIZE] > 0 AND phones[SIZE] = 0"]];
     
     if (phoneContacts.count)
     {
@@ -114,7 +114,7 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     }
 }
 
-- (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)contacts
+- (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries
 {
     //
     // Trigger delegate
@@ -146,7 +146,8 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     
     NSMutableArray<NSString *> * recipients = [NSMutableArray array];
     
-    for (YSGContact *contact in contacts)
+    for (YSGContact *contact in entries
+            )
     {
         [recipients addObject:contact.phones.firstObject];
     }
@@ -157,7 +158,7 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     [self.addressBookNavigationController presentViewController:messageController animated:YES completion:nil];
 }
 
-- (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)contacts
+- (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)entries
 {
     //
     // Check for native message sheet
@@ -181,7 +182,8 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     
     NSMutableArray<NSString *> * recipients = [NSMutableArray array];
     
-    for (YSGContact *contact in contacts)
+    for (YSGContact *contact in entries
+            )
     {
         [recipients addObject:contact.emails.firstObject];
     }

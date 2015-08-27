@@ -34,7 +34,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 @property (nonatomic, copy) NSArray <YSGContact *> *suggestions;
 
-//@property (nonatomic, copy) NSArray <YSGContact *> *contacts;
+//@property (nonatomic, copy) NSArray <YSGContact *> *entries;
 @property (nonatomic, strong) YSGContactList *contactList;
 
 @property (nonatomic, copy) NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedContacts;
@@ -44,7 +44,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 @property (nonatomic, copy) NSArray <NSString *> *letters;
 
 /*!
- *  Selected contacts
+ *  Selected entries
  */
 @property (nonatomic, copy) NSMutableSet <YSGContact *> *selectedContacts;
 
@@ -74,12 +74,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     _contactList = contactList;
     
-    self.suggestions = (contactList.useSuggestions) ? [self suggestedContactsWithContacts:contactList.contacts] : nil;
+    self.suggestions = (contactList.useSuggestions) ? [self suggestedContactsWithContacts:contactList.entries] : nil;
     
     
-    if (contactList.contacts.count)
+    if (contactList.entries.count)
     {
-        NSArray<YSGContact *> *trimmedContacts = [contactList.contacts subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contactList.contacts.count - self.service.numberOfSuggestions)];
+        NSArray<YSGContact *> *trimmedContacts = [contactList.entries subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contactList.entries.count - self.service.numberOfSuggestions)];
         
         self.sortedContacts = [self sortedContactsWithContactList:trimmedContacts];
         self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
@@ -226,7 +226,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
     
-    self.searchResults = [self.contactList.contacts filteredArrayUsingPredicate:predicate];
+    self.searchResults = [self.contactList.entries filteredArrayUsingPredicate:predicate];
     
     [self.tableView reloadData];
 }
@@ -358,11 +358,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 #pragma mark - Private Methods
 
-- (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedContactsWithContactList:(NSArray <YSGContact *> *)contacts
+- (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedContactsWithContactList:(NSArray <YSGContact *> *) entries
 {
     NSMutableDictionary <NSString *, NSMutableArray <YSGContact *> * > *contactList = [NSMutableDictionary dictionary];
     
-    for (YSGContact *contact in contacts)
+    for (YSGContact *contact in entries
+            )
     {
         NSString *letter = [contact.name substringToIndex:1];
         
@@ -382,21 +383,21 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     {
         NSArray *contacts = contactList[letter];
         
-        sortedList[letter] = [contacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
+        sortedList[letter] = [entries sortedArrayUsingDescriptors:@[ ascDescriptor ]];
     }
     
     return sortedList.copy;
 }
 
-- (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *)contacts
+- (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *) entries
 {
     NSMutableArray <YSGContact *> * suggested = [NSMutableArray array];
     
     for (NSUInteger i = 0; i < self.service.numberOfSuggestions; i++)
     {
-        if (i < contacts.count)
+        if (i < entries.count)
         {
-            [suggested addObject:contacts[i]];
+            [suggested addObject:entries[i]];
         }
         else
         {

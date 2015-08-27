@@ -8,8 +8,7 @@
 
 @import Foundation;
 
-#import "YSGContact.h"
-#import "YSGSource.h"
+#import "YSGNetworkDefines.h"
 
 /*!
  *  Provides direct API access to YesGraph API
@@ -18,14 +17,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@property (nonatomic, copy, readonly) NSURL* baseURL;
 @property (nonatomic, copy, nullable) NSString *clientKey;
 
 + (instancetype)shared;
 
-- (void)setupWithSecretKey:(NSString *)secretKey;
-
-- (void)updateAddressBookWithContactList:(NSArray <YSGContact *> *)contacts withSource:(YSGSource *)source completion:(nullable void (^)(NSError *__nullable error))completion;
-
 NS_ASSUME_NONNULL_END
+
+@end
+
+@interface YSGClient (Request)
+
+- (nullable NSURLSessionDataTask *)GET:(nonnull NSString *)path parameters:(nullable NSDictionary *)parameters completion:(nullable YSGNetworkRequestCompletion)completion;
+- (nullable NSURLSessionDataTask *)POST:(nonnull NSString *)path parameters:(nullable NSDictionary *)parameters completion:(nullable YSGNetworkRequestCompletion)completion;
+- (nullable NSURLSessionDataTask *)sendRequest:(nonnull NSURLRequest *)request completion:(nullable YSGNetworkRequestCompletion)completion;
+
+- (nonnull NSURLRequest *)requestForMethod:(nonnull NSString *)method path:(nonnull NSString *)path parameters:(nullable NSDictionary *)parameters key:(nullable NSString *)key error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
 @end

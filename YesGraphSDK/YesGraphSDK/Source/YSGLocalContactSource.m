@@ -51,7 +51,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
         }
         
-        return (appName.length) ? [NSString stringWithFormat:@"Share contacts with %@ app to find friends to invite?", appName] : @"Share contacts to find friends to invite?";
+        return (appName.length) ? [NSString stringWithFormat:@"Share entries with %@ app to find friends to invite?", appName] : @"Share entries to find friends to invite?";
     }
     
     return _contactAccessPromptMessage;
@@ -101,21 +101,21 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 {
     NSError* error;
     
-    NSArray<YSGContact *> *contacts = nil;
+    NSArray<YSGContact *> *entries = nil;
     
     if (self.useContactsFramework)
     {
-        contacts = [self contactListFromContacts:&error];
+        entries = [self contactListFromContacts:&error];
     }
     else
     {
-        contacts = [self contactListFromAddressBook:&error];
+        entries = [self contactListFromAddressBook:&error];
     }
     
     if (completion)
     {
         YSGContactList *contactList = [[YSGContactList alloc] init];
-        contactList.contacts = contacts;
+        contactList.entries = entries;
         
         completion (contactList, error);
     }
@@ -204,16 +204,16 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     
     CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keysToFetch];
     
-    NSMutableArray <YSGContact *> *contacts = [NSMutableArray array];
+    NSMutableArray <YSGContact *> *entries = [NSMutableArray array];
     
     [store enumerateContactsWithFetchRequest:fetchRequest error:error usingBlock:^(CNContact * _Nonnull contact, BOOL * _Nonnull stop)
     {
         YSGContact *userContact = [self contactFromContact:contact];
         
-        [contacts addObjectsFromArray:[self separatedContactsForContact:userContact]];
+        [entries addObjectsFromArray:[self separatedContactsForContact:userContact]];
     }];
     
-    return contacts.copy;
+    return entries.copy;
 }
 
 - (YSGContact *)contactFromContact:(CNContact *)contact
@@ -269,7 +269,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     {
         NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
 
-        NSMutableArray <YSGContact *> *contacts = [NSMutableArray array];
+        NSMutableArray <YSGContact *> *entries = [NSMutableArray array];
         
         for (NSUInteger i = 0; i < [allContacts count]; i++)
         {
@@ -289,12 +289,12 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             contact.emails = [self recordArrayFromValueRef:emails];
             contact.phones = [self recordArrayFromValueRef:phones];
             
-            [contacts addObjectsFromArray:[self separatedContactsForContact:contact]];
+            [entries addObjectsFromArray:[self separatedContactsForContact:contact]];
         }
         
         CFRelease(addressBook);
         
-        return contacts.copy;
+        return entries.copy;
     }
     
     NSError *addressBookError = (__bridge NSError *)err;

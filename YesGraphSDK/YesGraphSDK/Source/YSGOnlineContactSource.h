@@ -13,7 +13,7 @@
 @interface YSGOnlineContactSource : NSObject <YSGContactSource>
 
 /*!
- *  Base source is used when online YesGraph address book contacts are not available
+ *  Base source is used when online YesGraph address book entries are not available
  */
 @property (nonnull, nonatomic, readonly) id<YSGContactSource> baseSource;
 

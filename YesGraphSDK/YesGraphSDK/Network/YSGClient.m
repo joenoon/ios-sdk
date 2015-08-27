@@ -8,11 +8,11 @@
 
 #import "YSGClient.h"
 
-NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
+static NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
 
 @interface YSGClient ()
 
-@property (nonatomic, copy) NSURL *baseURL;
+@property (nonatomic, readwrite, copy) NSURL *baseURL;
 @property (nonatomic, strong) NSURLSession *session;
 
 @end
@@ -48,51 +48,71 @@ NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
 
 #pragma mark - Public Methods
 
-#pragma mark - Private Methods
-
-#pragma mark - URL Connection
-
-- (void)GET:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completion
+- (NSURLSessionDataTask *)GET:(NSString *)path parameters:(NSDictionary *)parameters completion:(YSGNetworkRequestCompletion)completion
 {
     NSError *error;
-    NSURLRequest *request = [self requestForMethod:@"GET" path:path parameters:parameters error:&error];
+    NSURLRequest *request = [self requestForMethod:@"GET" path:path parameters:parameters key:self.clientKey error:&error];
     
-    [self request:request completion:completion];
+    if (error && completion)
+    {
+        completion(nil, error);
+        
+        return nil;
+    }
+    else
+    {
+        return [self sendRequest:request completion:completion];
+    }
 }
 
-- (void)POST:(NSString *)path parameters:(NSDictionary *)parameters completion:(void (^)(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completion
+- (NSURLSessionDataTask *)POST:(NSString *)path parameters:(NSDictionary *)parameters completion:(YSGNetworkRequestCompletion)completion
 {
     NSError *error;
-    NSURLRequest *request = [self requestForMethod:@"POST" path:path parameters:parameters error:&error];
+    NSURLRequest *request = [self requestForMethod:@"POST" path:path parameters:parameters key:self.clientKey error:&error];
     
-    [self request:request completion:completion];
+    if (error && completion)
+    {
+        completion(nil, error);
+        
+        return nil;
+    }
+    else
+    {
+        return [self sendRequest:request completion:completion];
+    }
 }
 
-- (void)request:(NSURLRequest *)request completion:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completion
+- (NSURLSessionDataTask *)sendRequest:(NSURLRequest *)request completion:(YSGNetworkRequestCompletion)completion
 {
-    [[self.session dataTaskWithRequest:request completionHandler:completion] resume];
+    NSURLSessionDataTask* task = [self.session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+    {
+        if (completion)
+        {
+            YSGNetworkResponse* response = [[YSGNetworkResponse alloc] initWithDataTask:task data:data];
+            completion(response, response.error);
+        }
+    }];
+    
+    [task resume];
+    
+    return task;
 }
 
-- (NSURLRequest *)requestForMethod:(NSString *)method path:(NSString *)path parameters:(NSDictionary *)parameters error:(NSError **)error
+- (nonnull NSURLRequest *)requestForMethod:(nonnull NSString *)method path:(nonnull NSString *)path parameters:(nullable NSDictionary *)parameters key:(nullable NSString *)key error:(NSError *__autoreleasing  __nullable * __nullable)error
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path relativeToURL:self.baseURL]];
     
     request.HTTPMethod = method;
     
-    if (self.clientKey)
+    if (key)
     {
-        [request addValue:[NSString stringWithFormat:@"Bearer %@", self.clientKey] forHTTPHeaderField:@"Authorization"];
+        [request addValue:[NSString stringWithFormat:@"Bearer %@", key] forHTTPHeaderField:@"Authorization"];
     }
     
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     request.HTTPBody = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:error];
     
-    return request;
-}
-
-- (id)parseJSONfromData:(NSData *)data error:(NSError **)error
-{
-    return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:error];
+    return request.copy;
 }
 
 @end

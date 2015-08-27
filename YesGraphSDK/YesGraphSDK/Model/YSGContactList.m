@@ -10,4 +10,9 @@
 
 @implementation YSGContactList
 
++ (NSDictionary *)ysg_mapping
+{
+    return @{ @"userId" : @"user_id", @"entries" : @"entries", @"source" : @"source" };
+}
+
 @end

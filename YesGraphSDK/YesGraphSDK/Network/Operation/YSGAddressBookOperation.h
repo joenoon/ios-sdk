@@ -12,6 +12,7 @@
 
 @interface YSGAddressBookOperation : NSOperation
 
-- (instancetype _Nonnull)initWithContacts:(NSArray <YSGContact *> * _Nonnull)contacts;
+- (instancetype _Nonnull)initWithContacts:(NSArray <YSGContact *> * _Nonnull)
+entries;
 
 @end
