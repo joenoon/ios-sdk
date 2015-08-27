@@ -8,6 +8,7 @@
 
 @import Foundation;
 
+#import "YSGClient.h"
 #import "YSGContactSource.h"
 
 @interface YSGOnlineContactSource : NSObject <YSGContactSource>
@@ -15,8 +16,8 @@
 /*!
  *  Base source is used when online YesGraph address book entries are not available
  */
-@property (nonnull, nonatomic, readonly) id<YSGContactSource> baseSource;
+@property (nonnull, nonatomic, readonly) id<YSGContactSource> localSource;
 
-- (nonnull instancetype)initWithBaseSource:(nonnull id<YSGContactSource>)baseSource;
+- (nonnull instancetype)initWithClient:(nonnull YSGClient *)client localSource:(nonnull id<YSGContactSource>)localSource;
 
 @end

@@ -41,7 +41,7 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 
 - (instancetype)init
 {
-    YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithBaseSource:[YSGLocalContactSource new]];
+    YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithClient:[YSGClient shared] localSource:[YSGLocalContactSource new]];
     return [self initWithContactSource:source];
 }
 

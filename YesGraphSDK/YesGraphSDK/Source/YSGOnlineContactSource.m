@@ -7,22 +7,25 @@
 //
 
 #import "YSGOnlineContactSource.h"
+#import "YSGNetwork.h"
 
 @interface YSGOnlineContactSource ()
 
-@property (nonatomic, strong, readwrite) id<YSGContactSource> baseSource;
+@property (nonatomic, strong, readwrite) id<YSGContactSource> localSource;
+@property (nonatomic, strong) YSGClient *client;
 
 @end
 
 @implementation YSGOnlineContactSource
 
-- (instancetype)initWithBaseSource:(id<YSGContactSource>)baseSource
+- (instancetype)initWithClient:(YSGClient *)client localSource:(id<YSGContactSource>)localSource
 {
     self = [super init];
     
     if (self)
     {
-        self.baseSource = baseSource;
+        self.client = client;
+        self.localSource = localSource;
     }
     
     return self;
@@ -32,15 +35,22 @@
 
 - (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion
 {
-    [self.baseSource requestContactPermission:completion];
+    [self.localSource requestContactPermission:completion];
 }
 
 - (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
 {
-    //
-    // TODO: Go online and fetch from YesGraph
-    //
-    [self.baseSource fetchContactListWithCompletion:completion];
+    [self.client fetchAddressBookForUserId:@"1234" completion:^(YSGContactList *contactList, NSError * _Nullable error)
+    {
+        if (error)
+        {
+            [self.localSource fetchContactListWithCompletion:completion];
+        }
+        else if (completion)
+        {
+            completion(contactList, nil);
+        }
+    }];
 }
 
 @end

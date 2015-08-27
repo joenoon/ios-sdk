@@ -21,17 +21,17 @@
 		3846CBA61B85E6EB00963CE6 /* YSGAddressBookOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3846CBA41B85E6EB00963CE6 /* YSGAddressBookOperation.m */; };
 		384D39741B8EFA6B0080BA48 /* YSGClient+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D39721B8EFA6B0080BA48 /* YSGClient+Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		384D39751B8EFA6B0080BA48 /* YSGClient+Private.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D39731B8EFA6B0080BA48 /* YSGClient+Private.m */; settings = {ASSET_TAGS = (); }; };
-		384D39781B8F01380080BA48 /* YSGNetworkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D39761B8F01380080BA48 /* YSGNetworkResponse.h */; settings = {ASSET_TAGS = (); }; };
+		384D39781B8F01380080BA48 /* YSGNetworkResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D39761B8F01380080BA48 /* YSGNetworkResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		384D39791B8F01380080BA48 /* YSGNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D39771B8F01380080BA48 /* YSGNetworkResponse.m */; settings = {ASSET_TAGS = (); }; };
 		384D397F1B8F026B0080BA48 /* YSGNetworkDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D397E1B8F026B0080BA48 /* YSGNetworkDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		384D39811B8F19A10080BA48 /* YesGraphSDKAddressBookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D39801B8F19A10080BA48 /* YesGraphSDKAddressBookTests.m */; settings = {ASSET_TAGS = (); }; };
-		384D39841B8F1A8F0080BA48 /* YSGClient+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D39821B8F1A8F0080BA48 /* YSGClient+AddressBook.h */; settings = {ASSET_TAGS = (); }; };
+		384D39841B8F1A8F0080BA48 /* YSGClient+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D39821B8F1A8F0080BA48 /* YSGClient+AddressBook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		384D39851B8F1A8F0080BA48 /* YSGClient+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D39831B8F1A8F0080BA48 /* YSGClient+AddressBook.m */; settings = {ASSET_TAGS = (); }; };
 		384D39881B8F22EB0080BA48 /* YSGTestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D39871B8F22EB0080BA48 /* YSGTestSettings.m */; settings = {ASSET_TAGS = (); }; };
 		384D398B1B8F270A0080BA48 /* YSGTestMockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D398A1B8F270A0080BA48 /* YSGTestMockData.m */; settings = {ASSET_TAGS = (); }; };
 		384D398D1B8F27C30080BA48 /* YSGModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D398C1B8F27C30080BA48 /* YSGModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3852B2D61B833F2000544FBA /* YesGraphSDKNetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3852B2D51B833F2000544FBA /* YesGraphSDKNetworkTests.m */; };
-		385B64B11B831BAE00C55F60 /* YSGClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64AF1B831BAE00C55F60 /* YSGClient.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		385B64B11B831BAE00C55F60 /* YSGClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64AF1B831BAE00C55F60 /* YSGClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		385B64B21B831BAE00C55F60 /* YSGClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64B01B831BAE00C55F60 /* YSGClient.m */; };
 		385B64B51B831C0B00C55F60 /* YSGShareService.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64B31B831C0B00C55F60 /* YSGShareService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		385B64B61B831C0B00C55F60 /* YSGShareService.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64B41B831C0B00C55F60 /* YSGShareService.m */; };
@@ -118,6 +118,7 @@
 		384D39891B8F270A0080BA48 /* YSGTestMockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGTestMockData.h; sourceTree = "<group>"; };
 		384D398A1B8F270A0080BA48 /* YSGTestMockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGTestMockData.m; sourceTree = "<group>"; };
 		384D398C1B8F27C30080BA48 /* YSGModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGModel.h; sourceTree = "<group>"; };
+		384D398E1B8F47500080BA48 /* YSGNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSGNetwork.h; sourceTree = "<group>"; };
 		3852B2D51B833F2000544FBA /* YesGraphSDKNetworkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKNetworkTests.m; sourceTree = "<group>"; };
 		385B64AF1B831BAE00C55F60 /* YSGClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGClient.h; sourceTree = "<group>"; };
 		385B64B01B831BAE00C55F60 /* YSGClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGClient.m; sourceTree = "<group>"; };
@@ -372,6 +373,7 @@
 				384D397E1B8F026B0080BA48 /* YSGNetworkDefines.h */,
 				384D39821B8F1A8F0080BA48 /* YSGClient+AddressBook.h */,
 				384D39831B8F1A8F0080BA48 /* YSGClient+AddressBook.m */,
+				384D398E1B8F47500080BA48 /* YSGNetwork.h */,
 			);
 			path = Network;
 			sourceTree = "<group>";

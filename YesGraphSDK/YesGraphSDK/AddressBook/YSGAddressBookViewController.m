@@ -76,7 +76,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     self.suggestions = (contactList.useSuggestions) ? [self suggestedContactsWithContacts:contactList.entries] : nil;
     
-    
     if (contactList.entries.count)
     {
         NSArray<YSGContact *> *trimmedContacts = [contactList.entries subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contactList.entries.count - self.service.numberOfSuggestions)];
@@ -91,6 +90,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     }
     
     self.searchResults = nil;
+    self.selectedContacts = nil;
+    
+    [self.tableView reloadData];
+    
+    [self updateUI];
 }
 
 - (NSArray <YSGContact *> *)contactsForSection:(NSInteger)section
@@ -381,9 +385,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     for (NSString* letter in contactList)
     {
-        NSArray *contacts = contactList[letter];
+        NSArray *sortedContacts = contactList[letter];
         
-        sortedList[letter] = [entries sortedArrayUsingDescriptors:@[ ascDescriptor ]];
+        sortedList[letter] = [sortedContacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
     }
     
     return sortedList.copy;

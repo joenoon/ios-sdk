@@ -34,6 +34,7 @@
                 
                 YSGContactList *contactList = [[YSGContactList alloc] init];
                 contactList.entries = contacts.copy;
+                contactList.useSuggestions = YES;
                 
                 completion(contactList, error);
             }
