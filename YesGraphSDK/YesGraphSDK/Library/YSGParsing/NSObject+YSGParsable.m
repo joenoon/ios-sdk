@@ -165,7 +165,7 @@ static NSString * const YSGSeparator = @"@";
 {
     NSDictionary *mapping = [[self class] ysg_mapping];
     
-    NSDictionary *jsonRepresentation = [NSDictionary ysg_mappableDictionaryForKeyPaths:mapping.allValues];
+    NSDictionary *jsonRepresentation = [[NSDictionary ysg_mappableDictionaryForKeyPaths:mapping.allValues] mutableCopy];
     
     for (NSString *propertyNameKey in mapping.allKeys)
     {

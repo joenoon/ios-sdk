@@ -10,4 +10,13 @@
 
 @implementation YSGSource
 
++ (nonnull instancetype)userSource
+{
+    YSGSource *source = [[self alloc] init];
+    
+    source.type = @"ios";
+    
+    return source;
+}
+
 @end

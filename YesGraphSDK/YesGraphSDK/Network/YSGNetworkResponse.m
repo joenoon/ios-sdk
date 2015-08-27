@@ -7,6 +7,7 @@
 //
 
 #import "YSGNetworkResponse.h"
+#import "YSGParsing.h"
 
 @interface YSGNetworkResponse ()
 
@@ -14,6 +15,7 @@
 // Received Data
 //
 @property (nonatomic, strong, readwrite) NSURLSessionDataTask *dataTask;
+@property (nonatomic, strong, readwrite) NSURLResponse *response;
 @property (nonatomic, copy, readwrite) NSData *data;
 
 
@@ -27,14 +29,16 @@
 
 @implementation YSGNetworkResponse
 
+#pragma mark - Initialization
+
 - (nonnull instancetype)init
 {
     [[NSException exceptionWithName:@"Invalid call" reason:@"Cannot initialize empty network response." userInfo:nil] raise];
     
-    return [self initWithDataTask:nil data:nil];
+    return [self initWithDataTask:nil response:nil data:nil];
 }
 
-- (nonnull instancetype)initWithDataTask:(NSURLSessionDataTask *)dataTask data:(NSData *)data
+- (nonnull instancetype)initWithDataTask:(NSURLSessionDataTask *)dataTask response:(NSURLResponse *)response data:(NSData *)data
 {
     self = [super init];
     
@@ -42,6 +46,7 @@
     {
         self.dataTask = dataTask;
         self.data = data;
+        self.response = response;
         
         if (dataTask.error)
         {
@@ -49,10 +54,24 @@
         }
         else if (data.length)
         {
+            //
+            // Check URL response and status code
+            //
+            
+            if ([response isKindOfClass:[NSHTTPURLResponse class]])
+            {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+                
+                if (httpResponse.statusCode / 200 != 1)
+                {
+                    self.error = [NSError errorWithDomain:@"com.yesgraph.network" code:2 userInfo:@{}];
+                }
+            }
+            
             NSError* parseError;
             self.responseObject = [self parseJSONfromData:data error:&parseError];
             
-            if (parseError)
+            if (parseError && !self.error)
             {
                 self.error = parseError;
             }
@@ -65,6 +84,19 @@
 - (id)parseJSONfromData:(NSData *)data error:(NSError **)error
 {
     return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:error];
+}
+
+#pragma mark - Public Methods
+
+- (nullable id)responseObjectSerializedToClass:(nonnull Class)class
+{
+    if (![class conformsToProtocol:@protocol(YSGParsable)])
+    {
+        return nil;
+    }
+    
+    id object = [class ysg_objectWithDictionary:self.responseObject];
+    return object;
 }
 
 @end

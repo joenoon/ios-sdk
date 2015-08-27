@@ -8,10 +8,12 @@
 
 @import Foundation;
 
+#import "YSGParsing.h"
+
 /*!
  *  Represents a contact source
  */
-@interface YSGSource : NSObject
+@interface YSGSource : NSObject <YSGParsable>
 
 @property (nonnull, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *email;

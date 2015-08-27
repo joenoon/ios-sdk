@@ -43,26 +43,52 @@ static NSDictionary *swiftClassMapping = nil;
 
 @implementation NSObject (YSGIntrospection)
 
++ (NSArray *)ysg_ignoredProperties
+{
+    static dispatch_once_t once;
+    static id sharedInstance;
+    
+    dispatch_once(&once, ^
+    {
+        sharedInstance = @[ @"hash", @"superclass", @"description", @"debugDescription" ];
+    });
+    
+    return sharedInstance;
+}
+
 - (NSArray *)ysg_propertyNames
 {
     NSMutableArray *propertyNames = [NSMutableArray array];
     
-    unsigned count;
-    objc_property_t *properties = class_copyPropertyList([self class], &count);
+    Class currentClass = [self class];
     
-    // Parse Out Properties
-    for (int i = 0; i < count; i++)
+    while (currentClass != [NSObject class])
     {
-        objc_property_t property = properties[i];
-        const char * name = property_getName(property);
-        NSString * propertyName = [NSString stringWithUTF8String:name];
-        [propertyNames addObject:propertyName];
+        unsigned count;
+        objc_property_t *properties = class_copyPropertyList(currentClass, &count);
+        
+        // Parse Out Properties
+        for (int i = 0; i < count; i++)
+        {
+            objc_property_t property = properties[i];
+            const char * name = property_getName(property);
+            NSString * propertyName = [NSString stringWithUTF8String:name];
+            
+            if (![[[self class] ysg_ignoredProperties] containsObject:propertyName])
+            {
+                [propertyNames addObject:propertyName];
+            }
+            
+        }
+        
+        free(properties);
+        
+        currentClass = [currentClass superclass];
     }
-    
-    free(properties);
     
     return propertyNames;
 }
+
 
 - (Class)ysg_classForPropertyName:(NSString *)propertyName
 {

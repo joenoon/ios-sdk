@@ -8,6 +8,8 @@
 
 @import XCTest;
 
+#import "YSGTestSettings.h"
+
 #import "YSGClient.h"
 #import "YSGClient+Private.h"
 
@@ -37,7 +39,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Key Retrieved"];
     
-    [self.client fetchRandomClientKeyWithSecretKey:@"" completion:^(NSString *clientKey, NSError *error)
+    [self.client fetchRandomClientKeyWithSecretKey:YSGTestClientKey completion:^(NSString *clientKey, NSError *error)
     {
         if (error)
         {

@@ -19,6 +19,11 @@
 @property (nullable, nonatomic, readonly) NSURLSessionDataTask *dataTask;
 
 /*!
+ *  URL Response received from the server
+ */
+@property (nullable, nonatomic, readonly) NSURLResponse *response;
+
+/*!
  *  Error from backend or from parsing
  */
 @property (nullable, nonatomic, readonly) NSError *error;
@@ -28,5 +33,25 @@
  */
 @property (nullable, nonatomic, readonly) id responseObject;
 
-- (nonnull instancetype)initWithDataTask:(nullable NSURLSessionDataTask *)dataTask data:(nullable NSData *)data NS_DESIGNATED_INITIALIZER;
+/*!
+ *  Initializes network response based on received data and session task.
+ *
+ *  @discussion Designated Initializer
+ *
+ *  @param dataTask network task
+ *  @param data     received data
+ *
+ *  @return instance of network response
+ */
+- (nonnull instancetype)initWithDataTask:(nullable NSURLSessionDataTask *)dataTask response:(nullable NSURLResponse *)response data:(nullable NSData *)data NS_DESIGNATED_INITIALIZER;
+
+/*!
+ *  Attempts to create a parsable object
+ *
+ *  @param class that conforms to YSGParsable protocol
+ *
+ *  @return instance of class if successful
+ */
+- (nullable id)responseObjectSerializedToClass:(nonnull Class)class;
+
 @end

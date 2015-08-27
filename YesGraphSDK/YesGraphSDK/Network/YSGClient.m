@@ -88,8 +88,8 @@ static NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
     {
         if (completion)
         {
-            YSGNetworkResponse* response = [[YSGNetworkResponse alloc] initWithDataTask:task data:data];
-            completion(response, response.error);
+            YSGNetworkResponse* networkResponse = [[YSGNetworkResponse alloc] initWithDataTask:task response:response data:data];
+            completion(networkResponse, networkResponse.error);
         }
     }];
     
@@ -110,7 +110,11 @@ static NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
     }
     
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:error];
+    
+    if (parameters)
+    {
+        request.HTTPBody = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:error];
+    }
     
     return request.copy;
 }
