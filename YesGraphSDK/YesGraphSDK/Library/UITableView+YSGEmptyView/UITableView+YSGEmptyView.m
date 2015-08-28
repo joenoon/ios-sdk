@@ -102,9 +102,13 @@ void ysg_swizzle(Class c, SEL orig, SEL new)
 {
     UIView *emptyView = self.ysg_emptyView;
     
-    if (!emptyView) return;
+    if (!emptyView)
+    {
+        return;
+    }
     
-    if (emptyView.superview != self) {
+    if (emptyView.superview != self)
+    {
         [self addSubview:emptyView];
     }
     
@@ -145,7 +149,9 @@ void ysg_swizzle(Class c, SEL orig, SEL new)
     }
     
     // show / hide empty view
-    emptyView.hidden = !emptyViewShouldBeShown;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        emptyView.hidden = !emptyViewShouldBeShown;
+    });
 }
 
 
@@ -177,7 +183,7 @@ void ysg_swizzle(Class c, SEL orig, SEL new)
 
 @dynamic ysg_previousSeparatorStyle;
 
-- (UITableViewCellSeparatorStyle)YSGEV_previousSeparatorStyle
+- (UITableViewCellSeparatorStyle)ysg_previousSeparatorStyle
 {
     NSNumber *previousSeparatorStyle = objc_getAssociatedObject(self, &YSGEmptyViewPreviousSeparatorStyleAssociatedKey);
     return previousSeparatorStyle ? [previousSeparatorStyle intValue] : self.separatorStyle;

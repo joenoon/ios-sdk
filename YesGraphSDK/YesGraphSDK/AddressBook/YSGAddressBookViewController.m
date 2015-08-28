@@ -15,6 +15,7 @@
 #import "YSGStyling.h"
 #import "YSGTheme.h"
 #import "YSGContactList.h"
+#import "UITableView+YSGEmptyView.h"
 
 CGFloat const YSGSearchBarHeight = 44.0;
 
@@ -34,7 +35,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 @property (nonatomic, copy) NSArray <YSGContact *> *suggestions;
 
-//@property (nonatomic, copy) NSArray <YSGContact *> *entries;
 @property (nonatomic, strong) YSGContactList *contactList;
 
 @property (nonatomic, copy) NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedContacts;
@@ -47,6 +47,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
  *  Selected entries
  */
 @property (nonatomic, copy) NSMutableSet <YSGContact *> *selectedContacts;
+
+//
+// Empty view, when no contacts are available
+//
+
+@property (nonatomic, strong) UIView *emptyView;
 
 //
 // Search
@@ -119,6 +125,29 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return [self contactsForSection:indexPath.section][indexPath.row];
 }
 
+- (UIView *)emptyView
+{
+    if (!_emptyView)
+    {
+        _emptyView = [[UIView alloc] init];
+        
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [_emptyView addSubview:activityIndicator];
+        
+        [activityIndicator startAnimating];
+        
+        NSLayoutConstraint *horizontal = [NSLayoutConstraint constraintWithItem:activityIndicator attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_emptyView attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f];
+        
+        NSLayoutConstraint *vertical = [NSLayoutConstraint constraintWithItem:activityIndicator attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_emptyView attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f];
+        
+        [_emptyView addConstraints:@[ horizontal, vertical ]];
+    }
+    
+    return _emptyView;
+}
+
 #pragma mark - YSGStyling
 
 - (void)applyTheme:(YSGTheme *)theme
@@ -163,6 +192,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     self.tableView.allowsSelectionDuringEditing = YES;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    
+    self.tableView.ysg_emptyView = self.emptyView;
+    self.tableView.ysg_hideSeparatorLinesWhenShowingEmptyView = YES;
     
     //
     // Add navigation buttons
