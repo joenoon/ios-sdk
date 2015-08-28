@@ -25,7 +25,17 @@
     {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:self.serviceType];
         
-        [controller setInitialText:@"First post from my YesGraph SDK"];
+        NSString *message = nil;
+        
+        if ([viewController.delegate respondsToSelector:@selector(shareSheetController:messageForService:userInfo:)])
+        {
+            message = [viewController.delegate shareSheetController:viewController messageForService:self userInfo:nil];
+        }
+        
+        if (message)
+        {
+            [controller setInitialText:message];
+        }
         
         __weak UIViewController *weakController = controller;
         
