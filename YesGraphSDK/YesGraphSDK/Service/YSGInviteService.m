@@ -99,18 +99,30 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
     
     self.emailContacts = nil;
     
-    NSArray <YSGContact *>* phoneContacts = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"phones[SIZE] > 0"]];
-    NSArray <YSGContact *>* emailContacts = [entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"emails[SIZE] > 0 AND phones[SIZE] = 0"]];
+    NSMutableArray <YSGContact *>* phoneContacts = [NSMutableArray array];
+    NSMutableArray <YSGContact *>* emailContacts = [NSMutableArray array];
     
+    for (YSGContact *contact in entries)
+    {
+        if (contact.phones.count)
+        {
+            [phoneContacts addObject:contact];
+        }
+        else if (contact.emails.count)
+        {
+            [emailContacts addObject:contact];
+        }
+    }
+
     if (phoneContacts.count)
     {
-        self.emailContacts = emailContacts;
+        self.emailContacts = emailContacts.copy;
         
-        [self triggerMessageWithContacts:phoneContacts];
+        [self triggerMessageWithContacts:phoneContacts.copy];
     }
     else if (emailContacts.count)
     {
-        [self triggerEmailWithContacts:emailContacts];
+        [self triggerEmailWithContacts:emailContacts.copy];
     }
 }
 
