@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong, readwrite) id<YSGContactSource> localSource;
 @property (nonatomic, strong) YSGClient *client;
+@property (nonatomic, strong) YSGCacheContactSource *cacheSource;
 
 @end
 
@@ -20,7 +21,9 @@
 
 #pragma mark - Getters and Setters
 
-- (instancetype)initWithClient:(YSGClient *)client localSource:(id<YSGContactSource>)localSource
+#pragma mark - Initialization
+
+- (instancetype)initWithClient:(YSGClient *)client localSource:(id<YSGContactSource>)localSource cacheSource:(YSGCacheContactSource *)cacheSource
 {
     self = [super init];
     
@@ -28,6 +31,7 @@
     {
         self.client = client;
         self.localSource = localSource;
+        self.cacheSource = cacheSource;
     }
     
     return self;
@@ -46,10 +50,25 @@
     {
         if (error)
         {
-            [self.localSource fetchContactListWithCompletion:completion];
+            [self.cacheSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
+            {
+                if (error)
+                {
+                    [self.localSource fetchContactListWithCompletion:completion];
+                }
+                else
+                {
+                    completion(contactList, nil);
+                }
+            }];
         }
         else if (completion)
         {
+            if (self.cacheSource)
+            {
+                [self.cacheSource updateCacheWithContactList:contactList completion:nil];
+            }
+            
             completion(contactList, nil);
         }
     }];

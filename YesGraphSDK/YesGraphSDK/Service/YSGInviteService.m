@@ -14,6 +14,7 @@
 #import "YSGContactSource.h"
 #import "YSGContact.h"
 #import "YSGLocalContactSource.h"
+#import "YSGCacheContactSource.h"
 #import "YSGOnlineContactSource.h"
 
 NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
@@ -41,7 +42,7 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
 
 - (instancetype)init
 {
-    YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithClient:[YSGClient shared] localSource:[YSGLocalContactSource new]];
+    YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithClient:[YSGClient shared] localSource:[YSGLocalContactSource new] cacheSource: [YSGCacheContactSource new]];
     return [self initWithContactSource:source];
 }
 

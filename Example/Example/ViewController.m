@@ -26,7 +26,7 @@
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     
-    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[YSGClient shared] localSource:localSource];
+    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[YSGClient shared] localSource:localSource cacheSource:nil];
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource];
     inviteService.numberOfSuggestions = 3;
