@@ -8,5 +8,6 @@
 
 #import "YSGParsable.h"
 #import "NSObject+YSGParsable.h"
+#import "NSObject+YSGCoding.h"
 #import "NSArray+YSGParsable.h"
 #import "YSGValueTransformer.h"
