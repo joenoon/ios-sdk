@@ -18,6 +18,8 @@
 
 @implementation YSGOnlineContactSource
 
+#pragma mark - Getters and Setters
+
 - (instancetype)initWithClient:(YSGClient *)client localSource:(id<YSGContactSource>)localSource
 {
     self = [super init];

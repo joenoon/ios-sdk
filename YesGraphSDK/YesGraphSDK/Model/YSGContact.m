@@ -27,7 +27,7 @@
 
 - (NSString *)contactString
 {
-    return self.phone ?: self.email;
+    return self.email ?: self.phone;
 }
 
 @end
