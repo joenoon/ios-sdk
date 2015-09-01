@@ -9,6 +9,8 @@
 #import "YSGShareSheetController.h"
 #import "YSGShareSheetServiceCell.h"
 
+NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
+
 static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifier";
 
 @interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate>

@@ -10,7 +10,9 @@
 #import "YSGContactSource.h"
 #import "YSGContact.h"
 
-extern NSString *_Nonnull const YSGInviteContactsKey;
+extern NSString *_Nonnull const YSGInvitePhoneContactsKey;
+extern NSString *_Nonnull const YSGInviteEmailContactsKey;
+extern NSString *_Nonnull const YSGInviteEmailIsHTMLKey;
 
 /*!
  *  Invite service prepared to send email and sms entries

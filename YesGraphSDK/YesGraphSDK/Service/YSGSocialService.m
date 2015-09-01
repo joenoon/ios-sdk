@@ -29,7 +29,8 @@
         
         if ([viewController.delegate respondsToSelector:@selector(shareSheetController:messageForService:userInfo:)])
         {
-            message = [viewController.delegate shareSheetController:viewController messageForService:self userInfo:nil];
+            NSDictionary *info = [viewController.delegate shareSheetController:viewController messageForService:self userInfo:nil];
+            message = info[YSGShareSheetMessageKey];
         }
         
         if (message)

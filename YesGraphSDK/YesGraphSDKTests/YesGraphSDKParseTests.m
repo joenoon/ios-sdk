@@ -12,49 +12,13 @@
 #import "YSGContactList.h"
 #import "YSGSource.h"
 #import "YSGParsing.h"
+#import "YSGTestMockData.h"
 
 @interface YesGraphSDKParseTests : XCTestCase
 
 @end
 
 @implementation YesGraphSDKParseTests
-
-- (YSGContactList *)contactList
-{
-    NSDictionary *contact1 = @{ @"name" : @"Mr1. Test", @"emails" : @[ @"mr.test1@test.com", @"mr1.test@test.com" ], @"phones" : @[ @"+1 555 123 456", @"+22 25 123 456" ] };
-    
-    NSDictionary *contact2 = @{ @"name" : @"Mr2. Test", @"emails" : @[ @"mr.test1@test.com" ], @"phones" : @[ @"+1 555 123 456", @"+22 25 123 456" ] };
-    
-    NSDictionary *contact3 = @{ @"name" : @"Mr3. Test", @"phones" : @[ @"+1 555 123 456", @"+22 25 123 456" ] };
-    
-    NSDictionary *contact4 = @{ @"name" : @"Mr4. Test", @"emails" : @[ ], @"phones" : @[ @"+1 555 123 456", @"+22 25 123 456" ] };
-    
-    NSDictionary *contact5 = @{ @"name" : @"Mr5. Test", @"emails" : @[ @"mr.test1@test.com", @"mr1.test@test.com" ] };
-    
-    NSDictionary *contact6 = @{ @"name" : @"Mr6. Test", @"emails" : @[ @"mr.test1@test.com", @"mr1.test@test.com" ], @"phones" : @[ ] };
-    
-    NSDictionary *contact7 = @{ @"name" : @"Mr7. Test", @"phones" : @[ @"mr.test1@test.com" ], @"phones" : @[ @"+1 555 123 456" ] };
-    
-    NSDictionary *contact8 = @{ @"name" : @"Mr8. Test", @"phones" : @[ @"+1 555 123 456" ] };
-    
-    
-    YSGContact *parsedContact1 = [YSGContact ysg_objectWithDictionary:contact1];
-    YSGContact *parsedContact2 = [YSGContact ysg_objectWithDictionary:contact2];
-    YSGContact *parsedContact3 = [YSGContact ysg_objectWithDictionary:contact3];
-    YSGContact *parsedContact4 = [YSGContact ysg_objectWithDictionary:contact4];
-    YSGContact *parsedContact5 = [YSGContact ysg_objectWithDictionary:contact5];
-    YSGContact *parsedContact6 = [YSGContact ysg_objectWithDictionary:contact6];
-    YSGContact *parsedContact7 = [YSGContact ysg_objectWithDictionary:contact7];
-    YSGContact *parsedContact8 = [YSGContact ysg_objectWithDictionary:contact8];
-    
-    YSGContactList *contactList = [[YSGContactList alloc] init];
-    contactList.entries = @[ parsedContact1, parsedContact2, parsedContact3, parsedContact4, parsedContact5, parsedContact6, parsedContact7, parsedContact8 ];
-    contactList.useSuggestions = YES;
-    
-    contactList.source = [YSGSource userSource];
-    
-    return contactList;
-}
 
 - (void)setUp
 {
@@ -143,7 +107,7 @@
 
 - (void)testCodingContactList
 {
-    YSGContactList *contactList = [self contactList];
+    YSGContactList *contactList = [YSGTestMockData mockContactList];
     
     [NSKeyedArchiver archiveRootObject:contactList toFile:@"ContactList.file"];
     

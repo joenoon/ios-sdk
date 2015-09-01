@@ -17,7 +17,9 @@
 #import "YSGCacheContactSource.h"
 #import "YSGOnlineContactSource.h"
 
-NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
+NSString *_Nonnull const YSGInvitePhoneContactsKey = @"YSGInvitePhoneContactsKey";
+NSString *_Nonnull const YSGInviteEmailContactsKey = @"YSGInviteEmailContactsKey";
+NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 @interface YSGInviteService () <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
@@ -165,7 +167,9 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
         [recipients addObject:contact.phones.firstObject];
     }
     
-    messageController.body = [self messageForUserInfo:nil];
+    NSDictionary *data = [self shareDataForUserInfo:@{ YSGInvitePhoneContactsKey : entries }];
+    
+    messageController.body = data[YSGShareSheetMessageKey];
     messageController.recipients = recipients.copy;
     
     [self.addressBookNavigationController presentViewController:messageController animated:YES completion:nil];
@@ -201,29 +205,28 @@ NSString * const YSGInviteContactsKey = @"YSGInviteContactsKey";
         [recipients addObject:contact.emails.firstObject];
     }
     
-    [messageController setMessageBody:[self messageForUserInfo:nil] isHTML:NO];
+    NSDictionary *data = [self shareDataForUserInfo:@{ YSGInviteEmailContactsKey : entries }];
+    
+    [messageController setMessageBody:data[YSGShareSheetMessageKey] isHTML:[data[YSGInviteEmailIsHTMLKey] boolValue]];
     [messageController setToRecipients:recipients];
     
     [self.addressBookNavigationController presentViewController:messageController animated:YES completion:nil];
 }
 
-- (NSString *)messageForUserInfo:(NSDictionary *)userInfo
+- (NSDictionary *)shareDataForUserInfo:(NSDictionary *)userInfo
 {
-    NSString *message = nil;
+    NSDictionary *data = nil;
     
-    if (self.messageBlock)
+    if (self.shareDataBlock)
     {
-        message = self.messageBlock(self, userInfo);
+        data = self.shareDataBlock(self, userInfo);
     }
     else if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:messageForService:userInfo:)])
     {
-        //
-        // TODO: Add user info
-        //
-        message = [self.viewController.delegate shareSheetController:self.viewController messageForService:self userInfo:userInfo];
+        data = [self.viewController.delegate shareSheetController:self.viewController messageForService:self userInfo:userInfo];
     }
 
-    return message;
+    return data;
 }
 
 #pragma mark - MFMessageComposeViewControllerDelegate

@@ -14,6 +14,8 @@
 @class YSGShareSheetController;
 @class YSGTheme;
 
+extern NSString *_Nonnull const YSGShareSheetMessageKey;
+
 @protocol YSGShareSheetDelegate <NSObject>
 
 @optional
@@ -34,9 +36,9 @@
  *  @param service              service that needs message
  *  @param userInfo             additional information about the user from service
  *
- *  @return message to use
+ *  @return dictionary with at least "message" key, use
  */
-- (nonnull NSString *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo;
+- (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo;
 
 /*!
  *  Called when share sheet invited entries

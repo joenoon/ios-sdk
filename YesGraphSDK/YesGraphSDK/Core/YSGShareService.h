@@ -13,14 +13,14 @@
 @class YSGShareSheetController;
 
 /*!
- *  Message block is called every time share service needs a message
+ *  Share data block is called every time share service needs data
  *
  *  @param service  service instance that is asking for the message
  *  @param userInfo additional information about current message, such as sms or email incase of invite flow
  *
  *  @return string to use with share service
  */
-typedef NSString * _Nonnull (^YSGShareMessageBlock)(YSGShareService* _Nonnull service, NSDictionary * _Nullable userInfo);
+typedef NSDictionary * _Nonnull (^YSGShareDataBlock)(YSGShareService* _Nonnull service, NSDictionary * _Nullable userInfo);
 
 /*!
  *  Share service for YesGraph share sheet, abstract implementation. This class should not
@@ -30,7 +30,7 @@ typedef NSString * _Nonnull (^YSGShareMessageBlock)(YSGShareService* _Nonnull se
 
 NS_ASSUME_NONNULL_BEGIN
 
-@property (nullable, nonatomic, assign) YSGShareMessageBlock messageBlock;
+@property (nullable, nonatomic, assign) YSGShareDataBlock shareDataBlock;
 
 @property (nullable, nonatomic, strong) UIImage *serviceImage;
 

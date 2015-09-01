@@ -15,17 +15,26 @@
 @interface YSGOnlineContactSource : NSObject <YSGContactSource>
 
 /*!
- *  Caches YesGraph response and uses cache if at the next call, server is not available.
- *
- *  @discussion Default: YES
- */
-@property (nonatomic, assign) BOOL useCache;
-
-/*!
  *  Base source is used when online YesGraph address book entries are not available
  */
 @property (nonnull, nonatomic, readonly) id<YSGContactSource> localSource;
 
+/*!
+ *  Default initializer is not available
+ *
+ *  @return nil
+ */
+- (nullable instancetype)init NS_UNAVAILABLE;
+
+/*!
+ *  Instantiate new online contact source
+ *
+ *  @param client      online client to connect
+ *  @param localSource local backup source if cache and local source fail
+ *  @param cacheSource optional source that caches online responses
+ *
+ *  @return instance
+ */
 - (nonnull instancetype)initWithClient:(nonnull YSGClient *)client localSource:(nonnull id<YSGContactSource>)localSource cacheSource:(nullable YSGCacheContactSource *)cacheSource NS_DESIGNATED_INITIALIZER;
 
 @end

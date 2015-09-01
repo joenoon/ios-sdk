@@ -53,6 +53,7 @@
 		387DC5051B8E349900E78114 /* YSGParsable.h in Headers */ = {isa = PBXBuildFile; fileRef = 389ABFC71B8E242600E4E3F1 /* YSGParsable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		388757311B95DAD8001F0133 /* YSGParsableModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3887572F1B95DAD8001F0133 /* YSGParsableModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		388757321B95DAD8001F0133 /* YSGParsableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 388757301B95DAD8001F0133 /* YSGParsableModel.m */; settings = {ASSET_TAGS = (); }; };
+		388757341B95F17E001F0133 /* YesGraphSDKCacheTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 388757331B95F17E001F0133 /* YesGraphSDKCacheTests.m */; settings = {ASSET_TAGS = (); }; };
 		388D0D571B8C838400C17DA7 /* UIAlertController+YSGDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = 388D0D551B8C838400C17DA7 /* UIAlertController+YSGDisplay.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		388D0D581B8C838400C17DA7 /* UIAlertController+YSGDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 388D0D561B8C838400C17DA7 /* UIAlertController+YSGDisplay.m */; settings = {ASSET_TAGS = (); }; };
 		388D0D5A1B8C8A1100C17DA7 /* YSGStyling.h in Headers */ = {isa = PBXBuildFile; fileRef = 388D0D591B8C89E500C17DA7 /* YSGStyling.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -144,6 +145,7 @@
 		387DC5011B8E32C400E78114 /* YSGSocialService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGSocialService.m; sourceTree = "<group>"; };
 		3887572F1B95DAD8001F0133 /* YSGParsableModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGParsableModel.h; sourceTree = "<group>"; };
 		388757301B95DAD8001F0133 /* YSGParsableModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGParsableModel.m; sourceTree = "<group>"; };
+		388757331B95F17E001F0133 /* YesGraphSDKCacheTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKCacheTests.m; sourceTree = "<group>"; };
 		388D0D551B8C838400C17DA7 /* UIAlertController+YSGDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+YSGDisplay.h"; sourceTree = "<group>"; };
 		388D0D561B8C838400C17DA7 /* UIAlertController+YSGDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+YSGDisplay.m"; sourceTree = "<group>"; };
 		388D0D591B8C89E500C17DA7 /* YSGStyling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSGStyling.h; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				384D39801B8F19A10080BA48 /* YesGraphSDKAddressBookTests.m */,
 				3852B2D51B833F2000544FBA /* YesGraphSDKNetworkTests.m */,
 				389ABFC01B8E1D0100E4E3F1 /* YesGraphSDKParseTests.m */,
+				388757331B95F17E001F0133 /* YesGraphSDKCacheTests.m */,
 				38CC16CD1B831606008477C7 /* Supporting Files */,
 				384D39861B8F22EB0080BA48 /* YSGTestSettings.h */,
 				384D39871B8F22EB0080BA48 /* YSGTestSettings.m */,
@@ -623,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				389ABFC11B8E1D0100E4E3F1 /* YesGraphSDKParseTests.m in Sources */,
+				388757341B95F17E001F0133 /* YesGraphSDKCacheTests.m in Sources */,
 				384D39881B8F22EB0080BA48 /* YSGTestSettings.m in Sources */,
 				384D39811B8F19A10080BA48 /* YesGraphSDKAddressBookTests.m in Sources */,
 				384D398B1B8F270A0080BA48 /* YSGTestMockData.m in Sources */,

@@ -49,11 +49,12 @@
     }
     else if ([service isKindOfClass:[YSGTwitterService class]])
     {
-        return @"This message will be posted to Twiiter.";
+        return @"This message will be posted to Twitter.";
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        return @"";
+        return @"This message will be posted to SMS.";
+        //return @"This message will be posted to Email.";
     }
     
     return @"";
