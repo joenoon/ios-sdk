@@ -8,7 +8,7 @@
 
 @import Foundation;
 
-@protocol YSGParsable <NSObject>
+@protocol YSGParsable <NSSecureCoding, NSObject>
 
 @optional
 

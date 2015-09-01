@@ -8,6 +8,6 @@
 
 #import "YSGParsable.h"
 #import "NSObject+YSGParsable.h"
-#import "NSObject+YSGCoding.h"
+#import "YSGParsableModel.h"
 #import "NSArray+YSGParsable.h"
 #import "YSGValueTransformer.h"

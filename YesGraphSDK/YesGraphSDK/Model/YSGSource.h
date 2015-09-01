@@ -13,7 +13,7 @@
 /*!
  *  Represents a contact source
  */
-@interface YSGSource : NSObject <YSGParsable>
+@interface YSGSource : YSGParsableModel <YSGParsable>
 
 @property (nonnull, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *email;

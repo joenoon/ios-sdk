@@ -15,7 +15,7 @@
 /*!
  *  Wraps contact list for storage and serialization
  */
-@interface YSGContactList : NSObject <YSGParsable>
+@interface YSGContactList : YSGParsableModel <YSGParsable>
 
 @property (nonatomic, assign) BOOL useSuggestions;
 

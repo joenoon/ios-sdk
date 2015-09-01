@@ -13,7 +13,7 @@
 /*!
  *  Represents a single Address Book contact
  */
-@interface YSGContact : NSObject <YSGParsable>
+@interface YSGContact : YSGParsableModel <YSGParsable>
 
 NS_ASSUME_NONNULL_BEGIN
 
