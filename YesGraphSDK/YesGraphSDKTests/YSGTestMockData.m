@@ -18,19 +18,19 @@
     
     contactList.source = [YSGSource userSource];
     
-    NSDictionary *contact1 = @{ @"name" : @"Milton Fuller", @"emails" : @[ @"milton.fuller@example.com", @"milton.fuller95@example.com" ], @"phones" : @[ @"+1 (956)-886-4918", @"+22 (956)-886-4918" ] };
+    NSDictionary *contact1 = @{ @"name" : @"Milton Fuller", @"emails" : @[ @"milton.fuller@mymockdata.com", @"milton.fuller95@example.com" ], @"phones" : @[ @"+1 (956)-886-4918", @"+22 (956)-886-4918" ] };
     
-    NSDictionary *contact2 = @{ @"name" : @"Ronald Elliott", @"emails" : @[ @"ronald.elliott93@example.com" ], @"phones" : @[ @"+1 (640)-169-9195", @"+22 (640)-169-1111" ] };
+    NSDictionary *contact2 = @{ @"name" : @"Ronald Elliott", @"emails" : @[ @"ronald.elliott93@mymockdata.com" ], @"phones" : @[ @"+1 (640)-169-9195", @"+22 (640)-169-1111" ] };
     
     NSDictionary *contact3 = @{ @"name" : @"Pauline Richardson", @"phones" : @[ @"+1 (146)-877-8411", @"+22 (146)-277-8411" ] };
     
     NSDictionary *contact4 = @{ @"name" : @"Samantha Howard", @"emails" : @[ ], @"phones" : @[ @"+1 5(130)-663-8780", @"+22 (130)-344-8780" ] };
     
-    NSDictionary *contact5 = @{ @"name" : @"Troy Bell", @"emails" : @[ @"troy.bell87@example.com", @"troy.bell897@example.com" ] };
+    NSDictionary *contact5 = @{ @"name" : @"Troy Bell", @"emails" : @[ @"troy.bell87@mymockdata.com", @"troy.bell897@mymockdata.com" ] };
     
-    NSDictionary *contact6 = @{ @"name" : @"Sue Reed", @"emails" : @[ @"sue.reed37@example.com", @"sue.reed372@example.com" ], @"phones" : @[ ] };
+    NSDictionary *contact6 = @{ @"name" : @"Sue Reed", @"emails" : @[ @"sue.reed37@mymockdata.com", @"sue.reed372@mymockdata.com" ], @"phones" : @[ ] };
     
-    NSDictionary *contact7 = @{ @"name" : @"Howard Daniels", @"phones" : @[ @"howard.daniels64@example.com" ], @"phones" : @[ @"+1 (798)-494-6469" ] };
+    NSDictionary *contact7 = @{ @"name" : @"Howard Daniels", @"phones" : @[ @"howard.daniels64@mymockdata.com" ], @"phones" : @[ @"+1 (798)-494-6469" ] };
     
     NSDictionary *contact8 = @{ @"name" : @"Charlotte Hoffman", @"phones" : @[ @"+1 (495)-692-7296" ] };
     
