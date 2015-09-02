@@ -8,7 +8,15 @@
 
 @import Foundation;
 
+/*!
+ *  This class is the main entry point into YesGraph SDK
+ */
 @interface YesGraph : NSObject
+
+/*!
+ *  User ID used with YesGraph SDK
+ */
+@property (nullable, nonatomic, readonly) NSString *userId;
 
 /*!
  *  Shared instance to YesGraph
@@ -28,5 +36,24 @@
  *  @param key client string that is received from YesGraph backend on your trusted backend.
  */
 - (void)configureWithClientKey:(nonnull NSString *)key;
+
+/*!
+ *  Configure YesGraph SDK with an user ID that will be used to save address book
+ *
+ *  @param userId to be used with API calls
+ */
+- (void)configureWithUserId:(nonnull NSString *)userId;
+
+@end
+
+@interface YesGraph (Share)
+
+//- (UIViewController *)shareSheetControllerWithDelegate:(id)delegate;
+
+@end
+
+@interface YesGraph (Customization)
+
+//- (void)applyTheme:(id)theme;
 
 @end

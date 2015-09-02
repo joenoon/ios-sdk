@@ -22,4 +22,14 @@
     return shared;
 }
 
+- (void)configureWithClientKey:(NSString *)key
+{
+    
+}
+
+- (void)configureWithUserId:(NSString *)userId
+{
+    
+}
+
 @end
