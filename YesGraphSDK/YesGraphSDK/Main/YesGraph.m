@@ -7,6 +7,7 @@
 //
 
 #import "YesGraph.h"
+#import "YSGServices.h"
 
 @implementation YesGraph
 
@@ -30,6 +31,11 @@
 - (void)configureWithUserId:(NSString *)userId
 {
     
+}
+
+- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(id<YSGShareSheetDelegate>)delegate
+{
+    return nil;
 }
 
 @end

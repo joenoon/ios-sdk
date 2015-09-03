@@ -7,11 +7,13 @@
 //
 
 #import "YSGConstants.h"
+#import "YSGShareSheetController.h"
+#import "YSGTheme.h"
 
 @import Foundation;
 
 /*!
- *  This class is the main entry point into YesGraph SDK
+ *  This class is the main entry point into YesGraph SDK and acts as the main customization point
  */
 @interface YesGraph : NSObject
 
@@ -50,13 +52,13 @@
 
 @interface YesGraph (Share)
 
-//- (UIViewController *)shareSheetControllerWithDelegate:(id)delegate;
+- (nonnull YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
 @end
 
 @interface YesGraph (Customization)
 
-//- (void)applyTheme:(id)theme;
+@property (nullable, nonatomic, strong) YSGTheme *theme;
 
 @end
 
