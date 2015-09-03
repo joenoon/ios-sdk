@@ -8,6 +8,7 @@
 
 @import MessageUI;
 
+#import "YSGConstants.h"
 #import "YSGInviteService.h"
 #import "YSGShareSheetController.h"
 #import "YSGAddressBookViewController.h"
@@ -32,6 +33,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
  *  This property stores email entries, if both should be handled
  */
 @property (nonatomic, copy) NSArray <YSGContact *> *emailContacts;
+@property (nonatomic, copy) NSArray <YSGContact *> *phoneContacts;
 
 @end
 
@@ -101,6 +103,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     //
     
     self.emailContacts = nil;
+    self.phoneContacts = nil;
     
     NSMutableArray <YSGContact *>* phoneContacts = [NSMutableArray array];
     NSMutableArray <YSGContact *>* emailContacts = [NSMutableArray array];
@@ -116,11 +119,12 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
             [emailContacts addObject:contact];
         }
     }
+    
+    self.emailContacts = emailContacts.copy;
+    self.phoneContacts = phoneContacts.copy;
 
     if (phoneContacts.count)
     {
-        self.emailContacts = emailContacts.copy;
-        
         [self triggerMessageWithContacts:phoneContacts.copy];
     }
     else if (emailContacts.count)
@@ -143,10 +147,14 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
-            //
-            // TODO: Add error and user info
-            //
-            [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:nil error:nil];
+            NSError *error;
+            
+            if (![MFMessageComposeViewController canSendText])
+            {
+                error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageUnavailable);
+            }
+            
+            [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
         
         return;
@@ -185,10 +193,14 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
-            //
-            // TODO: Add error and user info
-            //
-            [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:nil error:nil];
+            NSError* error;
+            
+            if (![MFMailComposeViewController canSendMail])
+            {
+                error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailUnavailable);
+            }
+            
+            [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
         
         return;
@@ -197,7 +209,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
     messageController.mailComposeDelegate = self;
     
-    NSMutableArray<NSString *> * recipients = [NSMutableArray array];
+    NSMutableArray<NSString *>* recipients = [NSMutableArray array];
     
     for (YSGContact *contact in entries
             )
@@ -233,6 +245,18 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
+    if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    {
+        NSError* error;
+        
+        if (result == MessageComposeResultFailed)
+        {
+            error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageFailed);
+        }
+        
+        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : self.phoneContacts } error:error];
+    }
+
     if (result != MessageComposeResultSent)
     {
         [controller dismissViewControllerAnimated:YES completion:nil];
@@ -257,6 +281,18 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
+    if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    {
+        NSError* error;
+        
+        if (result == MFMailComposeResultFailed)
+        {
+            error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailFailed);
+        }
+        
+        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:error];
+    }
+    
     if (result != MFMailComposeResultSaved && result != MFMailComposeResultSent)
     {
         [controller dismissViewControllerAnimated:YES completion:nil];
@@ -264,6 +300,9 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         return;
     }
     
+    //
+    // Dismiss the mail composer and entire invite screen flow
+    //
     [controller dismissViewControllerAnimated:NO completion:^
     {
         [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];

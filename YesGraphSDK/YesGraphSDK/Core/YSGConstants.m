@@ -16,3 +16,23 @@ NSUInteger const YSGInviteNumberOfSuggestions = 5;
 NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
 
 NSString *const YSGDefaultContactAccessPromptMessage = @"Share contacts to invite friends?";
+
+#pragma mark - Global Error Functions
+
+NSError* YSGErrorWithErrorCode (YSGErrorCode errorCode)
+{
+    return [NSError errorWithDomain:YSGErrorDomain code:errorCode userInfo:@{ NSLocalizedDescriptionKey : YSGLocalizedErrorDescriptionForErrorCode(errorCode) }];
+}
+
+NSString* YSGLocalizedErrorDescriptionForErrorCode (YSGErrorCode errorCode)
+{
+    switch (errorCode)
+    {
+        case YSGErrorCodeInviteMessageUnavailable:
+            return @"Native Message Composer is unable to send text messages.";
+        case YSGErrorCodeInviteMailUnavailable:
+            return @"Native Mail Composer is unable to send text messages.";
+        default:
+            return @"Unknown error";
+    }
+}

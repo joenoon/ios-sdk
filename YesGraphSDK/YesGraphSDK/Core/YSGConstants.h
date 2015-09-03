@@ -17,30 +17,54 @@ YSG_EXTERN NSString *const YSGErrorDomain;
 typedef NS_ENUM(NSInteger, YSGErrorCode)
 {
     /*!
-     *  Error code for any error that is not expected
+     *  Error code for any error that is not expected.
      */
     YSGErrorCodeUnknown = 0,
     
     /*!
-     *  Error code for network being offline
+     *  Error code for network being offline.
      */
     YSGErrorCodeNetwork,
     
     /*!
-     *  Error code for server issues
+     *  Error code for server issues.
      */
     YSGErrorCodeServer,
     
     /*!
-     *  Error code for parsing data
+     *  Error code for parsing data.
      */
     YSGErrorCodeParse,
     
+    /*!
+     *  Error code when device is not capable of sending a message.
+     */
+    YSGErrorCodeInviteMessageUnavailable,
+    
+    /*!
+     *  Error code when device is not capable of sending an email.
+     *
+     *  @discussion This happens if there are no email accounts set up on the device.
+     */
+    YSGErrorCodeInviteMailUnavailable,
+    
+    /*!
+     *  Error code when device failed to send a message.
+     */
+    YSGErrorCodeInviteMessageFailed,
+    
+    /*!
+     *  Error code when device failed to send an email.
+     */
+    YSGErrorCodeInviteMailFailed
 };
 
 YSG_EXTERN NSString *const YSGErrorNetworkStatusCodeKey;
 
 typedef void (^YSGErrorHandlerBlock)(NSError *error);
+
+YSG_EXTERN NSError* YSGErrorWithErrorCode (YSGErrorCode errorCode);
+YSG_EXTERN NSString* YSGLocalizedErrorDescriptionForErrorCode (YSGErrorCode errorCode);
 
 #pragma mark - Network
 
