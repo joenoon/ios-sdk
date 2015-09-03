@@ -53,6 +53,8 @@
 		38AA7D0F1B976492009BFD83 /* YSGClient+Invite.h in Headers */ = {isa = PBXBuildFile; fileRef = 38AA7D0D1B976492009BFD83 /* YSGClient+Invite.h */; settings = {ASSET_TAGS = (); }; };
 		38AA7D101B976492009BFD83 /* YSGClient+Invite.m in Sources */ = {isa = PBXBuildFile; fileRef = 38AA7D0E1B976492009BFD83 /* YSGClient+Invite.m */; settings = {ASSET_TAGS = (); }; };
 		38B20AE61B9884ED00AE3DED /* YSGServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B20AE51B9884ED00AE3DED /* YSGServices.h */; settings = {ASSET_TAGS = (); }; };
+		38B20AE81B9886E700AE3DED /* YSGSources.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B20AE71B9886E700AE3DED /* YSGSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38B20AEA1B988C2300AE3DED /* YSGMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B20AE91B988C2300AE3DED /* YSGMacros.h */; settings = {ASSET_TAGS = (); }; };
 		38CC16C31B831606008477C7 /* YesGraphSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CC16C21B831606008477C7 /* YesGraphSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38CC16C91B831606008477C7 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC16BD1B831606008477C7 /* YesGraphSDK.framework */; };
 		38CC16D01B831606008477C7 /* YesGraphSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CC16CF1B831606008477C7 /* YesGraphSDKTests.m */; };
@@ -147,6 +149,8 @@
 		38AA7D0D1B976492009BFD83 /* YSGClient+Invite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGClient+Invite.h"; sourceTree = "<group>"; };
 		38AA7D0E1B976492009BFD83 /* YSGClient+Invite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGClient+Invite.m"; sourceTree = "<group>"; };
 		38B20AE51B9884ED00AE3DED /* YSGServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGServices.h; sourceTree = "<group>"; };
+		38B20AE71B9886E700AE3DED /* YSGSources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGSources.h; sourceTree = "<group>"; };
+		38B20AE91B988C2300AE3DED /* YSGMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGMacros.h; sourceTree = "<group>"; };
 		38CC16BD1B831606008477C7 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38CC16C11B831606008477C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38CC16C21B831606008477C7 /* YesGraphSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YesGraphSDK.h; sourceTree = "<group>"; };
@@ -381,6 +385,7 @@
 		67E641A3679EC156EC7DDA2A /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				38B20AE71B9886E700AE3DED /* YSGSources.h */,
 				67E6428A7873738ABAA4D31F /* YSGContactSource.h */,
 				67E6467665E38B367D230508 /* YSGLocalContactSource.h */,
 				67E64DA4788FBB0DC32F607E /* YSGLocalContactSource.m */,
@@ -420,9 +425,9 @@
 		67E64848DD453806557E2080 /* Invite */ = {
 			isa = PBXGroup;
 			children = (
+				67E641A3679EC156EC7DDA2A /* Source */,
 				67E645E06C5CD32874EA504B /* YSGInviteService.h */,
 				67E6427287E9F2551BBC6A21 /* YSGInviteService.m */,
-				67E641A3679EC156EC7DDA2A /* Source */,
 			);
 			path = Invite;
 			sourceTree = "<group>";
@@ -441,6 +446,7 @@
 		67E64AE32FF2B520BDB012B3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				38B20AE91B988C2300AE3DED /* YSGMacros.h */,
 				385B64B31B831C0B00C55F60 /* YSGShareService.h */,
 				385B64B41B831C0B00C55F60 /* YSGShareService.m */,
 				3800EE941B83769C007E0C43 /* YSGShareSheetController.h */,
@@ -484,6 +490,7 @@
 				3809373E1B84D0EA00FBF888 /* YSGTheme.h in Headers */,
 				388AFD261B98808D00629D35 /* YSGConstants.h in Headers */,
 				3800EE961B83769C007E0C43 /* YSGShareSheetController.h in Headers */,
+				38B20AEA1B988C2300AE3DED /* YSGMacros.h in Headers */,
 				387DC5051B8E349900E78114 /* YSGParsable.h in Headers */,
 				388D0D5A1B8C8A1100C17DA7 /* YSGStyling.h in Headers */,
 				384D39781B8F01380080BA48 /* YSGNetworkResponse.h in Headers */,
@@ -496,6 +503,7 @@
 				38AA7D0F1B976492009BFD83 /* YSGClient+Invite.h in Headers */,
 				388D0D571B8C838400C17DA7 /* UIAlertController+YSGDisplay.h in Headers */,
 				389ABFB71B8E1AD900E4E3F1 /* NSObject+YSGIntrospection.h in Headers */,
+				38B20AE81B9886E700AE3DED /* YSGSources.h in Headers */,
 				389ABFBB1B8E1AD900E4E3F1 /* NSArray+YSGParsable.h in Headers */,
 				387DC5041B8E349500E78114 /* YSGParsing.h in Headers */,
 				67E641FDFFA2B8E33DF1EACB /* YSGContactList.h in Headers */,

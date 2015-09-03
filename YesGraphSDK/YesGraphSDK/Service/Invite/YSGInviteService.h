@@ -25,6 +25,11 @@ extern NSString *_Nonnull const YSGInviteEmailIsHTMLKey;
 @property (nonnull, nonatomic, strong, readonly) id<YSGContactSource> contactSource;
 
 /*!
+ *  User Id to invite for
+ */
+@property (nonnull, nonatomic, readonly) NSString *userId;
+
+/*!
  *  This message is displayed to the user before entries permissions is requested. If user agrees with the message,
  *  the user is asked for permission to Address Book.
  */
@@ -90,7 +95,7 @@ extern NSString *_Nonnull const YSGInviteEmailIsHTMLKey;
  *
  *  @return instance of invite service
  */
-- (instancetype _Nonnull)initWithContactSource:(nonnull id<YSGContactSource>)contactSource NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nonnull)initWithContactSource:(nonnull id<YSGContactSource>)contactSource userId:(nullable NSString *)userId NS_DESIGNATED_INITIALIZER;
 
 #pragma mark - Triggers
 

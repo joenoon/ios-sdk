@@ -10,3 +10,9 @@
 
 NSString *const YSGErrorDomain = @"YSGErrorDomain";
 NSString *const YSGErrorNetworkStatusCodeKey = @"YSGErrorNetworkStatusCodeKey";
+
+NSUInteger const YSGInviteNumberOfSuggestions = 5;
+
+NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
+
+NSString *const YSGDefaultContactAccessPromptMessage = @"Share contacts to invite friends?";

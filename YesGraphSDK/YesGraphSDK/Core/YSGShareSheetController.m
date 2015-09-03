@@ -19,7 +19,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 @property (nonatomic, strong) YSGTheme *theme;
 
-@property (nonatomic, copy) NSArray <YSGShareService *> *services;
+@property (nonatomic, copy, readwrite) NSArray <YSGShareService *> *services;
 
 @end
 

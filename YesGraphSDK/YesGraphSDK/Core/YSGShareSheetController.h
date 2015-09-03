@@ -86,6 +86,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, weak) id<YSGShareSheetDelegate> delegate;
 
 /*!
+ *  Share services currently with share sheet controller
+ */
+@property (nonnull, nonatomic, readonly, strong) NSArray <YSGShareService *> * services;
+
+/*!
  *  Designated initializer
  *
  *  @param services to share with

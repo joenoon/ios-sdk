@@ -8,9 +8,11 @@
 
 @import Foundation;
 
+#import "YSGMacros.h"
+
 #pragma mark - Errors
 
-extern NSString *const YSGErrorDomain;
+YSG_EXTERN NSString *const YSGErrorDomain;
 
 typedef NS_ENUM(NSInteger, YSGErrorCode)
 {
@@ -36,6 +38,15 @@ typedef NS_ENUM(NSInteger, YSGErrorCode)
     
 };
 
-extern NSString *const YSGErrorNetworkStatusCodeKey;
+YSG_EXTERN NSString *const YSGErrorNetworkStatusCodeKey;
 
 typedef void (^YSGErrorHandlerBlock)(NSError *error);
+
+#pragma mark - Network
+
+YSG_EXTERN NSString *const YSGClientAPIURL;
+
+#pragma mark - Default Values
+
+YSG_EXTERN NSUInteger const YSGDefaultInviteNumberOfSuggestions;
+YSG_EXTERN NSString *const YSGDefaultContactAccessPromptMessage;

@@ -7,8 +7,7 @@
 //
 
 #import "YSGClient.h"
-
-static NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
+#import "YSGConstants.h"
 
 @interface YSGClient ()
 
@@ -19,28 +18,21 @@ static NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
 
 @implementation YSGClient
 
-+ (instancetype)shared
-{
-    static id shared = nil;
-    static dispatch_once_t onceToken;
-    
-    dispatch_once(&onceToken, ^{
-        shared = [[self alloc] init];
-    });
-    
-    return shared;
-}
-
 #pragma mark - Initialization
 
 - (instancetype)init
+{
+    return [self initWithBaseURL:[NSURL URLWithString:YSGClientAPIURL]];
+}
+
+- (instancetype)initWithBaseURL:(NSURL *)baseURL
 {
     self = [super init];
     
     if (self)
     {
         self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-        self.baseURL = [NSURL URLWithString:YSGClientAPIURL];
+        self.baseURL = baseURL;
     }
     
     return self;

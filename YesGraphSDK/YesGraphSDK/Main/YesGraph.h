@@ -20,7 +20,7 @@
 /*!
  *  User ID used with YesGraph SDK
  */
-@property (nullable, nonatomic, readonly) NSString *userId;
+@property (nullable, nonatomic, readonly, copy) NSString *userId;
 
 /*!
  *  Shared instance to YesGraph
@@ -39,7 +39,7 @@
  *
  *  @param key client string that is received from YesGraph backend on your trusted backend.
  */
-- (void)configureWithClientKey:(nonnull NSString *)key;
+- (void)configureWithClientKey:(nonnull NSString *)clientKey;
 
 /*!
  *  Configure YesGraph SDK with an user ID that will be used to save address book
@@ -52,7 +52,14 @@
 
 @interface YesGraph (Share)
 
-- (nonnull YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
+/*!
+ *  Factory method for share sheet view controller
+ *
+ *  @param delegate for share sheet controller
+ *
+ *  @return default share sheet controller
+ */
+- (nonnull YSGShareSheetController *)defaultShareSheetController;
 
 @end
 
@@ -68,5 +75,19 @@
 @interface YesGraph (ErrorHandling)
 
 @property (nullable, nonatomic, strong) YSGErrorHandlerBlock errorHandler;
+
+@end
+
+@interface YesGraph (Settings)
+
+/*!
+ *  Number of suggestions displayed when inviting address book users
+ */
+@property (nonatomic, assign) NSUInteger numberOfSuggestions;
+
+/*!
+ *  Before address book permission is requested, this message displays
+ */
+@property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 
 @end

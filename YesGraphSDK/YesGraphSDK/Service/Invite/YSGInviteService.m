@@ -44,11 +44,11 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (instancetype)init
 {
-    YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithClient:[YSGClient shared] localSource:[YSGLocalContactSource new] cacheSource: [YSGCacheContactSource new]];
-    return [self initWithContactSource:source];
+    YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:[YSGLocalContactSource new] cacheSource:[YSGCacheContactSource new]];
+    return [self initWithContactSource:source userId:nil];
 }
 
-- (instancetype)initWithContactSource:(id<YSGContactSource>)contactSource
+- (instancetype)initWithContactSource:(id<YSGContactSource>)contactSource userId:(nullable NSString *)userId
 {
     self = [super init];
     
