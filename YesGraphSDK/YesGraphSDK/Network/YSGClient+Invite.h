@@ -17,6 +17,6 @@
  *  @param invites    contacts that were invited
  *  @param completion called when completed
  */
-- (void)updateInviteSent:(nonnull NSArray <YSGContact *> *)invites completion:(void (^)(NSError  * _Nullable error))completion;
+- (void)updateInviteSent:(nonnull NSArray <YSGContact *> *)invites completion:(nullable void (^)(NSError  * _Nullable error))completion;
 
 @end

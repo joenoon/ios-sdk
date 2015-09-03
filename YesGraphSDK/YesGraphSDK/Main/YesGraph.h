@@ -6,6 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+#import "YSGConstants.h"
+
 @import Foundation;
 
 /*!
@@ -55,5 +57,14 @@
 @interface YesGraph (Customization)
 
 //- (void)applyTheme:(id)theme;
+
+@end
+
+/*!
+ *  Error handling methods
+ */
+@interface YesGraph (ErrorHandling)
+
+@property (nullable, nonatomic, strong) YSGErrorHandlerBlock errorHandler;
 
 @end

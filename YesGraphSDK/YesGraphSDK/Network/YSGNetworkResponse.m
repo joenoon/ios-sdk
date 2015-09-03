@@ -6,6 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+#import "YSGConstants.h"
 #import "YSGNetworkResponse.h"
 #import "YSGParsing.h"
 
@@ -50,7 +51,7 @@
         
         if (dataTask.error)
         {
-            self.error = dataTask.error;
+            self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeNetwork userInfo:@{ NSUnderlyingErrorKey : dataTask.error }];
         }
         else if (data.length)
         {
@@ -64,7 +65,7 @@
                 
                 if (httpResponse.statusCode / 200 != 1)
                 {
-                    self.error = [NSError errorWithDomain:@"com.yesgraph.network" code:2 userInfo:@{}];
+                    self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeServer userInfo:@{ YSGErrorNetworkStatusCodeKey : @(httpResponse.statusCode) }];
                 }
             }
             
@@ -73,7 +74,7 @@
             
             if (parseError && !self.error)
             {
-                self.error = parseError;
+                self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeParse userInfo:@{ NSUnderlyingErrorKey : parseError }];
             }
         }
     }
