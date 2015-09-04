@@ -50,17 +50,24 @@
     {
         if (error)
         {
-            [self.cacheSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
+            if (self.cacheSource)
             {
-                if (error)
+                [self.cacheSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
                 {
-                    [self.localSource fetchContactListWithCompletion:completion];
-                }
-                else
-                {
-                    completion(contactList, nil);
-                }
-            }];
+                    if (error)
+                    {
+                        [self.localSource fetchContactListWithCompletion:completion];
+                    }
+                    else
+                    {
+                        completion(contactList, nil);
+                    }
+                }];
+            }
+            else
+            {
+                [self.localSource fetchContactListWithCompletion:completion];
+            }
         }
         else if (completion)
         {

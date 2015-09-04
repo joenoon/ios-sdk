@@ -26,7 +26,7 @@
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     
-    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:localSource cacheSource:nil];
+    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:localSource cacheSource:[YSGCacheContactSource new]];
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:nil];
     inviteService.numberOfSuggestions = 3;
@@ -45,15 +45,15 @@
         // Facebook actually ignores this message, even in the popup.
         //
         
-        return @"This message will be posted to Facebook.";
+        return @{ YSGShareSheetMessageKey : @"This message will be posted to Facebook." };
     }
     else if ([service isKindOfClass:[YSGTwitterService class]])
     {
-        return @"This message will be posted to Twitter.";
+        return @{ YSGShareSheetMessageKey : @"This message will be posted to Twitter." };
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        return @"This message will be posted to SMS.";
+        return @{ YSGShareSheetMessageKey : @"This message will be posted to SMS." };
         //return @"This message will be posted to Email.";
     }
     

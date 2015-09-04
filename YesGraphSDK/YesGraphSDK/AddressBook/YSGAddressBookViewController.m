@@ -29,6 +29,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 @property (nonatomic, strong) UISearchController *searchController;
 
+@property (nonatomic, strong) UIView *searchContainerView;
+
 @property (nonatomic, strong) UITableView *tableView;
 
 //
@@ -75,13 +77,27 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, 0.0) style:UITableViewStylePlain];
         [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
         
-        NSDictionary *views = NSDictionaryOfVariableBindings(tableView);
-
+        tableView.dataSource = self;
+        tableView.delegate = self;
+        
         [self.view addSubview:tableView];
         
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-60-[tableView]-|" options:0 metrics:nil views:views]];
+        id<UILayoutSupport> topGuide = self.topLayoutGuide;
         
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[tableView]-|" options:0 metrics:nil views:views]];
+        NSDictionary *views = NSDictionaryOfVariableBindings(tableView, topGuide);
+        
+        if (self.service.allowSearch)
+        {
+            NSDictionary *searchViews = @{ @"tableView" : tableView, @"searchContainerView" : self.searchContainerView };
+            
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchContainerView]-0-[tableView]-0-|" options:0 metrics:nil views:searchViews]];
+        }
+        else
+        {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-[tableView]-0-|" options:0 metrics:nil views:views]];
+        }
+        
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tableView]-0-|" options:0 metrics:nil views:views]];
         
         
         _tableView = tableView;
@@ -201,13 +217,26 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         self.searchController.dimsBackgroundDuringPresentation = NO;
         self.searchController.searchBar.delegate = self;
         
-        self.definesPresentationContext = YES;
-        
-        [self.searchController.searchBar sizeToFit];
-        
         self.searchController.searchBar.showsCancelButton = NO;
         
-        self.tableView.tableHeaderView = self.searchController.searchBar;
+        UIView *searchContainerView = [[UIView alloc] init];
+        [searchContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        [searchContainerView addSubview:self.searchController.searchBar];
+        
+        self.searchContainerView = searchContainerView;
+        
+        [self.view addSubview:searchContainerView];
+        
+        NSDictionary* views = @{ @"searchContainerView" : searchContainerView, @"topGuide" : self.topLayoutGuide };
+        
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[searchContainerView]-0-|" options:0 metrics:nil views:views]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-0-[searchContainerView(44)]" options:0 metrics:nil views:views]];
+        
+        [searchContainerView addSubview:self.searchController.searchBar];
+        
+        self.definesPresentationContext = YES;
+        
     }
     
     [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
@@ -216,6 +245,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     self.tableView.allowsSelectionDuringEditing = YES;
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    
+    self.tableView.tableHeaderView = [UIView new];
+    self.tableView.tableFooterView = [UIView new];
     
     self.tableView.ysg_emptyView = self.emptyView;
     self.tableView.ysg_hideSeparatorLinesWhenShowingEmptyView = YES;
@@ -248,6 +280,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
+    
+    [self.searchController.searchBar sizeToFit];
 }
 
 #pragma mark - Actions

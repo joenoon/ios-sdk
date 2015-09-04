@@ -56,7 +56,17 @@ typedef NS_ENUM(NSInteger, YSGErrorCode)
     /*!
      *  Error code when device failed to send an email.
      */
-    YSGErrorCodeInviteMailFailed
+    YSGErrorCodeInviteMailFailed,
+    
+    /*!
+     *  Error code when cache fails to read from file system
+     */
+    YSGErrorCodeCacheReadFailure,
+    
+    /*!
+     *  Error code when cache fails to write file to system
+     */
+    YSGErrorCodeCacheWriteFailure
 };
 
 YSG_EXTERN NSString *const YSGErrorNetworkStatusCodeKey;

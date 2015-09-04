@@ -6,6 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+#import "YSGConstants.h"
 #import "YSGCacheContactSource.h"
 #import "YSGContactList.h"
 
@@ -71,10 +72,7 @@
     }
     else if (completion)
     {
-        //
-        // TODO: Create an I/O error here and return it
-        //
-        completion(nil);
+        completion(YSGErrorWithErrorCode(YSGErrorCodeCacheWriteFailure));
     }
 }
 
@@ -94,10 +92,7 @@
     }
     else
     {
-        //
-        // TODO: Create an error
-        //
-        completion(nil, nil);
+        completion(nil, YSGErrorWithErrorCode(YSGErrorCodeCacheReadFailure));
     }
 }
 
