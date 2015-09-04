@@ -21,13 +21,15 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdentifier";
 
-@interface YSGAddressBookViewController () <UISearchBarDelegate, UISearchResultsUpdating, YSGStyling>
+@interface YSGAddressBookViewController () <UISearchBarDelegate, UISearchResultsUpdating, YSGStyling, UITableViewDataSource, UITableViewDelegate>
 
 //
 // UI
 //
 
 @property (nonatomic, strong) UISearchController *searchController;
+
+@property (nonatomic, strong) UITableView *tableView;
 
 //
 // Data
@@ -65,6 +67,28 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 @implementation YSGAddressBookViewController
 
 #pragma mark - Getters and Setters
+
+- (UITableView *)tableView
+{
+    if (!_tableView)
+    {
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, 0.0) style:UITableViewStylePlain];
+        [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        
+        NSDictionary *views = NSDictionaryOfVariableBindings(tableView);
+
+        [self.view addSubview:tableView];
+        
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-60-[tableView]-|" options:0 metrics:nil views:views]];
+        
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[tableView]-|" options:0 metrics:nil views:views]];
+        
+        
+        _tableView = tableView;
+    }
+    
+    return _tableView;
+}
 
 - (NSMutableSet <YSGContact *> *)selectedContacts
 {
