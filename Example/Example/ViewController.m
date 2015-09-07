@@ -32,7 +32,18 @@
     inviteService.numberOfSuggestions = 3;
     inviteService.serviceImage = [UIImage imageNamed:@"Phone"];
     
+<<<<<<< HEAD
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ [YSGFacebookService new], [YSGTwitterService new], inviteService ] delegate:self];
+=======
+    YSGTwitterService *twitterInviteService = [YSGTwitterService new];
+    twitterInviteService.serviceImage = [UIImage imageNamed:@"Twitter"];
+    
+    YSGFacebookService *facebookInviteService = [YSGFacebookService new];
+    facebookInviteService.serviceImage = [UIImage imageNamed:@"Facebook"];
+    
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookInviteService, twitterInviteService, inviteService ] delegate:self];
+    shareController.delegate = self;
+>>>>>>> First version of share screen
     
     [self.navigationController pushViewController:shareController animated:YES];
 }
