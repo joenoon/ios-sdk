@@ -36,6 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonnull, nonatomic, readonly) NSString *name;
 
+@property (nonnull, nonatomic, readonly) NSString *callToAction;
+
+@property (nonnull, nonatomic, readonly) UIColor *color;
+
 - (void)triggerServiceWithViewController:(YSGShareSheetController *)viewController;
 
 NS_ASSUME_NONNULL_END

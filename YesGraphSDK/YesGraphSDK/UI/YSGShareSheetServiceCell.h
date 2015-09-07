@@ -17,6 +17,11 @@
 
 @property (nonatomic, strong) UIColor *color;
 
-@property (nonatomic, copy) UIImage *image;
+@property (nonatomic, copy) UIImage *icon;
+
+@property (nonatomic, strong) UIFont *font;
+
+@property (nonatomic, copy) NSString *cellShape;
+
 
 @end

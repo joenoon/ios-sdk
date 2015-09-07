@@ -30,6 +30,7 @@
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:nil];
     inviteService.numberOfSuggestions = 3;
+    inviteService.serviceImage = [UIImage imageNamed:@"Phone"];
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ [YSGFacebookService new], [YSGTwitterService new], inviteService ] delegate:self];
     
