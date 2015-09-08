@@ -38,7 +38,7 @@ extern NSString *_Nonnull const YSGShareSheetMessageKey;
  *
  *  @return dictionary with at least "message" key, use
  */
-- (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo;
+- (nonnull NSDictionary<NSString *, id> *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary <NSString *, id>*)userInfo;
 
 /*!
  *  Called when share sheet invited entries
@@ -48,7 +48,7 @@ extern NSString *_Nonnull const YSGShareSheetMessageKey;
  *  @param userInfo             userInfo that were selected (if available and no error)
  *  @param error                error during sharing
  */
-- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(nullable NSDictionary *)userInfo error:(nullable NSError *)error;
+- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error;
 
 /*!
  *  Called when user finished sharing

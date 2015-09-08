@@ -28,7 +28,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         self.navigationController?.pushViewController(shareController, animated: true)
     }
     
-    func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [NSObject : AnyObject]?) -> [NSObject : AnyObject] {
+    func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [String : AnyObject]?) -> [String : AnyObject] {
         
         if let _ = service as? YSGFacebookService {
             return [YSGShareSheetMessageKey : "This message will be posted to Facebook."]
