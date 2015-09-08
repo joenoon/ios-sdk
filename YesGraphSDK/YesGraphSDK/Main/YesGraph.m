@@ -164,7 +164,7 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     return [self defaultShareSheetControllerWithDelegate:nil];
 }
 
-- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(id<YSGShareSheetDelegate>)delegate
+- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate
 {
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;

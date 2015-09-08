@@ -57,13 +57,20 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YesGraph (Share)
 
 /*!
- *  Factory method for share sheet view controller
+ *  Factory method for share sheet view controller without delegate. Delegate can still be set manually.
  *
- *  @param delegate for share sheet controller
- *
- *  @return default share sheet controller
+ *  @return instance of share sheet controller
  */
 - (YSGShareSheetController *)defaultShareSheetController;
+
+/*!
+ *  Factory method for share sheet view controller with delegate
+ *
+ *  @param delegate for share sheet controller that conforms to YSGShareSheetDelegate.
+ *
+ *  @return instance of share sheet controller
+ */
+- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
 @end
 
