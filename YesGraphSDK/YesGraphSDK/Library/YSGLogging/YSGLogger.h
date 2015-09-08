@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YSGLogger : NSObject
 
+@property (nonatomic, assign) YSGLogLevel currentLogLevel;
+
 @property (nonnull, nonatomic, readonly) NSArray <YSGLog *>* logs;
 
 + (nonnull instancetype)shared;

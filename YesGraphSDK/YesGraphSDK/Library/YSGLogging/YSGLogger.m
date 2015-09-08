@@ -43,6 +43,11 @@
 
 - (void)addLog:(YSGLog *)log
 {
+    if (log.level < self.currentLogLevel)
+    {
+        [log print];
+    }
+    
     [self.logPool addObject:log];
 }
 

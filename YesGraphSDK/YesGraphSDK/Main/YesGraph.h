@@ -7,6 +7,7 @@
 //
 
 #import "YSGConstants.h"
+#import "YSGLoggingConstants.h"
 #import "YSGShareSheetController.h"
 #import "YSGTheme.h"
 
@@ -89,5 +90,14 @@
  *  Before address book permission is requested, this message displays
  */
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
+
+@end
+
+@interface YesGraph (Logging)
+
+/*!
+ *  Current log level
+ */
+@property (nonatomic, assign) YSGLogLevel logLevel;
 
 @end
