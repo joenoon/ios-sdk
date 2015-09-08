@@ -7,19 +7,41 @@
 //
 
 import UIKit
+import YesGraphSDK
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, YSGShareSheetDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func shareButtonTap(sender: UIButton) {
+        let localSource = YSGLocalContactSource()
+        localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
+        
+        let onlineSource = YSGOnlineContactSource(client: YSGClient(), localSource: localSource, cacheSource: YSGCacheContactSource())
+        
+        let inviteService = YSGInviteService(contactSource: onlineSource, userId: nil)
+        
+        let shareController = YSGShareSheetController(services: [YSGFacebookService(), YSGTwitterService(), inviteService], delegate: self)
+        
+        self.navigationController?.pushViewController(shareController, animated: true)
     }
-
-
+    
+    func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [NSObject : AnyObject]?) -> [NSObject : AnyObject] {
+        
+        if let _ = service as? YSGFacebookService {
+            return [YSGShareSheetMessageKey : "This message will be posted to Facebook."]
+        }
+        else if let _ = service as? YSGTwitterService {
+            return [YSGShareSheetMessageKey : "This message will be posted to Twitter."]
+        }
+        else if let _ = service as? YSGInviteService {
+            return [YSGShareSheetMessageKey : "This message will be posted to SMS."]
+        }
+        
+        return [YSGShareSheetMessageKey : ""]
+    }
+    
 }
 

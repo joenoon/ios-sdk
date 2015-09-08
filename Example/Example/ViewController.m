@@ -32,7 +32,6 @@
     inviteService.numberOfSuggestions = 3;
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ [YSGFacebookService new], [YSGTwitterService new], inviteService ] delegate:self];
-    shareController.delegate = self;
     
     [self.navigationController pushViewController:shareController animated:YES];
 }
