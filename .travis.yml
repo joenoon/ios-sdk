@@ -5,8 +5,8 @@ script:
 - curl -fsSL https://raw.githubusercontent.com/legoless/Dominus/master/install.sh | sh
 env:
   matrix:
-  - ACTION=build
-  - ACTION=test
+  - ACTION=build SCHEME='YesGraphSDK'
+  - ACTION=test SCHEME='YesGraphSDK'
   global:
   - SDK=9.0
   - PLATFORM='iphone'

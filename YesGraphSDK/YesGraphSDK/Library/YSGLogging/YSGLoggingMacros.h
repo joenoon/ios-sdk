@@ -8,14 +8,14 @@
 
 #pragma mark - Logging Macros
 
-#define YSG_LEVEL_LOG(level, levelString, fmt, ...) [YSGLogger logLevel:level file:__FILE__ function:__PRETTY_FUNCTION__ line:__LINE__ format:fmt, ##__VA_ARGS__];
+#define YSG_LEVEL_LOG(level, fmt, ...) [YSGLogger logLevel:level file:__FILE__ function:__PRETTY_FUNCTION__ line:__LINE__ format:(fmt), ##__VA_ARGS__]
 
 //
 // Use the macros below to correctly log messages, they are sent to YSGLogger, where they are logged and retained,
 // until they are handled by the server.
 //
 
-#define YSG_LERROR(error) [YSGLogger logError:error file:__FILE__ function:__PRETTY_FUNCTION__ line:__LINE__];
+#define YSG_LERROR(error) [YSGLogger logError:error file:__FILE__ function:__PRETTY_FUNCTION__ line:__LINE__]
 
 #define YSG_LTRACE(fmt, ...) YSG_LEVEL_LOG(YSGLogLevelTrace, fmt, ##__VA_ARGS__)
 #define YSG_LDEBUG(fmt, ...) YSG_LEVEL_LOG(YSGLogLevelDebug, fmt, ##__VA_ARGS__)

@@ -8,6 +8,7 @@
 
 #import "YSGClient.h"
 #import "YSGConstants.h"
+#import "YSGLogging.h"
 
 @interface YSGClient ()
 
@@ -76,8 +77,12 @@
 
 - (NSURLSessionDataTask *)sendRequest:(NSURLRequest *)request completion:(YSGNetworkRequestCompletion)completion
 {
+    NSDate* date = [NSDate date];
+    
     NSURLSessionDataTask* task = [self.session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
     {
+        YSG_LDEBUG(@"Request [%@] %@ finished in: %.6f seconds", request.HTTPMethod, request.URL.absoluteString, fabs([date timeIntervalSinceNow]));
+        
         if (completion)
         {
             YSGNetworkResponse* networkResponse = [[YSGNetworkResponse alloc] initWithDataTask:task response:response data:data];

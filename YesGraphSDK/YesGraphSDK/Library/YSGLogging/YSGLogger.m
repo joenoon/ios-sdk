@@ -39,11 +39,25 @@
     return self.logPool.copy;
 }
 
+#pragma mark - Initialization
+
+- (instancetype)init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        self.currentLogLevel = YSGLogLevelDebug;
+    }
+    
+    return self;
+}
+
 #pragma mark - Public Methods
 
 - (void)addLog:(YSGLog *)log
 {
-    if (log.level < self.currentLogLevel)
+    if (log.level <= self.currentLogLevel)
     {
         [log print];
     }
@@ -58,14 +72,16 @@
     YSGLog* log = [[YSGLog alloc] init];
     
     log.level = level;
-    log.file = [NSString stringWithUTF8String:file];
+    log.file = [[NSString stringWithUTF8String:file] lastPathComponent];
     log.function = [NSString stringWithUTF8String:function];
     log.line = line;
     
     va_list args;
     va_start(args, format);
     
-    log.message = [NSString stringWithFormat:format, args];
+    //NSLog(@"Format: %@", format);
+    
+    log.message = [[NSString alloc] initWithFormat:format arguments:args];
     
     va_end(args);
     

@@ -12,7 +12,7 @@
 
 - (void)print
 {
-    NSLog(@"[%@:%@] %@ [Line %luld]: %@", YSGLogLevelString(self.level), self.file, self.function, (unsigned long)self.line, self.message);
+    NSLog(@"[YesGraph-%@:%@] %@ [Line %lu]: %@", YSGLogLevelString(self.level), self.file, self.function, (unsigned long)self.line, self.message);
 }
 
 @end
