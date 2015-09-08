@@ -58,7 +58,7 @@
 		38C581C31B9EE435008676F0 /* YSGLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581C21B9EE435008676F0 /* YSGLogging.h */; settings = {ASSET_TAGS = (); }; };
 		38C581C81B9EE6FF008676F0 /* YSGLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581C61B9EE6FF008676F0 /* YSGLogger.h */; settings = {ASSET_TAGS = (); }; };
 		38C581C91B9EE6FF008676F0 /* YSGLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C581C71B9EE6FF008676F0 /* YSGLogger.m */; settings = {ASSET_TAGS = (); }; };
-		38C581CB1B9EE784008676F0 /* YSGLoggingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581CA1B9EE784008676F0 /* YSGLoggingConstants.h */; settings = {ASSET_TAGS = (); }; };
+		38C581CB1B9EE784008676F0 /* YSGLoggingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581CA1B9EE784008676F0 /* YSGLoggingConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38C581CE1B9EEDDA008676F0 /* YSGLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581CC1B9EEDDA008676F0 /* YSGLog.h */; settings = {ASSET_TAGS = (); }; };
 		38C581CF1B9EEDDA008676F0 /* YSGLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C581CD1B9EEDDA008676F0 /* YSGLog.m */; settings = {ASSET_TAGS = (); }; };
 		38C581D11B9EEE46008676F0 /* YSGLoggingMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581D01B9EEE46008676F0 /* YSGLoggingMacros.h */; settings = {ASSET_TAGS = (); }; };

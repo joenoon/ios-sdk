@@ -8,14 +8,16 @@
 
 #import "YSGConstants.h"
 
-NSString *const YSGErrorDomain = @"YSGErrorDomain";
-NSString *const YSGErrorNetworkStatusCodeKey = @"YSGErrorNetworkStatusCodeKey";
+NSString *const YSGErrorDomain                          = @"YSGErrorDomain";
+NSString *const YSGErrorNetworkStatusCodeKey            = @"YSGErrorNetworkStatusCodeKey";
 
-NSUInteger const YSGInviteNumberOfSuggestions = 5;
+NSUInteger const YSGInviteNumberOfSuggestions           = 5;
 
-NSString *const YSGClientAPIURL = @"https://api.yesgraph.com/v0/";
+NSString *const YSGClientAPIURL                         = @"https://api.yesgraph.com/v0/";
 
-NSString *const YSGDefaultContactAccessPromptMessage = @"Share contacts to invite friends?";
+NSString *const YSGDefaultContactAccessPromptMessage    = @"Share contacts to invite friends?";
+NSTimeInterval const YSGDefaultContactBookTimePeriod    = (60.0 * 60.0) * 24.0; // 60 seconds in 60 minutes * 24 hours
+
 
 #pragma mark - Global Error Functions
 

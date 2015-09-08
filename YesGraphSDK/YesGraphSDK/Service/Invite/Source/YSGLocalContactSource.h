@@ -19,12 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptTitle;
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 
-@property (nonatomic, readonly) BOOL hasPermission;
-
 /*!
- *  This holds last date that contacts were fetched. This can be used to test whether to upload them again.
+ *  Returns YES if local contact source has permission to address book
+ *
+ *  @return YES if user has given permission to address book
  */
-@property (nullable, nonatomic, readonly) NSDate* lastContactFetchDate;
++ (BOOL)hasPermission;
 
 @end
 

@@ -10,6 +10,10 @@
 #import "YSGServices.h"
 #import "YSGSources.h"
 
+#import "YSGClient+AddressBook.h"
+
+static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateKey";
+
 @interface YesGraph ()
 
 @property (nonatomic, readwrite, copy) NSString *userId;
@@ -18,11 +22,18 @@
 @property (nonatomic, strong) YSGLocalContactSource *localSource;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
 
+/*!
+ *  This holds last date that contacts were fetched. This can be used to test whether to upload them again.
+ */
+@property (nullable, nonatomic, copy) NSDate* lastFetchDate;
+
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+
 @end
 
 @implementation YesGraph
 
-#pragma mark - Getters and Setters
+#pragma mark - Singleton
 
 + (instancetype)shared
 {
@@ -36,6 +47,49 @@
     return shared;
 }
 
+#pragma mark - Getters and Setters
+
+- (NSUserDefaults *)userDefaults
+{
+    if (!_userDefaults)
+    {
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    
+    return _userDefaults;
+}
+
+- (NSDate *)lastFetchDate
+{
+    return [self.userDefaults objectForKey:YSGLocalContactFetchDateKey];
+}
+
+- (void)setLastFetchDate:(NSDate *)lastFetchDate
+{
+    [self.userDefaults setObject:lastFetchDate forKey:YSGLocalContactFetchDateKey];
+    [self.userDefaults synchronize];
+}
+
+- (YSGLocalContactSource *)localSource
+{
+    if (!_localSource)
+    {
+        _localSource = [YSGLocalContactSource new];
+    }
+    
+    return _localSource;
+}
+
+- (YSGCacheContactSource *)cacheSource
+{
+    if (!_cacheSource)
+    {
+        _cacheSource = [YSGCacheContactSource new];
+    }
+    
+    return _cacheSource;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)init
@@ -45,6 +99,12 @@
     if (self)
     {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        //
+        // Defaults
+        //
+        
+        self.contactBookTimePeriod = YSGDefaultContactBookTimePeriod;
     }
     
     return self;
@@ -59,9 +119,30 @@
 
 - (void)applicationNotification:(NSNotification *)notification
 {
-    //
-    // TODO: Upload Local Address Book, if allowed + was uploaded last 24 hours
-    //
+    if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
+    {
+        return;
+    }
+    
+    [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+    {
+        if (contactList)
+        {
+            YSGClient* client = [[YSGClient alloc] init];
+            client.clientKey = self.clientKey;
+            
+            [client updateAddressBookWithContactList:contactList completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+            {
+                if (!error)
+                {
+                    //
+                    // Store last fetch date
+                    //
+                    self.lastFetchDate = [NSDate date];
+                }
+            }];
+        }
+    }];
 }
 
 #pragma mark - Configuration

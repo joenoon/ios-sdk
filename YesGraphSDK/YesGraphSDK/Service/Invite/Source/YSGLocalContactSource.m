@@ -16,16 +16,10 @@
 #import "YSGLocalContactSource.h"
 
 static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSourcePermissionKey";
-static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateKey";
 
 @interface YSGLocalContactSource ()
 
 @property (nonatomic, strong) CNContactFormatter *formatter;
-
-@property (nonatomic, assign) BOOL didAskForPermission;
-@property (nonatomic, assign) BOOL hasContactsPermission;
-
-@property (nonatomic, strong) NSUserDefaults *userDefaults;
 
 @end
 
@@ -33,14 +27,9 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 
 #pragma mark - Getters and Setters
 
-- (NSUserDefaults *)userDefaults
++ (NSUserDefaults *)userDefaults
 {
-    if (!_userDefaults)
-    {
-        _userDefaults = [NSUserDefaults standardUserDefaults];
-    }
-    
-    return _userDefaults;
+    return [NSUserDefaults standardUserDefaults];
 }
 
 - (NSString *)contactAccessPromptTitle
@@ -70,23 +59,18 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     return _contactAccessPromptMessage;
 }
 
-- (NSDate *)lastContactFetchDate
-{
-    return [self.userDefaults objectForKey:YSGLocalContactFetchDateKey];
-}
-
-- (BOOL)didAskForPermission
++ (BOOL)didAskForPermission
 {
     return [self.userDefaults boolForKey:YSGLocalContactSourcePermissionKey];
 }
 
-- (void)setDidAskForPermission:(BOOL)didAskForPermission
++ (void)setDidAskForPermission:(BOOL)didAskForPermission
 {
     [self.userDefaults setBool:didAskForPermission forKey:YSGLocalContactSourcePermissionKey];
     [self.userDefaults synchronize];
 }
 
-- (BOOL)hasPermission
++ (BOOL)hasPermission
 {
     if ([self useContactsFramework])
     {
@@ -98,7 +82,7 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     }
 }
 
-- (BOOL)useContactsFramework
++ (BOOL)useContactsFramework
 {
     return [[CNContactStore alloc] init] != nil;
 }
@@ -121,22 +105,13 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     
     NSArray<YSGContact *> *entries = nil;
     
-    if (self.useContactsFramework)
+    if ([self class].useContactsFramework)
     {
         entries = [self contactListFromContacts:&error];
     }
     else
     {
         entries = [self contactListFromAddressBook:&error];
-    }
-    
-    //
-    // Remember fetched date, if there is no error
-    //
-    
-    if (!error)
-    {
-        [self.userDefaults setObject:[NSDate date] forKey:YSGLocalContactFetchDateKey];
     }
     
     if (completion)
@@ -157,11 +132,11 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     // If we already have permission, we do not request it again and just return
     //
     
-    if (self.hasPermission)
+    if ([self class].hasPermission)
     {
         if (completion)
         {
-            completion(self.hasPermission, nil);
+            completion([self class].hasPermission, nil);
         }
         
         return;
@@ -171,7 +146,7 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     // First ask user with a specific popup
     //
     
-    if (!self.didAskForPermission)
+    if (![self class].didAskForPermission)
     {
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:self.contactAccessPromptTitle message:self.contactAccessPromptMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *dontAllowAction = [UIAlertAction actionWithTitle:@"Don't allow" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
@@ -185,7 +160,7 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
             // Remember the decision
             //
             
-            self.didAskForPermission = YES;
+            [self class].didAskForPermission = YES;
             
             [self requestContactPermission:completion];
         }];
@@ -197,7 +172,7 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     }
     else
     {
-        if (self.useContactsFramework)
+        if ([self class].useContactsFramework)
         {
             [self requestContactsPermissionWithCompletion:completion];
         }

@@ -37,7 +37,7 @@
     [self.navigationController pushViewController:shareController animated:YES];
 }
 
-- (nonnull NSString *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
+- (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
 {
     if ([service isKindOfClass:[YSGFacebookService class]])
     {
@@ -57,7 +57,7 @@
         //return @"This message will be posted to Email.";
     }
     
-    return @"";
+    return @{ YSGShareSheetMessageKey : @"" };
 }
 
 @end

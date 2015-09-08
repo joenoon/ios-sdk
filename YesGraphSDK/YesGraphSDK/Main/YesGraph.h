@@ -13,8 +13,11 @@
 
 @import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
- *  This class is the main entry point into YesGraph SDK and acts as the main customization point
+ *  This class is the main entry point into YesGraph SDK and acts as the main customization point and exposes custom 
+ *  properties that can be used to read state of YesGraph SDK.
  */
 @interface YesGraph : NSObject
 
@@ -28,7 +31,7 @@
  *
  *  @return instance of YesGraph SDK
  */
-+ (nonnull instancetype)shared;
++ (instancetype)shared;
 
 @end
 
@@ -40,14 +43,14 @@
  *
  *  @param key client string that is received from YesGraph backend on your trusted backend.
  */
-- (void)configureWithClientKey:(nonnull NSString *)clientKey;
+- (void)configureWithClientKey:(NSString *)clientKey;
 
 /*!
  *  Configure YesGraph SDK with an user ID that will be used to save address book
  *
  *  @param userId to be used with API calls
  */
-- (void)configureWithUserId:(nonnull NSString *)userId;
+- (void)configureWithUserId:(NSString *)userId;
 
 @end
 
@@ -60,7 +63,7 @@
  *
  *  @return default share sheet controller
  */
-- (nonnull YSGShareSheetController *)defaultShareSheetController;
+- (YSGShareSheetController *)defaultShareSheetController;
 
 @end
 
@@ -91,6 +94,15 @@
  */
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 
+/*!
+ *  Every time that application is activated, it is checked when was the last time that 
+ *  address book was uploaded to YesGraph API. If this time had passed, address book will be uploaded again
+ *  automatically in the background.
+ *
+ *  @discussion: Default: 24 hours
+ */
+@property (nonatomic, assign) NSTimeInterval contactBookTimePeriod;
+
 @end
 
 @interface YesGraph (Logging)
@@ -101,3 +113,5 @@
 @property (nonatomic, assign) YSGLogLevel logLevel;
 
 @end
+
+NS_ASSUME_NONNULL_END
