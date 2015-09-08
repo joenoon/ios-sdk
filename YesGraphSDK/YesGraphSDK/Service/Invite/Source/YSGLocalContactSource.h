@@ -10,6 +10,8 @@
 
 #import "YSGContactSource.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGLocalContactSource : NSObject <YSGContactSource>
 
 #pragma mark - Contact Access Prompt
@@ -19,4 +21,11 @@
 
 @property (nonatomic, readonly) BOOL hasPermission;
 
+/*!
+ *  This holds last date that contacts were fetched. This can be used to test whether to upload them again.
+ */
+@property (nullable, nonatomic, readonly) NSDate* lastContactFetchDate;
+
 @end
+
+NS_ASSUME_NONNULL_END

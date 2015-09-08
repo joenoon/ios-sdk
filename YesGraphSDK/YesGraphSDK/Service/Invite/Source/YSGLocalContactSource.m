@@ -16,6 +16,7 @@
 #import "YSGLocalContactSource.h"
 
 static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSourcePermissionKey";
+static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateKey";
 
 @interface YSGLocalContactSource ()
 
@@ -24,11 +25,23 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 @property (nonatomic, assign) BOOL didAskForPermission;
 @property (nonatomic, assign) BOOL hasContactsPermission;
 
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+
 @end
 
 @implementation YSGLocalContactSource
 
 #pragma mark - Getters and Setters
+
+- (NSUserDefaults *)userDefaults
+{
+    if (!_userDefaults)
+    {
+        _userDefaults = [NSUserDefaults standardUserDefaults];
+    }
+    
+    return _userDefaults;
+}
 
 - (NSString *)contactAccessPromptTitle
 {
@@ -57,15 +70,20 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     return _contactAccessPromptMessage;
 }
 
+- (NSDate *)lastContactFetchDate
+{
+    return [self.userDefaults objectForKey:YSGLocalContactFetchDateKey];
+}
+
 - (BOOL)didAskForPermission
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:YSGLocalContactSourcePermissionKey];
+    return [self.userDefaults boolForKey:YSGLocalContactSourcePermissionKey];
 }
 
 - (void)setDidAskForPermission:(BOOL)didAskForPermission
 {
-    [[NSUserDefaults standardUserDefaults] setBool:didAskForPermission forKey:YSGLocalContactSourcePermissionKey];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.userDefaults setBool:didAskForPermission forKey:YSGLocalContactSourcePermissionKey];
+    [self.userDefaults synchronize];
 }
 
 - (BOOL)hasPermission
@@ -110,6 +128,15 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     else
     {
         entries = [self contactListFromAddressBook:&error];
+    }
+    
+    //
+    // Remember fetched date, if there is no error
+    //
+    
+    if (!error)
+    {
+        [self.userDefaults setObject:[NSDate date] forKey:YSGLocalContactFetchDateKey];
     }
     
     if (completion)

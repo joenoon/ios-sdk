@@ -14,6 +14,8 @@
 
 @property (nonatomic, readwrite, copy) NSString *userId;
 @property (nonatomic, readwrite, copy) NSString *clientKey;
+
+@property (nonatomic, strong) YSGLocalContactSource *localSource;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
 
 @end
