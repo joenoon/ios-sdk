@@ -9,3 +9,4 @@
 #import "YSGDrawingConstants.h"
 
 NSString *const YSGDrawingForegroundColorKey = @"YSGDrawingForegroundColorKey";
+NSString *const YSGDrawingBackgroundColorKey = @"YSGDrawingBackgroundColorKey";
