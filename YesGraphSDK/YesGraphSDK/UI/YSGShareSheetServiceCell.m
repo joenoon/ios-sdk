@@ -23,17 +23,14 @@
     self.textLabel.font = font;
 }
 
-- (void)setCellShape:(NSString *)cellShape {
+- (void)setShape:(YSGShareSheetServiceCellShape)shape {
     
-    _cellShape = cellShape;
+    _shape = shape;
     
-    if ([cellShape isEqualToString:@"Circle"]) {
-        self.layer.cornerRadius = self.frame.size.height/2;
-    }
-    else if ([cellShape isEqualToString:@"Square"]) {
+    if (_shape == YSGShareSheetServiceCellShapeSquare) {
         self.layer.cornerRadius = 0;
     }
-    else if ([cellShape isEqualToString:@"RoundedSquare"]) {
+    else if (_shape == YSGShareSheetServiceCellShapeRoundedSquare) {
         self.layer.cornerRadius = self.frame.size.height/10;
     }
     else {

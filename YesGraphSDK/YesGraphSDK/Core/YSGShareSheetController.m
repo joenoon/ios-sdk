@@ -142,8 +142,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //  Share text label
     //
     
-    float width = header.frame.size.width;
-    float height = header.frame.size.height;
+    CGFloat width = header.frame.size.width;
+    CGFloat height = header.frame.size.height;
     UILabel *shareLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width * 0.9, 100)];
     shareLabel.text = @"Share YesGraph with your friends, family, coworkers, your cat... We might even give you something. Maybe a sticker?";
     shareLabel.font = [UIFont systemFontOfSize:16.f];
@@ -161,13 +161,13 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //  Company logo
     //
     
-    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Logo"]];
-    
-    logoView.center = CGPointMake(width/2, height * 0.3);
-    logoView.contentMode = UIViewContentModeScaleAspectFit;
-    logoView.backgroundColor = [UIColor clearColor];
-    
-    [header addSubview:logoView];
+//    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Logo"]];
+//    
+//    logoView.center = CGPointMake(width/2, height * 0.3);
+//    logoView.contentMode = UIViewContentModeScaleAspectFit;
+//    logoView.backgroundColor = [UIColor clearColor];
+//    
+//    [header addSubview:logoView];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -190,15 +190,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     
     cell.text = service.callToAction;
-    // Shapes == Circle, RoundedSquare, or Square
-    cell.cellShape = @"Circle";
-    // Twitter, facebook and phone images
+    cell.shape = YSGShareSheetServiceCellShapeCircle;
     cell.icon = service.serviceImage;
     cell.backgroundColor = service.color;
     cell.font = [UIFont systemFontOfSize:14];
-    
-    // color for the service label font - based on brand colors for Twitter, fb & the app that's
-    // integrating the service
+
     //cell.color = service.color;
     
     cell.color = [UIColor colorWithRed:82/256.0 green:82/256.0 blue:82/256.0 alpha:1];
