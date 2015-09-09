@@ -119,10 +119,10 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 
 - (void)applicationNotification:(NSNotification *)notification
 {
-    if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
+    /*if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
     {
         return;
-    }
+    }*/
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
@@ -159,12 +159,28 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 
 #pragma mark - Public Methods
 
-- (YSGShareSheetController *)defaultShareSheetController
+- (YSGShareSheetController *)shareSheetControllerForAllServices
 {
-    return [self defaultShareSheetControllerWithDelegate:nil];
+    return [self shareSheetControllerForServicesWithDelegate:nil socialServices:YES];
 }
 
-- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate
+- (YSGShareSheetController *)shareSheetControllerForAllServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate
+{
+    return [self shareSheetControllerForServicesWithDelegate:delegate socialServices:YES];
+}
+
+- (YSGShareSheetController *)shareSheetControllerForInviteService
+{
+    return [self shareSheetControllerForServicesWithDelegate:nil socialServices:NO];
+}
+
+- (YSGShareSheetController *)shareSheetControllerForInviteServiceWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate
+{
+    return [self shareSheetControllerForServicesWithDelegate:delegate socialServices:NO];
+}
+
+
+- (YSGShareSheetController *)shareSheetControllerForServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate socialServices:(BOOL)socialServices
 {
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;

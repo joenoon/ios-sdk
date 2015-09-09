@@ -57,20 +57,38 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YesGraph (Share)
 
 /*!
- *  Factory method for share sheet view controller without delegate. Delegate can still be set manually.
+ *  Factory method for share sheet view controller. Delegate should be set manually. All available
+ *  sharing services are added to the share sheet.
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)defaultShareSheetController;
+- (YSGShareSheetController *)shareSheetControllerForAllServices;
 
 /*!
- *  Factory method for share sheet view controller with delegate
+ *  Factory method for share sheet view controller with delegate. All available
+ *  sharing services are added to the share sheet.
  *
  *  @param delegate for share sheet controller that conforms to YSGShareSheetDelegate.
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
+- (YSGShareSheetController *)shareSheetControllerForAllServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
+
+/*!
+ *  Factory method for share sheet view controller that includes only the YesGraph invite service.
+ *
+ *  @return instance of share sheet controller
+ */
+- (YSGShareSheetController *)shareSheetControllerForInviteService;
+
+/*!
+ *  Factory method for share sheet view controller that includes only the YesGraph invite service.
+ *
+ *  @param delegate for share sheet controller that conforms to YSGShareSheetDelegate.
+ *
+ *  @return instance of share sheet controller
+ */
+- (YSGShareSheetController *)shareSheetControllerForInviteServiceWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
 @end
 
@@ -83,9 +101,9 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  Error handling methods
  */
-@interface YesGraph (ErrorHandling)
+@interface YesGraph (Messaging)
 
-@property (nullable, nonatomic, strong) YSGErrorHandlerBlock errorHandler;
+@property (nullable, nonatomic, assign) YSGErrorHandlerBlock errorHandler;
 
 @end
 
