@@ -59,7 +59,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [super viewDidLoad];
     
-    self.title = @"Share";
+    self.title = NSLocalizedString(@"Share", @"Share");
     
     self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
     
