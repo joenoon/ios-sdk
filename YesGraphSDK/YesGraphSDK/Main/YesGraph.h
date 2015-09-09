@@ -99,11 +99,19 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /*!
- *  Error handling methods
+ *  Messaging blocks
  */
 @interface YesGraph (Messaging)
 
+/*!
+ *  If this block is set, it will receive errors from SDK in the handler.
+ */
 @property (nullable, nonatomic, assign) YSGErrorHandlerBlock errorHandler;
+
+/*!
+ *  If this block is set messages emitted by
+ */
+@property (nullable, nonatomic, assign) YSGMessageHandlerBlock messageHandler;
 
 @end
 

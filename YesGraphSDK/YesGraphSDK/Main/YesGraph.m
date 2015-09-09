@@ -9,6 +9,7 @@
 #import "YesGraph.h"
 #import "YSGServices.h"
 #import "YSGSources.h"
+#import "YSGMessageCenter.h"
 
 #import "YSGClient+AddressBook.h"
 
@@ -21,6 +22,8 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 
 @property (nonatomic, strong) YSGLocalContactSource *localSource;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
+
+@property (nonatomic, strong) YSGMessageCenter *messageCenter;
 
 /*!
  *  This holds last date that contacts were fetched. This can be used to test whether to upload them again.
@@ -48,6 +51,16 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 }
 
 #pragma mark - Getters and Setters
+
+- (YSGMessageCenter *)messageCenter
+{
+    if (!_messageCenter)
+    {
+        _messageCenter = [YSGMessageCenter shared];
+    }
+    
+    return _messageCenter;
+}
 
 - (NSUserDefaults *)userDefaults
 {
@@ -88,6 +101,26 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     }
     
     return _cacheSource;
+}
+
+- (YSGMessageHandlerBlock)messageHandler
+{
+    return self.messageCenter.messageHandler;
+}
+
+- (void)setMessageHandler:(YSGMessageHandlerBlock)messageHandler
+{
+    self.messageCenter.messageHandler = messageHandler;
+}
+
+- (YSGErrorHandlerBlock)errorHandler
+{
+    return self.messageCenter.errorHandler;
+}
+
+- (void)setErrorHandler:(YSGErrorHandlerBlock)errorHandler
+{
+    self.messageCenter.errorHandler = errorHandler;
 }
 
 #pragma mark - Initialization

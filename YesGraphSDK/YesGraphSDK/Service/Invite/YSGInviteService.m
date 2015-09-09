@@ -17,6 +17,7 @@
 #import "YSGLocalContactSource.h"
 #import "YSGCacheContactSource.h"
 #import "YSGOnlineContactSource.h"
+#import "UIAlertController+YSGDisplay.h"
 
 NSString *_Nonnull const YSGInvitePhoneContactsKey = @"YSGInvitePhoneContactsKey";
 NSString *_Nonnull const YSGInviteEmailContactsKey = @"YSGInviteEmailContactsKey";
@@ -308,5 +309,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
     }];
 }
+
+#pragma mark - Private Methods
 
 @end
