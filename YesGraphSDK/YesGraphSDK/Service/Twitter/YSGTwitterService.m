@@ -17,16 +17,6 @@
     return @"Twitter";
 }
 
-- (NSString *)callToAction
-{
-    return @"Tweet";
-}
-
-- (UIColor *)color {
-    
-    return [UIColor colorWithRed:0.31 green:0.67 blue:0.95 alpha:1];
-}
-
 - (NSString *)serviceType
 {
     return SLServiceTypeTwitter;

@@ -8,6 +8,7 @@
 
 #import "YSGShareSheetController.h"
 #import "YSGShareSheetServiceCell.h"
+#import "YSGTheme.h"
 
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
@@ -98,22 +99,52 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     UIView* footer = [[UIView alloc] init];
     footer.translatesAutoresizingMaskIntoConstraints = NO;
-    // footer currently invisible because it's unclear whether it will be used or not
     footer.backgroundColor = [UIColor clearColor];
     
+    //
+    // Header container view - logo + text
+    //
     UIView* header = [[UIView alloc] init];
     header.translatesAutoresizingMaskIntoConstraints = NO;
-    //header.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
-    header.backgroundColor = [UIColor clearColor];
+    header.backgroundColor = [UIColor greenColor];
+    
+    //
+    //  Company logo view
+    
+    UIImageView *logoView = [UIImageView new];
+    
+    logoView.translatesAutoresizingMaskIntoConstraints = NO;
+    logoView.contentMode = UIViewContentModeScaleAspectFit;
+    logoView.backgroundColor = [UIColor blueColor];
+    
+    //
+    // Share text view
+    
+    UILabel *shareLabel = [UILabel new];
+    
+    shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    shareLabel.text = @"Share YesGraph with your friends, family, coworkers, your cat... We might even give you something. Maybe a sticker?";
+    shareLabel.font = [UIFont systemFontOfSize:16.f];
+    shareLabel.textColor = [UIColor colorWithRed:82/256.0 green:82/256.0 blue:82/256.0 alpha:1];
+    shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    shareLabel.numberOfLines = 0;
+    shareLabel.backgroundColor = [UIColor redColor];
+    shareLabel.textAlignment = NSTextAlignmentCenter;
+    [shareLabel sizeToFit];
+    
+    [header addSubview:shareLabel];
     
     [self.view addSubview:header];
+    [header addSubview:logoView];
+    [header addSubview:shareLabel];
+    
     [self.view addSubview:footer];
     
     UICollectionView *collectionView = self.collectionView;
     [self.view addSubview:self.collectionView];
     
     UIView *superview = self.view;
-    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView, shareLabel, logoView);
     
     //
     // Constraints
@@ -131,43 +162,26 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[shareLabel]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:horizontalConstraints];
+    
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[logoView]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:horizontalConstraints];
+    
     NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(60)]" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
+    
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[logoView]-10-[shareLabel(120)]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:verticalConstraints];
+    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.65 constant:1]];
     
     [self.view layoutIfNeeded];
-    
-    //  OPTIONAL
-    //  Share text label
-    //
-    
-    CGFloat width = header.frame.size.width;
-    CGFloat height = header.frame.size.height;
-    UILabel *shareLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width * 0.9, 100)];
-    shareLabel.text = @"Share YesGraph with your friends, family, coworkers, your cat... We might even give you something. Maybe a sticker?";
-    shareLabel.font = [UIFont systemFontOfSize:16.f];
-    shareLabel.textColor = [UIColor colorWithRed:82/256.0 green:82/256.0 blue:82/256.0 alpha:1];
-    shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    shareLabel.numberOfLines = 0;
-    shareLabel.backgroundColor = [UIColor clearColor];
-    shareLabel.textAlignment = NSTextAlignmentCenter;
-    [shareLabel sizeToFit];
-    shareLabel.center = CGPointMake(width/2, height * 0.7);
-    
-    [header addSubview:shareLabel];
-    
-    //  OPTIONAL
-    //  Company logo
-    //
-    
-//    UIImageView *logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Logo"]];
-//    
-//    logoView.center = CGPointMake(width/2, height * 0.3);
-//    logoView.contentMode = UIViewContentModeScaleAspectFit;
-//    logoView.backgroundColor = [UIColor clearColor];
-//    
-//    [header addSubview:logoView];
+
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -188,14 +202,15 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         cell = [[YSGShareSheetServiceCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
     }
     
-    
-    cell.text = service.callToAction;
+    cell.text = service.name;
     cell.shape = YSGShareSheetServiceCellShapeCircle;
     cell.icon = service.serviceImage;
-    cell.backgroundColor = service.color;
+    cell.backgroundColor = [UIColor grayColor];
     cell.font = [UIFont systemFontOfSize:14];
 
     //cell.color = service.color;
+    
+    cell.color = self.theme.mainColor;
     
     cell.color = [UIColor colorWithRed:82/256.0 green:82/256.0 blue:82/256.0 alpha:1];
     
@@ -239,13 +254,13 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 // cell tap/selection animations
 - (void) fadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service {
     [UIView animateWithDuration:0.2 animations:^{
-        cell.backgroundColor = [service.color colorWithAlphaComponent:0.8];
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
     }];
 }
 
 - (void) unfadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service {
     [UIView animateWithDuration:0.4 animations:^{
-        cell.backgroundColor = [service.color colorWithAlphaComponent:1.0];
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
     }];
 }
 

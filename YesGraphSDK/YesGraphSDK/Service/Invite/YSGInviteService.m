@@ -44,16 +44,6 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     return @"Contacts";
 }
 
-- (NSString *)callToAction
-{
-    return @"Invite";
-}
-
-- (UIColor *)color
-{
-    return [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
-}
-
 - (instancetype)init
 {
     YSGOnlineContactSource *source = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:[YSGLocalContactSource new] cacheSource:[YSGCacheContactSource new]];

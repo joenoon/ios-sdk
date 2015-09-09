@@ -18,16 +18,6 @@
     
 }
 
-- (NSString *)callToAction
-{
-    return @"Share";
-}
-
-- (UIColor *)color
-{
-    return [UIColor colorWithRed:0.28 green:0.38 blue:0.64 alpha:1];
-}
-
 - (NSString *)serviceType
 {
     return SLServiceTypeFacebook;

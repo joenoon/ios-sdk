@@ -22,6 +22,21 @@
 @property (nonnull, nonatomic, strong) UIColor *mainColor;
 
 /*!
+ *  Official Twitter color
+ */
+@property (nonnull, nonatomic, strong) UIColor *twitterColor;
+
+/*!
+ *  Official Facebook color
+ */
+@property (nonnull, nonatomic, strong) UIColor *facebookColor;
+
+/*!
+ *  Main taxt color of the Share UI
+ */
+@property (nonnull, nonatomic, strong) UIColor *textColor;
+
+/*!
  *  Font family of the Share UI
  *
  *  @discussion: Default: System font
