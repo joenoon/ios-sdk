@@ -18,6 +18,11 @@
 
 #pragma mark - Getters and Setters
 
+- (void)setText:(NSString *)text {
+    _text = text;
+    self.textLabel.text = text;
+}
+
 - (void)setFont:(UIFont *)font {
     _font = font;
     self.textLabel.font = font;
@@ -36,7 +41,6 @@
     else {
         self.layer.cornerRadius = self.frame.size.height/2;
     }
-    
 }
 
 - (void)setIcon:(UIImage *)iconImage {
@@ -99,7 +103,7 @@
     self.textLabel = [[UILabel alloc] initWithFrame:self.bounds];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.textColor = [UIColor grayColor];
-    
+    NSLog(@"TEXT LABEL: %@", self.textLabel.text);
     [self addSubview:self.textLabel];
 }
 
@@ -107,8 +111,25 @@
 {
     [super layoutSubviews];
     
-    float cellHeight = self.frame.size.height;
-    float cellWidth = self.frame.size.width;
+    CGFloat cellHeight = self.frame.size.height;
+    CGFloat cellWidth = self.frame.size.width;
+    
+    NSNumber *height = [NSNumber numberWithFloat:cellHeight];
+    
+    UILabel *textLabel = self.textLabel;
+    textLabel.backgroundColor = [UIColor yellowColor];
+//    
+//    NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
+//    
+//    NSArray *horizontalConstraints = [NSLayoutConstraint
+//                                      constraintsWithVisualFormat:@"H:|-20-[textLabel]-0-|"
+//                                      options:0
+//                                      metrics:@{@"cellHeight": height}
+//                                      views:views];
+//    
+//    [self addConstraints:horizontalConstraints];
+//    
+//    [self layoutIfNeeded];
     
     self.textLabel.frame = CGRectMake(0, cellHeight * 1.05, cellWidth, [self heightForLabelWithFont:self.font]);
 }

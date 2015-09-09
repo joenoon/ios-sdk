@@ -242,8 +242,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     float cellSpacing = 10.f;
     
     // centers cell section in container horizontally
-    float containerWidth = collectionView.frame.size.width;
-    float horizontalEdgeInset = containerWidth - (3 * cellWidth + 2 * cellSpacing);
+    CGFloat containerWidth = collectionView.frame.size.width;
+    CGFloat horizontalEdgeInset = containerWidth - (3 * cellWidth + 2 * cellSpacing);
     
     return UIEdgeInsetsMake(0 * 0.25, horizontalEdgeInset * 0.4, 0, horizontalEdgeInset * 0.4);
 }
