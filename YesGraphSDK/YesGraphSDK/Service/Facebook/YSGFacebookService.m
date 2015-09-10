@@ -9,12 +9,18 @@
 @import Social;
 
 #import "YSGFacebookService.h"
+#import "YSGTheme.h"
 
 @implementation YSGFacebookService
 
 - (NSString *)name
 {
     return @"Facebook";
+}
+
+- (UIColor *)backgroundColor
+{
+    return self.theme.facebookColor;
 }
 
 - (NSString *)serviceType

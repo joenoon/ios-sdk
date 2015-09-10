@@ -8,6 +8,12 @@
 
 @import UIKit;
 
+typedef enum {
+    YSGShareSheetServiceCellShapeCircle,
+    YSGShareSheetServiceCellShapeSquare,
+    YSGShareSheetServiceCellShapeRoundedSquare
+} YSGShareSheetServiceCellShape ;
+
 /*!
  *  Share sheet displays service
  */
@@ -15,8 +21,13 @@
 
 @property (nonatomic, copy) NSString *text;
 
-@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *textColor;
 
-@property (nonatomic, copy) UIImage *image;
+@property (nonatomic, copy) UIImage *icon;
+
+@property (nonatomic, strong) UIFont *font;
+
+@property (nonatomic) YSGShareSheetServiceCellShape shape;
+
 
 @end

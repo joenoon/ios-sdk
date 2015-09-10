@@ -9,6 +9,8 @@
 @import Foundation;
 @import UIKit;
 
+#import "YSGTheme.h"
+
 @class YSGShareService;
 @class YSGShareSheetController;
 
@@ -35,6 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, strong) UIImage *serviceImage;
 
 @property (nonnull, nonatomic, readonly) NSString *name;
+
+@property (nonnull, nonatomic, readonly) UIColor *backgroundColor;
+
+@property (nonnull, nonatomic, readonly) UIColor *textColor;
+
+@property (nonnull, nonatomic, readonly) NSString *fontFamily;
+
+@property (nonnull, nonatomic, strong) YSGTheme *theme;
 
 - (void)triggerServiceWithViewController:(YSGShareSheetController *)viewController;
 
