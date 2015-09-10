@@ -106,7 +106,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //
     UIView* header = [[UIView alloc] init];
     header.translatesAutoresizingMaskIntoConstraints = NO;
-    header.backgroundColor = [UIColor greenColor];
     
     //
     //  Company logo view
@@ -115,7 +114,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     logoView.translatesAutoresizingMaskIntoConstraints = NO;
     logoView.contentMode = UIViewContentModeScaleAspectFit;
-    logoView.backgroundColor = [UIColor blueColor];
     
     //
     // Share text view
@@ -123,12 +121,12 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     UILabel *shareLabel = [UILabel new];
     
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    shareLabel.text = @"Share YesGraph with your friends, family, coworkers, your cat... We might even give you something. Maybe a sticker?";
-    shareLabel.font = [UIFont systemFontOfSize:16.f];
-    shareLabel.textColor = [UIColor colorWithRed:82/256.0 green:82/256.0 blue:82/256.0 alpha:1];
+    shareLabel.text = @"Share this app with friends to get our eternal gratitude";
+    shareLabel.font = [UIFont systemFontOfSize:36.f];
+    shareLabel.textColor = [UIColor redColor];
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
-    shareLabel.backgroundColor = [UIColor redColor];
+    //shareLabel.backgroundColor = [UIColor redColor];
     shareLabel.textAlignment = NSTextAlignmentCenter;
     [shareLabel sizeToFit];
     
@@ -174,11 +172,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:verticalConstraints];
     
-    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[logoView]-10-[shareLabel(120)]-10-|" options:0 metrics:nil views:views];
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[shareLabel]-10-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.65 constant:1]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
     
     [self.view layoutIfNeeded];
 
@@ -207,7 +205,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     cell.icon = service.serviceImage;
     cell.backgroundColor = service.backgroundColor;
     cell.font = [UIFont fontWithName:service.fontFamily size:14];
-    cell.textColor = service.textColor;
+    cell.textColor = service.backgroundColor;
     
     return cell;
 }
@@ -247,14 +245,18 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 #pragma mark - Helpers
 
 // cell tap/selection animations
-- (void) fadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service {
-    [UIView animateWithDuration:0.2 animations:^{
+- (void)fadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
+{
+    [UIView animateWithDuration:0.2 animations:^
+    {
         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
     }];
 }
 
-- (void) unfadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service {
-    [UIView animateWithDuration:0.4 animations:^{
+- (void)unfadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
+{
+    [UIView animateWithDuration:0.4 animations:^
+    {
         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
     }];
 }

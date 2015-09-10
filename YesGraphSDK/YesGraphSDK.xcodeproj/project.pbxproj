@@ -524,8 +524,8 @@
 		67E64B559994B62C26CC7169 /* Twitter */ = {
 			isa = PBXGroup;
 			children = (
-				67E64A38B2711722C98E1D0A /* YSGTwitterService.m */,
 				67E641CFF162E4BAE5C20A07 /* YSGTwitterService.h */,
+				67E64A38B2711722C98E1D0A /* YSGTwitterService.m */,
 			);
 			path = Twitter;
 			sourceTree = "<group>";

@@ -15,7 +15,7 @@
 
 - (NSString *)name
 {
-    return @"Twitter";
+    return @"Tweet";
 }
 
 - (UIColor *)backgroundColor

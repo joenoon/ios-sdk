@@ -103,7 +103,7 @@
     self.textLabel = [[UILabel alloc] initWithFrame:self.bounds];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.textColor = [UIColor grayColor];
-    NSLog(@"TEXT LABEL: %@", self.textLabel.text);
+    //NSLog(@"TEXT LABEL: %@", self.textLabel.text);
     [self addSubview:self.textLabel];
 }
 
@@ -114,10 +114,10 @@
     CGFloat cellHeight = self.frame.size.height;
     CGFloat cellWidth = self.frame.size.width;
     
-    NSNumber *height = [NSNumber numberWithFloat:cellHeight];
+    //NSNumber *height = [NSNumber numberWithFloat:cellHeight];
     
     UILabel *textLabel = self.textLabel;
-    textLabel.backgroundColor = [UIColor yellowColor];
+    //textLabel.backgroundColor = [UIColor yellowColor];
 //    
 //    NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
 //    
@@ -131,7 +131,7 @@
 //    
 //    [self layoutIfNeeded];
     
-    self.textLabel.frame = CGRectMake(0, cellHeight * 1.05, cellWidth, [self heightForLabelWithFont:self.font]);
+    self.textLabel.frame = CGRectMake(0, cellHeight * 1.1, cellWidth, [self heightForLabelWithFont:self.font]);
 }
 
 #pragma mark - Helpers
