@@ -21,7 +21,7 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *text;
 
-@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *textColor;
 
 @property (nonatomic, copy) UIImage *icon;
 

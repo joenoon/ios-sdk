@@ -55,9 +55,9 @@
     [self addImageViewWithIcon:_icon];
 }
 
-- (void)setColor:(UIColor *)color {
-    _color = color;
-    self.textLabel.textColor = color;
+- (void)setTextColor:(UIColor *)textColor {
+    _textColor = textColor;
+    self.textLabel.textColor = _textColor;
 }
 
 #pragma mark - Initialization

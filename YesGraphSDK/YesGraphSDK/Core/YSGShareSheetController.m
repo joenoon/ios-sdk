@@ -205,14 +205,9 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     cell.text = service.name;
     cell.shape = YSGShareSheetServiceCellShapeCircle;
     cell.icon = service.serviceImage;
-    cell.backgroundColor = [UIColor grayColor];
-    cell.font = [UIFont systemFontOfSize:14];
-
-    //cell.color = service.color;
-    
-    cell.color = self.theme.mainColor;
-    
-    cell.color = [UIColor colorWithRed:82/256.0 green:82/256.0 blue:82/256.0 alpha:1];
+    cell.backgroundColor = service.backgroundColor;
+    cell.font = [UIFont fontWithName:service.fontFamily size:14];
+    cell.textColor = service.textColor;
     
     return cell;
 }

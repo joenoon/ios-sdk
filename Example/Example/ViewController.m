@@ -14,10 +14,14 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    YSGTheme *theme;
+}
 
 - (void)viewDidLoad
 {
+    theme = [YSGTheme new];
+    
     [super viewDidLoad];
 }
 
@@ -30,8 +34,15 @@
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:nil];
     inviteService.numberOfSuggestions = 3;
+    inviteService.theme = theme;
     
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ [YSGFacebookService new], [YSGTwitterService new], inviteService ] delegate:self];
+    YSGFacebookService *facebookService = [YSGFacebookService new];
+    facebookService.theme = theme;
+    
+    YSGTwitterService *twitterService = [YSGTwitterService new];
+    twitterService.theme = theme;
+    
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
     
     [self.navigationController pushViewController:shareController animated:YES];
 }

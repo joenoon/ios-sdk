@@ -32,7 +32,7 @@
 @property (nonnull, nonatomic, strong) UIColor *facebookColor;
 
 /*!
- *  Main taxt color of the Share UI
+ *  Main text color of the Share UI
  */
 @property (nonnull, nonatomic, strong) UIColor *textColor;
 

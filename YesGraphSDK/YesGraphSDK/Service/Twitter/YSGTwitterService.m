@@ -9,12 +9,18 @@
 @import Social;
 
 #import "YSGTwitterService.h"
+#import "YSGTheme.h"
 
 @implementation YSGTwitterService
 
 - (NSString *)name
 {
     return @"Twitter";
+}
+
+- (UIColor *)backgroundColor
+{
+    return self.theme.twitterColor;
 }
 
 - (NSString *)serviceType
