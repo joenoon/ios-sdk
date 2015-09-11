@@ -282,6 +282,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         }
         else
         {
+            [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Selected contacts were successfully invited.", @"Successful invitation") userInfo:nil];
+            
             [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
         }
     }];
@@ -311,12 +313,14 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         
         return;
     }
-    
+
     //
     // Dismiss the mail composer and entire invite screen flow
     //
     [controller dismissViewControllerAnimated:NO completion:^
     {
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Selected contacts were successfully invited.", @"Successful invitation") userInfo:nil];
+        
         [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
     }];
 }
