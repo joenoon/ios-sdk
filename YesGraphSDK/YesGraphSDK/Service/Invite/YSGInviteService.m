@@ -260,9 +260,10 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         if (result == MessageComposeResultFailed)
         {
             error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageFailed);
-        }
+        }git 
         
         [[YSGMessageCenter shared] sendError:error];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
         
         [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : self.phoneContacts } error:error];
     }
@@ -303,6 +304,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         }
         
         [[YSGMessageCenter shared] sendError:error];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
         
         [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:error];
     }

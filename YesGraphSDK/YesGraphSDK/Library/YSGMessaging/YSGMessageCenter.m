@@ -65,6 +65,14 @@ NSString *const YSGMessageAlertButtonArrayKey = @"YSGMessageAlertButtonArrayKey"
                 }
             }
         }
+        else
+        {
+            UIAlertAction* action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", @"Ok") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [alertController dismissViewControllerAnimated:YES completion:nil];
+            }];
+            
+            [alertController addAction:action];
+        }
         
         [alertController ysg_show];
     }
