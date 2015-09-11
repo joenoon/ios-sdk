@@ -16,6 +16,8 @@
 #import "YSGClient+AddressBook.h"
 
 static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateKey";
+static NSString *const YSGConfigurationClientKey = @"YSGConfigurationClientKey";
+static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 @interface YesGraph ()
 
@@ -125,6 +127,26 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     self.messageCenter.errorHandler = errorHandler;
 }
 
+- (NSString *)clientKey
+{
+    if (!_clientKey)
+    {
+        _clientKey = [self.userDefaults objectForKey:YSGConfigurationClientKey];
+    }
+    
+    return _clientKey;
+}
+
+- (NSString *)userId
+{
+    if (!_userId)
+    {
+        _userId = [self.userDefaults objectForKey:YSGConfigurationUserIdKey];
+    }
+    
+    return _userId;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)init
@@ -185,11 +207,17 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 - (void)configureWithClientKey:(NSString *)clientKey
 {
     self.clientKey = clientKey;
+    
+    [self.userDefaults setObject:clientKey forKey:YSGConfigurationClientKey];
+    [self.userDefaults synchronize];
 }
 
 - (void)configureWithUserId:(NSString *)userId
 {
     self.userId = userId;
+    
+    [self.userDefaults setObject:userId forKey:YSGConfigurationUserIdKey];
+    [self.userDefaults synchronize];
 }
 
 #pragma mark - Public Methods
