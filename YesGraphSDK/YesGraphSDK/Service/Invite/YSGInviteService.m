@@ -19,6 +19,7 @@
 #import "YSGOnlineContactSource.h"
 #import "UIAlertController+YSGDisplay.h"
 #import "YSGTheme.h"
+#import "YSGMessaging.h"
 
 NSString *_Nonnull const YSGInvitePhoneContactsKey = @"YSGInvitePhoneContactsKey";
 NSString *_Nonnull const YSGInviteEmailContactsKey = @"YSGInviteEmailContactsKey";
@@ -84,7 +85,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         }
         else if (error)
         {
-            [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            [[YSGMessageCenter shared] sendMessage:error.localizedDescription userInfo:@{ YSGMessageAlertButtonArrayKey : @[ NSLocalizedString(@"Ok", @"Ok") ] }];
         }
     }];
 }
@@ -261,6 +262,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
             error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageFailed);
         }
         
+        [[YSGMessageCenter shared] sendError:error];
+        
         [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : self.phoneContacts } error:error];
     }
 
@@ -296,6 +299,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         {
             error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailFailed);
         }
+        
+        [[YSGMessageCenter shared] sendError:error];
         
         [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:error];
     }

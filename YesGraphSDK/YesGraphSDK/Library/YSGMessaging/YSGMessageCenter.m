@@ -12,6 +12,8 @@
 
 #import "YSGMessageCenter.h"
 
+NSString *const YSGMessageAlertButtonArrayKey = @"YSGMessageAlertButtonArrayKey";
+
 @implementation YSGMessageCenter
 
 + (instancetype)shared
@@ -39,7 +41,32 @@
     }
     else
     {
-        [[UIAlertController alertControllerWithTitle:@"YesGraph" message:message preferredStyle:UIAlertControllerStyleAlert] ysg_show:YES];
+        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"YesGraph" message:message preferredStyle:UIAlertControllerStyleAlert];
+        
+        //
+        // Load button titles
+        //
+        
+        if (userInfo[YSGMessageAlertButtonArrayKey] && [userInfo[YSGMessageAlertButtonArrayKey] isKindOfClass:[NSArray class]])
+        {
+            for (id object in userInfo[YSGMessageAlertButtonArrayKey])
+            {
+                if ([object isKindOfClass:[NSString class]])
+                {
+                    UIAlertAction* action = [UIAlertAction actionWithTitle:object style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                    }];
+                    
+                    [alertController addAction:action];
+                }
+                else if ([object isKindOfClass:[UIAlertAction class]])
+                {
+                    [alertController addAction:object];
+                }
+            }
+        }
+        
+        [alertController ysg_show];
     }
 }
 

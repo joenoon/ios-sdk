@@ -12,6 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString *const YSGMessageAlertButtonArrayKey;
+
 /*!
  *  Error messages and messages to be displayed are redirected to message center.
  */
@@ -20,12 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  If custom error block is set, all errors are sent to it in addition of the default logging mechanism.
  */
-@property (nonatomic, assign) YSGErrorHandlerBlock errorHandler;
+@property (nullable, nonatomic, strong) YSGErrorHandlerBlock errorHandler;
 
 /*!
  *  If message block is set, messages are sent to the block instead of displayed on screen.
  */
-@property (nonatomic, assign) YSGMessageHandlerBlock messageHandler;
+@property (nullable, nonatomic, strong) YSGMessageHandlerBlock messageHandler;
 
 + (instancetype)shared;
 
@@ -35,14 +37,14 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param message to be displayed
  *  @param userInfo to be sent
  */
-- (void)sendMessage:(nonnull NSString *)message userInfo:(nullable NSDictionary *)userInfo;
+- (void)sendMessage:(NSString *)message userInfo:(nullable NSDictionary *)userInfo;
 
 /*!
  *  Sends error to message center and logs it.
  *
  *  @param error to be logged
  */
-- (void)sendError:(nonnull NSError *)error;
+- (void)sendError:(NSError *)error;
 
 @end
 
