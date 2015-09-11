@@ -22,6 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YesGraph : NSObject
 
 /*!
+ *  YES if SDK is ready to be triggered.
+ */
+@property (nonatomic, readonly) BOOL isConfigured;
+
+/*!
  *  User ID used with YesGraph SDK
  */
 @property (nullable, nonatomic, readonly, copy) NSString *userId;
