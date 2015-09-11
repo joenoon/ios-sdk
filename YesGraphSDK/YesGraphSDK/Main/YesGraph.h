@@ -38,7 +38,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YesGraph (Initialization)
 
 /*!
- *  Configure YesGraph SDK with a client key that you receive from your trusted backend using YesGraph Secret Key.
+ *  Configure YesGraph SDK with a client key that you receive from your trusted backend
+ *  using YesGraph Secret Key. The client key is persisted in the SDK until configure
+ *  method is called again.
+ *
  *  @note: https://docs.yesgraph.com/v0/docs/connecting-apps
  *
  *  @param key client string that is received from YesGraph backend on your trusted backend.
@@ -46,9 +49,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)configureWithClientKey:(NSString *)clientKey;
 
 /*!
- *  Configure YesGraph SDK with an user ID that will be used to save address book
+ *  Configure YesGraph SDK with an user ID that will be used to fetch address book.
+ *  User ID is persisted until next time this method is called.
  *
- *  @param userId to be used with API calls
+ *  @param userId to be used with YesGraph API.
  */
 - (void)configureWithUserId:(NSString *)userId;
 
