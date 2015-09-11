@@ -12,12 +12,16 @@
 #import "YSGContactSource.h"
 #import "YSGCacheContactSource.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGOnlineContactSource : NSObject <YSGContactSource>
+
+@property (nullable, nonatomic, copy) NSString *userId;
 
 /*!
  *  Base source is used when online YesGraph address book entries are not available
  */
-@property (nonnull, nonatomic, readonly) id<YSGContactSource> localSource;
+@property (nonatomic, readonly) id<YSGContactSource> localSource;
 
 /*!
  *  Default initializer is not available
@@ -35,6 +39,8 @@
  *
  *  @return instance
  */
-- (nonnull instancetype)initWithClient:(nonnull YSGClient *)client localSource:(nonnull id<YSGContactSource>)localSource cacheSource:(nullable YSGCacheContactSource *)cacheSource NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithClient:(YSGClient *)client localSource:(id<YSGContactSource>)localSource cacheSource:(nullable YSGCacheContactSource *)cacheSource NS_DESIGNATED_INITIALIZER;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -46,7 +46,7 @@
 
 - (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
 {
-    [self.client fetchAddressBookForUserId:@"1234" completion:^(YSGContactList *contactList, NSError * _Nullable error)
+    [self.client fetchAddressBookForUserId:self.userId completion:^(YSGContactList *contactList, NSError * _Nullable error)
     {
         if (error)
         {

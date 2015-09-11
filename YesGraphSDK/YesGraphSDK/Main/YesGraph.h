@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)shareSheetControllerForAllServices;
+- (nullable YSGShareSheetController *)shareSheetControllerForAllServices;
 
 /*!
  *  Factory method for share sheet view controller with delegate. All available
@@ -72,14 +72,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)shareSheetControllerForAllServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
+- (nullable YSGShareSheetController *)shareSheetControllerForAllServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
 /*!
  *  Factory method for share sheet view controller that includes only the YesGraph invite service.
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)shareSheetControllerForInviteService;
+- (nullable YSGShareSheetController *)shareSheetControllerForInviteService;
 
 /*!
  *  Factory method for share sheet view controller that includes only the YesGraph invite service.
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)shareSheetControllerForInviteServiceWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
+- (nullable YSGShareSheetController *)shareSheetControllerForInviteServiceWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
 @end
 

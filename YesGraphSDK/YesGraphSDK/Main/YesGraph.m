@@ -7,6 +7,8 @@
 //
 
 #import "YesGraph.h"
+
+#import "YSGLogging.h"
 #import "YSGServices.h"
 #import "YSGSources.h"
 #import "YSGMessageCenter.h"
@@ -215,6 +217,24 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 
 - (YSGShareSheetController *)shareSheetControllerForServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate socialServices:(BOOL)socialServices
 {
+    //
+    // No client key, cannot create the share sheet.
+    //
+    if (!self.clientKey.length)
+    {
+        YSG_LERR(@"No client key was set for share sheet. Call configureWithClientKey: first.");
+        return nil;
+    }
+    
+    //
+    // No user id, cannot create the share sheet.
+    //
+    if (!self.userId.length)
+    {
+        YSG_LERR(@"No client key was set for share sheet. Call configureWithUserId: first.");
+        return nil;
+    }
+    
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
     
@@ -222,15 +242,33 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     client.clientKey = self.clientKey;
     
     YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localSource cacheSource:nil];
+    onlineSource.userId = self.userId;
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:self.userId];
     inviteService.numberOfSuggestions = self.numberOfSuggestions;
     
     //
-    // TODO: Check if Facebook & Twitter are available
+    // Check if social services such as Facebook & Twitter are available
     //
     
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ [YSGFacebookService new], [YSGTwitterService new], inviteService ] delegate:delegate];
+    NSMutableArray <YSGShareService *> * services = [NSMutableArray array];
+    
+    if (socialServices)
+    {
+        NSArray <YSGSocialService *> *allSocialServices = @[ [YSGFacebookService new], [YSGTwitterService new] ];
+        
+        for (YSGSocialService* service in allSocialServices)
+        {
+            if (service.isAvailable)
+            {
+                [services addObject:service];
+            }
+        }
+    }
+    
+    [services addObject:inviteService];
+    
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:services.copy delegate:delegate];
     
     return shareController;
 }

@@ -14,6 +14,11 @@
 
 @implementation YSGSocialService
 
+- (BOOL)isAvailable
+{
+    return [SLComposeViewController isAvailableForServiceType:self.serviceType];
+}
+
 - (NSString *)serviceType
 {
     return @"Unknown";

@@ -561,8 +561,8 @@
 		67E643FEAFA360FD3025B14F /* Facebook */ = {
 			isa = PBXGroup;
 			children = (
-				67E648E6D62D3D565729AB78 /* YSGFacebookService.m */,
 				67E640CDA38C1801103AEEF6 /* YSGFacebookService.h */,
+				67E648E6D62D3D565729AB78 /* YSGFacebookService.m */,
 			);
 			path = Facebook;
 			sourceTree = "<group>";
