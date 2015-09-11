@@ -143,24 +143,25 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries
 {
-    //
-    // Trigger delegate
-    //
     
     //
     // Check for native message sheet
     //
     
+    NSError* error;
+    
+    if (![MFMessageComposeViewController canSendText])
+    {
+        error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageUnavailable);
+        
+        [[YSGMessageCenter shared] sendError:error];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Unable to send a message. Can you check your message settings?", @"Unable to send a message. Can you check your message settings?") userInfo:nil];
+    }
+
     if (!self.nativeMessageSheet || ![MFMessageComposeViewController canSendText])
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
-            NSError *error;
-            
-            if (![MFMessageComposeViewController canSendText])
-            {
-                error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageUnavailable);
-            }
             
             [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
@@ -197,17 +198,20 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     // Check for native message sheet
     //
     
+    NSError* error;
+    
+    if (![MFMailComposeViewController canSendMail])
+    {
+        error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailUnavailable);
+        
+        [[YSGMessageCenter shared] sendError:error];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Unable to send email. Can you check your email settings?", @"Unable to send email. Can you check your email settings?") userInfo:nil];
+    }
+    
     if (!self.nativeEmailSheet || ![MFMailComposeViewController canSendMail])
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
-            NSError* error;
-            
-            if (![MFMailComposeViewController canSendMail])
-            {
-                error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailUnavailable);
-            }
-            
             [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
         
@@ -253,18 +257,18 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
-    if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    NSError* error;
+    
+    if (result == MessageComposeResultFailed)
     {
-        NSError* error;
-        
-        if (result == MessageComposeResultFailed)
-        {
-            error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageFailed);
-        }git 
+        error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageFailed);
         
         [[YSGMessageCenter shared] sendError:error];
         [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
-        
+    }
+    
+    if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    {
         [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : self.phoneContacts } error:error];
     }
 
@@ -294,19 +298,19 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
+    NSError *ysgError;
+    
+    if (result == MFMailComposeResultFailed || error)
+    {
+        ysgError = YSGErrorWithErrorCodeWithError(YSGErrorCodeInviteMailFailed, error);
+        
+        [[YSGMessageCenter shared] sendError:ysgError];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
+    }
+
     if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
     {
-        NSError* error;
-        
-        if (result == MFMailComposeResultFailed)
-        {
-            error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailFailed);
-        }
-        
-        [[YSGMessageCenter shared] sendError:error];
-        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
-        
-        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:error];
+        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:ysgError];
     }
     
     if (result != MFMailComposeResultSaved && result != MFMailComposeResultSent)

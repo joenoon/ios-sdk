@@ -14,6 +14,12 @@
 
 NSString *const YSGMessageAlertButtonArrayKey = @"YSGMessageAlertButtonArrayKey";
 
+@interface YSGMessageCenter ()
+
+@property (nonatomic, strong) UIAlertController *alertController;
+
+@end
+
 @implementation YSGMessageCenter
 
 + (instancetype)shared
@@ -41,7 +47,15 @@ NSString *const YSGMessageAlertButtonArrayKey = @"YSGMessageAlertButtonArrayKey"
     }
     else
     {
-        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:@"YesGraph" message:message preferredStyle:UIAlertControllerStyleAlert];
+        //
+        // Only one will open.
+        //
+        if (self.alertController)
+        {
+            return;
+        }
+        
+        self.alertController = [UIAlertController alertControllerWithTitle:@"YesGraph" message:message preferredStyle:UIAlertControllerStyleAlert];
         
         //
         // Load button titles
@@ -54,27 +68,29 @@ NSString *const YSGMessageAlertButtonArrayKey = @"YSGMessageAlertButtonArrayKey"
                 if ([object isKindOfClass:[NSString class]])
                 {
                     UIAlertAction* action = [UIAlertAction actionWithTitle:object style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        [alertController dismissViewControllerAnimated:YES completion:nil];
+                        self.alertController = nil;
+                        [self.alertController dismissViewControllerAnimated:YES completion:nil];
                     }];
                     
-                    [alertController addAction:action];
+                    [self.alertController addAction:action];
                 }
                 else if ([object isKindOfClass:[UIAlertAction class]])
                 {
-                    [alertController addAction:object];
+                    [self.alertController addAction:object];
                 }
             }
         }
         else
         {
             UIAlertAction* action = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", @"Ok") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [alertController dismissViewControllerAnimated:YES completion:nil];
+                [self.alertController dismissViewControllerAnimated:YES completion:nil];
+                self.alertController = nil;
             }];
             
-            [alertController addAction:action];
+            [self.alertController addAction:action];
         }
         
-        [alertController ysg_show];
+        [self.alertController ysg_show];
     }
 }
 

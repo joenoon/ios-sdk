@@ -26,6 +26,11 @@ NSError* YSGErrorWithErrorCode (YSGErrorCode errorCode)
     return [NSError errorWithDomain:YSGErrorDomain code:errorCode userInfo:@{ NSLocalizedDescriptionKey : YSGLocalizedErrorDescriptionForErrorCode(errorCode) }];
 }
 
+NSError* YSGErrorWithErrorCodeWithError (YSGErrorCode errorCode, NSError *error)
+{
+    return [NSError errorWithDomain:YSGErrorDomain code:errorCode userInfo:@{ NSLocalizedDescriptionKey : YSGLocalizedErrorDescriptionForErrorCode(errorCode), NSUnderlyingErrorKey : error }];
+}
+
 NSString* YSGLocalizedErrorDescriptionForErrorCode (YSGErrorCode errorCode)
 {
     switch (errorCode)

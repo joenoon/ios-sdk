@@ -77,6 +77,7 @@ typedef void (^YSGErrorHandlerBlock)(NSError *error);
 typedef void (^YSGMessageHandlerBlock)(NSString *message, NSDictionary * _Nullable userInfo);
 
 YSG_EXTERN NSError* YSGErrorWithErrorCode (YSGErrorCode errorCode);
+YSG_EXTERN NSError* YSGErrorWithErrorCodeWithError (YSGErrorCode errorCode, NSError *underlyingError);
 YSG_EXTERN NSString* YSGLocalizedErrorDescriptionForErrorCode (YSGErrorCode errorCode);
 
 #pragma mark - Network

@@ -48,13 +48,13 @@
 {
     [self.client fetchAddressBookForUserId:self.userId completion:^(YSGContactList *contactList, NSError * _Nullable error)
     {
-        if (error)
+        if (!contactList.entries.count || error)
         {
             if (self.cacheSource)
             {
                 [self.cacheSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
                 {
-                    if (error)
+                    if (!contactList.entries.count || error)
                     {
                         [self.localSource fetchContactListWithCompletion:completion];
                     }
