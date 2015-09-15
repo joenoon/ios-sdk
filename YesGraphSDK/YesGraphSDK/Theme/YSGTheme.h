@@ -37,6 +37,14 @@
 @property (nonnull, nonatomic, strong) UIColor *textColor;
 
 /*!
+ *  Share sheet view background color
+ *  @discussion: Default: White color
+ *
+ */
+
+@property (nonnull, nonatomic, strong) UIColor *shareViewBackgroundColor;
+
+/*!
  *  Font family of the Share UI
  *
  *  @discussion: Default: System font

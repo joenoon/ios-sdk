@@ -64,11 +64,13 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"Share", @"Share");
+    
+    if (!self.theme)
+    {
+        self.theme = [YSGTheme new];
+    }
     self.navigationController.navigationBar.tintColor = self.theme.mainColor;
-    
-    //    self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-    
-    self.view.backgroundColor = [UIColor whiteColor]; // TODO: add background color?
+    self.view.backgroundColor = self.theme.shareViewBackgroundColor;
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     

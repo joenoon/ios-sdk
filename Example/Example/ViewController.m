@@ -25,6 +25,7 @@
     theme.mainColor = [UIColor greenColor];
     theme.twitterColor = [UIColor blueColor];
     theme.facebookColor = [UIColor yellowColor];
+    theme.shareViewBackgroundColor = [UIColor purpleColor];
     
     [super viewDidLoad];
 }
@@ -46,7 +47,7 @@
     YSGTwitterService *twitterService = [YSGTwitterService new];
     twitterService.theme = theme;
     
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self theme:theme];
     
     [self.navigationController pushViewController:shareController animated:YES];
 }
