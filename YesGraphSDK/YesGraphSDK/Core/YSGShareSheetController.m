@@ -27,6 +27,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 @implementation YSGShareSheetController
 {
     float cellWidth;
+    NSString *referralLink;
 }
 
 #pragma mark - Getters and Setters
@@ -99,7 +100,31 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     UIView* footer = [[UIView alloc] init];
     footer.translatesAutoresizingMaskIntoConstraints = NO;
-    footer.backgroundColor = [UIColor clearColor];
+    footer.layer.borderColor = [UIColor redColor].CGColor;
+    footer.layer.borderWidth = 1.0f;
+    footer.layer.cornerRadius = 20;
+    
+    referralLink = @"referralLink.com";
+    
+    UILabel *referraLabel = [UILabel new];
+    referraLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    referraLabel.text = referralLink;
+    referraLabel.textColor = [UIColor blackColor];
+    referraLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [referraLabel sizeToFit];
+    
+    UIButton *copyButton = [UIButton new];
+    copyButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [copyButton setTitle:@"Copy" forState:UIControlStateNormal];
+    [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
+    [copyButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [copyButton setTitleColor:[[UIColor redColor] colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+    [copyButton sizeToFit];
+    
+    [self.view addSubview:footer];
+    [footer addSubview:referraLabel];
+    [footer addSubview:copyButton];
     
     //
     // Header container view - logo + text
@@ -126,23 +151,19 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.textColor = [UIColor redColor];
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
-    //shareLabel.backgroundColor = [UIColor redColor];
     shareLabel.textAlignment = NSTextAlignmentCenter;
     [shareLabel sizeToFit];
     
-    [header addSubview:shareLabel];
-    
     [self.view addSubview:header];
+    [header addSubview:shareLabel];
     [header addSubview:logoView];
     [header addSubview:shareLabel];
-    
-    [self.view addSubview:footer];
     
     UICollectionView *collectionView = self.collectionView;
     [self.view addSubview:self.collectionView];
     
     UIView *superview = self.view;
-    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView, shareLabel, logoView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView, shareLabel, logoView, referraLabel, copyButton);
     
     //
     // Constraints
@@ -156,7 +177,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[footer]-10-|" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[footer]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:horizontalConstraints];
     
@@ -168,7 +189,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(60)]" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[referraLabel]-10-[copyButton]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:horizontalConstraints];
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(40)]" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
@@ -176,7 +201,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:verticalConstraints];
     
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[referraLabel]-0-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:verticalConstraints];
+    
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[copyButton]-0-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:verticalConstraints];
+    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:referraLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:footer attribute:NSLayoutAttributeWidth multiplier:0.7 constant:1]];
     
     [self.view layoutIfNeeded];
 
@@ -261,5 +296,14 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     }];
 }
 
+- (void)copy:(id)sender {
+    UIPasteboard *gpBoard = [UIPasteboard generalPasteboard];
+    NSString *referralString = referralLink;
+    if (referralString) {
+        [gpBoard setString:referralString];
+    }
+    
+    [sender setTitle:@"Copied" forState:UIControlStateNormal];
+}
 
 @end

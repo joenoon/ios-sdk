@@ -8,6 +8,7 @@
 
 @import Foundation;
 @import UIKit;
+@import QuartzCore;
 
 #import "YSGShareService.h"
 
