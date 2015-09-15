@@ -64,11 +64,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"Share", @"Share");
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
+    self.navigationController.navigationBar.tintColor = self.theme.mainColor;
     
     //    self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor]; // TODO: add background color?
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -84,7 +84,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.collectionView.backgroundColor = [UIColor clearColor];
+    self.collectionView.backgroundColor = [UIColor clearColor]; // TODO: add background color?
     
     [self.collectionView registerClass:[YSGShareSheetServiceCell class] forCellWithReuseIdentifier:YSGShareSheetCellIdentifier];
     
@@ -98,7 +98,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     UIView* footer = [[UIView alloc] init];
     footer.translatesAutoresizingMaskIntoConstraints = NO;
-    footer.backgroundColor = [UIColor clearColor];
+    footer.backgroundColor = [UIColor clearColor]; // TODO: add background color?
     
     //
     // Header container view - logo + text
@@ -122,7 +122,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = @"Share this app with friends to get our eternal gratitude";
     shareLabel.font = [UIFont systemFontOfSize:36.f];
-    shareLabel.textColor = [UIColor redColor];
+    shareLabel.textColor = self.theme.textColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
     //shareLabel.backgroundColor = [UIColor redColor];

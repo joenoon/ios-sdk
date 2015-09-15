@@ -192,9 +192,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)applyTheme:(YSGTheme *)theme
 {
-    self.searchController.searchBar.tintColor = [UIColor redColor];
-    self.navigationController.navigationBar.tintColor = [UIColor redColor];
-    self.view.tintColor = [UIColor redColor];
+    self.searchController.searchBar.tintColor = theme.mainColor;
+    self.navigationController.navigationBar.tintColor = theme.mainColor;
+    self.view.tintColor = theme.mainColor;
 }
 
 #pragma mark - UIViewController
@@ -267,7 +267,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     // Load contact data
     //
     
-    [self applyTheme:[YSGTheme new]];
+    if(self.service && self.service.theme)
+    {
+        [self applyTheme:self.service.theme];
+    }
+    else
+    {
+        [self applyTheme:[YSGTheme new]];
+    }
     
     [self.service.contactSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
     {

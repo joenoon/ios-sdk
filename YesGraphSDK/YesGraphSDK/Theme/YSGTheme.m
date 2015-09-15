@@ -10,26 +10,18 @@
 
 @implementation YSGTheme
 
-- (UIColor *)mainColor {
-    return [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
-}
-
-- (UIColor *)twitterColor
+- (instancetype)init
 {
-    return [UIColor colorWithRed:0.31 green:0.67 blue:0.95 alpha:1];
-}
-
-- (UIColor *)facebookColor
-{
-    return [UIColor colorWithRed:0.28 green:0.38 blue:0.64 alpha:1];
-}
-
-- (UIColor *)textColor {
-    return [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
-}
-
-- (NSString *)fontFamily {
-    return @"Helvetica";
+    if((self = [super init]))
+    {
+        // setup default color values
+        self.mainColor = [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
+        self.twitterColor = [UIColor colorWithRed:0.31 green:0.67 blue:0.95 alpha:1];
+        self.facebookColor = [UIColor colorWithRed:0.28 green:0.38 blue:0.64 alpha:1];
+        self.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
+        self.fontFamily = @"Helvetica";
+    }
+    return self;
 }
 
 @end

@@ -21,6 +21,10 @@
 - (void)viewDidLoad
 {
     theme = [YSGTheme new];
+    theme.textColor = [UIColor redColor];
+    theme.mainColor = [UIColor greenColor];
+    theme.twitterColor = [UIColor blueColor];
+    theme.facebookColor = [UIColor yellowColor];
     
     [super viewDidLoad];
 }
