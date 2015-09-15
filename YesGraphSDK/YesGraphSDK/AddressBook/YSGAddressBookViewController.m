@@ -271,7 +271,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     [self.service.contactSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
     {
-        self.contactList = contactList;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.contactList = contactList;
+        });
     }];
     
     [self updateUI];

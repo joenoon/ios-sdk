@@ -92,16 +92,19 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)openInviteControllerWithController:(nonnull YSGShareSheetController *)viewController
 {
-    YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
     
-    addressBookViewController.service = self;
+        addressBookViewController.service = self;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
     
-    self.viewController = viewController;
-    self.addressBookNavigationController = navigationController;
-    
-    [viewController presentViewController:navigationController animated:YES completion:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
+        
+        self.viewController = viewController;
+        self.addressBookNavigationController = navigationController;
+        
+        [viewController presentViewController:navigationController animated:YES completion:nil];
+    });
 }
 
 - (void)triggerInviteFlowWithContacts:(NSArray<YSGContact *> *)entries
