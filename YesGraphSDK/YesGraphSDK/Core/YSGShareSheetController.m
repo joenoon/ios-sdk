@@ -86,7 +86,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     
     self.collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.collectionView.backgroundColor = [UIColor clearColor]; // TODO: add background color?
+    self.collectionView.backgroundColor = self.theme.shareCollectionViewBackgroundColor;
     
     [self.collectionView registerClass:[YSGShareSheetServiceCell class] forCellWithReuseIdentifier:YSGShareSheetCellIdentifier];
     
@@ -100,7 +100,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     UIView* footer = [[UIView alloc] init];
     footer.translatesAutoresizingMaskIntoConstraints = NO;
-    footer.backgroundColor = [UIColor clearColor]; // TODO: add background color?
+    footer.backgroundColor = self.theme.shareReferalViewBackgroundColor;
     
     //
     // Header container view - logo + text

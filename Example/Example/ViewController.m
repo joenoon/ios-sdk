@@ -26,7 +26,8 @@
     theme.twitterColor = [UIColor blueColor];
     theme.facebookColor = [UIColor yellowColor];
     theme.shareViewBackgroundColor = [UIColor purpleColor];
-    
+    theme.shareCollectionViewBackgroundColor = [UIColor orangeColor];
+    theme.shareReferalViewBackgroundColor = [UIColor grayColor];
     [super viewDidLoad];
 }
 
