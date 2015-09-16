@@ -500,7 +500,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         return contacts;
     
     for (int i=0; i<number; i++) {
-        if ([contacts count] < i)
+        if ([contacts count] <= i)
             break;
         
         if([[contacts[i] emails] count] > 0) {
