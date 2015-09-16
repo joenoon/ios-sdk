@@ -485,55 +485,53 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *) entries
 {
-    NSMutableArray <YSGContact *> * suggested = [NSMutableArray array];
-    NSArray<YSGContact *> *filteredContacts = [self filterContacts:entries];
+     NSArray<YSGContact *> *suggested = [self filterSuggestedContacts:entries numberOfSuggestions:self.service.numberOfSuggestions];
     
-    for (NSUInteger i = 0; i < self.service.numberOfSuggestions; i++)
-    {
-        if (i < filteredContacts.count)
-        {
-            [suggested addObject:filteredContacts[i]];
-        }
-        else
-        {
-            break;
-        }
-    }
-    
-    return filteredContacts.copy;
+    return suggested.copy;
 }
 
-- (NSArray <YSGContact *> *)filterContacts:(NSArray <YSGContact *> *)contacts {
-    NSMutableArray <YSGContact *> *contactsWithEmails = [[NSMutableArray <YSGContact *> alloc] init];
-    NSMutableArray <YSGContact *> *contactsWithPhones = [[NSMutableArray <YSGContact *> alloc] init];
+- (NSArray <YSGContact *> *)filterSuggestedContacts:(NSArray <YSGContact *> *)contacts numberOfSuggestions:(NSUInteger)number {
     
-    for (YSGContact *contact in contacts) {
-        if ([[contact emails] count] > 0) {
-            [contactsWithEmails addObject:contact];
-        }
-        else if ([[contact phones] count] > 0) {
-            [contactsWithPhones addObject:contact];
-        }
-    }
+    NSMutableArray <YSGContact *> *contactsWithEmails = [NSMutableArray array];
+    NSMutableArray <YSGContact *> *contactsWithPhones = [NSMutableArray array];
+    NSMutableArray <YSGContact *> *filteredContacts = [NSMutableArray array];
     
-    NSMutableArray <YSGContact *> *filteredContacts = [[NSMutableArray <YSGContact *> alloc] init];
+    if (![contacts count])
+        return contacts;
     
-    NSMutableIndexSet *indexesToDelete = [NSMutableIndexSet indexSet];
-    for (YSGContact *emailContact in contactsWithEmails) {
+    for (int i=0; i<number; i++) {
+        if ([contacts count] < i)
+            break;
         
-        NSUInteger currentIndex = 0;
-        for (YSGContact *phoneContact in contactsWithPhones) {
-            if ([[emailContact name] isEqualToString:[phoneContact name]]) {
-                [indexesToDelete addIndex:currentIndex];
+        if([[contacts[i] emails] count] > 0) {
+            [contactsWithEmails addObject:contacts[i]];
+            
+            for (YSGContact *contact in contactsWithPhones) {
+                if ([[contact name] isEqualToString:[contacts[i] name]]) {
+                    [contactsWithPhones removeObject:contact];
+                    number++;
+                    break;
+                }
             }
-            currentIndex++;
         }
-        
+        else if ([[contacts[i] phones] count] > 0) {
+            
+            bool insertContactWithPhone = true;
+            for (YSGContact *contact in contactsWithEmails) {
+                if ([[contact name] isEqualToString:[contacts[i] name]]) {
+                    insertContactWithPhone = false;
+                    number++;
+                    break;
+                }
+            }
+            if (insertContactWithPhone)
+                [contactsWithPhones addObject:contacts[i]];
+        }
     }
-    
+
     [filteredContacts addObjectsFromArray:contactsWithEmails];
-    [contactsWithPhones removeObjectsAtIndexes:indexesToDelete]; [filteredContacts addObjectsFromArray:contactsWithPhones];
-    
+    [filteredContacts addObjectsFromArray:contactsWithPhones];
+        
     return [NSArray <YSGContact *> arrayWithArray:filteredContacts];
 }
 
