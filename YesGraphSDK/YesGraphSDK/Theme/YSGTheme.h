@@ -69,6 +69,14 @@
 @property (nonnull, nonatomic, copy) NSString *fontFamily;
 
 /*!
+ *  Share label font size
+ * 
+ *  @discussion: Default: 36 points
+ */
+
+@property (nonatomic) CGFloat shareLabelFontSize;
+
+/*!
  *  Shape of the share button
  *  @discussion: Default: Circle shape
  *

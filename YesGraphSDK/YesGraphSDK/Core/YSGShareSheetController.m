@@ -123,7 +123,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = @"Share this app with friends to get our eternal gratitude";
-    shareLabel.font = [UIFont systemFontOfSize:36.f];
+    shareLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareLabelFontSize];
     shareLabel.textColor = self.theme.textColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;

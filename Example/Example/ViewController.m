@@ -29,6 +29,8 @@
     theme.shareCollectionViewBackgroundColor = [UIColor orangeColor];
     theme.shareReferalViewBackgroundColor = [UIColor grayColor];
     theme.shareButtonShape = YSGShareSheetServiceCellShapeRoundedSquare;
+    theme.fontFamily = @"Chalkduster";
+    theme.shareLabelFontSize = 12.f;
     [super viewDidLoad];
 }
 

@@ -23,6 +23,7 @@
         self.shareCollectionViewBackgroundColor = [UIColor clearColor];
         self.shareReferalViewBackgroundColor = [UIColor clearColor];
         self.fontFamily = @"Helvetica";
+        self.shareLabelFontSize = 36.f;
         self.shareButtonShape = YSGShareSheetServiceCellShapeCircle;
     }
     return self;
