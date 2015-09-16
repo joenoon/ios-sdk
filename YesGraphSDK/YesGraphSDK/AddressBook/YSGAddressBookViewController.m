@@ -486,20 +486,19 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 - (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *) entries
 {
     NSMutableArray <YSGContact *> * suggested = [NSMutableArray array];
+    NSArray<YSGContact *> *filteredContacts = [self filterContacts:entries];
     
     for (NSUInteger i = 0; i < self.service.numberOfSuggestions; i++)
     {
-        if (i < entries.count)
+        if (i < filteredContacts.count)
         {
-            [suggested addObject:entries[i]];
+            [suggested addObject:filteredContacts[i]];
         }
         else
         {
             break;
         }
     }
-    
-    NSArray<YSGContact *> *filteredContacts = [self filterContacts:suggested];
     
     return filteredContacts.copy;
 }
