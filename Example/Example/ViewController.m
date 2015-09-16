@@ -38,6 +38,7 @@
         .AlphaUnfadeFactor = 0.2f
     };
     theme.shareButtonLabelTextAlignment = NSTextAlignmentRight;
+    theme.shareLabelTextAlignment = NSTextAlignmentLeft;
     [super viewDidLoad];
 }
 

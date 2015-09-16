@@ -79,7 +79,7 @@ typedef union
 @property (nonnull, nonatomic, copy) NSString *fontFamily;
 
 /*!
- *  Share label font size
+ *  Share text font size
  * 
  *  @discussion: Default: 36 points
  */
@@ -87,12 +87,20 @@ typedef union
 @property (nonatomic) CGFloat shareButtonLabelFontSize;
 
 /*!
- *  Share button label text alignment
+ *  Share button text alignment
  *  @discussion: Default: Center
  *
  */
 
 @property (nonatomic) NSTextAlignment shareButtonLabelTextAlignment;
+
+/*!
+ *  Share text alignment
+ *  @discussion: Default: Center
+ *
+ */
+
+@property (nonatomic) NSTextAlignment shareLabelTextAlignment;
 
 /*!
  *  Shape of the share button
@@ -115,6 +123,7 @@ typedef union
  *  A convinience method for setting share button fade components
  *  @param fadedAlpha   a floating point alpha value (between 0 and 1) that will be applied to the button
  *  background color when it's in a faded (triggered) state
+ *
  *  @param unfadedAlpha a floating point alpha value (between 0 and 1) that will be applied to the button
  *  background color when in default state
  */

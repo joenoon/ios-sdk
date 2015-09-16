@@ -26,6 +26,7 @@
         self.fontFamily = @"Helvetica";
         self.shareButtonLabelFontSize = 36.f;
         self.shareButtonLabelTextAlignment = NSTextAlignmentCenter;
+        self.shareLabelTextAlignment = NSTextAlignmentCenter;
         // set default share button shape
         self.shareButtonShape = YSGShareSheetServiceCellShapeCircle;
         // set default share button alpha factors for both states

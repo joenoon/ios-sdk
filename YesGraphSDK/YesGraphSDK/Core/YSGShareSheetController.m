@@ -130,7 +130,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
     //shareLabel.backgroundColor = [UIColor redColor];
-    shareLabel.textAlignment = NSTextAlignmentCenter;
+    shareLabel.textAlignment = self.theme.shareLabelTextAlignment;
     [shareLabel sizeToFit];
     
     [header addSubview:shareLabel];
