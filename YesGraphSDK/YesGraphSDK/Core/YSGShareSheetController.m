@@ -119,11 +119,13 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //
     // Share text view
     
+    // NOTE: fix the alignment maybe?
+    
     UILabel *shareLabel = [UILabel new];
     
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = @"Share this app with friends to get our eternal gratitude";
-    shareLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareLabelFontSize];
+    shareLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareButtonLabelFontSize];
     shareLabel.textColor = self.theme.textColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
@@ -208,6 +210,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
                             colorWithAlphaComponent:service.theme.shareButtonFadeFactors.AlphaUnfadeFactor];
     cell.font = [UIFont fontWithName:service.fontFamily size:14];
     cell.textColor = service.backgroundColor;
+    cell.textAlignment = self.theme.shareButtonLabelTextAlignment;
     
     return cell;
 }

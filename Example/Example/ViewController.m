@@ -30,13 +30,14 @@
     theme.shareReferalViewBackgroundColor = [UIColor grayColor];
     theme.shareButtonShape = YSGShareSheetServiceCellShapeRoundedSquare;
     theme.fontFamily = @"Chalkduster";
-    theme.shareLabelFontSize = 12.f;
-    [theme setShareButtonFadeFactorsWithFadeAlpha:0.2f andUnfadeAlpha:-2.f];
+    theme.shareButtonLabelFontSize = 12.f;
+//    [theme setShareButtonFadeFactorsWithFadeAlpha:0.2f andUnfadeAlpha:-2.f];
     theme.shareButtonFadeFactors = (YSGShareButtonFadeFactors)
     {
         .AlphaFadeFactor = 0.8f,
         .AlphaUnfadeFactor = 0.2f
     };
+    theme.shareButtonLabelTextAlignment = NSTextAlignmentRight;
     [super viewDidLoad];
 }
 

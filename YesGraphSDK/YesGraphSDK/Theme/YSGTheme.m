@@ -24,7 +24,8 @@
         self.shareReferalViewBackgroundColor = [UIColor clearColor];
         // set default font details
         self.fontFamily = @"Helvetica";
-        self.shareLabelFontSize = 36.f;
+        self.shareButtonLabelFontSize = 36.f;
+        self.shareButtonLabelTextAlignment = NSTextAlignmentCenter;
         // set default share button shape
         self.shareButtonShape = YSGShareSheetServiceCellShapeCircle;
         // set default share button alpha factors for both states
@@ -44,10 +45,14 @@
     for (unsigned short i = 0; i < components; ++i)
     {
         CGFloat c = shareButtonFadeFactors.AlphaPair[i];
-        if(c > 1.f)
+        if (c > 1.f)
+        {
             c = 1.f;
-        else if(c < 0.f)
+        }
+        else if (c < 0.f)
+        {
             c = 0.f;
+        }
         _shareButtonFadeFactors.AlphaPair[i] = c;
     }
 }

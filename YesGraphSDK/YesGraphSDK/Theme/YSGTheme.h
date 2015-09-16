@@ -84,7 +84,15 @@ typedef union
  *  @discussion: Default: 36 points
  */
 
-@property (nonatomic) CGFloat shareLabelFontSize;
+@property (nonatomic) CGFloat shareButtonLabelFontSize;
+
+/*!
+ *  Share button label text alignment
+ *  @discussion: Default: Center
+ *
+ */
+
+@property (nonatomic) NSTextAlignment shareButtonLabelTextAlignment;
 
 /*!
  *  Shape of the share button
