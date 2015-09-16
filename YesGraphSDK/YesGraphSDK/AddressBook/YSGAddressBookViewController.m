@@ -126,9 +126,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     {
         NSArray<YSGContact *> *trimmedContacts = [contactList.entries subarrayWithRange:NSMakeRange(self.service.numberOfSuggestions, contactList.entries.count - self.service.numberOfSuggestions)];
         
-        NSArray<YSGContact *> *filteredContacts = [self filterContacts:trimmedContacts];
-        
-        self.sortedContacts = [self sortedContactsWithContactList:filteredContacts];
+        self.sortedContacts = [self sortedContactsWithContactList:trimmedContacts];
         self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     else
@@ -143,40 +141,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [self.tableView reloadData];
     
     [self updateUI];
-}
-
-- (NSArray <YSGContact *> *)filterContacts:(NSArray <YSGContact *> *)contacts {
-    NSMutableArray <YSGContact *> *contactsWithEmails = [[NSMutableArray <YSGContact *> alloc] init];
-    NSMutableArray <YSGContact *> *contactsWithPhones = [[NSMutableArray <YSGContact *> alloc] init];
-    
-    for (YSGContact *contact in contacts) {
-        if ([[contact emails] count] > 0) {
-            [contactsWithEmails addObject:contact];
-        }
-        else if ([[contact phones] count] > 0) {
-            [contactsWithPhones addObject:contact];
-        }
-    }
-    
-    NSMutableArray <YSGContact *> *filteredContacts = [[NSMutableArray <YSGContact *> alloc] init];
-    
-    NSMutableIndexSet *indexesToDelete = [NSMutableIndexSet indexSet];
-    for (YSGContact *emailContact in contactsWithEmails) {
-
-        NSUInteger currentIndex = 0;
-        for (YSGContact *phoneContact in contactsWithPhones) {
-            if ([[emailContact name] isEqualToString:[phoneContact name]]) {
-                [indexesToDelete addIndex:currentIndex];
-            }
-            currentIndex++;
-        }
-        
-    }
-    
-    [filteredContacts addObjectsFromArray:contactsWithEmails];
-    [contactsWithPhones removeObjectsAtIndexes:indexesToDelete]; [filteredContacts addObjectsFromArray:contactsWithPhones];
-    
-    return [NSArray <YSGContact *> arrayWithArray:filteredContacts];
 }
 
 - (NSArray <YSGContact *> *)contactsForSection:(NSInteger)section
@@ -535,7 +499,43 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         }
     }
     
-    return suggested.copy;
+    NSArray<YSGContact *> *filteredContacts = [self filterContacts:suggested];
+    
+    return filteredContacts.copy;
+}
+
+- (NSArray <YSGContact *> *)filterContacts:(NSArray <YSGContact *> *)contacts {
+    NSMutableArray <YSGContact *> *contactsWithEmails = [[NSMutableArray <YSGContact *> alloc] init];
+    NSMutableArray <YSGContact *> *contactsWithPhones = [[NSMutableArray <YSGContact *> alloc] init];
+    
+    for (YSGContact *contact in contacts) {
+        if ([[contact emails] count] > 0) {
+            [contactsWithEmails addObject:contact];
+        }
+        else if ([[contact phones] count] > 0) {
+            [contactsWithPhones addObject:contact];
+        }
+    }
+    
+    NSMutableArray <YSGContact *> *filteredContacts = [[NSMutableArray <YSGContact *> alloc] init];
+    
+    NSMutableIndexSet *indexesToDelete = [NSMutableIndexSet indexSet];
+    for (YSGContact *emailContact in contactsWithEmails) {
+        
+        NSUInteger currentIndex = 0;
+        for (YSGContact *phoneContact in contactsWithPhones) {
+            if ([[emailContact name] isEqualToString:[phoneContact name]]) {
+                [indexesToDelete addIndex:currentIndex];
+            }
+            currentIndex++;
+        }
+        
+    }
+    
+    [filteredContacts addObjectsFromArray:contactsWithEmails];
+    [contactsWithPhones removeObjectsAtIndexes:indexesToDelete]; [filteredContacts addObjectsFromArray:contactsWithPhones];
+    
+    return [NSArray <YSGContact *> arrayWithArray:filteredContacts];
 }
 
 @end
