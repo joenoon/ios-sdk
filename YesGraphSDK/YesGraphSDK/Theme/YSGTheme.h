@@ -10,6 +10,16 @@
 @import UIKit;
 #import "YSGShareCellShapeEnum.h"
 
+typedef union
+{
+    struct
+    {
+        CGFloat AlphaFadeFactor;
+        CGFloat AlphaUnfadeFactor;
+    };
+    CGFloat AlphaPair[2];
+} YSGShareButtonFadeFactors;
+
 /*!
  *  Use the theme to stylize YesGraph UI
  */
@@ -83,5 +93,24 @@
  */
 
 @property (nonatomic) YSGShareSheetServiceCellShape shareButtonShape;
+
+/*!
+ *  A two-component alpha factor that determines the alpha value for faded / unfaded background 
+ *  color of the share button cell
+ *  @discussion: Default: 0.8, 1.0
+ *
+ */
+
+@property (nonatomic) YSGShareButtonFadeFactors shareButtonFadeFactors;
+
+/*!
+ *  A convinience method for setting share button fade components
+ *  @param fadedAlpha   a floating point alpha value (between 0 and 1) that will be applied to the button
+ *  background color when it's in a faded (triggered) state
+ *  @param unfadedAlpha a floating point alpha value (between 0 and 1) that will be applied to the button
+ *  background color when in default state
+ */
+
+- (void)setShareButtonFadeFactorsWithFadeAlpha:(CGFloat)fadedAlpha andUnfadeAlpha:(CGFloat)unfadedAlpha;
 
 @end

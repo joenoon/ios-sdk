@@ -204,7 +204,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     cell.text = service.name;
     cell.shape = service.theme.shareButtonShape;
     cell.icon = service.serviceImage;
-    cell.backgroundColor = service.backgroundColor;
+    cell.backgroundColor = [service.backgroundColor
+                            colorWithAlphaComponent:service.theme.shareButtonFadeFactors.AlphaUnfadeFactor];
     cell.font = [UIFont fontWithName:service.fontFamily size:14];
     cell.textColor = service.backgroundColor;
     
@@ -250,7 +251,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [UIView animateWithDuration:0.2 animations:^
     {
-        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
+        cell.backgroundColor = [cell.backgroundColor
+                                colorWithAlphaComponent:self.theme.shareButtonFadeFactors.AlphaFadeFactor];
     }];
 }
 
@@ -258,7 +260,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [UIView animateWithDuration:0.4 animations:^
     {
-        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
+        cell.backgroundColor = [cell.backgroundColor
+                                colorWithAlphaComponent:self.theme.shareButtonFadeFactors.AlphaUnfadeFactor];
     }];
 }
 
