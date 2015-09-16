@@ -102,7 +102,7 @@
 {
     self.textLabel = [[UILabel alloc] initWithFrame:self.bounds];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
-    self.textLabel.textColor = [UIColor grayColor];
+    self.textLabel.textColor = [UIColor grayColor]; // NOTE: we should replace this with colors from the theme?
     //NSLog(@"TEXT LABEL: %@", self.textLabel.text);
     [self addSubview:self.textLabel];
 }
@@ -146,7 +146,7 @@
     imageView.image = _icon;
     imageView.center = CGPointMake(center, center);
     imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.backgroundColor = [UIColor clearColor];
+    imageView.backgroundColor = [UIColor clearColor]; // NOTE: do we need to replace this with a theme color?
     
     [self addSubview:imageView];
 }

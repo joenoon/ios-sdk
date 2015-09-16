@@ -8,6 +8,7 @@
 
 @import Foundation;
 @import UIKit;
+#import "YSGShareCellShapeEnum.h"
 
 /*!
  *  Use the theme to stylize YesGraph UI
@@ -66,5 +67,13 @@
  *  @discussion: Default: System font
  */
 @property (nonnull, nonatomic, copy) NSString *fontFamily;
+
+/*!
+ *  Shape of the share button
+ *  @discussion: Default: Circle shape
+ *
+ */
+
+@property (nonatomic) YSGShareSheetServiceCellShape shareButtonShape;
 
 @end

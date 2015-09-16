@@ -28,6 +28,7 @@
     theme.shareViewBackgroundColor = [UIColor purpleColor];
     theme.shareCollectionViewBackgroundColor = [UIColor orangeColor];
     theme.shareReferalViewBackgroundColor = [UIColor grayColor];
+    theme.shareButtonShape = YSGShareSheetServiceCellShapeRoundedSquare;
     [super viewDidLoad];
 }
 
