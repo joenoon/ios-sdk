@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) UIFont *font;
 
+@property (nonatomic) NSTextAlignment textAlignment;
+
 @property (nonatomic) YSGShareSheetServiceCellShape shape;
 
 

@@ -60,6 +60,11 @@
     self.textLabel.textColor = _textColor;
 }
 
+- (void)setTextAlignment:(NSTextAlignment)textAlignment {
+    _textAlignment = textAlignment;
+    self.textLabel.textAlignment = _textAlignment;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)init
@@ -102,7 +107,6 @@
 {
     self.textLabel = [[UILabel alloc] initWithFrame:self.bounds];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
-    self.textLabel.textColor = [UIColor grayColor]; // NOTE: we should replace this with colors from the theme?
     //NSLog(@"TEXT LABEL: %@", self.textLabel.text);
     [self addSubview:self.textLabel];
 }
