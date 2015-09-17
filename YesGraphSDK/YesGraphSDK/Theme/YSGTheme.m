@@ -35,6 +35,11 @@
             .AlphaFadeFactor = 0.8f,
             .AlphaUnfadeFactor = 1.f
         };
+        // set default address list font sizes (compiler already initializes this to 0 in optimized builds ?)
+        // NOTE: should this be done via the [UIFont prefferedFont..] ?
+        self.shareAddressBookCellDetailFontSize = 0.f;
+        self.shareAddressBookCellFontSize = 0.f;
+        self.shareAddressBookSectionFontSize = 0.f;
     }
     return self;
 }
