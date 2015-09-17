@@ -119,8 +119,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //
     // Share text view
     
-    // NOTE: fix the alignment maybe?
-    
     UILabel *shareLabel = [UILabel new];
     
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
