@@ -8,7 +8,10 @@
 
 @import Foundation;
 @import UIKit;
+
 #import "YSGShareCellShapeEnum.h"
+#import "YSGShareAddressBookTheme.h"
+
 
 typedef union
 {
@@ -131,59 +134,11 @@ typedef union
 - (void)setShareButtonFadeFactorsWithFadeAlpha:(CGFloat)fadedAlpha andUnfadeAlpha:(CGFloat)unfadedAlpha;
 
 /*!
- *  Background of the address book view
- *  @discussion: Default: nil
+ *  Address book theme, allows settings cell / section colors and font sizes
+ *  @discussion: Default: nil (system)
  *
  */
 
-@property (nullable, nonatomic, strong) UIColor *shareAddressBookViewBackground;
-
-/*!
- *  Background of the address book cells (when not selected)
- *  @discussion: Default: nil
- *
- */
-
-@property (nullable, nonatomic, strong) UIColor *shareAddressBookCellBackground;
-
-/*!
- *  Background of the address book cells (when selected)
- *  @discussion: Default: nil
- *
- */
-
-@property (nullable, nonatomic, strong) UIColor *shareAddressBookCellSelectedBackground;
-
-/*!
- *  Background of the address book section headers
- *  @discussion: Default: nil
- *
- */
-
-@property (nullable, nonatomic, strong) UIColor *shareAddressBookSectionBackground;
-
-/*!
- *  Size of the cell label font
- *  @discussion: Default: 0 (system)
- *
- */
-
-@property (nonatomic) CGFloat shareAddressBookCellFontSize;
-
-/*!
- *  Size of the cell detail label font
- *  @discussion: Default: 0 (system)
- *
- */
-
-@property (nonatomic) CGFloat shareAddressBookCellDetailFontSize;
-
-/*!
- *  Size of the section label font
- *  @discussion: Default: 0  (system)
- *
- */
-
-@property (nonatomic) CGFloat shareAddressBookSectionFontSize;
+@property (nullable, nonatomic, strong) YSGShareAddressBookTheme *shareAddressBookTheme;
 
 @end

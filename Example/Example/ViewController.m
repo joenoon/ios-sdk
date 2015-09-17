@@ -39,12 +39,13 @@
     };
     theme.shareButtonLabelTextAlignment = NSTextAlignmentRight;
     theme.shareLabelTextAlignment = NSTextAlignmentLeft;
-    theme.shareAddressBookSectionBackground = [UIColor yellowColor];
-    theme.shareAddressBookSectionFontSize = 60.f;
-    theme.shareAddressBookCellFontSize = 22.f;
-    theme.shareAddressBookCellDetailFontSize = 10.f;
-    theme.shareAddressBookCellBackground = [UIColor orangeColor];
-    theme.shareAddressBookCellSelectedBackground = [UIColor yellowColor];
+    theme.shareAddressBookTheme = [YSGShareAddressBookTheme new];
+    theme.shareAddressBookTheme.sectionBackground = [UIColor yellowColor];
+    theme.shareAddressBookTheme.sectionFontSize = 60.f;
+    theme.shareAddressBookTheme.cellFontSize = 22.f;
+    theme.shareAddressBookTheme.cellDetailFontSize = 10.f;
+    theme.shareAddressBookTheme.cellBackground = [UIColor orangeColor];
+    theme.shareAddressBookTheme.cellSelectedBackground = [UIColor yellowColor];
     [super viewDidLoad];
 }
 

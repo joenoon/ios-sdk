@@ -406,12 +406,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     cell.detailTextLabel.text = contact.contactString;
     cell.selected = [self.selectedContacts containsObject:contact];
     
-    if(self.service && self.service.theme)
+    if(self.service && self.service.theme && self.service.theme.shareAddressBookTheme)
     {
-        cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookCellFontSize];
-        cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookCellDetailFontSize];
-        cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookCellBackground];
-        cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookCellSelectedBackground];
+        cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellFontSize];
+        cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellDetailFontSize];
+        cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellBackground];
+        cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellSelectedBackground];
         // NOTE: should we also style the text / detail label backgrounds?
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
@@ -498,13 +498,13 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     if (self.service && self.service.theme && [view isKindOfClass:[UITableViewHeaderFooterView class]])
     {
         __weak UITableViewHeaderFooterView *lbl = (UITableViewHeaderFooterView *)view;
-        lbl.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookSectionFontSize];
+        lbl.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.sectionFontSize];
         
         // TODO: set the height of the section view so it'll be tall enough for
         //       the font height
 
         [self setSectionBackgroundView:lbl.backgroundView
-                     toBackgroundColor:self.service.theme.shareAddressBookSectionBackground];
+                     toBackgroundColor:self.service.theme.shareAddressBookTheme.sectionBackground];
     }
 }
 
