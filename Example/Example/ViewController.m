@@ -39,6 +39,12 @@
     };
     theme.shareButtonLabelTextAlignment = NSTextAlignmentRight;
     theme.shareLabelTextAlignment = NSTextAlignmentLeft;
+//    theme.shareAddressBookSectionBackground = [UIColor yellowColor];
+    theme.shareAddressBookSectionFontSize = 60.f;
+    theme.shareAddressBookCellFontSize = 22.f;
+    theme.shareAddressBookCellDetailFontSize = 10.f;
+    theme.shareAddressBookCellBackground = [UIColor orangeColor];
+    theme.shareAddressBookCellSelectedBackground = [UIColor yellowColor];
     [super viewDidLoad];
 }
 

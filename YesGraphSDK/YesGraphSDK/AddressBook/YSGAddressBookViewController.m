@@ -195,6 +195,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     self.searchController.searchBar.tintColor = theme.mainColor;
     self.navigationController.navigationBar.tintColor = theme.mainColor;
     self.view.tintColor = theme.mainColor;
+    self.tableView.backgroundColor = theme.shareViewBackgroundColor;
 }
 
 #pragma mark - UIViewController
@@ -375,6 +376,17 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return [self contactsForSection:section].count;
 }
 
+- (UIView *)cellBackgroundViewForColor:(UIColor *)color
+{
+    if(!color)
+    {
+        return nil;
+    }
+    UIView *view = [UIView new];
+    view.backgroundColor = color;
+    return view;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YSGAddressBookCell * cell = [tableView dequeueReusableCellWithIdentifier:YSGAddressBookCellIdentifier forIndexPath:indexPath];
@@ -392,8 +404,18 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     cell.textLabel.text = contact.name;
     cell.detailTextLabel.text = contact.contactString;
-    
     cell.selected = [self.selectedContacts containsObject:contact];
+    
+    if(self.service && self.service.theme)
+    {
+        cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookCellFontSize];
+        cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookCellDetailFontSize];
+        cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookCellBackground];
+        cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookCellSelectedBackground];
+        // NOTE: should we also style the text / detail label backgrounds?
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    }
     
     if ([self.selectedContacts containsObject:contact])
     {
@@ -455,6 +477,35 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [self.selectedContacts removeObject:contact];
     
     [self updateUI];
+}
+
+- (void)setSectionBackgroundView:(UIView *)view toBackgroundColor:(UIColor *)color
+{
+    if(!color)
+    {
+        return;
+    }
+    if(!view)
+    {
+        view = [UIView new];
+    }
+    view.backgroundColor = color;
+    
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    if (self.service && self.service.theme && [view isKindOfClass:[UITableViewHeaderFooterView class]])
+    {
+        __weak UITableViewHeaderFooterView *lbl = (UITableViewHeaderFooterView *)view;
+        lbl.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookSectionFontSize];
+        
+        // TODO: set the height of the section view so it'll be tall enough for
+        //       the font height
+
+        [self setSectionBackgroundView:lbl.backgroundView
+                     toBackgroundColor:self.service.theme.shareAddressBookSectionBackground];
+    }
 }
 
 #pragma mark - Private Methods

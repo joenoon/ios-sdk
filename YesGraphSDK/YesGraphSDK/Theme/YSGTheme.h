@@ -130,4 +130,19 @@ typedef union
 
 - (void)setShareButtonFadeFactorsWithFadeAlpha:(CGFloat)fadedAlpha andUnfadeAlpha:(CGFloat)unfadedAlpha;
 
+
+@property (nullable, nonatomic, strong) UIColor *shareAddressBookViewBackground;
+
+@property (nullable, nonatomic, strong) UIColor *shareAddressBookCellBackground;
+
+@property (nullable, nonatomic, strong) UIColor *shareAddressBookCellSelectedBackground;
+
+@property (nullable, nonatomic, strong) UIColor *shareAddressBookSectionBackground;
+
+@property (nonatomic) CGFloat shareAddressBookCellFontSize;
+
+@property (nonatomic) CGFloat shareAddressBookCellDetailFontSize;
+
+@property (nonatomic) CGFloat shareAddressBookSectionFontSize;
+
 @end
