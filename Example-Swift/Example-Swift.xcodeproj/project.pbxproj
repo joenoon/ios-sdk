@@ -15,6 +15,7 @@
 		38130D391B9F110100AA2AA8 /* Example_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38130D381B9F110100AA2AA8 /* Example_SwiftTests.swift */; };
 		38130D4B1B9F133C00AA2AA8 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38130D471B9F130A00AA2AA8 /* YesGraphSDK.framework */; };
 		38130D4C1B9F133C00AA2AA8 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38130D471B9F130A00AA2AA8 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		83F31C371BAC2D5E008E7CA2 /* ContentHeightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F31C361BAC2D5E008E7CA2 /* ContentHeightTextView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		38130D381B9F110100AA2AA8 /* Example_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_SwiftTests.swift; sourceTree = "<group>"; };
 		38130D3A1B9F110100AA2AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38130D471B9F130A00AA2AA8 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83F31C361BAC2D5E008E7CA2 /* ContentHeightTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentHeightTextView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 		38130D221B9F110100AA2AA8 /* Example-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				83F31C351BAC2D46008E7CA2 /* Controls */,
 				38130D231B9F110100AA2AA8 /* AppDelegate.swift */,
 				38130D251B9F110100AA2AA8 /* ViewController.swift */,
 				38130D271B9F110100AA2AA8 /* Main.storyboard */,
@@ -121,6 +124,14 @@
 				38130D471B9F130A00AA2AA8 /* YesGraphSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83F31C351BAC2D46008E7CA2 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				83F31C361BAC2D5E008E7CA2 /* ContentHeightTextView.swift */,
+			);
+			name = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83F31C371BAC2D5E008E7CA2 /* ContentHeightTextView.swift in Sources */,
 				38130D261B9F110100AA2AA8 /* ViewController.swift in Sources */,
 				38130D241B9F110100AA2AA8 /* AppDelegate.swift in Sources */,
 			);

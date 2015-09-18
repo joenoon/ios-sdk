@@ -15,6 +15,7 @@
 		3E1864A51BA85833007C8859 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E1864A31BA85833007C8859 /* LaunchScreen.storyboard */; };
 		3E1864B01BA85833007C8859 /* Example_StaticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864AF1BA85833007C8859 /* Example_StaticTests.m */; };
 		3E1864BC1BA858B6007C8859 /* libYesGraphSDKStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1864BB1BA858B6007C8859 /* libYesGraphSDKStatic.a */; };
+		83F31C311BAC135A008E7CA2 /* ContentHeightTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F31C301BAC135A008E7CA2 /* ContentHeightTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,8 @@
 		3E1864AF1BA85833007C8859 /* Example_StaticTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example_StaticTests.m; sourceTree = "<group>"; };
 		3E1864B11BA85833007C8859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E1864BB1BA858B6007C8859 /* libYesGraphSDKStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libYesGraphSDKStatic.a; path = "../YesGraphSDK/build/Debug-iphoneos/libYesGraphSDKStatic.a"; sourceTree = "<group>"; };
+		83F31C2F1BAC135A008E7CA2 /* ContentHeightTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentHeightTextView.h; sourceTree = "<group>"; };
+		83F31C301BAC135A008E7CA2 /* ContentHeightTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentHeightTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,7 @@
 		3E1864941BA85833007C8859 /* Example-Static */ = {
 			isa = PBXGroup;
 			children = (
+				83F31C2E1BAC133E008E7CA2 /* Controls */,
 				3E1864981BA85833007C8859 /* AppDelegate.h */,
 				3E1864991BA85833007C8859 /* AppDelegate.m */,
 				3E18649B1BA85833007C8859 /* ViewController.h */,
@@ -121,6 +125,15 @@
 				3E1864BB1BA858B6007C8859 /* libYesGraphSDKStatic.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83F31C2E1BAC133E008E7CA2 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				83F31C2F1BAC135A008E7CA2 /* ContentHeightTextView.h */,
+				83F31C301BAC135A008E7CA2 /* ContentHeightTextView.m */,
+			);
+			name = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +238,7 @@
 			files = (
 				3E18649D1BA85833007C8859 /* ViewController.m in Sources */,
 				3E18649A1BA85833007C8859 /* AppDelegate.m in Sources */,
+				83F31C311BAC135A008E7CA2 /* ContentHeightTextView.m in Sources */,
 				3E1864971BA85833007C8859 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

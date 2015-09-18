@@ -16,6 +16,7 @@
 		3805E1781B831B1B004463B8 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1771B831B1B004463B8 /* ExampleTests.m */; };
 		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
 		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		83F31C2C1BAC0AAA008E7CA2 /* ContentHeightTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F31C2B1BAC0AAA008E7CA2 /* ContentHeightTextView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		3805E1761B831B1B004463B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3805E1771B831B1B004463B8 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
 		38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		83F31C2A1BAC0AAA008E7CA2 /* ContentHeightTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentHeightTextView.h; sourceTree = "<group>"; };
+		83F31C2B1BAC0AAA008E7CA2 /* ContentHeightTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentHeightTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 		3805E15A1B831B1B004463B8 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				83F31C2D1BAC0EC5008E7CA2 /* Controls */,
 				3805E15F1B831B1B004463B8 /* AppDelegate.h */,
 				3805E1601B831B1B004463B8 /* AppDelegate.m */,
 				3805E1621B831B1B004463B8 /* ViewController.h */,
@@ -144,6 +148,15 @@
 				38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		83F31C2D1BAC0EC5008E7CA2 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				83F31C2A1BAC0AAA008E7CA2 /* ContentHeightTextView.h */,
+				83F31C2B1BAC0AAA008E7CA2 /* ContentHeightTextView.m */,
+			);
+			name = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,6 +262,7 @@
 			files = (
 				3805E1641B831B1B004463B8 /* ViewController.m in Sources */,
 				3805E1611B831B1B004463B8 /* AppDelegate.m in Sources */,
+				83F31C2C1BAC0AAA008E7CA2 /* ContentHeightTextView.m in Sources */,
 				3805E15E1B831B1B004463B8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
