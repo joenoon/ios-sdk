@@ -22,12 +22,6 @@
 {
     theme = [YSGTheme new];
     
-    // Welcome screen
-    [self.introTextField setTextColor:theme.textColor];
-    [self.introTextField setFont:[UIFont fontWithName:theme.fontFamily size:self.introTextField.font.pointSize]];
-    [self.additionalNotesTextView setTextColor:theme.textColor];
-    [self.additionalNotesTextView setFont:[UIFont fontWithName:theme.fontFamily size:self.additionalNotesTextView.font.pointSize]];
-    
     [super viewDidLoad];
 }
 

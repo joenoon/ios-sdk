@@ -11,11 +11,10 @@
 		3E18649A1BA85833007C8859 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864991BA85833007C8859 /* AppDelegate.m */; };
 		3E18649D1BA85833007C8859 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E18649C1BA85833007C8859 /* ViewController.m */; };
 		3E1864A01BA85833007C8859 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E18649E1BA85833007C8859 /* Main.storyboard */; };
-		3E1864A21BA85833007C8859 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E1864A11BA85833007C8859 /* Assets.xcassets */; };
 		3E1864A51BA85833007C8859 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E1864A31BA85833007C8859 /* LaunchScreen.storyboard */; };
 		3E1864B01BA85833007C8859 /* Example_StaticTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864AF1BA85833007C8859 /* Example_StaticTests.m */; };
 		3E1864BC1BA858B6007C8859 /* libYesGraphSDKStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E1864BB1BA858B6007C8859 /* libYesGraphSDKStatic.a */; };
-		83F31C311BAC135A008E7CA2 /* ContentHeightTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F31C301BAC135A008E7CA2 /* ContentHeightTextView.m */; };
+		3EFDB0B71BAC48BC00F51816 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EFDB0B61BAC48BC00F51816 /* Images.xcassets */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,15 +35,13 @@
 		3E18649B1BA85833007C8859 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		3E18649C1BA85833007C8859 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3E18649F1BA85833007C8859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3E1864A11BA85833007C8859 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E1864A41BA85833007C8859 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E1864A61BA85833007C8859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E1864AB1BA85833007C8859 /* Example-StaticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Example-StaticTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1864AF1BA85833007C8859 /* Example_StaticTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Example_StaticTests.m; sourceTree = "<group>"; };
 		3E1864B11BA85833007C8859 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E1864BB1BA858B6007C8859 /* libYesGraphSDKStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libYesGraphSDKStatic.a; path = "../YesGraphSDK/build/Debug-iphoneos/libYesGraphSDKStatic.a"; sourceTree = "<group>"; };
-		83F31C2F1BAC135A008E7CA2 /* ContentHeightTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentHeightTextView.h; sourceTree = "<group>"; };
-		83F31C301BAC135A008E7CA2 /* ContentHeightTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentHeightTextView.m; sourceTree = "<group>"; };
+		3EFDB0B61BAC48BC00F51816 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,13 +85,12 @@
 		3E1864941BA85833007C8859 /* Example-Static */ = {
 			isa = PBXGroup;
 			children = (
-				83F31C2E1BAC133E008E7CA2 /* Controls */,
+				3EFDB0B61BAC48BC00F51816 /* Images.xcassets */,
 				3E1864981BA85833007C8859 /* AppDelegate.h */,
 				3E1864991BA85833007C8859 /* AppDelegate.m */,
 				3E18649B1BA85833007C8859 /* ViewController.h */,
 				3E18649C1BA85833007C8859 /* ViewController.m */,
 				3E18649E1BA85833007C8859 /* Main.storyboard */,
-				3E1864A11BA85833007C8859 /* Assets.xcassets */,
 				3E1864A31BA85833007C8859 /* LaunchScreen.storyboard */,
 				3E1864A61BA85833007C8859 /* Info.plist */,
 				3E1864951BA85833007C8859 /* Supporting Files */,
@@ -125,15 +121,6 @@
 				3E1864BB1BA858B6007C8859 /* libYesGraphSDKStatic.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		83F31C2E1BAC133E008E7CA2 /* Controls */ = {
-			isa = PBXGroup;
-			children = (
-				83F31C2F1BAC135A008E7CA2 /* ContentHeightTextView.h */,
-				83F31C301BAC135A008E7CA2 /* ContentHeightTextView.m */,
-			);
-			name = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,8 +203,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EFDB0B71BAC48BC00F51816 /* Images.xcassets in Resources */,
 				3E1864A51BA85833007C8859 /* LaunchScreen.storyboard in Resources */,
-				3E1864A21BA85833007C8859 /* Assets.xcassets in Resources */,
 				3E1864A01BA85833007C8859 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,7 +225,6 @@
 			files = (
 				3E18649D1BA85833007C8859 /* ViewController.m in Sources */,
 				3E18649A1BA85833007C8859 /* AppDelegate.m in Sources */,
-				83F31C311BAC135A008E7CA2 /* ContentHeightTextView.m in Sources */,
 				3E1864971BA85833007C8859 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
