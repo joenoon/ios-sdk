@@ -26,8 +26,6 @@
     theme.twitterColor = [UIColor blueColor];
     theme.facebookColor = [UIColor yellowColor];
     theme.shareViewBackgroundColor = [UIColor purpleColor];
-    theme.shareCollectionViewBackgroundColor = [UIColor orangeColor];
-    theme.shareReferalViewBackgroundColor = [UIColor grayColor];
     theme.shareButtonShape = YSGShareSheetServiceCellShapeRoundedSquare;
     theme.fontFamily = @"Chalkduster";
     theme.shareButtonLabelFontSize = 12.f;

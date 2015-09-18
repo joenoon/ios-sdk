@@ -20,8 +20,6 @@
         self.facebookColor = [UIColor colorWithRed:0.28 green:0.38 blue:0.64 alpha:1];
         self.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
         self.shareViewBackgroundColor = [UIColor whiteColor];
-        self.shareCollectionViewBackgroundColor = [UIColor clearColor];
-        self.shareReferalViewBackgroundColor = [UIColor clearColor];
         // set default font details
         self.fontFamily = @"Helvetica";
         self.shareButtonLabelFontSize = 36.f;

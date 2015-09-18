@@ -59,22 +59,6 @@ typedef union
 @property (nonnull, nonatomic, strong) UIColor *shareViewBackgroundColor;
 
 /*!
- *  Share button collection view background color
- *  @discussion: Default: Clear color
- *
- */
-
-@property (nonnull, nonatomic, strong) UIColor *shareCollectionViewBackgroundColor;
-
-/*!
- *  Referal link view background color
- *  @discussion: Default: Clear color
- *
- */
-
-@property (nonnull, nonatomic, strong) UIColor *shareReferalViewBackgroundColor;
-
-/*!
  *  Font family of the Share UI
  *
  *  @discussion: Default: System font
