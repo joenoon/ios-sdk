@@ -27,7 +27,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 @implementation YSGShareSheetController
 {
     float cellWidth;
-    NSString *referralLink;
 }
 
 #pragma mark - Getters and Setters
@@ -91,39 +90,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    
-    //
-    // Referral link view
-    //
-    
-    UIView* footer = [[UIView alloc] init];
-    footer.translatesAutoresizingMaskIntoConstraints = NO;
-    footer.layer.borderColor = [UIColor blackColor].CGColor;
-    footer.layer.borderWidth = 1.0f;
-    footer.layer.cornerRadius = 20;
-    
-    referralLink = @"referralLink.com";
-    
-    UILabel *referraLabel = [UILabel new];
-    referraLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    referraLabel.text = referralLink;
-    referraLabel.textColor = [UIColor blackColor];
-    referraLabel.textAlignment = NSTextAlignmentCenter;
-    
-    [referraLabel sizeToFit];
-    
-    UIButton *copyButton = [UIButton new];
-    copyButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [copyButton setTitle:@"Copy" forState:UIControlStateNormal];
-    [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
-    [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
-    [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
-    [copyButton sizeToFit];
-    
-    [self.view addSubview:footer];
-    [footer addSubview:referraLabel];
-    [footer addSubview:copyButton];
-    
     //
     // Header container view - logo + text
     //
@@ -160,8 +126,43 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     UICollectionView *collectionView = self.collectionView;
     [self.view addSubview:self.collectionView];
     
+    //
+    // Referral link view
+    //
+    
+    UIView* footer = [[UIView alloc] init];
+    UILabel *referraLabel = [UILabel new];
+    UIButton *copyButton = [UIButton new];
+    
+    if (self.referralURL) {
+        
+        footer.translatesAutoresizingMaskIntoConstraints = NO;
+        footer.layer.borderColor = [UIColor blackColor].CGColor;
+        footer.layer.borderWidth = 1.0f;
+        footer.layer.cornerRadius = 20;
+        
+        referraLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        referraLabel.text = self.referralURL;
+        referraLabel.textColor = [UIColor blackColor];
+        referraLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [referraLabel sizeToFit];
+        
+        copyButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [copyButton setTitle:@"Copy" forState:UIControlStateNormal];
+        [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
+        [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
+        [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [copyButton sizeToFit];
+        
+    }
+    
+    [self.view addSubview:footer];
+    [footer addSubview:referraLabel];
+    [footer addSubview:copyButton];
+    
     UIView *superview = self.view;
-    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView, shareLabel, logoView, referraLabel, copyButton);
+    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, collectionView, shareLabel, logoView, footer, referraLabel, copyButton);
     
     //
     // Constraints
@@ -296,7 +297,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 - (void)copy:(id)sender {
     UIPasteboard *gpBoard = [UIPasteboard generalPasteboard];
-    NSString *referralString = referralLink;
+    NSString *referralString = self.referralURL;
     if (referralString) {
         [gpBoard setString:referralString];
     }

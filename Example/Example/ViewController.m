@@ -46,6 +46,8 @@
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
     shareController.baseColor = theme.baseColor;
     
+//    shareController.referralURL = @"leaIsAwesome.com";
+    
     [self.navigationController pushViewController:shareController animated:YES];
 }
 
