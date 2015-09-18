@@ -46,9 +46,27 @@
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
     shareController.baseColor = theme.baseColor;
     
-//    shareController.referralURL = @"leaIsAwesome.com";
+    // OPTIONAL
     
-    [self.navigationController pushViewController:shareController animated:YES];
+    //
+    // set referralURL if you have one
+    //
+    
+    //
+    // PRESENT MODALLY
+    //
+    
+    //[self presentViewController:shareController animated:YES completion:nil];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
+    
+    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:navController animated:YES completion:nil];
+    
+    //
+    // PRESENT ON NAVIGATION STACK
+    //
+    
+    //[self.navigationController pushViewController:shareController animated:YES];
 }
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo

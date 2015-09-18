@@ -63,10 +63,15 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [super viewDidLoad];
     
-    // self.theme.mainColor
-    self.navigationController.navigationBar.tintColor = self.baseColor;
-    self.title = @"Share";
-        
+    if ([self isModal]) {
+        // set up if view was rpesented modally
+        NSLog(@"MODALLL!");
+    }
+    else {
+        self.navigationController.navigationBar.tintColor = self.baseColor;
+        self.title = @"Share";
+    }
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -303,6 +308,20 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     }
     
     [sender setTitle:@"Copied" forState:UIControlStateNormal];
+}
+
+// figure out if view was presented modally
+- (BOOL)isModal {
+    if([self presentingViewController])
+        return YES;
+    if([[self presentingViewController] presentedViewController] == self)
+        return YES;
+    if([[[self navigationController] presentingViewController] presentedViewController] == [self navigationController])
+        return YES;
+    if([[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]])
+        return YES;
+    
+    return NO;
 }
 
 @end
