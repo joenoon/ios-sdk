@@ -47,7 +47,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.mainColor;
+    return self.theme.baseColor;
 }
 
 - (instancetype)init

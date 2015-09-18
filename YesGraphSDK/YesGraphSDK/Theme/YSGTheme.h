@@ -37,6 +37,11 @@
 @property (nonnull, nonatomic, strong) UIColor *textColor;
 
 /*!
+ *  Base color of the app
+ */
+@property (nonnull, nonatomic, strong) UIColor *baseColor;
+
+/*!
  *  Font family of the Share UI
  *
  *  @discussion: Default: System font

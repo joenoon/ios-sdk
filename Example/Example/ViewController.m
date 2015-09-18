@@ -21,6 +21,7 @@
 - (void)viewDidLoad
 {
     theme = [YSGTheme new];
+    theme.baseColor = [UIColor blueColor];
     
     [super viewDidLoad];
 }
@@ -43,6 +44,7 @@
     twitterService.theme = theme;
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
+    shareController.baseColor = theme.baseColor;
     
     [self.navigationController pushViewController:shareController animated:YES];
 }

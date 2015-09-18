@@ -65,11 +65,9 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [super viewDidLoad];
     
     // self.theme.mainColor
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
+    self.navigationController.navigationBar.tintColor = self.baseColor;
     self.title = @"Share";
-    
-    //    self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-    
+        
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -100,7 +98,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     UIView* footer = [[UIView alloc] init];
     footer.translatesAutoresizingMaskIntoConstraints = NO;
-    footer.layer.borderColor = [UIColor redColor].CGColor;
+    footer.layer.borderColor = [UIColor blackColor].CGColor;
     footer.layer.borderWidth = 1.0f;
     footer.layer.cornerRadius = 20;
     
@@ -148,7 +146,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = @"Share this app with friends to get our eternal gratitude";
     shareLabel.font = [UIFont systemFontOfSize:36.f];
-    shareLabel.textColor = [UIColor redColor];
+    shareLabel.textColor = self.baseColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
     shareLabel.textAlignment = NSTextAlignmentCenter;
