@@ -9,6 +9,7 @@
 #import "YSGShareSheetController.h"
 #import "YSGShareSheetServiceCell.h"
 #import "YSGTheme.h"
+#import "YSGDrawableView.h"
 
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
@@ -238,6 +239,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     {
         cell = [[YSGShareSheetServiceCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
     }
+    
     
     cell.text = service.name;
     cell.shape = YSGShareSheetServiceCellShapeCircle;

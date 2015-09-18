@@ -77,6 +77,8 @@
 		38EDF4DA1B9DC80D00B91C3D /* YSGDrawingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EDF4D81B9DC80D00B91C3D /* YSGDrawingConstants.m */; settings = {ASSET_TAGS = (); }; };
 		38EDF4DD1B9DC88200B91C3D /* YSGDrawableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EDF4DB1B9DC88200B91C3D /* YSGDrawableView.h */; settings = {ASSET_TAGS = (); }; };
 		38EDF4DE1B9DC88200B91C3D /* YSGDrawableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EDF4DC1B9DC88200B91C3D /* YSGDrawableView.m */; settings = {ASSET_TAGS = (); }; };
+		679632C51BAC2C3400F20B10 /* YSGTwitterIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = 679632C31BAC2C3400F20B10 /* YSGTwitterIcon.h */; settings = {ASSET_TAGS = (); }; };
+		679632C61BAC2C3400F20B10 /* YSGTwitterIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 679632C41BAC2C3400F20B10 /* YSGTwitterIcon.m */; settings = {ASSET_TAGS = (); }; };
 		67E64014B5B1EE87CFE80EC3 /* YSGRankedContact.h in Headers */ = {isa = PBXBuildFile; fileRef = 67E6481D2AAA27F6E37E4212 /* YSGRankedContact.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67E640A6A9838954FBD5930C /* YSGFacebookService.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E648E6D62D3D565729AB78 /* YSGFacebookService.m */; };
 		67E64122CC3DB600B398E75D /* YSGOnlineContactSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E648676913D9EDB117020E /* YSGOnlineContactSource.m */; settings = {ASSET_TAGS = (); }; };
@@ -189,6 +191,8 @@
 		38EDF4D81B9DC80D00B91C3D /* YSGDrawingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGDrawingConstants.m; sourceTree = "<group>"; };
 		38EDF4DB1B9DC88200B91C3D /* YSGDrawableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGDrawableView.h; sourceTree = "<group>"; };
 		38EDF4DC1B9DC88200B91C3D /* YSGDrawableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGDrawableView.m; sourceTree = "<group>"; };
+		679632C31BAC2C3400F20B10 /* YSGTwitterIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGTwitterIcon.h; sourceTree = "<group>"; };
+		679632C41BAC2C3400F20B10 /* YSGTwitterIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGTwitterIcon.m; sourceTree = "<group>"; };
 		67E6406BB63F2FBF78AC69B4 /* YSGRankedContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGRankedContact.m; sourceTree = "<group>"; };
 		67E640CDA38C1801103AEEF6 /* YSGFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGFacebookService.h; sourceTree = "<group>"; };
 		67E64153EABB93B703EB7B5E /* YSGSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGSource.m; sourceTree = "<group>"; };
@@ -400,6 +404,8 @@
 		38EDF4D41B9DC79300B91C3D /* YSGDrawing */ = {
 			isa = PBXGroup;
 			children = (
+				679632C31BAC2C3400F20B10 /* YSGTwitterIcon.h */,
+				679632C41BAC2C3400F20B10 /* YSGTwitterIcon.m */,
 				38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */,
 				38EDF4D71B9DC80D00B91C3D /* YSGDrawingConstants.h */,
 				38EDF4D81B9DC80D00B91C3D /* YSGDrawingConstants.m */,
@@ -552,6 +558,7 @@
 				38EDF4D91B9DC80D00B91C3D /* YSGDrawingConstants.h in Headers */,
 				387DC5051B8E349900E78114 /* YSGParsable.h in Headers */,
 				388D0D5A1B8C8A1100C17DA7 /* YSGStyling.h in Headers */,
+				679632C51BAC2C3400F20B10 /* YSGTwitterIcon.h in Headers */,
 				384D39781B8F01380080BA48 /* YSGNetworkResponse.h in Headers */,
 				380937421B84D1AA00FBF888 /* YSGAddressBookCell.h in Headers */,
 				385B64B11B831BAE00C55F60 /* YSGClient.h in Headers */,
@@ -720,6 +727,7 @@
 				38C581D31B9EF35C008676F0 /* YSGLoggingConstants.m in Sources */,
 				67E6458F02FC1DD77531EBEC /* YSGInviteService.m in Sources */,
 				67E64315EA418F599FDD0B6E /* YSGLocalContactSource.m in Sources */,
+				679632C61BAC2C3400F20B10 /* YSGTwitterIcon.m in Sources */,
 				67E64122CC3DB600B398E75D /* YSGOnlineContactSource.m in Sources */,
 				67E6428C840AE6007191EE29 /* YSGCacheContactSource.m in Sources */,
 			);

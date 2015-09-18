@@ -7,15 +7,14 @@
 //
 
 #import "YSGDrawableView.h"
+#import "YSGTwitterIcon.h"
 
 @implementation YSGDrawableView
 
 - (void)drawRect:(CGRect)rect
 {
-    if (self.drawingBlock)
-    {
-        self.drawingBlock(rect, nil);
-    }
+    
+    [YSGTwitterIcon drawTwitterCanvas];
 }
 
 @end
