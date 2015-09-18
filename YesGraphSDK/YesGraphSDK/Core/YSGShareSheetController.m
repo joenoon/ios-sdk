@@ -116,8 +116,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     copyButton.translatesAutoresizingMaskIntoConstraints = NO;
     [copyButton setTitle:@"Copy" forState:UIControlStateNormal];
     [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
-    [copyButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [copyButton setTitleColor:[[UIColor redColor] colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+    [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
+    [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
     [copyButton sizeToFit];
     
     [self.view addSubview:footer];
