@@ -9,8 +9,7 @@
 @import Social;
 
 #import "YSGTwitterService.h"
-#import "YSGTheme.h"
-#import "YSGTwitterIcon.h"
+#import "YSGIconDrawings.h"
 
 @implementation YSGTwitterService
 
@@ -31,7 +30,7 @@
 
 - (UIImage *)serviceImage
 {
-    return [YSGTwitterIcon imageOfTwitterCanvas];
+    return [YSGIconDrawings twitterImage];
 }
 
 @end

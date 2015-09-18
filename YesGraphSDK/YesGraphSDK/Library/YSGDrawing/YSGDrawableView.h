@@ -9,7 +9,6 @@
 @import UIKit;
 
 #import "YSGDrawingConstants.h"
-#import "YSGTwitterIcon.h"
 
 @interface YSGDrawableView : UIView
 

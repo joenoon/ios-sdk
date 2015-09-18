@@ -17,7 +17,7 @@
 #import "YSGLocalContactSource.h"
 #import "YSGCacheContactSource.h"
 #import "YSGOnlineContactSource.h"
-#import "YSGTheme.h"
+#import "YSGIconDrawings.h"
 
 NSString *_Nonnull const YSGInvitePhoneContactsKey = @"YSGInvitePhoneContactsKey";
 NSString *_Nonnull const YSGInviteEmailContactsKey = @"YSGInviteEmailContactsKey";
@@ -48,6 +48,11 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 - (UIColor *)backgroundColor
 {
     return self.theme.baseColor;
+}
+
+- (UIImage *)serviceImage
+{
+    return [YSGIconDrawings phoneImage];
 }
 
 - (instancetype)init

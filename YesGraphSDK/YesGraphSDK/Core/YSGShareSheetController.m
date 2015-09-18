@@ -240,6 +240,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         cell = [[YSGShareSheetServiceCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
     }
     
+    YSGDrawableView *draw = [YSGDrawableView new];
+    [self.view addSubview:draw];
     
     cell.text = service.name;
     cell.shape = YSGShareSheetServiceCellShapeCircle;
