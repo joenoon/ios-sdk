@@ -146,7 +146,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     if (self.referralURL) {
         
         footer.translatesAutoresizingMaskIntoConstraints = NO;
-        footer.layer.borderColor = [UIColor blackColor].CGColor;
+        footer.layer.borderColor = self.baseColor.CGColor;
         footer.layer.borderWidth = 1.0f;
         footer.layer.cornerRadius = 20;
         
@@ -158,7 +158,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [referraLabel sizeToFit];
         
         copyButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [copyButton setTitle:@"Copy" forState:UIControlStateNormal];
+        [copyButton setTitle:@"copy" forState:UIControlStateNormal];
         [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
         [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
         [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
@@ -315,7 +315,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [gpBoard setString:referralString];
     }
     
-    [sender setTitle:@"Copied" forState:UIControlStateNormal];
+    [sender setTitle:@"copied" forState:UIControlStateNormal];
 }
 
 // figure out if view was presented modally

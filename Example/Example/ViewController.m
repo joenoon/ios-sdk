@@ -21,7 +21,7 @@
 - (void)viewDidLoad
 {
     theme = [YSGTheme new];
-    theme.baseColor = [UIColor blueColor];
+    theme.baseColor = [UIColor redColor];
     
     [super viewDidLoad];
 }
@@ -50,6 +50,7 @@
     
     //
     // set referralURL if you have one
+    shareController.referralURL = @"hellosunschein.com/dkjh34";
     //
     
     //
@@ -58,22 +59,13 @@
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
     
-    navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    UIBarButtonItem *tempItem = [[UIBarButtonItem alloc]
-                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                 target:nil
-                                 action:nil];
-    [tempItem setWidth:20];
-    [tempItem setTitle:@"LEALEA"];
-    
-    [navController.navigationItem setLeftBarButtonItem:tempItem animated:YES];
-    [self presentViewController:navController animated:YES completion:nil];
+    //[self presentViewController:navController animated:YES completion:nil];
     
     //
     // PRESENT ON NAVIGATION STACK
     //
     
-    //[self.navigationController pushViewController:shareController animated:YES];
+    [self.navigationController pushViewController:shareController animated:YES];
 }
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
