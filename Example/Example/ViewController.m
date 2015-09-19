@@ -56,10 +56,17 @@
     // PRESENT MODALLY
     //
     
-    //[self presentViewController:shareController animated:YES completion:nil];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
     
     navController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    UIBarButtonItem *tempItem = [[UIBarButtonItem alloc]
+                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                 target:nil
+                                 action:nil];
+    [tempItem setWidth:20];
+    [tempItem setTitle:@"LEALEA"];
+    
+    [navController.navigationItem setLeftBarButtonItem:tempItem animated:YES];
     [self presentViewController:navController animated:YES completion:nil];
     
     //

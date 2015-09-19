@@ -60,13 +60,16 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 #pragma mark - UIViewController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     if ([self isModal]) {
-        // set up if view was rpesented modally
-        NSLog(@"MODALLL!");
+        // set up if view was prsented modally
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonPressed:)];
+        backButton.tintColor = self.baseColor;
+        self.navigationItem.leftBarButtonItem = backButton;
     }
     else {
         self.navigationController.navigationBar.tintColor = self.baseColor;
@@ -304,7 +307,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     }];
 }
 
-- (void)copy:(id)sender {
+- (void)copy:(id)sender
+{
     UIPasteboard *gpBoard = [UIPasteboard generalPasteboard];
     NSString *referralString = self.referralURL;
     if (referralString) {
@@ -315,7 +319,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 }
 
 // figure out if view was presented modally
-- (BOOL)isModal {
+- (BOOL)isModal
+{
     if([self presentingViewController])
         return YES;
     if([[self presentingViewController] presentedViewController] == self)
@@ -326,6 +331,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         return YES;
     
     return NO;
+}
+
+-(void)closeButtonPressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
