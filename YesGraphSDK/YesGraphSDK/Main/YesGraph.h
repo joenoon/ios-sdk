@@ -22,6 +22,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YesGraph : NSObject
 
 /*!
+ *  YES if SDK is ready to be triggered.
+ */
+@property (nonatomic, readonly) BOOL isConfigured;
+
+/*!
  *  User ID used with YesGraph SDK
  */
 @property (nullable, nonatomic, readonly, copy) NSString *userId;
@@ -38,7 +43,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YesGraph (Initialization)
 
 /*!
- *  Configure YesGraph SDK with a client key that you receive from your trusted backend using YesGraph Secret Key.
+ *  Configure YesGraph SDK with a client key that you receive from your trusted backend
+ *  using YesGraph Secret Key. The client key is persisted in the SDK until configure
+ *  method is called again.
+ *
  *  @note: https://docs.yesgraph.com/v0/docs/connecting-apps
  *
  *  @param key client string that is received from YesGraph backend on your trusted backend.
@@ -46,9 +54,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)configureWithClientKey:(NSString *)clientKey;
 
 /*!
- *  Configure YesGraph SDK with an user ID that will be used to save address book
+ *  Configure YesGraph SDK with an user ID that will be used to fetch address book.
+ *  User ID is persisted until next time this method is called.
  *
- *  @param userId to be used with API calls
+ *  @param userId to be used with YesGraph API.
  */
 - (void)configureWithUserId:(NSString *)userId;
 
@@ -57,20 +66,38 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YesGraph (Share)
 
 /*!
- *  Factory method for share sheet view controller without delegate. Delegate can still be set manually.
+ *  Factory method for share sheet view controller. Delegate should be set manually. All available
+ *  sharing services are added to the share sheet.
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)defaultShareSheetController;
+- (nullable YSGShareSheetController *)shareSheetControllerForAllServices;
 
 /*!
- *  Factory method for share sheet view controller with delegate
+ *  Factory method for share sheet view controller with delegate. All available
+ *  sharing services are added to the share sheet.
  *
  *  @param delegate for share sheet controller that conforms to YSGShareSheetDelegate.
  *
  *  @return instance of share sheet controller
  */
-- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
+- (nullable YSGShareSheetController *)shareSheetControllerForAllServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
+
+/*!
+ *  Factory method for share sheet view controller that includes only the YesGraph invite service.
+ *
+ *  @return instance of share sheet controller
+ */
+- (nullable YSGShareSheetController *)shareSheetControllerForInviteService;
+
+/*!
+ *  Factory method for share sheet view controller that includes only the YesGraph invite service.
+ *
+ *  @param delegate for share sheet controller that conforms to YSGShareSheetDelegate.
+ *
+ *  @return instance of share sheet controller
+ */
+- (nullable YSGShareSheetController *)shareSheetControllerForInviteServiceWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
 @end
 
@@ -81,11 +108,19 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /*!
- *  Error handling methods
+ *  Messaging blocks
  */
-@interface YesGraph (ErrorHandling)
+@interface YesGraph (Messaging)
 
-@property (nullable, nonatomic, strong) YSGErrorHandlerBlock errorHandler;
+/*!
+ *  If this block is set, it will receive errors from SDK in the handler.
+ */
+@property (nullable, nonatomic, assign) YSGErrorHandlerBlock errorHandler;
+
+/*!
+ *  If this block is set messages emitted by
+ */
+@property (nullable, nonatomic, assign) YSGMessageHandlerBlock messageHandler;
 
 @end
 

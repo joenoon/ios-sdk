@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8150" systemVersion="15A204g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8122"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,8 +16,39 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5V-kT-Zb5">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="AzJ-oS-cZS">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo" translatesAutoresizingMaskIntoConstraints="NO" id="C5Y-Wq-jyN">
+                                        <rect key="frame" x="250" y="250" width="100" height="100"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                        </accessibility>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="AzJ-oS-cZS" firstAttribute="leading" secondItem="D5V-kT-Zb5" secondAttribute="leading" id="EXK-TJ-mku"/>
+                                    <constraint firstItem="AzJ-oS-cZS" firstAttribute="top" secondItem="D5V-kT-Zb5" secondAttribute="top" id="FOz-PC-WXi"/>
+                                    <constraint firstItem="C5Y-Wq-jyN" firstAttribute="centerY" secondItem="D5V-kT-Zb5" secondAttribute="centerY" id="UAS-fv-2OF"/>
+                                    <constraint firstAttribute="trailing" secondItem="AzJ-oS-cZS" secondAttribute="trailing" id="Uas-e2-Z3V"/>
+                                    <constraint firstItem="C5Y-Wq-jyN" firstAttribute="centerX" secondItem="D5V-kT-Zb5" secondAttribute="centerX" id="cnJ-tC-xzz"/>
+                                    <constraint firstAttribute="bottom" secondItem="AzJ-oS-cZS" secondAttribute="bottom" id="wUV-Co-bg1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="D5V-kT-Zb5" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="ArC-xs-KoD"/>
+                            <constraint firstItem="D5V-kT-Zb5" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="ENm-TO-Bpg"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="D5V-kT-Zb5" secondAttribute="bottom" id="PBH-wT-Kgi"/>
+                            <constraint firstAttribute="trailing" secondItem="D5V-kT-Zb5" secondAttribute="trailing" id="Sox-Vz-FzT"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +56,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background" width="931" height="441"/>
+        <image name="launch-logo" width="100" height="100"/>
+    </resources>
 </document>

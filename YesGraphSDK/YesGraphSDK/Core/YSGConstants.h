@@ -12,6 +12,8 @@
 
 #pragma mark - Errors
 
+NS_ASSUME_NONNULL_BEGIN
+
 YSG_EXTERN NSString *const YSGErrorDomain;
 
 typedef NS_ENUM(NSInteger, YSGErrorCode)
@@ -72,8 +74,10 @@ typedef NS_ENUM(NSInteger, YSGErrorCode)
 YSG_EXTERN NSString *const YSGErrorNetworkStatusCodeKey;
 
 typedef void (^YSGErrorHandlerBlock)(NSError *error);
+typedef void (^YSGMessageHandlerBlock)(NSString *message, NSDictionary * _Nullable userInfo);
 
 YSG_EXTERN NSError* YSGErrorWithErrorCode (YSGErrorCode errorCode);
+YSG_EXTERN NSError* YSGErrorWithErrorCodeWithError (YSGErrorCode errorCode, NSError *underlyingError);
 YSG_EXTERN NSString* YSGLocalizedErrorDescriptionForErrorCode (YSGErrorCode errorCode);
 
 #pragma mark - Network
@@ -85,3 +89,5 @@ YSG_EXTERN NSString *const YSGClientAPIURL;
 YSG_EXTERN NSUInteger const YSGDefaultInviteNumberOfSuggestions;
 YSG_EXTERN NSString *const YSGDefaultContactAccessPromptMessage;
 YSG_EXTERN NSTimeInterval const YSGDefaultContactBookTimePeriod;
+
+NS_ASSUME_NONNULL_END

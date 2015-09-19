@@ -256,9 +256,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     // Add navigation buttons
     //
     
-    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonTap:)];
+    UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonTap:)];
     
-    UIBarButtonItem *inviteButton = [[UIBarButtonItem alloc] initWithTitle:@"Invite" style:UIBarButtonItemStylePlain target:self action:@selector(inviteButtonTap:)];
+    UIBarButtonItem *inviteButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Invite", @"Invite") style:UIBarButtonItemStylePlain target:self action:@selector(inviteButtonTap:)];
     
     self.navigationItem.leftBarButtonItem = cancelButton;
     self.navigationItem.rightBarButtonItem = inviteButton;
@@ -271,7 +271,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     [self.service.contactSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
     {
-        self.contactList = contactList;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.contactList = contactList;
+        });
     }];
     
     [self updateUI];
@@ -405,7 +407,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     if (self.suggestions.count && section == 0)
     {
-        return @"Suggestions";
+        return NSLocalizedString(@"Suggestions", @"Suggestions");
     }
     else if (self.suggestions.count)
     {

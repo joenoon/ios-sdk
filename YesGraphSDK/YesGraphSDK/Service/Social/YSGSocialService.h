@@ -11,6 +11,10 @@
 
 @interface YSGSocialService : YSGShareService
 
+@property (nonatomic, readonly) BOOL isAvailable;
+
+#pragma mark - Abstract Methods
+
 @property (nonnull, nonatomic, readonly) NSString *serviceType;
 
 @end

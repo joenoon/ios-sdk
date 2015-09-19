@@ -75,7 +75,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         self.navigationController.navigationBar.tintColor = self.baseColor;
         self.title = @"Share";
     }
-    
+
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;

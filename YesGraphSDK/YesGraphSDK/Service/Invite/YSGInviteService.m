@@ -18,6 +18,10 @@
 #import "YSGCacheContactSource.h"
 #import "YSGOnlineContactSource.h"
 #import "YSGIconDrawings.h"
+#import "UIAlertController+YSGDisplay.h"
+#import "YSGTheme.h"
+#import "YSGMessaging.h"
+
 
 NSString *_Nonnull const YSGInvitePhoneContactsKey = @"YSGInvitePhoneContactsKey";
 NSString *_Nonnull const YSGInviteEmailContactsKey = @"YSGInviteEmailContactsKey";
@@ -88,23 +92,26 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         }
         else if (error)
         {
-            [[[UIAlertView alloc] initWithTitle:@"YesGraph" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+            [[YSGMessageCenter shared] sendMessage:error.localizedDescription userInfo:@{ YSGMessageAlertButtonArrayKey : @[ NSLocalizedString(@"Ok", @"Ok") ] }];
         }
     }];
 }
 
 - (void)openInviteControllerWithController:(nonnull YSGShareSheetController *)viewController
 {
-    YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
     
-    addressBookViewController.service = self;
+        addressBookViewController.service = self;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
     
-    self.viewController = viewController;
-    self.addressBookNavigationController = navigationController;
-    
-    [viewController presentViewController:navigationController animated:YES completion:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
+        
+        self.viewController = viewController;
+        self.addressBookNavigationController = navigationController;
+        
+        [viewController presentViewController:navigationController animated:YES completion:nil];
+    });
 }
 
 - (void)triggerInviteFlowWithContacts:(NSArray<YSGContact *> *)entries
@@ -146,24 +153,25 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries
 {
-    //
-    // Trigger delegate
-    //
     
     //
     // Check for native message sheet
     //
     
+    NSError* error;
+    
+    if (![MFMessageComposeViewController canSendText])
+    {
+        error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageUnavailable);
+        
+        [[YSGMessageCenter shared] sendError:error];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Unable to send a message. Can you check your message settings?", @"Unable to send a message. Can you check your message settings?") userInfo:nil];
+    }
+
     if (!self.nativeMessageSheet || ![MFMessageComposeViewController canSendText])
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
-            NSError *error;
-            
-            if (![MFMessageComposeViewController canSendText])
-            {
-                error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageUnavailable);
-            }
             
             [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
@@ -200,17 +208,20 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     // Check for native message sheet
     //
     
+    NSError* error;
+    
+    if (![MFMailComposeViewController canSendMail])
+    {
+        error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailUnavailable);
+        
+        [[YSGMessageCenter shared] sendError:error];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Unable to send email. Can you check your email settings?", @"Unable to send email. Can you check your email settings?") userInfo:nil];
+    }
+    
     if (!self.nativeEmailSheet || ![MFMailComposeViewController canSendMail])
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
-            NSError* error;
-            
-            if (![MFMailComposeViewController canSendMail])
-            {
-                error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailUnavailable);
-            }
-            
             [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
         
@@ -256,15 +267,18 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
 {
+    NSError* error;
+    
+    if (result == MessageComposeResultFailed)
+    {
+        error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageFailed);
+        
+        [[YSGMessageCenter shared] sendError:error];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
+    }
+    
     if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
     {
-        NSError* error;
-        
-        if (result == MessageComposeResultFailed)
-        {
-            error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageFailed);
-        }
-        
         [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : self.phoneContacts } error:error];
     }
 
@@ -283,6 +297,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         }
         else
         {
+            [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Selected contacts were successfully invited.", @"Successful invitation") userInfo:nil];
+            
             [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
         }
     }];
@@ -292,16 +308,19 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
+    NSError *ysgError;
+    
+    if (result == MFMailComposeResultFailed || error)
+    {
+        ysgError = YSGErrorWithErrorCodeWithError(YSGErrorCodeInviteMailFailed, error);
+        
+        [[YSGMessageCenter shared] sendError:ysgError];
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
+    }
+
     if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
     {
-        NSError* error;
-        
-        if (result == MFMailComposeResultFailed)
-        {
-            error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailFailed);
-        }
-        
-        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:error];
+        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:ysgError];
     }
     
     if (result != MFMailComposeResultSaved && result != MFMailComposeResultSent)
@@ -310,14 +329,18 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         
         return;
     }
-    
+
     //
     // Dismiss the mail composer and entire invite screen flow
     //
     [controller dismissViewControllerAnimated:NO completion:^
     {
+        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Selected contacts were successfully invited.", @"Successful invitation") userInfo:nil];
+        
         [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
     }];
 }
+
+#pragma mark - Private Methods
 
 @end

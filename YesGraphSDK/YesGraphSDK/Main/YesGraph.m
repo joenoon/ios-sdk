@@ -7,12 +7,17 @@
 //
 
 #import "YesGraph.h"
+
+#import "YSGLogging.h"
 #import "YSGServices.h"
 #import "YSGSources.h"
+#import "YSGMessageCenter.h"
 
 #import "YSGClient+AddressBook.h"
 
 static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateKey";
+static NSString *const YSGConfigurationClientKey = @"YSGConfigurationClientKey";
+static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 @interface YesGraph ()
 
@@ -21,6 +26,8 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 
 @property (nonatomic, strong) YSGLocalContactSource *localSource;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
+
+@property (nonatomic, strong) YSGMessageCenter *messageCenter;
 
 /*!
  *  This holds last date that contacts were fetched. This can be used to test whether to upload them again.
@@ -48,6 +55,16 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 }
 
 #pragma mark - Getters and Setters
+
+- (YSGMessageCenter *)messageCenter
+{
+    if (!_messageCenter)
+    {
+        _messageCenter = [YSGMessageCenter shared];
+    }
+    
+    return _messageCenter;
+}
 
 - (NSUserDefaults *)userDefaults
 {
@@ -90,6 +107,46 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     return _cacheSource;
 }
 
+- (YSGMessageHandlerBlock)messageHandler
+{
+    return self.messageCenter.messageHandler;
+}
+
+- (void)setMessageHandler:(YSGMessageHandlerBlock)messageHandler
+{
+    self.messageCenter.messageHandler = messageHandler;
+}
+
+- (YSGErrorHandlerBlock)errorHandler
+{
+    return self.messageCenter.errorHandler;
+}
+
+- (void)setErrorHandler:(YSGErrorHandlerBlock)errorHandler
+{
+    self.messageCenter.errorHandler = errorHandler;
+}
+
+- (NSString *)clientKey
+{
+    if (!_clientKey)
+    {
+        _clientKey = [self.userDefaults objectForKey:YSGConfigurationClientKey];
+    }
+    
+    return _clientKey;
+}
+
+- (NSString *)userId
+{
+    if (!_userId)
+    {
+        _userId = [self.userDefaults objectForKey:YSGConfigurationUserIdKey];
+    }
+    
+    return _userId;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)init
@@ -119,10 +176,10 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 
 - (void)applicationNotification:(NSNotification *)notification
 {
-    if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
+    /*if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
     {
         return;
-    }
+    }*/
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
@@ -150,22 +207,62 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
 - (void)configureWithClientKey:(NSString *)clientKey
 {
     self.clientKey = clientKey;
+    
+    [self.userDefaults setObject:clientKey forKey:YSGConfigurationClientKey];
+    [self.userDefaults synchronize];
 }
 
 - (void)configureWithUserId:(NSString *)userId
 {
     self.userId = userId;
+    
+    [self.userDefaults setObject:userId forKey:YSGConfigurationUserIdKey];
+    [self.userDefaults synchronize];
 }
 
 #pragma mark - Public Methods
 
-- (YSGShareSheetController *)defaultShareSheetController
+- (YSGShareSheetController *)shareSheetControllerForAllServices
 {
-    return [self defaultShareSheetControllerWithDelegate:nil];
+    return [self shareSheetControllerForServicesWithDelegate:nil socialServices:YES];
 }
 
-- (YSGShareSheetController *)defaultShareSheetControllerWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate
+- (YSGShareSheetController *)shareSheetControllerForAllServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate
 {
+    return [self shareSheetControllerForServicesWithDelegate:delegate socialServices:YES];
+}
+
+- (YSGShareSheetController *)shareSheetControllerForInviteService
+{
+    return [self shareSheetControllerForServicesWithDelegate:nil socialServices:NO];
+}
+
+- (YSGShareSheetController *)shareSheetControllerForInviteServiceWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate
+{
+    return [self shareSheetControllerForServicesWithDelegate:delegate socialServices:NO];
+}
+
+
+- (YSGShareSheetController *)shareSheetControllerForServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate socialServices:(BOOL)socialServices
+{
+    //
+    // No client key, cannot create the share sheet.
+    //
+    if (!self.clientKey.length)
+    {
+        YSG_LERR(@"No client key was set for share sheet. Call configureWithClientKey: first.");
+        return nil;
+    }
+    
+    //
+    // No user id, cannot create the share sheet.
+    //
+    if (!self.userId.length)
+    {
+        YSG_LERR(@"No client key was set for share sheet. Call configureWithUserId: first.");
+        return nil;
+    }
+    
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
     
@@ -173,15 +270,33 @@ static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateK
     client.clientKey = self.clientKey;
     
     YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localSource cacheSource:nil];
+    onlineSource.userId = self.userId;
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:self.userId];
     inviteService.numberOfSuggestions = self.numberOfSuggestions;
     
     //
-    // TODO: Check if Facebook & Twitter are available
+    // Check if social services such as Facebook & Twitter are available
     //
     
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ [YSGFacebookService new], [YSGTwitterService new], inviteService ] delegate:delegate];
+    NSMutableArray <YSGShareService *> * services = [NSMutableArray array];
+    
+    if (socialServices)
+    {
+        NSArray <YSGSocialService *> *allSocialServices = @[ [YSGFacebookService new], [YSGTwitterService new] ];
+        
+        for (YSGSocialService* service in allSocialServices)
+        {
+            if (service.isAvailable)
+            {
+                [services addObject:service];
+            }
+        }
+    }
+    
+    [services addObject:inviteService];
+    
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:services.copy delegate:delegate];
     
     return shareController;
 }
