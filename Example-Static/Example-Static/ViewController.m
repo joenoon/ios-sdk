@@ -20,7 +20,6 @@
 - (void)viewDidLoad
 {
     theme = [YSGTheme new];
-    
     [super viewDidLoad];
 }
 

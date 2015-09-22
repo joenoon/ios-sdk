@@ -9,7 +9,7 @@
 @import Social;
 
 #import "YSGFacebookService.h"
-#import "YSGTheme.h"
+#import "YSGIconDrawings.h"
 
 @implementation YSGFacebookService
 
@@ -26,6 +26,11 @@
 - (NSString *)serviceType
 {
     return SLServiceTypeFacebook;
+}
+
+- (UIImage *)serviceImage
+{
+    return [YSGIconDrawings facebookImage];
 }
 
 @end

@@ -21,6 +21,7 @@
 - (void)viewDidLoad
 {
     theme = [YSGTheme new];
+    theme.baseColor = [UIColor redColor];
     
     [super viewDidLoad];
 }
@@ -43,6 +44,26 @@
     twitterService.theme = theme;
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
+    shareController.baseColor = theme.baseColor;
+    
+    // OPTIONAL
+    
+    //
+    // set referralURL if you have one
+    shareController.referralURL = @"hellosunschein.com/dkjh34";
+    //
+    
+    //
+    // PRESENT MODALLY
+    //
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
+    
+    //[self presentViewController:navController animated:YES completion:nil];
+    
+    //
+    // PRESENT ON NAVIGATION STACK
+    //
     
     [self.navigationController pushViewController:shareController animated:YES];
 }
