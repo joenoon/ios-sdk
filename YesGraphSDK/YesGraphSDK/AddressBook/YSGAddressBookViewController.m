@@ -195,7 +195,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     self.searchController.searchBar.tintColor = theme.mainColor;
     self.navigationController.navigationBar.tintColor = theme.mainColor;
     self.view.tintColor = theme.mainColor;
-    self.tableView.backgroundColor = theme.baseColor;
+    self.tableView.backgroundColor = theme.shareAddressBookTheme.viewBackground;
 }
 
 #pragma mark - UIViewController

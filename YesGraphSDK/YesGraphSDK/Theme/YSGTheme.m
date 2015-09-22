@@ -33,6 +33,8 @@
             .AlphaFadeFactor = 0.8f,
             .AlphaUnfadeFactor = 1.f
         };
+        self.shareAddressBookTheme = [[YSGShareAddressBookTheme alloc] init];
+        self.shareAddressBookTheme.viewBackground = [UIColor whiteColor];
     }
     return self;
 }

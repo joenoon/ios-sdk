@@ -21,7 +21,7 @@
 
 /*!
  *  Background of the address book cells (when not selected)
- *  @discussion: Default: nil (system)
+ *  @discussion: Default: White
  *
  */
 

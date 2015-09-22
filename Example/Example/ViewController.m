@@ -23,6 +23,7 @@
 {
     theme = [YSGTheme new];
     theme.baseColor = [UIColor redColor];
+    theme.shareAddressBookTheme.sectionBackground = [[UIColor redColor] colorWithAlphaComponent:0.38f];
     
     if ([YesGraph shared].userId)
     {
