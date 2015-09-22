@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "ParseBackend.h"
 
 @import YesGraphSDK;
 
@@ -22,6 +23,24 @@
 {
     theme = [YSGTheme new];
     theme.baseColor = [UIColor redColor];
+    
+    YesGraph *YG = [YesGraph shared];
+    ParseBackend *parseBackend = [[ParseBackend alloc] init];
+    
+    if (YG.userId)
+    {
+        [parseBackend setYGclientKey:YG.userId];
+    }
+    
+    // for parse backend example, we set a user id '1234' if there is none set in YesGraph class
+    else
+    {
+        [parseBackend setYGclientKey:@"1234"];
+    }
+    
+    NSLog(@"Yes Graph client key: %@", parseBackend.YGclientKey);
+    
+    [YG configureWithClientKey:parseBackend.YGclientKey];
     
     [super viewDidLoad];
 }

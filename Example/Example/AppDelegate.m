@@ -16,12 +16,4 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    ParseBackend *parse = [[ParseBackend alloc] init];
-    NSLog(@"Yes Graph client key: %@", parse.YGclientKey);
-    
-    return YES;
-}
-
 @end

@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSString *YGclientKey;
 
+- (id)initWithUserId:(NSString *)userId;
+
 @end
