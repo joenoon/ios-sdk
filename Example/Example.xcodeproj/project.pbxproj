@@ -14,7 +14,6 @@
 		3805E1691B831B1B004463B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3805E1681B831B1B004463B8 /* Images.xcassets */; };
 		3805E16C1B831B1B004463B8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3805E16A1B831B1B004463B8 /* LaunchScreen.xib */; };
 		3805E1781B831B1B004463B8 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1771B831B1B004463B8 /* ExampleTests.m */; };
-		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
 		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		83F31C3F1BAC56CB008E7CA2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C3E1BAC56CB008E7CA2 /* Parse.framework */; };
 		83F31C411BAC5A71008E7CA2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C401BAC5A71008E7CA2 /* AudioToolbox.framework */; };
@@ -118,7 +117,6 @@
 				83F31C431BAC5A7B008E7CA2 /* Accounts.framework in Frameworks */,
 				83F31C411BAC5A71008E7CA2 /* AudioToolbox.framework in Frameworks */,
 				83F31C3F1BAC56CB008E7CA2 /* Parse.framework in Frameworks */,
-				38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

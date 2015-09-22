@@ -11,6 +11,7 @@
 @interface YSGShareSheetServiceCell ()
 
 @property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UIImageView *imageView;
 
 @end
 
@@ -46,23 +47,18 @@
 - (void)setIcon:(UIImage *)iconImage {
     _icon = iconImage;
     
-    [self addImageViewWithIcon:_icon];
+    [self setImageViewWithIcon:_icon];
 }
 
 - (void)setIconWithString:(NSString *)iconImageString {
     _icon = [UIImage imageNamed:iconImageString];
     
-    [self addImageViewWithIcon:_icon];
+    [self setImageViewWithIcon:_icon];
 }
 
 - (void)setTextColor:(UIColor *)textColor {
     _textColor = textColor;
     self.textLabel.textColor = _textColor;
-}
-
-- (void)setTextAlignment:(NSTextAlignment)textAlignment {
-    _textAlignment = textAlignment;
-    self.textLabel.textAlignment = _textAlignment;
 }
 
 #pragma mark - Initialization
@@ -107,8 +103,19 @@
 {
     self.textLabel = [[UILabel alloc] initWithFrame:self.bounds];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
+    self.textLabel.textColor = [UIColor grayColor];
     //NSLog(@"TEXT LABEL: %@", self.textLabel.text);
     [self addSubview:self.textLabel];
+    
+    float frameWidth = self.frame.size.width;
+    float center = self.frame.size.width/2;
+    
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frameWidth * 0.6, frameWidth * 0.6)];
+    
+    self.imageView.center = CGPointMake(center, center);
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.imageView.backgroundColor = [UIColor clearColor];
+    [self addSubview:self.imageView];
 }
 
 - (void)layoutSubviews
@@ -140,19 +147,9 @@
 
 #pragma mark - Helpers
 
-- (void)addImageViewWithIcon:(UIImage *)icon {
+- (void)setImageViewWithIcon:(UIImage *)icon {
     
-    float frameWidth = self.frame.size.width;
-    float center = self.frame.size.width/2;
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frameWidth * 0.6, frameWidth * 0.6)];
-    
-    imageView.image = _icon;
-    imageView.center = CGPointMake(center, center);
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView.backgroundColor = [UIColor clearColor]; // NOTE: do we need to replace this with a theme color?
-    
-    [self addSubview:imageView];
+    self.imageView.image = _icon;
 }
 
 - (float)heightForLabelWithFont:(UIFont *)font {
