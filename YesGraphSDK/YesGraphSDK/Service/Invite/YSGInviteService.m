@@ -104,13 +104,18 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
         addressBookViewController.service = self;
     
-    
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
         
         self.viewController = viewController;
         self.addressBookNavigationController = navigationController;
         
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        {
+            navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
+        }
+        
         [viewController presentViewController:navigationController animated:YES completion:nil];
+        
     });
 }
 
