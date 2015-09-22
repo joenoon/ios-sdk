@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "ParseBackend.h"
+#import <Parse/Parse.h>
 
 @import YesGraphSDK;
 
@@ -24,23 +24,16 @@
     theme = [YSGTheme new];
     theme.baseColor = [UIColor redColor];
     
-    YesGraph *YG = [YesGraph shared];
-    ParseBackend *parseBackend = [[ParseBackend alloc] init];
-    
-    if (YG.userId)
+    if ([YesGraph shared].userId)
     {
-        [parseBackend setYGclientKey:YG.userId];
+        [self setYSGclientKey:[YesGraph shared].userId];
     }
     
     // for parse backend example, we set a user id '1234' if there is none set in YesGraph class
     else
     {
-        [parseBackend setYGclientKey:@"1234"];
+        [self setYSGclientKey:@"1234"];
     }
-    
-    NSLog(@"Yes Graph client key: %@", parseBackend.YGclientKey);
-    
-    [YG configureWithClientKey:parseBackend.YGclientKey];
     
     [super viewDidLoad];
 }
@@ -108,6 +101,41 @@
     }
     
     return @{ YSGShareSheetMessageKey : @"" };
+}
+
+- (void)setYSGclientKey:(NSString *)userId
+{
+    __block NSString *YSGclientKey = [YesGraph shared].clientKey;
+    
+    if (!YSGclientKey)
+    {
+        [PFCloud callFunctionInBackground:@"YGgetClientKey"
+                           withParameters:[[NSDictionary alloc] initWithObjectsAndKeys:userId, @"userId", nil]
+                                    block:^(NSString *response, NSError *error) {
+                                        if (!error)
+                                        {
+                                            NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                                            
+                                            NSError *jsonSerializationError;
+                                            id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:(NSJSONReadingMutableContainers)error:&jsonSerializationError];
+                                            if (jsonSerializationError)
+                                            {
+                                                NSLog(@"Json serizalization error: %@", jsonSerializationError.description);
+                                            }
+                                            
+                                            YSGclientKey = [jsonObject objectForKey:@"client_key"];
+                                            if (YSGclientKey)
+                                            {
+                                                NSLog(@"Yes Graph client key: %@", YSGclientKey);
+                                                [[YesGraph shared] configureWithClientKey:YSGclientKey];
+                                            }
+                                        }
+                                        else
+                                        {
+                                            NSLog(@"Error:%@", error.description);
+                                        }
+                                    }];
+    }
 }
 
 @end

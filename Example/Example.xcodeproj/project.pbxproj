@@ -16,7 +16,6 @@
 		3805E1781B831B1B004463B8 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1771B831B1B004463B8 /* ExampleTests.m */; };
 		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
 		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		830922CA1BB0235000BF6AEC /* ParseBackend.m in Sources */ = {isa = PBXBuildFile; fileRef = 830922C91BB0235000BF6AEC /* ParseBackend.m */; };
 		83F31C3F1BAC56CB008E7CA2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C3E1BAC56CB008E7CA2 /* Parse.framework */; };
 		83F31C411BAC5A71008E7CA2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C401BAC5A71008E7CA2 /* AudioToolbox.framework */; };
 		83F31C431BAC5A7B008E7CA2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C421BAC5A7B008E7CA2 /* Accounts.framework */; };
@@ -76,8 +75,6 @@
 		3805E1761B831B1B004463B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3805E1771B831B1B004463B8 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
 		38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		830922C81BB0235000BF6AEC /* ParseBackend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseBackend.h; sourceTree = "<group>"; };
-		830922C91BB0235000BF6AEC /* ParseBackend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseBackend.m; sourceTree = "<group>"; };
 		83F31C3E1BAC56CB008E7CA2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../Downloads/parse-library-1/Parse.framework"; sourceTree = "<group>"; };
 		83F31C401BAC5A71008E7CA2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83F31C421BAC5A7B008E7CA2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
@@ -165,8 +162,6 @@
 				3805E1681B831B1B004463B8 /* Images.xcassets */,
 				3805E16A1B831B1B004463B8 /* LaunchScreen.xib */,
 				3805E15B1B831B1B004463B8 /* Supporting Files */,
-				830922C81BB0235000BF6AEC /* ParseBackend.h */,
-				830922C91BB0235000BF6AEC /* ParseBackend.m */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -324,7 +319,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830922CA1BB0235000BF6AEC /* ParseBackend.m in Sources */,
 				3805E1641B831B1B004463B8 /* ViewController.m in Sources */,
 				3805E1611B831B1B004463B8 /* AppDelegate.m in Sources */,
 				3805E15E1B831B1B004463B8 /* main.m in Sources */,
