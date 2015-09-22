@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fFq-mp-1bk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fFq-mp-1bk">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--Welcome-->
@@ -17,21 +17,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="vEe-ue-ZYh">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbx-hW-cJo">
-                                <rect key="frame" x="280" y="285" width="40" height="30"/>
-                                <state key="normal" title="Share"/>
+                                <rect key="frame" x="230" y="290" width="140" height="40"/>
+                                <color key="backgroundColor" red="0.10196078431372549" green="0.47843137254901957" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="kBZ-4N-OHb"/>
+                                    <constraint firstAttribute="height" constant="40" id="znT-4J-SLd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Share now">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vad-xv-uuF"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="hkH-L3-imL">
+                                <rect key="frame" x="242" y="74" width="116" height="116"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="T2o-kZ-yPo"/>
+                                    <constraint firstAttribute="height" constant="116" id="xUP-aK-eRl"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVl-Y9-BBF">
+                                <rect key="frame" x="10" y="530" width="580" height="61"/>
+                                <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHI-ec-cZ2">
+                                <rect key="frame" x="15" y="534" width="570" height="51"/>
+                                <string key="text">Boost the performance of sharing and invite flows by recommending exactly who users should invite. We use machine learning and social graph analysis to tailor results just for your product and users.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="YesGraph Helps Your App Grow" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xba-dN-0C5">
+                                <rect key="frame" x="190" y="222" width="221" height="30"/>
+                                <color key="backgroundColor" red="0.88235294117647056" green="0.12156862745098039" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Mp8-Tz-bHQ"/>
+                                    <constraint firstAttribute="width" constant="221" id="ewq-sh-wXs"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dVl-Y9-BBF" secondAttribute="bottom" constant="10" id="2tq-vR-2ZN"/>
+                            <constraint firstItem="vEe-ue-ZYh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5qp-1V-ZmL"/>
+                            <constraint firstItem="hHI-ec-cZ2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="6ff-hY-HpJ"/>
+                            <constraint firstItem="Xba-dN-0C5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9gD-Es-MpD"/>
+                            <constraint firstItem="dVl-Y9-BBF" firstAttribute="height" secondItem="hHI-ec-cZ2" secondAttribute="height" constant="10" id="LCS-gg-OAB"/>
+                            <constraint firstAttribute="trailing" secondItem="dVl-Y9-BBF" secondAttribute="trailing" constant="10" id="RNF-kh-u1y"/>
+                            <constraint firstAttribute="trailing" secondItem="hHI-ec-cZ2" secondAttribute="trailing" constant="15" id="VNu-xB-jkB"/>
                             <constraint firstItem="bbx-hW-cJo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fhJ-SA-nMs"/>
-                            <constraint firstItem="bbx-hW-cJo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fqk-fb-J46"/>
+                            <constraint firstAttribute="bottom" secondItem="hHI-ec-cZ2" secondAttribute="bottom" constant="15" id="fiF-v0-46c"/>
+                            <constraint firstItem="bbx-hW-cJo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="10" id="fqk-fb-J46"/>
+                            <constraint firstAttribute="trailing" secondItem="vEe-ue-ZYh" secondAttribute="trailing" id="fzg-21-Rrc"/>
+                            <constraint firstItem="vEe-ue-ZYh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gcy-XC-AhH"/>
+                            <constraint firstItem="bbx-hW-cJo" firstAttribute="top" secondItem="Xba-dN-0C5" secondAttribute="bottom" constant="38" id="ie5-QH-T7m"/>
+                            <constraint firstItem="hkH-L3-imL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="se6-sk-7tK"/>
+                            <constraint firstItem="dVl-Y9-BBF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="tju-jO-qHN"/>
+                            <constraint firstItem="Xba-dN-0C5" firstAttribute="top" secondItem="hkH-L3-imL" secondAttribute="bottom" constant="32" id="uUw-G8-uQG"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vEe-ue-ZYh" secondAttribute="bottom" id="wqx-OH-7aM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="Lg2-bk-igb"/>
+                    <connections>
+                        <outlet property="introTextField" destination="Xba-dN-0C5" id="AsN-l1-xDB"/>
+                        <outlet property="shareButton" destination="bbx-hW-cJo" id="ilV-vQ-4HJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -56,4 +116,8 @@
             <point key="canvasLocation" x="60" y="-332"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="background" width="931" height="441"/>
+        <image name="logo" width="152" height="152"/>
+    </resources>
 </document>

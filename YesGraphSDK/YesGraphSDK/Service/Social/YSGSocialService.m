@@ -9,7 +9,6 @@
 @import Social;
 
 #import "YSGShareSheetController.h"
-
 #import "YSGSocialService.h"
 
 @implementation YSGSocialService

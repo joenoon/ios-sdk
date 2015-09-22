@@ -17,9 +17,11 @@
 #import "YSGLocalContactSource.h"
 #import "YSGCacheContactSource.h"
 #import "YSGOnlineContactSource.h"
+#import "YSGIconDrawings.h"
 #import "UIAlertController+YSGDisplay.h"
 #import "YSGTheme.h"
 #import "YSGMessaging.h"
+
 
 NSString *_Nonnull const YSGInvitePhoneContactsKey = @"YSGInvitePhoneContactsKey";
 NSString *_Nonnull const YSGInviteEmailContactsKey = @"YSGInviteEmailContactsKey";
@@ -49,7 +51,12 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.mainColor;
+    return self.theme.baseColor;
+}
+
+- (UIImage *)serviceImage
+{
+    return [YSGIconDrawings phoneImage];
 }
 
 - (instancetype)init
@@ -92,16 +99,19 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)openInviteControllerWithController:(nonnull YSGShareSheetController *)viewController
 {
-    YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
     
-    addressBookViewController.service = self;
+        addressBookViewController.service = self;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
     
-    self.viewController = viewController;
-    self.addressBookNavigationController = navigationController;
-    
-    [viewController presentViewController:navigationController animated:YES completion:nil];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
+        
+        self.viewController = viewController;
+        self.addressBookNavigationController = navigationController;
+        
+        [viewController presentViewController:navigationController animated:YES completion:nil];
+    });
 }
 
 - (void)triggerInviteFlowWithContacts:(NSArray<YSGContact *> *)entries
