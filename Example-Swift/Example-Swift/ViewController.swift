@@ -11,11 +11,10 @@ import YesGraphSDK
 
 class ViewController: UIViewController, YSGShareSheetDelegate {
 
-    @IBOutlet weak var additionalNotesTextView: UILabel!
     override func viewDidLoad() {
         
         let theme = YSGTheme()
-
+        theme.baseColor = UIColor.redColor();
         if let addrBookTheme = theme.shareAddressBookTheme {
             addrBookTheme.viewBackground = UIColor.redColor().colorWithAlphaComponent(0.38);
         }
