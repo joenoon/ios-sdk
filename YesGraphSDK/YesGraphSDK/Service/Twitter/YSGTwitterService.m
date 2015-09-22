@@ -9,7 +9,7 @@
 @import Social;
 
 #import "YSGTwitterService.h"
-#import "YSGTheme.h"
+#import "YSGIconDrawings.h"
 
 @implementation YSGTwitterService
 
@@ -26,6 +26,11 @@
 - (NSString *)serviceType
 {
     return SLServiceTypeTwitter;
+}
+
+- (UIImage *)serviceImage
+{
+    return [YSGIconDrawings twitterImage];
 }
 
 @end

@@ -56,7 +56,7 @@ typedef union
  *
  */
 
-@property (nonnull, nonatomic, strong) UIColor *shareViewBackgroundColor;
+@property (nonnull, nonatomic, strong) UIColor *baseColor;
 
 /*!
  *  Font family of the Share UI

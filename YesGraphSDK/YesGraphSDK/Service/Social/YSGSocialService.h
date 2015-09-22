@@ -7,6 +7,7 @@
 //
 
 #import "YSGShareService.h"
+#import "YSGTheme.h"
 
 @interface YSGSocialService : YSGShareService
 

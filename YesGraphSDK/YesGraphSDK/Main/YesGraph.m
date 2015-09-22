@@ -161,7 +161,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         // Defaults
         //
         
-        self.contactBookTimePeriod = YSGDefaultContactBookTimePeriod;
+//        self.contactBookTimePeriod = YSGDefaultContactBookTimePeriod;
     }
     
     return self;

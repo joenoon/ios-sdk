@@ -48,7 +48,10 @@
     //
     // TODO: Random
     //
-    return @"RandomID";
+    const NSInteger stringLength = 16 / sizeof(UInt32);
+    UInt32 stringBytes[stringLength];
+    arc4random_buf(stringBytes, stringLength * sizeof(UInt32));
+    return @"";
 }
 
 @end

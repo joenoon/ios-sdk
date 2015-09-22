@@ -9,6 +9,7 @@
 #import "YSGShareSheetController.h"
 #import "YSGShareSheetServiceCell.h"
 #import "YSGTheme.h"
+#import "YSGDrawableView.h"
 
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
@@ -59,18 +60,23 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 #pragma mark - UIViewController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Share", @"Share");
-    
-    if (!self.theme)
-    {
-        self.theme = [YSGTheme new];
+    if ([self isModal]) {
+        // set up if view was prsented modally
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonPressed:)];
+        backButton.tintColor = self.baseColor;
+        self.navigationItem.leftBarButtonItem = backButton;
     }
-    self.navigationController.navigationBar.tintColor = self.theme.mainColor;
-    self.view.backgroundColor = self.theme.shareViewBackgroundColor;
+    else {
+        self.navigationController.navigationBar.tintColor = self.baseColor;
+        self.title = @"Share";
+    }
+
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
@@ -78,10 +84,12 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     // Setup views
     //
     
-    cellWidth = self.view.frame.size.width/5;
+    cellWidth = 75;
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(cellWidth, cellWidth);
+    flowLayout.minimumInteritemSpacing = 10;
+    flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     
@@ -92,15 +100,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
-    
-    //
-    // Referral link view
-    //
-    
-    UIView* footer = [[UIView alloc] init];
-    footer.translatesAutoresizingMaskIntoConstraints = NO;
-    footer.backgroundColor = [UIColor clearColor];
     
     //
     // Header container view - logo + text
@@ -123,27 +122,58 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = @"Share this app with friends to get our eternal gratitude";
-    shareLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareButtonLabelFontSize];
-    shareLabel.textColor = self.theme.textColor;
+    shareLabel.font = [UIFont systemFontOfSize:36.f];
+    shareLabel.textColor = self.baseColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
-    //shareLabel.backgroundColor = [UIColor redColor];
-    shareLabel.textAlignment = self.theme.shareLabelTextAlignment;
+    shareLabel.textAlignment = NSTextAlignmentCenter;
     [shareLabel sizeToFit];
     
-    [header addSubview:shareLabel];
-    
     [self.view addSubview:header];
+    [header addSubview:shareLabel];
     [header addSubview:logoView];
     [header addSubview:shareLabel];
-    
-    [self.view addSubview:footer];
     
     UICollectionView *collectionView = self.collectionView;
     [self.view addSubview:self.collectionView];
     
+    //
+    // Referral link view
+    //
+    
+    UIView* footer = [[UIView alloc] init];
+    UILabel *referraLabel = [UILabel new];
+    UIButton *copyButton = [UIButton new];
+    
+    if (self.referralURL) {
+        
+        footer.translatesAutoresizingMaskIntoConstraints = NO;
+        footer.layer.borderColor = self.baseColor.CGColor;
+        footer.layer.borderWidth = 1.0f;
+        footer.layer.cornerRadius = 20;
+        
+        referraLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        referraLabel.text = self.referralURL;
+        referraLabel.textColor = [UIColor blackColor];
+        referraLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [referraLabel sizeToFit];
+        
+        copyButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [copyButton setTitle:@"copy" forState:UIControlStateNormal];
+        [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
+        [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
+        [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [copyButton sizeToFit];
+        
+    }
+    
+    [self.view addSubview:footer];
+    [footer addSubview:referraLabel];
+    [footer addSubview:copyButton];
+    
     UIView *superview = self.view;
-    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView, shareLabel, logoView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, collectionView, shareLabel, logoView, footer, referraLabel, copyButton);
     
     //
     // Constraints
@@ -157,7 +187,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[footer]-10-|" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[footer]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:horizontalConstraints];
     
@@ -169,7 +199,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(60)]" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[referraLabel]-10-[copyButton]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:horizontalConstraints];
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(40)]" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
@@ -177,7 +211,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:verticalConstraints];
     
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[referraLabel]-0-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:verticalConstraints];
+    
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[copyButton]-0-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:verticalConstraints];
+    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:referraLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:footer attribute:NSLayoutAttributeWidth multiplier:0.7 constant:1]];
     
     [self.view layoutIfNeeded];
 
@@ -201,14 +245,15 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         cell = [[YSGShareSheetServiceCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
     }
     
+    YSGDrawableView *draw = [YSGDrawableView new];
+    [self.view addSubview:draw];
+    
     cell.text = service.name;
-    cell.shape = service.theme.shareButtonShape;
+    cell.shape = YSGShareSheetServiceCellShapeCircle;
     cell.icon = service.serviceImage;
-    cell.backgroundColor = [service.backgroundColor
-                            colorWithAlphaComponent:service.theme.shareButtonFadeFactors.AlphaUnfadeFactor];
+    cell.backgroundColor = service.backgroundColor;
     cell.font = [UIFont fontWithName:service.fontFamily size:14];
     cell.textColor = service.backgroundColor;
-    cell.textAlignment = self.theme.shareButtonLabelTextAlignment;
     
     return cell;
 }
@@ -235,13 +280,14 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 - (UIEdgeInsets)collectionView: (UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
     
-    float cellSpacing = 10.f;
+    float cellSpacing = [(UICollectionViewFlowLayout*)collectionViewLayout minimumInteritemSpacing];
     
     // centers cell section in container horizontally
     CGFloat containerWidth = collectionView.frame.size.width;
-    CGFloat horizontalEdgeInset = containerWidth - (3 * cellWidth + 2 * cellSpacing);
     
-    return UIEdgeInsetsMake(0 * 0.25, horizontalEdgeInset * 0.4, 0, horizontalEdgeInset * 0.4);
+    CGFloat horizontalEdgeInset = containerWidth - (self.services.count * cellWidth + (self.services.count-1) * cellSpacing);
+    
+    return UIEdgeInsetsMake(0, horizontalEdgeInset/2, 0, horizontalEdgeInset/2);
 }
 
 
@@ -252,8 +298,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [UIView animateWithDuration:0.2 animations:^
     {
-        cell.backgroundColor = [cell.backgroundColor
-                                colorWithAlphaComponent:self.theme.shareButtonFadeFactors.AlphaFadeFactor];
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
     }];
 }
 
@@ -261,10 +306,39 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [UIView animateWithDuration:0.4 animations:^
     {
-        cell.backgroundColor = [cell.backgroundColor
-                                colorWithAlphaComponent:self.theme.shareButtonFadeFactors.AlphaUnfadeFactor];
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
     }];
 }
 
+- (void)copy:(id)sender
+{
+    UIPasteboard *gpBoard = [UIPasteboard generalPasteboard];
+    NSString *referralString = self.referralURL;
+    if (referralString) {
+        [gpBoard setString:referralString];
+    }
+    
+    [sender setTitle:@"copied" forState:UIControlStateNormal];
+}
+
+// figure out if view was presented modally
+- (BOOL)isModal
+{
+    if([self presentingViewController])
+        return YES;
+    if([[self presentingViewController] presentedViewController] == self)
+        return YES;
+    if([[[self navigationController] presentingViewController] presentedViewController] == [self navigationController])
+        return YES;
+    if([[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]])
+        return YES;
+    
+    return NO;
+}
+
+-(void)closeButtonPressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

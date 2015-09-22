@@ -52,6 +52,16 @@
                ReferencedContainer = "container:Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "38CC16C71B831606008477C7"
+               BuildableName = "YesGraphSDKTests.xctest"
+               BlueprintName = "YesGraphSDKTests"
+               ReferencedContainer = "container:../YesGraphSDK/YesGraphSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

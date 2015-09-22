@@ -19,7 +19,7 @@
         self.twitterColor = [UIColor colorWithRed:0.31 green:0.67 blue:0.95 alpha:1];
         self.facebookColor = [UIColor colorWithRed:0.28 green:0.38 blue:0.64 alpha:1];
         self.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
-        self.shareViewBackgroundColor = [UIColor whiteColor];
+        self.baseColor = [UIColor whiteColor];
         // set default font details
         self.fontFamily = @"Helvetica";
         self.shareButtonLabelFontSize = 36.f;
