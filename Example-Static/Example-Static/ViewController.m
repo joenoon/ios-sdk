@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "YesGraphSDK/YesGraphSDK.h"
+#import <Parse/Parse.h>
 
 @interface ViewController () <YSGShareSheetDelegate>
 
@@ -20,6 +21,19 @@
 - (void)viewDidLoad
 {
     theme = [YSGTheme new];
+    [super viewDidLoad];
+    
+    if ([YesGraph shared].userId)
+    {
+        [self setYSGclientKey:[YesGraph shared].userId];
+    }
+    
+    // for parse backend example, we set a user id '1234' if there is none set in YesGraph class
+    else
+    {
+        [self setYSGclientKey:@"1234"];
+    }
+    
     [super viewDidLoad];
 }
 
@@ -66,6 +80,36 @@
     }
     
     return @{ YSGShareSheetMessageKey : @"" };
+}
+
+- (void)setYSGclientKey:(NSString *)userId
+{
+    [PFCloud callFunctionInBackground:@"YGgetClientKey"
+                       withParameters:[[NSDictionary alloc] initWithObjectsAndKeys:userId, @"userId", nil]
+                                block:^(NSString *response, NSError *error) {
+                                    if (!error)
+                                    {
+                                        NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                                        
+                                        NSError *jsonSerializationError;
+                                        id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:(NSJSONReadingMutableContainers)error:&jsonSerializationError];
+                                        if (jsonSerializationError)
+                                        {
+                                            NSLog(@"Json serizalization error: %@", jsonSerializationError.description);
+                                        }
+                                        
+                                        NSString *YSGclientKey = [jsonObject objectForKey:@"client_key"];
+                                        if (YSGclientKey)
+                                        {
+                                            NSLog(@"Yes Graph client key: %@", YSGclientKey);
+                                            [[YesGraph shared] configureWithClientKey:YSGclientKey];
+                                        }
+                                    }
+                                    else
+                                    {
+                                        NSLog(@"Error:%@", error.description);
+                                    }
+                                }];
 }
 
 @end

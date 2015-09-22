@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fFq-mp-1bk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9046" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fFq-mp-1bk">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9035"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -26,7 +26,7 @@
         <!--Welcome-->
         <scene sceneID="bMa-ir-fsk">
             <objects>
-                <viewController id="eIW-Yy-bL8" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="eIW-Yy-bL8" customClass="ViewController" customModule="Example_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HcF-2n-DZ4"/>
                         <viewControllerLayoutGuide type="bottom" id="3yU-Qw-3nP"/>
@@ -108,7 +108,6 @@
                     <navigationItem key="navigationItem" title="Welcome" id="TND-lE-9QW"/>
                     <connections>
                         <outlet property="introTextField" destination="Bkg-y5-vvo" id="Ygc-2z-O8G"/>
-                        <outlet property="shareButton" destination="huc-kQ-NVz" id="jJS-dp-6RY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NBn-kl-bjX" sceneMemberID="firstResponder"/>
@@ -118,6 +117,6 @@
     </scenes>
     <resources>
         <image name="background" width="931" height="441"/>
-        <image name="logo" width="152" height="152"/>
+        <image name="logo" width="156" height="80"/>
     </resources>
 </document>
