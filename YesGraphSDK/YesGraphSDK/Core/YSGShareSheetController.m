@@ -9,6 +9,7 @@
 #import "YSGShareSheetController.h"
 #import "YSGShareSheetServiceCell.h"
 #import "YSGTheme.h"
+#import "YSGDrawableView.h"
 
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
@@ -59,15 +60,22 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 #pragma mark - UIViewController
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.title = NSLocalizedString(@"Share", @"Share");
-    self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
-    
-    //    self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-    
+    if ([self isModal]) {
+        // set up if view was prsented modally
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonPressed:)];
+        backButton.tintColor = self.baseColor;
+        self.navigationItem.leftBarButtonItem = backButton;
+    }
+    else {
+        self.navigationController.navigationBar.tintColor = self.baseColor;
+        self.title = @"Share";
+    }
+
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -91,15 +99,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    
-    //
-    // Referral link view
-    //
-    
-    UIView* footer = [[UIView alloc] init];
-    footer.translatesAutoresizingMaskIntoConstraints = NO;
-    footer.backgroundColor = [UIColor clearColor];
-    
     //
     // Header container view - logo + text
     //
@@ -122,26 +121,57 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = @"Share this app with friends to get our eternal gratitude";
     shareLabel.font = [UIFont systemFontOfSize:36.f];
-    shareLabel.textColor = [UIColor redColor];
+    shareLabel.textColor = self.baseColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
-    //shareLabel.backgroundColor = [UIColor redColor];
     shareLabel.textAlignment = NSTextAlignmentCenter;
     [shareLabel sizeToFit];
     
-    [header addSubview:shareLabel];
-    
     [self.view addSubview:header];
+    [header addSubview:shareLabel];
     [header addSubview:logoView];
     [header addSubview:shareLabel];
-    
-    [self.view addSubview:footer];
     
     UICollectionView *collectionView = self.collectionView;
     [self.view addSubview:self.collectionView];
     
+    //
+    // Referral link view
+    //
+    
+    UIView* footer = [[UIView alloc] init];
+    UILabel *referraLabel = [UILabel new];
+    UIButton *copyButton = [UIButton new];
+    
+    if (self.referralURL) {
+        
+        footer.translatesAutoresizingMaskIntoConstraints = NO;
+        footer.layer.borderColor = self.baseColor.CGColor;
+        footer.layer.borderWidth = 1.0f;
+        footer.layer.cornerRadius = 20;
+        
+        referraLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        referraLabel.text = self.referralURL;
+        referraLabel.textColor = [UIColor blackColor];
+        referraLabel.textAlignment = NSTextAlignmentCenter;
+        
+        [referraLabel sizeToFit];
+        
+        copyButton.translatesAutoresizingMaskIntoConstraints = NO;
+        [copyButton setTitle:@"copy" forState:UIControlStateNormal];
+        [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
+        [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
+        [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [copyButton sizeToFit];
+        
+    }
+    
+    [self.view addSubview:footer];
+    [footer addSubview:referraLabel];
+    [footer addSubview:copyButton];
+    
     UIView *superview = self.view;
-    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, footer, collectionView, shareLabel, logoView);
+    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, collectionView, shareLabel, logoView, footer, referraLabel, copyButton);
     
     //
     // Constraints
@@ -155,7 +185,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[footer]-10-|" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[footer]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:horizontalConstraints];
     
@@ -167,7 +197,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(60)]" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[referraLabel]-10-[copyButton]-10-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:horizontalConstraints];
+    
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]-10-[footer(40)]" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
@@ -175,7 +209,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:verticalConstraints];
     
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[referraLabel]-0-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:verticalConstraints];
+    
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[copyButton]-0-|" options:0 metrics:nil views:views];
+    
+    [self.view addConstraints:verticalConstraints];
+    
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
+    
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:referraLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:footer attribute:NSLayoutAttributeWidth multiplier:0.7 constant:1]];
     
     [self.view layoutIfNeeded];
 
@@ -198,6 +242,9 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     {
         cell = [[YSGShareSheetServiceCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
     }
+    
+    YSGDrawableView *draw = [YSGDrawableView new];
+    [self.view addSubview:draw];
     
     cell.text = service.name;
     cell.shape = YSGShareSheetServiceCellShapeCircle;
@@ -260,5 +307,35 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     }];
 }
 
+- (void)copy:(id)sender
+{
+    UIPasteboard *gpBoard = [UIPasteboard generalPasteboard];
+    NSString *referralString = self.referralURL;
+    if (referralString) {
+        [gpBoard setString:referralString];
+    }
+    
+    [sender setTitle:@"copied" forState:UIControlStateNormal];
+}
+
+// figure out if view was presented modally
+- (BOOL)isModal
+{
+    if([self presentingViewController])
+        return YES;
+    if([[self presentingViewController] presentedViewController] == self)
+        return YES;
+    if([[[self navigationController] presentingViewController] presentedViewController] == [self navigationController])
+        return YES;
+    if([[[self tabBarController] presentingViewController] isKindOfClass:[UITabBarController class]])
+        return YES;
+    
+    return NO;
+}
+
+-(void)closeButtonPressed:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
