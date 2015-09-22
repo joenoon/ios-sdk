@@ -32,11 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, readonly, copy) NSString *userId;
 
 /*!
- *  Client key used with YesGraph SDK
- */
-@property (nullable, nonatomic, readonly, copy) NSString *clientKey;
-
-/*!
  *  Shared instance to YesGraph
  *
  *  @return instance of YesGraph SDK

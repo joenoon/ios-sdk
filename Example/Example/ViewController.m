@@ -105,37 +105,32 @@
 
 - (void)setYSGclientKey:(NSString *)userId
 {
-    __block NSString *YSGclientKey = [YesGraph shared].clientKey;
-    
-    if (!YSGclientKey)
-    {
-        [PFCloud callFunctionInBackground:@"YGgetClientKey"
-                           withParameters:[[NSDictionary alloc] initWithObjectsAndKeys:userId, @"userId", nil]
-                                    block:^(NSString *response, NSError *error) {
-                                        if (!error)
+    [PFCloud callFunctionInBackground:@"YGgetClientKey"
+                       withParameters:[[NSDictionary alloc] initWithObjectsAndKeys:userId, @"userId", nil]
+                                block:^(NSString *response, NSError *error) {
+                                    if (!error)
+                                    {
+                                        NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                                        
+                                        NSError *jsonSerializationError;
+                                        id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:(NSJSONReadingMutableContainers)error:&jsonSerializationError];
+                                        if (jsonSerializationError)
                                         {
-                                            NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
-                                            
-                                            NSError *jsonSerializationError;
-                                            id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:(NSJSONReadingMutableContainers)error:&jsonSerializationError];
-                                            if (jsonSerializationError)
-                                            {
-                                                NSLog(@"Json serizalization error: %@", jsonSerializationError.description);
-                                            }
-                                            
-                                            YSGclientKey = [jsonObject objectForKey:@"client_key"];
-                                            if (YSGclientKey)
-                                            {
-                                                NSLog(@"Yes Graph client key: %@", YSGclientKey);
-                                                [[YesGraph shared] configureWithClientKey:YSGclientKey];
-                                            }
+                                            NSLog(@"Json serizalization error: %@", jsonSerializationError.description);
                                         }
-                                        else
+                                        
+                                        NSString *YSGclientKey = [jsonObject objectForKey:@"client_key"];
+                                        if (YSGclientKey)
                                         {
-                                            NSLog(@"Error:%@", error.description);
+                                            NSLog(@"Yes Graph client key: %@", YSGclientKey);
+                                            [[YesGraph shared] configureWithClientKey:YSGclientKey];
                                         }
-                                    }];
-    }
+                                    }
+                                    else
+                                    {
+                                        NSLog(@"Error:%@", error.description);
+                                    }
+                                }];
 }
 
 @end
