@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30420E521BAC763900C1D614 /* YSGIconDrawings.h in Headers */ = {isa = PBXBuildFile; fileRef = 30420E501BAC763900C1D614 /* YSGIconDrawings.h */; settings = {ASSET_TAGS = (); }; };
+		30420E531BAC763900C1D614 /* YSGIconDrawings.m in Sources */ = {isa = PBXBuildFile; fileRef = 30420E511BAC763900C1D614 /* YSGIconDrawings.m */; settings = {ASSET_TAGS = (); }; };
 		3800EE961B83769C007E0C43 /* YSGShareSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3800EE941B83769C007E0C43 /* YSGShareSheetController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3800EE971B83769C007E0C43 /* YSGShareSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3800EE951B83769C007E0C43 /* YSGShareSheetController.m */; };
 		3809373E1B84D0EA00FBF888 /* YSGTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 3809373C1B84D0EA00FBF888 /* YSGTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -220,6 +222,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		30420E501BAC763900C1D614 /* YSGIconDrawings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGIconDrawings.h; sourceTree = "<group>"; };
+		30420E511BAC763900C1D614 /* YSGIconDrawings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGIconDrawings.m; sourceTree = "<group>"; };
 		3800EE941B83769C007E0C43 /* YSGShareSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareSheetController.h; sourceTree = "<group>"; };
 		3800EE951B83769C007E0C43 /* YSGShareSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGShareSheetController.m; sourceTree = "<group>"; };
 		3809373C1B84D0EA00FBF888 /* YSGTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGTheme.h; sourceTree = "<group>"; };
@@ -533,6 +537,8 @@
 		38EDF4D41B9DC79300B91C3D /* YSGDrawing */ = {
 			isa = PBXGroup;
 			children = (
+				30420E501BAC763900C1D614 /* YSGIconDrawings.h */,
+				30420E511BAC763900C1D614 /* YSGIconDrawings.m */,
 				38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */,
 				38EDF4D71B9DC80D00B91C3D /* YSGDrawingConstants.h */,
 				38EDF4D81B9DC80D00B91C3D /* YSGDrawingConstants.m */,
@@ -708,6 +714,7 @@
 				389ABFB71B8E1AD900E4E3F1 /* NSObject+YSGIntrospection.h in Headers */,
 				38B20AE81B9886E700AE3DED /* YSGSources.h in Headers */,
 				389ABFBB1B8E1AD900E4E3F1 /* NSArray+YSGParsable.h in Headers */,
+				30420E521BAC763900C1D614 /* YSGIconDrawings.h in Headers */,
 				387DC5041B8E349500E78114 /* YSGParsing.h in Headers */,
 				67E641FDFFA2B8E33DF1EACB /* YSGContactList.h in Headers */,
 				385B64CA1B831CA900C55F60 /* YSGAddressBookViewController.h in Headers */,
@@ -944,6 +951,7 @@
 				67E6445BDC3B56C4CCA249BA /* YSGSource.m in Sources */,
 				67E640A6A9838954FBD5930C /* YSGFacebookService.m in Sources */,
 				67E641B1582113A0B97033D6 /* YSGTwitterService.m in Sources */,
+				30420E531BAC763900C1D614 /* YSGIconDrawings.m in Sources */,
 				67E6457C63007075DC33DC31 /* YSGSocialService.m in Sources */,
 				38C581D31B9EF35C008676F0 /* YSGLoggingConstants.m in Sources */,
 				67E6458F02FC1DD77531EBEC /* YSGInviteService.m in Sources */,
