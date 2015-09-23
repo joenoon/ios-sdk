@@ -13,13 +13,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    static let ParseApplicationID : String = "BU2njCAM4ZGNHuh2meG9Ca3zkBjqlbUd1WSwHmGG";
-    static let ParseClientKey : String = "o7bc0AL0X2gmE5eh1doecNSJPKjS6VtpVx1kaEzG";
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-        Parse.setApplicationId(AppDelegate.ParseApplicationID, clientKey: AppDelegate.ParseClientKey);
-        
-        return true;
-    }
-    
 }

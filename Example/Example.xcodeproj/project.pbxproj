@@ -16,7 +16,8 @@
 		3805E1781B831B1B004463B8 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1771B831B1B004463B8 /* ExampleTests.m */; };
 		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
 		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		83F31C3F1BAC56CB008E7CA2 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C3E1BAC56CB008E7CA2 /* Parse.framework */; };
+		832AE90D1BB29979003600AD /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832AE90B1BB29979003600AD /* Bolts.framework */; };
+		832AE90E1BB29979003600AD /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 832AE90C1BB29979003600AD /* Parse.framework */; };
 		83F31C411BAC5A71008E7CA2 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C401BAC5A71008E7CA2 /* AudioToolbox.framework */; };
 		83F31C431BAC5A7B008E7CA2 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C421BAC5A7B008E7CA2 /* Accounts.framework */; };
 		83F31C451BAC5A83008E7CA2 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C441BAC5A83008E7CA2 /* AdSupport.framework */; };
@@ -33,7 +34,6 @@
 		83F31C5B1BAC5AEB008E7CA2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C5A1BAC5AEB008E7CA2 /* SystemConfiguration.framework */; };
 		83F31C5D1BAC5AF0008E7CA2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C5C1BAC5AF0008E7CA2 /* UIKit.framework */; };
 		83F31C5F1BAC5AF9008E7CA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C5E1BAC5AF9008E7CA2 /* Foundation.framework */; };
-		83F31C611BAC5B35008E7CA2 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F31C601BAC5B35008E7CA2 /* Bolts.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +75,8 @@
 		3805E1761B831B1B004463B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3805E1771B831B1B004463B8 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
 		38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		83F31C3E1BAC56CB008E7CA2 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../../../../Downloads/parse-library-1/Parse.framework"; sourceTree = "<group>"; };
+		832AE90B1BB29979003600AD /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		832AE90C1BB29979003600AD /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		83F31C401BAC5A71008E7CA2 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		83F31C421BAC5A7B008E7CA2 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		83F31C441BAC5A83008E7CA2 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -92,7 +93,6 @@
 		83F31C5A1BAC5AEB008E7CA2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		83F31C5C1BAC5AF0008E7CA2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		83F31C5E1BAC5AF9008E7CA2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		83F31C601BAC5B35008E7CA2 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "../../../../../Downloads/parse-library-1/Bolts.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83F31C611BAC5B35008E7CA2 /* Bolts.framework in Frameworks */,
 				83F31C5F1BAC5AF9008E7CA2 /* Foundation.framework in Frameworks */,
 				83F31C5D1BAC5AF0008E7CA2 /* UIKit.framework in Frameworks */,
 				83F31C5B1BAC5AEB008E7CA2 /* SystemConfiguration.framework in Frameworks */,
@@ -114,10 +113,11 @@
 				83F31C4B1BAC5A9A008E7CA2 /* CoreLocation.framework in Frameworks */,
 				83F31C491BAC5A93008E7CA2 /* CoreGraphics.framework in Frameworks */,
 				83F31C471BAC5A8B008E7CA2 /* CFNetwork.framework in Frameworks */,
+				832AE90E1BB29979003600AD /* Parse.framework in Frameworks */,
 				83F31C451BAC5A83008E7CA2 /* AdSupport.framework in Frameworks */,
 				83F31C431BAC5A7B008E7CA2 /* Accounts.framework in Frameworks */,
+				832AE90D1BB29979003600AD /* Bolts.framework in Frameworks */,
 				83F31C411BAC5A71008E7CA2 /* AudioToolbox.framework in Frameworks */,
-				83F31C3F1BAC56CB008E7CA2 /* Parse.framework in Frameworks */,
 				38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,7 +195,8 @@
 		385B64D31B831DD900C55F60 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				83F31C601BAC5B35008E7CA2 /* Bolts.framework */,
+				832AE90B1BB29979003600AD /* Bolts.framework */,
+				832AE90C1BB29979003600AD /* Parse.framework */,
 				83F31C5E1BAC5AF9008E7CA2 /* Foundation.framework */,
 				83F31C5C1BAC5AF0008E7CA2 /* UIKit.framework */,
 				83F31C5A1BAC5AEB008E7CA2 /* SystemConfiguration.framework */,
@@ -212,7 +213,6 @@
 				83F31C441BAC5A83008E7CA2 /* AdSupport.framework */,
 				83F31C421BAC5A7B008E7CA2 /* Accounts.framework */,
 				83F31C401BAC5A71008E7CA2 /* AudioToolbox.framework */,
-				83F31C3E1BAC56CB008E7CA2 /* Parse.framework */,
 				38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */,
 			);
 			name = Frameworks;
@@ -450,7 +450,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yesgraph.$(PRODUCT_NAME:rfc1034identifier)";
@@ -462,7 +465,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yesgraph.$(PRODUCT_NAME:rfc1034identifier)";
