@@ -31,7 +31,9 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Sent To Selected Contacts"];
     YSGContactList *listOfContacts = [YSGTestMockData mockContactList];
 
-    [self.client updateInviteSent:listOfContacts.entries completion:^(NSError * error)
+    [self.client updateInviteSentToContacts:listOfContacts.entries
+                                  forUserId:YSGTestClientID
+                             withCompletion:^(NSError *_Nullable error)
     {
         if (error)
         {
@@ -42,7 +44,8 @@
             [expectation fulfill];
         }
     }];
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * error)
+    [self waitForExpectationsWithTimeout:5.0
+                                 handler:^(NSError *error)
     {
         if (error)
         {

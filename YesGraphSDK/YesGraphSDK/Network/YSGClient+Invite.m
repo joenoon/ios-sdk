@@ -10,9 +10,33 @@
 
 @implementation YSGClient (Invite)
 
-- (void)updateInviteSent:(NSArray<YSGContact *> *)invites completion:(void (^)(NSError *_Nullable))completion
+- (void)updateInviteSentToContacts:(nonnull NSArray<YSGContact *> *)invited
+                         forUserId:(nonnull NSString *)userId
+                    withCompletion:(nullable void (^)(NSError * _Nullable error))completion
 {
-    [self POST:@"invite-sent" parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+    for(YSGContact *contact in invited)
+    {
+        [self updateInviteSentToContact:contact forUserId:userId withCompletion:completion];
+    }
+}
+
+- (void)updateInviteSentToContact:(nonnull YSGContact *)invitee
+                        forUserId:(nonnull NSString *)userId
+                   withCompletion:(nullable void (^)(NSError * _Nullable error))completion
+{
+
+    NSMutableDictionary *parameter = [NSMutableDictionary new];
+    parameter[@"user_id"] = userId;
+    if (invitee.email)
+    {
+        parameter[@"email"] = invitee.email;
+    }
+    else if (invitee.phone)
+    {
+        parameter[@"phone"] = invitee.phone;
+    }
+
+    [self POST:@"invite-sent" parameters:parameter completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
     {
         if (completion)
         {
