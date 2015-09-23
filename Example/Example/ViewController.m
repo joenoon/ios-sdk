@@ -69,8 +69,7 @@
     // PRESENT MODALLY
     //
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
-    
+    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
     //[self presentViewController:navController animated:YES completion:nil];
     
     //

@@ -13,16 +13,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
 
     override func viewDidLoad() {
         
-        let theme = YSGTheme()
-        
-        // Welcome Screen
-        
-        self.introTextField.textColor = theme.textColor;
-        self.introTextField.font = UIFont(name: theme.fontFamily, size: self.introTextField.font!.pointSize);
-        
-        self.additionalNotesTextView.textColor = theme.textColor;
-        self.additionalNotesTextView.font = UIFont(name: theme.fontFamily, size: self.additionalNotesTextView.font!.pointSize);
-        
         super.viewDidLoad()
     }
     
@@ -59,4 +49,5 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
     }
     
 }
+
 
