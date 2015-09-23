@@ -7,6 +7,7 @@
 //
 
 #import "YSGTestMockData.h"
+#import "YSGTestSettings.h"
 
 @implementation YSGTestMockData
 
@@ -14,7 +15,7 @@
 {
     YSGContactList *contactList = [[YSGContactList alloc] init];
     
-    contactList.userId = @"1234";
+    contactList.userId = YSGTestClientID;
     
     contactList.source = [YSGSource userSource];
     

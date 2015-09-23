@@ -41,7 +41,7 @@
     
     self.client.clientKey = YSGTestClientKey;
     
-    [self.client fetchAddressBookForUserId:@"1234" completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+    [self.client fetchAddressBookForUserId:YSGTestClientID completion:^(id  _Nullable responseObject, NSError * _Nullable error)
     {
         XCTAssert([responseObject isKindOfClass:[YSGContactList class]]);
         

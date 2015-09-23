@@ -39,6 +39,7 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Key Retrieved"];
     
+
     [self.client fetchRandomClientKeyWithSecretKey:YSGTestClientKey completion:^(NSString *clientKey, NSError *error)
     {
         if (error)
@@ -60,5 +61,7 @@
         }
     }];
 }
+
+
 
 @end

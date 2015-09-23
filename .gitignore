@@ -24,3 +24,5 @@ Podfile.lock
 
 DerivedData
 build
+TAGS
+.clang-format

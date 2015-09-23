@@ -9,3 +9,4 @@
 @import Foundation;
 
 extern NSString *const YSGTestClientKey;
+extern NSString *const YSGTestClientID;

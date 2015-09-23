@@ -53,10 +53,6 @@
 
 - (NSString *)randomID
 {
-    //
-    // TODO: Random
-    //
-    
     const unsigned int totalLength = ('9' - '0') + ('Z' - 'A') + ('z' - 'a');
     NSMutableString *characters = [[NSMutableString alloc] initWithCapacity:totalLength];
     [self fillArray:characters fromChar:'0' toChar:'9'];

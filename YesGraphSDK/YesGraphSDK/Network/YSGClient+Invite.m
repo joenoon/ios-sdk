@@ -10,10 +10,14 @@
 
 @implementation YSGClient (Invite)
 
-- (void)updateInviteSent:(NSArray<YSGContact *> *)invites completion:(void (^)(NSError * _Nullable))completion
+- (void)updateInviteSent:(NSArray<YSGContact *> *)invites completion:(void (^)(NSError *_Nullable))completion
 {
-    [self POST:@"invite-sent" parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error) {
-        
+    [self POST:@"invite-sent" parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+    {
+        if (completion)
+        {
+            completion(error);
+        }
     }];
 }
 
