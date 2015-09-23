@@ -11,20 +11,17 @@ import YesGraphSDK
 
 class ViewController: UIViewController, YSGShareSheetDelegate {
 
+    var theme = YSGTheme()
+    
     override func viewDidLoad() {
         
-        let theme = YSGTheme()
+        
         theme.baseColor = UIColor.redColor();
         if let addrBookTheme = theme.shareAddressBookTheme {
             addrBookTheme.viewBackground = UIColor.redColor().colorWithAlphaComponent(0.38);
         }
         // Welcome Screen
-        theme.textColor = UIColor.whiteColor();
-        self.introTextField.textColor = theme.textColor;
-        self.introTextField.font = UIFont(name: theme.fontFamily, size: self.introTextField.font!.pointSize);
-        
-        self.additionalNotesTextView.textColor = theme.textColor;
-        self.additionalNotesTextView.font = UIFont(name: theme.fontFamily, size: self.additionalNotesTextView.font!.pointSize);
+        theme.textColor = UIColor.whiteColor()
         
         super.viewDidLoad()
     }
@@ -39,8 +36,22 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         let onlineSource = YSGOnlineContactSource(client: YSGClient(), localSource: localSource, cacheSource: YSGCacheContactSource())
         
         let inviteService = YSGInviteService(contactSource: onlineSource, userId: nil)
+        inviteService.theme = theme
         
-        let shareController = YSGShareSheetController(services: [YSGFacebookService(), YSGTwitterService(), inviteService], delegate: self)
+        let facebookService = YSGFacebookService()
+        facebookService.theme = theme
+        
+        let twitterService = YSGTwitterService()
+        twitterService.theme = theme
+        
+        let shareController = YSGShareSheetController(services: [ facebookService, twitterService, inviteService], delegate: self)
+        shareController.baseColor = theme.baseColor
+        
+        // OPTIONAL
+        
+        //
+        // set referralURL if you have one
+        shareController.referralURL = "hellosunschein.com/dkjh34"
         
         self.navigationController?.pushViewController(shareController, animated: true)
     }
