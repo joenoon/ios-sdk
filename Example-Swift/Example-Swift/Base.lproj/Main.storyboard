@@ -26,7 +26,7 @@
         <!--Welcome-->
         <scene sceneID="bMa-ir-fsk">
             <objects>
-                <viewController id="eIW-Yy-bL8" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="eIW-Yy-bL8" customClass="ViewController" customModule="Example_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HcF-2n-DZ4"/>
                         <viewControllerLayoutGuide type="bottom" id="3yU-Qw-3nP"/>
@@ -50,7 +50,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="shareButtonTap:" destination="eIW-Yy-bL8" eventType="touchUpInside" id="sxq-Ir-Fio"/>
+                                    <action selector="shareButtonTap:" destination="eIW-Yy-bL8" eventType="touchUpInside" id="awZ-0B-I5h"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="w7A-tb-mmL">
@@ -107,8 +107,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="TND-lE-9QW"/>
                     <connections>
-                        <outlet property="introTextField" destination="Bkg-y5-vvo" id="Ygc-2z-O8G"/>
-                        <outlet property="shareButton" destination="huc-kQ-NVz" id="jJS-dp-6RY"/>
+                        <outlet property="additionalNotesTextView" destination="Rpr-C3-V3R" id="FTa-oy-4Y5"/>
+                        <outlet property="introTextField" destination="Bkg-y5-vvo" id="BkU-Jn-rnw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NBn-kl-bjX" sceneMemberID="firstResponder"/>

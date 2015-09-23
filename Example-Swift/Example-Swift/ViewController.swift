@@ -19,7 +19,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
             addrBookTheme.viewBackground = UIColor.redColor().colorWithAlphaComponent(0.38);
         }
         // Welcome Screen
-        
+        theme.textColor = UIColor.whiteColor();
         self.introTextField.textColor = theme.textColor;
         self.introTextField.font = UIFont(name: theme.fontFamily, size: self.introTextField.font!.pointSize);
         
@@ -30,8 +30,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
     }
     
     @IBOutlet weak var introTextField: UITextField!
-    @IBOutlet weak var additionalNotesTextView: UITextView!
-    
+    @IBOutlet weak var additionalNotesTextView: UILabel!
 
     @IBAction func shareButtonTap(sender: UIButton) {
         let localSource = YSGLocalContactSource()
