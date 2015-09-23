@@ -43,12 +43,33 @@
 
 #pragma mark - Private Methods
 
+- (void)fillArray:(NSMutableString *)array fromChar:(char)start toChar:(char)end
+{
+    for(char c = start; c <= end; ++c)
+    {
+        [array appendFormat:@"%c", c];
+    }
+}
+
 - (NSString *)randomID
 {
     //
     // TODO: Random
     //
-    return @"RandomID";
+    
+    const unsigned int totalLength = ('9' - '0') + ('Z' - 'A') + ('z' - 'a');
+    NSMutableString *characters = [[NSMutableString alloc] initWithCapacity:totalLength];
+    [self fillArray:characters fromChar:'0' toChar:'9'];
+    [self fillArray:characters fromChar:'a' toChar:'z'];
+    [self fillArray:characters fromChar:'A' toChar:'Z'];
+    const unsigned int totalStringLength = 16;
+    NSMutableString *returnString = [[NSMutableString alloc] initWithCapacity:totalStringLength];
+    for(unsigned int i = 0; i < totalStringLength; ++i)
+    {
+        uint32_t randomIndex = arc4random_uniform((uint32_t)characters.length);
+        [returnString appendFormat:@"%c", [characters characterAtIndex:randomIndex]];
+    }
+    return returnString;
 }
 
 @end
