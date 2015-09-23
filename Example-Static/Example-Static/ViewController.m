@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
     theme = [YSGTheme new];
-    
+    theme.baseColor = [UIColor redColor];
     [super viewDidLoad];
 }
 

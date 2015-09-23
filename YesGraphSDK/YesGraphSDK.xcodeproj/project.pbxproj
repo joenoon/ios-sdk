@@ -122,6 +122,8 @@
 		38EF2BC11BA30B0800AF2AE0 /* YSGUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EF2BBF1BA30B0800AF2AE0 /* YSGUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38EF2BC21BA30B0800AF2AE0 /* YSGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF2BC01BA30B0800AF2AE0 /* YSGUtility.m */; settings = {ASSET_TAGS = (); }; };
 		38EF2BC31BA30B0800AF2AE0 /* YSGUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EF2BC01BA30B0800AF2AE0 /* YSGUtility.m */; settings = {ASSET_TAGS = (); }; };
+		3E0636891BB3454A002FD11F /* YSGShareAddressBookTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = E8881D051BB21310005DCBF1 /* YSGShareAddressBookTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3E06368A1BB34557002FD11F /* YSGShareAddressBookTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8881D061BB21310005DCBF1 /* YSGShareAddressBookTheme.m */; settings = {ASSET_TAGS = (); }; };
 		3EAFEFB81BA993EE00D2548D /* YesGraphSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CC16C21B831606008477C7 /* YesGraphSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFB91BA993EE00D2548D /* YSGAddressBookViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64C81B831CA900C55F60 /* YSGAddressBookViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFBA1BA993EE00D2548D /* YSGAddressBookCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 380937401B84D1AA00FBF888 /* YSGAddressBookCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -764,6 +766,7 @@
 				3EAFEFEB1BA995D800D2548D /* YSGParsing.h in Headers */,
 				3EAFEFE81BA9954200D2548D /* YSGTheme.h in Headers */,
 				3EAFEFD31BA9954200D2548D /* YSGModel.h in Headers */,
+				3E0636891BB3454A002FD11F /* YSGShareAddressBookTheme.h in Headers */,
 				3EAFEFC31BA9947C00D2548D /* YSGDrawableView.h in Headers */,
 				3EAFEFD91BA9954200D2548D /* YSGNetworkResponse.h in Headers */,
 				3EAFEFC71BA994B200D2548D /* YSGLogger.h in Headers */,
@@ -1023,6 +1026,7 @@
 				38EF2BB71BA30A8100AF2AE0 /* YSGOnlineContactSource.m in Sources */,
 				38EF2BB81BA30A8100AF2AE0 /* YSGCacheContactSource.m in Sources */,
 				38EF2BB91BA30A8100AF2AE0 /* YSGInviteService.m in Sources */,
+				3E06368A1BB34557002FD11F /* YSGShareAddressBookTheme.m in Sources */,
 				38EF2BBA1BA30A8100AF2AE0 /* YSGSocialService.m in Sources */,
 				38EF2BBB1BA30A8100AF2AE0 /* YSGTwitterService.m in Sources */,
 				38EF2BBC1BA30A8100AF2AE0 /* YSGTheme.m in Sources */,
