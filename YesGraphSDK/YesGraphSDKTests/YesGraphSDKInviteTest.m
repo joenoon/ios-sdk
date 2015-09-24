@@ -31,9 +31,41 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Sent To Selected Contacts"];
     YSGContactList *listOfContacts = [YSGTestMockData mockContactList];
 
+    __block NSUInteger numberOfSuccesses = listOfContacts.entries.count;
     [self.client updateInviteSentToContacts:listOfContacts.entries
                                   forUserId:YSGTestClientID
                              withCompletion:^(NSError *_Nullable error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation failed with error: %@", error);
+        }
+        else
+        {
+            numberOfSuccesses--;
+            if (numberOfSuccesses == 0)
+            {
+                [expectation fulfill];
+            }
+        }
+    }];
+    [self waitForExpectationsWithTimeout:5.0
+                                 handler:^(NSError *error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation failed with error: %@", error);
+        }
+    }];
+}
+
+- (void)testInviteAccepted
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Accepted By Contact"];
+    YSGContact *firstMockedContact = [YSGTestMockData mockContactList].entries[0];
+
+    [self.client updateInviteAceptedBy:firstMockedContact
+                        withCompletion:^(NSError * error)
     {
         if (error)
         {

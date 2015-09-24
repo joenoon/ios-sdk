@@ -11,5 +11,5 @@
 //
 // TODO: Enter your client key to run tests
 //
-NSString *const YSGTestClientKey = @"live-WzEsMCwieWVzZ3JhcGhfc2RrX3Rlc3QiXQ.COM_zw.A76PgpT7is1P8nneuSg-49y4nW8";
+NSString *const YSGTestClientKey = @"";
 NSString *const YSGTestClientID = @"1234";
