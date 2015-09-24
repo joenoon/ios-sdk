@@ -51,12 +51,18 @@ typedef union
 @property (nonnull, nonatomic, strong) UIColor *textColor;
 
 /*!
+<<<<<<< HEAD
  *  Share sheet view background color
  *  @discussion: Default: White color
  *
  */
 
+@property (nonnull, nonatomic, strong) UIColor *shareViewBackgroundColor;
+=======
+ *  Base color of the app
+ */
 @property (nonnull, nonatomic, strong) UIColor *baseColor;
+>>>>>>> 9cecb5d3db30728ee535c47e02c70096aeb8ed44
 
 /*!
  *  Font family of the Share UI

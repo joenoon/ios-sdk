@@ -192,9 +192,10 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)applyTheme:(YSGTheme *)theme
 {
-    self.searchController.searchBar.tintColor = [UIColor redColor];
-    self.navigationController.navigationBar.tintColor = [UIColor redColor];
-    self.view.tintColor = [UIColor redColor];
+    self.searchController.searchBar.tintColor = theme.mainColor;
+    self.navigationController.navigationBar.tintColor = theme.mainColor;
+    self.view.tintColor = theme.mainColor;
+    self.tableView.backgroundColor = theme.shareAddressBookTheme.viewBackground;
 }
 
 #pragma mark - UIViewController
@@ -267,7 +268,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     // Load contact data
     //
     
-    [self applyTheme:[YSGTheme new]];
+    if(self.service && self.service.theme)
+    {
+        [self applyTheme:self.service.theme];
+    }
+    else
+    {
+        [self applyTheme:[YSGTheme new]];
+    }
     
     [self.service.contactSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
     {
@@ -370,6 +378,17 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return [self contactsForSection:section].count;
 }
 
+- (UIView *)cellBackgroundViewForColor:(UIColor *)color
+{
+    if(!color)
+    {
+        return nil;
+    }
+    UIView *view = [UIView new];
+    view.backgroundColor = color;
+    return view;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YSGAddressBookCell * cell = [tableView dequeueReusableCellWithIdentifier:YSGAddressBookCellIdentifier forIndexPath:indexPath];
@@ -387,8 +406,18 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     cell.textLabel.text = contact.name;
     cell.detailTextLabel.text = contact.contactString;
-    
     cell.selected = [self.selectedContacts containsObject:contact];
+    
+    if(self.service && self.service.theme && self.service.theme.shareAddressBookTheme)
+    {
+        cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellFontSize];
+        cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellDetailFontSize];
+        cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellBackground];
+        cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellSelectedBackground];
+        // NOTE: should we also style the text / detail label backgrounds?
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+    }
     
     if ([self.selectedContacts containsObject:contact])
     {
@@ -450,6 +479,35 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [self.selectedContacts removeObject:contact];
     
     [self updateUI];
+}
+
+- (void)setSectionBackgroundView:(UIView *)view toBackgroundColor:(UIColor *)color
+{
+    if(!color)
+    {
+        return;
+    }
+    if(!view)
+    {
+        view = [UIView new];
+    }
+    view.backgroundColor = color;
+    
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    if (self.service && self.service.theme && [view isKindOfClass:[UITableViewHeaderFooterView class]])
+    {
+        __weak UITableViewHeaderFooterView *lbl = (UITableViewHeaderFooterView *)view;
+        lbl.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.sectionFontSize];
+        
+        // TODO: set the height of the section view so it'll be tall enough for
+        //       the font height
+
+        [self setSectionBackgroundView:lbl.backgroundView
+                     toBackgroundColor:self.service.theme.shareAddressBookTheme.sectionBackground];
+    }
 }
 
 #pragma mark - Private Methods
