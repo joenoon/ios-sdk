@@ -10,18 +10,6 @@
 
 @implementation YSGClient (Invite)
 
-- (void)updateInviteSentToContacts:(nonnull NSArray<YSGContact *> *)invited
-                         forUserId:(nonnull NSString *)userId
-                    withCompletion:(nullable void (^)(NSError *_Nullable error))completion
-{
-    for (YSGContact *contact in invited)
-    {
-        [self updateInviteSentToContact:contact
-                              forUserId:userId
-                         withCompletion:completion];
-    }
-}
-
 - (void)updateInviteSentToContact:(nonnull YSGContact *)invitee
                         forUserId:(nonnull NSString *)userId
                    withCompletion:(nullable void (^)(NSError *_Nullable error))completion
