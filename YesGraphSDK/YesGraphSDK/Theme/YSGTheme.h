@@ -11,17 +11,7 @@
 
 #import "YSGShareCellShapeEnum.h"
 #import "YSGShareAddressBookTheme.h"
-
-
-typedef union
-{
-    struct
-    {
-        CGFloat AlphaFadeFactor;
-        CGFloat AlphaUnfadeFactor;
-    };
-    CGFloat AlphaPair[2];
-} YSGShareButtonFadeFactors;
+#import "YSGShareButtonFadeFactors.h"
 
 /*!
  *  Use the theme to stylize YesGraph UI

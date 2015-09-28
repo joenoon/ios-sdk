@@ -7,6 +7,7 @@
 //
 
 #import "YSGTheme.h"
+#import "YSGConstants.h"
 
 @implementation YSGTheme
 
@@ -15,24 +16,20 @@
     if ((self = [super init]))
     {
         // set default color values
-        self.mainColor = [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
-        self.twitterColor = [UIColor colorWithRed:0.31 green:0.67 blue:0.95 alpha:1];
-        self.facebookColor = [UIColor colorWithRed:0.28 green:0.38 blue:0.64 alpha:1];
-        self.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
-        self.baseColor = [UIColor whiteColor];
+        self.mainColor = [YSGConstants defaultMainColor]; 
+        self.twitterColor = [YSGConstants defaultTwitterColor]; 
+        self.facebookColor = [YSGConstants defaultFacebookColor];
+        self.textColor = [YSGConstants defaultTextColor]; 
+        self.baseColor = [YSGConstants defaultBackgroundColor];
         // set default font details
-        self.fontFamily = @"Helvetica";
-        self.shareButtonLabelFontSize = 36.f;
-        self.shareButtonLabelTextAlignment = NSTextAlignmentCenter;
-        self.shareLabelTextAlignment = NSTextAlignmentCenter;
+        self.fontFamily = [YSGConstants defaultFontFamily]; 
+        self.shareButtonLabelFontSize = [YSGConstants defaultShareButtonFontSize]; 
+        self.shareButtonLabelTextAlignment = [YSGConstants defaultTextAlignment]; 
+        self.shareLabelTextAlignment =  [YSGConstants defaultTextAlignment]; 
         // set default share button shape
-        self.shareButtonShape = YSGShareSheetServiceCellShapeCircle;
+        self.shareButtonShape = [YSGConstants defaultShareButtonShape];
         // set default share button alpha factors for both states
-        self.shareButtonFadeFactors = (YSGShareButtonFadeFactors)
-        {
-            .AlphaFadeFactor = 0.8f,
-            .AlphaUnfadeFactor = 1.f
-        };
+        self.shareButtonFadeFactors = [YSGConstants defaultShareButtonAlphaFactors]; 
         self.shareAddressBookTheme = [[YSGShareAddressBookTheme alloc] init];
         self.shareAddressBookTheme.viewBackground = [UIColor whiteColor];
     }

@@ -7,6 +7,7 @@
 //
 
 #import "YSGShareAddressBookTheme.h"
+#import "YSGConstants+AddressBook.h"
 
 @implementation YSGShareAddressBookTheme
 
@@ -16,9 +17,9 @@
     {
         // set default address list font sizes (compiler already initializes this to 0 in optimized builds ?)
         // NOTE: should this be done via the [UIFont prefferedFont..] ?
-        self.cellDetailFontSize = 0.f;
-        self.cellFontSize = 0.f;
-        self.sectionFontSize = 0.f;
+        self.cellDetailFontSize = [YSGConstants cellDefaultFontSize];
+        self.cellFontSize = [YSGConstants cellDefaultFontSize];
+        self.sectionFontSize = [YSGConstants cellDefaultFontSize];
     }
     return self;
 }
