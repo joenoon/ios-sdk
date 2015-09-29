@@ -25,59 +25,59 @@
     self.client.clientKey = YSGTestClientKey;
 }
 
-- (void)testInviteSent
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Sent To Selected Contacts"];
-
-    YSGContact *firstContact = [YSGTestMockData mockContactList].entries[0];
-    [self.client updateInviteSentToContact:firstContact
-                                 forUserId:YSGTestClientID
-                            withCompletion:^(NSError *_Nullable error) {
-                              if (error)
-                              {
-                                  XCTFail(@"Expectation failed with error: %@", error);
-                              }
-                              else
-                              {
-                                  [expectation fulfill];
-                              }
-                            }];
-    [self waitForExpectationsWithTimeout:5.0
-                                 handler:^(NSError *error) {
-                                   if (error)
-                                   {
-                                       XCTFail(@"Expectation failed with error: %@",
-                                               error);
-                                   }
-                                 }];
-}
-
-- (void)testInviteAccepted
-{
-    XCTestExpectation *expectation =
-        [self expectationWithDescription:@"Invites Accepted By Contact"];
-    YSGContact *firstMockedContact = [YSGTestMockData mockContactList].entries[0];
-
-    [self.client updateInviteAceptedBy:firstMockedContact
-                        withCompletion:^(NSError *error) {
-                          if (error)
-                          {
-                              XCTFail(@"Expectation failed with error: %@", error);
-                          }
-                          else
-                          {
-                              [expectation fulfill];
-                          }
-                        }];
-    [self waitForExpectationsWithTimeout:5.0
-                                 handler:^(NSError *error) {
-                                   if (error)
-                                   {
-                                       XCTFail(@"Expectation failed with error: %@",
-                                               error);
-                                   }
-                                 }];
-}
+//- (void)testInviteSent
+//{
+//    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Sent To Selected Contacts"];
+//
+//    YSGContact *firstContact = [YSGTestMockData mockContactList].entries[0];
+//    [self.client updateInviteSentToContact:firstContact
+//                                 forUserId:YSGTestClientID
+//                            withCompletion:^(NSError *_Nullable error) {
+//                              if (error)
+//                              {
+//                                  XCTFail(@"Expectation failed with error: %@", error);
+//                              }
+//                              else
+//                              {
+//                                  [expectation fulfill];
+//                              }
+//                            }];
+//    [self waitForExpectationsWithTimeout:5.0
+//                                 handler:^(NSError *error) {
+//                                   if (error)
+//                                   {
+//                                       XCTFail(@"Expectation failed with error: %@",
+//                                               error);
+//                                   }
+//                                 }];
+//}
+//
+//- (void)testInviteAccepted
+//{
+//    XCTestExpectation *expectation =
+//        [self expectationWithDescription:@"Invites Accepted By Contact"];
+//    YSGContact *firstMockedContact = [YSGTestMockData mockContactList].entries[0];
+//
+//    [self.client updateInviteAceptedBy:firstMockedContact
+//                        withCompletion:^(NSError *error) {
+//                          if (error)
+//                          {
+//                              XCTFail(@"Expectation failed with error: %@", error);
+//                          }
+//                          else
+//                          {
+//                              [expectation fulfill];
+//                          }
+//                        }];
+//    [self waitForExpectationsWithTimeout:5.0
+//                                 handler:^(NSError *error) {
+//                                   if (error)
+//                                   {
+//                                       XCTFail(@"Expectation failed with error: %@",
+//                                               error);
+//                                   }
+//                                 }];
+//}
 
 - (void)tearDown
 {

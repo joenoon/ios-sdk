@@ -11,6 +11,7 @@
 #import "YSGTheme.h"
 #import "YSGClient+Invite.h"
 #import "YSGInviteService.h"
+#import "YesGraph.h"
 
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
@@ -262,21 +263,20 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
      }];
 }
 
-- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error {
+- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController
+           didShareToService:(YSGShareService * _Nonnull)service
+                    userInfo:(nullable NSDictionary <NSString *, id> *)userInfo
+                       error:(nullable NSError *)error {
     
     if([userInfo objectForKey:YSGInviteEmailContactsKey])
     {
         //
         // Send emailContacts invites to YSG API endpoint '/invite-sent'
         //
-        
-        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInviteEmailContactsKey] completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error) {
-            if (!error)
-            {
-                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
-            }
-            else
+
+        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInviteEmailContactsKey] forUsedId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
+        {
+            if (error)
             {
                 NSLog(@"Error:%@", error.description);
             }
@@ -289,17 +289,13 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         // Send phoneContacts invites to YSG API endpoint '/invite-sent'
         //
         
-        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInvitePhoneContactsKey] completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error) {
-            if (!error)
-            {
-                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
-                NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
-            }
-            else
-            {
-                NSLog(@"Error:%@", error.description);
-            }
-        }];
+        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInvitePhoneContactsKey] forUsedId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
+         {
+             if (error)
+             {
+                 NSLog(@"Error:%@", error.description);
+             }
+         }];
     }
 }
 
