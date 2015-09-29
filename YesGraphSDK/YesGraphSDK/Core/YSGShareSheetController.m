@@ -148,7 +148,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     referralLabel.translatesAutoresizingMaskIntoConstraints = NO;
     copyButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    if (self.referralURL) {
+    if (self.referralURL.length) {
         
         footer.layer.borderColor = self.baseColor.CGColor;
         footer.layer.borderWidth = 1.0f;

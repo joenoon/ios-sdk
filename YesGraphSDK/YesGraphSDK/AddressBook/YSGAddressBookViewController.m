@@ -516,17 +516,19 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     NSMutableDictionary <NSString *, NSMutableArray <YSGContact *> * > *contactList = [NSMutableDictionary dictionary];
     
-    for (YSGContact *contact in entries
-            )
+    for (YSGContact *contact in entries)
     {
         NSString *letter = [contact.name substringToIndex:1];
         
-        if (!contactList[letter])
+        if (letter.length)
         {
-            contactList[letter] = [NSMutableArray array];
+            if (!contactList[letter])
+            {
+                contactList[letter] = [NSMutableArray array];
+            }
+            
+            [contactList[letter] addObject:contact];
         }
-        
-        [contactList[letter] addObject:contact];
     }
     
     NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
