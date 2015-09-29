@@ -53,9 +53,10 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
         }
         
-        NSString *longMessage = [NSString stringWithFormat:@"Share entries with %@ app to find friends to invite?", appName];
+        NSString *longMessage = [NSString stringWithFormat:NSLocalizedString(@"Share entries with ENTER_NAME app to find friends to invite?", @""), appName];
         NSString *shortMessage = @"Share entries to find friends to invite?";
-        return (appName.length) ? NSLocalizedString(longMessage, @"") : NSLocalizedString(shortMessage, @"");
+        
+        return (appName.length) ? longMessage : shortMessage;
     }
     
     return _contactAccessPromptMessage;
