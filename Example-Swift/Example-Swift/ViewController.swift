@@ -50,10 +50,21 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         // OPTIONAL
         
         //
-        // set referralURL if you have one
-        shareController.referralURL = "hellosunschein.com/dkjh34"
+        // set referralURL if you have one, leave blank if you don't
+        shareController.referralURL = "hellosunschein.com/dkjh34";
+        //
         
-        self.navigationController?.pushViewController(shareController, animated: true)
+        //
+        // PRESENT MODALLY - un/comment next 2 lines
+        //
+        
+        // self.presentViewController(shareController, animated: true, completion: nil)
+        
+        //
+        // PRESENT ON NAVIGATION STACK - un/comment next 1 line
+        //
+        
+         self.navigationController?.pushViewController(shareController, animated: true)
     }
     
     func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [String : AnyObject]?) -> [String : AnyObject] {

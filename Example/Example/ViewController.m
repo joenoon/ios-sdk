@@ -62,22 +62,21 @@
     // OPTIONAL
     
     //
-    // set referralURL if you have one
+    // set referralURL if you have one, leave blank if you don't
     shareController.referralURL = @"hellosunschein.com/dkjh34";
     //
     
     //
-    // PRESENT MODALLY
+    // PRESENT MODALLY - un/comment next 3 lines
     //
     
-    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
-    //[self presentViewController:navController animated:YES completion:nil];
+       [self presentViewController:shareController animated:YES completion:nil];
     
     //
-    // PRESENT ON NAVIGATION STACK
+    // PRESENT ON NAVIGATION STACK - un/comment next 1 line
     //
     
-    [self.navigationController pushViewController:shareController animated:YES];
+     //  [self.navigationController pushViewController:shareController animated:YES];
 }
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
