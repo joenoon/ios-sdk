@@ -63,7 +63,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         
         //
         // set referralURL if you have one
-        shareController!.referralURL = "";
+        //shareController!.referralURL = "your-site.com/referral";
         
         
         //
