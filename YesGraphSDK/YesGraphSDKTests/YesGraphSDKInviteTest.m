@@ -10,6 +10,7 @@
 #import "YSGTestSettings.h"
 #import "YSGTestMockData.h"
 #import "YSGClient+Invite.h"
+#import "YSGUtility.h"
 
 @interface YesGraphSDKInviteTest : XCTestCase
 
@@ -25,59 +26,59 @@
     self.client.clientKey = YSGTestClientKey;
 }
 
-//- (void)testInviteSent
-//{
-//    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Sent To Selected Contacts"];
-//
-//    YSGContact *firstContact = [YSGTestMockData mockContactList].entries[0];
-//    [self.client updateInviteSentToContact:firstContact
-//                                 forUserId:YSGTestClientID
-//                            withCompletion:^(NSError *_Nullable error) {
-//                              if (error)
-//                              {
-//                                  XCTFail(@"Expectation failed with error: %@", error);
-//                              }
-//                              else
-//                              {
-//                                  [expectation fulfill];
-//                              }
-//                            }];
-//    [self waitForExpectationsWithTimeout:5.0
-//                                 handler:^(NSError *error) {
-//                                   if (error)
-//                                   {
-//                                       XCTFail(@"Expectation failed with error: %@",
-//                                               error);
-//                                   }
-//                                 }];
-//}
-//
-//- (void)testInviteAccepted
-//{
-//    XCTestExpectation *expectation =
-//        [self expectationWithDescription:@"Invites Accepted By Contact"];
-//    YSGContact *firstMockedContact = [YSGTestMockData mockContactList].entries[0];
-//
-//    [self.client updateInviteAceptedBy:firstMockedContact
-//                        withCompletion:^(NSError *error) {
-//                          if (error)
-//                          {
-//                              XCTFail(@"Expectation failed with error: %@", error);
-//                          }
-//                          else
-//                          {
-//                              [expectation fulfill];
-//                          }
-//                        }];
-//    [self waitForExpectationsWithTimeout:5.0
-//                                 handler:^(NSError *error) {
-//                                   if (error)
-//                                   {
-//                                       XCTFail(@"Expectation failed with error: %@",
-//                                               error);
-//                                   }
-//                                 }];
-//}
+
+- (void)testUpdateInviteSent
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Sent To Selected Contacts"];
+    NSArray<YSGContact *> *invitees = [YSGTestMockData mockContactList].entries;
+
+    [self.client updateInvitesSent:invitees forUsedId:YSGTestClientID withCompletion:^(NSError *_Nullable error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation failed with error: %@", error);
+        }
+        else
+        {
+            [expectation fulfill];
+        }
+    }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *_Nullable error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation timed-out with error: %@", error);
+        }
+    }];
+}
+
+- (void)testUpdateInvitesAccepted
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Accepted By User"];
+    NSArray<YSGContact *> *invites = [YSGTestMockData mockContactList].entries;
+    NSString *randomUID = [YSGUtility randomUserId];
+
+    [self.client updateInvitesAccepted:invites forNewUserId:randomUID withCompletion:^(NSError *_Nullable error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation failed with error: %@", error);
+        }
+        else
+        {
+            [expectation fulfill];
+        }
+    }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *_Nullable error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation timed-out with error: %@", error);
+        }
+    }];
+}
 
 - (void)tearDown
 {
