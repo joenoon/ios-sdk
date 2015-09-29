@@ -74,7 +74,7 @@
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Rpr-C3-V3R" firstAttribute="centerY" secondItem="yPo-LX-9ba" secondAttribute="centerY" id="QpX-tu-rWg"/>
                                     <constraint firstItem="Rpr-C3-V3R" firstAttribute="top" secondItem="yPo-LX-9ba" secondAttribute="top" constant="5" id="TMc-xQ-o3g"/>

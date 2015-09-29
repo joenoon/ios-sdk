@@ -54,7 +54,7 @@
                                         <size key="shadowOffset" width="0.0" height="0.0"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="0.80000000000000004" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="hHI-ec-cZ2" secondAttribute="trailing" constant="12" id="1ic-AZ-qow"/>
                                     <constraint firstItem="hHI-ec-cZ2" firstAttribute="centerY" secondItem="dVl-Y9-BBF" secondAttribute="centerY" id="QbY-2X-xIT"/>
