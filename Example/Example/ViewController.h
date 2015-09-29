@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *introTextField;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UITextView *additionalNotesTextView;
+@property (weak, nonatomic) IBOutlet UILabel *additionalTextView;
 
 @end
 

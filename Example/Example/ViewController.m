@@ -21,6 +21,10 @@
 
 - (void)viewDidLoad
 {
+    self.introTextField.text = NSLocalizedString(@"IntroTextField", "");
+    self.shareButton.titleLabel.text = NSLocalizedString(@"ShareButtonTitleLabel", "");
+    self.additionalTextView.text = NSLocalizedString(@"AdditionalTextView", "");
+    
     theme = [YSGTheme new];
     theme.baseColor = [UIColor redColor];
     theme.shareAddressBookTheme.sectionBackground = [[UIColor redColor] colorWithAlphaComponent:0.38f];
@@ -43,6 +47,7 @@
 {
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
+    localSource.contactAccessPromptMessage = NSLocalizedString(@"ContactAccessPromptMessage", nil);
     
     YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:localSource cacheSource:[YSGCacheContactSource new]];
     
@@ -89,14 +94,17 @@
         //
         
         return @{ YSGShareSheetMessageKey : @"This message will be posted to Facebook." };
+        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"PostedToFacebookShareSheetMessageKey", nil)};
     }
     else if ([service isKindOfClass:[YSGTwitterService class]])
     {
         return @{ YSGShareSheetMessageKey : @"This message will be posted to Twitter." };
+        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"PostedToTwitterShareSheetMessageKey", nil)};
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
         return @{ YSGShareSheetMessageKey : @"This message will be posted to SMS." };
+        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"PostedToSMSShareSheetMessageKey", nil)};
         //return @"This message will be posted to Email.";
     }
     
