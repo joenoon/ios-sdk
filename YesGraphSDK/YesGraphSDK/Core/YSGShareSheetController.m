@@ -67,13 +67,13 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     if ([self isModal]) {
         // set up if view was prsented modally
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonPressed:)];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", "Close") style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonPressed:)];
         backButton.tintColor = self.baseColor;
         self.navigationItem.leftBarButtonItem = backButton;
     }
     else {
         self.navigationController.navigationBar.tintColor = self.baseColor;
-        self.title = @"Share";
+        self.title = NSLocalizedString(@"Share", @"Share");
     }
 
     self.view.backgroundColor = [UIColor whiteColor];
@@ -121,7 +121,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     UILabel *shareLabel = [UILabel new];
     
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    shareLabel.text = @"Share this app with friends to get our eternal gratitude";
+    shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
     shareLabel.font = [UIFont systemFontOfSize:36.f];
     shareLabel.textColor = self.baseColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -160,7 +160,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [referraLabel sizeToFit];
         
         copyButton.translatesAutoresizingMaskIntoConstraints = NO;
-        [copyButton setTitle:@"copy" forState:UIControlStateNormal];
+        [copyButton setTitle:NSLocalizedString(@"copy", @"copy") forState:UIControlStateNormal];
         [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
         [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
         [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
