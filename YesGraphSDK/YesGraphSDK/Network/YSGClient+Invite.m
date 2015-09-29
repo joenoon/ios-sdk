@@ -7,64 +7,69 @@
 //
 
 #import "YSGClient+Invite.h"
+#import "YesGraph.h"
 
 @implementation YSGClient (Invite)
 
-- (void)updateInviteSentToContact:(nonnull YSGContact *)invitee
-                        forUserId:(nonnull NSString *)userId
-                   withCompletion:(nullable void (^)(NSError *_Nullable error))completion
+- (void)updateInvitesSent:(nonnull NSArray <YSGContact *> *)invites completion:(YSGNetworkRequestCompletion)completion
 {
-
-    NSMutableDictionary *parameter = [NSMutableDictionary new];
-    parameter[@"user_id"] = userId;
-    if (invitee.email)
+    //
+    // Currently sending only one invite to endpoint since YSG API does not support multiples yet
+    // IT is possible to send POST request for each invite sent - but this is not implemented in the following code
+    //
+    
+    if (invites.count)
     {
-        parameter[@"email"] = invitee.email;
-    }
-    else if (invitee.phone)
-    {
-        parameter[@"phone"] = invitee.phone;
-    }
-
-    [self POST:@"invite-sent" parameters:parameter completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
-    {
-        if (completion)
-        {
-            completion(error);
+        NSMutableDictionary *parameter = [NSMutableDictionary new];
+        
+        parameter[@"user_id"] = [YesGraph shared].userId;
+        parameter[@"sent_at"] = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+        
+        if (invites.lastObject.email) {
+            parameter[@"email"] = invites.lastObject.email;
         }
-    }];
-}
-
-- (void)updateInviteAceptedBy:(nonnull YSGContact *)invitee
-               withCompletion:(nullable void (^)(NSError *_Nullable error))completion
-{
-    [self updateInviteAceptedBy:invitee forNewUserId:nil withCompletion:completion];
-}
-
-- (void)updateInviteAceptedBy:(nonnull YSGContact *)invitee
-                 forNewUserId:(nullable NSString *)randomUserId
-               withCompletion:(nullable void (^)(NSError *_Nullable error))completion
-{
-    NSMutableDictionary *parameter = [NSMutableDictionary new];
-    if (randomUserId)
-    {
-        parameter[@"new_user_id"] = randomUserId;
-    }
-    if (invitee.email)
-    {
-        parameter[@"email"] = invitee.email;
-    }
-    else if (invitee.phone)
-    {
-        parameter[@"phone"] = invitee.phone;
-    }
-    [self POST:@"invite-accepted" parameters:parameter completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
-    {
-        if (completion)
-        {
-            completion(error);
+        else if (invites.lastObject.phone) {
+            parameter[@"phone"] = invites.lastObject.phone;
         }
-    }];
+        
+        [self POST:@"invite-sent" parameters:parameter completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+         {
+             if (completion)
+             {
+                 completion(response.responseObject, error);
+             }
+         }];
+    }
 }
 
+- (void)updateInvitesAccepted:(nonnull NSArray <YSGContact *> *)invites completion:(nonnull YSGNetworkRequestCompletion)completion
+{
+    //
+    // Currently sending only one invite since YSG API does not support multiples yet
+    // IT is possible to send POST request for each invite accepted - but this is not implemented in the following code
+    //
+    
+    if (invites.count)
+    {
+        NSMutableDictionary *parameter = [NSMutableDictionary new];
+        
+        parameter[@"new_user_id"] = [YesGraph shared].userId;
+        parameter[@"accepted_at"] = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+        
+        if (invites.lastObject.email) {
+            parameter[@"email"] = invites.lastObject.email;
+        }
+        else if (invites.lastObject.phone) {
+            parameter[@"phone"] = invites.lastObject.phone;
+        }
+        
+        [self POST:@"invite-accepted" parameters:parameter completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+         {
+             if (completion)
+             {
+                 completion(response.responseObject, error);
+             }
+         }];
+    }
+}
 @end

@@ -12,34 +12,19 @@
 @interface YSGClient (Invite)
 
 /*!
- *  This notifies YesGraph that the invite was sent to the specified contact
+ *  This notifies YesGraph which invites were sent
  *
- *  @param invitee    contact that was invited
+ *  @param invite     contacts that were invited
  *  @param completion called when completed
- *  @param userId     user_id 
  */
-
-- (void)updateInviteSentToContact:(nonnull YSGContact *)invitee
-                        forUserId:(nonnull NSString *)userId
-                   withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
+- (void)updateInvitesSent:(nonnull NSArray<YSGContact *> *)invites completion:(nonnull YSGNetworkRequestCompletion)completion;
 
 /*!
- *  This method is called when the user accepts an invite
- *  @param invitee      contact that accepted the invite (must have either email or phone string set)
- *  @param randomUserId randomly generated user ID, can also be nil
- *  @param completion   called when completed
+ *  This notifies YesGraph which invites were accepted
+ *
+ *  @param invite     contacts that were invited
+ *  @param completion called when completed
  */
-- (void)updateInviteAceptedBy:(nonnull YSGContact *)invitee
-                 forNewUserId:(nullable NSString *)randomUserId
-               withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
-
-
-/*!
- *  This method is called when the user accepts an invite
- *  @param invitee      contact that accepted the invite (must have either email or phone string set)
- *  @param completion   called when completed
- */
-- (void)updateInviteAceptedBy:(nonnull YSGContact *)invitee
-               withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
+- (void)updateInvitesAccepted:(nonnull NSArray<YSGContact *> *)invites completion:(nonnull YSGNetworkRequestCompletion)completion;
 
 @end

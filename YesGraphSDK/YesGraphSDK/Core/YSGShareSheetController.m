@@ -9,6 +9,8 @@
 #import "YSGShareSheetController.h"
 #import "YSGShareSheetServiceCell.h"
 #import "YSGTheme.h"
+#import "YSGClient+Invite.h"
+#import "YSGInviteService.h"
 
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
@@ -178,7 +180,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
     
     [self.view layoutIfNeeded];
-
+    
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -247,18 +249,58 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 - (void)fadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
 {
     [UIView animateWithDuration:0.2 animations:^
-    {
-        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
-    }];
+     {
+         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
+     }];
 }
 
 - (void)unfadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
 {
     [UIView animateWithDuration:0.4 animations:^
-    {
-        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
-    }];
+     {
+         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
+     }];
 }
 
+- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error {
+    
+    if([userInfo objectForKey:YSGInviteEmailContactsKey])
+    {
+        //
+        // Send emailContacts invites to YSG API endpoint '/invite-sent'
+        //
+        
+        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInviteEmailContactsKey] completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error) {
+            if (!error)
+            {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+            }
+            else
+            {
+                NSLog(@"Error:%@", error.description);
+            }
+        }];
+    }
+    
+    else if([userInfo objectForKey:YSGInvitePhoneContactsKey])
+    {
+        //
+        // Send phoneContacts invites to YSG API endpoint '/invite-sent'
+        //
+        
+        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInvitePhoneContactsKey] completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error) {
+            if (!error)
+            {
+                NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+                NSLog(@"response status code: %ld", (long)[httpResponse statusCode]);
+            }
+            else
+            {
+                NSLog(@"Error:%@", error.description);
+            }
+        }];
+    }
+}
 
 @end
