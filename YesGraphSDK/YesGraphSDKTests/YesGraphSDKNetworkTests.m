@@ -61,4 +61,31 @@
     }];
 }
 
+- (void)testClientGETRequestWithoutKey
+{
+    // we expect to get a 401 response with
+    // this body:
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Client Unauthorized Test"];
+    NSString *testPath = @"https://api.yesgraph.com/v0/test"; // same URL as documentation example, but we won't set the key header
+
+    [self.client GET:testPath parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+    {
+        XCTAssertNotNil(response, @"Response object should not be nil");
+        XCTAssertNotNil(error, @"Error object should not be nil");
+        XCTAssert([response.response isKindOfClass:[NSHTTPURLResponse class]], @"Response should be of type NSHTTPURLResponse");
+        XCTAssertNotNil([error.userInfo objectForKey:@"YSGErrorNetworkStatusCodeKey"], @"Error detail object does not contain the status code key");
+        NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response.response;
+        XCTAssert([resp statusCode] == 401 && [error.userInfo[@"YSGErrorNetworkStatusCodeKey"] intValue] == 401, @"HTTP status code should be Not Authorized (401)");
+        [expectation fulfill];
+    }];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+    {
+        if (error)
+        {
+            XCTFail(@"Expectation timed-out with error: %@", error);
+        }
+    }];
+}
+
 @end
