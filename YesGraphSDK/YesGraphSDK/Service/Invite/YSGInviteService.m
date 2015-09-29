@@ -109,7 +109,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         self.viewController = viewController;
         self.addressBookNavigationController = navigationController;
         
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        if (self.viewController.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular
+            && self.viewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
         {
             navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
         }
