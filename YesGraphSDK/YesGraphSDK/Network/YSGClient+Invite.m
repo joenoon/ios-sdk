@@ -25,7 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
     NSMutableDictionary *parameter = [NSMutableDictionary new];
     
     parameter[@"user_id"] = userId;
-    parameter[@"sent_at"] = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    // NOTE: when sent_at is a string, it must be an ISO 8601 formatted variant, otherwise this must be
+    //       a number
+    parameter[@"sent_at"] = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
     
     if (invites.lastObject.email) {
         parameter[@"email"] = invites.lastObject.email;
@@ -58,8 +60,9 @@ NS_ASSUME_NONNULL_BEGIN
     {
         parameter[@"new_user_id"] = userId;
     }
-    
-    parameter[@"accepted_at"] = [NSString stringWithFormat:@"%f", [[NSDate date] timeIntervalSince1970]];
+    // NOTE: when sent_at is a string, it must be an ISO 8601 formatted variant, otherwise this must be
+    //       a number
+    parameter[@"accepted_at"] = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
     
     if (invites.lastObject.email) {
         parameter[@"email"] = invites.lastObject.email;
