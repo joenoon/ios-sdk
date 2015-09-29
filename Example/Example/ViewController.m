@@ -21,9 +21,9 @@
 
 - (void)viewDidLoad
 {
-    self.introTextField.text = NSLocalizedString(@"IntroTextField", "");
-    self.shareButton.titleLabel.text = NSLocalizedString(@"ShareButtonTitleLabel", "");
-    self.additionalTextView.text = NSLocalizedString(@"AdditionalTextView", "");
+    self.introTextField.text = NSLocalizedString(@"YesGraph Helps Your App Grow", "");
+    self.shareButton.titleLabel.text = NSLocalizedString(@"Share now", "");
+    self.additionalTextView.text = NSLocalizedString(@"Boost the performance of sharing and invite flows by recommending exactly who users should invite. We use machine learning and social graph analysis to tailor results just for your product and users.", "");
     
     theme = [YSGTheme new];
     theme.baseColor = [UIColor redColor];
@@ -46,8 +46,7 @@
 - (IBAction)shareButtonTap:(UIButton *)sender
 {
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
-    localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
-    localSource.contactAccessPromptMessage = NSLocalizedString(@"ContactAccessPromptMessage", nil);
+    localSource.contactAccessPromptMessage = NSLocalizedString(@"Share contacts with Example to invite friends?", nil);
     
     YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:localSource cacheSource:[YSGCacheContactSource new]];
     
@@ -93,18 +92,15 @@
         // Facebook actually ignores this message, even in the popup.
         //
         
-        return @{ YSGShareSheetMessageKey : @"This message will be posted to Facebook." };
-        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"PostedToFacebookShareSheetMessageKey", nil)};
+        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"This message will be posted to Facebook.", nil)};
     }
     else if ([service isKindOfClass:[YSGTwitterService class]])
     {
-        return @{ YSGShareSheetMessageKey : @"This message will be posted to Twitter." };
-        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"PostedToTwitterShareSheetMessageKey", nil)};
+        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"This message will be posted to Twitter.", nil)};
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        return @{ YSGShareSheetMessageKey : @"This message will be posted to SMS." };
-        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"PostedToSMSShareSheetMessageKey", nil)};
+        return @{ YSGShareSheetMessageKey : NSLocalizedString(@"This message will be posted to SMS.", nil)};
         //return @"This message will be posted to Email.";
     }
     
