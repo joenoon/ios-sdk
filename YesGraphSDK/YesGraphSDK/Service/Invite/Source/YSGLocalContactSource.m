@@ -77,7 +77,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 {
     if ([self useContactsFramework])
     {
-        return [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts];
+        return [CNContactStore authorizationStatusForEntityType:CNEntityTypeContacts] == CNAuthorizationStatusAuthorized;
     }
     else
     {
