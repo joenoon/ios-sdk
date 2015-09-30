@@ -21,6 +21,11 @@
 
 - (void)viewDidLoad
 {
+    self.theme = [YSGTheme new];
+    self.theme.baseColor = [UIColor redColor];
+
+    [self styleView];
+    
     [super viewDidLoad];
     
     self.theme = [YSGTheme new];
@@ -69,17 +74,14 @@
     // set referralURL if you have one
     //shareController.referralURL = @"your-site.com/referral";
     
+    //
+    // PRESENT MODALLY - un/comment next 2 lines
+    //
+    
+    //  [self presentViewController:shareController animated:YES completion:nil];
     
     //
-    // PRESENT MODALLY
-    //
-    
-    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
-    //[self presentViewController:navController animated:YES completion:nil];
-    
-    //
-    // PRESENT ON NAVIGATION STACK
-    //
+    // PRESENT ON NAVIGATION STACK - un/comment next 1 line
     
     [self.navigationController pushViewController:shareController animated:YES];
 }
@@ -117,6 +119,15 @@
     }
     
     return @{ YSGShareSheetMessageKey : @"" };
+}
+
+- (void) styleView {
+    
+    self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:18];
+    self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
+    
+    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
 }
 
 @end
