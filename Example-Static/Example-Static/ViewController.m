@@ -21,15 +21,14 @@
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
+    self.title = @"Wellcome";
+    
     self.theme = [YSGTheme new];
     self.theme.baseColor = [UIColor redColor];
 
     [self styleView];
-    
-    [super viewDidLoad];
-    
-    self.theme = [YSGTheme new];
-    self.theme.baseColor = [UIColor redColor];
 }
 
 - (IBAction)shareButtonTap:(UIButton *)sender
@@ -77,12 +76,12 @@
     //
     // PRESENT MODALLY - un/comment next 2 lines
     //
-    
-    //  [self presentViewController:shareController animated:YES completion:nil];
+    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
+    //[self presentViewController:navController animated:YES completion:nil];
     
     //
     // PRESENT ON NAVIGATION STACK - un/comment next 1 line
-    
+    //
     [self.navigationController pushViewController:shareController animated:YES];
 }
 

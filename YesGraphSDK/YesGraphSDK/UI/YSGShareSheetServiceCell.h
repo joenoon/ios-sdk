@@ -16,6 +16,8 @@
 
 @property (nonatomic, copy) NSString *text;
 
+@property (nonatomic, strong) UIColor *serviceColor;
+
 @property (nonatomic, strong) UIColor *textColor;
 
 @property (nonatomic, copy) UIImage *icon;

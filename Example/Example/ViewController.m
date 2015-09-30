@@ -25,8 +25,12 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Wellcome";
+    
     self.theme = [YSGTheme new];
     self.theme.baseColor = [UIColor redColor];
+    
+    [self styleView];
 }
 
 - (IBAction)shareButtonTap:(UIButton *)sender
@@ -53,12 +57,8 @@
             }
             
         }];
+    
     }
-    
-    [self styleView];
-    
-    [super viewDidLoad];
-
 }
 
 - (void)presentYSGShareSheetController
@@ -72,19 +72,18 @@
     // OPTIONAL
     
     // set referralURL if you have one
-    //shareController.referralURL = @"your-site.com/referral";
+    shareController.referralURL = @"your-site.com/referral";
     
     //
-    // PRESENT MODALLY - un/comment next 3 lines
+    // PRESENT MODALLY - un/comment next 2 lines
     //
-    
-       [self presentViewController:shareController animated:YES completion:nil];
+    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
+    //[self presentViewController:navController animated:YES completion:nil];
     
     //
     // PRESENT ON NAVIGATION STACK - un/comment next 1 line
     //
-    
-     //  [self.navigationController pushViewController:shareController animated:YES];
+    [self.navigationController pushViewController:shareController animated:YES];
 }
 
 - (void)configureYesGraphWithCompletion:(void (^)(BOOL success, NSError *error))completion
