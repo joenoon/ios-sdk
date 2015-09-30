@@ -53,7 +53,10 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
         }
         
-        return (appName.length) ? [NSString stringWithFormat:@"Share entries with %@ app to find friends to invite?", appName] : @"Share entries to find friends to invite?";
+        NSString *longMessage = [NSLocalizedString(@"Share entries with ", "") stringByAppendingString:[appName stringByAppendingString:NSLocalizedString(@" app to find friends to invite?", @"")]];
+        NSString *shortMessage = NSLocalizedString(@"Share entries to find friends to invite?", @"");
+        
+        return (appName.length) ? longMessage : shortMessage;
     }
     
     return _contactAccessPromptMessage;
@@ -151,12 +154,12 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     if (![self class].didAskForPermission)
     {
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:self.contactAccessPromptTitle message:self.contactAccessPromptMessage preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *dontAllowAction = [UIAlertAction actionWithTitle:@"Don't allow" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+        UIAlertAction *dontAllowAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Don't allow", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
         {
             
         }];
         
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
         {
             //
             // Remember the decision

@@ -127,7 +127,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     UILabel *shareLabel = [UILabel new];
     
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    shareLabel.text = @"Share this app with friends to get our eternal gratitude";
+    shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
     shareLabel.font = [UIFont systemFontOfSize:36.f];
     shareLabel.textColor = self.baseColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -166,7 +166,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         
         [referralLabel sizeToFit];
         
-        [copyButton setTitle:@"copy" forState:UIControlStateNormal];
+        [copyButton setTitle:NSLocalizedString(@"copy", @"copy") forState:UIControlStateNormal];
         [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
         [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
         [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
