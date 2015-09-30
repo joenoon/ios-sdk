@@ -155,7 +155,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         
         footer.translatesAutoresizingMaskIntoConstraints = NO;
         footer.layer.borderColor = self.baseColor.CGColor;
-        footer.layer.borderWidth = 1.0f;
+        footer.layer.borderWidth = 1.5f;
         footer.layer.cornerRadius = 20;
         
         referraLabel.translatesAutoresizingMaskIntoConstraints = NO;
@@ -215,7 +215,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[backButton]-0-[header]-10-[collectionView(140)]-40-[footer(40)]" options:0 metrics:nil views:views];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[backButton]-0-[header]-10-[collectionView(140)]-50-[footer(40)]" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     

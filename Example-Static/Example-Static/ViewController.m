@@ -22,6 +22,8 @@
     theme = [YSGTheme new];
     theme.baseColor = [UIColor redColor];
 
+    [self styleView];
+    
     [super viewDidLoad];
 }
 
@@ -86,6 +88,15 @@
     }
     
     return @{ YSGShareSheetMessageKey : @"" };
+}
+
+- (void) styleView {
+    
+    self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:18];
+    self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
+    
+    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
 }
 
 @end

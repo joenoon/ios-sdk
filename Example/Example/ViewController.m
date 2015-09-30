@@ -36,6 +36,8 @@
         [self setYSGclientKey:@"1234"];
     }
     
+    [self styleView];
+    
     [super viewDidLoad];
 }
 
@@ -130,6 +132,15 @@
                                         NSLog(@"Error:%@", error.description);
                                     }
                                 }];
+}
+
+- (void) styleView {
+    
+    self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
+    self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
+    
+    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
 }
 
 @end

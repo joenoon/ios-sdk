@@ -24,12 +24,25 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         theme.textColor = UIColor.whiteColor()
         
         super.viewDidLoad()
+        
+        for family: String in UIFont.familyNames()
+        {
+            print("\(family)")
+            for names: String in UIFont.fontNamesForFamilyName(family)
+            {
+                print("== \(names)")
+            }
+        }
     }
     
     @IBOutlet weak var introTextField: UITextField!
-    @IBOutlet weak var additionalNotesTextView: UILabel!
+    @IBOutlet weak var additionalInfoLabel: UILabel!
 
-    @IBAction func shareButtonTap(sender: UIButton) {
+    @IBOutlet weak var shareButton: UIButton!
+
+    @IBOutlet weak var additionalNotesView: UIView!
+
+    @IBAction func shareButtonTapped(sender: AnyObject) {
         let localSource = YSGLocalContactSource()
         localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
         
@@ -64,7 +77,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         // PRESENT ON NAVIGATION STACK - un/comment next 1 line
         //
         
-         self.navigationController?.pushViewController(shareController, animated: true)
+        self.navigationController?.pushViewController(shareController, animated: true)
     }
     
     func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [String : AnyObject]?) -> [String : AnyObject] {
@@ -80,6 +93,14 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         }
         
         return [YSGShareSheetMessageKey : ""]
+    }
+    
+    func styleView() {
+        self.additionalInfoLabel.font = UIFont(name: "OpenSans", size: 16)
+        self.introTextField.font = UIFont(name: "OpenSans-Semibold", size: 18)
+        self.shareButton.titleLabel?.font = UIFont(name: "OpenSans", size: 20)
+        
+        self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
     }
     
 }
