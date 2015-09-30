@@ -216,7 +216,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[backButton]-0-[header]-10-[collectionView(140)]-50-[footer(40)]" options:0 metrics:nil views:views];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[backButton]-0-[header]-10-[collectionView(140)]->=20-[footer(40)]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
