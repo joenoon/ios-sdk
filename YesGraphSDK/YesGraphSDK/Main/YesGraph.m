@@ -30,6 +30,24 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 @property (nonatomic, strong) YSGMessageCenter *messageCenter;
 
 /*!
+ * Customization
+ */
+@property (nullable, nonatomic, strong) YSGTheme *theme;
+
+/*!
+ * Settings
+ */
+@property (nonatomic, assign) NSUInteger numberOfSuggestions;
+@property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
+@property (nonatomic, assign) NSTimeInterval contactBookTimePeriod;
+
+/*!
+ * Logging
+ */
+@property (nonatomic, assign) YSGLogLevel logLevel;
+
+
+/*!
  *  This holds last date that contacts were fetched. This can be used to test whether to upload them again.
  */
 @property (nullable, nonatomic, copy) NSDate* lastFetchDate;
@@ -147,6 +165,15 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     return _userId;
 }
 
+- (YSGTheme *)theme
+{
+    if (!_theme)
+    {
+        _theme = [YSGTheme new];
+    }
+    return _theme;
+}
+
 #pragma mark - Initialization
 
 - (instancetype)init
@@ -161,7 +188,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         // Defaults
         //
         
-//        self.contactBookTimePeriod = YSGDefaultContactBookTimePeriod;
+        self.contactBookTimePeriod = YSGDefaultContactBookTimePeriod;
     }
     
     return self;
@@ -220,6 +247,18 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     [self.userDefaults synchronize];
 }
 
+- (BOOL)isConfigured
+{
+    if (self.userId.length && self.clientKey.length)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+
 #pragma mark - Public Methods
 
 - (YSGShareSheetController *)shareSheetControllerForAllServices
@@ -263,6 +302,10 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         return nil;
     }
     
+    if (!self.contactAccessPromptMessage.length) {
+        YSG_LWARN(@"No contact access prompt message is set.");
+    }
+    
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
     
@@ -274,6 +317,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:self.userId];
     inviteService.numberOfSuggestions = self.numberOfSuggestions;
+    inviteService.theme = self.theme;
     
     //
     // Check if social services such as Facebook & Twitter are available
@@ -289,6 +333,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         {
             if (service.isAvailable)
             {
+                service.theme = self.theme;
                 [services addObject:service];
             }
         }
