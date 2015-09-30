@@ -65,22 +65,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [super viewDidLoad];
     
-    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton setTitleColor:self.baseColor forState:UIControlStateNormal];
-    backButton.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    if ([self isModal]) {
+    if ([self isModal])
+    {
         // set up if view was prsented modally
-        [backButton setTitle:@"Close" forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(modalCloseButtonPressed:) forControlEvents:UIControlEventTouchDown];
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(modalCloseButtonPressed:)];
+        backButton.tintColor = self.baseColor;
+        self.navigationItem.leftBarButtonItem = backButton;
     }
     else {
-        [backButton setTitle:@"Welcome" forState:UIControlStateNormal];
-        [backButton addTarget:self action:@selector(navStackCloseButtonPressed:) forControlEvents:UIControlEventTouchDown];
+        self.navigationController.navigationBar.tintColor = self.baseColor;
+        self.title = @"Share";
     }
-
-    [backButton sizeToFit];
-    [self.view addSubview:backButton];
 
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -180,23 +175,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [footer addSubview:copyButton];
     
     UIView *superview = self.view;
-    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, collectionView, shareLabel, logoView, footer, referralLabel, copyButton, backButton);
+    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, collectionView, shareLabel, logoView, footer, referralLabel, copyButton);
     
     //
     // Constraints
     //
-    
-    NSNumber *rightSide = [NSNumber numberWithFloat:([UIScreen mainScreen].bounds.size.width - 20 - backButton.bounds.size.width)];
     
     NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[collectionView]-10-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:horizontalConstraints];
     
     horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[header]-10-|" options:0 metrics:nil views:views];
-    
-    [self.view addConstraints:horizontalConstraints];
-    
-    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[backButton]-rightSide-|" options:0 metrics:@{@"rightSide": rightSide} views:views];
     
     [self.view addConstraints:horizontalConstraints];
     
@@ -216,7 +205,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[backButton]-0-[header]-10-[collectionView(140)]->=20-[footer(40)]-20-|" options:0 metrics:nil views:views];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]->=20-[footer(40)]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
@@ -232,7 +221,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:verticalConstraints];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.45 constant:1]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:referralLabel attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:footer attribute:NSLayoutAttributeWidth multiplier:0.7 constant:1]];
     
@@ -364,11 +353,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.collectionView.collectionViewLayout invalidateLayout];
     [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
-}
-
--(void)navStackCloseButtonPressed:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
