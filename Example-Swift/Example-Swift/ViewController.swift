@@ -15,24 +15,12 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
     
     override func viewDidLoad() {
         
+        super.viewDidLoad()
         
         theme.baseColor = UIColor.redColor();
-        if let addrBookTheme = theme.shareAddressBookTheme {
-            addrBookTheme.viewBackground = UIColor.redColor().colorWithAlphaComponent(0.38);
-        }
-        // Welcome Screen
-        theme.textColor = UIColor.whiteColor()
         
         super.viewDidLoad()
         
-        for family: String in UIFont.familyNames()
-        {
-            print("\(family)")
-            for names: String in UIFont.fontNamesForFamilyName(family)
-            {
-                print("== \(names)")
-            }
-        }
     }
     
     @IBOutlet weak var introTextField: UITextField!
@@ -45,39 +33,45 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
     @IBAction func shareButtonTapped(sender: AnyObject) {
         let localSource = YSGLocalContactSource()
         localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
+    }
+    
+    
+    func presentYSGShareSheetController() {
         
-        let onlineSource = YSGOnlineContactSource(client: YSGClient(), localSource: localSource, cacheSource: YSGCacheContactSource())
+        YesGraph.shared().theme = self.theme
+        YesGraph.shared().numberOfSuggestions = 5
+        YesGraph.shared().contactAccessPromptMessage = "Share contacts with Example to invite friends?"
         
-        let inviteService = YSGInviteService(contactSource: onlineSource, userId: nil)
-        inviteService.theme = theme
-        
-        let facebookService = YSGFacebookService()
-        facebookService.theme = theme
-        
-        let twitterService = YSGTwitterService()
-        twitterService.theme = theme
-        
-        let shareController = YSGShareSheetController(services: [ facebookService, twitterService, inviteService], delegate: self)
-        shareController.baseColor = theme.baseColor
+        let shareController  = YesGraph.shared().shareSheetControllerForAllServicesWithDelegate(self)
         
         // OPTIONAL
         
-        //
-        // set referralURL if you have one, leave blank if you don't
-        shareController.referralURL = "hellosunschein.com/dkjh34";
-        //
+        // set referralURL if you have one
+        //shareController!.referralURL = "your-site.com/referral";
         
         //
-        // PRESENT MODALLY - un/comment next 2 lines
+        // PRESENT MODALLY
         //
         
-        // self.presentViewController(shareController, animated: true, completion: nil)
+        //let navController = UINavigationController.init(rootViewController: shareController!)
+        //self.presentViewController(navController, animated: true, completion: nil)
         
         //
-        // PRESENT ON NAVIGATION STACK - un/comment next 1 line
+        // PRESENT ON NAVIGATION STACK
         //
         
-        self.navigationController?.pushViewController(shareController, animated: true)
+        self.navigationController?.pushViewController(shareController!, animated: true)
+    }
+
+    func configureYesGraphWithCompletion(completion: ((success: Bool, error: NSError?) -> Void)?) {
+        if YesGraph.shared().userId == nil {
+            YesGraph.shared().configureWithUserId(YSGUtility.randomUserId())
+        }
+        
+        //TODO: backend call example
+        if completion != nil {
+            completion!(success: false, error: nil);
+        }
     }
     
     func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [String : AnyObject]?) -> [String : AnyObject] {

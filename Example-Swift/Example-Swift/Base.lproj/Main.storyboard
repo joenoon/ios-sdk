@@ -79,6 +79,7 @@
                                     <action selector="shareButtonTapped:" destination="CpW-IJ-GVg" eventType="touchUpInside" id="pzr-Fq-A0h"/>
                                 </connections>
                             </button>
+
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>

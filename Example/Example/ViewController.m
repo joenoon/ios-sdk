@@ -13,60 +13,67 @@
 
 @interface ViewController () <YSGShareSheetDelegate>
 
+@property (nullable, nonatomic, strong) YSGTheme *theme;
+
 @end
 
 @implementation ViewController {
-    YSGTheme *theme;
+    
 }
 
 - (void)viewDidLoad
 {
-    theme = [YSGTheme new];
-    theme.baseColor = [UIColor redColor];
-    theme.shareAddressBookTheme.sectionBackground = [[UIColor redColor] colorWithAlphaComponent:0.38f];
+    [super viewDidLoad];
     
-    if ([YesGraph shared].userId)
-    {
-        [self setYSGclientKey:[YesGraph shared].userId];
+    self.theme = [YSGTheme new];
+    self.theme.baseColor = [UIColor redColor];
+}
+
+- (IBAction)shareButtonTap:(UIButton *)sender
+{
+    if ([YesGraph shared].isConfigured) {
+        [self presentYSGShareSheetController];
     }
-    
-    // for parse backend example, we set a user id '1234' if there is none set in YesGraph class
     else
     {
-        [self setYSGclientKey:@"1234"];
+        [self.shareButton setTitle:@"  Configuring YesGraph...  " forState:UIControlStateNormal];
+        self.shareButton.enabled = NO;
+        
+        [self configureYesGraphWithCompletion:^(BOOL success, NSError *error) {
+            [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
+            self.shareButton.enabled = YES;
+            if (success)
+            {
+                [self presentYSGShareSheetController];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+            
+        }];
     }
     
     [self styleView];
     
     [super viewDidLoad];
+
 }
 
-- (IBAction)shareButtonTap:(UIButton *)sender
+- (void)presentYSGShareSheetController
 {
-    YSGLocalContactSource *localSource = [YSGLocalContactSource new];
-    localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     
-    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:localSource cacheSource:[YSGCacheContactSource new]];
+    [YesGraph shared].theme = self.theme;
+    [YesGraph shared].numberOfSuggestions = 5;
+    [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     
-    YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:@"1234"];
-    inviteService.numberOfSuggestions = 3;
-    inviteService.theme = theme;
-    
-    YSGFacebookService *facebookService = [YSGFacebookService new];
-    facebookService.theme = theme;
-    
-    YSGTwitterService *twitterService = [YSGTwitterService new];
-    twitterService.theme = theme;
-    
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
-    shareController.baseColor = theme.baseColor;
-    
+    YSGShareSheetController *shareController  = [[YesGraph shared] shareSheetControllerForAllServicesWithDelegate:self];
+
     // OPTIONAL
     
-    //
-    // set referralURL if you have one, leave blank if you don't
-    shareController.referralURL = @"hellosunschein.com/dkjh34";
-    //
+    // set referralURL if you have one
+    //shareController.referralURL = @"your-site.com/referral";
     
     //
     // PRESENT MODALLY - un/comment next 3 lines
@@ -80,6 +87,64 @@
     
      //  [self.navigationController pushViewController:shareController animated:YES];
 }
+
+- (void)configureYesGraphWithCompletion:(void (^)(BOOL success, NSError *error))completion
+{
+    if (![YesGraph shared].userId.length) {
+        [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
+    }
+    
+    [PFCloud callFunctionInBackground:@"YGgetClientKey"
+                       withParameters:[[NSDictionary alloc] initWithObjectsAndKeys:[YesGraph shared].userId, @"userId", nil]
+                                block:^(NSString *response, NSError *error) {
+                                    if (!error)
+                                    {
+                                        NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
+                                        
+                                        NSError *jsonSerializationError;
+                                        id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:(NSJSONReadingMutableContainers)error:&jsonSerializationError];
+                                        
+                                        if (jsonSerializationError)
+                                        {
+                                            NSLog(@"Json serizalization error: %@", jsonSerializationError.description);
+                                        }
+                                        
+                                        NSString *YSGclientKey = [jsonObject objectForKey:@"client_key"];
+                                        if (YSGclientKey)
+                                        {
+                                            [[YesGraph shared] configureWithClientKey:YSGclientKey];
+                                            if (completion) {
+                                                completion(YES, nil);
+                                            }
+                                            
+                                        }
+                                        else{
+                                            NSError *ysgError = YSGErrorWithErrorCode(1234);
+                                            if (completion) {
+                                                completion(NO, ysgError);
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (completion) {
+                                            completion(NO, error);
+                                        }
+                                    }
+                                }];
+}
+
+- (void) styleView {
+    
+    self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
+    self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
+    
+    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
+
+}
+
+#pragma - mark YSGShareSheetControllerDelegate
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
 {
@@ -102,45 +167,6 @@
     }
     
     return @{ YSGShareSheetMessageKey : @"" };
-}
-
-- (void)setYSGclientKey:(NSString *)userId
-{
-    [PFCloud callFunctionInBackground:@"YGgetClientKey"
-                       withParameters:[[NSDictionary alloc] initWithObjectsAndKeys:userId, @"userId", nil]
-                                block:^(NSString *response, NSError *error) {
-                                    if (!error)
-                                    {
-                                        NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
-                                        
-                                        NSError *jsonSerializationError;
-                                        id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:(NSJSONReadingMutableContainers)error:&jsonSerializationError];
-                                        if (jsonSerializationError)
-                                        {
-                                            NSLog(@"Json serizalization error: %@", jsonSerializationError.description);
-                                        }
-                                        
-                                        NSString *YSGclientKey = [jsonObject objectForKey:@"client_key"];
-                                        if (YSGclientKey)
-                                        {
-                                            NSLog(@"Yes Graph client key: %@", YSGclientKey);
-                                            [[YesGraph shared] configureWithClientKey:YSGclientKey];
-                                        }
-                                    }
-                                    else
-                                    {
-                                        NSLog(@"Error:%@", error.description);
-                                    }
-                                }];
-}
-
-- (void) styleView {
-    
-    self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
-    self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
-    self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
-    
-    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
 }
 
 @end

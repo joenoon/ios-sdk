@@ -11,48 +11,68 @@
 
 @interface ViewController () <YSGShareSheetDelegate>
 
+@property (nullable, nonatomic, strong) YSGTheme *theme;
+
 @end
 
 @implementation ViewController {
-    YSGTheme *theme;
+    
 }
 
 - (void)viewDidLoad
 {
-    theme = [YSGTheme new];
-    theme.baseColor = [UIColor redColor];
+    self.theme = [YSGTheme new];
+    self.theme.baseColor = [UIColor redColor];
 
     [self styleView];
     
     [super viewDidLoad];
+    
+    self.theme = [YSGTheme new];
+    self.theme.baseColor = [UIColor redColor];
 }
 
 - (IBAction)shareButtonTap:(UIButton *)sender
 {
-    YSGLocalContactSource *localSource = [YSGLocalContactSource new];
-    localSource.contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
+    if ([YesGraph shared].isConfigured) {
+        [self presentYSGShareSheetController];
+    }
+    else
+    {
+        [self.shareButton setTitle:@"  Configuring YesGraph...  " forState:UIControlStateNormal];
+        self.shareButton.enabled = NO;
+        
+        [self configureYesGraphWithCompletion:^(BOOL success, NSError *error) {
+            [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
+            self.shareButton.enabled = YES;
+            if (success)
+            {
+                [self presentYSGShareSheetController];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+            
+        }];
+    }
+}
+
+- (void)presentYSGShareSheetController
+{
     
-    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:[[YSGClient alloc] init] localSource:localSource cacheSource:[YSGCacheContactSource new]];
+    [YesGraph shared].theme = self.theme;
+    [YesGraph shared].numberOfSuggestions = 5;
+    [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     
-    YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:@"1234"];
-    inviteService.numberOfSuggestions = 3;
-    inviteService.theme = theme;
-    
-    YSGFacebookService *facebookService = [YSGFacebookService new];
-    facebookService.theme = theme;
-    
-    YSGTwitterService *twitterService = [YSGTwitterService new];
-    twitterService.theme = theme;
-    
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ facebookService, twitterService, inviteService ] delegate:self];
-    shareController.baseColor = theme.baseColor;
+    YSGShareSheetController *shareController  = [[YesGraph shared] shareSheetControllerForAllServicesWithDelegate:self];
     
     // OPTIONAL
     
     //
-    // set referralURL if you have one, leave blank if you don't
-    shareController.referralURL = @"hellosunschein.com/dkjh34";
-    //
+    // set referralURL if you have one
+    //shareController.referralURL = @"your-site.com/referral";
     
     //
     // PRESENT MODALLY - un/comment next 2 lines
@@ -62,9 +82,20 @@
     
     //
     // PRESENT ON NAVIGATION STACK - un/comment next 1 line
-    //
     
     [self.navigationController pushViewController:shareController animated:YES];
+}
+
+- (void)configureYesGraphWithCompletion:(void (^)(BOOL success, NSError *error))completion
+{
+    if (![YesGraph shared].userId.length) {
+        [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
+    }
+    //TODO: backend call example
+    
+    if (completion) {
+        completion(NO, nil);
+    }
 }
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
