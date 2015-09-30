@@ -63,7 +63,6 @@
 
 - (void)presentYSGShareSheetController
 {
-    
     [YesGraph shared].theme = self.theme;
     [YesGraph shared].numberOfSuggestions = 5;
     [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
