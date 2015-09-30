@@ -343,16 +343,22 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
+#pragma mark - View Transitions
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    self.cellWidth = self.view.frame.size.width/5;
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    self.cellWidth = size.width/5;
     self.cellHeight = 75;
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout;
     flowLayout.itemSize = CGSizeMake(self.cellWidth, self.cellHeight);
     
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView setCollectionViewLayout:flowLayout animated:YES];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        [self.collectionView.collectionViewLayout invalidateLayout];
+        [self.collectionView setCollectionViewLayout:flowLayout];
+    } completion:nil];
 }
 
 @end
