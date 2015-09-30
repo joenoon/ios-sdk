@@ -11,6 +11,7 @@
 @interface YSGShareSheetServiceCell ()
 
 @property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UIView *serviceLogo;
 @property (nonatomic, strong) UIImageView *imageView;
 
 @end
@@ -34,13 +35,13 @@
     _shape = shape;
     
     if (_shape == YSGShareSheetServiceCellShapeSquare) {
-        self.layer.cornerRadius = 0;
+        self.serviceLogo.layer.cornerRadius = 0;
     }
     else if (_shape == YSGShareSheetServiceCellShapeRoundedSquare) {
-        self.layer.cornerRadius = self.frame.size.height/10;
+        self.serviceLogo.layer.cornerRadius = self.serviceLogo.frame.size.height/10;
     }
     else {
-        self.layer.cornerRadius = self.frame.size.height/2;
+        self.serviceLogo.layer.cornerRadius = self.serviceLogo.frame.size.height/2;
     }
 }
 
@@ -59,6 +60,18 @@
 - (void)setTextColor:(UIColor *)textColor {
     _textColor = textColor;
     self.textLabel.textColor = _textColor;
+}
+
+- (void)setServiceColor:(UIColor *)serviceColor
+{
+    _serviceColor = serviceColor;
+    
+    if (!_textColor)
+    {
+        [self setTextColor:serviceColor];
+    }
+    
+    self.serviceLogo.backgroundColor = _serviceColor;
 }
 
 #pragma mark - Initialization
@@ -107,15 +120,21 @@
     //NSLog(@"TEXT LABEL: %@", self.textLabel.text);
     [self addSubview:self.textLabel];
     
-    float frameWidth = self.frame.size.width;
-    float center = self.frame.size.width/2;
+    float serviceLogoSize = (self.frame.size.width > self.frame.size.height) ? self.frame.size.height : self.frame.size.width;
+    float centerX = self.frame.size.width/2;
+    float centerY = self.frame.size.height/2;
     
-    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, frameWidth * 0.6, frameWidth * 0.6)];
+    self.serviceLogo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, serviceLogoSize, serviceLogoSize)];
+    self.serviceLogo.center = CGPointMake(centerX, centerY);
+    self.serviceLogo.backgroundColor = [UIColor grayColor];
+    [self addSubview:self.serviceLogo];
     
-    self.imageView.center = CGPointMake(center, center);
+    self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.serviceLogo.frame.size.width * 0.6, self.serviceLogo.frame.size.height * 0.6)];
+    
+    self.imageView.center = CGPointMake(self.serviceLogo.frame.size.width/2, self.serviceLogo.frame.size.height/2);
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.imageView.backgroundColor = [UIColor clearColor];
-    [self addSubview:self.imageView];
+    [self.serviceLogo addSubview:self.imageView];
 }
 
 - (void)layoutSubviews
@@ -124,24 +143,7 @@
     
     CGFloat cellHeight = self.frame.size.height;
     CGFloat cellWidth = self.frame.size.width;
-    
-    //NSNumber *height = [NSNumber numberWithFloat:cellHeight];
-    
-    UILabel *textLabel = self.textLabel;
-    //textLabel.backgroundColor = [UIColor yellowColor];
-//    
-//    NSDictionary *views = NSDictionaryOfVariableBindings(textLabel);
-//    
-//    NSArray *horizontalConstraints = [NSLayoutConstraint
-//                                      constraintsWithVisualFormat:@"H:|-20-[textLabel]-0-|"
-//                                      options:0
-//                                      metrics:@{@"cellHeight": height}
-//                                      views:views];
-//    
-//    [self addConstraints:horizontalConstraints];
-//    
-//    [self layoutIfNeeded];
-    
+
     self.textLabel.frame = CGRectMake(0, cellHeight * 1.1, cellWidth, [self heightForLabelWithFont:self.font]);
 }
 

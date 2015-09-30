@@ -23,12 +23,12 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 @property (nonatomic, copy, readwrite) NSArray <YSGShareService *> *services;
 
+@property (nonatomic) CGFloat cellWidth;
+@property (nonatomic) CGFloat cellHeight;
+
 @end
 
 @implementation YSGShareSheetController
-{
-    float cellWidth;
-}
 
 #pragma mark - Getters and Setters
 
@@ -84,10 +84,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     // Setup views
     //
     
-    cellWidth = 75;
+    self.cellWidth = self.view.frame.size.width/5;
+    self.cellHeight = 75;
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    flowLayout.itemSize = CGSizeMake(cellWidth, cellWidth);
+    flowLayout.itemSize = CGSizeMake(self.cellWidth, self.cellHeight);
     flowLayout.minimumInteritemSpacing = 10;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     
@@ -242,7 +243,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     if (!cell)
     {
-        cell = [[YSGShareSheetServiceCell alloc] initWithFrame:CGRectMake(0.0, 0.0, 100.0, 100.0)];
+        cell = [[YSGShareSheetServiceCell alloc] initWithFrame:CGRectMake(0.0, 0.0, self.cellWidth, self.cellHeight)];
     }
     
     YSGDrawableView *draw = [YSGDrawableView new];
@@ -251,7 +252,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     cell.text = service.name;
     cell.shape = YSGShareSheetServiceCellShapeCircle;
     cell.icon = service.serviceImage;
-    cell.backgroundColor = service.backgroundColor;
+    cell.serviceColor = service.backgroundColor;
     cell.font = [UIFont fontWithName:service.fontFamily size:14];
     cell.textColor = service.backgroundColor;
     
@@ -285,7 +286,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     // centers cell section in container horizontally
     CGFloat containerWidth = collectionView.frame.size.width;
     
-    CGFloat horizontalEdgeInset = containerWidth - (self.services.count * cellWidth + (self.services.count-1) * cellSpacing);
+    CGFloat horizontalEdgeInset = containerWidth - (self.services.count * self.cellWidth + (self.services.count-1) * cellSpacing);
     
     return UIEdgeInsetsMake(0, horizontalEdgeInset/2, 0, horizontalEdgeInset/2);
 }
