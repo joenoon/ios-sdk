@@ -54,6 +54,11 @@
             
         }];
     }
+    
+    [self styleView];
+    
+    [super viewDidLoad];
+
 }
 
 - (void)presentYSGShareSheetController
@@ -67,23 +72,20 @@
 
     // OPTIONAL
     
-    //
     // set referralURL if you have one
-    //shareController.referralURL = @"your-site.com/referral";
-
+    shareController.referralURL = @"your-site.com/referral";
     
     //
-    // PRESENT MODALLY
+    // PRESENT MODALLY - un/comment next 3 lines
     //
     
-    //UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:shareController];
-    //[self presentViewController:navController animated:YES completion:nil];
+//       [self presentViewController:shareController animated:YES completion:nil];
     
     //
-    // PRESENT ON NAVIGATION STACK
+    // PRESENT ON NAVIGATION STACK - un/comment next 1 line
     //
     
-    [self.navigationController pushViewController:shareController animated:YES];
+       [self.navigationController pushViewController:shareController animated:YES];
 }
 
 - (void)configureYesGraphWithCompletion:(void (^)(BOOL success, NSError *error))completion
@@ -132,7 +134,15 @@
                                 }];
 }
 
+- (void) styleView {
+    
+    self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
+    self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
+    self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
+    
+    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
 
+}
 
 #pragma - mark YSGShareSheetControllerDelegate
 

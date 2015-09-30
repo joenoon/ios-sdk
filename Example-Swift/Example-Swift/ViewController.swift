@@ -19,37 +19,22 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         
         theme.baseColor = UIColor.redColor();
         
+        super.viewDidLoad()
+        
     }
     
     @IBOutlet weak var introTextField: UITextField!
-    @IBOutlet weak var additionalNotesTextView: UILabel!
+    @IBOutlet weak var additionalInfoLabel: UILabel!
+
     @IBOutlet weak var shareButton: UIButton!
 
-    @IBAction func shareButtonTap(sender: UIButton) {
-        
-        if YesGraph.shared().isConfigured {
-            self.presentYSGShareSheetController()
-        }
-        else {
-            self.shareButton.setTitle("  Configuring YesGraph...  ", forState: .Normal)
-            self.shareButton.enabled = false
-            
-            self.configureYesGraphWithCompletion({ (success, error) -> Void in
-                self.shareButton.setTitle("Share", forState: .Normal)
-                self.shareButton.enabled = true
+    @IBOutlet weak var additionalNotesView: UIView!
 
-                if (success)
-                {
-                    self.presentYSGShareSheetController()
-                }
-                else
-                {
-                    let alert = UIAlertView.init(title: "Error!", message: "YesGraphSDK must be configured before presenting ShareSheet", delegate: nil, cancelButtonTitle: "OK")
-                    alert.show()
-                }
-            })
-        }
+    @IBAction func shareButtonTapped(sender: AnyObject) {
+        let localSource = YSGLocalContactSource()
+        localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
     }
+    
     
     func presentYSGShareSheetController() {
         
@@ -61,10 +46,8 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         
         // OPTIONAL
         
-        //
         // set referralURL if you have one
         //shareController!.referralURL = "your-site.com/referral";
-        
         
         //
         // PRESENT MODALLY
@@ -104,6 +87,14 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         }
         
         return [YSGShareSheetMessageKey : ""]
+    }
+    
+    func styleView() {
+        self.additionalInfoLabel.font = UIFont(name: "OpenSans", size: 16)
+        self.introTextField.font = UIFont(name: "OpenSans-Semibold", size: 18)
+        self.shareButton.titleLabel?.font = UIFont(name: "OpenSans", size: 20)
+        
+        self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
     }
     
 }

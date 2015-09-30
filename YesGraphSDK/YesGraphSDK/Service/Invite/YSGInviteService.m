@@ -92,7 +92,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         }
         else if (error)
         {
-            [[YSGMessageCenter shared] sendMessage:error.localizedDescription userInfo:@{ YSGMessageAlertButtonArrayKey : @[ NSLocalizedString(@"Ok", @"Ok") ] }];
+            [[YSGMessageCenter shared] sendMessage: NSLocalizedString(@"Check contacts permissions in settings.", @"Check contacts permissions in settings.") userInfo:@{ YSGMessageAlertButtonArrayKey : @[ NSLocalizedString(@"Ok", @"Ok") ] }];
         }
     }];
 }
