@@ -120,9 +120,10 @@
     //NSLog(@"TEXT LABEL: %@", self.textLabel.text);
     [self addSubview:self.textLabel];
     
-    float serviceLogoSize = (self.frame.size.width > self.frame.size.height) ? self.frame.size.height : self.frame.size.width;
-    float centerX = self.frame.size.width/2;
-    float centerY = self.frame.size.height/2;
+    CGFloat serviceLogoSize = (self.frame.size.width > self.frame.size.height) ? self.frame.size.height : self.frame.size.width;
+    
+    CGFloat centerX = self.frame.size.width/2;
+    CGFloat centerY = self.frame.size.height/2;
     
     self.serviceLogo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, serviceLogoSize, serviceLogoSize)];
     self.serviceLogo.center = CGPointMake(centerX, centerY);
@@ -144,6 +145,11 @@
     CGFloat cellHeight = self.frame.size.height;
     CGFloat cellWidth = self.frame.size.width;
 
+    CGFloat centerX = self.frame.size.width/2;
+    CGFloat centerY = self.frame.size.height/2;
+    
+    self.serviceLogo.center = CGPointMake(centerX, centerY);
+    
     self.textLabel.frame = CGRectMake(0, cellHeight * 1.1, cellWidth, [self heightForLabelWithFont:self.font]);
 }
 
