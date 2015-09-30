@@ -100,12 +100,10 @@
     YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request) {
         // check the headers for completeness
         // /test endpoint specifies the Authorization header
+        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"GET"], @"Expected a 'GET' method");
         NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
         XCTAssertNotNil(authHeader, @"Authorization header is missing");
         XCTAssert([authHeader isEqualToString:[self getCombinedAuthHeader]], @"Authorization header is incomplete");
-        NSString *clientId = [request.allHTTPHeaderFields objectForKey:@"user_id"];
-        XCTAssertNotNil(clientId, @"client_id header is missing");
-        XCTAssert([clientId isEqualToString:YSGTestClientID], @"client_id header value is unexpected");
         return YES;
     } andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
         NSData *expectedResponse = [@"{\"message\": \"You have successfully made an authorized request to the YesGraph API!\", \"meta\": { \"app_name\": \"demo\", \"docs\": \"https://www.yesgraph.com/docs/#get-test\", \"user_id\": null }  }" dataUsingEncoding:NSUTF8StringEncoding];
@@ -114,7 +112,8 @@
     
     NSString *testPath = @"https://api.yesgraph.com/v0/test";
     
-    [self.client GET:testPath parameters:@{@"user_id": YSGTestClientID} completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+    self.client.clientKey = YSGTestClientKey;
+    [self.client GET:testPath parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
      {
          XCTAssertNil(error, @"Error should be nil");
          XCTAssertNotNil(response, @"Response shouldn't be nil");
