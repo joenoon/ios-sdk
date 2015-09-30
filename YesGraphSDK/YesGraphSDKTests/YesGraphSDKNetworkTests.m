@@ -13,6 +13,8 @@
 #import "YSGClient.h"
 #import "YSGClient+Private.h"
 
+#import "YSGStubRequestsScoped.h" // scoped OHHTTPStubs setup / teardown done via constructors / destructors
+
 @interface YesGraphSDKNetworkTests : XCTestCase
 
 @property (nonatomic, strong) YSGClient *client;
@@ -24,7 +26,6 @@
 - (void)setUp
 {
     [super setUp];
-    
     self.client = [[YSGClient alloc] init];
 }
 
@@ -87,5 +88,85 @@
         }
     }];
 }
+
+- (NSString *)getCombinedAuthHeader
+{
+    return [NSString stringWithFormat:@"Bearer %@", YSGTestClientKey];
+}
+
+- (void)testClientGETRequestHeaders
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Client Headers Test"];
+    YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request) {
+        // check the headers for completeness
+        // /test endpoint specifies the Authorization header
+        NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+        XCTAssertNotNil(authHeader, @"Authorization header is missing");
+        XCTAssert([authHeader isEqualToString:[self getCombinedAuthHeader]], @"Authorization header is incomplete");
+        NSString *clientId = [request.allHTTPHeaderFields objectForKey:@"user_id"];
+        XCTAssertNotNil(clientId, @"client_id header is missing");
+        XCTAssert([clientId isEqualToString:YSGTestClientID], @"client_id header value is unexpected");
+        return YES;
+    } andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
+        NSData *expectedResponse = [@"{\"message\": \"You have successfully made an authorized request to the YesGraph API!\", \"meta\": { \"app_name\": \"demo\", \"docs\": \"https://www.yesgraph.com/docs/#get-test\", \"user_id\": null }  }" dataUsingEncoding:NSUTF8StringEncoding];
+        return [OHHTTPStubsResponse responseWithData:expectedResponse statusCode:200 headers:nil];
+    }];
+    
+    NSString *testPath = @"https://api.yesgraph.com/v0/test";
+    
+    [self.client GET:testPath parameters:@{@"user_id": YSGTestClientID} completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil");
+         XCTAssertNotNil(response, @"Response shouldn't be nil");
+         XCTAssertNotNil(response.responseObject, @"Response should have a parsed data object");
+         XCTAssert([response.responseObject isKindOfClass:[NSDictionary class]], @"Parsed data object should be a NSDictionary");
+         NSDictionary *respParsed = (NSDictionary *)response.responseObject;
+         XCTAssertNotNil([respParsed objectForKey:@"message"], @"Parsed object should contains a message key");
+         XCTAssertNotNil([respParsed objectForKey:@"meta"], @"Parsed object should contains a meta key");
+         XCTAssert([[respParsed objectForKey:@"meta"]  isKindOfClass:[NSDictionary class]], @"Meta key should be a NSDictionary");
+         NSDictionary *meta = (NSDictionary *)[respParsed objectForKey:@"meta"];
+         XCTAssertNotNil([meta objectForKey:@"app_name"], @"App name should not be nil");
+         XCTAssert([[meta objectForKey:@"app_name"] isEqualToString:@"demo"], @"App name should be 'demo'");
+         [expectation fulfill];
+     }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         if (error)
+         {
+             XCTFail(@"Expectation timed-out with error: %@", error);
+         }
+     }];
+    
+    scoped = nil; // this isn't needed, it's used to remove compiler warnings
+}
+
+
+//- (void)testClientGETRequestWithNilResponse
+//{
+//    YSGStubRequestsScoped *scoped = [[YSGStubRequestsScoped alloc] initWithStubRequestBlock:^BOOL(NSURLRequest * _Nonnull request) {
+//        return YES;
+//    } andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request) {
+//        return nil;
+//    }];
+//    XCTestExpectation *expectation = [self expectationWithDescription:@"Client Key Retrieved"];
+//    
+//    [self.client fetchRandomClientKeyWithSecretKey:YSGTestClientKey completion:^(NSString *clientKey, NSError *error)
+//     {
+//         XCTAssertNotNil(error, @"Error shouldn't be nil");
+//         XCTAssertNil(clientKey, @"Client key should be nil");
+//         
+//     }];
+//    
+//    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+//     {
+//         if (error)
+//         {
+//             XCTFail(@"Expectation Failed with error: %@", error);
+//         }
+//     }];
+//    
+//    scoped = nil;
+//}
 
 @end
