@@ -44,11 +44,8 @@
     [self.client fetchAddressBookForUserId:YSGTestClientID completion:^(id  _Nullable responseObject, NSError * _Nullable error)
     {
         XCTAssert([responseObject isKindOfClass:[YSGContactList class]]);
-        
         YSGContactList* contactList = (YSGContactList *)responseObject;
-        
         XCTAssert(contactList.entries.count == [YSGTestMockData mockContactList].entries.count);
-        
         XCTAssert([contactList.entries.firstObject isKindOfClass:[YSGContact class]]);
         
         [expectation fulfill];
@@ -68,17 +65,23 @@
     }];
 }
 
-- (void)testUpdateAddressBook
+- (void)asyncUpdateWithExpectation:(XCTestExpectation *)expectation
 {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Fetched"];
-    
     self.client.clientKey = YSGTestClientKey;
         
     [self.client updateAddressBookWithContactList:[YSGTestMockData mockContactList] completion:^(id _Nullable responseObject, NSError * _Nullable error)
     {
-        XCTAssert(responseObject != nil);
+        XCTAssertNotNil(responseObject, @"Response shouldn't be nil");
+        XCTAssertNil(error, @"Error should be nil");
         [expectation fulfill];
     }];
+}
+
+- (void)testUpdateAddressBook
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Fetched"];
+    
+    [self asyncUpdateWithExpectation:expectation];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
     {
@@ -115,7 +118,7 @@
             @"name": c.name ? c.name : [NSNull null],
             @"phone": c.phone ? c.phone : [NSNull null],
             @"data": c.data ? c.data : empty
-         };
+        };
         [contactsData addObject:contactData];           
     }
     NSDictionary *respDic = @{
@@ -124,11 +127,11 @@
         @"user_id": YSGTestClientID,
         @"data": contactsData
     };
-
     NSError *err = nil;
     NSData *ret = [NSJSONSerialization dataWithJSONObject:respDic options:NSJSONWritingPrettyPrinted  error:&err];
     XCTAssertNil(err, @"Error converting contacts data to json: %@", err.localizedDescription);
     return ret;
+
 }
 
 - (void)testFetchMockedAddressBook
@@ -143,7 +146,7 @@
          NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
          XCTAssertNotNil(authHeader, @"Authorization header is missing");
          XCTAssert([authHeader isEqualToString:[self getCombinedAuthHeader]], @"Authorization header is incomplete");
-         NSLog(@"Request %@", request);
+         return YES;
      }
     andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
      {
@@ -157,9 +160,56 @@
      {
          scoped = nil;
          XCTAssertNil(error, @"Expectation failed with error: %@", error);
-     }];
-    
+     }];   
 }
 
+- (void)testUpdateMockedAddressBook
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Mocked Update"];
+
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+     {
+         XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Request type for mocked data should be POST");
+         XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/address-book"], @"Unexpected URL");
+         NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+         XCTAssertNotNil(authHeader, @"Authorization header is missing");
+         XCTAssert([authHeader isEqualToString:[self getCombinedAuthHeader]], @"Authorization header is incomplete");
+         XCTAssertNotNil(request.HTTPBodyStream, @"No data can be read from the stream");
+
+         NSInputStream *istream = request.HTTPBodyStream;
+         NSMutableData *data = [NSMutableData new];
+         [istream open];
+         
+         size_t sizeOfBuf = 1024;
+         uint8_t *buf = malloc(sizeOfBuf);
+         NSInteger len = 0;
+         while ([istream hasBytesAvailable] && (len = [istream read:buf maxLength:sizeOfBuf]) > 0)
+         {
+             [data appendBytes:buf length:len];
+         }
+         free(buf);
+         [istream close];
+
+         NSError *err = nil;
+         NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
+         XCTAssertNil(err, @"Error parsing response data: %@", err);
+         NSDictionary *mockDic = [[YSGTestMockData mockContactList] ysg_toDictionary];
+         XCTAssert([mockDic isEqualToDictionary:parsedResponse], @"Mocked response not the same as parsed data");
+         return YES;
+     }
+    andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
+     {
+         NSString *mockResponseString = @"{\"message\":\"Address book for 1234 added.\",\"batch_id\":\"e8e38d79-1d2b-466f-8aa1-02c3ca7479d5\"}";
+         return [OHHTTPStubsResponse responseWithData:[mockResponseString dataUsingEncoding:NSUTF8StringEncoding] statusCode:200 headers:nil];
+     }];
+
+    [self asyncUpdateWithExpectation:expectation];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         scoped = nil;
+         XCTAssertNil(error, @"Expectation failed with error %@", error);
+     }];
+}
 
 @end
