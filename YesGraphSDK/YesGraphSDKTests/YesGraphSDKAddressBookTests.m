@@ -47,7 +47,7 @@
         
         YSGContactList* contactList = (YSGContactList *)responseObject;
         
-        XCTAssert(contactList.entries.count > 0);
+        XCTAssert(contactList.entries.count == [YSGTestMockData mockContactList].entries.count);
         
         XCTAssert([contactList.entries.firstObject isKindOfClass:[YSGContact class]]);
         
@@ -103,73 +103,32 @@
 
 - (NSData *)buildMockedAddressBookJSONResponse
 {
-    NSString *mockedJson = @"{" 
-                            "\"meta\": {"
-                            "  \"app_name\": \"test\","
-                            "  \"docs\": \"https://www.yesgraph.com/docs/#get-address-bookuser_id\","
-                            "  \"help\": \"Please contact support@yesgraph.com for any issues.\","
-                            "  \"time\": 0.033014535903930664,"
-                            "  \"total_count\": 10,"
-                            "  \"user_id\": \"1234\","
-                            "},"
-                            "\"data\": ["
-                            "  {"
-                            "    \"phones\": [],"
-                            "    \"emails\": ["
-                            "      \"ivan@yesgraph.com\""
-                            "    ],"
-                            "    \"email\": \"ivan@yesgraph.com\","
-                            "    \"name\": \"Ivan Kirigin\","
-                            "    \"phone\": null,"
-                            "    \"data\": {"
-                            "      \"picture_url\": \"http://j.mp/ivan_jpg\","
-                            "      \"ref\": 123"
-                            "    }"
-                            "  },"
-                            "  {"
-                            "    \"phones\": [],"
-                            "    \"emails\": ["
-                            "      \"george@yesgraph.com\""
-                            "    ],"
-                            "    \"email\": \"george@yesgraph.com\","
-                            "    \"name\": \"George Hickman\","
-                            "    \"phone\": null,"
-                            "    \"data\": {"
-                            "      \"foo\": \"bar\""
-                            "    }"
-                            "  },"
-                            "  {"
-                            "    \"phones\": [],"
-                            "    \"emails\": ["
-                            "      \"jonathan.chu@me.com\""
-                            "    ],"
-                            "    \"email\": \"jonathan.chu@me.com\","
-                            "    \"name\": \"Jonathan Chu\","
-                            "    \"phone\": null,"
-                            "    \"data\": {}"
-                            "  },"
-                            "  {"
-                            "    \"phones\": [],"
-                            "    \"emails\": ["
-                            "      \"me@nvie.com\""
-                            "    ],"
-                            "    \"email\": \"me@nvie.com\","
-                            "    \"name\": null,"
-                            "    \"phone\": null,"
-                            "    \"data\": {}"
-                            "  },"
-                            "  {"
-                            "    \"phones\": [],"
-                            "    \"emails\": ["
-                            "      \"h.schroeder@gmail.com\""
-                            "    ],"
-                            "    \"email\": \"h.schroeder@gmail.com\","
-                            "    \"name\": \"Heinz Schroeder\","
-                            "    \"phone\": null,"
-                            "    \"data\": {}"
-                            "  }"
-                            "]";
-    return [mockedJson dataUsingEncoding:NSUTF8StringEncoding];
+    YSGContactList *contacts = [YSGTestMockData mockContactList];
+    NSMutableArray *contactsData = [[NSMutableArray alloc] initWithCapacity:contacts.entries.count];
+    NSArray *empty = [NSArray new];
+    for (YSGContact *c in contacts.entries)
+    {
+        NSDictionary *contactData = @{
+            @"phones": c.phones ? c.phones : empty,
+            @"emails": c.emails ? c.emails : empty,
+            @"email": c.email ? c.email : [NSNull null],
+            @"name": c.name ? c.name : [NSNull null],
+            @"phone": c.phone ? c.phone : [NSNull null],
+            @"data": c.data ? c.data : empty
+         };
+        [contactsData addObject:contactData];           
+    }
+    NSDictionary *respDic = @{
+        @"meta": @"test",
+        @"total_count": [NSNumber numberWithInteger:contacts.entries.count],
+        @"user_id": YSGTestClientID,
+        @"data": contactsData
+    };
+
+    NSError *err = nil;
+    NSData *ret = [NSJSONSerialization dataWithJSONObject:respDic options:NSJSONWritingPrettyPrinted  error:&err];
+    XCTAssertNil(err, @"Error converting contacts data to json: %@", err.localizedDescription);
+    return ret;
 }
 
 - (void)testFetchMockedAddressBook
@@ -201,4 +160,6 @@
      }];
     
 }
+
+
 @end
