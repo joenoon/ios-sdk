@@ -158,9 +158,27 @@
      }
     andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
      {
-        NSString *payloadData = [NSString stringWithFormat:@"{ \"user_id\": \"%@\", \"test_parameter\": %@ }", YSGTestClientID, [NSNumber numberWithFloat:13.5f]];
-        XCTAssert([request.HTTPBody isEqualToData:[payloadData dataUsingEncoding:NSUTF8StringEncoding]]); // NOTE: tule vprasat, ce ma kdo kako idejo zakaj je httpbody enak nil, ceprav je v YSGClient requestForMethod nastavljeno vse...
+        NSString *payloadData = [NSString stringWithFormat:@"{\"user_id\":\"%@\",\"test_parameter\":%@}", YSGTestClientID, [NSNumber numberWithFloat:13.5f]];
+        // XCTAssert([request.HTTPBody isEqualToData:[payloadData dataUsingEncoding:NSUTF8StringEncoding]]); // NOTE: tule vprasat, ce ma kdo kako idejo zakaj je httpbody enak nil, ceprav je v YSGClient requestForMethod nastavljeno vse...
+
+        XCTAssertNotNil(request.HTTPBodyStream, @"Body stream shouldn't be nil");
+        NSInputStream *istream = request.HTTPBodyStream;
+        NSMutableData *data = [NSMutableData new];
+        [istream open];
+
+        size_t sizeOfBuf = 1024;
+        uint8_t *buf = malloc(sizeOfBuf);
+        NSInteger len = 0;
+        while ([istream hasBytesAvailable] && (len = [istream read:buf maxLength:sizeOfBuf]) > 0)
+        {
+            [data appendBytes:buf length:len];
+        }
+        free(buf);
+        [istream close];
+        NSData *payloadBytes = [payloadData dataUsingEncoding:NSUTF8StringEncoding];
+        XCTAssert([data isEqualToData:payloadBytes], @"Payload data doesn't match expected values");
         NSData *expectedResponse = [@"{\"message\": \"You have successfully made an authorized request to the YesGraph API!\", \"meta\": { \"app_name\": \"demo\", \"docs\": \"https://www.yesgraph.com/docs/#get-test\", \"user_id\": null }  }" dataUsingEncoding:NSUTF8StringEncoding];
+        
         return [OHHTTPStubsResponse responseWithData:expectedResponse statusCode:200 headers:nil];
      }];
     
