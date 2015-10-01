@@ -53,33 +53,6 @@
     }];
 }
 
-- (void)testUpdateInvitesAccepted
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Accepted By User"];
-    NSArray<YSGContact *> *invites = [YSGTestMockData mockContactList].entries;
-    NSString *randomUID = [YSGUtility randomUserId];
-
-    [self.client updateInvitesAccepted:invites forNewUserId:randomUID withCompletion:^(NSError *_Nullable error)
-    {
-        if (error)
-        {
-            XCTFail(@"Expectation failed with error: %@", error);
-        }
-        else
-        {
-            [expectation fulfill];
-        }
-    }];
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *_Nullable error)
-    {
-        if (error)
-        {
-            XCTFail(@"Expectation timed-out with error: %@", error);
-        }
-    }];
-}
-
 - (void)tearDown
 {
     [super tearDown];
