@@ -8,17 +8,21 @@
 
 #import "YSGConstants+AddressBook.h"
 
-@implementation YSGConstants (AddressBook)
-
-/*!
- *  Default cell font size for the AddressBook view
- *  @discussion: Default: 0.0f (System)
- *
- */
+@implementation YSGThemeConstants (AddressBook)
 
 + (CGFloat)cellDefaultFontSize
 {
-    return 0.f;
+    return 17.f;
+}
+
++ (CGFloat)cellDefaultDetailFontSize
+{
+    return 12.f;
+}
+
++ (CGFloat)cellDefaultSectionFontSize
+{
+    return 17.f;
 }
 
 @end

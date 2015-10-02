@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		303358BA1BBB5BBC002F5E92 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358B01BBB5BBC002F5E92 /* OpenSans-Regular.ttf */; };
+		303358BB1BBB5BBC002F5E92 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */; };
 		3E1864971BA85833007C8859 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864961BA85833007C8859 /* main.m */; };
 		3E18649A1BA85833007C8859 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864991BA85833007C8859 /* AppDelegate.m */; };
 		3E18649D1BA85833007C8859 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E18649C1BA85833007C8859 /* ViewController.m */; };
@@ -28,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		303358B01BBB5BBC002F5E92 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		3E1864921BA85833007C8859 /* Example-Static.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Static.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1864961BA85833007C8859 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E1864981BA85833007C8859 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -63,6 +67,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		303358A81BBB5BB3002F5E92 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				303358B01BBB5BBC002F5E92 /* OpenSans-Regular.ttf */,
+				303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		3E1864891BA85833007C8859 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +98,7 @@
 		3E1864941BA85833007C8859 /* Example-Static */ = {
 			isa = PBXGroup;
 			children = (
+				303358A81BBB5BB3002F5E92 /* Fonts */,
 				3EFDB0B61BAC48BC00F51816 /* Images.xcassets */,
 				3E1864981BA85833007C8859 /* AppDelegate.h */,
 				3E1864991BA85833007C8859 /* AppDelegate.m */,
@@ -203,7 +217,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303358BB1BBB5BBC002F5E92 /* OpenSans-Semibold.ttf in Resources */,
 				3EFDB0B71BAC48BC00F51816 /* Images.xcassets in Resources */,
+				303358BA1BBB5BBC002F5E92 /* OpenSans-Regular.ttf in Resources */,
 				3E1864A51BA85833007C8859 /* LaunchScreen.storyboard in Resources */,
 				3E1864A01BA85833007C8859 /* Main.storyboard in Resources */,
 			);

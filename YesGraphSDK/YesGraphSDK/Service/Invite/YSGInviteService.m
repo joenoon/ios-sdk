@@ -92,7 +92,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         }
         else if (error)
         {
-            [[YSGMessageCenter shared] sendMessage:error.localizedDescription userInfo:@{ YSGMessageAlertButtonArrayKey : @[ NSLocalizedString(@"Ok", @"Ok") ] }];
+            [[YSGMessageCenter shared] sendMessage: NSLocalizedString(@"Check contacts permissions in settings.", @"Check contacts permissions in settings.") userInfo:@{ YSGMessageAlertButtonArrayKey : @[ NSLocalizedString(@"Ok", @"Ok") ] }];
         }
     }];
 }
@@ -109,7 +109,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         self.viewController = viewController;
         self.addressBookNavigationController = navigationController;
         
-        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+        if (self.viewController.traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular
+            && self.viewController.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular)
         {
             navigationController.modalPresentationStyle = UIModalPresentationFormSheet;
         }

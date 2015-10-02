@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		303358CF1BBB5BC9002F5E92 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358C51BBB5BC9002F5E92 /* OpenSans-Regular.ttf */; };
+		303358D01BBB5BC9002F5E92 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358C61BBB5BC9002F5E92 /* OpenSans-Semibold.ttf */; };
 		38130D241B9F110100AA2AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38130D231B9F110100AA2AA8 /* AppDelegate.swift */; };
 		38130D261B9F110100AA2AA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38130D251B9F110100AA2AA8 /* ViewController.swift */; };
 		38130D291B9F110100AA2AA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38130D271B9F110100AA2AA8 /* Main.storyboard */; };
@@ -42,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		303358C51BBB5BC9002F5E92 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		303358C61BBB5BC9002F5E92 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		38130D201B9F110100AA2AA8 /* Example-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38130D231B9F110100AA2AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38130D251B9F110100AA2AA8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		303358BD1BBB5BC0002F5E92 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				303358C51BBB5BC9002F5E92 /* OpenSans-Regular.ttf */,
+				303358C61BBB5BC9002F5E92 /* OpenSans-Semibold.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		38130D171B9F110100AA2AA8 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +109,7 @@
 		38130D221B9F110100AA2AA8 /* Example-Swift */ = {
 			isa = PBXGroup;
 			children = (
+				303358BD1BBB5BC0002F5E92 /* Fonts */,
 				3EFDB0B41BAC48B300F51816 /* Images.xcassets */,
 				38130D231B9F110100AA2AA8 /* AppDelegate.swift */,
 				38130D251B9F110100AA2AA8 /* ViewController.swift */,
@@ -205,7 +219,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				303358D01BBB5BC9002F5E92 /* OpenSans-Semibold.ttf in Resources */,
 				3EFDB0B51BAC48B300F51816 /* Images.xcassets in Resources */,
+				303358CF1BBB5BC9002F5E92 /* OpenSans-Regular.ttf in Resources */,
 				38130D2E1B9F110100AA2AA8 /* LaunchScreen.storyboard in Resources */,
 				38130D291B9F110100AA2AA8 /* Main.storyboard in Resources */,
 			);

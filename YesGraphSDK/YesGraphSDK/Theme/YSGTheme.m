@@ -7,7 +7,7 @@
 //
 
 #import "YSGTheme.h"
-#import "YSGConstants.h"
+#import "YSGThemeConstants.h"
 
 @implementation YSGTheme
 
@@ -16,22 +16,21 @@
     if ((self = [super init]))
     {
         // set default color values
-        self.mainColor = [YSGConstants defaultMainColor]; 
-        self.twitterColor = [YSGConstants defaultTwitterColor]; 
-        self.facebookColor = [YSGConstants defaultFacebookColor];
-        self.textColor = [YSGConstants defaultTextColor]; 
-        self.baseColor = [YSGConstants defaultBackgroundColor];
+        self.mainColor = [YSGThemeConstants defaultMainColor]; 
+        self.twitterColor = [YSGThemeConstants defaultTwitterColor]; 
+        self.facebookColor = [YSGThemeConstants defaultFacebookColor];
+        self.textColor = [YSGThemeConstants defaultTextColor]; 
+        self.baseColor = [YSGThemeConstants defaultBackgroundColor];
         // set default font details
-        self.fontFamily = [YSGConstants defaultFontFamily]; 
-        self.shareButtonLabelFontSize = [YSGConstants defaultShareButtonFontSize]; 
-        self.shareButtonLabelTextAlignment = [YSGConstants defaultTextAlignment]; 
-        self.shareLabelTextAlignment =  [YSGConstants defaultTextAlignment]; 
+        self.fontFamily = (NSString *)[YSGThemeConstants defaultFontFamily]; // casting to remove const-errors
+        self.shareButtonLabelFontSize = [YSGThemeConstants defaultShareButtonFontSize]; 
+        self.shareButtonLabelTextAlignment = [YSGThemeConstants defaultTextAlignment]; 
+        self.shareLabelTextAlignment =  [YSGThemeConstants defaultTextAlignment]; 
         // set default share button shape
-        self.shareButtonShape = [YSGConstants defaultShareButtonShape];
+        self.shareButtonShape = [YSGThemeConstants defaultShareButtonShape];
         // set default share button alpha factors for both states
-        self.shareButtonFadeFactors = [YSGConstants defaultShareButtonAlphaFactors]; 
-        self.shareAddressBookTheme = [[YSGShareAddressBookTheme alloc] init];
-        self.shareAddressBookTheme.viewBackground = [UIColor whiteColor];
+        self.shareButtonFadeFactors = [YSGThemeConstants defaultShareButtonAlphaFactors]; 
+        self.shareAddressBookTheme = [YSGShareAddressBookTheme new];
     }
     return self;
 }

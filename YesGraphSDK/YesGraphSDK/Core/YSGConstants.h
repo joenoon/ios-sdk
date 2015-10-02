@@ -87,7 +87,7 @@ YSG_EXTERN NSString *const YSGClientAPIURL;
 #pragma mark - Default Values
 
 YSG_EXTERN NSUInteger const YSGDefaultInviteNumberOfSuggestions;
-YSG_EXTERN NSString *const YSGDefaultContactAccessPromptMessage;
+//YSG_EXTERN NSString *const YSGDefaultContactAccessPromptMessage;
 YSG_EXTERN NSTimeInterval const YSGDefaultContactBookTimePeriod;
 
 NS_ASSUME_NONNULL_END

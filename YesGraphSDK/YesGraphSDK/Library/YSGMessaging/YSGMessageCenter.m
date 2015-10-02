@@ -93,9 +93,9 @@ NSString *const YSGMessageAlertButtonArrayKey = @"YSGMessageAlertButtonArrayKey"
 
             [self.alertController addAction:action];
         }
-        dispatch_sync(dispatch_get_main_queue(), ^
+        dispatch_async(dispatch_get_main_queue(), ^
         {
-          [self.alertController ysg_show];
+            [self.alertController ysg_show];
         });
     }
 }
