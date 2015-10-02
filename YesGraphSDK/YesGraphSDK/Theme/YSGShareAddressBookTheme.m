@@ -16,9 +16,9 @@
     {
         // set default address list font sizes (compiler already initializes this to 0 in optimized builds ?)
         // NOTE: should this be done via the [UIFont prefferedFont..] ?
-        self.cellDetailFontSize = 0.f;
-        self.cellFontSize = 0.f;
-        self.sectionFontSize = 0.f;
+        self.cellFontSize = 17.f;
+        self.cellDetailFontSize = 12.f;
+        self.sectionFontSize = 17.f;
     }
     return self;
 }

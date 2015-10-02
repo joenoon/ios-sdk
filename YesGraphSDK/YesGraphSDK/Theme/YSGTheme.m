@@ -21,7 +21,7 @@
         self.textColor = [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
         self.baseColor = [UIColor whiteColor];
         // set default font details
-        self.fontFamily = @"Helvetica";
+        self.fontFamily = [[UIFont systemFontOfSize:12] familyName];
         self.shareButtonLabelFontSize = 36.f;
         self.shareButtonLabelTextAlignment = NSTextAlignmentCenter;
         self.shareLabelTextAlignment = NSTextAlignmentCenter;
