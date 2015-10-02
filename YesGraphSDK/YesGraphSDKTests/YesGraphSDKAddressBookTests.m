@@ -92,13 +92,6 @@
     }];
 }
 
-// NOTE: duplication of code, this should be yanked out...
-//       everything below this should probably be moved out of this file?
-- (NSString *)getCombinedAuthHeader
-{
-    return [NSString stringWithFormat:@"Bearer %@", YSGTestClientKey];
-}
-
 - (NSString *)getCombinedURL:(NSString *)base
 {
     return [NSString stringWithFormat:@"%@/%@", base, YSGTestClientID];
@@ -145,7 +138,7 @@
          XCTAssert([request.URL.absoluteString isEqualToString:[self getCombinedURL:@"https://api.yesgraph.com/v0/address-book"]], @"Unexpected URL");
          NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
          XCTAssertNotNil(authHeader, @"Authorization header is missing");
-         XCTAssert([authHeader isEqualToString:[self getCombinedAuthHeader]], @"Authorization header is incomplete");
+         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
          return YES;
      }
     andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
@@ -173,7 +166,7 @@
          XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/address-book"], @"Unexpected URL");
          NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
          XCTAssertNotNil(authHeader, @"Authorization header is missing");
-         XCTAssert([authHeader isEqualToString:[self getCombinedAuthHeader]], @"Authorization header is incomplete");
+         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
          XCTAssertNotNil(request.HTTPBodyStream, @"No data can be read from the stream");
 
          NSInputStream *istream = request.HTTPBodyStream;

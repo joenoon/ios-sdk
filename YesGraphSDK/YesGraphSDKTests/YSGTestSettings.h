@@ -10,3 +10,5 @@
 
 extern NSString *const YSGTestClientKey;
 extern NSString *const YSGTestClientID;
+
+NS_RETURNS_RETAINED NSString *getCombinedAuthHeader(void);
