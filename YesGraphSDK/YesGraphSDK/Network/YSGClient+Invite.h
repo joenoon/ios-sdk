@@ -21,14 +21,4 @@
                 forUsedId:(nonnull NSString *)userId
            withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
 
-/*!
- *  This notifies YesGraph which invites were accepted
- *
- *  @param invite     contacts that were invited
- *  @param completion called when completed
- */
-- (void)updateInvitesAccepted:(nonnull NSArray<YSGContact *> *)invites
-                   forNewUserId:(nullable NSString *)userId
-                 withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
-
 @end

@@ -45,41 +45,6 @@ NS_ASSUME_NONNULL_BEGIN
      }];
 }
 
-- (void)updateInvitesAccepted:(nonnull NSArray <YSGContact *> *)invites
-                 forNewUserId:(nullable NSString *)userId
-               withCompletion:(nullable void (^)(NSError *_Nullable error))completion
-{
-    //
-    // Currently sending only one invite since YSG API does not support multiples yet
-    // IT is possible to send POST request for each invite accepted - but this is not implemented in the following code
-    //
-    
-    NSMutableDictionary *parameter = [NSMutableDictionary new];
-    
-    if (userId)
-    {
-        parameter[@"new_user_id"] = userId;
-    }
-    // NOTE: when sent_at is a string, it must be an ISO 8601 formatted variant, otherwise this must be
-    //       a number
-    parameter[@"accepted_at"] = [NSNumber numberWithLong:[[NSDate date] timeIntervalSince1970]];
-    
-    if (invites.lastObject.email) {
-        parameter[@"email"] = invites.lastObject.email;
-    }
-    else if (invites.lastObject.phone) {
-        parameter[@"phone"] = invites.lastObject.phone;
-    }
-    
-    [self POST:@"invite-accepted" parameters:parameter completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
-     {
-         if (completion)
-         {
-             completion(error);
-         }
-     }];
-}
-
 NS_ASSUME_NONNULL_END
 
 @end
