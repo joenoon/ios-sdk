@@ -18,6 +18,8 @@
  */
 @interface YSGTheme : NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Main color of the Share UI
  *
@@ -114,5 +116,7 @@
  */
 
 @property (nullable, nonatomic, strong) YSGShareAddressBookTheme *shareAddressBookTheme;
+
+NS_ASSUME_NONNULL_END
 
 @end

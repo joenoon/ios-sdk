@@ -22,7 +22,7 @@
         self.textColor = [YSGThemeConstants defaultTextColor]; 
         self.baseColor = [YSGThemeConstants defaultBackgroundColor];
         // set default font details
-        self.fontFamily = (NSString *)[YSGThemeConstants defaultFontFamily]; // casting to remove const-errors
+        self.fontFamily = [YSGThemeConstants defaultFontFamily];
         self.shareButtonLabelFontSize = [YSGThemeConstants defaultShareButtonFontSize]; 
         self.shareButtonLabelTextAlignment = [YSGThemeConstants defaultTextAlignment]; 
         self.shareLabelTextAlignment =  [YSGThemeConstants defaultTextAlignment]; 

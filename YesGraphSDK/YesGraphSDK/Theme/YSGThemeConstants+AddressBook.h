@@ -9,6 +9,7 @@
 #import "YSGThemeConstants.h"
 
 @interface YSGThemeConstants (AddressBook)
+
 /*!
  *  Default address book list cell font size
  *  @Discussion: Default: 17.0
@@ -29,6 +30,5 @@
  *
  */
 + (CGFloat)cellDefaultSectionFontSize;
-
 
 @end

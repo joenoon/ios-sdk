@@ -35,7 +35,7 @@
     return [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
 }
 
-+ (nonnull const NSString *const)defaultFontFamily
++ (nonnull const NSString *)defaultFontFamily
 {
     return [UIFont systemFontOfSize:12].familyName;
 }

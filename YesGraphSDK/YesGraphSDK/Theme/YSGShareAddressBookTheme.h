@@ -11,6 +11,8 @@
 
 @interface YSGShareAddressBookTheme : NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Background of the address book view
  *  @discussion: Default: nil (system)
@@ -67,5 +69,6 @@
 
 @property (nonatomic) CGFloat sectionFontSize;
 
+NS_ASSUME_NONNULL_END
 
 @end

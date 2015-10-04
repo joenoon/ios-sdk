@@ -58,7 +58,7 @@
  *  @Discussion: Default: System, size 12
  *
  */
-+ (nonnull const NSString * const)defaultFontFamily;
++ (nonnull NSString *)defaultFontFamily;
 
 /*!
  *  Default share button cell size
