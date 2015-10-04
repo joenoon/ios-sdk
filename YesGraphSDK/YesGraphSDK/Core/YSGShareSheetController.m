@@ -52,14 +52,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     {
         self.services = services;
         self.delegate = delegate;
-        if (!theme)
-        {
-            self.theme = [YSGTheme new];
-        }
-        else
-        {
-            self.theme = theme;
-        }
+        self.theme = theme;
     }
     
     return self;
