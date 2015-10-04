@@ -91,11 +91,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonnull, nonatomic, readonly, strong) NSArray <YSGShareService *> * services;
 
-/*!
- *  Base color used for back button, contacts, sharing label
- */
-@property (nonatomic, strong) UIColor *baseColor;
-
 
 /*!
  *  Designated initializer

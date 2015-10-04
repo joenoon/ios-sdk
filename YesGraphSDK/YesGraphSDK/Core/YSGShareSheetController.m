@@ -52,7 +52,14 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     {
         self.services = services;
         self.delegate = delegate;
-        self.theme = theme;
+        if (!theme)
+        {
+            self.theme = [YSGTheme new];
+        }
+        else
+        {
+            self.theme = theme;
+        }
     }
     
     return self;
@@ -69,11 +76,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     {
         // set up if view was prsented modally
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(modalCloseButtonPressed:)];
-        backButton.tintColor = self.baseColor;
+        backButton.tintColor = self.theme.baseColor;
         self.navigationItem.leftBarButtonItem = backButton;
     }
     else {
-        self.navigationController.navigationBar.tintColor = self.baseColor;
+        self.navigationController.navigationBar.tintColor = self.theme.baseColor;
         self.title = @"Share";
     }
 
@@ -125,7 +132,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
     shareLabel.font = [UIFont systemFontOfSize:36.f];
-    shareLabel.textColor = self.baseColor;
+    shareLabel.textColor = self.theme.baseColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
     shareLabel.textAlignment = NSTextAlignmentCenter;
@@ -152,7 +159,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     if (self.referralURL.length) {
         
-        footer.layer.borderColor = self.baseColor.CGColor;
+        footer.layer.borderColor = self.theme.baseColor.CGColor;
         footer.layer.borderWidth = 1.5f;
         footer.layer.cornerRadius = 20;
         
@@ -164,8 +171,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         
         [copyButton setTitle:NSLocalizedString(@"copy", @"copy") forState:UIControlStateNormal];
         [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
-        [copyButton setTitleColor:self.baseColor forState:UIControlStateNormal];
-        [copyButton setTitleColor:[self.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [copyButton setTitleColor:self.theme.baseColor forState:UIControlStateNormal];
+        [copyButton setTitleColor:[self.theme.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
         [copyButton sizeToFit];
         
     }
