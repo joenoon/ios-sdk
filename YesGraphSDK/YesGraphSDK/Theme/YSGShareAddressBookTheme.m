@@ -20,7 +20,7 @@
         self.cellDetailFontSize = [YSGThemeConstants cellDefaultFontSize];
         self.cellFontSize = [YSGThemeConstants cellDefaultFontSize];
         self.sectionFontSize = [YSGThemeConstants cellDefaultFontSize];
-        self.viewBackground = [UIColor whiteColor];
+        self.viewBackground = [YSGThemeConstants defaultBackgroundColor];
     }
     return self;
 }

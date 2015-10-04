@@ -45,7 +45,7 @@
 
 /*!
  *  Size of the cell label font
- *  @discussion: Default: 0 (system)
+ *  @discussion: Default: 17
  *
  */
 
@@ -53,7 +53,7 @@
 
 /*!
  *  Size of the cell detail label font
- *  @discussion: Default: 0 (system)
+ *  @discussion: Default: 12
  *
  */
 
@@ -61,7 +61,7 @@
 
 /*!
  *  Size of the section label font
- *  @discussion: Default: 0 (system)
+ *  @discussion: Default: 17
  *
  */
 
