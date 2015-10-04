@@ -7,7 +7,7 @@
 //
 
 #import "YSGShareAddressBookTheme.h"
-#import "YSGConstants+AddressBook.h"
+#import "YSGThemeConstants+AddressBook.h"
 
 @implementation YSGShareAddressBookTheme
 

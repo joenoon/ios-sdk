@@ -6,7 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import "YSGConstants+AddressBook.h"
+#import "YSGThemeConstants+AddressBook.h"
 
 @implementation YSGThemeConstants (AddressBook)
 
