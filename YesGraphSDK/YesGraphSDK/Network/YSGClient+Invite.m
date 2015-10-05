@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateInvitesSent:(nonnull NSArray <YSGContact *> *)invites
-                forUsedId:(nonnull NSString *)userId
+                forUserId:(nonnull NSString *)userId
            withCompletion:(nullable void (^)(NSError *_Nullable error))completion
 {
     //

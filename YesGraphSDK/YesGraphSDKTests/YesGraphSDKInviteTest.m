@@ -32,7 +32,7 @@
 {
     NSArray<YSGContact *> *invitees = [YSGTestMockData mockContactList].entries;
 
-    [self.client updateInvitesSent:invitees forUsedId:YSGTestClientID withCompletion:^(NSError *_Nullable error)
+    [self.client updateInvitesSent:invitees forUserId:YSGTestClientID withCompletion:^(NSError *_Nullable error)
     {
         if (error)
         {
