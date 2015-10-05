@@ -10,6 +10,7 @@
 @import Contacts;
 
 #import "YSGClient.h"
+#import "YSGClient+InvitesShown.h"
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
 #import "YSGStyling.h"
@@ -63,6 +64,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 //
 
 @property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
+
+//
+// Invites Seen
+//
+
+@property (nonatomic, strong, nonnull) YSGClient *invitesSeenClient;
 
 @end
 
@@ -143,6 +150,20 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         self.sortedContacts = nil;
         self.letters = nil;
     }
+
+    // NOTE: send all viewed suggestions to YesGraph
+    //       should this be PRIORITY_BACKGORUND or PRIORITY_LOW?
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
+     {
+         [self.invitesSeenClient updateInvitesSeen:self.suggestions forUserId:nil withCompletion:^(NSError * _Nullable error)
+          {
+              if (error)
+              {
+                  // TODO: Log error??
+              }
+          }];
+     });
+    
     
     self.searchResults = nil;
     self.selectedContacts = nil;
