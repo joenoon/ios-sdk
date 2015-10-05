@@ -11,8 +11,21 @@
 
 @interface YSGClient (AddressBook)
 
+/*!
+ *  Retrieves the address book for the given User ID
+ *  
+ *  @param userId       ID of the user
+ *  @param completion   called when completed
+ */
 - (void)fetchAddressBookForUserId:(nonnull NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion;
 
+/*!
+ *
+ *  Updates the address book with the provided contact list
+ *
+ *  @param contactList  list of contacts that are to be updated
+ *  @param completion   called when completed
+ */
 - (void)updateAddressBookWithContactList:(nonnull YSGContactList *)contactList completion:(nullable YSGNetworkFetchCompletion)completion;
 
 @end

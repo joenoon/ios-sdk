@@ -14,7 +14,8 @@
 /*!
  *  This notifies YesGraph which invites were sent
  *
- *  @param invite     contacts that were invited
+ *  @param invites    contacts that were invited
+ *  @param userId     user's ID 
  *  @param completion called when completed
  */
 - (void)updateInvitesSent:(nonnull NSArray<YSGContact *> *)invites
