@@ -9,8 +9,10 @@
 @import AddressBook;
 @import Contacts;
 
+#import "YesGraph.h"
 #import "YSGClient.h"
 #import "YSGClient+InvitesShown.h"
+#import "YSGLogging.h"
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
 #import "YSGStyling.h"
@@ -155,11 +157,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     //       should this be PRIORITY_BACKGORUND or PRIORITY_LOW?
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
      {
-         [self.invitesSeenClient updateInvitesSeen:self.suggestions forUserId:nil withCompletion:^(NSError * _Nullable error)
+         [self.invitesSeenClient updateInvitesSeen:self.suggestions forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
           {
               if (error)
               {
-                  // TODO: Log error??
+                  YSG_LERROR(error);
               }
           }];
      });
