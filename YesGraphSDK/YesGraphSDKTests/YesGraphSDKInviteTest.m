@@ -10,6 +10,7 @@
 #import "YSGTestSettings.h"
 #import "YSGTestMockData.h"
 #import "YSGClient+Invite.h"
+#import "YSGClient+InvitesShown.h"
 #import "YSGUtility.h"
 #import "YSGStubRequestsScoped.h"
 
@@ -111,6 +112,34 @@
          scoped = nil;
          XCTAssertNil(error, @"Expectation timed-out with error: %@", error);
      }];
+}
+
+- (void)asyncInvitesShownWithExpectation:(XCTestExpectation *)expectation
+{
+    NSArray *shownInvites = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
+    [self.client updateInviteSeen:shownInvites forUserId:YSGTestClientID withCompletion:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil: %@", error);
+         [expectation fulfill];
+     }];
+}
+
+- (void)testInvitesShown
+{
+    XCTAssert(false, @"Test is not to be run yet, API endpoint missing!");
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Send Shown Invites to API"];
+
+    [self asyncInvitesShownWithExpectation:expectation];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Expectation timed-out with error: %@", error);
+     }];
+}
+
+- (void)testMockedInvitesShown
+{
+    
 }
 
 - (void)tearDown
