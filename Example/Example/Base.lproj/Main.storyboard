@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="vEe-ue-ZYh">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="vEe-ue-ZYh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbx-hW-cJo">
@@ -36,7 +36,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVl-Y9-BBF">
-                                <rect key="frame" x="20" y="311" width="560" height="43"/>
+                                <rect key="frame" x="20" y="310" width="560" height="43"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boost the performance of sharing and invite flows by recommending exactly who users should invite. " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHI-ec-cZ2">
                                         <rect key="frame" x="12" y="5" width="536" height="34"/>
@@ -59,6 +59,7 @@
                                 <rect key="frame" x="140" y="256" width="321" height="30"/>
                                 <color key="backgroundColor" red="0.88235294117647056" green="0.12156862745098039" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="321" id="M81-Rg-NdJ"/>
                                     <constraint firstAttribute="height" constant="30" id="Mp8-Tz-bHQ"/>
                                 </constraints>
                                 <attributedString key="attributedText">
@@ -83,7 +84,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="vEe-ue-ZYh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5qp-1V-ZmL"/>
-                            <constraint firstItem="Xba-dN-0C5" firstAttribute="leading" secondItem="vEe-ue-ZYh" secondAttribute="trailing" constant="-460" id="6rp-ba-vjp"/>
                             <constraint firstItem="hHI-ec-cZ2" firstAttribute="top" secondItem="Xba-dN-0C5" secondAttribute="bottom" constant="30" id="9bz-u3-dc9"/>
                             <constraint firstItem="Xba-dN-0C5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9gD-Es-MpD"/>
                             <constraint firstItem="Xba-dN-0C5" firstAttribute="top" relation="lessThanOrEqual" secondItem="hkH-L3-imL" secondAttribute="bottom" constant="36" id="Lc3-1Q-UIF"/>
