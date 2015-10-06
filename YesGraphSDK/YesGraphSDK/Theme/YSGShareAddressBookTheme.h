@@ -11,6 +11,8 @@
 
 @interface YSGShareAddressBookTheme : NSObject
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Background of the address book view
  *  @discussion: Default: nil (system)
@@ -45,7 +47,7 @@
 
 /*!
  *  Size of the cell label font
- *  @discussion: Default: 0 (system)
+ *  @discussion: Default: 17
  *
  */
 
@@ -53,7 +55,7 @@
 
 /*!
  *  Size of the cell detail label font
- *  @discussion: Default: 0 (system)
+ *  @discussion: Default: 12
  *
  */
 
@@ -61,11 +63,12 @@
 
 /*!
  *  Size of the section label font
- *  @discussion: Default: 0 (system)
+ *  @discussion: Default: 17
  *
  */
 
 @property (nonatomic) CGFloat sectionFontSize;
 
+NS_ASSUME_NONNULL_END
 
 @end

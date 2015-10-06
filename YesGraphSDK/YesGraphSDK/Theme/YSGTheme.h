@@ -11,22 +11,14 @@
 
 #import "YSGShareCellShapeEnum.h"
 #import "YSGShareAddressBookTheme.h"
-
-
-typedef union
-{
-    struct
-    {
-        CGFloat AlphaFadeFactor;
-        CGFloat AlphaUnfadeFactor;
-    };
-    CGFloat AlphaPair[2];
-} YSGShareButtonFadeFactors;
+#import "YSGShareButtonFadeFactors.h"
 
 /*!
  *  Use the theme to stylize YesGraph UI
  */
 @interface YSGTheme : NSObject
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  Main color of the Share UI
@@ -124,5 +116,7 @@ typedef union
  */
 
 @property (nullable, nonatomic, strong) YSGShareAddressBookTheme *shareAddressBookTheme;
+
+NS_ASSUME_NONNULL_END
 
 @end
