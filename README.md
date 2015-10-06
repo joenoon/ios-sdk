@@ -1,6 +1,6 @@
 # YesGraph iOS SDK
 
-[![Travis](https://img.shields.io/travis/YesGraph/ios-sdk/master.svg?style=flat)](https://travis-ci.org/YesGraph/ios-sdk)
+[![Travis](https://travis-ci.org/YesGraph/ios-sdk.svg)](https://travis-ci.org/YesGraph/ios-sdk)
 [![CocoaPods](https://img.shields.io/cocoapods/v/YesGraph-iOS-SDK.svg?style=flat)](http://cocoapods.org/?q=)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods](https://img.shields.io/cocoapods/l/YesGraph.svg?style=flat)](https://github.com/yesgraph/ios-sdk/blob/master/LICENSE)
@@ -12,7 +12,7 @@ The next version of the SDK will also provide a drop-in user facing invite flow.
 
 ## Requirements
 
-The SDK is compatible with iOS apps with **Minimum Deployment Target** iOS 8 and above. It requires Xcode 6.4+ and the iOS8 SDK to build the source.
+The SDK is compatible with iOS apps with **Minimum Deployment Target** iOS 8 and above. It requires Xcode 7.x and  iOS 9 SDK to build the source.
 
 ## Integration
 
