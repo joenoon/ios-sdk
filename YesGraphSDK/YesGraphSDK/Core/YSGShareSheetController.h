@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  Share services currently with share sheet controller
  */
-@property (nonnull, nonatomic, readonly, strong) NSArray <YSGShareService *> * services;
+@property (nonatomic, readonly, copy) NSArray <YSGShareService *> * services;
 
 
 /*!
