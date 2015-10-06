@@ -176,14 +176,17 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 #pragma mark - Initialization
 
++ (void)load
+{
+    [[NSNotificationCenter defaultCenter] addObserver:[self shared] selector:@selector(applicationNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
 - (instancetype)init
 {
     self = [super init];
     
     if (self)
     {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
-        
         //
         // Defaults
         //
@@ -215,12 +218,12 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
-        if (contactList)
+        if (contactList.entries.count)
         {
             YSGClient* client = [[YSGClient alloc] init];
             client.clientKey = self.clientKey;
-            
-            [client updateAddressBookWithContactList:contactList completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+
+            [client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
             {
                 if (!error)
                 {
@@ -314,10 +317,12 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
     
+    YSGCacheContactSource* cacheSource = [[YSGCacheContactSource alloc] init];
+    
     YSGClient* client = [[YSGClient alloc] init];
     client.clientKey = self.clientKey;
     
-    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localSource cacheSource:nil];
+    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localSource cacheSource:cacheSource];
     onlineSource.userId = self.userId;
     
     YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:self.userId];

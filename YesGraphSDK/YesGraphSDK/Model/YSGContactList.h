@@ -21,7 +21,6 @@
 
 @property (nonnull, nonatomic, copy) NSArray <YSGContact *> *entries;
 
-@property (nullable, nonatomic, strong) NSString *userId;
 @property (nullable, nonatomic, strong) YSGSource *source;
 
 @end

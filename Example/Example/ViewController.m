@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <Parse/Parse.h>
+
 
 @import YesGraphSDK;
 
@@ -17,9 +17,7 @@
 
 @end
 
-@implementation ViewController {
-    
-}
+@implementation ViewController
 
 - (void)viewDidLoad
 {
@@ -92,44 +90,14 @@
         [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
     }
     
-    [PFCloud callFunctionInBackground:@"YGgetClientKey"
-                       withParameters:[[NSDictionary alloc] initWithObjectsAndKeys:[YesGraph shared].userId, @"userId", nil]
-                                block:^(NSString *response, NSError *error) {
-                                    if (!error)
-                                    {
-                                        NSData *responseData = [response dataUsingEncoding:NSUTF8StringEncoding];
-                                        
-                                        NSError *jsonSerializationError;
-                                        id jsonObject = [NSJSONSerialization JSONObjectWithData:responseData options:(NSJSONReadingMutableContainers)error:&jsonSerializationError];
-                                        
-                                        if (jsonSerializationError)
-                                        {
-                                            NSLog(@"Json serizalization error: %@", jsonSerializationError.description);
-                                        }
-                                        
-                                        NSString *YSGclientKey = [jsonObject objectForKey:@"client_key"];
-                                        if (YSGclientKey)
-                                        {
-                                            [[YesGraph shared] configureWithClientKey:YSGclientKey];
-                                            if (completion) {
-                                                completion(YES, nil);
-                                            }
-                                            
-                                        }
-                                        else{
-                                            NSError *ysgError = YSGErrorWithErrorCode(1234);
-                                            if (completion) {
-                                                completion(NO, ysgError);
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (completion) {
-                                            completion(NO, error);
-                                        }
-                                    }
-                                }];
+    //
+    // Client key should be retrieved from your trusted backend.
+    //
+    [[YesGraph shared] configureWithClientKey:@""];
+    
+    if (completion) {
+        completion(NO, nil);
+    }
 }
 
 - (void) styleView {

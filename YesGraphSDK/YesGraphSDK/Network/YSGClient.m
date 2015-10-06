@@ -81,7 +81,7 @@
     
     NSURLSessionDataTask* task = [self.session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
     {
-        YSG_LDEBUG(@"Request [%@] %@ finished in: %.6f seconds", request.HTTPMethod, request.URL.absoluteString, fabs([date timeIntervalSinceNow]));
+        YSG_LDEBUG(@"Request [%@] %@ finished in: %.6f seconds, error: %@", request.HTTPMethod, request.URL.absoluteString, fabs([date timeIntervalSinceNow]), error.localizedDescription);
         
         if (completion)
         {

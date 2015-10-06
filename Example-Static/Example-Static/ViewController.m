@@ -90,7 +90,11 @@
     if (![YesGraph shared].userId.length) {
         [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
     }
-    //TODO: backend call example
+    
+    //
+    // Client key should be retrieved from your trusted backend.
+    //
+    [[YesGraph shared] configureWithClientKey:@""];
     
     if (completion) {
         completion(NO, nil);

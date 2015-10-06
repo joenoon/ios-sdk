@@ -542,7 +542,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     
-    NSMutableDictionary <NSString *, NSArray <YSGContact *> * > *sortedList = [NSMutableDictionary dictionary];
+    NSMutableDictionary <NSString *, NSArray <YSGContact *> *> *sortedList = [NSMutableDictionary dictionary];
     
     for (NSString* letter in contactList)
     {
@@ -554,7 +554,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return sortedList.copy;
 }
 
-- (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *) entries
+- (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *)entries
 {
     NSArray<YSGContact *> *filteredSuggested = [self removeDuplicatedContactsFromSuggestions:entries numberOfSuggestions:self.service.numberOfSuggestions];
     
@@ -571,7 +571,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     NSMutableArray <YSGContact *> *contactsWithEmails = [NSMutableArray array];
     NSMutableArray <YSGContact *> *contactsWithPhones = [NSMutableArray array];
     
-    for (NSUInteger i=0; i<number; i++)
+    for (NSUInteger i = 0; i< number; i++)
     {
         if (contacts.count <= i)
         {

@@ -56,7 +56,18 @@
                 {
                     if (!contactList.entries.count || error)
                     {
-                        [self.localSource fetchContactListWithCompletion:completion];
+                        [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+                        {
+                            if (contactList.entries.count)
+                            {
+                                [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:nil];
+                            }
+                            
+                            if (completion)
+                            {
+                                completion(contactList, error);
+                            }
+                        }];
                     }
                     else
                     {
@@ -66,7 +77,18 @@
             }
             else
             {
-                [self.localSource fetchContactListWithCompletion:completion];
+                [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+                {
+                    if (contactList)
+                    {
+                        [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:nil];
+                    }
+                    
+                    if (completion)
+                    {
+                        completion(contactList, error);
+                    }
+                }];
             }
         }
         else if (completion)

@@ -68,7 +68,11 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
             YesGraph.shared().configureWithUserId(YSGUtility.randomUserId())
         }
         
-        //TODO: backend call example
+        YesGraph.shared().configureWithClientKey("")
+        
+        //
+        // Client key should be retrieved from your trusted backend.
+        //
         if completion != nil {
             completion!(success: false, error: nil);
         }

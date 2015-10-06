@@ -46,9 +46,12 @@
     }];
 }
 
-- (void)updateAddressBookWithContactList:(YSGContactList *)contactList completion:(YSGNetworkFetchCompletion)completion
+- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(nonnull NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion
 {
-    [self POST:@"address-book" parameters:[contactList ysg_toDictionary] completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
+    NSMutableDictionary *parameters = [[contactList ysg_toDictionary] mutableCopy];
+    parameters[@"user_id"] = userId;
+    
+    [self POST:@"address-book" parameters:parameters completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
     {
         if (completion)
         {
