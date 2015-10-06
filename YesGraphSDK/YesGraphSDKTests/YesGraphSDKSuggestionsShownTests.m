@@ -58,7 +58,6 @@
 
 - (void)testMockedSuggestionsShown
 {
-    XCTAssert(false, @"Test is not to be run yet, API endpoint missing!");
     XCTestExpectation *expectation = [self expectationWithDescription:@"Send Shown Suggestions to API Mocked Responses"];
 
     __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
@@ -88,16 +87,12 @@
          NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
          XCTAssertNil(err, @"Error parsing response data: %@", err);
 
-         NSString *userId = [parsedResponse objectForKey:@"user_id"];
-         XCTAssertNotNil(userId, @"Request body is missing user_id parameter");
-         XCTAssert([userId isEqualToString:YSGTestClientID], @"user_id in request is unexpected: %@", userId);
-
          NSArray *sentSuggestions = [parsedResponse objectForKey:@"data"];
          XCTAssertNotNil(sentSuggestions, @"Request body is missing the data payload");
 
          NSArray *expectedSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
          XCTAssert(expectedSuggestions.count == sentSuggestions.count, @"Arrays don't have the same number of elements");
-         for (NSInteger index = 0; index < expectedSuggestions.count; ++i)
+         for (NSInteger index = 0; index < expectedSuggestions.count; ++index)
          {
              YSGContact *contact = [expectedSuggestions objectAtIndex:index];
              NSDictionary *sentContact = [sentSuggestions objectAtIndex:index];
@@ -112,17 +107,17 @@
 
              NSArray *contactEmails = [sentContact objectForKey:@"contact_emails"];
              XCTAssertNotNil(contactEmails, @"Contact emails shouldn't be nil (should be empty array)");
-             XCTAssert(contactEmails.count == 0 ? !contact.emails : [contactEmails isEqualToArray:contact.emails], @"Unexpected emails array, got: %@, expected: %@", contactEmails, contact.emails);
+             XCTAssert(contactEmails.count == 0 ? !contact.emails || contact.emails.count == 0 : [contactEmails isEqualToArray:contact.emails], @"Unexpected emails array, got: %@, expected: %@", contactEmails, contact.emails);
 
              NSArray *contactPhones = [sentContact objectForKey:@"contact_phones"];
              XCTAssertNotNil(contactPhones, @"Contact phones shouldn't be nil (should be empty array)");
-             XCTAssert(contactPhones.count == 0 ? !contact.phones : [contactPhones isEqualToArray:contact.emails], @"Unexpected phones array, got: %@, expected: %@", contactPhones, contact.phones);
+             XCTAssert(contactPhones.count == 0 ? !contact.phones || contact.phones.count == 0 : [contactPhones isEqualToArray:contact.phones], @"Unexpected phones array, got: %@, expected: %@", contactPhones, contact.phones);
 
              NSNumber *sSince1970 = [sentContact objectForKey:@"seen_at"];
              XCTAssertNotNil(sSince1970, @"seen_at shouldn't be nil, it should be a number"); // unless it's a string?!
              NSDate *seenAt = [NSDate dateWithTimeIntervalSince1970:[sSince1970 doubleValue]];
              XCTAssertNotNil(seenAt, @"Conversion from seen_at number to NSDate failed, number was: %@", sSince1970);
-             XCTAssert([seenAt timeIntervalSinceNow] > (5 * 60), @"Converted date is more than 5 minutes off from now: %@", seenAt);
+             XCTAssert([seenAt timeIntervalSinceNow] <= (5 * 60), @"Converted date is more than 5 minutes old, indicating parsing problems: %@", seenAt);
          }
          return YES;
      }
