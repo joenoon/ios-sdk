@@ -28,7 +28,7 @@ An alternate way to integrate is using Carthage. Add the following link to your 
 github "YesGraph/ios-sdk"
 ```
 
-Or integrate it manually by drag & dropping all files 
+Or integrate it manually by drag & dropping all files from YesGraphSDK folder into your project. If you have a Swift project, you must add `YesGraph.h` file to your Objective-C Bridging Header.
 
 ## Tests
 
