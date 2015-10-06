@@ -45,7 +45,6 @@
 
 - (void)testSuggestionsShown
 {
-    XCTAssert(false, @"Test is not to be run yet, API endpoint missing!");
     XCTestExpectation *expectation = [self expectationWithDescription:@"Send Shown Suggestions to API"];
 
     [self asyncSuggestionsShownWithExpectation:expectation];
@@ -113,17 +112,22 @@
              XCTAssertNotNil(contactPhones, @"Contact phones shouldn't be nil (should be empty array)");
              XCTAssert(contactPhones.count == 0 ? !contact.phones || contact.phones.count == 0 : [contactPhones isEqualToArray:contact.phones], @"Unexpected phones array, got: %@, expected: %@", contactPhones, contact.phones);
 
-             NSNumber *sSince1970 = [sentContact objectForKey:@"seen_at"];
-             XCTAssertNotNil(sSince1970, @"seen_at shouldn't be nil, it should be a number"); // unless it's a string?!
-             NSDate *seenAt = [NSDate dateWithTimeIntervalSince1970:[sSince1970 doubleValue]];
-             XCTAssertNotNil(seenAt, @"Conversion from seen_at number to NSDate failed, number was: %@", sSince1970);
-             XCTAssert([seenAt timeIntervalSinceNow] <= (5 * 60), @"Converted date is more than 5 minutes old, indicating parsing problems: %@", seenAt);
+             NSString *seenAtString = [sentContact objectForKey:@"seen_at"];
+             XCTAssertNotNil(seenAtString, @"seen_at shouldn't be nil, it should be an ISO8601 date string");
+             NSDateFormatter *isoFormat = [NSDateFormatter new];
+             NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+             isoFormat.locale = posixLocale;
+             isoFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+             NSDate *parsedSeenAt = [isoFormat dateFromString:seenAtString];
+             XCTAssertNotNil(parsedSeenAt, @"seen_at string is not in an ISO8601 format: %@", seenAtString);
+             XCTAssert([[NSDate date] timeIntervalSinceDate:parsedSeenAt] <= (5 * 60), @"Parsed date is more than 5 minutes off: %@", parsedSeenAt);
          }
          return YES;
      }
     andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
      {
-         NSData *response = [@"{\"message\":\"Shown suggestions saved.\"}" dataUsingEncoding:NSUTF8StringEncoding];
+         NSString *responseString = @"{\"message\": \"Suggested and Seen contacts added.\",\"meta\": {\"docs\": \"https://www.yesgraph.com/docs/reference#post-suggested-seen\",\"help\": \"Please contact support@yesgraph.com for any issues.\",\"time\": 0.009863853454589844}}";
+         NSData *response = [responseString dataUsingEncoding:NSUTF8StringEncoding];
          return [OHHTTPStubsResponse responseWithData:response statusCode:200 headers:nil];
      }];
 
