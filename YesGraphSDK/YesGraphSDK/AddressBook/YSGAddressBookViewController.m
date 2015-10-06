@@ -11,7 +11,7 @@
 
 #import "YesGraph.h"
 #import "YSGClient.h"
-#import "YSGClient+InvitesShown.h"
+#import "YSGClient+SuggestionsShown.h"
 #import "YSGLogging.h"
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
@@ -68,10 +68,10 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 @property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
 
 //
-// Invites Seen
+// Suggestions Seen
 //
 
-@property (nonatomic, strong, nonnull) YSGClient *invitesSeenClient;
+@property (nonatomic, strong, nonnull) YSGClient *suggestionsSeenClient;
 
 @end
 
@@ -153,11 +153,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         self.letters = nil;
     }
 
-    // NOTE: send all viewed suggestions to YesGraph
-    //       should this be PRIORITY_BACKGORUND or PRIORITY_LOW?
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
      {
-         [self.invitesSeenClient updateInvitesSeen:self.suggestions forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
+         [self.suggestionsSeenClient updateSuggestionsSeen:self.suggestions forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
           {
               if (error)
               {
