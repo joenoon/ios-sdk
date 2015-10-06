@@ -203,10 +203,15 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 - (void)applicationNotification:(NSNotification *)notification
 {
-    /*if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
+    if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
     {
         return;
-    }*/
+    }
+    
+    if (![[self.localSource class] hasPermission])
+    {
+        return;
+    }
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
