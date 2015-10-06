@@ -10,6 +10,7 @@
 #import "YSGShareSheetServiceCell.h"
 #import "YSGTheme.h"
 #import "YSGDrawableView.h"
+#import "YSGThemeConstants.h"
 
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
@@ -164,7 +165,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         
         [copyButton setTitle:NSLocalizedString(@"copy", @"copy") forState:UIControlStateNormal];
         [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
-        [copyButton setTitleColor:self.theme.baseColor forState:UIControlStateNormal];
+        
+        [copyButton setTitleColor:[YSGThemeConstants defaultMainColor] forState:UIControlStateNormal];
         [copyButton setTitleColor:[self.theme.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
         [copyButton sizeToFit];
         
