@@ -1,5 +1,0 @@
-machine:
-  xcode:
-    version: "7.0"
-  environment:
-    LANG: en_US.UTF-8
