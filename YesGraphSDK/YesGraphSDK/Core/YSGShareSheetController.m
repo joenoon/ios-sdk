@@ -21,7 +21,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 @property (nonatomic, strong) YSGTheme *theme;
 
-@property (nonatomic, copy, readwrite) NSArray <YSGShareService *> *services;
+@property (nonatomic, copy, readwrite)  NSArray <YSGShareService *> *services;
 
 @property (nonatomic) CGFloat cellWidth;
 @property (nonatomic) CGFloat cellHeight;
@@ -33,6 +33,16 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 #pragma mark - Getters and Setters
 
 #pragma mark - Initialization
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    return [self initWithServices:@[ ] delegate:nil];;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    return [self initWithServices:@[ ] delegate:nil];
+}
 
 + (instancetype _Nonnull)shareSheetControllerWithServices:(NSArray<YSGShareService *> * _Nonnull)services
 {
