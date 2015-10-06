@@ -3,8 +3,9 @@
 [![Travis](https://travis-ci.org/YesGraph/ios-sdk.svg)](https://travis-ci.org/YesGraph/ios-sdk)
 [![CocoaPods](https://img.shields.io/cocoapods/v/YesGraph-iOS-SDK.svg?style=flat)](http://cocoapods.org/?q=)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![CocoaPods](https://img.shields.io/cocoapods/l/YesGraph.svg?style=flat)](https://github.com/yesgraph/ios-sdk/blob/master/LICENSE)
-[![CocoaPods](https://img.shields.io/cocoapods/p/YesGraph.svg?style=flat)](https://github.com/yesgraph/ios-sdk#)
+[![Pod Version](http://img.shields.io/cocoapods/v/YesGraph-iOS-SDK.svg?style=flat)](http://cocoadocs.org/docsets/YesGraph-iOS-SDK/)
+[![Pod Platform](http://img.shields.io/cocoapods/p/YesGraph-iOS-SDK.svg?style=flat)](http://cocoadocs.org/docsets/YesGraph-iOS-SDK/)
+[![Pod License](http://img.shields.io/cocoapods/l/YesGraph-iOS-SDK.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 This is an iOS SDK for YesGraph's API. It helps wrap calls into our social graph analysis API. Find more information on [yesgraph.com](https://www.yesgraph.com)
 
