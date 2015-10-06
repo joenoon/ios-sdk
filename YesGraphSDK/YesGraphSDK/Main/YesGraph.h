@@ -156,4 +156,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@class YSGContact;
+/*!
+ *  Every time the suggestions list is shown, it is sent to the YesGraph API
+ */
+@interface YesGraph (SuggestionsShown)
+
+- (void)sendShownSuggestions:(nonnull NSArray <YSGContact *> *)contacts;
+
+@end
+
 NS_ASSUME_NONNULL_END

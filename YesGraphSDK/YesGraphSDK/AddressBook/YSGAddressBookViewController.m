@@ -11,7 +11,6 @@
 
 #import "YesGraph.h"
 #import "YSGClient.h"
-#import "YSGClient+SuggestionsShown.h"
 #import "YSGLogging.h"
 #import "YSGAddressBookCell.h"
 #import "YSGAddressBookViewController.h"
@@ -66,12 +65,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 //
 
 @property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
-
-//
-// Suggestions Seen
-//
-
-@property (nonatomic, strong, nonnull) YSGClient *suggestionsSeenClient;
 
 @end
 
@@ -153,17 +146,10 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         self.letters = nil;
     }
 
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
-     {
-         [self.suggestionsSeenClient updateSuggestionsSeen:self.suggestions forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
-          {
-              if (error)
-              {
-                  YSG_LERROR(error);
-              }
-          }];
-     });
-    
+    if (self.suggestions && self.suggestions.count > 0)
+    {
+        [[YesGraph shared] sendShownSuggestions:self.suggestions];
+    }
     
     self.searchResults = nil;
     self.selectedContacts = nil;
@@ -313,7 +299,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
             self.contactList = contactList;
         });
     }];
-    
+
     [self updateUI];
 }
 
