@@ -69,7 +69,7 @@
     
     self.client.clientKey = YSGTestClientKey;
         
-    [self.client updateAddressBookWithContactList:[YSGTestMockData mockContactList] completion:^(id _Nullable responseObject, NSError * _Nullable error)
+    [self.client updateAddressBookWithContactList:[YSGTestMockData mockContactList] forUserId:@"1234" completion:^(id _Nullable responseObject, NSError * _Nullable error)
     {
         XCTAssert(responseObject != nil);
         [expectation fulfill];
