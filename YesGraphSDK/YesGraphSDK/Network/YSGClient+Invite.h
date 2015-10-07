@@ -9,6 +9,8 @@
 #import "YSGClient.h"
 #import "YSGContact.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGClient (Invite)
 
 /*!
@@ -17,6 +19,8 @@
  *  @param invites    contacts that were invited
  *  @param completion called when completed
  */
-- (void)updateInviteSent:(nonnull NSArray <YSGContact *> *)invites completion:(nullable void (^)(NSError  * _Nullable error))completion;
+- (void)updateInviteSent:(NSArray <YSGContact *> *)invites completion:(nullable void (^)(NSError  * _Nullable error))completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

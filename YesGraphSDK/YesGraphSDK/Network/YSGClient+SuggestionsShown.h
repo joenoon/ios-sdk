@@ -10,6 +10,7 @@
 #import "YSGContactList.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGClient (SuggestionsShown)
 
 /*!
@@ -23,4 +24,5 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateSuggestionsSeen:(NSArray <YSGContact *> *)suggestionsShown forUserId:(NSString *)userId withCompletion:(nullable void (^)(NSError * _Nullable error))completion;
 
 @end
+
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 
 @import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Network response wrapper, similar to AFNetworking
  */
@@ -43,7 +45,7 @@
  *
  *  @return instance of network response
  */
-- (nonnull instancetype)initWithDataTask:(nullable NSURLSessionDataTask *)dataTask response:(nullable NSURLResponse *)response data:(nullable NSData *)data NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDataTask:(nullable NSURLSessionDataTask *)dataTask response:(nullable NSURLResponse *)response data:(nullable NSData *)data NS_DESIGNATED_INITIALIZER;
 
 /*!
  *  Attempts to create a parsable object
@@ -52,6 +54,8 @@
  *
  *  @return instance of class if successful
  */
-- (nullable id)responseObjectSerializedToClass:(nonnull Class)class;
+- (nullable id)responseObjectSerializedToClass:(Class)class;
 
 @end
+
+NS_ASSUME_NONNULL_END

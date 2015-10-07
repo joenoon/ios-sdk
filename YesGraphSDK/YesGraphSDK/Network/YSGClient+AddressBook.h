@@ -9,10 +9,14 @@
 #import "YSGClient.h"
 #import "YSGContactList.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGClient (AddressBook)
 
-- (void)fetchAddressBookForUserId:(nonnull NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion;
+- (void)fetchAddressBookForUserId:(NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion;
 
-- (void)updateAddressBookWithContactList:(nonnull YSGContactList *)contactList completion:(nullable YSGNetworkFetchCompletion)completion;
+- (void)updateAddressBookWithContactList:(YSGContactList *)contactList completion:(nullable YSGNetworkFetchCompletion)completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

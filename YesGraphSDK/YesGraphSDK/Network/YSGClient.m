@@ -95,7 +95,7 @@
     return task;
 }
 
-- (nonnull NSURLRequest *)requestForMethod:(nonnull NSString *)method path:(nonnull NSString *)path parameters:(nullable NSDictionary *)parameters key:(nullable NSString *)key error:(NSError *__autoreleasing  __nullable * __nullable)error
+- (NSURLRequest *)requestForMethod:(NSString *)method path:(NSString *)path parameters:(nullable NSDictionary *)parameters key:(nullable NSString *)key error:(NSError *__autoreleasing  __nullable * __nullable)error
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:path relativeToURL:self.baseURL]];
     
