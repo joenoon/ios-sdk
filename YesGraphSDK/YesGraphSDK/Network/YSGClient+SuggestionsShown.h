@@ -9,6 +9,7 @@
 #import "YSGClient.h"
 #import "YSGContactList.h"
 
+NS_ASSUME_NONNULL_BEGIN
 @interface YSGClient (SuggestionsShown)
 
 /*!
@@ -19,6 +20,7 @@
  *  @param  completion       called when completed
  *
  */
-- (void)updateSuggestionsSeen:(nonnull NSArray <YSGContact *> *)suggestionsShown forUserId:(nonnull NSString *)userId withCompletion:(nullable void (^)(NSError * _Nullable error))completion;
+- (void)updateSuggestionsSeen:(NSArray <YSGContact *> *)suggestionsShown forUserId:(NSString *)userId withCompletion:(nullable void (^)(NSError * _Nullable error))completion;
 
 @end
+NS_ASSUME_NONNULL_END

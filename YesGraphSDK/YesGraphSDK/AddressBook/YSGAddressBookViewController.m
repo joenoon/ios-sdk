@@ -18,6 +18,7 @@
 #import "YSGTheme.h"
 #import "YSGContactList.h"
 #import "UITableView+YSGEmptyView.h"
+#import "YSGOnlineContactSource.h"
 
 CGFloat const YSGSearchBarHeight = 44.0;
 
@@ -145,10 +146,10 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         self.sortedContacts = nil;
         self.letters = nil;
     }
-
-    if (self.suggestions && self.suggestions.count > 0)
+    
+    if (self.suggestions.count > 0 && [self.service.contactSource isKindOfClass:[YSGOnlineContactSource class]])
     {
-        [[YesGraph shared] sendShownSuggestions:self.suggestions];
+        [((YSGOnlineContactSource *)self.service.contactSource) sendShownSuggestions:self.suggestions];
     }
     
     self.searchResults = nil;

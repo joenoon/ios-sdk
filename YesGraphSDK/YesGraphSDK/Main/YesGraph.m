@@ -350,22 +350,4 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 #pragma mark - Private Methods
 
-#pragma mark - Suggestions shown implementation
-
-- (void)sendShownSuggestions:(nonnull NSArray <YSGContact *> *)contacts
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
-     {
-         YSGClient *client = [YSGClient new];
-         client.clientKey = self.clientKey;
-         [client updateSuggestionsSeen:contacts forUserId:self.userId withCompletion:^(NSError * _Nullable error)
-          {
-              if (error)
-              {
-                  YSG_LERROR(error);
-              }
-          }];
-     });
-}
-
 @end
