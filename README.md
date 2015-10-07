@@ -2,6 +2,7 @@
 
 [![Travis](https://travis-ci.org/YesGraph/ios-sdk.svg)](https://travis-ci.org/YesGraph/ios-sdk)
 [![CocoaPods](https://img.shields.io/cocoapods/v/YesGraph-iOS-SDK.svg?style=flat)](http://cocoapods.org/?q=)
+[![Coverage Status](https://coveralls.io/repos/YesGraph/ios-sdk/badge.svg?branch=develop&service=github)](https://coveralls.io/github/YesGraph/ios-sdk?branch=develop)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Pod Version](http://img.shields.io/cocoapods/v/YesGraph-iOS-SDK.svg?style=flat)](http://cocoadocs.org/docsets/YesGraph-iOS-SDK/)
 [![Pod Platform](http://img.shields.io/cocoapods/p/YesGraph-iOS-SDK.svg?style=flat)](http://cocoadocs.org/docsets/YesGraph-iOS-SDK/)

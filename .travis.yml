@@ -9,4 +9,3 @@ env:
   - ACTION=test SCHEME='YesGraphSDK'
   global:
   - SDK=9.0
-  - PLATFORM='iphone'
