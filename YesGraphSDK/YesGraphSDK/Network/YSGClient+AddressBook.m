@@ -12,7 +12,7 @@
 
 @implementation YSGClient (AddressBook)
 
-- (void)fetchAddressBookForUserId:(nonnull NSString *)userId completion:(YSGNetworkFetchCompletion)completion
+- (void)fetchAddressBookForUserId:(NSString *)userId completion:(YSGNetworkFetchCompletion)completion
 {
     [self GET:[NSString stringWithFormat:@"address-book/%@", userId] parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
     {

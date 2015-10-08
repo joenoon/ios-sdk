@@ -40,7 +40,18 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return instance
  */
 - (instancetype)initWithClient:(YSGClient *)client localSource:(id<YSGContactSource>)localSource cacheSource:(nullable YSGCacheContactSource *)cacheSource NS_DESIGNATED_INITIALIZER;
-
+                                
 @end
 
+@class YSGContact;
+                                
+@interface YSGOnlineContactSource (SuggestionsSHown)
+
+/*!
+ *  Every time the suggestions list is shown, it is sent to the YesGraph API
+ */
+- (void)sendShownSuggestions:(NSArray <YSGContact *> *)contacts;
+
+@end
+                                
 NS_ASSUME_NONNULL_END

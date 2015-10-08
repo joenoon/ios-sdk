@@ -32,14 +32,14 @@
 
 #pragma mark - Initialization
 
-- (nonnull instancetype)init
+- (instancetype)init
 {
     [[NSException exceptionWithName:@"Invalid call" reason:@"Cannot initialize empty network response." userInfo:nil] raise];
     
     return [self initWithDataTask:nil response:nil data:nil];
 }
 
-- (nonnull instancetype)initWithDataTask:(NSURLSessionDataTask *)dataTask response:(NSURLResponse *)response data:(NSData *)data
+- (instancetype)initWithDataTask:(NSURLSessionDataTask *)dataTask response:(NSURLResponse *)response data:(NSData *)data
 {
     self = [super init];
     
@@ -89,7 +89,7 @@
 
 #pragma mark - Public Methods
 
-- (nullable id)responseObjectSerializedToClass:(nonnull Class)class
+- (nullable id)responseObjectSerializedToClass:(Class)class
 {
     if (![class conformsToProtocol:@protocol(YSGParsable)])
     {

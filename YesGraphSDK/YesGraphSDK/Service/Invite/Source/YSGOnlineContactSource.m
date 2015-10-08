@@ -8,6 +8,8 @@
 
 #import "YSGOnlineContactSource.h"
 #import "YSGNetwork.h"
+#import "YSGClient+SuggestionsShown.h"
+#import "YSGLogging.h"
 
 @interface YSGOnlineContactSource ()
 
@@ -102,5 +104,19 @@
         }
     }];
 }
+
+#pragma mark - Suggestions shown implementation
+
+- (void)sendShownSuggestions:(NSArray <YSGContact *> *)contacts
+{
+    [self.client updateSuggestionsSeen:contacts forUserId:self.userId withCompletion:^(NSError * _Nullable error)
+     {
+         if (error)
+         {
+             YSG_LERROR(error);
+         }
+     }];
+}
+
 
 @end

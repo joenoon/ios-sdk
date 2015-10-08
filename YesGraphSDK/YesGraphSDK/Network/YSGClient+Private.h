@@ -8,6 +8,8 @@
 
 #import "YSGClient.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGClient (Private)
 
 - (void)fetchRandomClientKeyWithSecretKey:(NSString *)secretKey completion:(void (^)(NSString *clientKey, NSError *error))completion;
@@ -15,3 +17,5 @@
 - (void)fetchClientKeyWithSecretKey:(NSString *)secretKey forUser:(NSString *)user completion:(void (^)(NSString *clientKey, NSError *error))completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -15,6 +15,8 @@
 
 #import "YSGClient+AddressBook.h"
 
+#import "YSGClient+SuggestionsShown.h"
+
 static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateKey";
 static NSString *const YSGConfigurationClientKey = @"YSGConfigurationClientKey";
 static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";

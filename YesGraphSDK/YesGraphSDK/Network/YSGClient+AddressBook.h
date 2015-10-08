@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YSGClient (AddressBook)
 
 - (void)fetchAddressBookForUserId:(NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion;
-
 - (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion;
 
 @end
