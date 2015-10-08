@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "YesGraphSDK/YesGraphSDK.h"
+#import "YesGraphSDK.h"
 
 @interface ViewController () <YSGShareSheetDelegate>
 

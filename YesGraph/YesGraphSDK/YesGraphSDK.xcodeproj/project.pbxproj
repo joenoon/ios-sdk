@@ -977,8 +977,8 @@
 			projectRoot = "";
 			targets = (
 				38CC16BC1B831606008477C7 /* YesGraphSDK */,
-				38CC16C71B831606008477C7 /* YesGraphSDKTests */,
 				38EF2B8F1BA30A4800AF2AE0 /* YesGraphSDKStatic */,
+				38CC16C71B831606008477C7 /* YesGraphSDKTests */,
 			);
 		};
 /* End PBXProject section */
