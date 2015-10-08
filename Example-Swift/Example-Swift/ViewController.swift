@@ -33,6 +33,33 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
     @IBAction func shareButtonTapped(sender: AnyObject) {
         let localSource = YSGLocalContactSource()
         localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
+        
+        if(YesGraph.shared().isConfigured)
+        {
+            self.presentYSGShareSheetController()
+        }
+        
+        else
+        {
+            self.shareButton.setTitle("  Configuring YesGraph...  ", forState: UIControlState.Normal);
+            self.shareButton.enabled = false;
+            
+            self.configureYesGraphWithCompletion({ (success, error) -> Void in
+                self.shareButton.setTitle("Share", forState: UIControlState.Normal)
+                self.shareButton.enabled = true;
+                
+                if (success)
+                {
+                    self.presentYSGShareSheetController()
+                }
+                else
+                {
+                    let alert = UIAlertController(title: "Error!", message: "YesGraphSDK must be configured before presenting ShareSheet", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+            })
+        }
     }
     
     
@@ -68,7 +95,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
             YesGraph.shared().configureWithUserId(YSGUtility.randomUserId())
         }
         
-        YesGraph.shared().configureWithClientKey("")
+        YesGraph.shared().configureWithClientKey("WzEsMCwiRXhhbXBsZUFwcGxpY2F0aW9uIiwiYW5vbl9NVFEwTkRFek1UazJNRjg0TVRRd05qZzIiXQ.CPVF-Q.kf2N4C9ksb3zPx-MrRn7o-g5GM4")
         
         //
         // Client key should be retrieved from your trusted backend.
