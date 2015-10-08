@@ -20,6 +20,7 @@
 @end
 
 @implementation YesGraphSDKInviteTest
+
 - (void)setUp
 {
     [super setUp];
