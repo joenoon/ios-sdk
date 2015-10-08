@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "YesGraphSDK.h"
+#import <YesGraphSDK/YesGraphSDK.h>
 
 @interface ViewController () <YSGShareSheetDelegate>
 
@@ -15,9 +15,7 @@
 
 @end
 
-@implementation ViewController {
-    
-}
+@implementation ViewController
 
 - (void)viewDidLoad
 {

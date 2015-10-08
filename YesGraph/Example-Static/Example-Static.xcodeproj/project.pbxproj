@@ -34,62 +34,7 @@
 		303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "../../Resources/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		380FD8371BC684BE00162D85 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../Resources/Main.storyboard; sourceTree = "<group>"; };
 		380FD83F1BC6852200162D85 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		38343AF11BC6B2CD00DD635B /* libYesGraphSDKStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libYesGraphSDKStatic.a; path = "../../../../../../../Library/Developer/Xcode/DerivedData/YesGraph-dmvdbqlyrqulpgbauccpnobibggz/Build/Products/Debug-iphoneos/libYesGraphSDKStatic.a"; sourceTree = "<group>"; };
-		38343AF51BC6B4C700DD635B /* YSGValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGValueTransformer.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGParsing/YSGValueTransformer.h; sourceTree = "<group>"; };
-		38343AF61BC6B4C700DD635B /* YSGUtility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGUtility.h; path = ../YesGraphSDK/YesGraphSDK/Library/Utility/YSGUtility.h; sourceTree = "<group>"; };
-		38343AF71BC6B4C700DD635B /* YSGTwitterService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGTwitterService.h; path = ../YesGraphSDK/YesGraphSDK/Service/Twitter/YSGTwitterService.h; sourceTree = "<group>"; };
-		38343AF81BC6B4C700DD635B /* YSGThemeConstants+AddressBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "YSGThemeConstants+AddressBook.h"; path = "../YesGraphSDK/YesGraphSDK/Theme/YSGThemeConstants+AddressBook.h"; sourceTree = "<group>"; };
-		38343AF91BC6B4C700DD635B /* YSGThemeConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGThemeConstants.h; path = ../YesGraphSDK/YesGraphSDK/Theme/YSGThemeConstants.h; sourceTree = "<group>"; };
-		38343AFA1BC6B4C700DD635B /* YSGTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGTheme.h; path = ../YesGraphSDK/YesGraphSDK/Theme/YSGTheme.h; sourceTree = "<group>"; };
-		38343AFB1BC6B4C700DD635B /* YSGStyling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGStyling.h; path = ../YesGraphSDK/YesGraphSDK/Theme/YSGStyling.h; sourceTree = "<group>"; };
-		38343AFC1BC6B4C700DD635B /* YSGSources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGSources.h; path = ../YesGraphSDK/YesGraphSDK/Service/Invite/Source/YSGSources.h; sourceTree = "<group>"; };
-		38343AFD1BC6B4C700DD635B /* YSGSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGSource.h; path = ../YesGraphSDK/YesGraphSDK/Model/YSGSource.h; sourceTree = "<group>"; };
-		38343AFE1BC6B4C700DD635B /* YSGSocialService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGSocialService.h; path = ../YesGraphSDK/YesGraphSDK/Service/Social/YSGSocialService.h; sourceTree = "<group>"; };
-		38343AFF1BC6B4C700DD635B /* YSGShareSheetServiceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGShareSheetServiceCell.h; path = ../YesGraphSDK/YesGraphSDK/UI/YSGShareSheetServiceCell.h; sourceTree = "<group>"; };
-		38343B001BC6B4C700DD635B /* YSGShareSheetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGShareSheetController.h; path = ../YesGraphSDK/YesGraphSDK/Core/YSGShareSheetController.h; sourceTree = "<group>"; };
-		38343B011BC6B4C700DD635B /* YSGShareService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGShareService.h; path = ../YesGraphSDK/YesGraphSDK/Core/YSGShareService.h; sourceTree = "<group>"; };
-		38343B021BC6B4C700DD635B /* YSGShareCellShapeEnum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGShareCellShapeEnum.h; path = ../YesGraphSDK/YesGraphSDK/UI/YSGShareCellShapeEnum.h; sourceTree = "<group>"; };
-		38343B031BC6B4C700DD635B /* YSGShareButtonFadeFactors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGShareButtonFadeFactors.h; path = ../YesGraphSDK/YesGraphSDK/Theme/YSGShareButtonFadeFactors.h; sourceTree = "<group>"; };
-		38343B041BC6B4C700DD635B /* YSGShareAddressBookTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGShareAddressBookTheme.h; path = ../YesGraphSDK/YesGraphSDK/Theme/YSGShareAddressBookTheme.h; sourceTree = "<group>"; };
-		38343B051BC6B4C700DD635B /* YSGServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGServices.h; path = ../YesGraphSDK/YesGraphSDK/Service/YSGServices.h; sourceTree = "<group>"; };
-		38343B061BC6B4C700DD635B /* YSGRankedContact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGRankedContact.h; path = ../YesGraphSDK/YesGraphSDK/Model/YSGRankedContact.h; sourceTree = "<group>"; };
-		38343B071BC6B4C700DD635B /* YSGParsing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGParsing.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGParsing/YSGParsing.h; sourceTree = "<group>"; };
-		38343B081BC6B4C700DD635B /* YSGParsableModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGParsableModel.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGParsing/YSGParsableModel.h; sourceTree = "<group>"; };
-		38343B091BC6B4C700DD635B /* YSGParsable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGParsable.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGParsing/YSGParsable.h; sourceTree = "<group>"; };
-		38343B0A1BC6B4C700DD635B /* YSGOnlineContactSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGOnlineContactSource.h; path = ../YesGraphSDK/YesGraphSDK/Service/Invite/Source/YSGOnlineContactSource.h; sourceTree = "<group>"; };
-		38343B0B1BC6B4C700DD635B /* YSGNetworkResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGNetworkResponse.h; path = ../YesGraphSDK/YesGraphSDK/Network/YSGNetworkResponse.h; sourceTree = "<group>"; };
-		38343B0C1BC6B4C700DD635B /* YSGNetworkDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGNetworkDefines.h; path = ../YesGraphSDK/YesGraphSDK/Network/YSGNetworkDefines.h; sourceTree = "<group>"; };
-		38343B0D1BC6B4C700DD635B /* YSGNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGNetwork.h; path = ../YesGraphSDK/YesGraphSDK/Network/YSGNetwork.h; sourceTree = "<group>"; };
-		38343B0E1BC6B4C700DD635B /* YSGModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGModel.h; path = ../YesGraphSDK/YesGraphSDK/Model/YSGModel.h; sourceTree = "<group>"; };
-		38343B0F1BC6B4C700DD635B /* YSGMessaging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGMessaging.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGMessaging/YSGMessaging.h; sourceTree = "<group>"; };
-		38343B101BC6B4C700DD635B /* YSGMessageCenter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGMessageCenter.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGMessaging/YSGMessageCenter.h; sourceTree = "<group>"; };
-		38343B111BC6B4C700DD635B /* YSGMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGMacros.h; path = ../YesGraphSDK/YesGraphSDK/Core/YSGMacros.h; sourceTree = "<group>"; };
-		38343B121BC6B4C700DD635B /* YSGLocalContactSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGLocalContactSource.h; path = ../YesGraphSDK/YesGraphSDK/Service/Invite/Source/YSGLocalContactSource.h; sourceTree = "<group>"; };
-		38343B131BC6B4C700DD635B /* YSGInviteService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGInviteService.h; path = ../YesGraphSDK/YesGraphSDK/Service/Invite/YSGInviteService.h; sourceTree = "<group>"; };
-		38343B141BC6B4C700DD635B /* YSGIconDrawings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGIconDrawings.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGDrawing/YSGIconDrawings.h; sourceTree = "<group>"; };
-		38343B151BC6B4C700DD635B /* YSGFacebookService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGFacebookService.h; path = ../YesGraphSDK/YesGraphSDK/Service/Facebook/YSGFacebookService.h; sourceTree = "<group>"; };
-		38343B161BC6B4C700DD635B /* YSGDrawingConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGDrawingConstants.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGDrawing/YSGDrawingConstants.h; sourceTree = "<group>"; };
-		38343B171BC6B4C700DD635B /* YSGDrawing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGDrawing.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGDrawing/YSGDrawing.h; sourceTree = "<group>"; };
-		38343B181BC6B4C700DD635B /* YSGDrawableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGDrawableView.h; path = ../YesGraphSDK/YesGraphSDK/Library/YSGDrawing/YSGDrawableView.h; sourceTree = "<group>"; };
-		38343B191BC6B4C700DD635B /* YSGContactSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGContactSource.h; path = ../YesGraphSDK/YesGraphSDK/Service/Invite/Source/YSGContactSource.h; sourceTree = "<group>"; };
-		38343B1A1BC6B4C700DD635B /* YSGContactList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGContactList.h; path = ../YesGraphSDK/YesGraphSDK/Model/YSGContactList.h; sourceTree = "<group>"; };
-		38343B1B1BC6B4C700DD635B /* YSGContact.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGContact.h; path = ../YesGraphSDK/YesGraphSDK/Model/YSGContact.h; sourceTree = "<group>"; };
-		38343B1C1BC6B4C700DD635B /* YSGConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGConstants.h; path = ../YesGraphSDK/YesGraphSDK/Core/YSGConstants.h; sourceTree = "<group>"; };
-		38343B1D1BC6B4C700DD635B /* YSGClient+SuggestionsShown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "YSGClient+SuggestionsShown.h"; path = "../YesGraphSDK/YesGraphSDK/Network/YSGClient+SuggestionsShown.h"; sourceTree = "<group>"; };
-		38343B1E1BC6B4C700DD635B /* YSGClient+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "YSGClient+Private.h"; path = "../YesGraphSDK/YesGraphSDK/Network/YSGClient+Private.h"; sourceTree = "<group>"; };
-		38343B1F1BC6B4C700DD635B /* YSGClient+Invite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "YSGClient+Invite.h"; path = "../YesGraphSDK/YesGraphSDK/Network/YSGClient+Invite.h"; sourceTree = "<group>"; };
-		38343B201BC6B4C700DD635B /* YSGClient+AddressBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "YSGClient+AddressBook.h"; path = "../YesGraphSDK/YesGraphSDK/Network/YSGClient+AddressBook.h"; sourceTree = "<group>"; };
-		38343B211BC6B4C700DD635B /* YSGClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGClient.h; path = ../YesGraphSDK/YesGraphSDK/Network/YSGClient.h; sourceTree = "<group>"; };
-		38343B221BC6B4C700DD635B /* YSGCacheContactSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGCacheContactSource.h; path = ../YesGraphSDK/YesGraphSDK/Service/Invite/Source/YSGCacheContactSource.h; sourceTree = "<group>"; };
-		38343B231BC6B4C700DD635B /* YSGAddressBookViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGAddressBookViewController.h; path = ../YesGraphSDK/YesGraphSDK/AddressBook/YSGAddressBookViewController.h; sourceTree = "<group>"; };
-		38343B241BC6B4C700DD635B /* YSGAddressBookCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YSGAddressBookCell.h; path = ../YesGraphSDK/YesGraphSDK/AddressBook/YSGAddressBookCell.h; sourceTree = "<group>"; };
-		38343B251BC6B4C700DD635B /* YesGraphSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YesGraphSDK.h; path = ../YesGraphSDK/YesGraphSDK/YesGraphSDK.h; sourceTree = "<group>"; };
-		38343B261BC6B4C700DD635B /* YesGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = YesGraph.h; path = ../YesGraphSDK/YesGraphSDK/Main/YesGraph.h; sourceTree = "<group>"; };
-		38343B271BC6B4C700DD635B /* UITableView+YSGEmptyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UITableView+YSGEmptyView.h"; path = "../YesGraphSDK/YesGraphSDK/Library/UITableView+YSGEmptyView/UITableView+YSGEmptyView.h"; sourceTree = "<group>"; };
-		38343B281BC6B4C700DD635B /* UIAlertController+YSGDisplay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIAlertController+YSGDisplay.h"; path = "../YesGraphSDK/YesGraphSDK/Library/UIAlertController+YSGDisplay/UIAlertController+YSGDisplay.h"; sourceTree = "<group>"; };
-		38343B291BC6B4C700DD635B /* NSObject+YSGParsable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSObject+YSGParsable.h"; path = "../YesGraphSDK/YesGraphSDK/Library/YSGParsing/NSObject+YSGParsable.h"; sourceTree = "<group>"; };
-		38343B2A1BC6B4C700DD635B /* NSObject+YSGIntrospection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSObject+YSGIntrospection.h"; path = "../YesGraphSDK/YesGraphSDK/Library/YSGParsing/NSObject+YSGIntrospection.h"; sourceTree = "<group>"; };
-		38343B2B1BC6B4C700DD635B /* NSArray+YSGParsable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSArray+YSGParsable.h"; path = "../YesGraphSDK/YesGraphSDK/Library/YSGParsing/NSArray+YSGParsable.h"; sourceTree = "<group>"; };
+		38343AF11BC6B2CD00DD635B /* libYesGraphSDKStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYesGraphSDKStatic.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1864921BA85833007C8859 /* Example-Static.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Static.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1864961BA85833007C8859 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E1864981BA85833007C8859 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -134,72 +79,9 @@
 		38343AF31BC6B35100DD635B /* YesGraph */ = {
 			isa = PBXGroup;
 			children = (
-				38343AF41BC6B35800DD635B /* Headers */,
 				38343AF11BC6B2CD00DD635B /* libYesGraphSDKStatic.a */,
 			);
 			name = YesGraph;
-			sourceTree = "<group>";
-		};
-		38343AF41BC6B35800DD635B /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				38343AF51BC6B4C700DD635B /* YSGValueTransformer.h */,
-				38343AF61BC6B4C700DD635B /* YSGUtility.h */,
-				38343AF71BC6B4C700DD635B /* YSGTwitterService.h */,
-				38343AF81BC6B4C700DD635B /* YSGThemeConstants+AddressBook.h */,
-				38343AF91BC6B4C700DD635B /* YSGThemeConstants.h */,
-				38343AFA1BC6B4C700DD635B /* YSGTheme.h */,
-				38343AFB1BC6B4C700DD635B /* YSGStyling.h */,
-				38343AFC1BC6B4C700DD635B /* YSGSources.h */,
-				38343AFD1BC6B4C700DD635B /* YSGSource.h */,
-				38343AFE1BC6B4C700DD635B /* YSGSocialService.h */,
-				38343AFF1BC6B4C700DD635B /* YSGShareSheetServiceCell.h */,
-				38343B001BC6B4C700DD635B /* YSGShareSheetController.h */,
-				38343B011BC6B4C700DD635B /* YSGShareService.h */,
-				38343B021BC6B4C700DD635B /* YSGShareCellShapeEnum.h */,
-				38343B031BC6B4C700DD635B /* YSGShareButtonFadeFactors.h */,
-				38343B041BC6B4C700DD635B /* YSGShareAddressBookTheme.h */,
-				38343B051BC6B4C700DD635B /* YSGServices.h */,
-				38343B061BC6B4C700DD635B /* YSGRankedContact.h */,
-				38343B071BC6B4C700DD635B /* YSGParsing.h */,
-				38343B081BC6B4C700DD635B /* YSGParsableModel.h */,
-				38343B091BC6B4C700DD635B /* YSGParsable.h */,
-				38343B0A1BC6B4C700DD635B /* YSGOnlineContactSource.h */,
-				38343B0B1BC6B4C700DD635B /* YSGNetworkResponse.h */,
-				38343B0C1BC6B4C700DD635B /* YSGNetworkDefines.h */,
-				38343B0D1BC6B4C700DD635B /* YSGNetwork.h */,
-				38343B0E1BC6B4C700DD635B /* YSGModel.h */,
-				38343B0F1BC6B4C700DD635B /* YSGMessaging.h */,
-				38343B101BC6B4C700DD635B /* YSGMessageCenter.h */,
-				38343B111BC6B4C700DD635B /* YSGMacros.h */,
-				38343B121BC6B4C700DD635B /* YSGLocalContactSource.h */,
-				38343B131BC6B4C700DD635B /* YSGInviteService.h */,
-				38343B141BC6B4C700DD635B /* YSGIconDrawings.h */,
-				38343B151BC6B4C700DD635B /* YSGFacebookService.h */,
-				38343B161BC6B4C700DD635B /* YSGDrawingConstants.h */,
-				38343B171BC6B4C700DD635B /* YSGDrawing.h */,
-				38343B181BC6B4C700DD635B /* YSGDrawableView.h */,
-				38343B191BC6B4C700DD635B /* YSGContactSource.h */,
-				38343B1A1BC6B4C700DD635B /* YSGContactList.h */,
-				38343B1B1BC6B4C700DD635B /* YSGContact.h */,
-				38343B1C1BC6B4C700DD635B /* YSGConstants.h */,
-				38343B1D1BC6B4C700DD635B /* YSGClient+SuggestionsShown.h */,
-				38343B1E1BC6B4C700DD635B /* YSGClient+Private.h */,
-				38343B1F1BC6B4C700DD635B /* YSGClient+Invite.h */,
-				38343B201BC6B4C700DD635B /* YSGClient+AddressBook.h */,
-				38343B211BC6B4C700DD635B /* YSGClient.h */,
-				38343B221BC6B4C700DD635B /* YSGCacheContactSource.h */,
-				38343B231BC6B4C700DD635B /* YSGAddressBookViewController.h */,
-				38343B241BC6B4C700DD635B /* YSGAddressBookCell.h */,
-				38343B251BC6B4C700DD635B /* YesGraphSDK.h */,
-				38343B261BC6B4C700DD635B /* YesGraph.h */,
-				38343B271BC6B4C700DD635B /* UITableView+YSGEmptyView.h */,
-				38343B281BC6B4C700DD635B /* UIAlertController+YSGDisplay.h */,
-				38343B291BC6B4C700DD635B /* NSObject+YSGParsable.h */,
-				38343B2A1BC6B4C700DD635B /* NSObject+YSGIntrospection.h */,
-				38343B2B1BC6B4C700DD635B /* NSArray+YSGParsable.h */,
-			);
-			name = Headers;
 			sourceTree = "<group>";
 		};
 		3E1864891BA85833007C8859 = {
@@ -477,12 +359,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				HEADER_SEARCH_PATHS = "$BUILT_PRODUCTS_DIR/**";
 				INFOPLIST_FILE = "Example-Static/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
@@ -496,12 +375,9 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				HEADER_SEARCH_PATHS = "$BUILT_PRODUCTS_DIR/**";
 				INFOPLIST_FILE = "Example-Static/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
