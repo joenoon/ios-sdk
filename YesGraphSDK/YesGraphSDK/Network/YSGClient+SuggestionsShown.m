@@ -21,6 +21,7 @@
     NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     isoFormat.locale = posixLocale;
     isoFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+    
     NSString *seenAt = [isoFormat stringFromDate:[NSDate date]];
     
     for (YSGContact *contact in suggestions)

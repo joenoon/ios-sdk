@@ -6,8 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <OHHTTPStubs.h>
+@import Foundation;
+@import OHHTTPStubs;
 
 @interface YSGStubRequestsScoped : NSObject
 
