@@ -17,20 +17,23 @@
     NSArray *emptyArray = [NSArray new];
 
     NSDateFormatter *isoFormat = [NSDateFormatter new];
+    
     NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     isoFormat.locale = posixLocale;
     isoFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
     NSString *seenAt = [isoFormat stringFromDate:[NSDate date]];
+    
     for (YSGContact *contact in suggestions)
     {
         NSDictionary *seenContact = @
-         {
-             @"user_id": userId,
-             @"contact_name": contact.name,
-             @"contact_emails": contact.emails ?: emptyArray,
-             @"contact_phones": contact.phones ?: emptyArray,
-             @"seen_at": seenAt
-         };
+        {
+            @"user_id": userId,
+            @"contact_name": contact.name,
+            @"contact_emails": contact.emails ?: emptyArray,
+            @"contact_phones": contact.phones ?: emptyArray,
+            @"seen_at": seenAt
+        };
+        
         [ret addObject:seenContact];
     }
     

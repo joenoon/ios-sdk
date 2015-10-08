@@ -199,6 +199,7 @@
 		67E64EDB6902C774E84AFA6B /* YSGRankedContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E6406BB63F2FBF78AC69B4 /* YSGRankedContact.m */; };
 		67E64EEE1155E1FF9FE14BC0 /* YSGFacebookService.h in Headers */ = {isa = PBXBuildFile; fileRef = 67E640CDA38C1801103AEEF6 /* YSGFacebookService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67E64F24AA6529C333D9A552 /* YSGContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E6488C19F203A44EA85DD3 /* YSGContactList.m */; settings = {ASSET_TAGS = (); }; };
+		E81F9F8B1BB34969005117A0 /* YesGraphSDKInviteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E81F9F8A1BB34969005117A0 /* YesGraphSDKInviteTest.m */; settings = {ASSET_TAGS = (); }; };
 		E82A8B791BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E82A8B7A1BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = E82A8B751BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m */; settings = {ASSET_TAGS = (); }; };
 		E82A8B7B1BB9EFB9001A26A7 /* YSGShareButtonFadeFactors.h in Headers */ = {isa = PBXBuildFile; fileRef = E82A8B761BB9EFB9001A26A7 /* YSGShareButtonFadeFactors.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -208,13 +209,12 @@
 		E87C23171BC31E4300364C0C /* YSGClient+SuggestionsShown.m in Sources */ = {isa = PBXBuildFile; fileRef = E87C23131BC31E2300364C0C /* YSGClient+SuggestionsShown.m */; settings = {ASSET_TAGS = (); }; };
 		E8881D071BB21310005DCBF1 /* YSGShareAddressBookTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = E8881D051BB21310005DCBF1 /* YSGShareAddressBookTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8881D081BB21310005DCBF1 /* YSGShareAddressBookTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8881D061BB21310005DCBF1 /* YSGShareAddressBookTheme.m */; settings = {ASSET_TAGS = (); }; };
-		E89CA8AA1BC1BE52008365EF /* YSGThemeConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */; settings = {ASSET_TAGS = (); }; };
-		E89CA8AB1BC1BE52008365EF /* YSGThemeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */; settings = {ASSET_TAGS = (); }; };
-		E8A6D66E1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E81F9F8B1BB34969005117A0 /* YesGraphSDKInviteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E81F9F8A1BB34969005117A0 /* YesGraphSDKInviteTest.m */; settings = {ASSET_TAGS = (); }; };
 		E88C68F91BC45BC1006C7868 /* YSGClient+SuggestionsShown.h in Headers */ = {isa = PBXBuildFile; fileRef = E88C68F71BC45BC1006C7868 /* YSGClient+SuggestionsShown.h */; settings = {ASSET_TAGS = (); }; };
 		E88C68FA1BC45BC1006C7868 /* YSGClient+SuggestionsShown.m in Sources */ = {isa = PBXBuildFile; fileRef = E88C68F81BC45BC1006C7868 /* YSGClient+SuggestionsShown.m */; settings = {ASSET_TAGS = (); }; };
 		E88C68FC1BC45C01006C7868 /* YesGraphSDKSuggestionsShownTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E88C68FB1BC45C01006C7868 /* YesGraphSDKSuggestionsShownTests.m */; settings = {ASSET_TAGS = (); }; };
+		E89CA8AA1BC1BE52008365EF /* YSGThemeConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */; settings = {ASSET_TAGS = (); }; };
+		E89CA8AB1BC1BE52008365EF /* YSGThemeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */; settings = {ASSET_TAGS = (); }; };
+		E8A6D66E1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8BC05EC1BC465030082C74E /* YSGStubRequestsScoped.m in Sources */ = {isa = PBXBuildFile; fileRef = E8BC05EB1BC465030082C74E /* YSGStubRequestsScoped.m */; settings = {ASSET_TAGS = (); }; };
 		F450D8ED8752F157EB3B650E /* libPods-YesGraphSDKTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A75E83B5FC18673182FCD0 /* libPods-YesGraphSDKTests.a */; };
 /* End PBXBuildFile section */
@@ -349,6 +349,8 @@
 		67E64A38B2711722C98E1D0A /* YSGTwitterService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGTwitterService.m; sourceTree = "<group>"; };
 		67E64DA4788FBB0DC32F607E /* YSGLocalContactSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGLocalContactSource.m; sourceTree = "<group>"; };
 		67E64F479EC3C3C13DC44FC3 /* YSGOnlineContactSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGOnlineContactSource.h; sourceTree = "<group>"; };
+		AFC68D319DFCC9706D102545 /* Pods-YesGraphSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesGraphSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YesGraphSDKTests/Pods-YesGraphSDKTests.release.xcconfig"; sourceTree = "<group>"; };
+		E81F9F8A1BB34969005117A0 /* YesGraphSDKInviteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKInviteTest.m; sourceTree = "<group>"; };
 		E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGThemeConstants+AddressBook.h"; sourceTree = "<group>"; };
 		E82A8B751BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGThemeConstants+AddressBook.m"; sourceTree = "<group>"; };
 		E82A8B761BB9EFB9001A26A7 /* YSGShareButtonFadeFactors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareButtonFadeFactors.h; sourceTree = "<group>"; };
@@ -356,14 +358,12 @@
 		E87C23131BC31E2300364C0C /* YSGClient+SuggestionsShown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGClient+SuggestionsShown.m"; sourceTree = "<group>"; };
 		E8881D051BB21310005DCBF1 /* YSGShareAddressBookTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareAddressBookTheme.h; sourceTree = "<group>"; };
 		E8881D061BB21310005DCBF1 /* YSGShareAddressBookTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGShareAddressBookTheme.m; sourceTree = "<group>"; };
-		E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGThemeConstants.h; sourceTree = "<group>"; };
-		E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGThemeConstants.m; sourceTree = "<group>"; };
-		E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareCellShapeEnum.h; sourceTree = "<group>"; };
-		AFC68D319DFCC9706D102545 /* Pods-YesGraphSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesGraphSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YesGraphSDKTests/Pods-YesGraphSDKTests.release.xcconfig"; sourceTree = "<group>"; };
-		E81F9F8A1BB34969005117A0 /* YesGraphSDKInviteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKInviteTest.m; sourceTree = "<group>"; };
 		E88C68F71BC45BC1006C7868 /* YSGClient+SuggestionsShown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGClient+SuggestionsShown.h"; sourceTree = "<group>"; };
 		E88C68F81BC45BC1006C7868 /* YSGClient+SuggestionsShown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGClient+SuggestionsShown.m"; sourceTree = "<group>"; };
 		E88C68FB1BC45C01006C7868 /* YesGraphSDKSuggestionsShownTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKSuggestionsShownTests.m; sourceTree = "<group>"; };
+		E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGThemeConstants.h; sourceTree = "<group>"; };
+		E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGThemeConstants.m; sourceTree = "<group>"; };
+		E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareCellShapeEnum.h; sourceTree = "<group>"; };
 		E8BC05EA1BC465030082C74E /* YSGStubRequestsScoped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGStubRequestsScoped.h; sourceTree = "<group>"; };
 		E8BC05EB1BC465030082C74E /* YSGStubRequestsScoped.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGStubRequestsScoped.m; sourceTree = "<group>"; };
 		E9F46EF3108E4C8965EB4884 /* Pods-YesGraphSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YesGraphSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YesGraphSDKTests/Pods-YesGraphSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -533,20 +533,20 @@
 		38CC16CC1B831606008477C7 /* YesGraphSDKTests */ = {
 			isa = PBXGroup;
 			children = (
-				E8BC05EA1BC465030082C74E /* YSGStubRequestsScoped.h */,
-				E8BC05EB1BC465030082C74E /* YSGStubRequestsScoped.m */,
 				38CC16CF1B831606008477C7 /* YesGraphSDKTests.m */,
 				384D39801B8F19A10080BA48 /* YesGraphSDKAddressBookTests.m */,
 				3852B2D51B833F2000544FBA /* YesGraphSDKNetworkTests.m */,
 				389ABFC01B8E1D0100E4E3F1 /* YesGraphSDKParseTests.m */,
 				388757331B95F17E001F0133 /* YesGraphSDKCacheTests.m */,
-				38CC16CD1B831606008477C7 /* Supporting Files */,
+				E8BC05EA1BC465030082C74E /* YSGStubRequestsScoped.h */,
+				E8BC05EB1BC465030082C74E /* YSGStubRequestsScoped.m */,
 				384D39861B8F22EB0080BA48 /* YSGTestSettings.h */,
 				384D39871B8F22EB0080BA48 /* YSGTestSettings.m */,
 				384D39891B8F270A0080BA48 /* YSGTestMockData.h */,
 				384D398A1B8F270A0080BA48 /* YSGTestMockData.m */,
 				E81F9F8A1BB34969005117A0 /* YesGraphSDKInviteTest.m */,
 				E88C68FB1BC45C01006C7868 /* YesGraphSDKSuggestionsShownTests.m */,
+				38CC16CD1B831606008477C7 /* Supporting Files */,
 			);
 			path = YesGraphSDKTests;
 			sourceTree = "<group>";
@@ -914,6 +914,7 @@
 				38CC16C51B831606008477C7 /* Frameworks */,
 				38CC16C61B831606008477C7 /* Resources */,
 				CD672876F115C61FF126198C /* Copy Pods Resources */,
+				6855E12E55022633539C48D5 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1014,6 +1015,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6855E12E55022633539C48D5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YesGraphSDKTests/Pods-YesGraphSDKTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CD672876F115C61FF126198C /* Copy Pods Resources */ = {
