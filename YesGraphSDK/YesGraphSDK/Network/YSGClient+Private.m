@@ -7,7 +7,7 @@
 //
 
 #import "YSGClient+Private.h"
-
+#import "YSGUtility.h"
 @implementation YSGClient (Private)
 
 #pragma mark - Public Methods
@@ -43,15 +43,17 @@
 
 #pragma mark - Private Methods
 
+- (void)fillArray:(NSMutableString *)array fromChar:(char)start toChar:(char)end
+{
+    for(char c = start; c <= end; ++c)
+    {
+        [array appendFormat:@"%c", c];
+    }
+}
+
 - (NSString *)randomID
 {
-    //
-    // TODO: Random
-    //
-    const NSInteger stringLength = 16 / sizeof(UInt32);
-    UInt32 stringBytes[stringLength];
-    arc4random_buf(stringBytes, stringLength * sizeof(UInt32));
-    return @"";
+    return [YSGUtility randomUserId];
 }
 
 @end

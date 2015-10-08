@@ -7,13 +7,14 @@
 //
 
 #import "YSGTestMockData.h"
+#import "YSGTestSettings.h"
 
 @implementation YSGTestMockData
 
 + (YSGContactList *)mockContactList
 {
     YSGContactList *contactList = [[YSGContactList alloc] init];
-    
+
     contactList.source = [YSGSource userSource];
     
     NSDictionary *contact1 = @{ @"name" : @"Milton Fuller", @"emails" : @[ @"milton.fuller@mymockdata.com", @"milton.fuller95@example.com" ], @"phones" : @[ @"+1 (956)-886-4918", @"+22 (956)-886-4918" ] };
@@ -31,7 +32,6 @@
     NSDictionary *contact7 = @{ @"name" : @"Howard Daniels", @"phones" : @[ @"howard.daniels64@mymockdata.com" ], @"phones" : @[ @"+1 (798)-494-6469" ] };
     
     NSDictionary *contact8 = @{ @"name" : @"Charlotte Hoffman", @"phones" : @[ @"+1 (495)-692-7296" ] };
-    
     
     YSGContact *parsedContact1 = [YSGContact ysg_objectWithDictionary:contact1];
     YSGContact *parsedContact2 = [YSGContact ysg_objectWithDictionary:contact2];

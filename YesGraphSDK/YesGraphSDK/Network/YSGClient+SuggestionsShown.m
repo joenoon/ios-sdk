@@ -40,17 +40,17 @@
 - (void)updateSuggestionsSeen:(NSArray <YSGContact *> *)suggestionsShown forUserId:(NSString *)userId withCompletion:(nullable void (^)(NSError * _Nullable error))completion
 {
     NSDictionary *parameters = @
-     {
-         @"data": [self generateArrayOfSuggestionsFrom:suggestionsShown withUserId:userId]
-     };
+    {
+        @"data": [self generateArrayOfSuggestionsFrom:suggestionsShown withUserId:userId]
+    };
     
     [self POST:@"suggested-seen" parameters:parameters completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
-     {   
-         if (completion)
-         {
-             completion(error);
-         }
-     }];
+    {   
+        if (completion)
+        {
+            completion(error);
+        }
+    }];
 }
 
 @end

@@ -46,7 +46,7 @@
     }];
 }
 
-- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(nonnull NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion
+- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion
 {
     NSMutableDictionary *parameters = [[contactList ysg_toDictionary] mutableCopy];
     parameters[@"user_id"] = userId;

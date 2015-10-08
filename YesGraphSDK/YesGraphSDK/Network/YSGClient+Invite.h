@@ -17,9 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  This notifies YesGraph which invites were sent
  *
  *  @param invites    contacts that were invited
+ *  @param userId     user's ID 
  *  @param completion called when completed
  */
-- (void)updateInviteSent:(NSArray <YSGContact *> *)invites completion:(nullable void (^)(NSError  * _Nullable error))completion;
+- (void)updateInvitesSent:(nonnull NSArray<YSGContact *> *)invites forUserId:(nonnull NSString *)userId withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
 
 @end
 
