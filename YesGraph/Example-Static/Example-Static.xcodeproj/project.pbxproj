@@ -106,7 +106,6 @@
 				3E18649C1BA85833007C8859 /* ViewController.m */,
 				380FD83F1BC6852200162D85 /* LaunchScreen.storyboard */,
 				380FD8371BC684BE00162D85 /* Main.storyboard */,
-				3E1864A61BA85833007C8859 /* Info.plist */,
 				3E1864951BA85833007C8859 /* Supporting Files */,
 			);
 			path = "Example-Static";
@@ -115,6 +114,7 @@
 		3E1864951BA85833007C8859 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3E1864A61BA85833007C8859 /* Info.plist */,
 				3E1864961BA85833007C8859 /* main.m */,
 			);
 			name = "Supporting Files";
