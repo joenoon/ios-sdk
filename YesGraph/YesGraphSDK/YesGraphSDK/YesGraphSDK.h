@@ -20,10 +20,11 @@ FOUNDATION_EXPORT const unsigned char YesGraphSDKVersionString[];
 #import <YesGraphSDK/YSGClient.h>
 #import <YesGraphSDK/YSGShareService.h>
 #import <YesGraphSDK/YSGShareSheetController.h>
+#import <YesGraphSDK/YSGAddressBook.h>
+#import <YesGraphSDK/YSGTheme.h>
 
-#import <YesGraphSDK/YSGFacebookService.h>
-#import <YesGraphSDK/YSGTwitterService.h>
-#import <YesGraphSDK/YSGInviteService.h>
-#import <YesGraphSDK/YSGOnlineContactSource.h>
-#import <YesGraphSDK/YSGLocalContactSource.h>
+#import <YesGraphSDK/YSGSources.h>
+#import <YesGraphSDK/YSGServices.h>
+#import <YesGraphSDK/YSGModel.h>
 #import <YesGraphSDK/YSGParsing.h>
+#import <YesGraphSDK/YSGDrawing.h>

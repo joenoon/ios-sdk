@@ -9,9 +9,13 @@
 @import Foundation;
 @import UIKit;
 
+#import "YSGThemeConstants.h"
+#import "YSGThemeConstants+AddressBook.h"
+
 #import "YSGShareCellShapeEnum.h"
 #import "YSGShareAddressBookTheme.h"
 #import "YSGShareButtonFadeFactors.h"
+#import "YSGStyling.h"
 
 /*!
  *  Use the theme to stylize YesGraph UI

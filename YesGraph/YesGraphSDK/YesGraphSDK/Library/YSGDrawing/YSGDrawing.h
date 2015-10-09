@@ -8,3 +8,4 @@
 
 #import "YSGDrawingConstants.h"
 #import "YSGDrawableView.h"
+#import "YSGIconDrawings.h"
