@@ -51,8 +51,22 @@ Before you can use any of the example apps, you need to configure the app with y
 
 1. If you haven't already, sign up for a YesGraph account (it takes seconds). Then go to YesGraph Dashboard: https://www.yesgraph.com/apps/.
 2. Copy the live secret key on the bottom of the page to your trusted backend.
-3. Call your trusted backend with user ID, to get the client key back (you can generate a random user ID, if user is not known, by using YSGUtility random .
-4. Connect the user ID 
+3. Call your trusted backend with user ID, to get the client key back (you can generate a random user ID, if user is not known, by using `YSGUtility` class and `randomUserId` method.
+4. Configure YesGraphSDK with received client key and user ID:
+
+Objective-C
+
+```objc
+[[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
+[[YesGraph shared] configureWithClientKey:@""];
+```
+
+Swift
+```swift
+YesGraph.shared().configureWithClientKey(clientKey)
+YesGraph.shared().configureWithUserId(userId)
+```
+5. Run the desired Example app.
 
 ## Tests
 
