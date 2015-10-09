@@ -14,17 +14,17 @@ FOUNDATION_EXPORT double YesGraphSDKVersionNumber;
 //! Project version string for YesGraphSDK.
 FOUNDATION_EXPORT const unsigned char YesGraphSDKVersionString[];
 
-#import <YesGraphSDK/YSGConstants.h>
-#import <YesGraphSDK/YSGUtility.h>
-#import <YesGraphSDK/YesGraph.h>
-#import <YesGraphSDK/YSGClient.h>
-#import <YesGraphSDK/YSGShareService.h>
-#import <YesGraphSDK/YSGShareSheetController.h>
-#import <YesGraphSDK/YSGAddressBook.h>
-#import <YesGraphSDK/YSGTheme.h>
+#import <YSGConstants.h>
+#import <YSGUtility.h>
+#import <YesGraph.h>
+#import <YSGClient.h>
+#import <YSGShareService.h>
+#import <YSGShareSheetController.h>
+#import <YSGAddressBook.h>
+#import <YSGTheme.h>
 
-#import <YesGraphSDK/YSGSources.h>
-#import <YesGraphSDK/YSGServices.h>
-#import <YesGraphSDK/YSGModel.h>
-#import <YesGraphSDK/YSGParsing.h>
-#import <YesGraphSDK/YSGDrawing.h>
+#import <YSGSources.h>
+#import <YSGServices.h>
+#import <YSGModel.h>
+#import <YSGParsing.h>
+#import <YSGDrawing.h>

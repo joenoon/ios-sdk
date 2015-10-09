@@ -6,9 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-
+@import Foundation;
+@import UIKit;
 
 @interface YSGIconDrawings : NSObject
 
@@ -23,8 +22,8 @@
 + (void)drawPhoneCanvas;
 
 // Generated Images
-+ (UIImage*)twitterImage;
-+ (UIImage*)facebookImage;
-+ (UIImage*)phoneImage;
++ (UIImage *)twitterImage;
++ (UIImage *)facebookImage;
++ (UIImage *)phoneImage;
 
 @end

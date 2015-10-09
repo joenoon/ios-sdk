@@ -10,6 +10,7 @@
 		303358BA1BBB5BBC002F5E92 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358B01BBB5BBC002F5E92 /* OpenSans-Regular.ttf */; };
 		303358BB1BBB5BBC002F5E92 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */; };
 		380FD8401BC6852200162D85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD83F1BC6852200162D85 /* LaunchScreen.storyboard */; };
+		3892F7691BC7E95C00F324E3 /* libYesGraphSDKStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3892F7681BC7E95C00F324E3 /* libYesGraphSDKStatic.a */; };
 		38FBA0AC1BC7C4EC0030C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA0AB1BC7C4EC0030C473 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		3E1864971BA85833007C8859 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864961BA85833007C8859 /* main.m */; };
 		3E18649A1BA85833007C8859 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864991BA85833007C8859 /* AppDelegate.m */; };
@@ -33,6 +34,7 @@
 		303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "../../Resources/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		380FD83F1BC6852200162D85 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38343AF11BC6B2CD00DD635B /* libYesGraphSDKStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYesGraphSDKStatic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3892F7681BC7E95C00F324E3 /* libYesGraphSDKStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libYesGraphSDKStatic.a; path = "../YesGraphSDK/build/Debug-iphoneos/libYesGraphSDKStatic.a"; sourceTree = "<group>"; };
 		38FBA0AB1BC7C4EC0030C473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3E1864921BA85833007C8859 /* Example-Static.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Static.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1864961BA85833007C8859 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3892F7691BC7E95C00F324E3 /* libYesGraphSDKStatic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +141,7 @@
 		3E1864BA1BA85874007C8859 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3892F7681BC7E95C00F324E3 /* libYesGraphSDKStatic.a */,
 				38343AF31BC6B35100DD635B /* YesGraph */,
 			);
 			name = Frameworks;
@@ -358,7 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
-				HEADER_SEARCH_PATHS = "$SOURCE_ROOT/../YesGraphSDK/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../**";
 				INFOPLIST_FILE = "Example-Static/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
@@ -373,7 +377,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
-				HEADER_SEARCH_PATHS = "$SOURCE_ROOT/../YesGraphSDK/**";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../**";
 				INFOPLIST_FILE = "Example-Static/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
