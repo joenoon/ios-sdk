@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		303358CF1BBB5BC9002F5E92 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358C51BBB5BC9002F5E92 /* OpenSans-Regular.ttf */; };
 		303358D01BBB5BC9002F5E92 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358C61BBB5BC9002F5E92 /* OpenSans-Semibold.ttf */; };
-		380FD83A1BC684D600162D85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD8391BC684D600162D85 /* Main.storyboard */; };
 		380FD8421BC6852600162D85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD8411BC6852600162D85 /* LaunchScreen.storyboard */; };
 		38130D241B9F110100AA2AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38130D231B9F110100AA2AA8 /* AppDelegate.swift */; };
 		38130D261B9F110100AA2AA8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38130D251B9F110100AA2AA8 /* ViewController.swift */; };
 		38130D391B9F110100AA2AA8 /* Example_SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38130D381B9F110100AA2AA8 /* Example_SwiftTests.swift */; };
 		38130D4B1B9F133C00AA2AA8 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38130D471B9F130A00AA2AA8 /* YesGraphSDK.framework */; };
 		38130D4C1B9F133C00AA2AA8 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38130D471B9F130A00AA2AA8 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38FBA0A81BC7C2BF0030C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA0A71BC7C2BF0030C473 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		3EFDB0B51BAC48B300F51816 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3EFDB0B41BAC48B300F51816 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -46,7 +46,6 @@
 /* Begin PBXFileReference section */
 		303358C51BBB5BC9002F5E92 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../Resources/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		303358C61BBB5BC9002F5E92 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "../../Resources/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
-		380FD8391BC684D600162D85 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../Resources/Main.storyboard; sourceTree = "<group>"; };
 		380FD8411BC6852600162D85 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38130D201B9F110100AA2AA8 /* Example-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38130D231B9F110100AA2AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +55,7 @@
 		38130D381B9F110100AA2AA8 /* Example_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example_SwiftTests.swift; sourceTree = "<group>"; };
 		38130D3A1B9F110100AA2AA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38130D471B9F130A00AA2AA8 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FBA0A71BC7C2BF0030C473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3EFDB0B41BAC48B300F51816 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../Resources/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,7 +114,7 @@
 				38130D231B9F110100AA2AA8 /* AppDelegate.swift */,
 				38130D251B9F110100AA2AA8 /* ViewController.swift */,
 				380FD8411BC6852600162D85 /* LaunchScreen.storyboard */,
-				380FD8391BC684D600162D85 /* Main.storyboard */,
+				38FBA0A71BC7C2BF0030C473 /* Main.storyboard */,
 				38130D2F1B9F110100AA2AA8 /* Info.plist */,
 			);
 			path = "Example-Swift";
@@ -220,10 +220,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				303358D01BBB5BC9002F5E92 /* OpenSans-Semibold.ttf in Resources */,
+				38FBA0A81BC7C2BF0030C473 /* Main.storyboard in Resources */,
 				3EFDB0B51BAC48B300F51816 /* Images.xcassets in Resources */,
 				303358CF1BBB5BC9002F5E92 /* OpenSans-Regular.ttf in Resources */,
 				380FD8421BC6852600162D85 /* LaunchScreen.storyboard in Resources */,
-				380FD83A1BC684D600162D85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

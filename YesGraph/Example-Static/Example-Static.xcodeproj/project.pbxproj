@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		303358BA1BBB5BBC002F5E92 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358B01BBB5BBC002F5E92 /* OpenSans-Regular.ttf */; };
 		303358BB1BBB5BBC002F5E92 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */; };
-		380FD8381BC684BE00162D85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD8371BC684BE00162D85 /* Main.storyboard */; };
 		380FD8401BC6852200162D85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD83F1BC6852200162D85 /* LaunchScreen.storyboard */; };
 		38343AF21BC6B2CD00DD635B /* libYesGraphSDKStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38343AF11BC6B2CD00DD635B /* libYesGraphSDKStatic.a */; };
+		38FBA0AC1BC7C4EC0030C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA0AB1BC7C4EC0030C473 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 		3E1864971BA85833007C8859 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864961BA85833007C8859 /* main.m */; };
 		3E18649A1BA85833007C8859 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E1864991BA85833007C8859 /* AppDelegate.m */; };
 		3E18649D1BA85833007C8859 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E18649C1BA85833007C8859 /* ViewController.m */; };
@@ -32,9 +32,9 @@
 /* Begin PBXFileReference section */
 		303358B01BBB5BBC002F5E92 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "../../Resources/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		303358B11BBB5BBC002F5E92 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "../../Resources/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
-		380FD8371BC684BE00162D85 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../Resources/Main.storyboard; sourceTree = "<group>"; };
 		380FD83F1BC6852200162D85 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38343AF11BC6B2CD00DD635B /* libYesGraphSDKStatic.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYesGraphSDKStatic.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FBA0AB1BC7C4EC0030C473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3E1864921BA85833007C8859 /* Example-Static.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example-Static.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E1864961BA85833007C8859 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3E1864981BA85833007C8859 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 				3E18649B1BA85833007C8859 /* ViewController.h */,
 				3E18649C1BA85833007C8859 /* ViewController.m */,
 				380FD83F1BC6852200162D85 /* LaunchScreen.storyboard */,
-				380FD8371BC684BE00162D85 /* Main.storyboard */,
+				38FBA0AB1BC7C4EC0030C473 /* Main.storyboard */,
 				3E1864951BA85833007C8859 /* Supporting Files */,
 			);
 			path = "Example-Static";
@@ -226,10 +226,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				303358BB1BBB5BBC002F5E92 /* OpenSans-Semibold.ttf in Resources */,
+				38FBA0AC1BC7C4EC0030C473 /* Main.storyboard in Resources */,
 				3EFDB0B71BAC48BC00F51816 /* Images.xcassets in Resources */,
 				303358BA1BBB5BBC002F5E92 /* OpenSans-Regular.ttf in Resources */,
 				380FD8401BC6852200162D85 /* LaunchScreen.storyboard in Resources */,
-				380FD8381BC684BE00162D85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

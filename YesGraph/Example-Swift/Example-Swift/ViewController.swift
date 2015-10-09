@@ -20,7 +20,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         theme.baseColor = UIColor.redColor();
         
         super.viewDidLoad()
-        
     }
     
     @IBOutlet weak var introTextField: UITextField!
@@ -30,7 +29,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
 
     @IBOutlet weak var additionalNotesView: UIView!
 
-    @IBAction func shareButtonTapped(sender: AnyObject) {
+    @IBAction func shareButtonTap(sender: AnyObject) {
         let localSource = YSGLocalContactSource()
         localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
         

@@ -14,10 +14,10 @@
 		3805E1641B831B1B004463B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1631B831B1B004463B8 /* ViewController.m */; };
 		3805E1691B831B1B004463B8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3805E1681B831B1B004463B8 /* Images.xcassets */; };
 		3805E1781B831B1B004463B8 /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3805E1771B831B1B004463B8 /* ExampleTests.m */; };
-		380FD8361BC684B300162D85 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD8351BC684B300162D85 /* Main.storyboard */; };
 		380FD83E1BC6851D00162D85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD83D1BC6851D00162D85 /* LaunchScreen.storyboard */; };
 		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
 		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		38FBA0AA1BC7C4E30030C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA0A91BC7C4E30030C473 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,9 +58,9 @@
 		3805E1711B831B1B004463B8 /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3805E1761B831B1B004463B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3805E1771B831B1B004463B8 /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
-		380FD8351BC684B300162D85 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../Resources/Main.storyboard; sourceTree = "<group>"; };
 		380FD83D1BC6851D00162D85 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38FBA0A91BC7C4E30030C473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,8 +119,8 @@
 				3805E1601B831B1B004463B8 /* AppDelegate.m */,
 				3805E1621B831B1B004463B8 /* ViewController.h */,
 				3805E1631B831B1B004463B8 /* ViewController.m */,
+				38FBA0A91BC7C4E30030C473 /* Main.storyboard */,
 				380FD83D1BC6851D00162D85 /* LaunchScreen.storyboard */,
-				380FD8351BC684B300162D85 /* Main.storyboard */,
 				3805E15B1B831B1B004463B8 /* Supporting Files */,
 			);
 			path = Example;
@@ -242,10 +242,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				303358A61BBB5BAD002F5E92 /* OpenSans-Semibold.ttf in Resources */,
+				38FBA0AA1BC7C4E30030C473 /* Main.storyboard in Resources */,
 				303358A51BBB5BAD002F5E92 /* OpenSans-Regular.ttf in Resources */,
 				3805E1691B831B1B004463B8 /* Images.xcassets in Resources */,
 				380FD83E1BC6851D00162D85 /* LaunchScreen.storyboard in Resources */,
-				380FD8361BC684B300162D85 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
