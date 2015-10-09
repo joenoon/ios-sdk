@@ -85,9 +85,9 @@ Before you can use any of the example apps, you need to configure the app with y
 
 YesGraph iOS SDK contains unit tests that can be executed in Xcode.
 
-Open **YesGraphSDK/YesGraphSDK.xcworkspace**
-Choose the "YesGraphSDK" scheme
-Run Product -> Test
+- Open **YesGraph/YesGraphSDK.xcworkspace**
+- Choose the "YesGraphSDK" scheme
+- Run Product -> Test
 
 License
 ======
