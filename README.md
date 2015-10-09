@@ -50,8 +50,8 @@ import YesGraphSDK
 There are 3 example applications included in the repository, that display the share sheet when triggered. All examples are the same, but they contain different ways of SDK integration.
 
 - Example - Is a **Objective-C** app that includes YesGraphSDK as a framework and uses it as a module.
-- Example-Swift - Is a **Swift** app that includes YesGraphSDK as a framework.
 - Example-Static - Is a **Objective-C** app that includes YesGraph SDK as a static library.
+- Example-Swift - Is a **Swift** app that includes YesGraphSDK as a framework.
 
 ## Getting Started with Example applications
 
