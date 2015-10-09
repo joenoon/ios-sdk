@@ -8,19 +8,20 @@
 [![Pod Platform](http://img.shields.io/cocoapods/p/YesGraph-iOS-SDK.svg?style=flat)](http://cocoadocs.org/docsets/YesGraph-iOS-SDK/)
 [![Pod License](http://img.shields.io/cocoapods/l/YesGraph-iOS-SDK.svg?style=flat)](http://opensource.org/licenses/MIT)
 
-This is an iOS SDK for YesGraph's API. It helps wrap calls into our social graph analysis API. Find more information on [yesgraph.com](https://www.yesgraph.com)
+YesGraph iOS SDK is a sharing iOS SDK that integrates with YesGraph. It presents user with a share sheet that can be used to share a message to user's friends to multiple sources, such as: Facebook, Twitter or user's contact book. [Read more about that on our blog.](http://blog.yesgraph.com/perfect-share-flow/) 
 
-The next version of the SDK will also provide a drop-in user facing invite flow. [Read more about that on our blog.](http://blog.yesgraph.com/perfect-share-flow/) 
+Find detailed documentation about YesGraph on [yesgraph.com](https://docs.yesgraph.com)
 
 ## Requirements
 
-The SDK is compatible with iOS apps with **Minimum Deployment Target** iOS 8 and above. It requires Xcode 7.x and  iOS 9 SDK to build the source.
+The SDK is compatible with iOS apps with iOS 8 and above. It requires Xcode 7.x and iOS 9.x SDK to build the source.
 
 ## Integration
 
 The easiest way to integrate is with CocoaPods. Add the following Pod to your **Podfile**:
 
 ```
+pod 'YesGraph-iOS-SDK'
 ```
 
 An alternate way to integrate is using Carthage. Add the following link to your **CartFile**:
@@ -29,14 +30,40 @@ An alternate way to integrate is using Carthage. Add the following link to your 
 github "YesGraph/ios-sdk"
 ```
 
-Or integrate it manually by drag & dropping all files from YesGraphSDK folder into your project. If you have a Swift project, you must add `YesGraph.h` file to your Objective-C Bridging Header.
+Or integrate it manually by drag & dropping all **.h** and **.m** files from YesGraphSDK folder into your project. If you have a Swift project, you must add `YesGraph.h` file to your Objective-C Bridging Header.
+
+# Example applications
+
+There are 3 example applications included in the repository, that display the share sheet when triggered. All examples are the same, but they contain different ways of SDK integration.
+
+- Example - Is a **Objective-C** app that includes YesGraphSDK as a framework and uses it as a module.
+- Example-Swift - Is a **Swift** app that includes YesGraphSDK as a framework.
+- Example-Static - Is a **Objective-C** app that includes YesGraph SDK as a static library.
+
+## Getting Started with Example applications
+
+**Like YesGraph SDK, all example apps require Xcode 7.x to build and run.**
+
+Before you can use any of the example apps, you need to configure the app with your **YesGraph client key**. Because YesGraph treats mobile devices as untrusted clients, first you need a trusted backend to generate client keys.
+
+[Read more about connecting apps](https://docs.yesgraph.com/docs/connecting-apps#mobile-apps)
+[Read more about creating client keys](https://docs.yesgraph.com/docs/create-client-keys)
+
+1. If you haven't already, sign up for a YesGraph account (it takes seconds). Then go to YesGraph Dashboard: https://www.yesgraph.com/apps/.
+2. Copy the live secret key on the bottom of the page to your trusted backend.
+3. Call your trusted backend with user ID, to get the client key back (you can generate a random user ID, if user is not known, by using YSGUtility random .
+4. Connect the user ID 
 
 ## Tests
 
-## Frequently Asked Questions
+YesGraph iOS SDK contains unit tests that can be executed in Xcode.
+
+Open **YesGraphSDK.xcworkspace**
+Choose the "YesGraphSDK" scheme
+Run Product -> Test
 
 License
 ======
 
-The SDK is released under <LICENSE> license.
+YesGraphSDK is released under **MIT** license. See [LICENSE]() file for more information.
 =======
