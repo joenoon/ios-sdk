@@ -181,6 +181,12 @@
 		38FBA0A41BC7B4890030C473 /* YSGThemeConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38FBA0A51BC7B48D0030C473 /* YSGThemeConstants+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38FBA0A61BC7B4910030C473 /* YSGShareButtonFadeFactors.h in Headers */ = {isa = PBXBuildFile; fileRef = E82A8B761BB9EFB9001A26A7 /* YSGShareButtonFadeFactors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38FBA0AD1BC7C64F0030C473 /* YSGAddressBook.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38FBA09F1BC7B2A90030C473 /* YSGAddressBook.h */; };
+		38FBA0AE1BC7C64F0030C473 /* YSGIconDrawings.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 30420E501BAC763900C1D614 /* YSGIconDrawings.h */; };
+		38FBA0AF1BC7C64F0030C473 /* YSGThemeConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */; };
+		38FBA0B01BC7C64F0030C473 /* YSGThemeConstants+AddressBook.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */; };
+		38FBA0B11BC7C64F0030C473 /* YSGShareButtonFadeFactors.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E82A8B761BB9EFB9001A26A7 /* YSGShareButtonFadeFactors.h */; };
+		38FBA0B21BC7C64F0030C473 /* YSGShareCellShapeEnum.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */; };
 		3E0636891BB3454A002FD11F /* YSGShareAddressBookTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = E8881D051BB21310005DCBF1 /* YSGShareAddressBookTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E06368A1BB34557002FD11F /* YSGShareAddressBookTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8881D061BB21310005DCBF1 /* YSGShareAddressBookTheme.m */; };
 		3EAFEFB81BA993EE00D2548D /* YesGraphSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CC16C21B831606008477C7 /* YesGraphSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -289,6 +295,12 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				38FBA0AD1BC7C64F0030C473 /* YSGAddressBook.h in CopyFiles */,
+				38FBA0AE1BC7C64F0030C473 /* YSGIconDrawings.h in CopyFiles */,
+				38FBA0AF1BC7C64F0030C473 /* YSGThemeConstants.h in CopyFiles */,
+				38FBA0B01BC7C64F0030C473 /* YSGThemeConstants+AddressBook.h in CopyFiles */,
+				38FBA0B11BC7C64F0030C473 /* YSGShareButtonFadeFactors.h in CopyFiles */,
+				38FBA0B21BC7C64F0030C473 /* YSGShareCellShapeEnum.h in CopyFiles */,
 				38132D5F1BC6B8D400E93527 /* YesGraphSDK.h in CopyFiles */,
 				38132D601BC6B8D400E93527 /* YSGAddressBookViewController.h in CopyFiles */,
 				38132D611BC6B8D400E93527 /* YSGAddressBookCell.h in CopyFiles */,

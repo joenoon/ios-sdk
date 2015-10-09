@@ -8,6 +8,7 @@
 
 #import "YSGClient+Private.h"
 #import "YSGUtility.h"
+
 @implementation YSGClient (Private)
 
 #pragma mark - Public Methods
