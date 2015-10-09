@@ -18,19 +18,32 @@ The SDK is compatible with iOS apps with iOS 8 and above. It requires Xcode 7.x 
 
 ## Integration
 
-The easiest way to integrate is with CocoaPods. Add the following Pod to your **Podfile**:
+The easiest way to integrate is with **CocoaPods**. Add the following Pod to your **Podfile**:
 
 ```
 pod 'YesGraph-iOS-SDK'
 ```
 
-An alternate way to integrate is using Carthage. Add the following link to your **CartFile**:
+An alternate way to integrate is using **Carthage**. Add the following link to your **CartFile**:
 
 ```
 github "YesGraph/ios-sdk"
 ```
 
-Or integrate it manually by drag & dropping all **.h** and **.m** files from YesGraphSDK folder into your project. If you have a Swift project, you must add `YesGraph.h` file to your Objective-C Bridging Header.
+Or integrate it manually by drag & dropping all **.h** and **.m** files from YesGraphSDK folder into your project.
+You must also import the library by either:
+
+```objective-c
+#import <YesGraphSDK/YesGraphSDK.h>
+
+@import YesGraphSDK;
+```
+
+```swift
+import YesGraphSDK
+```
+
+*If you have a Swift project, you must add `YesGraph.h` file to your Objective-C Bridging Header.*
 
 # Example applications
 
@@ -54,30 +67,29 @@ Before you can use any of the example apps, you need to configure the app with y
 3. Call your trusted backend with user ID, to get the client key back (you can generate a random user ID, if user is not known, by using `YSGUtility` class and `randomUserId` method.
 4. Configure YesGraphSDK with received client key and user ID:
 
-Objective-C
+   Objective-C
 
-```objc
-[[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
-[[YesGraph shared] configureWithClientKey:@""];
-```
+   ```objective-c
+   [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
+   [[YesGraph shared] configureWithClientKey:@""];
+   ```
 
-Swift
-```swift
-YesGraph.shared().configureWithClientKey(clientKey)
-YesGraph.shared().configureWithUserId(userId)
-```
+   Swift
+   ```swift
+   YesGraph.shared().configureWithClientKey(clientKey)
+   YesGraph.shared().configureWithUserId(userId)
+   ```
 5. Run the desired Example app.
 
 ## Tests
 
 YesGraph iOS SDK contains unit tests that can be executed in Xcode.
 
-Open **YesGraphSDK.xcworkspace**
+Open **YesGraphSDK/YesGraphSDK.xcworkspace**
 Choose the "YesGraphSDK" scheme
 Run Product -> Test
 
 License
 ======
 
-YesGraphSDK is released under **MIT** license. See [LICENSE]() file for more information.
-=======
+YesGraphSDK is released under **MIT** license. See [LICENSE](https://github.com/YesGraph/ios-sdk/blob/master/LICENSE) file for more information.
