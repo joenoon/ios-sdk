@@ -6,6 +6,10 @@ script:
 env:
   matrix:
   - ACTION=build SCHEME='YesGraphSDK'
+  - ACTION=build SCHEME='YesGraphSDKStatic'
+  - ACTION=build SCHEME='Example'
+  - ACTION=build SCHEME='Example-Static'
+  - ACTION=build SCHEME='Example-Swift'
   - ACTION=test SCHEME='YesGraphSDK'
   global:
   - SDK=9.0
