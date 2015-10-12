@@ -49,7 +49,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
                 
                 if (success)
                 {
-                    self.presentYSGShareSheetController()
+                    self.presentShareSheetController()
                 }
                 else
                 {
@@ -61,9 +61,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         }
     }
     
-    
-    func presentYSGShareSheetController() {
-        
+    func presentShareSheetController() {
         YesGraph.shared().theme = self.theme
         YesGraph.shared().numberOfSuggestions = 5
         YesGraph.shared().contactAccessPromptMessage = "Share contacts with Example to invite friends?"
@@ -104,6 +102,14 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         }
     }
     
+    func styleView() {
+        self.additionalInfoLabel.font = UIFont(name: "OpenSans", size: 16)
+        self.introTextField.font = UIFont(name: "OpenSans-Semibold", size: 18)
+        self.shareButton.titleLabel?.font = UIFont(name: "OpenSans", size: 20)
+        
+        self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height / 10
+    }
+    
     func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [String : AnyObject]?) -> [String : AnyObject] {
         
         if let _ = service as? YSGFacebookService {
@@ -118,14 +124,5 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         
         return [YSGShareSheetMessageKey : ""]
     }
-    
-    func styleView() {
-        self.additionalInfoLabel.font = UIFont(name: "OpenSans", size: 16)
-        self.introTextField.font = UIFont(name: "OpenSans-Semibold", size: 18)
-        self.shareButton.titleLabel?.font = UIFont(name: "OpenSans", size: 20)
-        
-        self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
-    }
-    
 }
 

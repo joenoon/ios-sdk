@@ -32,7 +32,8 @@
 
 - (IBAction)shareButtonTap:(UIButton *)sender
 {
-    if ([YesGraph shared].isConfigured) {
+    if ([YesGraph shared].isConfigured)
+    {
         [self presentYSGShareSheetController];
     }
     else
@@ -40,12 +41,14 @@
         [self.shareButton setTitle:@"  Configuring YesGraph...  " forState:UIControlStateNormal];
         self.shareButton.enabled = NO;
         
-        [self configureYesGraphWithCompletion:^(BOOL success, NSError *error) {
+        [self configureYesGraphWithCompletion:^(BOOL success, NSError *error)
+        {
             [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
             self.shareButton.enabled = YES;
+            
             if (success)
             {
-                [self presentYSGShareSheetController];
+                [self presentShareSheetController];
             }
             else
             {
@@ -58,7 +61,7 @@
     }
 }
 
-- (void)presentYSGShareSheetController
+- (void)presentShareSheetController
 {
     [YesGraph shared].theme = self.theme;
     [YesGraph shared].numberOfSuggestions = 5;
@@ -85,7 +88,8 @@
 
 - (void)configureYesGraphWithCompletion:(void (^)(BOOL success, NSError *error))completion
 {
-    if (![YesGraph shared].userId.length) {
+    if (![YesGraph shared].userId.length)
+    {
         [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
     }
     
@@ -94,19 +98,19 @@
     //
     [[YesGraph shared] configureWithClientKey:@""];
     
-    if (completion) {
+    if (completion)
+    {
         completion(NO, nil);
     }
 }
 
-- (void) styleView {
-    
+- (void)styleView
+{
     self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
     self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
     self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
     
     self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
-
 }
 
 #pragma - mark YSGShareSheetControllerDelegate
