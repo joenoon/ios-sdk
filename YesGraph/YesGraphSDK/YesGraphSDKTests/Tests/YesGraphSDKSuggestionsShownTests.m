@@ -11,7 +11,7 @@
 #import "YSGTestMockData.h"
 #import "YSGClient+SuggestionsShown.h"
 #import "YSGStubRequestsScoped.h"
-
+#import "YSGUtility.h"
 
 @interface YesGraphSDKSuggestionsShownTests : XCTestCase
 
@@ -114,11 +114,7 @@
 
              NSString *seenAtString = [sentContact objectForKey:@"seen_at"];
              XCTAssertNotNil(seenAtString, @"seen_at shouldn't be nil, it should be an ISO8601 date string");
-             NSDateFormatter *isoFormat = [NSDateFormatter new];
-             NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-             isoFormat.locale = posixLocale;
-             isoFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
-             NSDate *parsedSeenAt = [isoFormat dateFromString:seenAtString];
+             NSDate *parsedSeenAt = [YSGUtility dateFromIso8061String:seenAtString];
              XCTAssertNotNil(parsedSeenAt, @"seen_at string is not in an ISO8601 format: %@", seenAtString);
              XCTAssert([[NSDate date] timeIntervalSinceDate:parsedSeenAt] <= (5 * 60), @"Parsed date is more than 5 minutes off: %@", parsedSeenAt);
          }

@@ -8,6 +8,9 @@
 
 #import "YSGUtility.h"
 
+static NSString * const dateFormat =  @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+static NSString * const dateLocale = @"en_US_POSIX";
+
 @implementation YSGUtility
 
 + (NSString *)randomUserId
@@ -21,4 +24,23 @@
     return [NSString stringWithFormat:@"anon_%@", [[randomString dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
 }
 
++ (NSString *)iso8061dateStringFromDate:(NSDate *)date
+{
+    NSDateFormatter *isoFormat = [NSDateFormatter new];   
+    NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:dateLocale];
+    isoFormat.locale = posixLocale;
+    isoFormat.dateFormat = dateFormat;
+
+    return [isoFormat stringFromDate:date];
+}
+
+
++ (NSDate *)dateFromIso8061String:(NSString *)formattedDateString
+{
+    NSDateFormatter *isoFormat = [NSDateFormatter new];
+    NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:dateLocale];
+    isoFormat.locale = posixLocale;
+    isoFormat.dateFormat = dateFormat;
+    return [isoFormat dateFromString:formattedDateString];
+}
 @end
