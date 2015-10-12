@@ -13,31 +13,28 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
 
     var theme = YSGTheme()
     
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        theme.baseColor = UIColor.redColor();
-        
-        super.viewDidLoad()
-    }
-    
     @IBOutlet weak var introTextField: UITextField!
     @IBOutlet weak var additionalInfoLabel: UILabel!
 
     @IBOutlet weak var shareButton: UIButton!
 
     @IBOutlet weak var additionalNotesView: UIView!
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        theme.baseColor = UIColor.redColor()
+    }
 
     @IBAction func shareButtonTap(sender: AnyObject) {
         let localSource = YSGLocalContactSource()
         localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
         
-        if(YesGraph.shared().isConfigured)
+        if YesGraph.shared().isConfigured
         {
-            self.presentYSGShareSheetController()
+            self.presentShareSheetController()
         }
-        
         else
         {
             self.shareButton.setTitle("  Configuring YesGraph...  ", forState: UIControlState.Normal);
@@ -66,12 +63,12 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         YesGraph.shared().numberOfSuggestions = 5
         YesGraph.shared().contactAccessPromptMessage = "Share contacts with Example to invite friends?"
         
-        let shareController  = YesGraph.shared().shareSheetControllerForAllServicesWithDelegate(self)
+        let shareController = YesGraph.shared().shareSheetControllerForAllServicesWithDelegate(self)
         
         // OPTIONAL
         
         // set referralURL if you have one
-        //shareController!.referralURL = "your-site.com/referral";
+        shareController!.referralURL = "your-site.com/referral";
         
         //
         // PRESENT MODALLY
