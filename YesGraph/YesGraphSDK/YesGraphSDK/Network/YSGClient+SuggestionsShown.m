@@ -29,9 +29,9 @@
         NSDictionary *seenContact = @
         {
             @"user_id": userId,
-            @"contact_name": contact.name,
-            @"contact_emails": contact.emails ?: emptyArray,
-            @"contact_phones": contact.phones ?: emptyArray,
+            @"name": contact.name,
+            @"emails": contact.emails ?: emptyArray,
+            @"phones": contact.phones ?: emptyArray,
             @"seen_at": seenAt
         };
         
@@ -45,7 +45,7 @@
 {
     NSDictionary *parameters = @
     {
-        @"data": [self generateArrayOfSuggestionsFrom:suggestionsShown withUserId:userId]
+        @"entries": [self generateArrayOfSuggestionsFrom:suggestionsShown withUserId:userId]
     };
     
     [self POST:@"suggested-seen" parameters:parameters completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
