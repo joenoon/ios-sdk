@@ -86,8 +86,8 @@
          NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
          XCTAssertNil(err, @"Error parsing response data: %@", err);
 
-         NSArray *sentSuggestions = [parsedResponse objectForKey:@"data"];
-         XCTAssertNotNil(sentSuggestions, @"Request body is missing the data payload");
+         NSArray *sentSuggestions = [parsedResponse objectForKey:@"entries"];
+         XCTAssertNotNil(sentSuggestions, @"Request body is missing entries");
 
          NSArray *expectedSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
          XCTAssert(expectedSuggestions.count == sentSuggestions.count, @"Arrays don't have the same number of elements");
@@ -100,15 +100,15 @@
              XCTAssertNotNil(userId, @"UserId shouldn't be nil in suggestions payload");
              XCTAssert([userId isEqualToString:YSGTestClientID], @"Sent UserId in suggestions payload is not the same as mocked UserId: %@, should be %@", userId, YSGTestClientID);
 
-             NSString *contactName = [sentContact objectForKey:@"contact_name"];
+             NSString *contactName = [sentContact objectForKey:@"name"];
              XCTAssertNotNil(contactName, @"Contact name shouldn't be nil");
              XCTAssert([contactName isEqualToString:contact.name]);
 
-             NSArray *contactEmails = [sentContact objectForKey:@"contact_emails"];
+             NSArray *contactEmails = [sentContact objectForKey:@"emails"];
              XCTAssertNotNil(contactEmails, @"Contact emails shouldn't be nil (should be empty array)");
              XCTAssert(contactEmails.count == 0 ? !contact.emails || contact.emails.count == 0 : [contactEmails isEqualToArray:contact.emails], @"Unexpected emails array, got: %@, expected: %@", contactEmails, contact.emails);
 
-             NSArray *contactPhones = [sentContact objectForKey:@"contact_phones"];
+             NSArray *contactPhones = [sentContact objectForKey:@"phones"];
              XCTAssertNotNil(contactPhones, @"Contact phones shouldn't be nil (should be empty array)");
              XCTAssert(contactPhones.count == 0 ? !contact.phones || contact.phones.count == 0 : [contactPhones isEqualToArray:contact.phones], @"Unexpected phones array, got: %@, expected: %@", contactPhones, contact.phones);
 

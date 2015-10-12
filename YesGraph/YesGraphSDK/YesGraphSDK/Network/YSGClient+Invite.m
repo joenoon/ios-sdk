@@ -27,13 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
             @"invitee_name": c.name,
             @"sent_at": sent_at
         }];
-        if (c.phones.count > 0)
+        if (c.phone)
         {
-            [inviteSent setObject:c.phones[0] forKey:@"phone"];
+            [inviteSent setObject:c.phone forKey:@"phone"];
         }
-        if (c.emails.count > 0)
+        if (c.email)
         {
-            [inviteSent setObject:c.emails[0] forKey:@"email"];
+            [inviteSent setObject:c.email forKey:@"email"];
         }
         [ret addObject:inviteSent];
     }
