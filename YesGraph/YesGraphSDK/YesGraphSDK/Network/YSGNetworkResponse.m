@@ -63,7 +63,7 @@
             {
                 NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
                 
-                if (httpResponse.statusCode / 200 != 1)
+                if (httpResponse.statusCode < 200 || httpResponse.statusCode > 399)
                 {
                     self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeServer userInfo:@{ YSGErrorNetworkStatusCodeKey : @(httpResponse.statusCode) }];
                 }
