@@ -17,16 +17,6 @@
 
 @implementation ViewController
 
-#import "ViewController.h"
-
-@interface ViewController () <YSGShareSheetDelegate>
-
-@property (nullable, nonatomic, strong) YSGTheme *theme;
-
-@end
-
-@implementation ViewController
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,22 +41,20 @@
         self.shareButton.enabled = NO;
         
         [self configureYesGraphWithCompletion:^(BOOL success, NSError *error)
-         {
-             [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
-             self.shareButton.enabled = YES;
-             
-             if (success)
-             {
-                 [self presentShareSheetController];
-             }
-             else
-             {
-                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                 [alert show];
-             }
-             
-         }];
-        
+        {
+            [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
+            self.shareButton.enabled = YES;
+            
+            if (success)
+            {
+                [self presentShareSheetController];
+            }
+            else
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+                [alert show];
+            }
+        }];
     }
 }
 
