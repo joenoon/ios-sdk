@@ -52,19 +52,6 @@
     }];
 }
 
-- (void)testFetchAddressBook
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Fetched"];
-    [self asyncFetchWithExpectation:expectation]; 
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
-    {
-        if (error)
-        {
-            XCTFail(@"Expectation Failed with error: %@", error);
-        }
-    }];
-}
-
 - (void)asyncUpdateWithExpectation:(XCTestExpectation *)expectation
 {
     self.client.clientKey = YSGTestClientKey;
@@ -74,21 +61,6 @@
         XCTAssertNotNil(responseObject, @"Response shouldn't be nil");
         XCTAssertNil(error, @"Error should be nil");
         [expectation fulfill];
-    }];
-}
-
-- (void)testUpdateAddressBook
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Fetched"];
-    
-    [self asyncUpdateWithExpectation:expectation];
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
-    {
-        if (error)
-        {
-            XCTFail(@"Expectation Failed with error: %@", error);
-        }
     }];
 }
 
@@ -127,7 +99,7 @@
 
 }
 
-- (void)testFetchMockedAddressBook
+- (void)testFetchAddressBook
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Fetched Mocked Data"];    
     NSData *response = [self buildMockedAddressBookJSONResponse];
@@ -156,7 +128,7 @@
      }];   
 }
 
-- (void)testUpdateMockedAddressBook
+- (void)testUpdateAddressBook
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Mocked Update"];
 

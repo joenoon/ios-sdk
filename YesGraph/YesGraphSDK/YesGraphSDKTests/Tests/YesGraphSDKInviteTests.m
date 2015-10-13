@@ -48,18 +48,6 @@
 
 - (void)testUpdateInviteSent
 {
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Invites Sent To Selected Contacts"];
-
-    [self asyncUpdateInviteSentWithExpecation:expectation];
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *_Nullable error)
-    {
-        XCTAssertNil(error, @"Expectation timed-out with error: %@", error);
-    }];
-}
-
-- (void)testMockedUpdateInviteSent
-{
     XCTestExpectation *expectation = [self expectationWithDescription:@"Mocked Invites Sent To Selected Contacts"];
 
     __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)

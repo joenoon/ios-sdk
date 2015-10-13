@@ -21,7 +21,8 @@
 
 @implementation YesGraphSDKSuggestionsShownTests
 
-- (void)setUp {
+- (void)setUp
+{
     [super setUp];
     self.client = [YSGClient new];
     self.client.clientKey = YSGTestClientKey;
@@ -36,23 +37,12 @@
 - (void)asyncSuggestionsShownWithExpectation:(XCTestExpectation *)expectation
 {
     NSArray *shownSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
-    [self.client updateSuggestionsSeen:shownSuggestions forUserId:YSGTestClientID withCompletion:^(NSError * _Nullable error)
-     {
-         XCTAssertNil(error, @"Error should be nil: %@", error);
-         [expectation fulfill];
-     }];
-}
-
-- (void)testSuggestionsShown
-{
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Send Shown Suggestions to API"];
-
-    [self asyncSuggestionsShownWithExpectation:expectation];
     
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
-     {
-         XCTAssertNil(error, @"Expectation timed-out with error: %@", error);
-     }];
+    [self.client updateSuggestionsSeen:shownSuggestions forUserId:YSGTestClientID withCompletion:^(NSError * _Nullable error)
+    {
+        XCTAssertNil(error, @"Error should be nil: %@", error);
+        [expectation fulfill];
+    }];
 }
 
 - (void)testMockedSuggestionsShown

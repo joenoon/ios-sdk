@@ -38,27 +38,61 @@
 
 - (void)testClientKey
 {
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    {
+        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Client key request should be sent with the POST method");
+        XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/client-key"], @"Client key request not sent to the right URL");
+        NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+        XCTAssertNotNil(authHeader, @"Authorization header is missing");
+        XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
+        XCTAssertNotNil(request.HTTPBodyStream, @"No data can be read from the stream");
+
+        NSInputStream *istream = request.HTTPBodyStream;
+        NSMutableData *data = [NSMutableData new];
+        [istream open];
+
+        size_t sizeOfBuf = 1024;
+        uint8_t *buf = malloc(sizeOfBuf);
+        NSInteger len = 0;
+        
+        while ([istream hasBytesAvailable] && (len = [istream read:buf maxLength:sizeOfBuf]) > 0)
+        {
+            [data appendBytes:buf length:len];
+        }
+        
+        free(buf);
+        [istream close];
+
+        NSError *err = nil;
+        NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
+        XCTAssertNil(err, @"Error parsing response data: %@", err);
+        
+        NSString *userId = [parsedResponse objectForKey:@"user_id"];
+        XCTAssertNotNil(userId, @"UserId shouldn't be nil in client key payload");
+
+        return YES;
+    }
+    andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
+    {
+        NSString *responseString = @"{\"client_key\": \"12345678asdfg\"}";
+        NSData *response = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+        return [OHHTTPStubsResponse responseWithData:response statusCode:200 headers:nil];
+    }];
+    
+    
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Key Retrieved"];
     
     [self.client fetchRandomClientKeyWithSecretKey:YSGTestClientKey completion:^(NSString *clientKey, NSError *error)
     {
-        if (error)
-        {
-            NSLog(@"Error is: %@", error);
-        }
-        else
-        {
-            XCTAssert(clientKey.length > 0, @"Client key should be at least 1 character long");
-            [expectation fulfill];
-        }
+        XCTAssertNil(error, @"Error should be nil: %@", error);
+        XCTAssert(clientKey.length > 0, @"Client key should be at least 1 character long");
+        [expectation fulfill];
     }];
     
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
     {
-        if (error)
-        {
-            XCTFail(@"Expectation Failed with error: %@", error);
-        }
+         scoped = nil;
+         XCTAssertNil(error, @"Expectation timed-out with error: %@", error);
     }];
 }
 
