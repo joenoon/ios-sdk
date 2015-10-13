@@ -85,6 +85,7 @@
 		384D39841B8F1A8F0080BA48 /* YSGClient+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D39821B8F1A8F0080BA48 /* YSGClient+AddressBook.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		384D39851B8F1A8F0080BA48 /* YSGClient+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D39831B8F1A8F0080BA48 /* YSGClient+AddressBook.m */; };
 		384D398D1B8F27C30080BA48 /* YSGModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D398C1B8F27C30080BA48 /* YSGModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38533E831BCCF6A2003CC926 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38B6DD411BC67E35001B70BC /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		385766C31BC7EC6E00A84512 /* YSGIconDrawings.m in Sources */ = {isa = PBXBuildFile; fileRef = 30420E511BAC763900C1D614 /* YSGIconDrawings.m */; };
 		385766C41BC7EC6E00A84512 /* YSGThemeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */; };
 		385766C51BC7EC6E00A84512 /* YSGThemeConstants+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = E82A8B751BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m */; };
@@ -292,6 +293,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		3856B28E1BCCF33500C20893 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				38533E831BCCF6A2003CC926 /* OHHTTPStubs.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		38EF2B8E1BA30A4800AF2AE0 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1043,6 +1054,7 @@
 				38CC16C41B831606008477C7 /* Sources */,
 				38CC16C51B831606008477C7 /* Frameworks */,
 				38CC16C61B831606008477C7 /* Resources */,
+				3856B28E1BCCF33500C20893 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1386,6 +1398,7 @@
 		38CC16D71B831606008477C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/YesGraphSDKTests",
@@ -1404,6 +1417,7 @@
 		38CC16D81B831606008477C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/YesGraphSDKTests",
