@@ -95,7 +95,14 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         // Client key should be retrieved from your trusted backend.
         //
         if completion != nil {
-            completion!(success: false, error: nil);
+            if YesGraph.shared().isConfigured
+            {
+                completion!(success: true, error: nil);
+            }
+            else
+            {
+                completion!(success: false, error: nil);
+            }
         }
     }
     
