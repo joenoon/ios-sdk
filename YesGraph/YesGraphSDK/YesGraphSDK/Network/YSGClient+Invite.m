@@ -12,8 +12,6 @@
 
 @implementation YSGClient (Invite)
 
-NS_ASSUME_NONNULL_BEGIN
-
 - (NSArray <NSDictionary *> *)generateArrayOfInviteesFrom:(NSArray <YSGContact *> *)invitees withUserId:(NSString *)userId
 {
     NSMutableArray *ret = [[NSMutableArray alloc] initWithCapacity:invitees.count];
@@ -27,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
             @"invitee_name": c.name,
             @"sent_at": sent_at
         }];
+        
         if (c.phone)
         {
             [inviteSent setObject:c.phone forKey:@"phone"];
@@ -58,7 +57,5 @@ NS_ASSUME_NONNULL_BEGIN
          }
      }];
 }
-
-NS_ASSUME_NONNULL_END
 
 @end
