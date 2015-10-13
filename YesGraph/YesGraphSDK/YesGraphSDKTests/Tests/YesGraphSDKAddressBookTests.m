@@ -186,7 +186,8 @@
          NSError *err = nil;
          NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
          XCTAssertNil(err, @"Error parsing response data: %@", err);
-         NSDictionary *mockDic = [[YSGTestMockData mockContactList] ysg_toDictionary];
+         NSMutableDictionary *mockDic = [NSMutableDictionary dictionaryWithDictionary:[[YSGTestMockData mockContactList] ysg_toDictionary]];
+         [mockDic setObject:YSGTestClientID forKey:@"user_id"];
          XCTAssert([mockDic isEqualToDictionary:parsedResponse], @"Mocked response not the same as parsed data");
          return YES;
      }

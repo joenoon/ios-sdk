@@ -7,22 +7,15 @@
 //
 
 #import "YSGClient+SuggestionsShown.h"
+#import "YSGUtility.h"
 
 @implementation YSGClient (SuggestionsShown)
 
 - (NSArray <NSDictionary *> *)generateArrayOfSuggestionsFrom:(NSArray <YSGContact *> *)suggestions withUserId:(NSString *)userId
 {
     NSMutableArray *ret = [[NSMutableArray alloc] initWithCapacity:suggestions.count];
-
     NSArray *emptyArray = [NSArray new];
-
-    NSDateFormatter *isoFormat = [NSDateFormatter new];
-    
-    NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-    isoFormat.locale = posixLocale;
-    isoFormat.dateFormat = @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
-    
-    NSString *seenAt = [isoFormat stringFromDate:[NSDate date]];
+    NSString *seenAt = [YSGUtility iso8061dateStringFromDate:[NSDate date]];
     
     for (YSGContact *contact in suggestions)
     {
