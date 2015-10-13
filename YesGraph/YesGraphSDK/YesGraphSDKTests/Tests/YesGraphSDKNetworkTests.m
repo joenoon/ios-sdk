@@ -119,6 +119,8 @@
 
     [self.client GET:testPath parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
     {
+        NSLog(@"ERROR: %@", error);
+        
         XCTAssertNotNil(response, @"Response object should not be nil");
         XCTAssertNotNil(error, @"Error object should not be nil");
         XCTAssert([response.response isKindOfClass:[NSHTTPURLResponse class]], @"Response should be of type NSHTTPURLResponse");
