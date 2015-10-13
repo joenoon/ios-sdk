@@ -103,24 +103,9 @@
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Unauthorized Test"];
     NSString *testPath = @"https://api.yesgraph.com/v0/test"; // same URL as documentation example, but we won't set the key header
-    
-    /*YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
-    {
-        XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
-        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"GET"], @"Expected a 'GET' method");
-        return YES;
-    }
-    andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
-    {
-        NSData *expectedResponse = [@"{\"docs\":\"https://www.yesgraph.com/docs/reference#authentication\",\"error\":\"missing \\\"Authorization\\\" header\"}" dataUsingEncoding:NSUTF8StringEncoding];
-
-        return [OHHTTPStubsResponse responseWithData:expectedResponse statusCode:200 headers:nil];
-    }];*/
 
     [self.client GET:testPath parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
     {
-        NSLog(@"ERROR: %@ UserInfo: %@", error, error.userInfo);
-        
         XCTAssertNotNil(response, @"Response object should not be nil");
         XCTAssertNotNil(error, @"Error object should not be nil");
         XCTAssert([response.response isKindOfClass:[NSHTTPURLResponse class]], @"Response should be of type NSHTTPURLResponse");

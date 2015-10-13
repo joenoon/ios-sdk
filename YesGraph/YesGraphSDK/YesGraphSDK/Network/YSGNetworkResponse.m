@@ -36,10 +36,10 @@
 {
     [[NSException exceptionWithName:@"Invalid call" reason:@"Cannot initialize empty network response." userInfo:nil] raise];
     
-    return [self initWithDataTask:nil response:nil data:nil];
+    return [self initWithDataTask:nil response:nil data:nil error:nil];
 }
 
-- (instancetype)initWithDataTask:(NSURLSessionDataTask *)dataTask response:(NSURLResponse *)response data:(NSData *)data
+- (instancetype)initWithDataTask:(NSURLSessionDataTask *)dataTask response:(NSURLResponse *)response data:(NSData *)data error:(nullable NSError *)error
 {
     self = [super init];
     
@@ -49,9 +49,9 @@
         self.data = data;
         self.response = response;
         
-        if (dataTask.error)
+        if (error || dataTask.error)
         {
-            self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeNetwork userInfo:@{ NSUnderlyingErrorKey : dataTask.error }];
+            self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeNetwork userInfo:@{ NSUnderlyingErrorKey : (error ?: dataTask.error) }];
         }
         else if (data.length)
         {

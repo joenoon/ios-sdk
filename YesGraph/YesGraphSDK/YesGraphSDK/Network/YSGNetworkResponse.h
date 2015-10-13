@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return instance of network response
  */
-- (instancetype)initWithDataTask:(nullable NSURLSessionDataTask *)dataTask response:(nullable NSURLResponse *)response data:(nullable NSData *)data NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDataTask:(nullable NSURLSessionDataTask *)dataTask response:(nullable NSURLResponse *)response data:(nullable NSData *)data error:(nullable NSError *)error NS_DESIGNATED_INITIALIZER;
 
 /*!
  *  Attempts to create a parsable object
