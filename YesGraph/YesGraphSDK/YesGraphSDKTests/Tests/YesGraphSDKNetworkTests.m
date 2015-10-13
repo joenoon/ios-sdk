@@ -103,17 +103,34 @@
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Unauthorized Test"];
     NSString *testPath = @"https://api.yesgraph.com/v0/test"; // same URL as documentation example, but we won't set the key header
+    
+    /*YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    {
+        XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
+        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"GET"], @"Expected a 'GET' method");
+        return YES;
+    }
+    andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
+    {
+        NSData *expectedResponse = [@"{\"docs\":\"https://www.yesgraph.com/docs/reference#authentication\",\"error\":\"missing \\\"Authorization\\\" header\"}" dataUsingEncoding:NSUTF8StringEncoding];
+
+        return [OHHTTPStubsResponse responseWithData:expectedResponse statusCode:200 headers:nil];
+    }];*/
 
     [self.client GET:testPath parameters:nil completion:^(YSGNetworkResponse * _Nullable response, NSError * _Nullable error)
     {
         XCTAssertNotNil(response, @"Response object should not be nil");
         XCTAssertNotNil(error, @"Error object should not be nil");
         XCTAssert([response.response isKindOfClass:[NSHTTPURLResponse class]], @"Response should be of type NSHTTPURLResponse");
-        XCTAssertNotNil([error.userInfo objectForKey:@"YSGErrorNetworkStatusCodeKey"], @"Error detail object does not contain the status code key");
+        
+        id statusCode = [error.userInfo objectForKey:@"YSGErrorNetworkStatusCodeKey"];
+        
+        XCTAssertNotNil(statusCode, @"Error detail object does not contain the status code key");
         NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response.response;
         XCTAssert([resp statusCode] == 401 && [error.userInfo[@"YSGErrorNetworkStatusCodeKey"] intValue] == 401, @"HTTP status code should be Not Authorized (401)");
         [expectation fulfill];
     }];
+    
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
     {
         if (error)
@@ -121,6 +138,8 @@
             XCTFail(@"Expectation timed-out with error: %@", error);
         }
     }];
+    
+    //scoped = nil; // this isn't needed, it's used to remove compiler warnings
 }
 
 - (void)testClientGETRequestHeaders
@@ -179,7 +198,7 @@
     YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
         XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
-        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'GET' method");
+        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'POST' method");
         NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
         XCTAssertNotNil(authHeader, @"Authorization header is missing");
         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
