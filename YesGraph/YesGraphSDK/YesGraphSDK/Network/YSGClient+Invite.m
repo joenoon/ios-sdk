@@ -15,7 +15,7 @@
 - (NSArray <NSDictionary *> *)generateArrayOfInviteesFrom:(NSArray <YSGContact *> *)invitees withUserId:(NSString *)userId
 {
     NSMutableArray *ret = [[NSMutableArray alloc] initWithCapacity:invitees.count];
-    NSString *sent_at = [YSGUtility iso8061dateStringFromDate:[NSDate date]];
+    NSString *sent_at = [YSGUtility iso8601dateStringFromDate:[NSDate date]];
 
     for (YSGContact *c in invitees)
     {
