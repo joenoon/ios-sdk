@@ -49,7 +49,7 @@
         self.data = data;
         self.response = response;
         
-        if (error || dataTask.error)
+        if (error || dataTask.error)
         {
             self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeNetwork userInfo:@{ NSUnderlyingErrorKey : (error ?: dataTask.error) }];
         }
