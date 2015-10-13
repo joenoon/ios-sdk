@@ -34,7 +34,7 @@
 {
     if ([YesGraph shared].isConfigured)
     {
-        [self presentYSGShareSheetController];
+        [self presentShareSheetController];
     }
     else
     {
