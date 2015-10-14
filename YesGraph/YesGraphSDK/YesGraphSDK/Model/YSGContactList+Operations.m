@@ -10,10 +10,56 @@
 
 @implementation YSGContactList (Operations)
 
+#pragma mark - Public Methods
+
 - (NSArray<YSGContact *> *)suggestedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions
 {
     return [[self removeDuplicatedContactsFromSuggestions:self.entries numberOfSuggestions:numberOfSuggestions] copy];
 }
+
++ (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithEntries:(NSArray <YSGContact *> *)entries;
+{
+    NSMutableDictionary <NSString *, NSMutableArray <YSGContact *> * > *contactList = [NSMutableDictionary dictionary];
+    
+    for (YSGContact *contact in entries)
+    {
+        //
+        // Check if name is empty
+        //
+        
+        NSString *letter = [contact.name substringToIndex:1];
+
+        if (!letter.length || ![[NSCharacterSet letterCharacterSet] characterIsMember:[letter characterAtIndex:0]])
+        {
+            letter = @"#";
+        }
+        
+        if (letter.length)
+        {
+            if (!contactList[letter])
+            {
+                contactList[letter] = [NSMutableArray array];
+            }
+            
+            [contactList[letter] addObject:contact];
+        }
+    }
+    
+    NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    
+    NSMutableDictionary <NSString *, NSArray <YSGContact *> *> *sortedList = [NSMutableDictionary dictionary];
+    
+    for (NSString* letter in contactList)
+    {
+        NSArray *sortedContacts = contactList[letter];
+        
+        sortedList[letter] = [sortedContacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
+    }
+    
+    return sortedList.copy;
+}
+
+#pragma mark - Private Methods
 
 - (NSArray <YSGContact *> *)removeDuplicatedContactsFromSuggestions:(NSArray <YSGContact *> *)contacts numberOfSuggestions:(NSUInteger)number
 {
@@ -68,40 +114,6 @@
     [filteredContacts addObjectsFromArray:contactsWithPhones];
     
     return filteredContacts.copy;
-}
-
-
-+ (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithEntries:(NSArray <YSGContact *> *)entries;
-{
-    NSMutableDictionary <NSString *, NSMutableArray <YSGContact *> * > *contactList = [NSMutableDictionary dictionary];
-    
-    for (YSGContact *contact in entries)
-    {
-        NSString *letter = [contact.name substringToIndex:1];
-        
-        if (letter.length)
-        {
-            if (!contactList[letter])
-            {
-                contactList[letter] = [NSMutableArray array];
-            }
-            
-            [contactList[letter] addObject:contact];
-        }
-    }
-    
-    NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    
-    NSMutableDictionary <NSString *, NSArray <YSGContact *> *> *sortedList = [NSMutableDictionary dictionary];
-    
-    for (NSString* letter in contactList)
-    {
-        NSArray *sortedContacts = contactList[letter];
-        
-        sortedList[letter] = [sortedContacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
-    }
-    
-    return sortedList.copy;
 }
 
 
