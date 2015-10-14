@@ -359,7 +359,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         return;
     }
     
-    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(name CONTAINS[cd] %@)", searchText];
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(sanitizedName CONTAINS[c] %@)", searchText];
     
     self.searchResults = [self.contactList.entries filteredArrayUsingPredicate:predicate];
     

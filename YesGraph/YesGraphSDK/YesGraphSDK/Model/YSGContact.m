@@ -30,4 +30,9 @@
     return self.email ?: self.phone;
 }
 
+- (NSString *)sanitizedName
+{
+    return [self.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
 @end

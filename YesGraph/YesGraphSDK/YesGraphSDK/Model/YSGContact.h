@@ -32,6 +32,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (nullable NSString *)contactString;
 
+/*!
+ *  Returns sanitized name of the contact for searching
+ *
+ *  @return name
+ */
+- (NSString *)sanitizedName;
+
 NS_ASSUME_NONNULL_END
 
 @end
