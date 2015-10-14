@@ -285,6 +285,7 @@
 		E8A6D66E1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8E845A41BCF027E008E227B /* YesGraphSDKModelContactTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A31BCF027E008E227B /* YesGraphSDKModelContactTests.m */; settings = {ASSET_TAGS = (); }; };
 		E8E845A61BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A51BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m */; settings = {ASSET_TAGS = (); }; };
+		E8E845A81BCF17FF008E227B /* YesGraphSDKModelYSGSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -502,6 +503,7 @@
 		E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareCellShapeEnum.h; sourceTree = "<group>"; };
 		E8E845A31BCF027E008E227B /* YesGraphSDKModelContactTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKModelContactTests.m; sourceTree = "<group>"; };
 		E8E845A51BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKModelYSGContactListTests.m; sourceTree = "<group>"; };
+		E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKModelYSGSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -560,6 +562,7 @@
 				E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */,
 				E8E845A31BCF027E008E227B /* YesGraphSDKModelContactTests.m */,
 				E8E845A51BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m */,
+				E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1216,6 +1219,7 @@
 				38343AEA1BC6A67400DD635B /* YesGraphSDKInviteTests.m in Sources */,
 				E8E845A41BCF027E008E227B /* YesGraphSDKModelContactTests.m in Sources */,
 				38343ADA1BC6A65A00DD635B /* YSGTestMockData.m in Sources */,
+				E8E845A81BCF17FF008E227B /* YesGraphSDKModelYSGSource.m in Sources */,
 				38343AE91BC6A67400DD635B /* YesGraphSDKCacheTests.m in Sources */,
 				38343AE81BC6A67400DD635B /* YesGraphSDKAddressBookTests.m in Sources */,
 				38343AED1BC6A67400DD635B /* YesGraphSDKSuggestionsShownTests.m in Sources */,
