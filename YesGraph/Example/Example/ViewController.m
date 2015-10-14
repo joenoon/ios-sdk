@@ -100,7 +100,14 @@
     
     if (completion)
     {
-        completion(NO, nil);
+        if ([YesGraph shared].isConfigured)
+        {
+            completion(YES, nil);
+        }
+        else
+        {
+            completion(NO, nil);
+        }
     }
 }
 
