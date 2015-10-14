@@ -11,6 +11,6 @@
 @interface YSGContactList (Operations)
 
 - (NSArray<YSGContact *> *)suggestedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions;
-+ (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithEntries:(NSArray <YSGContact *> *)entries;
+- (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions;
 
 @end

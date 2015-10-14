@@ -17,9 +17,20 @@
     return [[self removeDuplicatedContactsFromSuggestions:self.entries numberOfSuggestions:numberOfSuggestions] copy];
 }
 
-+ (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithEntries:(NSArray <YSGContact *> *)entries;
+- (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions
 {
     NSMutableDictionary <NSString *, NSMutableArray <YSGContact *> * > *contactList = [NSMutableDictionary dictionary];
+    
+    NSArray<YSGContact *> *entries;
+    
+    if (numberOfSuggestions > 0)
+    {
+        entries = [self.entries subarrayWithRange:NSMakeRange(numberOfSuggestions, self.entries.count - numberOfSuggestions)];
+    }
+    else
+    {
+        entries = self.entries;
+    }
     
     for (YSGContact *contact in entries)
     {
