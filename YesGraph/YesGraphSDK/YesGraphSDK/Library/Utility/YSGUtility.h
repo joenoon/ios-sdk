@@ -21,20 +21,20 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)randomUserId;
 
 /*!
- *  This method can be used to format the provided NSDate into an iso8061 string
+ *  This method can be used to format the provided NSDate into an iso8601 string
  *
- *  @param: date: NSDate instance that is to be formatted into an iso8061 string 
+ *  @param: date: NSDate instance that is to be formatted into an iso8601 string 
  */
 
-+ (NSString * _Nullable)iso8061dateStringFromDate:(NSDate *)date;
++ (NSString * _Nullable)iso8601dateStringFromDate:(NSDate *)date;
 
 /*!
- *  This method can be used to parse an iso8061 formatted string into a NSDate instance
+ *  This method can be used to parse an iso8601 formatted string into a NSDate instance
  *
- *  @param: formattedDateString: an iso8061 formatted string that is to be parsed
+ *  @param: formattedDateString: an iso8601 formatted string that is to be parsed
  */
 
-+ (NSDate * _Nullable)dateFromIso8061String:(NSString *)formattedDateString;
++ (NSDate * _Nullable)dateFromIso8601String:(NSString *)formattedDateString;
 
 @end
 

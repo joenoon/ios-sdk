@@ -8,7 +8,7 @@
 
 #import "YSGUtility.h"
 
-static NSString * const dateFormat =  @"yyyy-MM-dd'T'HH:mm:ssZZZZZ";
+static NSString * const dateFormat =  @"yyyy-MM-dd'T'HH:mm:ss";
 static NSString * const dateLocale = @"en_US_POSIX";
 
 @implementation YSGUtility
@@ -24,23 +24,24 @@ static NSString * const dateLocale = @"en_US_POSIX";
     return [NSString stringWithFormat:@"anon_%@", [[randomString dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:0]];
 }
 
-+ (NSString *)iso8061dateStringFromDate:(NSDate *)date
++ (NSString *)iso8601dateStringFromDate:(NSDate *)date
 {
     NSDateFormatter *isoFormat = [NSDateFormatter new];   
     NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:dateLocale];
     isoFormat.locale = posixLocale;
     isoFormat.dateFormat = dateFormat;
-
+    isoFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     return [isoFormat stringFromDate:date];
 }
 
 
-+ (NSDate *)dateFromIso8061String:(NSString *)formattedDateString
++ (NSDate *)dateFromIso8601String:(NSString *)formattedDateString
 {
     NSDateFormatter *isoFormat = [NSDateFormatter new];
     NSLocale *posixLocale = [NSLocale localeWithLocaleIdentifier:dateLocale];
     isoFormat.locale = posixLocale;
     isoFormat.dateFormat = dateFormat;
+    isoFormat.timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     return [isoFormat dateFromString:formattedDateString];
 }
 @end

@@ -104,9 +104,12 @@
 
              NSString *seenAtString = [sentContact objectForKey:@"seen_at"];
              XCTAssertNotNil(seenAtString, @"seen_at shouldn't be nil, it should be an ISO8601 date string");
-             NSDate *parsedSeenAt = [YSGUtility dateFromIso8061String:seenAtString];
+             NSDate *parsedSeenAt = [YSGUtility dateFromIso8601String:seenAtString];
              XCTAssertNotNil(parsedSeenAt, @"seen_at string is not in an ISO8601 format: %@", seenAtString);
-             XCTAssert([[NSDate date] timeIntervalSinceDate:parsedSeenAt] <= (5 * 60), @"Parsed date is more than 5 minutes off: %@", parsedSeenAt);
+             NSString *current = [YSGUtility iso8601dateStringFromDate:[NSDate date]];
+             NSDate *currentDate = [YSGUtility dateFromIso8601String:current];
+             double diff = [currentDate timeIntervalSinceDate:parsedSeenAt];
+             XCTAssert((diff) <= (5 * 60), @"Parsed date is more than 5 minutes off: %f for %@", diff, seenAtString);
          }
          return YES;
      }

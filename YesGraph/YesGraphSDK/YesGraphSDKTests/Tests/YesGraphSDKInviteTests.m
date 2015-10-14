@@ -98,7 +98,7 @@
 
              NSString *sentAt = [entry objectForKey:@"sent_at"];
              XCTAssertNotNil(name, @"sent_at is missing for entry: %@", entry);
-             NSDate *parsedSentAt = [YSGUtility dateFromIso8061String:sentAt];
+             NSDate *parsedSentAt = [YSGUtility dateFromIso8601String:sentAt];
              XCTAssertNotNil(parsedSentAt, @"Parsing date string '%@' failed, is the format correct?", sentAt);
 
              NSString *phone = [entry objectForKey:@"phone"];
