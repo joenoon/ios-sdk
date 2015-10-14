@@ -522,12 +522,15 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         // TODO: set the height of the section view so it'll be tall enough for
         //       the font height
         
-        if (!lbl.backgroundView)
+        if (self.service.theme.shareAddressBookTheme.sectionBackground)
         {
-            lbl.backgroundView = [UIView new];
+            if (!lbl.backgroundView)
+            {
+                lbl.backgroundView = [UIView new];
+            }
+            
+            lbl.backgroundView.backgroundColor = self.service.theme.shareAddressBookTheme.sectionBackground;
         }
-        
-        lbl.backgroundView.backgroundColor = self.service.theme.shareAddressBookTheme.sectionBackground ?: [UIColor redColor];
     }
 }
 
