@@ -10,4 +10,5 @@
 #import "YSGContact.h"
 #import "YSGRankedContact.h"
 #import "YSGContactList.h"
+#import "YSGContactList+Operations.h"
 #import "YSGSource.h"

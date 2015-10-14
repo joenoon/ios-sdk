@@ -17,6 +17,7 @@
 #import "YSGStyling.h"
 #import "YSGTheme.h"
 #import "YSGContactList.h"
+#import "YSGContactList+Operations.h"
 #import "UITableView+YSGEmptyView.h"
 #import "YSGOnlineContactSource.h"
 
@@ -123,7 +124,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     _contactList = contactList;
     
-    self.suggestions = (contactList.useSuggestions) ? [self suggestedContactsWithContacts:contactList.entries] : nil;
+    self.suggestions = (contactList.useSuggestions) ? [contactList suggestedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions] : nil;
 
     if (contactList.entries.count)
     {
@@ -138,7 +139,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
             trimmedContacts = contactList.entries;
         }
         
-        self.sortedContacts = [self sortedContactsWithContactList:trimmedContacts];
+        self.sortedContacts = [YSGContactList sortedEntriesWithEntries:trimmedContacts];
         self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     }
     else
@@ -221,7 +222,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     [super viewDidLoad];
     
-    self.title = @"Contacts";
+    self.title = NSLocalizedString(@"Contacts", @"Contacts");
     
     //
     // Add the search
@@ -229,32 +230,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     if (self.service.allowSearch)
     {
-        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-        
-        self.searchController.searchResultsUpdater = self;
-        self.searchController.dimsBackgroundDuringPresentation = NO;
-        self.searchController.searchBar.delegate = self;
-        
-        self.searchController.searchBar.showsCancelButton = NO;
-        
-        UIView *searchContainerView = [[UIView alloc] init];
-        [searchContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        
-        [searchContainerView addSubview:self.searchController.searchBar];
-        
-        self.searchContainerView = searchContainerView;
-        
-        [self.view addSubview:searchContainerView];
-        
-        NSDictionary* views = @{ @"searchContainerView" : searchContainerView, @"topGuide" : self.topLayoutGuide };
-        
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[searchContainerView]-0-|" options:0 metrics:nil views:views]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-0-[searchContainerView(44)]" options:0 metrics:nil views:views]];
-        
-        [searchContainerView addSubview:self.searchController.searchBar];
-        
-        self.definesPresentationContext = YES;
-        
+        [self setupSearch];
     }
     
     [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
@@ -311,6 +287,46 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [self.searchController.searchBar sizeToFit];
 }
 
+- (void)setupSearch
+{
+    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+    
+    self.searchController.searchResultsUpdater = self;
+    self.searchController.dimsBackgroundDuringPresentation = NO;
+    self.searchController.searchBar.delegate = self;
+    
+    self.searchController.searchBar.showsCancelButton = NO;
+    
+    UIView *searchContainerView = [[UIView alloc] init];
+    [searchContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [searchContainerView addSubview:self.searchController.searchBar];
+    
+    self.searchContainerView = searchContainerView;
+    
+    [self.view addSubview:searchContainerView];
+    
+    NSDictionary* views = @{ @"searchContainerView" : searchContainerView, @"topGuide" : self.topLayoutGuide };
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[searchContainerView]-0-|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-0-[searchContainerView(44)]" options:0 metrics:nil views:views]];
+    
+    [searchContainerView addSubview:self.searchController.searchBar];
+    
+    self.definesPresentationContext = YES;
+}
+
+#pragma mark - View Transitions
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
+        [_searchController.searchBar sizeToFit];
+    } completion:nil];
+}
+
 #pragma mark - Actions
 
 - (void)cancelButtonTap:(UIBarButtonItem *)sender
@@ -321,8 +337,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 - (void)inviteButtonTap:(UIBarButtonItem *)sender
 {
     [self.service triggerInviteFlowWithContacts:self.selectedContacts.allObjects];
-    
-    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)updateUI
@@ -397,10 +411,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (UIView *)cellBackgroundViewForColor:(UIColor *)color
 {
-    if(!color)
+    if (!color)
     {
         return nil;
     }
+    
     UIView *view = [UIView new];
     view.backgroundColor = color;
     return view;
@@ -425,13 +440,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     cell.detailTextLabel.text = contact.contactString;
     cell.selected = [self.selectedContacts containsObject:contact];
     
-    if(self.service && self.service.theme && self.service.theme.shareAddressBookTheme)
+    if (self.service && self.service.theme && self.service.theme.shareAddressBookTheme)
     {
         cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellFontSize];
         cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellDetailFontSize];
         cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellBackground];
         cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellSelectedBackground];
-        // NOTE: should we also style the text / detail label backgrounds?
         cell.textLabel.backgroundColor = [UIColor clearColor];
         cell.detailTextLabel.backgroundColor = [UIColor clearColor];
     }
@@ -498,20 +512,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [self updateUI];
 }
 
-- (void)setSectionBackgroundView:(UIView *)view toBackgroundColor:(UIColor *)color
-{
-    if(!color)
-    {
-        return;
-    }
-    if(!view)
-    {
-        view = [UIView new];
-    }
-    view.backgroundColor = color;
-    
-}
-
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     if (self.service && self.service.theme && [view isKindOfClass:[UITableViewHeaderFooterView class]])
@@ -521,118 +521,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         
         // TODO: set the height of the section view so it'll be tall enough for
         //       the font height
-
-        [self setSectionBackgroundView:lbl.backgroundView
-                     toBackgroundColor:self.service.theme.shareAddressBookTheme.sectionBackground];
+        
+        lbl.backgroundView.backgroundColor = self.service.theme.shareAddressBookTheme.sectionBackground ?: [UIColor clearColor];
     }
 }
 
 #pragma mark - Private Methods
-
-- (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedContactsWithContactList:(NSArray <YSGContact *> *) entries
-{
-    NSMutableDictionary <NSString *, NSMutableArray <YSGContact *> * > *contactList = [NSMutableDictionary dictionary];
-    
-    for (YSGContact *contact in entries)
-    {
-        NSString *letter = [contact.name substringToIndex:1];
-        
-        if (letter.length)
-        {
-            if (!contactList[letter])
-            {
-                contactList[letter] = [NSMutableArray array];
-            }
-            
-            [contactList[letter] addObject:contact];
-        }
-    }
-    
-    NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    
-    NSMutableDictionary <NSString *, NSArray <YSGContact *> *> *sortedList = [NSMutableDictionary dictionary];
-    
-    for (NSString* letter in contactList)
-    {
-        NSArray *sortedContacts = contactList[letter];
-        
-        sortedList[letter] = [sortedContacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
-    }
-    
-    return sortedList.copy;
-}
-
-- (NSArray <YSGContact *> *)suggestedContactsWithContacts:(NSArray <YSGContact *> *)entries
-{
-    NSArray<YSGContact *> *filteredSuggested = [self removeDuplicatedContactsFromSuggestions:entries numberOfSuggestions:self.service.numberOfSuggestions];
-    
-    return filteredSuggested.copy;
-}
-
-- (NSArray <YSGContact *> *)removeDuplicatedContactsFromSuggestions:(NSArray <YSGContact *> *)contacts numberOfSuggestions:(NSUInteger)number
-{
-    if (!contacts.count)
-    {
-        return nil;
-    }
-    
-    NSMutableArray <YSGContact *> *contactsWithEmails = [NSMutableArray array];
-    NSMutableArray <YSGContact *> *contactsWithPhones = [NSMutableArray array];
-    
-    for (NSUInteger i = 0; i< number; i++)
-    {
-        if (contacts.count <= i)
-        {
-            break;
-        }
-        
-        if(contacts[i].emails.count > 0)
-        {
-            [contactsWithEmails addObject:contacts[i]];
-            
-            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
-            
-            NSArray <YSGContact *> *sameNamePhoneContacts = [contactsWithPhones filteredArrayUsingPredicate:sameNamePredicate];
-            
-            if (sameNamePhoneContacts.count)
-            {
-                [contactsWithPhones removeObjectsInArray:sameNamePhoneContacts];
-                number ++;
-            }
-        }
-        
-        else if (contacts[i].phones.count > 0)
-        {
-            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
-            
-            if ([contactsWithEmails filteredArrayUsingPredicate:sameNamePredicate].count)
-            {
-                number++;
-            }
-            else
-            {
-                [contactsWithPhones addObject:contacts[i]];
-            }
-        }
-    }
-
-    NSMutableArray <YSGContact *> *filteredContacts = [NSMutableArray array];
-    
-    [filteredContacts addObjectsFromArray:contactsWithEmails];
-    [filteredContacts addObjectsFromArray:contactsWithPhones];
-    
-    return filteredContacts.copy;
-}
-
-#pragma mark - View Transitions
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
-{
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    
-    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        [_searchController.searchBar sizeToFit];
-    } completion:nil];
-}
 
 @end
