@@ -261,7 +261,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     // Load contact data
     //
     
-    if(self.service && self.service.theme)
+    if (self.service.theme)
     {
         [self applyTheme:self.service.theme];
     }
@@ -429,7 +429,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     {
         cell = [[YSGAddressBookCell alloc] initWithReuseIdentifier:YSGAddressBookCellIdentifier];
         
-        
         if (self.service.theme.shareAddressBookTheme)
         {
             cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellFontSize];
@@ -523,7 +522,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         // TODO: set the height of the section view so it'll be tall enough for
         //       the font height
         
-        lbl.backgroundView.backgroundColor = self.service.theme.shareAddressBookTheme.sectionBackground ?: [UIColor clearColor];
+        if (!lbl.backgroundView)
+        {
+            lbl.backgroundView = [UIView new];
+        }
+        
+        lbl.backgroundView.backgroundColor = self.service.theme.shareAddressBookTheme.sectionBackground ?: [UIColor redColor];
     }
 }
 
