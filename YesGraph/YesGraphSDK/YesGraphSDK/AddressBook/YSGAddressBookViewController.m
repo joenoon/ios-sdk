@@ -428,10 +428,21 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     if (!cell)
     {
         cell = [[YSGAddressBookCell alloc] initWithReuseIdentifier:YSGAddressBookCellIdentifier];
+        
+        
+        if (self.service.theme.shareAddressBookTheme)
+        {
+            cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellFontSize];
+            cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellDetailFontSize];
+            cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellBackground];
+            cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellSelectedBackground];
+            cell.textLabel.backgroundColor = [UIColor clearColor];
+            cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+        }
     }
     
     //
-    // Fill the cell
+    // Fill the cell with data
     //
     
     YSGContact *contact = [self contactForIndexPath:indexPath];
@@ -439,16 +450,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     cell.textLabel.text = contact.name;
     cell.detailTextLabel.text = contact.contactString;
     cell.selected = [self.selectedContacts containsObject:contact];
-    
-    if (self.service && self.service.theme && self.service.theme.shareAddressBookTheme)
-    {
-        cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellFontSize];
-        cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellDetailFontSize];
-        cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellBackground];
-        cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellSelectedBackground];
-        cell.textLabel.backgroundColor = [UIColor clearColor];
-        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-    }
     
     if ([self.selectedContacts containsObject:contact])
     {
