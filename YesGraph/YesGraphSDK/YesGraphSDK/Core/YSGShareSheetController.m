@@ -79,6 +79,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.translucent = NO;
+    
     if ([self isModal])
     {
         // set up if view was prsented modally
@@ -90,7 +92,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         self.navigationController.navigationBar.tintColor = self.theme.baseColor;
         self.title = @"Share";
     }
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -220,7 +222,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]->=20-[footer(40)]-20-|" options:0 metrics:nil views:views];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]->=10-[collectionView(140)]-10-[footer(40)]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     

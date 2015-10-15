@@ -303,6 +303,10 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [searchContainerView addSubview:self.searchController.searchBar];
     
     self.definesPresentationContext = YES;
+    
+    id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
+    
+    [barButtonAppearanceInSearchBar setTitle:@"Done"];
 }
 
 #pragma mark - View Transitions
@@ -360,6 +364,13 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     self.searchResults = nil;
+    
+//    
+//    CGSize keyboardSize = [[[[NSNotification new] userInfo] objectForKey: UIKeyboardFrameBeginUserInfoKey
+//                             ] CGRectValue].size;
+//    
+//    CGRect newFrame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, keyboardSize.height);
+//    self.tableView.frame = newFrame;
     
     [self.tableView reloadData];
 }
@@ -521,6 +532,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
             lbl.backgroundView.backgroundColor = self.service.theme.shareAddressBookTheme.sectionBackground;
         }
     }
+}
+
+#pragma mark - ScrollView
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+    scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 #pragma mark - Private Methods
