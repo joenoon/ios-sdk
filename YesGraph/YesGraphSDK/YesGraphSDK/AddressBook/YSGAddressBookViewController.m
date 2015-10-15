@@ -78,6 +78,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     if (!_tableView)
     {
+        if (self.service.allowSearch)
+        {
+            [self setupSearch];
+        }
+        
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 0.0, 0.0, 0.0) style:UITableViewStylePlain];
         [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
         
@@ -92,8 +97,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         
         if (self.service.allowSearch)
         {
-            [self setupSearch];
-            
             NSDictionary *searchViews = @{ @"tableView" : tableView, @"searchContainerView" : self.searchContainerView };
             
             [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchContainerView]-0-[tableView]-0-|" options:0 metrics:nil views:searchViews]];
