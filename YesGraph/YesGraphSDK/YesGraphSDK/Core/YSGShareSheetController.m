@@ -21,14 +21,21 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 @interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) UICollectionView *collectionView;
-
 @property (nonatomic, strong) YSGTheme *theme;
 
 @property (nonatomic, copy, readwrite)  NSArray <YSGShareService *> *services;
 
 @property (nonatomic) CGFloat cellWidth;
 @property (nonatomic) CGFloat cellHeight;
+
+@property (nonatomic, strong) UIView *header;
+@property (nonatomic, strong) UILabel *shareLabel;
+@property (nonatomic, strong) UIImageView *logoView;
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UIView *footer;
+@property (nonatomic, strong) UILabel *referralLabel;
+@property (nonatomic, strong) UIButton *cpyButton;
+
 
 @end
 
@@ -94,7 +101,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     }
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     //
@@ -103,6 +109,67 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     self.cellWidth = self.view.frame.size.width/5;
     self.cellHeight = 75;
+    
+    // HEADER
+    self.header = [[UIView alloc] init];
+    self.logoView = [UIImageView new];
+    self.shareLabel = [UILabel new];
+    [self setUpHeader];
+    
+    // SHARE SERVICES
+    [self setUpShareServicesView];
+    
+    // FOOTER
+    
+    self.footer = [[UIView alloc] init];
+    self.referralLabel = [UILabel new];
+    self.cpyButton = [UIButton new];
+    [self setUpFooter];
+    
+    [self.view addSubview:self.collectionView];
+    [self.view addSubview:self.footer];
+    [self.footer addSubview:self.referralLabel];
+    [self.footer addSubview:self.cpyButton];
+    
+    // AUTO LAYOUT CONSTRAINTS
+    [self setupConstraints];
+    
+    [self.view layoutIfNeeded];
+}
+
+- (void) setUpHeader {
+    
+    //
+    // Header container view - logo + text
+    //
+    
+    self.header.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    //
+    //  Company logo view
+    
+    self.logoView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.logoView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    //
+    // Share text view
+    
+    self.shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
+    self.shareLabel.font = [UIFont systemFontOfSize:36.f];
+    self.shareLabel.textColor = self.theme.baseColor;
+    self.shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.shareLabel.numberOfLines = 0;
+    self.shareLabel.textAlignment = NSTextAlignmentCenter;
+    [self.shareLabel sizeToFit];
+    
+    [self.view addSubview:self.header];
+    [self.header addSubview:self.shareLabel];
+    [self.header addSubview:self.logoView];
+    [self.header addSubview:self.shareLabel];
+}
+
+- (void) setUpShareServicesView {
     
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(self.cellWidth, self.cellHeight);
@@ -119,80 +186,54 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    //
-    // Header container view - logo + text
-    //
-    UIView* header = [[UIView alloc] init];
-    header.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    //
-    //  Company logo view
-    
-    UIImageView *logoView = [UIImageView new];
-    
-    logoView.translatesAutoresizingMaskIntoConstraints = NO;
-    logoView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    //
-    // Share text view
-    
-    UILabel *shareLabel = [UILabel new];
-    
-    shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
-    shareLabel.font = [UIFont systemFontOfSize:36.f];
-    shareLabel.textColor = self.theme.baseColor;
-    shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    shareLabel.numberOfLines = 0;
-    shareLabel.textAlignment = NSTextAlignmentCenter;
-    [shareLabel sizeToFit];
-    
-    [self.view addSubview:header];
-    [header addSubview:shareLabel];
-    [header addSubview:logoView];
-    [header addSubview:shareLabel];
-    
-    UICollectionView *collectionView = self.collectionView;
-    [self.view addSubview:self.collectionView];
+}
+
+- (void) setUpFooter {
     
     //
     // Referral link view
     //
     
-    UIView* footer = [[UIView alloc] init];
-    UILabel *referralLabel = [UILabel new];
-    UIButton *copyButton = [UIButton new];
-    footer.translatesAutoresizingMaskIntoConstraints = NO;
-    referralLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    copyButton.translatesAutoresizingMaskIntoConstraints = NO;
+    self.footer.translatesAutoresizingMaskIntoConstraints = NO;
+    self.referralLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.cpyButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     if (self.referralURL.length) {
         
-        footer.layer.borderColor = self.theme.baseColor.CGColor;
-        footer.layer.borderWidth = 1.5f;
-        footer.layer.cornerRadius = 20;
+        self.footer.layer.borderColor = self.theme.baseColor.CGColor;
+        self.footer.layer.borderWidth = 1.5f;
+        self.footer.layer.cornerRadius = 20;
         
-        referralLabel.text = self.referralURL;
-        referralLabel.textColor = [UIColor blackColor];
-        referralLabel.textAlignment = NSTextAlignmentCenter;
+        self.referralLabel.text = self.referralURL;
+        self.referralLabel.textColor = [UIColor blackColor];
+        self.referralLabel.textAlignment = NSTextAlignmentCenter;
         
-        [referralLabel sizeToFit];
+        [self.referralLabel sizeToFit];
         
-        [copyButton setTitle:NSLocalizedString(@"copy", @"copy") forState:UIControlStateNormal];
-        [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
+        [self.cpyButton setTitle:NSLocalizedString(@"copy", @"copy") forState:UIControlStateNormal];
+        [self.cpyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
         
-        [copyButton setTitleColor:[YSGThemeConstants defaultMainColor] forState:UIControlStateNormal];
-        [copyButton setTitleColor:[self.theme.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
-        [copyButton sizeToFit];
+        [self.cpyButton setTitleColor:[YSGThemeConstants defaultMainColor] forState:UIControlStateNormal];
+        [self.cpyButton setTitleColor:[self.theme.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [self.cpyButton sizeToFit];
         
     }
-    
-    [self.view addSubview:footer];
-    [footer addSubview:referralLabel];
-    [footer addSubview:copyButton];
+}
+
+- (void) setupConstraints {
     
     UIView *superview = self.view;
-    NSDictionary *views = NSDictionaryOfVariableBindings(superview, header, collectionView, shareLabel, logoView, footer, referralLabel, copyButton);
+    
+    NSDictionary *views = @{
+                            @"superview": superview,
+                            @"header": self.header,
+                            @"collectionView": self.collectionView,
+                            @"shareLabel": self.shareLabel,
+                            @"logoView": self.logoView,
+                            @"footer": self.footer,
+                            @"referralLabel": self.referralLabel,
+                            @"cpyButton": self.cpyButton
+                            };
     
     //
     // Constraints
@@ -218,7 +259,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[referralLabel]-10-[copyButton(60)]-10-|" options:0 metrics:nil views:views];
+    horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[referralLabel]-10-[cpyButton(60)]-10-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:horizontalConstraints];
     
@@ -234,13 +275,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:verticalConstraints];
     
-    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[copyButton]-0-|" options:0 metrics:nil views:views];
+    verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[cpyButton]-0-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
-    
-    [self.view layoutIfNeeded];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
 }
 
 #pragma mark - UICollectionViewDataSource
