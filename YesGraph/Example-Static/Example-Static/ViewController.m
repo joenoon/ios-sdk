@@ -24,7 +24,6 @@
     self.title = @"Welcome";
     
     self.theme = [YSGTheme new];
-    self.theme.baseColor = [UIColor redColor];
     
     [self styleView];
 }

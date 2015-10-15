@@ -11,11 +11,14 @@
 @import QuartzCore;
 
 #import "YSGShareService.h"
+#import "YSGViewController.h"
 
 @class YSGShareSheetController;
 @class YSGTheme;
 
-extern NSString *_Nonnull const YSGShareSheetMessageKey;
+NS_ASSUME_NONNULL_BEGIN
+
+extern NSString * const YSGShareSheetMessageKey;
 
 @protocol YSGShareSheetDelegate <NSObject>
 
@@ -27,7 +30,7 @@ extern NSString *_Nonnull const YSGShareSheetMessageKey;
  *  @param shareSheetController instance
  *  @param service              share service that will be used
  */
-- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didSelectService:(nonnull YSGShareService *)service;
+- (void)shareSheetController:(YSGShareSheetController *)shareSheetController didSelectService:(YSGShareService *)service;
 
 /*!
  *  If share service does not have a message block set, the delegate is asked to provide a message.
@@ -39,7 +42,7 @@ extern NSString *_Nonnull const YSGShareSheetMessageKey;
  *
  *  @return dictionary with at least "message" key, use
  */
-- (nonnull NSDictionary<NSString *, id> *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary <NSString *, id>*)userInfo;
+- (nonnull NSDictionary<NSString *, id> *)shareSheetController:(YSGShareSheetController *)shareSheetController messageForService:(YSGShareService *)service userInfo:(nullable NSDictionary <NSString *, id>*)userInfo;
 
 /*!
  *  Called when share sheet invited entries
@@ -49,23 +52,21 @@ extern NSString *_Nonnull const YSGShareSheetMessageKey;
  *  @param userInfo             userInfo that were selected (if available and no error)
  *  @param error                error during sharing
  */
-- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService * _Nonnull)service userInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error;
+- (void)shareSheetController:(YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService *)service userInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error;
 
 /*!
  *  Called when user finished sharing
  *
  *  @param shareSheetController instance
  */
-- (void)shareSheetControllerDidFinish:(nonnull YSGShareSheetController *)shareSheetController;
+- (void)shareSheetControllerDidFinish:(YSGShareSheetController *)shareSheetController;
 
 @end
 
 /*!
  *  Main share sheet controller (entry point)
  */
-@interface YSGShareSheetController : UIViewController
-
-NS_ASSUME_NONNULL_BEGIN
+@interface YSGShareSheetController : YSGViewController
 
 /*!
  *  Referel URL that is displayed and can be copied
@@ -101,17 +102,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return instance of share sheet
  */
-- (instancetype)initWithServices:(nonnull NSArray<YSGShareService *> *)services delegate:(nullable id<YSGShareSheetDelegate>)delegate theme:(nullable YSGTheme *)theme NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(nullable id<YSGShareSheetDelegate>)delegate theme:(nullable YSGTheme *)theme NS_DESIGNATED_INITIALIZER;
 
-NS_ASSUME_NONNULL_END
 
 @end
 
 #pragma mark - YSGShareSheetController Initialization
 
 @interface YSGShareSheetController (Initialization)
-
-NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  Returns new instance of Share Sheet view controller
@@ -120,7 +118,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return new view controller instance to be displayed
  */
-+ (instancetype)shareSheetControllerWithServices:(nonnull NSArray<YSGShareService *> *)services;
++ (instancetype)shareSheetControllerWithServices:(NSArray<YSGShareService *> *)services;
 
 /*!
  *  Convenience initializer without theme
@@ -132,6 +130,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (instancetype)initWithServices:(NSArray<YSGShareService *> *)services delegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
-NS_ASSUME_NONNULL_END
-
 @end
+
+NS_ASSUME_NONNULL_END

@@ -17,6 +17,7 @@
 #import "YSGLocalContactSource.h"
 #import "YSGCacheContactSource.h"
 #import "YSGOnlineContactSource.h"
+#import "YSGClient+Invite.h"
 #import "YSGIconDrawings.h"
 #import "UIAlertController+YSGDisplay.h"
 #import "YSGTheme.h"
@@ -51,7 +52,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.baseColor;
+    return self.theme.mainColor;
 }
 
 - (UIImage *)serviceImage
@@ -103,6 +104,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
     
         addressBookViewController.service = self;
+        addressBookViewController.theme = self.theme;
     
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
         
@@ -159,7 +161,17 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries
 {
+    //
+    // Call the endpoint and update invites
+    //
     
+    if ([self.contactSource isKindOfClass:[YSGOnlineContactSource class]])
+    {
+        YSGOnlineContactSource* contactSource = (YSGOnlineContactSource *)self.contactSource;
+        
+        [contactSource.client updateInvitesSent:entries forUserId:self.userId withCompletion:nil];
+    }
+        
     //
     // Check for native message sheet
     //

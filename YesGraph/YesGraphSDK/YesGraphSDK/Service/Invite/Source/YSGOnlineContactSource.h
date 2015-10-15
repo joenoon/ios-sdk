@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) id<YSGContactSource> localSource;
 
 /*!
+ *  Client that makes API calls
+ */
+@property (nonatomic, readonly) YSGClient *client;
+
+/*!
  *  Default initializer is not available
  *
  *  @return nil

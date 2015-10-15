@@ -14,7 +14,7 @@
 @interface YSGOnlineContactSource ()
 
 @property (nonatomic, strong, readwrite) id<YSGContactSource> localSource;
-@property (nonatomic, strong) YSGClient *client;
+@property (nonatomic, strong, readwrite) YSGClient *client;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
 
 @end

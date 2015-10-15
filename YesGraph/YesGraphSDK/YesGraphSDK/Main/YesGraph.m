@@ -353,8 +353,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     
     [services addObject:inviteService];
     
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:services.copy delegate:delegate];
-//    shareController.baseColor = self.theme.baseColor;
+    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:services.copy delegate:delegate theme:self.theme];
     return shareController;
 }
 

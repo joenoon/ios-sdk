@@ -86,17 +86,16 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.translucent = NO;
-    
     if ([self isModal])
     {
-        // set up if view was prsented modally
+        // Set up if view was presented modally
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(modalCloseButtonPressed:)];
-        backButton.tintColor = self.theme.baseColor;
+        backButton.tintColor = self.theme.mainColor;
         self.navigationItem.leftBarButtonItem = backButton;
     }
-    else {
-        self.navigationController.navigationBar.tintColor = self.theme.baseColor;
+    else
+    {
+        self.navigationController.navigationBar.tintColor = self.theme.mainColor;
         self.title = @"Share";
     }
     
@@ -424,42 +423,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [self.collectionView.collectionViewLayout invalidateLayout];
         [self.collectionView setCollectionViewLayout:flowLayout];
     } completion:nil];
-}
-
-- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController
-           didShareToService:(YSGShareService * _Nonnull)service
-                    userInfo:(nullable NSDictionary <NSString *, id> *)userInfo
-                       error:(nullable NSError *)error {
-    
-    if([userInfo objectForKey:YSGInviteEmailContactsKey])
-    {
-        //
-        // Send emailContacts invites to YSG API endpoint '/invite-sent'
-        //
-
-        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInviteEmailContactsKey] forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
-        {
-            if (error)
-            {
-                NSLog(@"Error:%@", error.description);
-            }
-        }];
-    }
-    
-    else if([userInfo objectForKey:YSGInvitePhoneContactsKey])
-    {
-        //
-        // Send phoneContacts invites to YSG API endpoint '/invite-sent'
-        //
-        
-        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInvitePhoneContactsKey] forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
-         {
-             if (error)
-             {
-                 NSLog(@"Error:%@", error.description);
-             }
-         }];
-    }
 }
 
 @end
