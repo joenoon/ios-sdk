@@ -23,8 +23,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, strong) YSGTheme *theme;
-
 @property (nonatomic, copy, readwrite)  NSArray <YSGShareService *> *services;
 
 @property (nonatomic) CGFloat cellWidth;

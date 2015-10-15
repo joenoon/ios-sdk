@@ -23,6 +23,8 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        styleView()
     }
 
     @IBAction func shareButtonTap(sender: AnyObject) {
