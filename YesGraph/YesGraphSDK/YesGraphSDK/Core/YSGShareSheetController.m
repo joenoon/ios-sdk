@@ -122,7 +122,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //
     UIView* header = [[UIView alloc] init];
     header.translatesAutoresizingMaskIntoConstraints = NO;
-    header.backgroundColor = [UIColor redColor];
     
     //
     //  Company logo view
@@ -145,7 +144,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.numberOfLines = 0;
     shareLabel.textAlignment = NSTextAlignmentCenter;
     [shareLabel sizeToFit];
-    shareLabel.backgroundColor = [UIColor blueColor];
     
     [self.view addSubview:header];
     [header addSubview:shareLabel];
