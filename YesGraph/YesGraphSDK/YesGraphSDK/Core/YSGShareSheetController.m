@@ -381,40 +381,4 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     } completion:nil];
 }
 
-- (void)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController
-           didShareToService:(YSGShareService * _Nonnull)service
-                    userInfo:(nullable NSDictionary <NSString *, id> *)userInfo
-                       error:(nullable NSError *)error {
-    
-    if([userInfo objectForKey:YSGInviteEmailContactsKey])
-    {
-        //
-        // Send emailContacts invites to YSG API endpoint '/invite-sent'
-        //
-
-        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInviteEmailContactsKey] forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
-        {
-            if (error)
-            {
-                NSLog(@"Error:%@", error.description);
-            }
-        }];
-    }
-    
-    else if([userInfo objectForKey:YSGInvitePhoneContactsKey])
-    {
-        //
-        // Send phoneContacts invites to YSG API endpoint '/invite-sent'
-        //
-        
-        [[[YSGClient alloc] init] updateInvitesSent:[userInfo objectForKey:YSGInvitePhoneContactsKey] forUserId:[YesGraph shared].userId withCompletion:^(NSError * _Nullable error)
-         {
-             if (error)
-             {
-                 NSLog(@"Error:%@", error.description);
-             }
-         }];
-    }
-}
-
 @end
