@@ -79,23 +79,18 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.translucent = NO;
-    
     if ([self isModal])
     {
-        // set up if view was prsented modally
+        // Set up if view was presented modally
         UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Close", @"Close") style:UIBarButtonItemStylePlain target:self action:@selector(modalCloseButtonPressed:)];
-        backButton.tintColor = self.theme.baseColor;
+        backButton.tintColor = self.theme.mainColor;
         self.navigationItem.leftBarButtonItem = backButton;
     }
-    else {
-        self.navigationController.navigationBar.tintColor = self.theme.baseColor;
+    else
+    {
+        self.navigationController.navigationBar.tintColor = self.theme.mainColor;
         self.title = @"Share";
     }
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     //
     // Setup views
@@ -141,10 +136,12 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
     shareLabel.font = [UIFont systemFontOfSize:36.f];
-    shareLabel.textColor = self.theme.baseColor;
+    shareLabel.textColor = self.theme.mainColor;
     shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     shareLabel.numberOfLines = 0;
     shareLabel.textAlignment = NSTextAlignmentCenter;
+    shareLabel.adjustsFontSizeToFitWidth = YES;
+    shareLabel.minimumScaleFactor = 0.5f;
     [shareLabel sizeToFit];
     
     [self.view addSubview:header];
@@ -166,9 +163,9 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     referralLabel.translatesAutoresizingMaskIntoConstraints = NO;
     copyButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    if (self.referralURL.length) {
-        
-        footer.layer.borderColor = self.theme.baseColor.CGColor;
+    if (self.referralURL.length)
+    {
+        footer.layer.borderColor = self.theme.mainColor.CGColor;
         footer.layer.borderWidth = 1.5f;
         footer.layer.cornerRadius = 20;
         
@@ -182,9 +179,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [copyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
         
         [copyButton setTitleColor:[YSGThemeConstants defaultMainColor] forState:UIControlStateNormal];
-        [copyButton setTitleColor:[self.theme.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [copyButton setTitleColor:[self.theme.mainColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
         [copyButton sizeToFit];
-        
     }
     
     [self.view addSubview:footer];

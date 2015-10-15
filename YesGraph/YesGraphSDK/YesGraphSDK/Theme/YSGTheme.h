@@ -29,22 +29,22 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion: Default: Red color
  */
-@property (nonnull, nonatomic, strong) UIColor *mainColor;
+@property (nonatomic, strong) UIColor *mainColor;
 
 /*!
  *  Official Twitter color
  */
-@property (nonnull, nonatomic, strong) UIColor *twitterColor;
+@property (nonatomic, strong) UIColor *twitterColor;
 
 /*!
  *  Official Facebook color
  */
-@property (nonnull, nonatomic, strong) UIColor *facebookColor;
+@property (nonatomic, strong) UIColor *facebookColor;
 
 /*!
  *  Main text color of the Share UI
  */
-@property (nonnull, nonatomic, strong) UIColor *textColor;
+@property (nonatomic, strong) UIColor *textColor;
 
 /*!
  *  Share sheet view background color
@@ -52,14 +52,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 
-@property (nonnull, nonatomic, strong) UIColor *baseColor;
+@property (nonatomic, strong) UIColor *baseColor;
 
 /*!
  *  Font family of the Share UI
  *
  *  @discussion: Default: System font
  */
-@property (nonnull, nonatomic, copy) NSString *fontFamily;
+@property (nonatomic, copy) NSString *fontFamily;
 
 /*!
  *  Share text font size

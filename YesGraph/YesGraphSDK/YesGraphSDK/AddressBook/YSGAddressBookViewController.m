@@ -25,7 +25,7 @@ CGFloat const YSGSearchBarHeight = 44.0;
 
 static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdentifier";
 
-@interface YSGAddressBookViewController () <UISearchBarDelegate, UISearchResultsUpdating, YSGStyling, UITableViewDataSource, UITableViewDelegate>
+@interface YSGAddressBookViewController () <UISearchBarDelegate, UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate>
 
 //
 // UI
@@ -92,6 +92,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         
         if (self.service.allowSearch)
         {
+            [self setupSearch];
+            
             NSDictionary *searchViews = @{ @"tableView" : tableView, @"searchContainerView" : self.searchContainerView };
             
             [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[searchContainerView]-0-[tableView]-0-|" options:0 metrics:nil views:searchViews]];
@@ -199,10 +201,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)applyTheme:(YSGTheme *)theme
 {
-    self.searchController.searchBar.tintColor = theme.mainColor;
+    [super applyTheme:theme];
+    
+    self.tableView.backgroundColor = theme.shareAddressBookTheme.viewBackground;
     self.navigationController.navigationBar.tintColor = theme.mainColor;
     self.view.tintColor = theme.mainColor;
-    self.tableView.backgroundColor = theme.shareAddressBookTheme.viewBackground;
+    self.view.backgroundColor = theme.shareAddressBookTheme.viewBackground;
 }
 
 #pragma mark - UIViewController
@@ -212,15 +216,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"Contacts", @"Contacts");
-    
-    //
-    // Add the search
-    //
-    
-    if (self.service.allowSearch)
-    {
-        [self setupSearch];
-    }
     
     [self.tableView registerClass:[YSGAddressBookCell class] forCellReuseIdentifier:YSGAddressBookCellIdentifier];
     
@@ -250,15 +245,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     // Load contact data
     //
     
-    if (self.service.theme)
-    {
-        [self applyTheme:self.service.theme];
-    }
-    else
-    {
-        [self applyTheme:[YSGTheme new]];
-    }
-    
     [self.service.contactSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -285,6 +271,11 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     self.searchController.searchBar.delegate = self;
     
     self.searchController.searchBar.showsCancelButton = NO;
+    
+    if (self.theme)
+    {
+        self.searchController.searchBar.tintColor = self.theme.mainColor;
+    }
     
     UIView *searchContainerView = [[UIView alloc] init];
     [searchContainerView setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -365,13 +356,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     self.searchResults = nil;
     
-//    
-//    CGSize keyboardSize = [[[[NSNotification new] userInfo] objectForKey: UIKeyboardFrameBeginUserInfoKey
-//                             ] CGRectValue].size;
-//    
-//    CGRect newFrame = CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.width, keyboardSize.height);
-//    self.tableView.frame = newFrame;
-    
     [self.tableView reloadData];
 }
 
@@ -429,12 +413,12 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     {
         cell = [[YSGAddressBookCell alloc] initWithReuseIdentifier:YSGAddressBookCellIdentifier];
         
-        if (self.service.theme.shareAddressBookTheme)
+        if (self.theme.shareAddressBookTheme)
         {
-            cell.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellFontSize];
-            cell.detailTextLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.cellDetailFontSize];
-            cell.backgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellBackground];
-            cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.service.theme.shareAddressBookTheme.cellSelectedBackground];
+            cell.textLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellFontSize];
+            cell.detailTextLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellDetailFontSize];
+            cell.backgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellBackground];
+            cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellSelectedBackground];
             cell.textLabel.backgroundColor = [UIColor clearColor];
             cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         }
@@ -514,29 +498,30 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
-    if (self.service && self.service.theme && [view isKindOfClass:[UITableViewHeaderFooterView class]])
+    if (self.theme && [view isKindOfClass:[UITableViewHeaderFooterView class]])
     {
         __weak UITableViewHeaderFooterView *lbl = (UITableViewHeaderFooterView *)view;
-        lbl.textLabel.font = [UIFont fontWithName:self.service.theme.fontFamily size:self.service.theme.shareAddressBookTheme.sectionFontSize];
+        lbl.textLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.sectionFontSize];
         
         // TODO: set the height of the section view so it'll be tall enough for
         //       the font height
         
-        if (self.service.theme.shareAddressBookTheme.sectionBackground)
+        if (self.theme.shareAddressBookTheme.sectionBackground)
         {
             if (!lbl.backgroundView)
             {
                 lbl.backgroundView = [UIView new];
             }
             
-            lbl.backgroundView.backgroundColor = self.service.theme.shareAddressBookTheme.sectionBackground;
+            lbl.backgroundView.backgroundColor = self.theme.shareAddressBookTheme.sectionBackground;
         }
     }
 }
 
-#pragma mark - ScrollView
+#pragma mark - UIScrollViewDelegate
 
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
     scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 

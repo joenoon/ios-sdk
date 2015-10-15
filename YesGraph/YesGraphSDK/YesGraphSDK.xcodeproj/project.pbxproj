@@ -65,6 +65,12 @@
 		38132D921BC6B8D400E93527 /* YSGTheme.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3809373C1B84D0EA00FBF888 /* YSGTheme.h */; };
 		38132D941BC6B8D400E93527 /* YSGShareSheetServiceCell.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38CE6ECB1B8623200037FE79 /* YSGShareSheetServiceCell.h */; };
 		3817840C1B877370008B8315 /* YSGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3817840A1B877370008B8315 /* YSGConstants.m */; };
+		382708141BCF93B500B85AFF /* YSGViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 382708121BCF93B500B85AFF /* YSGViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382708151BCF93B500B85AFF /* YSGViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 382708121BCF93B500B85AFF /* YSGViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		382708161BCF93B500B85AFF /* YSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382708131BCF93B500B85AFF /* YSGViewController.m */; settings = {ASSET_TAGS = (); }; };
+		382708171BCF93B500B85AFF /* YSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382708131BCF93B500B85AFF /* YSGViewController.m */; settings = {ASSET_TAGS = (); }; };
+		382708181BCF93BA00B85AFF /* YSGContactList+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 38827CA61BCE995100A6610E /* YSGContactList+Operations.m */; settings = {ASSET_TAGS = (); }; };
+		382708191BCF956C00B85AFF /* YSGContactList+Operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 38827CA51BCE995100A6610E /* YSGContactList+Operations.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38343ADA1BC6A65A00DD635B /* YSGTestMockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 38343AD91BC6A65A00DD635B /* YSGTestMockData.m */; settings = {ASSET_TAGS = (); }; };
 		38343ADF1BC6A66300DD635B /* YSGStubRequestsScoped.m in Sources */ = {isa = PBXBuildFile; fileRef = 38343ADC1BC6A66300DD635B /* YSGStubRequestsScoped.m */; settings = {ASSET_TAGS = (); }; };
 		38343AE01BC6A66300DD635B /* YSGTestSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 38343ADE1BC6A66300DD635B /* YSGTestSettings.m */; settings = {ASSET_TAGS = (); }; };
@@ -382,6 +388,8 @@
 		380937401B84D1AA00FBF888 /* YSGAddressBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGAddressBookCell.h; sourceTree = "<group>"; };
 		380937411B84D1AA00FBF888 /* YSGAddressBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGAddressBookCell.m; sourceTree = "<group>"; };
 		3817840A1B877370008B8315 /* YSGConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGConstants.m; sourceTree = "<group>"; };
+		382708121BCF93B500B85AFF /* YSGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGViewController.h; sourceTree = "<group>"; };
+		382708131BCF93B500B85AFF /* YSGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGViewController.m; sourceTree = "<group>"; };
 		38343AD81BC6A65A00DD635B /* YSGTestMockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGTestMockData.h; sourceTree = "<group>"; };
 		38343AD91BC6A65A00DD635B /* YSGTestMockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGTestMockData.m; sourceTree = "<group>"; };
 		38343ADB1BC6A66300DD635B /* YSGStubRequestsScoped.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGStubRequestsScoped.h; sourceTree = "<group>"; };
@@ -861,13 +869,15 @@
 		67E64AE32FF2B520BDB012B3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				388AFD251B98808D00629D35 /* YSGConstants.h */,
+				3817840A1B877370008B8315 /* YSGConstants.m */,
 				38B20AE91B988C2300AE3DED /* YSGMacros.h */,
 				385B64B31B831C0B00C55F60 /* YSGShareService.h */,
 				385B64B41B831C0B00C55F60 /* YSGShareService.m */,
 				3800EE941B83769C007E0C43 /* YSGShareSheetController.h */,
 				3800EE951B83769C007E0C43 /* YSGShareSheetController.m */,
-				388AFD251B98808D00629D35 /* YSGConstants.h */,
-				3817840A1B877370008B8315 /* YSGConstants.m */,
+				382708121BCF93B500B85AFF /* YSGViewController.h */,
+				382708131BCF93B500B85AFF /* YSGViewController.m */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -926,6 +936,7 @@
 				38CE6EAB1B86175A0037FE79 /* NSObject+YSGParsable.h in Headers */,
 				38CC16C31B831606008477C7 /* YesGraphSDK.h in Headers */,
 				389ABFBD1B8E1AD900E4E3F1 /* YSGValueTransformer.h in Headers */,
+				382708141BCF93B500B85AFF /* YSGViewController.h in Headers */,
 				38EDF4D61B9DC7EF00B91C3D /* YSGDrawing.h in Headers */,
 				389ABFB71B8E1AD900E4E3F1 /* NSObject+YSGIntrospection.h in Headers */,
 				38B20AE81B9886E700AE3DED /* YSGSources.h in Headers */,
@@ -977,10 +988,12 @@
 				3EAFEFC11BA9946D00D2548D /* YSGDrawing.h in Headers */,
 				3EAFEFE61BA9954200D2548D /* YSGServices.h in Headers */,
 				3EAFEFDD1BA9954200D2548D /* YSGFacebookService.h in Headers */,
+				382708151BCF93B500B85AFF /* YSGViewController.h in Headers */,
 				3EAFEFBB1BA993EE00D2548D /* YSGMacros.h in Headers */,
 				3EAFEFEB1BA995D800D2548D /* YSGParsing.h in Headers */,
 				3EAFEFE81BA9954200D2548D /* YSGTheme.h in Headers */,
 				3EAFEFD31BA9954200D2548D /* YSGModel.h in Headers */,
+				382708191BCF956C00B85AFF /* YSGContactList+Operations.h in Headers */,
 				3E0636891BB3454A002FD11F /* YSGShareAddressBookTheme.h in Headers */,
 				3EAFEFD91BA9954200D2548D /* YSGNetworkResponse.h in Headers */,
 				3EAFEFD71BA9954200D2548D /* YSGSource.h in Headers */,
@@ -1184,6 +1197,7 @@
 				E8881D081BB21310005DCBF1 /* YSGShareAddressBookTheme.m in Sources */,
 				67E64C6C814BE45263F6E1A8 /* YSGContact.m in Sources */,
 				388757321B95DAD8001F0133 /* YSGParsableModel.m in Sources */,
+				382708161BCF93B500B85AFF /* YSGViewController.m in Sources */,
 				67E64F24AA6529C333D9A552 /* YSGContactList.m in Sources */,
 				E87C23151BC31E2300364C0C /* YSGClient+SuggestionsShown.m in Sources */,
 				67E64EDB6902C774E84AFA6B /* YSGRankedContact.m in Sources */,
@@ -1259,7 +1273,9 @@
 				38EF2BB61BA30A8100AF2AE0 /* YSGLocalContactSource.m in Sources */,
 				38EF2BB71BA30A8100AF2AE0 /* YSGOnlineContactSource.m in Sources */,
 				38EF2BB81BA30A8100AF2AE0 /* YSGCacheContactSource.m in Sources */,
+				382708181BCF93BA00B85AFF /* YSGContactList+Operations.m in Sources */,
 				38EF2BB91BA30A8100AF2AE0 /* YSGInviteService.m in Sources */,
+				382708171BCF93B500B85AFF /* YSGViewController.m in Sources */,
 				3E06368A1BB34557002FD11F /* YSGShareAddressBookTheme.m in Sources */,
 				38EF2BBA1BA30A8100AF2AE0 /* YSGSocialService.m in Sources */,
 				38EF2BBB1BA30A8100AF2AE0 /* YSGTwitterService.m in Sources */,

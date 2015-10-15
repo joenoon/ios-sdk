@@ -23,8 +23,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        theme.baseColor = UIColor.redColor()
     }
 
     @IBAction func shareButtonTap(sender: AnyObject) {

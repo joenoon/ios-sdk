@@ -14,6 +14,8 @@
 
 // Colors
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGThemeConstants : NSObject 
 
 /*!
@@ -21,35 +23,35 @@
  *  @Discussion: Default: r: 0.9, g: 0.11, b: 0.17
  *
  */
-+ (nonnull UIColor *)defaultMainColor;
++ (UIColor *)defaultMainColor;
 
 /*!
  *  Default color for the twitter share button
  *  @Discussion: Default: r: 0.31, g: 0.67, b: 0.95
  *
  */
-+ (nonnull UIColor *)defaultTwitterColor;
++ (UIColor *)defaultTwitterColor;
 
 /*!
  *  Default overall color of the theme  
  *  @Discussion: Default: r: 0.28, g: 0.38, b: 64
  *
  */
-+ (nonnull UIColor *)defaultFacebookColor;
++ (UIColor *)defaultFacebookColor;
 
 /*!
  *  Default background view color  
  *  @Discussion: Default: White color
  *
  */
-+ (nonnull UIColor *)defaultBackgroundColor;
++ (UIColor *)defaultBackgroundColor;
 
 /*!
  *  Default text color  
  *  @Discussion: Default: r: 0.33, g: 0.33, b:0.33
  *
  */
-+ (nonnull UIColor *)defaultTextColor;
++ (UIColor *)defaultTextColor;
 
 // Font settings
 
@@ -58,7 +60,7 @@
  *  @Discussion: Default: System, size 12
  *
  */
-+ (nonnull NSString *)defaultFontFamily;
++ (NSString *)defaultFontFamily;
 
 /*!
  *  Default share button cell size
@@ -91,3 +93,5 @@
 + (YSGShareButtonFadeFactors)defaultShareButtonAlphaFactors;
 
 @end
+
+NS_ASSUME_NONNULL_END

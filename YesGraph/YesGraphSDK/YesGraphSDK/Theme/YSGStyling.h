@@ -12,6 +12,8 @@
 
 @protocol YSGStyling <NSObject>
 
+@property (nullable, nonatomic, strong) YSGTheme *theme;
+
 - (void)applyTheme:(nonnull YSGTheme *)theme;
 
 @end

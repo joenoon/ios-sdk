@@ -51,7 +51,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.baseColor;
+    return self.theme.mainColor;
 }
 
 - (UIImage *)serviceImage
@@ -103,6 +103,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
     
         addressBookViewController.service = self;
+        addressBookViewController.theme = self.theme;
     
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:addressBookViewController];
         

@@ -9,8 +9,9 @@
 @import UIKit;
 
 #import "YSGInviteService.h"
+#import "YSGViewController.h"
 
-@interface YSGAddressBookViewController : UIViewController
+@interface YSGAddressBookViewController : YSGViewController
 
 @property (nullable, nonatomic, weak) YSGInviteService *service;
 
