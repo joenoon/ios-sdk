@@ -25,17 +25,34 @@
     [super tearDown];
 }
 
-- (void)testTwitterImage
+- (void)runTestForImage:(UIImage *)image andFile:(NSString *)file
 {
-    UIImage *twitterImage = [YSGIconDrawings twitterImage];
-    CGDataProviderRef imageProvider = CGImageGetDataProvider(twitterImage.CGImage);
+    CGDataProviderRef imageProvider = CGImageGetDataProvider(image.CGImage);
     NSData *data = CFBridgingRelease(CGDataProviderCopyData(imageProvider));
     
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *twitterImageDataPath = [bundle pathForResource:@"twitterImageData" ofType:@"bin"];
-    NSData *twitterImageData = [NSData dataWithContentsOfFile:twitterImageDataPath];
+    NSString *imageDataPath = [bundle pathForResource:file ofType:@"bin"];
+    NSData *imageData = [NSData dataWithContentsOfFile:imageDataPath];
     
-    XCTAssert([data isEqualToData:twitterImageData], @"Generated image and image from bundled data file are not the same");
+    XCTAssert([data isEqualToData:imageData], @"Generated image and image from bundled data file are not the same");
+}
+
+- (void)testPhoneImage
+{
+    UIImage *phoneImage = [YSGIconDrawings phoneImage];
+    [self runTestForImage:phoneImage andFile:@"phoneImageData"];
+}
+
+- (void)testFacebookImage
+{
+    UIImage *facebookImage = [YSGIconDrawings facebookImage];
+    [self runTestForImage:facebookImage andFile:@"facebookImageData"];
+}
+
+- (void)testTwitterImage
+{
+    UIImage *twitterImage = [YSGIconDrawings twitterImage];
+    [self runTestForImage:twitterImage andFile:@"twitterImageData"];
 }
 
 @end
