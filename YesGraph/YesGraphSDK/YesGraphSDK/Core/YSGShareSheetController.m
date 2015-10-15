@@ -79,6 +79,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 {
     [super viewDidLoad];
     
+    self.navigationController.navigationBar.translucent = NO;
+    
     if ([self isModal])
     {
         // set up if view was prsented modally
@@ -90,7 +92,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         self.navigationController.navigationBar.tintColor = self.theme.baseColor;
         self.title = @"Share";
     }
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
