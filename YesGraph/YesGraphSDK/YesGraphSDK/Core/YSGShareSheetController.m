@@ -122,6 +122,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //
     UIView* header = [[UIView alloc] init];
     header.translatesAutoresizingMaskIntoConstraints = NO;
+    header.backgroundColor = [UIColor redColor];
     
     //
     //  Company logo view
@@ -144,6 +145,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     shareLabel.numberOfLines = 0;
     shareLabel.textAlignment = NSTextAlignmentCenter;
     [shareLabel sizeToFit];
+    shareLabel.backgroundColor = [UIColor blueColor];
     
     [self.view addSubview:header];
     [header addSubview:shareLabel];
@@ -220,7 +222,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]-10-[collectionView(140)]->=20-[footer(40)]-20-|" options:0 metrics:nil views:views];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]->=10-[collectionView(140)]-10-[footer(40)]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
