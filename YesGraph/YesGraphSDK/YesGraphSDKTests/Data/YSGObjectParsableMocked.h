@@ -15,6 +15,4 @@
 @property (strong, nonatomic) NSArray <NSString *> *prop2;
 @property (strong, nonatomic) NSData *prop3;
 
-- (NSDictionary *)mappedKvp;
-
 @end

@@ -22,10 +22,4 @@
     return self;
 }
 
-- (NSDictionary *)mappedKvp
-{
-    
-    return @{ @"prop1": self.prop1, @"prop2": self.prop2, @"prop3": self.prop3 };
-}
-
 @end

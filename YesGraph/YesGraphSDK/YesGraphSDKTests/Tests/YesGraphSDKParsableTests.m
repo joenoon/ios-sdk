@@ -27,7 +27,6 @@
 
 - (void)checkIfValidParsed:(YSGObjectParsableMocked *)parsed isEqualTo:(YSGObjectParsableMocked *)expected
 {
-    XCTAssertNotNil(parsed, @"Parsed object shouldn't be nil for dictionary: '%@'", expected.mappedKvp);
     XCTAssert([expected.prop1 isEqualToString:parsed.prop1], @"Parsed string '%@' not the same as '%@'", parsed.prop1, expected.prop1);
     XCTAssert([expected.prop2 isEqualToArray:parsed.prop2], @"Parsed array '%@' not the same as '%@'", parsed.prop2, expected.prop2);
     XCTAssert([expected.prop3 isEqualToData:parsed.prop3], @"Parsed data '%@' not the same as '%@'", parsed.prop3, expected.prop3);
@@ -36,7 +35,7 @@
 - (void)testObjectParsing
 {
     YSGObjectParsableMocked *expected = [YSGObjectParsableMocked new];
-    NSDictionary *dataFromExpected = expected.mappedKvp;
+    NSDictionary *dataFromExpected = [expected ysg_toDictionary];
     {
         YSGObjectParsableMocked *parsed = [YSGObjectParsableMocked ysg_objectWithDictionary:dataFromExpected];
         [self checkIfValidParsed:parsed isEqualTo:expected];
