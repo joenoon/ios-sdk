@@ -89,7 +89,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
             YesGraph.shared().configureWithUserId(YSGUtility.randomUserId())
         }
         
-        YesGraph.shared().configureWithClientKey("")
+        YesGraph.shared().configureWithClientKey("live-WzEsMCwibGVhIl0.CQCE_g.DMOwr3YUg2zwiuPMJnInVa1D3ZI")
         
         //
         // Client key should be retrieved from your trusted backend.
