@@ -8,7 +8,7 @@
 
 #import "YSGTestIntrospectionMocked.h"
 
-@implementation TestClassForIntrospection
+@implementation TestClassForIntrospection1
 
 - (instancetype)init
 {
@@ -26,11 +26,28 @@
 
 @end
 
-@implementation TestClassForIntrospectionExpected
+@implementation TestClassForIntrospectionExpected1
 
 + (NSArray *)expectedIntrospectionProperties
 {
     return @[ @"prop1", @"prop2", @"prop3" ];
+}
+
+@end
+
+@implementation TestClassForIntrospection2
+
+@end
+
+@implementation TestClassForIntrospection2Expected
+
++ (NSArray *)expectedIntrospectionProperties
+{
+    NSArray *parentProps = [TestClassForIntrospectionExpected1 expectedIntrospectionProperties];
+    NSMutableArray *ret = [NSMutableArray arrayWithArray:parentProps];
+    [ret addObject:@"prop4"];
+    [ret addObject:@"prop5"];
+    return ret;
 }
 
 @end
