@@ -97,30 +97,25 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         self.title = NSLocalizedString(@"Share", @"Share");
     }
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    
     //
     // Setup views
     //
     
-    self.cellWidth = self.view.frame.size.width/5;
+    self.cellWidth = self.view.frame.size.width / 5;
     self.cellHeight = 75;
     
-    // HEADER
-    self.header = [[UIView alloc] init];
-    self.logoView = [UIImageView new];
-    self.shareLabel = [UILabel new];
-    [self setupHeader];
     
     // SHARE SERVICES
     [self setupShareServicesView];
     
+    // HEADER
+    
+    [self setupHeader];
+    
+    
     // FOOTER
     
-    self.footer = [[UIView alloc] init];
-    self.referralLabel = [UILabel new];
-    self.cpyButton = [UIButton new];
+
     [self setupFooter];
     
     [self.view addSubview:self.collectionView];
@@ -136,6 +131,10 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 - (void)setupHeader
 {
+    self.header = [[UIView alloc] init];
+    self.logoView = [UIImageView new];
+    self.shareLabel = [UILabel new];
+    
     //
     // Header container view - logo + text
     //
@@ -154,7 +153,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
     self.shareLabel.font = [UIFont systemFontOfSize:36.f];
-    self.shareLabel.textColor = self.theme.baseColor;
+    self.shareLabel.textColor = self.theme.mainColor;
     self.shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.shareLabel.numberOfLines = 0;
     self.shareLabel.textAlignment = NSTextAlignmentCenter;
@@ -187,6 +186,10 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 - (void)setupFooter
 {
+    self.footer = [[UIView alloc] init];
+    self.referralLabel = [UILabel new];
+    self.cpyButton = [UIButton new];
+    
     //
     // Referral link view
     //
@@ -198,7 +201,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     if (self.referralURL.length)
     {
         
-        self.footer.layer.borderColor = self.theme.baseColor.CGColor;
+        self.footer.layer.borderColor = self.theme.mainColor.CGColor;
         self.footer.layer.borderWidth = 1.5f;
         self.footer.layer.cornerRadius = 20;
         
@@ -212,7 +215,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [self.cpyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
         
         [self.cpyButton setTitleColor:[YSGThemeConstants defaultMainColor] forState:UIControlStateNormal];
-        [self.cpyButton setTitleColor:[self.theme.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [self.cpyButton setTitleColor:[self.theme.mainColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
         [self.cpyButton sizeToFit];
     }
 }
@@ -222,15 +225,15 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     UIView *superview = self.view;
     
     NSDictionary *views = @{
-                            @"superview": superview,
-                            @"header": self.header,
-                            @"collectionView": self.collectionView,
-                            @"shareLabel": self.shareLabel,
-                            @"logoView": self.logoView,
-                            @"footer": self.footer,
-                            @"referralLabel": self.referralLabel,
-                            @"cpyButton": self.cpyButton
-                            };
+        @"superview": superview,
+        @"header": self.header,
+        @"collectionView": self.collectionView,
+        @"shareLabel": self.shareLabel,
+        @"logoView": self.logoView,
+        @"footer": self.footer,
+        @"referralLabel": self.referralLabel,
+        @"cpyButton": self.cpyButton
+    };
     
     //
     // Constraints
