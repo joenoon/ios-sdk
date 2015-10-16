@@ -12,37 +12,40 @@
 
 @import ObjectiveC.runtime;
 
-@interface YesGraphSDKYSGInviteServiceTests : XCTestCase
+@interface YesGraphSDKSwizzledMethods : NSObject
+
+@property (strong, nonatomic) YSGContact *contactEmail;
+@property (strong, nonatomic) YSGContact *contactPhone;
+
++ (instancetype)shared;
+
+- (void)swizzleBoth;
 
 @end
 
-@implementation YesGraphSDKYSGInviteServiceTests
+@implementation YesGraphSDKSwizzledMethods
 
-- (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries
++ (instancetype)shared
 {
-    XCTAssertEqual(entries.count, 1, @"Entries should only contain 1 object");
-    YSGContact *c = entries.firstObject;
-    YSGContact *ce = [YSGTestMockData mockContactList].entries.lastObject;
-    [YesGraphSDKYSGInviteServiceTests checkInterceptedMessagesForContact:c againstExpected:ce];
+    static YesGraphSDKSwizzledMethods *shared;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shared = [YesGraphSDKSwizzledMethods new];
+    });
+    return shared;
 }
 
-- (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)entries
+- (instancetype)init
 {
-    XCTAssertEqual(entries.count, 1, @"Entries should only contain 1 object");
-    YSGContact *c = entries.firstObject;
-    YSGContact *ce = [YSGTestMockData mockContactList].entries.firstObject;
-    [YesGraphSDKYSGInviteServiceTests checkInterceptedMessagesForContact:c againstExpected:ce];
+    if ((self = [super init]))
+    {
+        [self swizzleBoth];
+    }
+    return self;
 }
 
-+ (void)checkInterceptedMessagesForContact:(YSGContact *)intercept againstExpected:(YSGContact *)expected
+- (void)swizzleBoth
 {
-    XCTAssert([intercept.contactString isEqualToString:expected.contactString], @"Intercepted contact '%@' should be the same as '%@'", intercept, expected);
-}
-
-
-- (void)setUp
-{
-    [super setUp];
     [self swizzleEmailMethods];
     [self swizzleMessageMethods];
 }
@@ -65,21 +68,57 @@
     method_setImplementation(original, replacementImplementation);
 }
 
+- (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries
+{
+    XCTAssertEqual(entries.count, 1, @"Entries should only contain 1 object");
+    YSGContact *c = entries.firstObject;
+    YSGContact *expected = [YesGraphSDKSwizzledMethods shared].contactPhone;
+    XCTAssert([c.contactString isEqualToString:expected.contactString], @"Intercepted contact '%@' does not match the expected contact '%@'", c, expected);
+}
+
+- (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)entries
+{
+    XCTAssertEqual(entries.count, 1, @"Entries should only contain 1 object");
+    YSGContact *c = entries.firstObject;
+    YSGContact *expected = [YesGraphSDKSwizzledMethods shared].contactEmail;
+    XCTAssert([c.contactString isEqualToString:expected.contactString], @"Intercepted contact '%@' does not match the expected contact '%@'", c, expected);
+}
+
+@end
+
+@interface YesGraphSDKYSGInviteServiceTests : XCTestCase
+@property (strong, nonatomic) YesGraphSDKSwizzledMethods *swizzles;
+@end
+
+@implementation YesGraphSDKYSGInviteServiceTests
+
+- (void)setUp
+{
+    [super setUp];
+    self.swizzles = [YesGraphSDKSwizzledMethods shared];
+}
+
 - (void)tearDown
 {
     [super tearDown];
+    self.swizzles = nil;
 }
 
 - (void)testInviteWithPhoneContact
 {
-    NSArray *contacts = @[ [YSGTestMockData mockContactList].entries.lastObject ];
+    YSGContact *invitee = [YSGTestMockData mockContactList].entries.lastObject;
+    NSArray *contacts = @[ invitee ];
+    self.swizzles.contactPhone = invitee;
     YSGInviteService *service = [[YSGInviteService alloc] init];
     [service triggerInviteFlowWithContacts:contacts];
 }
 
 - (void)testInviteWithEmailContact
 {
-    NSArray *contacts = @[ [YSGTestMockData mockContactList].entries.lastObject ];
+    YSGContact *invitee = [YSGTestMockData mockContactList].entries.firstObject;
+    invitee.phones = nil;
+    NSArray *contacts = @[ invitee ];
+    self.swizzles.contactEmail = invitee;
     YSGInviteService *service = [[YSGInviteService alloc] init];
     [service triggerInviteFlowWithContacts:contacts];
 }
