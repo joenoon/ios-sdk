@@ -27,7 +27,7 @@
 
 @interface TestClassForIntrospectionExpected1 : NSObject
 
-+ (NSArray *)expectedIntrospectionProperties;
++ (NSDictionary *)expectedIntrospectionProperties;
 
 @end
 
@@ -46,6 +46,18 @@ typedef struct
     struct TestStructForIntrospecation2 *nextNode, *prevNode;
 } TestStructForIntrospecation2;
 
+typedef enum
+{
+    THIS_ENUM,
+    FOR_TEST,
+    IS_ONLY
+} TestEnumForInstrospection2;
+
+typedef NS_ENUM(NSUInteger, TestNSEnumForIntrospection2) {
+    THIS_ENUM_IS,
+    ALSO_JUST_FOR_TEST
+};
+
 @interface TestClassForIntrospection2 : TestClassForIntrospection1
 {
     NSString *stillNotAprop;
@@ -53,11 +65,20 @@ typedef struct
 
 @property (weak, nonatomic) NSData *prop4;
 @property (atomic) TestStructForIntrospecation2 prop5;
+@property (atomic) TestEnumForInstrospection2 prop6;
+@property (nonatomic, readonly) TestNSEnumForIntrospection2 prop7;
 
 @end
 
 @interface TestClassForIntrospection2Expected : NSObject
 
-+ (NSArray *)expectedIntrospectionProperties;
++ (NSDictionary *)expectedIntrospectionProperties;
+
+@end
+
+/*!
+ *  This class is a placeholder for the standard C types (since they can't be introspected)
+ */
+@interface TestCClassType : NSObject
 
 @end

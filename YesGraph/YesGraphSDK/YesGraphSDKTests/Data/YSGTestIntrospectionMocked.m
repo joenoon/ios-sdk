@@ -28,9 +28,9 @@
 
 @implementation TestClassForIntrospectionExpected1
 
-+ (NSArray *)expectedIntrospectionProperties
++ (NSDictionary *)expectedIntrospectionProperties
 {
-    return @[ @"prop1", @"prop2", @"prop3" ];
+    return @{ @"prop1": [NSString class], @"prop2": [NSNumber class], @"prop3": [NSArray class] };
 }
 
 @end
@@ -39,14 +39,20 @@
 
 @end
 
+@implementation TestCClassType
+
+@end
+
 @implementation TestClassForIntrospection2Expected
 
-+ (NSArray *)expectedIntrospectionProperties
++ (NSDictionary *)expectedIntrospectionProperties
 {
-    NSArray *parentProps = [TestClassForIntrospectionExpected1 expectedIntrospectionProperties];
-    NSMutableArray *ret = [NSMutableArray arrayWithArray:parentProps];
-    [ret addObject:@"prop4"];
-    [ret addObject:@"prop5"];
+    NSDictionary *parentProps = [TestClassForIntrospectionExpected1 expectedIntrospectionProperties];
+    NSMutableDictionary *ret = [NSMutableDictionary dictionaryWithDictionary:parentProps];
+    [ret setObject:[NSData class] forKeyedSubscript:@"prop4"];
+    [ret setObject:[TestCClassType class] forKeyedSubscript:@"prop5"];
+    [ret setObject:[TestCClassType class] forKeyedSubscript:@"prop6"];
+    [ret setObject:[TestCClassType class] forKeyedSubscript:@"prop7"];
     return ret;
 }
 
