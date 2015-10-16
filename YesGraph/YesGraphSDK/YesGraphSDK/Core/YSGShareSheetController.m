@@ -21,8 +21,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 @interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) YSGTheme *theme;
-
 @property (nonatomic, copy, readwrite)  NSArray <YSGShareService *> *services;
 
 @property (nonatomic) CGFloat cellWidth;
@@ -96,7 +94,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     else
     {
         self.navigationController.navigationBar.tintColor = self.theme.mainColor;
-        self.title = @"Share";
+        self.title = NSLocalizedString(@"Share", @"Share");
     }
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -113,17 +111,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.header = [[UIView alloc] init];
     self.logoView = [UIImageView new];
     self.shareLabel = [UILabel new];
-    [self setUpHeader];
+    [self setupHeader];
     
     // SHARE SERVICES
-    [self setUpShareServicesView];
+    [self setupShareServicesView];
     
     // FOOTER
     
     self.footer = [[UIView alloc] init];
     self.referralLabel = [UILabel new];
     self.cpyButton = [UIButton new];
-    [self setUpFooter];
+    [self setupFooter];
     
     [self.view addSubview:self.collectionView];
     [self.view addSubview:self.footer];
@@ -136,8 +134,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [self.view layoutIfNeeded];
 }
 
-- (void) setUpHeader {
-    
+- (void)setupHeader
+{
     //
     // Header container view - logo + text
     //
@@ -168,8 +166,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [self.header addSubview:self.shareLabel];
 }
 
-- (void) setUpShareServicesView {
-    
+- (void)setupShareServicesView
+{
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     flowLayout.itemSize = CGSizeMake(self.cellWidth, self.cellHeight);
     flowLayout.minimumInteritemSpacing = 10;
@@ -187,8 +185,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
 }
 
-- (void) setUpFooter {
-    
+- (void)setupFooter
+{
     //
     // Referral link view
     //
@@ -197,7 +195,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.referralLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.cpyButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    if (self.referralURL.length) {
+    if (self.referralURL.length)
+    {
         
         self.footer.layer.borderColor = self.theme.baseColor.CGColor;
         self.footer.layer.borderWidth = 1.5f;
@@ -215,12 +214,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [self.cpyButton setTitleColor:[YSGThemeConstants defaultMainColor] forState:UIControlStateNormal];
         [self.cpyButton setTitleColor:[self.theme.baseColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
         [self.cpyButton sizeToFit];
-        
     }
 }
 
-- (void) setupConstraints {
-    
+- (void)setupConstraints
+{
     UIView *superview = self.view;
     
     NSDictionary *views = @{
