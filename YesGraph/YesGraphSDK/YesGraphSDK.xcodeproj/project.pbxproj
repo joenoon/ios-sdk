@@ -289,6 +289,8 @@
 		E8A6D66E1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = E8A6D66D1BB20F4D00D4C219 /* YSGShareCellShapeEnum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E8D76BE41BD126CC006435BD /* YesGraphSDKIntrospectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D76BE31BD126CC006435BD /* YesGraphSDKIntrospectionTests.m */; settings = {ASSET_TAGS = (); }; };
 		E8D76BE71BD128A2006435BD /* YSGTestIntrospectionMocked.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D76BE61BD128A2006435BD /* YSGTestIntrospectionMocked.m */; settings = {ASSET_TAGS = (); }; };
+		E8D76BEC1BD142E4006435BD /* YesGraphSDKParsableTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D76BEB1BD142E4006435BD /* YesGraphSDKParsableTests.m */; settings = {ASSET_TAGS = (); }; };
+		E8D76BEF1BD14327006435BD /* YSGObjectParsableMocked.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D76BEE1BD14327006435BD /* YSGObjectParsableMocked.m */; settings = {ASSET_TAGS = (); }; };
 		E8E845A41BCF027E008E227B /* YesGraphSDKModelContactTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A31BCF027E008E227B /* YesGraphSDKModelContactTests.m */; settings = {ASSET_TAGS = (); }; };
 		E8E845A61BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A51BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m */; settings = {ASSET_TAGS = (); }; };
 		E8E845A81BCF17FF008E227B /* YesGraphSDKModelYSGSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */; settings = {ASSET_TAGS = (); }; };
@@ -514,6 +516,9 @@
 		E8D76BE31BD126CC006435BD /* YesGraphSDKIntrospectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKIntrospectionTests.m; sourceTree = "<group>"; };
 		E8D76BE51BD12884006435BD /* YSGTestIntrospectionMocked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGTestIntrospectionMocked.h; sourceTree = "<group>"; };
 		E8D76BE61BD128A2006435BD /* YSGTestIntrospectionMocked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGTestIntrospectionMocked.m; sourceTree = "<group>"; };
+		E8D76BEB1BD142E4006435BD /* YesGraphSDKParsableTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKParsableTests.m; sourceTree = "<group>"; };
+		E8D76BED1BD14327006435BD /* YSGObjectParsableMocked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGObjectParsableMocked.h; sourceTree = "<group>"; };
+		E8D76BEE1BD14327006435BD /* YSGObjectParsableMocked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGObjectParsableMocked.m; sourceTree = "<group>"; };
 		E8E845A31BCF027E008E227B /* YesGraphSDKModelContactTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKModelContactTests.m; sourceTree = "<group>"; };
 		E8E845A51BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKModelYSGContactListTests.m; sourceTree = "<group>"; };
 		E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKModelYSGSource.m; sourceTree = "<group>"; };
@@ -578,6 +583,7 @@
 				E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */,
 				E8860D6D1BD055CC005BE89D /* YesGraphSDKDrawingTests.m */,
 				E8D76BE31BD126CC006435BD /* YesGraphSDKIntrospectionTests.m */,
+				E8D76BEB1BD142E4006435BD /* YesGraphSDKParsableTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -592,6 +598,8 @@
 				38343AD81BC6A65A00DD635B /* YSGTestMockData.h */,
 				38343AD91BC6A65A00DD635B /* YSGTestMockData.m */,
 				E8D76BE61BD128A2006435BD /* YSGTestIntrospectionMocked.m */,
+				E8D76BED1BD14327006435BD /* YSGObjectParsableMocked.h */,
+				E8D76BEE1BD14327006435BD /* YSGObjectParsableMocked.m */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1248,8 +1256,10 @@
 				38343AE81BC6A67400DD635B /* YesGraphSDKAddressBookTests.m in Sources */,
 				38343AED1BC6A67400DD635B /* YesGraphSDKSuggestionsShownTests.m in Sources */,
 				38343AE01BC6A66300DD635B /* YSGTestSettings.m in Sources */,
+				E8D76BEC1BD142E4006435BD /* YesGraphSDKParsableTests.m in Sources */,
 				38343AEC1BC6A67400DD635B /* YesGraphSDKParseTests.m in Sources */,
 				E8E845A61BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m in Sources */,
+				E8D76BEF1BD14327006435BD /* YSGObjectParsableMocked.m in Sources */,
 				38343ADF1BC6A66300DD635B /* YSGStubRequestsScoped.m in Sources */,
 				E857C0DD1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m in Sources */,
 				38343AEB1BC6A67400DD635B /* YesGraphSDKNetworkTests.m in Sources */,
