@@ -102,7 +102,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     //
     
     self.cellWidth = self.view.frame.size.width / 5;
-    self.cellHeight = 75;
+    self.cellHeight = 100;
     
     
     // SHARE SERVICES
@@ -127,6 +127,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [self setupConstraints];
     
     [self.view layoutIfNeeded];
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (void)setupHeader
@@ -152,17 +154,20 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     self.shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
-    self.shareLabel.font = [UIFont systemFontOfSize:36.f];
+    self.shareLabel.font = [UIFont systemFontOfSize:60.f];
+    self.shareLabel.adjustsFontSizeToFitWidth = YES;
+    
     self.shareLabel.textColor = self.theme.mainColor;
-    self.shareLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.shareLabel.lineBreakMode = NSLineBreakByClipping;
     self.shareLabel.numberOfLines = 0;
     self.shareLabel.textAlignment = NSTextAlignmentCenter;
+    [self.shareLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [self.shareLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.shareLabel sizeToFit];
     
     [self.view addSubview:self.header];
     [self.header addSubview:self.shareLabel];
     [self.header addSubview:self.logoView];
-    [self.header addSubview:self.shareLabel];
 }
 
 - (void)setupShareServicesView
@@ -181,7 +186,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
 }
 
 - (void)setupFooter
@@ -200,7 +204,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     if (self.referralURL.length)
     {
-        
         self.footer.layer.borderColor = self.theme.mainColor.CGColor;
         self.footer.layer.borderWidth = 1.5f;
         self.footer.layer.cornerRadius = 20;
@@ -226,6 +229,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     NSDictionary *views = @{
         @"superview": superview,
+        @"topGuide": self.topLayoutGuide,
         @"header": self.header,
         @"collectionView": self.collectionView,
         @"shareLabel": self.shareLabel,
@@ -263,7 +267,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     [self.view addConstraints:horizontalConstraints];
     
-    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[header]->=10-[collectionView(140)]-10-[footer(40)]-20-|" options:0 metrics:nil views:views];
+    NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[topGuide]-10-[header(>=70,<=300)]-10-[collectionView(>=120)]-10-[footer(40)]-20-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
     
@@ -278,8 +282,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[cpyButton]-0-|" options:0 metrics:nil views:views];
     
     [self.view addConstraints:verticalConstraints];
-    
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.header attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:superview attribute:NSLayoutAttributeHeight multiplier:0.5 constant:1]];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -339,10 +341,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     // centers cell section in container horizontally
     CGFloat containerWidth = collectionView.frame.size.width;
+
+    CGFloat verticalEdgeInset = (collectionView.frame.size.height / 2) - (self.cellHeight / 2);
+    CGFloat horizontalEdgeInset = (containerWidth - (self.services.count * self.cellWidth + (self.services.count-1) * cellSpacing)) / 2;
     
-    CGFloat horizontalEdgeInset = containerWidth - (self.services.count * self.cellWidth + (self.services.count-1) * cellSpacing);
-    
-    return UIEdgeInsetsMake(0, horizontalEdgeInset/2, 0, horizontalEdgeInset/2);
+    return UIEdgeInsetsMake(verticalEdgeInset, horizontalEdgeInset, verticalEdgeInset, horizontalEdgeInset);
 }
 
 
@@ -415,7 +418,6 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     
     self.cellWidth = size.width/5;
-    self.cellHeight = 75;
     
     UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout*)self.collectionView.collectionViewLayout;
     flowLayout.itemSize = CGSizeMake(self.cellWidth, self.cellHeight);
