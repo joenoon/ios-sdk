@@ -80,7 +80,7 @@
          YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
          NSArray *entries = [parsedResponse objectForKey:@"entries"];
          XCTAssertNotNil(entries, @"Request body is missing entries parameter");
-         XCTAssert(entries.count == mockedContacts.entries.count, @"Expected the same number of entries in request body as there are in the mocked contact list, but got %lu instead of %lu", entries.count, mockedContacts.entries.count);
+         XCTAssert(entries.count == mockedContacts.entries.count, @"Expected the same number of entries in request body as there are in the mocked contact list, but got %lu instead of %lu", (unsigned long)(unsigned long)entries.count, (unsigned long)mockedContacts.entries.count);
 
          for (NSUInteger index = 0; index < entries.count; ++index)
          {

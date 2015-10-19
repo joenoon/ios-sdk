@@ -31,7 +31,7 @@
     NSDictionary <NSString *, NSArray <YSGContact *> *> *noSuggestions = [mockedContacts sortedEntriesWithNumberOfSuggestions:0];
     XCTAssertNotNil(noSuggestions, @"Sorted contacts shouldn't be nil");
     NSArray *expectedSections = @[ @{ @"M": @1 }, @{ @"R": @1 }, @{ @"P": @1 }, @{ @"S": @2 }, @{ @"T": @1 }, @{ @"H": @1 }, @{ @"C": @1 } ];
-    XCTAssertEqual(noSuggestions.allKeys.count, expectedSections.count, @"There should be '%lu' groups in contacts, but found '%lu'", expectedSections.count, noSuggestions.allKeys.count);
+    XCTAssertEqual(noSuggestions.allKeys.count, expectedSections.count, @"There should be '%lu' groups in contacts, but found '%lu'", (unsigned long)expectedSections.count, (unsigned long)noSuggestions.allKeys.count);
     for (NSUInteger index = 0; index < expectedSections.count; ++index)
     {
         NSDictionary *expectation = expectedSections[index];
@@ -39,7 +39,7 @@
         NSArray *contacts = [noSuggestions objectForKey:key];
         XCTAssertNotNil(contacts, @"Contacts shouldn't be nil for key '%@'", key);
         NSNumber *val = [expectation objectForKey:key];
-        XCTAssertEqual(contacts.count, [val integerValue], @"Number of contacts in section '%@' should be '%@', but it was '%lu'", key, val, contacts.count);
+        XCTAssertEqual(contacts.count, [val integerValue], @"Number of contacts in section '%@' should be '%@', but it was '%lu'", key, val, (unsigned long)contacts.count);
     }
 }
 
@@ -49,10 +49,10 @@
     mockedContacts.useSuggestions = YES;
     NSUInteger suggestionCount = 2;
     NSArray <YSGContact *> *suggestions = [mockedContacts suggestedEntriesWithNumberOfSuggestions:suggestionCount];
-    XCTAssertEqual(suggestions.count, suggestionCount, @"The number of returned suggestions '%lu' is not '%lu'", suggestions.count, suggestionCount);
+    XCTAssertEqual(suggestions.count, suggestionCount, @"The number of returned suggestions '%lu' is not '%lu'", (unsigned long)suggestions.count, (unsigned long)suggestionCount);
     for (NSUInteger index = 0; index < suggestionCount; ++index)
     {
-        XCTAssert([suggestions[index].contactString isEqualToString:mockedContacts.entries[index].contactString], @"Contact string '%@' at index %lu is not the same as '%@'", suggestions[index].contactString, index, mockedContacts.entries[index].contactString);
+        XCTAssert([suggestions[index].contactString isEqualToString:mockedContacts.entries[index].contactString], @"Contact string '%@' at index %lu is not the same as '%@'", suggestions[index].contactString, (unsigned long)index, mockedContacts.entries[index].contactString);
     }
 }
 
