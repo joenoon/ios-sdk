@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 #import <YesGraphSDK/YesGraphSDK.h>
+#import <objc/runtime.h>
+
+@import Social;
 
 @interface ViewController () <YSGShareSheetDelegate>
 
@@ -26,6 +29,7 @@
     self.theme = [YSGTheme new];
     
     [self styleView];
+    
 }
 
 - (IBAction)shareButtonTap:(UIButton *)sender
@@ -92,7 +96,7 @@
     //
     // Client key should be retrieved from your trusted backend.
     //
-    [[YesGraph shared] configureWithClientKey:@""];
+    [[YesGraph shared] configureWithClientKey:@"live-WzEsMCwieWVzZ3JhcGhfc2RrX3Rlc3QiXQ.COM_zw.A76PgpT7is1P8nneuSg-49y4nW8"];
     
     if (completion)
     {
