@@ -56,10 +56,10 @@
     if ([emailObject isKindOfClass:[NSArray class]])
     {
         NSArray *emails = (NSArray *)emailObject;
-        XCTAssertEqual(contact.emails.count, emails.count, @"Emails count '%lu' is not the same as in dictionary '%lu'", contact.emails.count, emails.count);
+        XCTAssertEqual(contact.emails.count, emails.count, @"Emails count '%lu' is not the same as in dictionary '%lu'", (unsigned long)contact.emails.count, (unsigned long)emails.count);
         for (NSUInteger index = 0; index < emails.count; ++index)
         {
-            XCTAssert([contact.emails[index] isEqualToString:emails[index]], @"The email '%@' at index '%lu' is not the same as '%@'", contact.emails[index], index, emails[index]);
+            XCTAssert([contact.emails[index] isEqualToString:emails[index]], @"The email '%@' at index '%lu' is not the same as '%@'", contact.emails[index], (unsigned long)index, emails[index]);
         }
     }
     else if ([emailObject isKindOfClass:[NSString class]])
@@ -75,10 +75,10 @@
     if ([phoneObject isKindOfClass:[NSArray class]])
     {
         NSArray *phones = (NSArray *)phoneObject;
-        XCTAssertEqual(contact.phones.count, phones.count, @"Phones count '%lu' is not the same as in dictionary '%lu'", contact.phones.count, phones.count);
+        XCTAssertEqual(contact.phones.count, phones.count, @"Phones count '%lu' is not the same as in dictionary '%lu'", (unsigned long)contact.phones.count, (unsigned long)phones.count);
         for (NSUInteger index = 0; index < phones.count; ++index)
         {
-            XCTAssert([contact.phones[index] isEqualToString:phones[index]], @"The phone '%@' at index '%lu' is not the same as '%@'", contact.phones[index], index, phones[index]);
+            XCTAssert([contact.phones[index] isEqualToString:phones[index]], @"The phone '%@' at index '%lu' is not the same as '%@'", contact.phones[index], (unsigned long)index, phones[index]);
         }
     }
     else if ([phoneObject isKindOfClass:[NSString class]])
