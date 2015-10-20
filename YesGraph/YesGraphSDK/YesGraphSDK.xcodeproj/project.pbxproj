@@ -288,6 +288,7 @@
 		E8478B3B1BD57ACC004EEB47 /* twitterImageData_1.00.bin in Resources */ = {isa = PBXBuildFile; fileRef = E8478B321BD57ACC004EEB47 /* twitterImageData_1.00.bin */; settings = {ASSET_TAGS = (); }; };
 		E8478B3C1BD57ACC004EEB47 /* twitterImageData_2.00.bin in Resources */ = {isa = PBXBuildFile; fileRef = E8478B331BD57ACC004EEB47 /* twitterImageData_2.00.bin */; settings = {ASSET_TAGS = (); }; };
 		E8478B3D1BD57ACC004EEB47 /* twitterImageData_3.00.bin in Resources */ = {isa = PBXBuildFile; fileRef = E8478B341BD57ACC004EEB47 /* twitterImageData_3.00.bin */; settings = {ASSET_TAGS = (); }; };
+		E84798821BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E84798811BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m */; settings = {ASSET_TAGS = (); }; };
 		E857C0DD1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */; settings = {ASSET_TAGS = (); }; };
 		E87C23141BC31E2300364C0C /* YSGClient+SuggestionsShown.h in Headers */ = {isa = PBXBuildFile; fileRef = E87C23121BC31E2300364C0C /* YSGClient+SuggestionsShown.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E87C23151BC31E2300364C0C /* YSGClient+SuggestionsShown.m in Sources */ = {isa = PBXBuildFile; fileRef = E87C23131BC31E2300364C0C /* YSGClient+SuggestionsShown.m */; };
@@ -525,6 +526,7 @@
 		E8478B321BD57ACC004EEB47 /* twitterImageData_1.00.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = twitterImageData_1.00.bin; sourceTree = "<group>"; };
 		E8478B331BD57ACC004EEB47 /* twitterImageData_2.00.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = twitterImageData_2.00.bin; sourceTree = "<group>"; };
 		E8478B341BD57ACC004EEB47 /* twitterImageData_3.00.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; path = twitterImageData_3.00.bin; sourceTree = "<group>"; };
+		E84798811BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKViewControllerThemeTests.m; sourceTree = "<group>"; };
 		E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKUtilityDateTests.m; sourceTree = "<group>"; };
 		E87C23121BC31E2300364C0C /* YSGClient+SuggestionsShown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGClient+SuggestionsShown.h"; sourceTree = "<group>"; };
 		E87C23131BC31E2300364C0C /* YSGClient+SuggestionsShown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGClient+SuggestionsShown.m"; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				E8D76BE31BD126CC006435BD /* YesGraphSDKIntrospectionTests.m */,
 				E8D76BEB1BD142E4006435BD /* YesGraphSDKParsableTests.m */,
 				E8D76BF21BD153EA006435BD /* YesGraphSDKYSGInviteServiceTests.m */,
+				E84798811BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1290,6 +1293,7 @@
 			files = (
 				E8D76BF31BD153EA006435BD /* YesGraphSDKYSGInviteServiceTests.m in Sources */,
 				E8860D6E1BD055CC005BE89D /* YesGraphSDKDrawingTests.m in Sources */,
+				E84798821BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m in Sources */,
 				38343AEA1BC6A67400DD635B /* YesGraphSDKInviteTests.m in Sources */,
 				E8E845A41BCF027E008E227B /* YesGraphSDKModelContactTests.m in Sources */,
 				38343ADA1BC6A65A00DD635B /* YSGTestMockData.m in Sources */,
