@@ -50,8 +50,9 @@
             }
             else
             {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-                [alert show];
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" preferredStyle:UIAlertControllerStyleAlert];
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+                [self presentViewController:alert animated:YES completion:nil];
             }
         }];
     }
