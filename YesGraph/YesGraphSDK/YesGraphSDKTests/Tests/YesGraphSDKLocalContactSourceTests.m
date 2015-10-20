@@ -28,17 +28,6 @@
     [super tearDown];
 }
 
-- (BOOL)mockedHasPermission
-{
-    return YES;
-}
-
-- (YSGContactList *)mockedUnarchiveObjectWithFile:(NSString *)filePath
-{
-    XCTAssertNotNil(filePath, @"File path for the unarchiver shouldn't be nil");
-    return [YSGTestMockData mockContactList];
-}
-
 - (NSArray <YSGContact *> *)mockedContactListFromContacts:(NSError **)error
 {
     error = nil;
@@ -47,16 +36,6 @@
 
 - (void)swizzleTheMethods
 {
-    {
-        Method original = class_getClassMethod([YSGLocalContactSource class], @selector(hasPermission));
-        Method replacement = class_getInstanceMethod([self class], @selector(mockedHasPermission));
-        method_exchangeImplementations(original, replacement);
-    }
-    {
-        Method original = class_getClassMethod([NSKeyedUnarchiver class], @selector(unarchiveObjectWithFile:));
-        Method replacement = class_getInstanceMethod([self class], @selector(mockedUnarchiveObjectWithFile:));
-        method_exchangeImplementations(original, replacement);
-    }
     {
         // we know the selector is in fact in the class, it's just not visible outside of the compilation unit
         #pragma clang diagnostic push
