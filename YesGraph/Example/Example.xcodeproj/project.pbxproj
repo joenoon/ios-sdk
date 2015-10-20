@@ -18,10 +18,23 @@
 		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
 		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		38FBA0AA1BC7C4E30030C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA0A91BC7C4E30030C473 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		E8DCAE8B1BD5800200581AE6 /* CommonTexts.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE841BD5800200581AE6 /* CommonTexts.m */; settings = {ASSET_TAGS = (); }; };
+		E8DCAE8C1BD5800200581AE6 /* ExampleContactsOnlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE851BD5800200581AE6 /* ExampleContactsOnlyTests.m */; settings = {ASSET_TAGS = (); }; };
+		E8DCAE8D1BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE861BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m */; settings = {ASSET_TAGS = (); }; };
+		E8DCAE8E1BD5800200581AE6 /* HammerTheAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE871BD5800200581AE6 /* HammerTheAppTests.m */; settings = {ASSET_TAGS = (); }; };
+		E8DCAE8F1BD5800200581AE6 /* TwitterAndContacsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE881BD5800200581AE6 /* TwitterAndContacsTests.m */; settings = {ASSET_TAGS = (); }; };
+		E8DCAE901BD5800200581AE6 /* YSGTestMockData.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE8A1BD5800200581AE6 /* YSGTestMockData.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		3805E1721B831B1B004463B8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3805E1501B831B1B004463B8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3805E1571B831B1B004463B8;
+			remoteInfo = Example;
+		};
+		E8DCAE7E1BD57FD900581AE6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3805E1501B831B1B004463B8 /* Project object */;
 			proxyType = 1;
@@ -61,6 +74,16 @@
 		380FD83D1BC6851D00162D85 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FBA0A91BC7C4E30030C473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		E8DCAE791BD57FD900581AE6 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8DCAE7D1BD57FD900581AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8DCAE831BD5800200581AE6 /* CommonTexts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTexts.h; sourceTree = "<group>"; };
+		E8DCAE841BD5800200581AE6 /* CommonTexts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonTexts.m; sourceTree = "<group>"; };
+		E8DCAE851BD5800200581AE6 /* ExampleContactsOnlyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleContactsOnlyTests.m; sourceTree = "<group>"; };
+		E8DCAE861BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookAndTwitterAndContactsTests.m; sourceTree = "<group>"; };
+		E8DCAE871BD5800200581AE6 /* HammerTheAppTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HammerTheAppTests.m; sourceTree = "<group>"; };
+		E8DCAE881BD5800200581AE6 /* TwitterAndContacsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAndContacsTests.m; sourceTree = "<group>"; };
+		E8DCAE891BD5800200581AE6 /* YSGTestMockData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGTestMockData.h; sourceTree = "<group>"; };
+		E8DCAE8A1BD5800200581AE6 /* YSGTestMockData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGTestMockData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +96,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3805E16E1B831B1B004463B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8DCAE761BD57FD900581AE6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -96,6 +126,7 @@
 			children = (
 				3805E15A1B831B1B004463B8 /* Example */,
 				3805E1741B831B1B004463B8 /* ExampleTests */,
+				E8DCAE7A1BD57FD900581AE6 /* ExampleUITests */,
 				385B64D31B831DD900C55F60 /* Frameworks */,
 				3805E1591B831B1B004463B8 /* Products */,
 			);
@@ -106,6 +137,7 @@
 			children = (
 				3805E1581B831B1B004463B8 /* Example.app */,
 				3805E1711B831B1B004463B8 /* ExampleTests.xctest */,
+				E8DCAE791BD57FD900581AE6 /* ExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,6 +192,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E8DCAE7A1BD57FD900581AE6 /* ExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E8DCAE831BD5800200581AE6 /* CommonTexts.h */,
+				E8DCAE841BD5800200581AE6 /* CommonTexts.m */,
+				E8DCAE851BD5800200581AE6 /* ExampleContactsOnlyTests.m */,
+				E8DCAE861BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m */,
+				E8DCAE871BD5800200581AE6 /* HammerTheAppTests.m */,
+				E8DCAE881BD5800200581AE6 /* TwitterAndContacsTests.m */,
+				E8DCAE891BD5800200581AE6 /* YSGTestMockData.h */,
+				E8DCAE8A1BD5800200581AE6 /* YSGTestMockData.m */,
+				E8DCAE7D1BD57FD900581AE6 /* Info.plist */,
+			);
+			path = ExampleUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,6 +247,24 @@
 			productReference = 3805E1711B831B1B004463B8 /* ExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E8DCAE781BD57FD900581AE6 /* ExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8DCAE801BD57FD900581AE6 /* Build configuration list for PBXNativeTarget "ExampleUITests" */;
+			buildPhases = (
+				E8DCAE751BD57FD900581AE6 /* Sources */,
+				E8DCAE761BD57FD900581AE6 /* Frameworks */,
+				E8DCAE771BD57FD900581AE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E8DCAE7F1BD57FD900581AE6 /* PBXTargetDependency */,
+			);
+			name = ExampleUITests;
+			productName = ExampleUITests;
+			productReference = E8DCAE791BD57FD900581AE6 /* ExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -213,6 +279,10 @@
 					};
 					3805E1701B831B1B004463B8 = {
 						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 3805E1571B831B1B004463B8;
+					};
+					E8DCAE781BD57FD900581AE6 = {
+						CreatedOnToolsVersion = 7.0.1;
 						TestTargetID = 3805E1571B831B1B004463B8;
 					};
 				};
@@ -232,6 +302,7 @@
 			targets = (
 				3805E1571B831B1B004463B8 /* Example */,
 				3805E1701B831B1B004463B8 /* ExampleTests */,
+				E8DCAE781BD57FD900581AE6 /* ExampleUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -250,6 +321,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3805E16F1B831B1B004463B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E8DCAE771BD57FD900581AE6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -277,6 +355,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E8DCAE751BD57FD900581AE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8DCAE901BD5800200581AE6 /* YSGTestMockData.m in Sources */,
+				E8DCAE8D1BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m in Sources */,
+				E8DCAE8E1BD5800200581AE6 /* HammerTheAppTests.m in Sources */,
+				E8DCAE8F1BD5800200581AE6 /* TwitterAndContacsTests.m in Sources */,
+				E8DCAE8B1BD5800200581AE6 /* CommonTexts.m in Sources */,
+				E8DCAE8C1BD5800200581AE6 /* ExampleContactsOnlyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -284,6 +375,11 @@
 			isa = PBXTargetDependency;
 			target = 3805E1571B831B1B004463B8 /* Example */;
 			targetProxy = 3805E1721B831B1B004463B8 /* PBXContainerItemProxy */;
+		};
+		E8DCAE7F1BD57FD900581AE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3805E1571B831B1B004463B8 /* Example */;
+			targetProxy = E8DCAE7E1BD57FD900581AE6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -429,6 +525,33 @@
 			};
 			name = Release;
 		};
+		E8DCAE811BD57FD900581AE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yesgraph.ExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Example;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		E8DCAE821BD57FD900581AE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ExampleUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yesgraph.ExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Example;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -458,6 +581,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E8DCAE801BD57FD900581AE6 /* Build configuration list for PBXNativeTarget "ExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E8DCAE811BD57FD900581AE6 /* Debug */,
+				E8DCAE821BD57FD900581AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

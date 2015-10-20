@@ -78,6 +78,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         
         self.nativeMessageSheet = YES;
         self.nativeEmailSheet = YES;
+        
+        _userId = userId;
     }
     
     return self;
