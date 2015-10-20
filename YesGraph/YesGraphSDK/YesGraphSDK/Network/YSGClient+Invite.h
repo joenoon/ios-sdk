@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param userId     user's ID 
  *  @param completion called when completed
  */
-- (void)updateInvitesSent:(nonnull NSArray<YSGContact *> *)invites forUserId:(nonnull NSString *)userId withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
+- (void)updateInvitesSent:(NSArray<YSGContact *> *)invites forUserId:(NSString *)userId withCompletion:(nullable void (^)(NSError *_Nullable error))completion;
 
 @end
 

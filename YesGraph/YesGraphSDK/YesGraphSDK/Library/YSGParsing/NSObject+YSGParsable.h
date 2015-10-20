@@ -8,6 +8,8 @@
 
 @import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSObject (YSGParsable)
 
 /*!
@@ -17,7 +19,7 @@
  *
  *  @return instance of object
  */
-+ (nullable instancetype)ysg_objectWithDictionary:(nonnull NSDictionary *)dictionary;
++ (nullable instancetype)ysg_objectWithDictionary:(NSDictionary *)dictionary;
 
 /*!
  *  Creates new object and fills property values from dictionary using KVO
@@ -28,7 +30,7 @@
  *
  *  @return instance of object
  */
-+ (nullable instancetype)ysg_objectWithDictionary:(nonnull NSDictionary *)dictionary inContext:(nullable id)context;
++ (nullable instancetype)ysg_objectWithDictionary:(NSDictionary *)dictionary inContext:(nullable id)context;
 
 /*!
  *  Creates new object and fills property values from dictionary using KVO
@@ -39,7 +41,7 @@
  *
  *  @return instance of object
  */
-+ (nullable instancetype)ysg_objectWithDictionary:(nonnull NSDictionary *)dictionary inContext:(nullable id)context error:(NSError *__autoreleasing  __nullable * __nullable)error;
++ (nullable instancetype)ysg_objectWithDictionary:(NSDictionary *)dictionary inContext:(nullable id)context error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
 /*!
  *  Returns dictionary of object properties and values
@@ -47,5 +49,7 @@
  *  @return dictionary
  */
 - (nullable NSDictionary *)ysg_toDictionary;
+
+NS_ASSUME_NONNULL_END
 
 @end
