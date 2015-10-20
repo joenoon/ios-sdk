@@ -1,0 +1,15 @@
+language: objective-c
+sudo: false
+osx_image: xcode7
+script:
+- curl -fsSL https://raw.githubusercontent.com/legoless/Dominus/master/install.sh | sh
+env:
+  matrix:
+  - ACTION=build SCHEME='YesGraphSDK'
+  - ACTION=build SCHEME='YesGraphSDKStatic'
+  - ACTION=build SCHEME='Example'
+  - ACTION=build SCHEME='Example-Static'
+  - ACTION=build SCHEME='Example-Swift'
+  - ACTION=test SCHEME='YesGraphSDK'
+  global:
+  - SDK=9.0

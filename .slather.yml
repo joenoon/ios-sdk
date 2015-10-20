@@ -1,0 +1,6 @@
+coverage_service: coveralls
+xcodeproj: YesGraph/YesGraphSDK/YesGraphSDK.xcodeproj
+ignore:
+  - Example/*
+  - Example-Static/*
+  - Example-Swift/*

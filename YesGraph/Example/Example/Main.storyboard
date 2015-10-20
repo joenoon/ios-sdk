@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fFq-mp-1bk">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbx-hW-cJo">
+                                <rect key="frame" x="230" y="401" width="140" height="40"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.10196078431372549" green="0.47843137254901957" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="kBZ-4N-OHb"/>
+                                    <constraint firstAttribute="height" constant="40" id="znT-4J-SLd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="SHARE NOW">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vad-xv-uuF"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVl-Y9-BBF">
+                                <rect key="frame" x="20" y="310" width="560" height="43"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boost the performance of sharing and invite flows by recommending exactly who users should invite. " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHI-ec-cZ2">
+                                        <rect key="frame" x="12" y="5" width="536" height="34"/>
+                                        <animations/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                                    </label>
+                                </subviews>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="hHI-ec-cZ2" secondAttribute="trailing" constant="12" id="1ic-AZ-qow"/>
+                                    <constraint firstItem="hHI-ec-cZ2" firstAttribute="centerY" secondItem="dVl-Y9-BBF" secondAttribute="centerY" id="QbY-2X-xIT"/>
+                                    <constraint firstItem="hHI-ec-cZ2" firstAttribute="centerX" secondItem="dVl-Y9-BBF" secondAttribute="centerX" id="adi-7v-s3G"/>
+                                    <constraint firstItem="hHI-ec-cZ2" firstAttribute="leading" secondItem="dVl-Y9-BBF" secondAttribute="leading" constant="12" id="ek8-PY-Tdi"/>
+                                    <constraint firstItem="hHI-ec-cZ2" firstAttribute="top" secondItem="dVl-Y9-BBF" secondAttribute="top" constant="5" id="mfj-mC-1Id"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xba-dN-0C5">
+                                <rect key="frame" x="140" y="255" width="321" height="30"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.88235294117647056" green="0.12156862745098039" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="321" id="M81-Rg-NdJ"/>
+                                    <constraint firstAttribute="height" constant="30" id="Mp8-Tz-bHQ"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="YesGraph Helps Your App Grow">
+                                        <attributes>
+                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <font key="NSFont" size="18" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hkH-L3-imL">
+                                <rect key="frame" x="231" y="119" width="139" height="100"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="139" id="T2o-kZ-yPo"/>
+                                    <constraint firstAttribute="height" constant="100" id="xUP-aK-eRl"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hHI-ec-cZ2" firstAttribute="top" secondItem="Xba-dN-0C5" secondAttribute="bottom" constant="30" id="9bz-u3-dc9"/>
+                            <constraint firstItem="Xba-dN-0C5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9gD-Es-MpD"/>
+                            <constraint firstItem="Xba-dN-0C5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hkH-L3-imL" secondAttribute="bottom" constant="36" id="Lc3-1Q-UIF"/>
+                            <constraint firstItem="hkH-L3-imL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="75" id="LgX-Sv-SJ0"/>
+                            <constraint firstAttribute="trailing" secondItem="dVl-Y9-BBF" secondAttribute="trailing" constant="20" id="RNF-kh-u1y"/>
+                            <constraint firstItem="bbx-hW-cJo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fhJ-SA-nMs"/>
+                            <constraint firstItem="bbx-hW-cJo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="121" id="fqk-fb-J46"/>
+                            <constraint firstItem="hkH-L3-imL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="se6-sk-7tK"/>
+                            <constraint firstItem="dVl-Y9-BBF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="tju-jO-qHN"/>
+                            <constraint firstItem="bbx-hW-cJo" firstAttribute="top" secondItem="hHI-ec-cZ2" secondAttribute="bottom" constant="52" id="ygm-A8-xy8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Welcome" id="Lg2-bk-igb"/>
+                    <connections>
+                        <outlet property="additionalInfoLabel" destination="hHI-ec-cZ2" id="VC9-LI-iNx"/>
+                        <outlet property="additionalNotesView" destination="dVl-Y9-BBF" id="jwh-FZ-I6G"/>
+                        <outlet property="introTextField" destination="Xba-dN-0C5" id="AsN-l1-xDB"/>
+                        <outlet property="shareButton" destination="bbx-hW-cJo" id="ilV-vQ-4HJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1027" y="360"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="2P9-gI-rUo">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fFq-mp-1bk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xDS-En-s3i">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="pvE-lF-LeN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2aS-Uo-Efc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="60" y="-332"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="launch-logo" width="100" height="100"/>
+    </resources>
+</document>

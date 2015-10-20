@@ -16,6 +16,9 @@
 *.moved-aside
 .idea
 
+*.gcda
+*.gcno
+
 profile
 DerivedData
 
