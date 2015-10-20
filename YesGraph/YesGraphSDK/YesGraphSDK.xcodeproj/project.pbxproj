@@ -291,6 +291,7 @@
 		E84798821BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E84798811BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m */; settings = {ASSET_TAGS = (); }; };
 		E84798841BD6E76000BDA3B8 /* YesGraphSDKMessageCenterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E84798831BD6E76000BDA3B8 /* YesGraphSDKMessageCenterTests.m */; settings = {ASSET_TAGS = (); }; };
 		E84798861BD6F43800BDA3B8 /* YesGraphSDKThemeButtonFadeFactorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E84798851BD6F43800BDA3B8 /* YesGraphSDKThemeButtonFadeFactorTests.m */; settings = {ASSET_TAGS = (); }; };
+		E84798881BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E84798871BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m */; settings = {ASSET_TAGS = (); }; };
 		E857C0DD1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */; settings = {ASSET_TAGS = (); }; };
 		E87C23141BC31E2300364C0C /* YSGClient+SuggestionsShown.h in Headers */ = {isa = PBXBuildFile; fileRef = E87C23121BC31E2300364C0C /* YSGClient+SuggestionsShown.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		E87C23151BC31E2300364C0C /* YSGClient+SuggestionsShown.m in Sources */ = {isa = PBXBuildFile; fileRef = E87C23131BC31E2300364C0C /* YSGClient+SuggestionsShown.m */; };
@@ -531,6 +532,7 @@
 		E84798811BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKViewControllerThemeTests.m; sourceTree = "<group>"; };
 		E84798831BD6E76000BDA3B8 /* YesGraphSDKMessageCenterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKMessageCenterTests.m; sourceTree = "<group>"; };
 		E84798851BD6F43800BDA3B8 /* YesGraphSDKThemeButtonFadeFactorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKThemeButtonFadeFactorTests.m; sourceTree = "<group>"; };
+		E84798871BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKLocalContactSourceTests.m; sourceTree = "<group>"; };
 		E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKUtilityDateTests.m; sourceTree = "<group>"; };
 		E87C23121BC31E2300364C0C /* YSGClient+SuggestionsShown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGClient+SuggestionsShown.h"; sourceTree = "<group>"; };
 		E87C23131BC31E2300364C0C /* YSGClient+SuggestionsShown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGClient+SuggestionsShown.m"; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 				E84798811BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m */,
 				E84798831BD6E76000BDA3B8 /* YesGraphSDKMessageCenterTests.m */,
 				E84798851BD6F43800BDA3B8 /* YesGraphSDKThemeButtonFadeFactorTests.m */,
+				E84798871BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1319,6 +1322,7 @@
 				38343AEB1BC6A67400DD635B /* YesGraphSDKNetworkTests.m in Sources */,
 				E8D76BE71BD128A2006435BD /* YSGTestIntrospectionMocked.m in Sources */,
 				E8D76BE41BD126CC006435BD /* YesGraphSDKIntrospectionTests.m in Sources */,
+				E84798881BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
