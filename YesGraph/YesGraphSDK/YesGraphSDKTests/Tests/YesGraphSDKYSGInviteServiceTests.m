@@ -12,7 +12,7 @@
 
 @import ObjectiveC.runtime;
 
-@interface YesGraphSDKSwizzledMethods : NSObject
+@interface YesGraphSDKSwizzledMethods : XCTestCase
 
 @property (strong, nonatomic) YSGContact *contactEmail;
 @property (strong, nonatomic) YSGContact *contactPhone;

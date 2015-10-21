@@ -35,6 +35,7 @@
 
 - (void)applyTheme:(YSGTheme *)theme
 {
+    self.theme = theme;
     self.view.backgroundColor = self.theme.baseColor;
 }
 
