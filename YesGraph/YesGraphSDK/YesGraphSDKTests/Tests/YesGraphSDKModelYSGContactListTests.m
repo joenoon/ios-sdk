@@ -56,4 +56,16 @@
     }
 }
 
+- (void)testContactListOperationsSortedNumberOfSuggestionsBiggerThanEntriesCount
+{
+    YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
+    mockedContacts.useSuggestions = YES;
+    NSUInteger suggestionCount = mockedContacts.entries.count + 1;
+    
+    XCTAssertNoThrow([mockedContacts sortedEntriesWithNumberOfSuggestions:suggestionCount], @"Exception was thrown while sorting contact list.");
+    
+    NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedEntries = [mockedContacts sortedEntriesWithNumberOfSuggestions:suggestionCount];
+    XCTAssertEqual(sortedEntries.count, 0, @"The number of returned entries '%lu' is not '%d'", (unsigned long)sortedEntries.count, 0);
+}
+
 @end

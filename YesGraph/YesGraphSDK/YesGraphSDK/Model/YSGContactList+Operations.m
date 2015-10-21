@@ -25,7 +25,10 @@
     
     if (numberOfSuggestions > 0)
     {
-        entries = [self.entries subarrayWithRange:NSMakeRange(numberOfSuggestions, self.entries.count - numberOfSuggestions)];
+        if (numberOfSuggestions <= self.entries.count)
+        {
+            entries = [self.entries subarrayWithRange:NSMakeRange(numberOfSuggestions, self.entries.count - numberOfSuggestions)];
+        }
     }
     else
     {
