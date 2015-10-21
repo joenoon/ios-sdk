@@ -67,15 +67,13 @@
         }
     }
     
-    NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    
     NSMutableDictionary <NSString *, NSArray <YSGContact *> *> *sortedList = [NSMutableDictionary dictionary];
     
     for (NSString* letter in contactList)
     {
         NSArray *sortedContacts = contactList[letter];
         
-        sortedList[letter] = [sortedContacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
+        sortedList[letter] = [sortedContacts sortedArrayUsingFunction:contactsSort context:nil];
     }
     
     return sortedList.copy;
@@ -138,5 +136,19 @@
     return filteredContacts.copy;
 }
 
+NSInteger contactsSort(YSGContact *contact1, YSGContact *contact2, void *context)
+{
+    // We force contacts without name on the bottom of the list
+    if (contact1.name.length == 0)
+    {
+        return NSOrderedAscending;
+    }
+    else if (contact2.name.length == 0)
+    {
+        return NSOrderedDescending;
+    }
+    
+    return [contact1.name caseInsensitiveCompare:contact1.name];
+}
 
 @end
