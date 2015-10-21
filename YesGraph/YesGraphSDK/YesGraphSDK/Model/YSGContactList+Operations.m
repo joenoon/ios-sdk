@@ -42,11 +42,22 @@
 
         if (!letter.length || ![[NSCharacterSet letterCharacterSet] characterIsMember:[letter characterAtIndex:0]])
         {
-            letter = @"#";
+            //
+            // If name is empty check if email is available
+            //
+            if (contact.email.length)
+            {
+                letter = [contact.email substringToIndex:1];
+            }
+            else
+            {
+                letter = @"#";
+            }
         }
         
         if (letter.length)
         {
+            letter = letter.uppercaseString;
             if (!contactList[letter])
             {
                 contactList[letter] = [NSMutableArray array];
