@@ -37,6 +37,16 @@
     return nil;
 }
 
++ (BOOL)mockedArchiveRootObject:(YSGContactList *)contactList toFile:(NSString *)filePath
+{
+    return YES;
+}
+
++ (BOOL)mockedFailArchiveRootObject:(YSGContactList *)contactList toFile:(NSString *)filePath
+{
+    return NO;
+}
+
 - (void)swizzleCachedUnarchiverWithEmpty:(BOOL)shouldBeEmpty
 {
     Method original = class_getClassMethod([NSKeyedUnarchiver class], @selector(unarchiveObjectWithFile:));
@@ -48,6 +58,21 @@
     else
     {
         replaced = class_getClassMethod([self class], @selector(mockedUnarchiveWithFile:));
+    }
+    method_exchangeImplementations(original, replaced);
+}
+
+- (void)swizzleCacheArchiverWithFailure:(BOOL)shouldFail
+{
+    Method original = class_getClassMethod([NSKeyedArchiver class], @selector(archiveRootObject:toFile:));
+    Method replaced;
+    if (shouldFail)
+    {
+        replaced = class_getClassMethod([self class], @selector(mockedFailArchiveRootObject:toFile:));
+    }
+    else
+    {
+        replaced = class_getClassMethod([self class], @selector(mockedArchiveRootObject:toFile:));
     }
     method_exchangeImplementations(original, replaced);
 }
@@ -85,7 +110,7 @@
     YSGCacheContactSource *cachedSource = [YSGCacheContactSource new];
     __weak YSGCacheContactSource *preventRetainCycleInstance = cachedSource;
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Fetch Cached Contact List"];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Fetch Failed Cached Contact List"];
     
     [preventRetainCycleInstance fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error) {
         XCTAssertNotNil(error, @"Error is supposed to be nil, not '%@'", error);
@@ -99,6 +124,43 @@
      }];
 }
 
+- (void)testUpdate
+{
+    [self swizzleCacheArchiverWithFailure:NO];
+    YSGCacheContactSource *cachedSource = [YSGCacheContactSource new];
+    __weak YSGCacheContactSource *preventRetainCycleInstance = cachedSource;
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Update Cached Contact List"];
+    
+    [preventRetainCycleInstance updateCacheWithContactList:[YSGTestMockData mockContactList] completion:^(NSError * _Nullable error) {
+        XCTAssertNil(error, @"There shouldn't be an error while updating");
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil not '%@', otherwise the message handler was never invoked", error);
+     }];
+}
+
+- (void)testUpdateWithFail
+{
+    [self swizzleCacheArchiverWithFailure:YES];
+    YSGCacheContactSource *cachedSource = [YSGCacheContactSource new];
+    __weak YSGCacheContactSource *preventRetainCycleInstance = cachedSource;
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Update Cached Contact List"];
+    
+    [preventRetainCycleInstance updateCacheWithContactList:[YSGTestMockData mockContactList] completion:^(NSError * _Nullable error) {
+        XCTAssertNotNil(error, @"There shouldn't be an error while updating");
+        [expectation fulfill];
+    }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil not '%@', otherwise the message handler was never invoked", error);
+     }];
+}
 
 
 @end
