@@ -13,8 +13,6 @@
 #import "objc/runtime.h"
 
 @interface YesGraphSDKLocalContactSourceTests : XCTestCase
-@property (nonatomic) BOOL hasPermission;
-@property (nonatomic) BOOL didAskForPermission;
 @end
 
 @implementation YesGraphSDKLocalContactSourceTests
@@ -29,15 +27,26 @@
     [super tearDown];
 }
 
-- (BOOL)mockedHasPermission
++ (BOOL)mockedHasPermissionYES
 {
-    return self.hasPermission;
+    return YES;
 }
 
-- (BOOL)mockedDidAskForPermission
++ (BOOL)mockedDidAskForPermissionYES
 {
-    return self.didAskForPermission;
+    return YES;
 }
+
++ (BOOL)mockedHasPermissionNO
+{
+    return NO;
+}
+
++ (BOOL)mockedDidAskForPermissionNO
+{
+    return NO;
+}
+
 
 - (NSArray <YSGContact *> *)mockedContactListFromContacts:(NSError **)error
 {
@@ -45,10 +54,36 @@
     return [YSGTestMockData mockContactList].entries;
 }
 
-- (void)swizzlePermissionMethods
+- (void)mockedRequestContactsPermissionWithCompletion:(void (^)(BOOL granted, NSError *error))completion
+{
+    XCTAssertNotNil(completion, @"Completion handler shouldn't be nil");
+    completion(YES, nil);
+}
+
+- (void)swizzlePermissionMethods:(BOOL)allowed
 {
     Method original = class_getClassMethod([YSGLocalContactSource class], @selector(hasPermission));
-    Method replacement = class_getInstanceMethod([self class], @selector(mockedHasPermission));
+    Method replacement = allowed ? class_getClassMethod([self class], @selector(mockedHasPermissionYES)) : class_getClassMethod([self class], @selector(mockedHasPermissionNO));
+    method_exchangeImplementations(original, replacement);
+}
+
+- (void)swizzleDidAskPermissionMethods:(BOOL)allowed
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    Method original = class_getClassMethod([YSGLocalContactSource class], @selector(didAskForPermission));
+#pragma clang diagnostic pop
+    Method replacement = allowed ? class_getClassMethod([self class], @selector(mockedDidAskForPermissionYES)) : class_getClassMethod([self class], @selector(mockedDidAskForPermissionNO));
+    method_exchangeImplementations(original, replacement);
+}
+
+- (void)swizzleRequestPermissionMethods
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+    Method original = class_getInstanceMethod([YSGLocalContactSource class], @selector(requestContactsPermissionWithCompletion:));
+#pragma clang diagnostic pop
+    Method replacement = class_getInstanceMethod([self class], @selector(mockedRequestContactsPermissionWithCompletion:));
     method_exchangeImplementations(original, replacement);
 }
 
@@ -65,13 +100,12 @@
 
 - (void)swizzleTheMethods
 {
-    [self swizzlePermissionMethods];
+    [self swizzlePermissionMethods:YES];
     [self swizzleContactsListFromContactMethods];
 }
 
 - (void)testFetchFonctactListWithCompletion
 {
-    self.hasPermission = YES;
     [self swizzleTheMethods];
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     __weak YSGContactList *mockedList = [YSGTestMockData mockContactList];
@@ -99,8 +133,7 @@
 
 - (void)testFetchContactListWithErrorExpected
 {
-    self.hasPermission = NO;
-    [self swizzlePermissionMethods];
+    [self swizzlePermissionMethods:NO];
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     __weak YSGLocalContactSource *preventRetainCycleInstance = localSource;
     XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Fetch Contact List With Error"];
@@ -108,6 +141,28 @@
     [preventRetainCycleInstance fetchContactListWithCompletion:^(YSGContactList *returnedContacts, NSError *error)
      {
          XCTAssertNotNil(error, @"Error is supposed to not be nil since the user hasn't approved the access to contacts");
+         [expectation fulfill];
+     }];
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil not '%@', otherwise the message handler was never invoked", error);
+     }];
+}
+
+- (void)testRequestContactsPermission
+{
+    [self swizzleDidAskPermissionMethods:YES];
+    [self swizzlePermissionMethods:YES];
+    [self swizzleRequestPermissionMethods];
+    YSGLocalContactSource *localSource = [YSGLocalContactSource new];
+    __weak YSGLocalContactSource *preventRetainCycleInstance = localSource;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Request Permission"];
+    
+    [preventRetainCycleInstance requestContactPermission:^(BOOL granted, NSError *error)
+     {
+         XCTAssertNil(error, @"Error is supposed to not be nil since the user hasn't approved the access to contacts");
+         XCTAssertTrue(granted, @"Permission was denided, expected it to be approved");
          [expectation fulfill];
      }];
 
