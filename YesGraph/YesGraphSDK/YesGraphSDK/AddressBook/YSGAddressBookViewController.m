@@ -134,7 +134,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     if (contactList.entries.count)
     {
         self.sortedContacts = [contactList sortedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions];
-        self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        self.letters = [self.sortedContacts.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
     }
     else
     {
@@ -529,5 +529,20 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 }
 
 #pragma mark - Private Methods
+
+NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context)
+{
+    // We force "#" section to the bottom of the list
+    if ([letter2 isEqualToString:@"#"])
+    {
+        return NSOrderedAscending;
+    }
+    else if ([letter1 isEqualToString:@"#"])
+    {
+        return NSOrderedDescending;
+    }
+    
+    return [letter1 caseInsensitiveCompare:letter2];
+}
 
 @end

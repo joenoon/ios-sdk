@@ -45,11 +45,22 @@
 
         if (!letter.length || ![[NSCharacterSet letterCharacterSet] characterIsMember:[letter characterAtIndex:0]])
         {
-            letter = @"#";
+            //
+            // If name is empty check if email is available
+            //
+            if (contact.email.length)
+            {
+                letter = [contact.email substringToIndex:1];
+            }
+            else
+            {
+                letter = @"#";
+            }
         }
         
         if (letter.length)
         {
+            letter = letter.uppercaseString;
             if (!contactList[letter])
             {
                 contactList[letter] = [NSMutableArray array];
@@ -59,15 +70,13 @@
         }
     }
     
-    NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    
     NSMutableDictionary <NSString *, NSArray <YSGContact *> *> *sortedList = [NSMutableDictionary dictionary];
     
     for (NSString* letter in contactList)
     {
         NSArray *sortedContacts = contactList[letter];
         
-        sortedList[letter] = [sortedContacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
+        sortedList[letter] = [sortedContacts sortedArrayUsingFunction:contactsSort context:nil];
     }
     
     return sortedList.copy;
@@ -130,5 +139,19 @@
     return filteredContacts.copy;
 }
 
+NSInteger contactsSort(YSGContact *contact1, YSGContact *contact2, void *context)
+{
+    // We force contacts without name on the bottom of the list
+    if (contact1.name.length == 0)
+    {
+        return NSOrderedAscending;
+    }
+    else if (contact2.name.length == 0)
+    {
+        return NSOrderedDescending;
+    }
+    
+    return [contact1.name caseInsensitiveCompare:contact1.name];
+}
 
 @end
