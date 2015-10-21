@@ -9,8 +9,20 @@
 @import Foundation;
 #import "YSGClient.h"
 
-@interface YSGMockClient : NSObject
+@class YSGContact;
 
-- (YSGClient *)createMockedClient:(BOOL)shouldSucceed;
+@interface YSGMockClient : YSGClient
+
+NS_ASSUME_NONNULL_BEGIN
+
+@property (nonatomic) BOOL shouldSucceed;
+
+typedef void (^ErrorCompletion)(NSError * _Nullable error);
+typedef void (^MockUpdateCompletionHandler)(NSArray <YSGContact *> * suggestionsShown, NSString * userId, ErrorCompletion _Nullable completion);
+@property (copy, nonatomic) MockUpdateCompletionHandler _Nullable completionHandler;
+
++ (instancetype)createMockedClient:(BOOL)shouldSucceed;
+
+NS_ASSUME_NONNULL_END
 
 @end
