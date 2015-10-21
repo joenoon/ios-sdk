@@ -69,31 +69,24 @@
 
 - (void)swizzleDidAskPermissionMethods:(BOOL)allowed
 {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    Method original = class_getClassMethod([YSGLocalContactSource class], @selector(didAskForPermission));
-#pragma clang diagnostic pop
+    SEL originalSel = NSSelectorFromString(@"didAskForPermission");
+    Method original = class_getClassMethod([YSGLocalContactSource class], originalSel);
     Method replacement = allowed ? class_getClassMethod([self class], @selector(mockedDidAskForPermissionYES)) : class_getClassMethod([self class], @selector(mockedDidAskForPermissionNO));
     method_exchangeImplementations(original, replacement);
 }
 
 - (void)swizzleRequestPermissionMethods
 {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    Method original = class_getInstanceMethod([YSGLocalContactSource class], @selector(requestContactsPermissionWithCompletion:));
-#pragma clang diagnostic pop
+    SEL originalSel = NSSelectorFromString(@"requestContactsPermissionWithCompletion:");
+    Method original = class_getInstanceMethod([YSGLocalContactSource class], originalSel);
     Method replacement = class_getInstanceMethod([self class], @selector(mockedRequestContactsPermissionWithCompletion:));
     method_exchangeImplementations(original, replacement);
 }
 
 - (void)swizzleContactsListFromContactMethods
 {
-    // we know the selector is in fact in the class, it's just not visible outside of the compilation unit
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    Method original = class_getInstanceMethod([YSGLocalContactSource class], @selector(contactListFromContacts:));
-#pragma clang diagnostic pop
+    SEL originalSel = NSSelectorFromString(@"contactListFromContacts:");
+    Method original = class_getInstanceMethod([YSGLocalContactSource class], originalSel);
     Method replacement = class_getInstanceMethod([self class], @selector(mockedContactListFromContacts:));
     method_exchangeImplementations(original, replacement);
 }
