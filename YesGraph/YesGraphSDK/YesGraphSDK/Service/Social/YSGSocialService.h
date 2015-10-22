@@ -9,12 +9,16 @@
 #import "YSGShareService.h"
 #import "YSGTheme.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGSocialService : YSGShareService
 
 @property (nonatomic, readonly) BOOL isAvailable;
 
 #pragma mark - Abstract Methods
 
-@property (nonnull, nonatomic, readonly) NSString *serviceType;
+@property (nonatomic, readonly) NSString *serviceType;
 
 @end
+
+NS_ASSUME_NONNULL_END

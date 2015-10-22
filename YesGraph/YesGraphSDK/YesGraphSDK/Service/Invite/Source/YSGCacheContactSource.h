@@ -10,6 +10,8 @@
 
 #import "YSGContactSource.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Cache contact source stores contact list in a local repository
  */
@@ -18,12 +20,12 @@
 /*!
  *  Stores last update date
  */
-@property (nonnull, nonatomic, readonly) NSDate *lastUpdateDate;
+@property (nonatomic, readonly) NSDate *lastUpdateDate;
 
 /*!
  *  Location of YesGraph cache directory
  */
-@property (nonnull, nonatomic, copy) NSString *cacheDirectory;
+@property (nonatomic, copy) NSString *cacheDirectory;
 
 /*!
  *  Updates locally stored contact list in cache
@@ -31,6 +33,8 @@
  *  @param contactList to be stored
  *  @param completion  called when completed
  */
-- (void)updateCacheWithContactList:(nonnull YSGContactList *)contactList completion:(nullable void (^)(NSError * _Nullable))completion;
+- (void)updateCacheWithContactList:(YSGContactList *)contactList completion:(nullable void (^)(NSError * _Nullable))completion;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,12 +10,12 @@
 
 #import "YSGParsing.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Represents a single Address Book contact
  */
 @interface YSGContact : YSGParsableModel <YSGParsable>
-
-NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSArray<NSString *> *emails;
@@ -39,6 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)sanitizedName;
 
-NS_ASSUME_NONNULL_END
-
 @end
+
+NS_ASSUME_NONNULL_END

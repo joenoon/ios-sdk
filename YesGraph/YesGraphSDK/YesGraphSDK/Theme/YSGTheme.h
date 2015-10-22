@@ -17,12 +17,13 @@
 #import "YSGShareButtonFadeFactors.h"
 #import "YSGStyling.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Use the theme to stylize YesGraph UI
  */
 @interface YSGTheme : NSObject
 
-NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  Main color of the Share UI
@@ -121,6 +122,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, strong) YSGShareAddressBookTheme *shareAddressBookTheme;
 
-NS_ASSUME_NONNULL_END
-
 @end
+
+NS_ASSUME_NONNULL_END

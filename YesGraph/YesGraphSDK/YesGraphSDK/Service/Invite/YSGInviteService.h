@@ -24,18 +24,18 @@ extern NSString * const YSGInviteEmailIsHTMLKey;
 /*!
  *  Contact source that invite service uses for entries
  */
-@property (nonnull, nonatomic, strong, readonly) id<YSGContactSource> contactSource;
+@property (nonatomic, strong, readonly) id<YSGContactSource> contactSource;
 
 /*!
  *  User Id to invite for
  */
-@property (nonnull, nonatomic, readonly) NSString *userId;
+@property (nonatomic, readonly) NSString *userId;
 
 /*!
  *  This message is displayed to the user before entries permissions is requested. If user agrees with the message,
  *  the user is asked for permission to Address Book.
  */
-@property (nonnull, nonatomic, copy) NSString *requestContactPermissionMessage;
+@property (nonatomic, copy) NSString *requestContactPermissionMessage;
 
 #pragma mark - Invite configuration
 
@@ -97,11 +97,11 @@ extern NSString * const YSGInviteEmailIsHTMLKey;
  *
  *  @return instance of invite service
  */
-- (instancetype _Nonnull)initWithContactSource:(nonnull id<YSGContactSource>)contactSource userId:(nullable NSString *)userId NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContactSource:(id<YSGContactSource>)contactSource userId:(nullable NSString *)userId NS_DESIGNATED_INITIALIZER;
 
 #pragma mark - Triggers
 
-- (void)triggerInviteFlowWithContacts:(nonnull NSArray <YSGContact *> *)entries;
+- (void)triggerInviteFlowWithContacts:(NSArray <YSGContact *> *)entries;
 
 @end
 

@@ -8,7 +8,9 @@
 
 #import "YSGLoggingConstants.h"
 
-NSString* _Nonnull YSGLogLevelString (YSGLogLevel level)
+NS_ASSUME_NONNULL_BEGIN
+
+NSString* YSGLogLevelString (YSGLogLevel level)
 {
     switch (level)
     {
@@ -26,3 +28,5 @@ NSString* _Nonnull YSGLogLevelString (YSGLogLevel level)
             return @"None";
     }
 }
+
+NS_ASSUME_NONNULL_END

@@ -22,9 +22,13 @@
         NSMutableDictionary *inviteSent = [NSMutableDictionary dictionaryWithDictionary:@
         {
             @"user_id": userId,
-            @"invitee_name": c.name,
             @"sent_at": sent_at
         }];
+        
+        if (c.name)
+        {
+            inviteSent[@"invitee_name"] = c.name;
+        }
         
         if (c.phone)
         {
@@ -33,8 +37,15 @@
         if (c.email)
         {
             inviteSent[@"email"] = c.email;
+<<<<<<< HEAD
+=======
         }
-        [ret addObject:inviteSent];
+        
+        if (inviteSent.count > 2)
+        {
+            [ret addObject:inviteSent];
+>>>>>>> develop
+        }
     }
 
     return ret;

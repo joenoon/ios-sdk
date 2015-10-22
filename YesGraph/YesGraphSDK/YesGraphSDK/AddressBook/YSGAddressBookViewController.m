@@ -301,6 +301,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     
     [barButtonAppearanceInSearchBar setTitle:@"Done"];
+    
+    [self.searchController loadViewIfNeeded];
 }
 
 #pragma mark - View Transitions
