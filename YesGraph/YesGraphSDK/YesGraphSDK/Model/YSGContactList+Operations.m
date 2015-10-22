@@ -48,7 +48,7 @@
             //
             // If name is empty check if email is available
             //
-            if (contact.email.length)
+            if (!letter.length && contact.email.length)
             {
                 letter = [contact.email substringToIndex:1];
             }
