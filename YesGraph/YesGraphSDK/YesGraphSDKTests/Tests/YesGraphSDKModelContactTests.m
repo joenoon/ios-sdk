@@ -40,8 +40,12 @@
         }
         NSString *contactString = contact.email ?: contact.phone;
         XCTAssert([contact.contactString isEqualToString:contactString], @"Contact string should be either an email or a phone number if no emails are present");
-        NSString *sanitizedNameString = [contact.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        XCTAssert([contact.sanitizedName isEqualToString:sanitizedNameString], @"Contact's sanitized name string shouldn't include any whitespaces or newlines");
+        
+        if (contact.name)
+        {
+            NSString *sanitizedNameString = [contact.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            XCTAssert([contact.sanitizedName isEqualToString:sanitizedNameString], @"Contact's sanitized name string shouldn't include any whitespaces or newlines");
+        }
     }
 }
 

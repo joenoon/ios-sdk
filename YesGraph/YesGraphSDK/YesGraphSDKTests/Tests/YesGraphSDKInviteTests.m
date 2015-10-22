@@ -91,13 +91,21 @@
              XCTAssert([userId isEqualToString:YSGTestClientID], @"user_id is %@, but expected %@", userId, YSGTestClientID);
 
              YSGContact *contact = mockedContacts.entries[index];
+             
+             if (!contact.name)
+             {
+                 XCTAssertNil(entry[@"invitee_name"], @"invitee_name must be nil in entry: %@", entry);
+             }
+             else
+             {
+                 NSString *name = entry[@"invitee_name"];
+                 
+                 XCTAssertNotNil(name, @"invitee_name is missing for entry: %@", entry);
+                 XCTAssert([name isEqualToString:contact.name], @"invitee_name %@ should be %@", name, contact.name);
+             }
 
-             NSString *name = [entry objectForKey:@"invitee_name"];
-             XCTAssertNotNil(name, @"invitee_name is missing for entry: %@", entry);
-             XCTAssert([name isEqualToString:contact.name], @"invitee_name %@ should be %@", name, contact.name);
-
-             NSString *sentAt = [entry objectForKey:@"sent_at"];
-             XCTAssertNotNil(name, @"sent_at is missing for entry: %@", entry);
+             NSString *sentAt = entry[@"sent_at"];
+             XCTAssertNotNil(sentAt, @"sent_at is missing for entry: %@", entry);
              NSDate *parsedSentAt = [YSGUtility dateFromIso8601String:sentAt];
              XCTAssertNotNil(parsedSentAt, @"Parsing date string '%@' failed, is the format correct?", sentAt);
 

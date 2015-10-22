@@ -29,9 +29,23 @@
     
     NSDictionary *contact6 = @{ @"name" : @"Sue Reed", @"emails" : @[ @"sue.reed37@mymockdata.com", @"sue.reed372@mymockdata.com" ], @"phones" : @[ ] };
     
-    NSDictionary *contact7 = @{ @"name" : @"Howard Daniels", @"phones" : @[ @"howard.daniels64@mymockdata.com" ], @"phones" : @[ @"+1 (798)-494-6469" ] };
+    NSDictionary *contact7 = @{ @"name" : @"Howard Daniels", @"emails" : @[ @"howard.daniels64@mymockdata.com" ], @"phones" : @[ @"+1 (798)-494-6469" ] };
     
     NSDictionary *contact8 = @{ @"name" : @"Charlotte Hoffman", @"phones" : @[ @"+1 (495)-692-7296" ] };
+    NSDictionary *contact9 = @{ @"phones" : @[ @"+1 (495)-692-4416", @"+386 11 220 233" ] };
+    NSDictionary *contact10 = @{ @"phones" : @[ @"+386 11 221 233" ] };
+    
+    NSDictionary *contact11 = @{ @"phones" : @[ @"+1 (495)-123-4416" ] };
+    
+    NSDictionary *contact12 = @{ @"emails" : @[ @"christine.bell12@mymockdata.com" ], @"phones" : @[ @"+1 (798)-494-6121" ] };
+    NSDictionary *contact13 = @{ @"emails" : @[ @"marion.richards11@mymockdata.com" ] };
+    NSDictionary *contact14 = @{ @"emails" : @[ @"camila.harrison21@mymockdata.com", @"camila.harrisssson55@mymockdata.com", @"camilla.harrissssson1967@mymockdata.com" ] };
+    NSDictionary *contact15 = @{ @"name" : @"★ Steven Smith", @"emails" : @[ @"steven.smith15@mymockdata.com" ] };
+    NSDictionary *contact16 = @{ @"name" : @"(Shane) Shannon Hill", @"emails" : @[ @"shannon.shannon788@mymockdata.com" ] };
+    NSDictionary *contact17 = @{ @"name" : @"* Manuela Velasco", @"emails" : @[ @"manuela.man.velasco11@mymockdata.com" ] };
+    NSDictionary *contact18 = @{ @"name" : @"15512 Some Address", @"phones" : @[ @"+1 (495)-331-4222" ] };
+    NSDictionary *contact19 = @{ @"name" : @"441 Some Address", @"phones" : @[ @"+1 (555)-119-4222" ] };
+    NSDictionary *contact20 = @{ @"name" : @"*$%/( Random name", @"phones" : @[ @"+1 (555)-119-3355" ] };
     
     YSGContact *parsedContact1 = [YSGContact ysg_objectWithDictionary:contact1];
     YSGContact *parsedContact2 = [YSGContact ysg_objectWithDictionary:contact2];
@@ -41,8 +55,20 @@
     YSGContact *parsedContact6 = [YSGContact ysg_objectWithDictionary:contact6];
     YSGContact *parsedContact7 = [YSGContact ysg_objectWithDictionary:contact7];
     YSGContact *parsedContact8 = [YSGContact ysg_objectWithDictionary:contact8];
+    YSGContact *parsedContact9 = [YSGContact ysg_objectWithDictionary:contact9];
+    YSGContact *parsedContact10 = [YSGContact ysg_objectWithDictionary:contact10];
+    YSGContact *parsedContact11 = [YSGContact ysg_objectWithDictionary:contact11];
+    YSGContact *parsedContact12 = [YSGContact ysg_objectWithDictionary:contact12];
+    YSGContact *parsedContact13 = [YSGContact ysg_objectWithDictionary:contact13];
+    YSGContact *parsedContact14 = [YSGContact ysg_objectWithDictionary:contact14];
+    YSGContact *parsedContact15 = [YSGContact ysg_objectWithDictionary:contact15];
+    YSGContact *parsedContact16 = [YSGContact ysg_objectWithDictionary:contact16];
+    YSGContact *parsedContact17 = [YSGContact ysg_objectWithDictionary:contact17];
+    YSGContact *parsedContact18 = [YSGContact ysg_objectWithDictionary:contact18];
+    YSGContact *parsedContact19 = [YSGContact ysg_objectWithDictionary:contact19];
+    YSGContact *parsedContact20 = [YSGContact ysg_objectWithDictionary:contact20];
     
-    contactList.entries = @[ parsedContact1, parsedContact2, parsedContact3, parsedContact4, parsedContact5, parsedContact6, parsedContact7, parsedContact8 ];
+    contactList.entries = @[ parsedContact1, parsedContact2, parsedContact3, parsedContact4, parsedContact5, parsedContact6, parsedContact7, parsedContact8, parsedContact9, parsedContact10, parsedContact11, parsedContact12, parsedContact13, parsedContact14, parsedContact15, parsedContact16, parsedContact17, parsedContact18, parsedContact19, parsedContact20 ];
     
     return contactList;
 }
