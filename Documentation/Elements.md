@@ -1,8 +1,8 @@
-# YesGraph iOS SDK - Getting Started
+# YesGraph iOS SDK - Elements
 
-YesGraph iOS SDK makes it easy to add invite flows to your app and helps your app grow.
+YesGraph iOS SDK makes it easy to add invite flows to your app and helps your app grow. This document describes basic elements of the SDK.
 
-##What YesGraph does for you
+## What YesGraph does for you
 
 Boosts the performance of sharing and invite flows by recommending exactly who users should invite. We use machine learning and social graph analysis to tailor results just for your product and users.
 
