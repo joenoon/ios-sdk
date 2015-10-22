@@ -1,6 +1,6 @@
 # YesGraph iOS SDK - Elements
 
-YesGraph iOS SDK makes it easy to add invite flows to your app and helps your app grow. This document describes basic elements of the SDK.
+YesGraph iOS SDK makes it easy to add invite flows to your app and helps your app grow. This document describes basic elements of the SDK and what are they used for.
 
 ## What YesGraph does for you
 
@@ -8,9 +8,22 @@ Boosts the performance of sharing and invite flows by recommending exactly who u
 
 **How YesGraph Works**: YesGraph can recommend who each user should invite. We tune our ranking by learning about past users and past invites. Then you send a user’s contacts, and we send back a ranked list.
 
-##Base YesGraph iOS SDK classes so you can leverage the API with ease
+# Sections
 
-###YSGClient
+YesGraph SDK is divided into multiple sections. The sections correspond to folder structure inside the SDK.
+
+- [Address Book](#address-book) - Contains UI that displays contacts form 
+- [Core](#library)
+- [Main](#main)
+- [Model](#model)
+- [Network](#service)
+- [Theme](#theme)
+
+
+- [YSGClient](#YSGClient)
+- 
+
+### YSGClient
 **YSGClient** provides direct API access to YesGraph API which needs to be configured with your **YesGraph clientKey**.
 Because YesGraph treats mobile devices as untrusted clients, first you need a trusted backend to generate client keys.
 
