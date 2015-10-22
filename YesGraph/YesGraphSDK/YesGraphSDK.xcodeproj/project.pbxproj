@@ -70,10 +70,10 @@
 		382708171BCF93B500B85AFF /* YSGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 382708131BCF93B500B85AFF /* YSGViewController.m */; };
 		382708181BCF93BA00B85AFF /* YSGContactList+Operations.m in Sources */ = {isa = PBXBuildFile; fileRef = 38827CA61BCE995100A6610E /* YSGContactList+Operations.m */; };
 		382708191BCF956C00B85AFF /* YSGContactList+Operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 38827CA51BCE995100A6610E /* YSGContactList+Operations.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		383256FD1BD8FE7B003E106A /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FA1BD8FE7B003E106A /* YSGShareCellShapeEnum.h */; };
-		383256FE1BD8FE7B003E106A /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FA1BD8FE7B003E106A /* YSGShareCellShapeEnum.h */; };
-		383256FF1BD8FE7B003E106A /* YSGShareSheetServiceCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FB1BD8FE7B003E106A /* YSGShareSheetServiceCell.h */; };
-		383257001BD8FE7B003E106A /* YSGShareSheetServiceCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FB1BD8FE7B003E106A /* YSGShareSheetServiceCell.h */; };
+		383256FD1BD8FE7B003E106A /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FA1BD8FE7B003E106A /* YSGShareCellShapeEnum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		383256FE1BD8FE7B003E106A /* YSGShareCellShapeEnum.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FA1BD8FE7B003E106A /* YSGShareCellShapeEnum.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		383256FF1BD8FE7B003E106A /* YSGShareSheetServiceCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FB1BD8FE7B003E106A /* YSGShareSheetServiceCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		383257001BD8FE7B003E106A /* YSGShareSheetServiceCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 383256FB1BD8FE7B003E106A /* YSGShareSheetServiceCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		383257011BD8FE7B003E106A /* YSGShareSheetServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 383256FC1BD8FE7B003E106A /* YSGShareSheetServiceCell.m */; };
 		383257021BD8FE7B003E106A /* YSGShareSheetServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 383256FC1BD8FE7B003E106A /* YSGShareSheetServiceCell.m */; };
 		38343ADA1BC6A65A00DD635B /* YSGTestMockData.m in Sources */ = {isa = PBXBuildFile; fileRef = 38343AD91BC6A65A00DD635B /* YSGTestMockData.m */; };
