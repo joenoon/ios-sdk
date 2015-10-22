@@ -37,14 +37,11 @@
         if (c.email)
         {
             inviteSent[@"email"] = c.email;
-<<<<<<< HEAD
-=======
         }
         
         if (inviteSent.count > 2)
         {
             [ret addObject:inviteSent];
->>>>>>> develop
         }
     }
 
