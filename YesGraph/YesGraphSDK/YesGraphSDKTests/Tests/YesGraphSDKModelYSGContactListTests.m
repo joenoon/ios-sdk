@@ -36,9 +36,9 @@
     {
         NSDictionary *expectation = expectedSections[index];
         NSString *key = expectation.allKeys.firstObject;
-        NSArray *contacts = [noSuggestions objectForKey:key];
+        NSArray *contacts = noSuggestions[key];
         XCTAssertNotNil(contacts, @"Contacts shouldn't be nil for key '%@'", key);
-        NSNumber *val = [expectation objectForKey:key];
+        NSNumber *val = expectation[key];
         XCTAssertEqual(contacts.count, [val integerValue], @"Number of contacts in section '%@' should be '%@', but it was '%lu'", key, val, (unsigned long)contacts.count);
     }
 }

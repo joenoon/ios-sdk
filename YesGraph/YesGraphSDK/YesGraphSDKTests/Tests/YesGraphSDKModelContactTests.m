@@ -48,10 +48,10 @@
 - (void)compareContact:(YSGContact *)contact withDictionary:(NSDictionary *)dictionary
 {
     XCTAssertNotNil(contact, @"Contact should not be nil after parsing values from: %@", dictionary);
-    NSString *name = [dictionary objectForKey:@"name"];
+    NSString *name = dictionary[@"name"];
     XCTAssert([contact.name isEqualToString:name], @"Contact name '%@' is not the same as '%@'", contact.name, name);
 
-    id emailObject = [dictionary objectForKey:@"emails"];
+    id emailObject = dictionary[@"emails"];
 
     if ([emailObject isKindOfClass:[NSArray class]])
     {
@@ -70,7 +70,7 @@
     }
 
 
-    id phoneObject = [dictionary objectForKey:@"phones"];
+    id phoneObject = dictionary[@"phones"];
 
     if ([phoneObject isKindOfClass:[NSArray class]])
     {
@@ -131,7 +131,7 @@
         YSGContact *invalidContact1 = [YSGContact ysg_objectWithDictionary:invalidContactValues1];
         // it should only contain the name
         XCTAssertNotNil(invalidContact1, @"The contact shouldn't be nil even though it has an invalid state");
-        NSString *name = [invalidContactValues1 objectForKey:@"name"];
+        NSString *name = invalidContactValues1[@"name"];
         XCTAssert([invalidContact1.name isEqualToString:name], @"Invalid contact's name '%@' is not the same as '%@'", invalidContact1.name, name);
         XCTAssertNil(invalidContact1.emails, @"Emails should be nil");
         XCTAssertNil(invalidContact1.phones, @"Phones should be nil");
@@ -141,7 +141,7 @@
         YSGContact *invalidContact3 = [YSGContact ysg_objectWithDictionary:invalidContactValues3];
         // it should only contain the name
         XCTAssertNotNil(invalidContact3, @"The contact shouldn't be nil even though it has an invalid state");
-        NSString *name = [invalidContactValues3 objectForKey:@"name"];
+        NSString *name = invalidContactValues3[@"name"];
         XCTAssert([invalidContact3.name isEqualToString:name], @"Invalid contact's name '%@' is not the same as '%@'", invalidContact3.name, name);
         XCTAssertNil(invalidContact3.emails, @"Emails should be nil");
         XCTAssertNil(invalidContact3.phones, @"Phones should be nil");

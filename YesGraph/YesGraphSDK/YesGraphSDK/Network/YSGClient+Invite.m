@@ -28,11 +28,11 @@
         
         if (c.phone)
         {
-            [inviteSent setObject:c.phone forKey:@"phone"];
+            inviteSent[@"phone"] = c.phone;
         }
         if (c.email)
         {
-            [inviteSent setObject:c.email forKey:@"email"];
+            inviteSent[@"email"] = c.email;
         }
         [ret addObject:inviteSent];
     }

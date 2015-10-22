@@ -42,7 +42,7 @@
     {
         XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Client key request should be sent with the POST method");
         XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/client-key"], @"Client key request not sent to the right URL");
-        NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+        NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
         XCTAssertNotNil(authHeader, @"Authorization header is missing");
         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
         XCTAssertNotNil(request.HTTPBodyStream, @"No data can be read from the stream");
@@ -67,7 +67,7 @@
         NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
         XCTAssertNil(err, @"Error parsing response data: %@", err);
         
-        NSString *userId = [parsedResponse objectForKey:@"user_id"];
+        NSString *userId = parsedResponse[@"user_id"];
         XCTAssertNotNil(userId, @"UserId shouldn't be nil in client key payload");
 
         return YES;
@@ -108,13 +108,6 @@
     {
         XCTAssertNotNil(response, @"Response object should not be nil");
         XCTAssertNotNil(error, @"Error object should not be nil");
-        /*XCTAssert([response.response isKindOfClass:[NSHTTPURLResponse class]], @"Response should be of type NSHTTPURLResponse");
-        
-        id statusCode = [error.userInfo objectForKey:@"YSGErrorNetworkStatusCodeKey"];
-        
-        XCTAssertNotNil(statusCode, @"Error detail object does not contain the status code key");
-        NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response.response;
-        XCTAssert([resp statusCode] == 401 && [error.userInfo[@"YSGErrorNetworkStatusCodeKey"] intValue] == 401, @"HTTP status code should be Not Authorized (401)");*/
         [expectation fulfill];
     }];
     
@@ -138,7 +131,7 @@
         // /test endpoint specifies the Authorization header
         XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
         XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"GET"], @"Expected a 'GET' method");
-        NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+        NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
         XCTAssertNotNil(authHeader, @"Authorization header is missing");
         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
         return YES;
@@ -159,12 +152,12 @@
          XCTAssertNotNil(response.responseObject, @"Response should have a parsed data object");
          XCTAssert([response.responseObject isKindOfClass:[NSDictionary class]], @"Parsed data object should be a NSDictionary");
          NSDictionary *respParsed = (NSDictionary *)response.responseObject;
-         XCTAssertNotNil([respParsed objectForKey:@"message"], @"Parsed object should contains a message key");
-         XCTAssertNotNil([respParsed objectForKey:@"meta"], @"Parsed object should contains a meta key");
-         XCTAssert([[respParsed objectForKey:@"meta"]  isKindOfClass:[NSDictionary class]], @"Meta key should be a NSDictionary");
-         NSDictionary *meta = (NSDictionary *)[respParsed objectForKey:@"meta"];
-         XCTAssertNotNil([meta objectForKey:@"app_name"], @"App name should not be nil");
-         XCTAssert([[meta objectForKey:@"app_name"] isEqualToString:@"demo"], @"App name should be 'demo'");
+         XCTAssertNotNil(respParsed[@"message"], @"Parsed object should contains a message key");
+         XCTAssertNotNil(respParsed[@"meta"], @"Parsed object should contains a meta key");
+         XCTAssert([respParsed[@"meta"]  isKindOfClass:[NSDictionary class]], @"Meta key should be a NSDictionary");
+         NSDictionary *meta = (NSDictionary *)respParsed[@"meta"];
+         XCTAssertNotNil(meta[@"app_name"], @"App name should not be nil");
+         XCTAssert([meta[@"app_name"] isEqualToString:@"demo"], @"App name should be 'demo'");
          [expectation fulfill];
      }];
     
@@ -186,7 +179,7 @@
      {
         XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
         XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'POST' method");
-        NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+        NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
         XCTAssertNotNil(authHeader, @"Authorization header is missing");
         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
         return YES;
@@ -227,12 +220,12 @@
          XCTAssertNotNil(response.responseObject, @"Response should have a parsed data object");
          XCTAssert([response.responseObject isKindOfClass:[NSDictionary class]], @"Parsed data object should be a NSDictionary");
          NSDictionary *respParsed = (NSDictionary *)response.responseObject;
-         XCTAssertNotNil([respParsed objectForKey:@"message"], @"Parsed object should contains a message key");
-         XCTAssertNotNil([respParsed objectForKey:@"meta"], @"Parsed object should contains a meta key");
-         XCTAssert([[respParsed objectForKey:@"meta"]  isKindOfClass:[NSDictionary class]], @"Meta key should be a NSDictionary");
-         NSDictionary *meta = (NSDictionary *)[respParsed objectForKey:@"meta"];
-         XCTAssertNotNil([meta objectForKey:@"app_name"], @"App name should not be nil");
-         XCTAssert([[meta objectForKey:@"app_name"] isEqualToString:@"demo"], @"App name should be 'demo'");
+         XCTAssertNotNil(respParsed[@"message"], @"Parsed object should contains a message key");
+         XCTAssertNotNil(respParsed[@"meta"], @"Parsed object should contains a meta key");
+         XCTAssert([respParsed[@"meta"]  isKindOfClass:[NSDictionary class]], @"Meta key should be a NSDictionary");
+         NSDictionary *meta = (NSDictionary *)respParsed[@"meta"];
+         XCTAssertNotNil(meta[@"app_name"], @"App name should not be nil");
+         XCTAssert([meta[@"app_name"] isEqualToString:@"demo"], @"App name should be 'demo'");
          [expectation fulfill];
      }];
     
