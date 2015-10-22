@@ -83,8 +83,8 @@
          XCTAssert(expectedSuggestions.count == sentSuggestions.count, @"Arrays don't have the same number of elements");
          for (NSInteger index = 0; index < expectedSuggestions.count; ++index)
          {
-             YSGContact *contact = [expectedSuggestions objectAtIndex:index];
-             NSDictionary *sentContact = [sentSuggestions objectAtIndex:index];
+             YSGContact *contact = expectedSuggestions[index];
+             NSDictionary *sentContact = sentSuggestions[index];
 
              NSString *userId = sentContact[@"user_id"];
              XCTAssertNotNil(userId, @"UserId shouldn't be nil in suggestions payload");
