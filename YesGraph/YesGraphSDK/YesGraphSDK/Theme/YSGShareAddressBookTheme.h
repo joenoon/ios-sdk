@@ -9,9 +9,10 @@
 @import Foundation;
 @import UIKit;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface YSGShareAddressBookTheme : NSObject
 
-NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  Background of the address book view
@@ -69,6 +70,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic) CGFloat sectionFontSize;
 
-NS_ASSUME_NONNULL_END
-
 @end
+
+NS_ASSUME_NONNULL_END
