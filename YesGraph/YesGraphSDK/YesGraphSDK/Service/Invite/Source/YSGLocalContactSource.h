@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark - Contact Access Prompt
 
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptTitle;
+/*!
+ *  This message is displayed to the user before entries permissions is requested. If user agrees with the message,
+ *  the user is asked for permission to Address Book.
+ */
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 
 /*!

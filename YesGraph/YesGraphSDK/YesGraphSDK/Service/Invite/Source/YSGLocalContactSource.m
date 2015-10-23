@@ -127,8 +127,6 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     }
 }
 
-
-
 #pragma mark - Permissions
 
 - (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion
