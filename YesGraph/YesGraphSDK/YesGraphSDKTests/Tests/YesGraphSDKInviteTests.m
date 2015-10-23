@@ -54,7 +54,7 @@
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Invites should be sent with the POST method");
          XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/invites-sent"], @"Invite not being sent to the right URL");
-         NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+         NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
          XCTAssertNotNil(authHeader, @"Authorization header is missing");
          XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
          XCTAssertNotNil(request.HTTPBodyStream, @"No data can be read from the stream");
@@ -78,7 +78,7 @@
          XCTAssertNil(err, @"Error parsing response data: %@", err);
 
          YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
-         NSArray *entries = [parsedResponse objectForKey:@"entries"];
+         NSArray *entries = parsedResponse[@"entries"];
          XCTAssertNotNil(entries, @"Request body is missing entries parameter");
          XCTAssert(entries.count == mockedContacts.entries.count, @"Expected the same number of entries in request body as there are in the mocked contact list, but got %lu instead of %lu", (unsigned long)(unsigned long)entries.count, (unsigned long)mockedContacts.entries.count);
 
@@ -86,12 +86,11 @@
          {
              NSDictionary *entry = entries[index];
 
-             NSString *userId = [entry objectForKey:@"user_id"];
+             NSString *userId = entry[@"user_id"];
              XCTAssertNotNil(userId, @"user_id is missing for entry: %@", entry);
              XCTAssert([userId isEqualToString:YSGTestClientID], @"user_id is %@, but expected %@", userId, YSGTestClientID);
 
              YSGContact *contact = mockedContacts.entries[index];
-             
              if (!contact.name)
              {
                  XCTAssertNil(entry[@"invitee_name"], @"invitee_name must be nil in entry: %@", entry);
@@ -103,14 +102,14 @@
                  XCTAssertNotNil(name, @"invitee_name is missing for entry: %@", entry);
                  XCTAssert([name isEqualToString:contact.name], @"invitee_name %@ should be %@", name, contact.name);
              }
-
+             
              NSString *sentAt = entry[@"sent_at"];
              XCTAssertNotNil(sentAt, @"sent_at is missing for entry: %@", entry);
              NSDate *parsedSentAt = [YSGUtility dateFromIso8601String:sentAt];
              XCTAssertNotNil(parsedSentAt, @"Parsing date string '%@' failed, is the format correct?", sentAt);
 
-             NSString *phone = [entry objectForKey:@"phone"];
-             NSString *email = [entry objectForKey:@"email"];
+             NSString *phone = entry[@"phone"];
+             NSString *email = entry[@"email"];
              XCTAssert(phone || email, @"Both phone and email are missing for entry: %@", entry);
              if (phone)
              {

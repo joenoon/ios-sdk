@@ -53,7 +53,7 @@
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Shown suggestions should be sent with the POST method");
          XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/suggested-seen"], @"Suggestions not sent to the right URL");
-         NSString *authHeader = [request.allHTTPHeaderFields objectForKey:@"Authorization"];
+         NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
          XCTAssertNotNil(authHeader, @"Authorization header is missing");
          XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
          XCTAssertNotNil(request.HTTPBodyStream, @"No data can be read from the stream");
@@ -76,33 +76,33 @@
          NSDictionary *parsedResponse = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&err];
          XCTAssertNil(err, @"Error parsing response data: %@", err);
 
-         NSArray *sentSuggestions = [parsedResponse objectForKey:@"entries"];
+         NSArray *sentSuggestions = parsedResponse[@"entries"];
          XCTAssertNotNil(sentSuggestions, @"Request body is missing entries");
 
          NSArray *expectedSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
          XCTAssert(expectedSuggestions.count == sentSuggestions.count, @"Arrays don't have the same number of elements");
          for (NSInteger index = 0; index < expectedSuggestions.count; ++index)
          {
-             YSGContact *contact = [expectedSuggestions objectAtIndex:index];
-             NSDictionary *sentContact = [sentSuggestions objectAtIndex:index];
+             YSGContact *contact = expectedSuggestions[index];
+             NSDictionary *sentContact = sentSuggestions[index];
 
-             NSString *userId = [sentContact objectForKey:@"user_id"];
+             NSString *userId = sentContact[@"user_id"];
              XCTAssertNotNil(userId, @"UserId shouldn't be nil in suggestions payload");
              XCTAssert([userId isEqualToString:YSGTestClientID], @"Sent UserId in suggestions payload is not the same as mocked UserId: %@, should be %@", userId, YSGTestClientID);
 
-             NSString *contactName = [sentContact objectForKey:@"name"];
+             NSString *contactName = sentContact[@"name"];
              XCTAssertNotNil(contactName, @"Contact name shouldn't be nil");
              XCTAssert([contactName isEqualToString:contact.name]);
 
-             NSArray *contactEmails = [sentContact objectForKey:@"emails"];
+             NSArray *contactEmails = sentContact[@"emails"];
              XCTAssertNotNil(contactEmails, @"Contact emails shouldn't be nil (should be empty array)");
              XCTAssert(contactEmails.count == 0 ? !contact.emails || contact.emails.count == 0 : [contactEmails isEqualToArray:contact.emails], @"Unexpected emails array, got: %@, expected: %@", contactEmails, contact.emails);
 
-             NSArray *contactPhones = [sentContact objectForKey:@"phones"];
+             NSArray *contactPhones = sentContact[@"phones"];
              XCTAssertNotNil(contactPhones, @"Contact phones shouldn't be nil (should be empty array)");
              XCTAssert(contactPhones.count == 0 ? !contact.phones || contact.phones.count == 0 : [contactPhones isEqualToArray:contact.phones], @"Unexpected phones array, got: %@, expected: %@", contactPhones, contact.phones);
 
-             NSString *seenAtString = [sentContact objectForKey:@"seen_at"];
+             NSString *seenAtString = sentContact[@"seen_at"];
              XCTAssertNotNil(seenAtString, @"seen_at shouldn't be nil, it should be an ISO8601 date string");
              NSDate *parsedSeenAt = [YSGUtility dateFromIso8601String:seenAtString];
              XCTAssertNotNil(parsedSeenAt, @"seen_at string is not in an ISO8601 format: %@", seenAtString);
