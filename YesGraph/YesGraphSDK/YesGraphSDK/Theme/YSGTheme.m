@@ -23,8 +23,7 @@
         self.baseColor = [YSGThemeConstants defaultBackgroundColor];
         // set default font details
         self.fontFamily = [YSGThemeConstants defaultFontFamily];
-        self.shareButtonLabelFontSize = [YSGThemeConstants defaultShareButtonFontSize]; 
-        self.shareButtonLabelTextAlignment = [YSGThemeConstants defaultTextAlignment]; 
+        self.shareLabelFontSize = [YSGThemeConstants defaultShareLabelFontSize];
         self.shareLabelTextAlignment =  [YSGThemeConstants defaultTextAlignment]; 
         // set default share button shape
         self.shareButtonShape = [YSGThemeConstants defaultShareButtonShape];
