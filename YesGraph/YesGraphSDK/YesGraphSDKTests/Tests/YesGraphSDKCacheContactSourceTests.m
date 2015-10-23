@@ -85,4 +85,10 @@
     [self checkFetchCachedListAgainst:[YSGTestMockData mockContactList]];
 }
 
+- (void)testCacheSourceWithoutCompletion
+{
+    [self cleanUpFile];
+    [self.cacheSource fetchContactListWithCompletion:nil];
+}
+
 @end
