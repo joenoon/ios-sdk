@@ -398,6 +398,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return [self contactsForSection:section].count;
 }
 
+
 - (UIView *)cellBackgroundViewForColor:(UIColor *)color
 {
     if (!color)
@@ -408,6 +409,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     UIView *view = [UIView new];
     view.backgroundColor = color;
     return view;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.theme.shareAddressBookTheme.cellBackground)
+    {
+        cell.backgroundColor = self.theme.shareAddressBookTheme.cellBackground;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -422,8 +431,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         {
             cell.textLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellFontSize];
             cell.detailTextLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellDetailFontSize];
-            cell.backgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellBackground];
-            cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellSelectedBackground];
             cell.textLabel.backgroundColor = [UIColor clearColor];
             cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         }
@@ -485,6 +492,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    YSGAddressBookCell *cell = (YSGAddressBookCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellSelectedBackground];
+    
     YSGContact *contact = [self contactForIndexPath:indexPath];
     
     [self.selectedContacts addObject:contact];

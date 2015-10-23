@@ -154,13 +154,13 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     
     self.shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
     self.shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
-    self.shareLabel.font = [UIFont systemFontOfSize:60.f];
+    self.shareLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareLabelFontSize];
     self.shareLabel.adjustsFontSizeToFitWidth = YES;
     
     self.shareLabel.textColor = self.theme.mainColor;
     self.shareLabel.lineBreakMode = NSLineBreakByClipping;
     self.shareLabel.numberOfLines = 0;
-    self.shareLabel.textAlignment = NSTextAlignmentCenter;
+    self.shareLabel.textAlignment = self.theme.shareLabelTextAlignment;
     [self.shareLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.shareLabel setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
     [self.shareLabel sizeToFit];
@@ -306,11 +306,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     [self.view addSubview:draw];
     
     cell.text = service.name;
-    cell.shape = YSGShareSheetServiceCellShapeCircle;
+    cell.shape = service.shape;
     cell.icon = service.serviceImage;
     cell.serviceColor = service.backgroundColor;
     cell.font = [UIFont fontWithName:service.fontFamily size:14];
-    cell.textColor = service.backgroundColor;
+    cell.textColor = service.textColor;
     
     return cell;
 }
