@@ -10,7 +10,6 @@
 #import "YSGLocalContactSource.h"
 #import "YSGContactList.h"
 #import "YSGTestMockData.h"
-#import "objc/runtime.h"
 
 @interface YesGraphSDKLocalContactSourceTests : XCTestCase
 @end
@@ -39,7 +38,7 @@
 
 - (void)testHasPermission
 {
-    XCTAssertTrue([YSGLocalContactSource hasPermission], @"We shouldn't have contact permissions");
+    XCTAssertTrue([YSGLocalContactSource hasPermission], @"We shouldn have contact permissions");
 }
 
 @end
