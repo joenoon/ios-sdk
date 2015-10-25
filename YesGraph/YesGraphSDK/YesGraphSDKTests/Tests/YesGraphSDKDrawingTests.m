@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "YSGIconDrawings.h"
+#import "YSGTestImageData.h"
 
 @interface YesGraphSDKDrawingTests : XCTestCase
 
@@ -30,35 +31,29 @@
     CGDataProviderRef imageProvider = CGImageGetDataProvider(image.CGImage);
     NSData *data = CFBridgingRelease(CGDataProviderCopyData(imageProvider));
     
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSString *imageDataPath = [bundle pathForResource:file ofType:@"bin"];
-    NSData *imageData = [NSData dataWithContentsOfFile:imageDataPath];
+    NSData *imageData = [YSGTestImageData getDataForImageFile:file];
+    
     XCTAssertNotNil(imageData, @"Image data file not found for path %@", file);
     XCTAssertEqual(data.length, imageData.length, @"Length of the pixel byte arrays are not the same");
     XCTAssert([data isEqualToData:imageData], @"Generated image and image from bundled data file are not the same");
 }
 
-- (NSString *)fileForScale:(NSString *)baseName
-{
-    return [NSString stringWithFormat:@"%@_%.2f", baseName, [UIScreen mainScreen].scale];
-}
-
 - (void)testPhoneImage
 {
     UIImage *phoneImage = [YSGIconDrawings phoneImage];
-    [self runTestForImage:phoneImage andFile:[self fileForScale:@"phoneImageData"]];
+    [self runTestForImage:phoneImage andFile:@"phoneImageData"];
 }
 
 - (void)testFacebookImage
 {
     UIImage *facebookImage = [YSGIconDrawings facebookImage];
-    [self runTestForImage:facebookImage andFile:[self fileForScale:@"facebookImageData"]];
+    [self runTestForImage:facebookImage andFile:@"facebookImageData"];
 }
 
 - (void)testTwitterImage
 {
     UIImage *twitterImage = [YSGIconDrawings twitterImage];
-    [self runTestForImage:twitterImage andFile:[self fileForScale:@"twitterImageData"]];
+    [self runTestForImage:twitterImage andFile:@"twitterImageData"];
 }
 
 @end
