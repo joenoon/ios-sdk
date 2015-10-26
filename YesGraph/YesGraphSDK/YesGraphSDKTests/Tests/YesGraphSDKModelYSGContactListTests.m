@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "YSGContactList+ExposedPrivate.h"
 #import "YSGTestMockData.h"
 
 @interface YesGraphSDKModelYSGContactListTests : XCTestCase
@@ -66,6 +67,18 @@
     
     NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedEntries = [mockedContacts sortedEntriesWithNumberOfSuggestions:suggestionCount];
     XCTAssertEqual(sortedEntries.count, 0, @"The number of returned entries '%lu' is not '%d'", (unsigned long)sortedEntries.count, 0);
+}
+
+- (void)testContactListRemoveDuplicate
+{
+    YSGContactList *list = [YSGContactList new];
+    NSUInteger numberOfSuggestions = 1;
+    XCTAssertNil([list removeDuplicatedContactsFromSuggestions:nil numberOfSuggestions:numberOfSuggestions], @"Remove duplicate should return nil when the contacts list is empty");
+    
+    list.entries = [YSGTestMockData mockContactList].entries;
+    NSArray *trimmedList = [list removeDuplicatedContactsFromSuggestions:list.entries numberOfSuggestions:numberOfSuggestions];
+    XCTAssertNotNil(trimmedList, @"Trimmed suggestions list shouldn't be nil");
+    XCTAssertEqual(trimmedList.count, numberOfSuggestions, @"The trimmed list should contain only '%lu' contacts, not '%lu'", numberOfSuggestions, trimmedList.count);
 }
 
 @end
