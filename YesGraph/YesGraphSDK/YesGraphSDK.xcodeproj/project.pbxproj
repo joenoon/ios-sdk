@@ -308,6 +308,7 @@
 		E8881D081BB21310005DCBF1 /* YSGShareAddressBookTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8881D061BB21310005DCBF1 /* YSGShareAddressBookTheme.m */; };
 		E89CA8AA1BC1BE52008365EF /* YSGThemeConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E89CA8AB1BC1BE52008365EF /* YSGThemeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */; };
+		E8A7D9981BDEC99900C80501 /* YSGInviteService+OverridenMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = E8A7D9971BDEC99900C80501 /* YSGInviteService+OverridenMethods.m */; };
 		E8B1ED1A1BDA6B1B00F92FFE /* YSGCacheContactSource+MockedFilePath.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B1ED191BDA6B1B00F92FFE /* YSGCacheContactSource+MockedFilePath.m */; };
 		E8B1ED1D1BDA79D500F92FFE /* YSGLocalContactSource+OverrideContactStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B1ED1C1BDA79D500F92FFE /* YSGLocalContactSource+OverrideContactStore.m */; };
 		E8CB678E1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CB678D1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m */; };
@@ -561,6 +562,8 @@
 		E8881D061BB21310005DCBF1 /* YSGShareAddressBookTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGShareAddressBookTheme.m; sourceTree = "<group>"; };
 		E89CA8A81BC1BE52008365EF /* YSGThemeConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGThemeConstants.h; sourceTree = "<group>"; };
 		E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGThemeConstants.m; sourceTree = "<group>"; };
+		E8A7D9961BDEC99900C80501 /* YSGInviteService+OverridenMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGInviteService+OverridenMethods.h"; sourceTree = "<group>"; };
+		E8A7D9971BDEC99900C80501 /* YSGInviteService+OverridenMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGInviteService+OverridenMethods.m"; sourceTree = "<group>"; };
 		E8B1ED181BDA6B1B00F92FFE /* YSGCacheContactSource+MockedFilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGCacheContactSource+MockedFilePath.h"; sourceTree = "<group>"; };
 		E8B1ED191BDA6B1B00F92FFE /* YSGCacheContactSource+MockedFilePath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGCacheContactSource+MockedFilePath.m"; sourceTree = "<group>"; };
 		E8B1ED1B1BDA79D500F92FFE /* YSGLocalContactSource+OverrideContactStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGLocalContactSource+OverrideContactStore.h"; sourceTree = "<group>"; };
@@ -712,6 +715,8 @@
 				E87949A21BDD948B008B781D /* YSGTestImageData.m */,
 				E8D319301BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.h */,
 				E8D319311BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.m */,
+				E8A7D9961BDEC99900C80501 /* YSGInviteService+OverridenMethods.h */,
+				E8A7D9971BDEC99900C80501 /* YSGInviteService+OverridenMethods.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1356,6 +1361,7 @@
 				E84798821BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m in Sources */,
 				38343AEA1BC6A67400DD635B /* YesGraphSDKInviteTests.m in Sources */,
 				E84798861BD6F43800BDA3B8 /* YesGraphSDKThemeButtonFadeFactorTests.m in Sources */,
+				E8A7D9981BDEC99900C80501 /* YSGInviteService+OverridenMethods.m in Sources */,
 				E87949991BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m in Sources */,
 				E8E845A41BCF027E008E227B /* YesGraphSDKModelContactTests.m in Sources */,
 				E8CB67961BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m in Sources */,

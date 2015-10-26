@@ -7,87 +7,11 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "YSGInviteService.h"
+#import "YSGInviteService+OverridenMethods.h"
 #import "YSGTestMockData.h"
 
-@import ObjectiveC.runtime;
-
-@interface YesGraphSDKSwizzledMethods : XCTestCase
-
-@property (strong, nonatomic) YSGContact *contactEmail;
-@property (strong, nonatomic) YSGContact *contactPhone;
-
-+ (instancetype)shared;
-
-- (void)swizzleBoth;
-
-@end
-
-@implementation YesGraphSDKSwizzledMethods
-
-+ (instancetype)shared
-{
-    static YesGraphSDKSwizzledMethods *shared;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        shared = [YesGraphSDKSwizzledMethods new];
-    });
-    return shared;
-}
-
-- (instancetype)init
-{
-    if ((self = [super init]))
-    {
-        [self swizzleBoth];
-    }
-    return self;
-}
-
-- (void)swizzleBoth
-{
-    [self swizzleEmailMethods];
-    [self swizzleMessageMethods];
-}
-
-- (void)swizzleMessageMethods
-{
-    Method original = class_getInstanceMethod([YSGInviteService class], @selector(triggerMessageWithContacts:));
-    Method replacement = class_getInstanceMethod([self class], @selector(triggerMessageWithContacts:));
-    
-    IMP replacementImplementation = method_getImplementation(replacement);
-    method_setImplementation(original, replacementImplementation);
-}
-
-- (void)swizzleEmailMethods
-{
-    Method original = class_getInstanceMethod([YSGInviteService class], @selector(triggerEmailWithContacts:));
-    Method replacement = class_getInstanceMethod([self class], @selector(triggerEmailWithContacts:));
-    
-    IMP replacementImplementation = method_getImplementation(replacement);
-    method_setImplementation(original, replacementImplementation);
-}
-
-- (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries
-{
-    XCTAssertEqual(entries.count, 1, @"Entries should only contain 1 object");
-    YSGContact *c = entries.firstObject;
-    YSGContact *expected = [YesGraphSDKSwizzledMethods shared].contactPhone;
-    XCTAssert([c.contactString isEqualToString:expected.contactString], @"Intercepted contact '%@' does not match the expected contact '%@'", c, expected);
-}
-
-- (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)entries
-{
-    XCTAssertEqual(entries.count, 1, @"Entries should only contain 1 object");
-    YSGContact *c = entries.firstObject;
-    YSGContact *expected = [YesGraphSDKSwizzledMethods shared].contactEmail;
-    XCTAssert([c.contactString isEqualToString:expected.contactString], @"Intercepted contact '%@' does not match the expected contact '%@'", c, expected);
-}
-
-@end
-
 @interface YesGraphSDKYSGInviteServiceTests : XCTestCase
-@property (strong, nonatomic) YesGraphSDKSwizzledMethods *swizzles;
+@property (strong, nonatomic) YSGInviteService *service;
 @end
 
 @implementation YesGraphSDKYSGInviteServiceTests
@@ -95,22 +19,28 @@
 - (void)setUp
 {
     [super setUp];
-    self.swizzles = [YesGraphSDKSwizzledMethods shared];
+    self.service = [YSGInviteService new];
 }
 
 - (void)tearDown
 {
     [super tearDown];
-    self.swizzles = nil;
+    self.service = nil;
 }
 
 - (void)testInviteWithPhoneContact
 {
     YSGContact *invitee = [YSGTestMockData mockContactList].entries.lastObject;
     NSArray *contacts = @[ invitee ];
-    self.swizzles.contactPhone = invitee;
-    YSGInviteService *service = [[YSGInviteService alloc] init];
-    [service triggerInviteFlowWithContacts:contacts];
+    __weak YesGraphSDKYSGInviteServiceTests *preventRetainCycle = self;
+    preventRetainCycle.service.triggeredForEmailContacts = ^(NSArray <YSGContact *> *entries)
+    {
+        XCTAssertEqual(contacts.count, entries.count, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        __weak YSGContact *firstSent = contacts[0];
+        __weak YSGContact *firstRec = entries[0];
+        XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
+    };
+    [self.service triggerInviteFlowWithContacts:contacts];
 }
 
 - (void)testInviteWithEmailContact
@@ -118,9 +48,41 @@
     YSGContact *invitee = [YSGTestMockData mockContactList].entries.firstObject;
     invitee.phones = nil;
     NSArray *contacts = @[ invitee ];
-    self.swizzles.contactEmail = invitee;
-    YSGInviteService *service = [[YSGInviteService alloc] init];
-    [service triggerInviteFlowWithContacts:contacts];
+    __weak YesGraphSDKYSGInviteServiceTests *preventRetainCycle = self;
+    preventRetainCycle.service.triggeredPhoneContacts = ^(NSArray <YSGContact *> *entries)
+    {
+        XCTAssertEqual(contacts.count, entries.count, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        __weak YSGContact *firstSent = contacts[0];
+        __weak YSGContact *firstRec = entries[0];
+        XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
+    };
+    [self.service triggerInviteFlowWithContacts:contacts];
+    
+}
+
+- (void)testInviteBothKinds
+{
+    YSGContact *onlyEmail = [YSGTestMockData mockContactList].entries.firstObject;
+    YSGContact *onlyPhone = [YSGTestMockData mockContactList].entries.lastObject;
+    onlyEmail.phones = nil;
+    onlyPhone.emails = nil;
+    NSArray *contacts = @[ onlyEmail, onlyPhone ];
+    __weak YesGraphSDKYSGInviteServiceTests *preventRetainCycle = self;
+    preventRetainCycle.service.triggeredForEmailContacts = ^(NSArray <YSGContact *> *entries)
+    {
+        XCTAssertEqual(entries.count, 1, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        __weak YSGContact *firstSent = contacts[0];
+        __weak YSGContact *firstRec = entries[0];
+        XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
+    };
+    preventRetainCycle.service.triggeredPhoneContacts = ^(NSArray <YSGContact *> *entries)
+    {
+        XCTAssertEqual(entries.count, 1, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        __weak YSGContact *firstSent = contacts[1];
+        __weak YSGContact *firstRec = entries[0];
+        XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
+    };
+    [self.service triggerInviteFlowWithContacts:contacts];
 }
 
 @end
