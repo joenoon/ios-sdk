@@ -21,7 +21,7 @@
 {
     [super setUp];
     self.cacheSource = [YSGCacheContactSource new];
-    self.cacheSource.filePath = @"TestCache.plist";
+    [self.cacheSource setMockedFilePath:@"TestCache.plist"];
     [self cleanUpFile];
 }
 
