@@ -44,6 +44,8 @@ typedef NSDictionary * _Nonnull (^YSGShareDataBlock)(YSGShareService* _Nonnull s
 
 @property (nonatomic, readonly) NSString *fontFamily;
 
+@property (nonatomic) YSGShareSheetServiceCellShape shape;
+
 @property (nonatomic, strong) YSGTheme *theme;
 
 - (void)triggerServiceWithViewController:(YSGShareSheetController *)viewController;

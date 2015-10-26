@@ -40,9 +40,9 @@
     return [UIFont systemFontOfSize:12].familyName;
 }
 
-+ (CGFloat)defaultShareButtonFontSize
++ (CGFloat)defaultShareLabelFontSize
 {
-    return 36.f;
+    return 60.f;
 }
 
 + (NSTextAlignment)defaultTextAlignment

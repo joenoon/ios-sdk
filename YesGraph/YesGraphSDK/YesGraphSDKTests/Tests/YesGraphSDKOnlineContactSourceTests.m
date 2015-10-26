@@ -10,7 +10,7 @@
 #import "YSGMockClient.h"
 #import "YSGOnlineContactSource.h"
 #import "YSGCacheContactSource.h"
-#import "YSGLocalContactSource.h"
+#import "YSGLocalContactSource+OverrideContactStore.h"
 #import "YSGTestMockData.h"
 #import "YSGTestSettings.h"
 #import "objc/runtime.h"
@@ -25,6 +25,7 @@
 {
     [super setUp];
     self.localSource = [YSGLocalContactSource new];
+    [YSGLocalContactSource shouldReturnNil:YES];
 }
 
 - (void)tearDown
@@ -70,7 +71,7 @@
 
     [preventRetainCycleInstance fetchContactListWithCompletion:^(YSGContactList *returnedContacts, NSError *error)
      {
-         XCTAssertNotNil(error, @"Error is supposed to be nil, not '%@'", error);
+         XCTAssertNil(error, @"Error is supposed to be nil, not '%@'", error);
          XCTAssertEqual(returnedContacts.entries.count, 0, @"Returned contacts should be empty");
          [expectation fulfill];
      }];
