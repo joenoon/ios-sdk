@@ -64,10 +64,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  Default share button cell size
- *  @Discussion: Default: 36.0f
+ *  @Discussion: Default: 60.0f
  *
  */
-+ (CGFloat)defaultShareButtonFontSize;
++ (CGFloat)defaultShareLabelFontSize;
 
 /*!
  *  Default text alignment

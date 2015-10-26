@@ -52,7 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: White color
  *
  */
-
 @property (nonatomic, strong) UIColor *baseColor;
 
 /*!
@@ -65,25 +64,15 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  Share text font size
  * 
- *  @discussion: Default: 36 points
+ *  @discussion: Default: 60 points
  */
-
-@property (nonatomic) CGFloat shareButtonLabelFontSize;
-
-/*!
- *  Share button text alignment
- *  @discussion: Default: Center
- *
- */
-
-@property (nonatomic) NSTextAlignment shareButtonLabelTextAlignment;
+@property (nonatomic) CGFloat shareLabelFontSize;
 
 /*!
  *  Share text alignment
  *  @discussion: Default: Center
  *
  */
-
 @property (nonatomic) NSTextAlignment shareLabelTextAlignment;
 
 /*!
@@ -91,7 +80,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: Circle shape
  *
  */
-
 @property (nonatomic) YSGShareSheetServiceCellShape shareButtonShape;
 
 /*!
@@ -100,7 +88,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: 0.8, 1.0
  *
  */
-
 @property (nonatomic) YSGShareButtonFadeFactors shareButtonFadeFactors;
 
 /*!
@@ -111,7 +98,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param unfadedAlpha a floating point alpha value (between 0 and 1) that will be applied to the button
  *  background color when in default state
  */
-
 - (void)setShareButtonFadeFactorsWithFadeAlpha:(CGFloat)fadedAlpha andUnfadeAlpha:(CGFloat)unfadedAlpha;
 
 /*!
@@ -119,7 +105,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: nil (system)
  *
  */
-
 @property (nullable, nonatomic, strong) YSGShareAddressBookTheme *shareAddressBookTheme;
 
 @end

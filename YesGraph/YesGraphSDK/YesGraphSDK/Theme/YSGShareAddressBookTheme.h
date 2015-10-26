@@ -19,7 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: nil (system)
  *
  */
-
 @property (nullable, nonatomic, strong) UIColor *viewBackground;
 
 /*!
@@ -27,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: White
  *
  */
-
 @property (nullable, nonatomic, strong) UIColor *cellBackground;
 
 /*!
@@ -35,7 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: nil (system)
  *
  */
-
 @property (nullable, nonatomic, strong) UIColor *cellSelectedBackground;
 
 /*!
@@ -43,7 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: nil (system)
  *
  */
-
 @property (nullable, nonatomic, strong) UIColor *sectionBackground;
 
 /*!
@@ -51,7 +47,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: 17
  *
  */
-
 @property (nonatomic) CGFloat cellFontSize;
 
 /*!
@@ -59,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: 12
  *
  */
-
 @property (nonatomic) CGFloat cellDetailFontSize;
 
 /*!
@@ -67,7 +61,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  @discussion: Default: 17
  *
  */
-
 @property (nonatomic) CGFloat sectionFontSize;
 
 @end
