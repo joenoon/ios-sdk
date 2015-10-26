@@ -85,14 +85,6 @@
 
 - (void)testYesGraphSettings
 {
-    /*
-    @property (nonatomic, assign) NSUInteger numberOfSuggestions;
-    
-    @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
-    
-    @property (nonatomic, assign) NSTimeInterval contactBookTimePeriod;
-     */
-    
     NSInteger testNumberOfSuggestions = 10;
     NSString *testContactAccessPromptMessage = @"Test prompt";
     NSTimeInterval testContactBookTimePeriod = 1.0;
@@ -118,7 +110,6 @@
     YSGLocalContactSource *localContactSource = onlineContactSource.localSource;
     
     XCTAssert([localContactSource.contactAccessPromptMessage isEqualToString:testContactAccessPromptMessage], @"Invite contact permissions message \"%@\" is not the same as configured \"%@\".", localContactSource.contactAccessPromptMessage, testContactAccessPromptMessage);
-    
 }
 
 @end
