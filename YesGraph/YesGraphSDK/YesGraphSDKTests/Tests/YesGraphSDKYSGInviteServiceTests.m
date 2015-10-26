@@ -9,9 +9,11 @@
 #import <XCTest/XCTest.h>
 #import "YSGInviteService+OverridenMethods.h"
 #import "YSGTestMockData.h"
+#import "YSGTestImageData.h"
 
 @interface YesGraphSDKYSGInviteServiceTests : XCTestCase
 @property (strong, nonatomic) YSGInviteService *service;
+@property (strong, nonatomic) YSGTheme *theme;
 @end
 
 @implementation YesGraphSDKYSGInviteServiceTests
@@ -20,12 +22,15 @@
 {
     [super setUp];
     self.service = [YSGInviteService new];
+    self.theme = [YSGTheme new];
+    self.service.theme = self.theme;
 }
 
 - (void)tearDown
 {
     [super tearDown];
     self.service = nil;
+    self.theme = nil;
 }
 
 - (void)testInviteWithPhoneContact
@@ -83,6 +88,27 @@
         XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
     };
     [self.service triggerInviteFlowWithContacts:contacts];
+}
+
+- (void)testServiceName
+{
+    XCTAssert([self.service.name isEqualToString:@"Contacts"], @"The service name should be 'Contacts' not '%@'", self.service.name);
+}
+
+- (void)testServiceBackgroundColor
+{
+    XCTAssert([self.service.backgroundColor isEqual:self.theme.mainColor], @"Theme's main color and service background color should be the same");
+}
+
+- (void)testServiceImage
+{
+    NSData *imageData = [YSGTestImageData getDataForImageFile:@"phoneImageData"];
+    XCTAssertNotNil(imageData, @"Image data file not found for path %@", @"phoneImageData");
+    UIImage *image = self.service.serviceImage;
+    CGDataProviderRef imageProvider = CGImageGetDataProvider(image.CGImage);
+    NSData *data = CFBridgingRelease(CGDataProviderCopyData(imageProvider));
+    XCTAssertEqual(data.length, imageData.length, @"Length of the pixel byte arrays are not the same");
+    XCTAssert([data isEqualToData:imageData], @"Generated image and image from bundled data file are not the same");
 }
 
 @end
