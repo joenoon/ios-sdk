@@ -8,18 +8,13 @@
 
 #import "YSGCacheContactSource+MockedFilePath.h"
 
-static NSString *mockedFilePath = nil;
-
 @implementation YSGCacheContactSource (MockedFilePath)
 
-- (NSString *)filePath
-{
-    return [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, mockedFilePath];
-}
+@dynamic filePath;
 
-- (void)setFilePath:(NSString *)filePath
+- (void)setMockedFilePath:(NSString *)mockedFilePath
 {
-    mockedFilePath = filePath;
+    self.filePath = [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, mockedFilePath];
 }
 
 @end

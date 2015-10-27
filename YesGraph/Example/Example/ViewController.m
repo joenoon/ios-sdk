@@ -199,8 +199,14 @@
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        return @{ YSGShareSheetMessageKey : @"This message will be posted to SMS." };
-        //return @"This message will be posted to Email.";
+        if ([userInfo valueForKey:YSGInviteEmailContactsKey])
+        {
+            return @{ YSGShareSheetSubjectKey : @"We should check out YesGraph",
+                      YSGShareSheetMessageKey : @"Check out YesGraph, they help apps grow: www.yesgraph.com/#iosce" };
+        }
+        else {
+            return @{ YSGShareSheetMessageKey : @"Check out YesGraph, they help apps grow: www.yesgraph.com/#ioscs" };
+        }
     }
     
     return @{ YSGShareSheetMessageKey : @"" };

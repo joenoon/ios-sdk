@@ -141,17 +141,21 @@
 
 NSInteger contactsSort(YSGContact *contact1, YSGContact *contact2, void *context)
 {
-    // We force contacts without name on the bottom of the list
-    if (contact1.name.length == 0)
+    // We order contacts without name by email
+    if (contact1.name.length == 0 && contact2.name.length > 0)
     {
-        return NSOrderedAscending;
+        return [contact1.email caseInsensitiveCompare:contact2.name];
     }
-    else if (contact2.name.length == 0)
+    else if (contact1.name.length > 0 && contact2.name.length == 0)
     {
-        return NSOrderedDescending;
+        return [contact1.name caseInsensitiveCompare:contact2.email];
+    }
+    else if (contact1.name.length == 0 && contact2.name.length == 0)
+    {
+        return [contact1.email caseInsensitiveCompare:contact2.email];
     }
     
-    return [contact1.name caseInsensitiveCompare:contact1.name];
+    return [contact1.name caseInsensitiveCompare:contact2.name];
 }
 
 @end
