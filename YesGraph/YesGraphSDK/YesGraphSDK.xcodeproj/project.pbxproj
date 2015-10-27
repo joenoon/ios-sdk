@@ -279,6 +279,7 @@
 		E80044771BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m in Sources */ = {isa = PBXBuildFile; fileRef = E80044761BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m */; };
 		E8105DC91BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */; };
 		E8105DCC1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DCB1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m */; };
+		E8105DCF1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DCE1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m */; };
 		E824881E1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E824881D1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m */; };
 		E82A8B791BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E82A8B7A1BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = E82A8B751BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m */; };
@@ -540,6 +541,8 @@
 		E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGUIAlertController+YSGDisplayOverride.m"; sourceTree = "<group>"; };
 		E8105DCA1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGMessageCenter+RemoveAlertController.h"; sourceTree = "<group>"; };
 		E8105DCB1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGMessageCenter+RemoveAlertController.m"; sourceTree = "<group>"; };
+		E8105DCD1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareSheetControllerMockedPresentView.h; sourceTree = "<group>"; };
+		E8105DCE1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGShareSheetControllerMockedPresentView.m; sourceTree = "<group>"; };
 		E824881D1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKNetworkResponseTests.m; sourceTree = "<group>"; };
 		E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGThemeConstants+AddressBook.h"; sourceTree = "<group>"; };
 		E82A8B751BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGThemeConstants+AddressBook.m"; sourceTree = "<group>"; };
@@ -737,6 +740,8 @@
 				E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */,
 				E8105DCA1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.h */,
 				E8105DCB1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m */,
+				E8105DCD1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.h */,
+				E8105DCE1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1392,6 +1397,7 @@
 				E87949A91BDD97D2008B781D /* YesGraphSDKSocialServiceTests.m in Sources */,
 				E8E845A81BCF17FF008E227B /* YesGraphSDKModelYSGSource.m in Sources */,
 				E80044771BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m in Sources */,
+				E8105DCF1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m in Sources */,
 				38343AE91BC6A67400DD635B /* YesGraphSDKCacheTests.m in Sources */,
 				38343AE81BC6A67400DD635B /* YesGraphSDKAddressBookTests.m in Sources */,
 				E8105DCC1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m in Sources */,
