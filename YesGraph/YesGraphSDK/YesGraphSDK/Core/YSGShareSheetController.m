@@ -15,6 +15,7 @@
 #import "YSGInviteService.h"
 #import "YesGraph.h"
 
+NSString *_Nonnull const YSGShareSheetSubjectKey = @"YSGShareSheetSubjectKey";
 NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
 static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifier";
