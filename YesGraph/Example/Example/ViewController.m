@@ -12,7 +12,7 @@
 @import YesGraphSDK;
 @import Social;
 
-@interface ViewController () <YSGShareSheetDelegate>
+@interface ViewController () <YSGShareSheetDelegate, UIWebViewDelegate>
 
 @property (nullable, nonatomic, strong) YSGTheme *theme;
 
@@ -31,6 +31,12 @@
     [self styleView];
     
     [self nastyHacksForUITests];
+    
+    NSString* htmlString= @"It’s open source. <a href=\"https://github.com/YesGraph/ios-sdk\">Find it on Github here</a>.\
+    If you use CocoaPods, you can integrate with: pod 'YesGraph-iOS-SDK' Or with Carthage: github \"YesGraph/ios-sdk\"\
+    We have example applications using (Parse, Swift, and Objective-C](https://github.com/YesGraph/ios-sdk#example-applications) on Github. You’ll need a YesGraph account. [Sign up and create an app to configure the SDK.](https://www.yesgraph.com/) The documentation online is extensive, but if you have any trouble, email [support@yesgraph.com](mailto:support@yesgraph.com).";
+    [self.webView loadHTMLString:htmlString baseURL:nil];
+    self.webView.delegate = self;
 }
 
 - (BOOL)isAvailableTwit:(NSString *)empty
@@ -210,6 +216,20 @@
     }
     
     return @{ YSGShareSheetMessageKey : @"" };
+}
+
+#pragma mark - WebViewDelegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        [[UIApplication sharedApplication] openURL:request.URL];
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
 }
 
 @end

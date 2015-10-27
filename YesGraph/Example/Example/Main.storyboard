@@ -1,120 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="up5-qv-S28">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fFq-mp-1bk">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+        </mutableArray>
+        <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
-        <!--Welcome-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbx-hW-cJo">
-                                <rect key="frame" x="90" y="409" width="140" height="40"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.10196078431372549" green="0.47843137254901957" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="kBZ-4N-OHb"/>
-                                    <constraint firstAttribute="height" constant="40" id="xje-eN-FSn"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="SHARE NOW">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vad-xv-uuF"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xba-dN-0C5">
-                                <rect key="frame" x="5" y="249" width="310" height="30"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.88235294117647056" green="0.12156862745098039" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Mp8-Tz-bHQ"/>
-                                    <constraint firstAttribute="width" constant="310" id="fIK-8A-iPu"/>
-                                    <constraint firstAttribute="height" constant="30" id="zOn-6b-82y"/>
-                                </constraints>
-                                <attributedString key="attributedText">
-                                    <fragment content="YesGraph Helps Your App Grow">
-                                        <attributes>
-                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <font key="NSFont" size="18" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Mp8-Tz-bHQ"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="270" verticalHuggingPriority="270" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="300" image="launch-logo" translatesAutoresizingMaskIntoConstraints="NO" id="hkH-L3-imL">
-                                <rect key="frame" x="91" y="104" width="139" height="100"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="139" id="M4N-Jc-s8i"/>
-                                    <constraint firstAttribute="height" constant="100" id="cqB-me-ECf"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="800" verticalCompressionResistancePriority="800" text="Boost the performance of sharing and invite flows by recommending exactly who users should invite. " textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="hHI-ec-cZ2">
-                                <rect key="frame" x="21" y="309" width="278" height="70"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="0Lu-V9-EgO"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <size key="shadowOffset" width="0.0" height="0.0"/>
-                            </label>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="hHI-ec-cZ2" firstAttribute="top" secondItem="Xba-dN-0C5" secondAttribute="bottom" constant="30" id="3Kp-uA-SmE"/>
-                            <constraint firstItem="Xba-dN-0C5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hkH-L3-imL" secondAttribute="bottom" constant="10" id="5MV-M2-C58"/>
-                            <constraint firstItem="Xba-dN-0C5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Am7-kk-N59"/>
-                            <constraint firstItem="hkH-L3-imL" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" priority="950" constant="60" id="Mth-GY-eEa"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="bbx-hW-cJo" secondAttribute="bottom" priority="900" constant="145" id="QMz-zI-obL"/>
-                            <constraint firstItem="hHI-ec-cZ2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="bj5-Yo-7jZ"/>
-                            <constraint firstItem="hHI-ec-cZ2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="60" id="cHw-Qm-dUP"/>
-                            <constraint firstItem="hHI-ec-cZ2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h5H-As-uvn"/>
-                            <constraint firstItem="bbx-hW-cJo" firstAttribute="top" secondItem="hHI-ec-cZ2" secondAttribute="bottom" constant="30" id="iAH-Vj-cf6"/>
-                            <constraint firstItem="bbx-hW-cJo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tq4-y2-979"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hHI-ec-cZ2" secondAttribute="trailing" constant="5" id="y7Q-4I-JoK"/>
-                            <constraint firstItem="hkH-L3-imL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="y9p-wo-hML"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Welcome" id="Lg2-bk-igb"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="additionalInfoLabel" destination="hHI-ec-cZ2" id="VC9-LI-iNx"/>
-                        <outlet property="introTextField" destination="Xba-dN-0C5" id="AsN-l1-xDB"/>
-                        <outlet property="shareButton" destination="bbx-hW-cJo" id="ilV-vQ-4HJ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1027" y="360"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="2P9-gI-rUo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fFq-mp-1bk" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <nil key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xDS-En-s3i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -122,65 +26,65 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="pvE-lF-LeN"/>
+                        <segue destination="up5-qv-S28" kind="relationship" relationship="rootViewController" id="z8H-AU-jrb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2aS-Uo-Efc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="835" y="-771"/>
+            <point key="canvasLocation" x="-1845" y="-643"/>
         </scene>
-        <!--Welcome View Controller-->
+        <!--View Controller-->
         <scene sceneID="e8b-1o-4as">
             <objects>
-                <viewController id="up5-qv-S28" customClass="WelcomeViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="up5-qv-S28" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Twb-S1-vzz"/>
                         <viewControllerLayoutGuide type="bottom" id="zc2-g4-pOh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Oou-HP-TO7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="2300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Quk-aY-xyK">
-                                <rect key="frame" x="0.0" y="20" width="600" height="2280"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1836"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yMN-h3-DRZ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1735"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMN-h3-DRZ" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1833"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jL5-E6-oy6" userLabel="Section1">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="321"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jL5-E6-oy6" userLabel="Section1">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-gB-a5i">
-                                                        <rect key="frame" x="8" y="125" width="584" height="86"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-gB-a5i">
+                                                        <rect key="frame" x="15" y="136" width="345" height="123"/>
                                                         <animations/>
                                                         <string key="text">Welcome to YesGraph’s example app! We’ll show you how you grow faster and how YesGraph works.
 
 You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
                                                         <color key="textColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aan-qq-fxp">
-                                                        <rect key="frame" x="230" y="241" width="140" height="50"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aan-qq-fxp">
+                                                        <rect key="frame" x="117" y="289" width="140" height="50"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="2cM-BK-07D"/>
                                                             <constraint firstAttribute="width" constant="140" id="eTZ-lP-Sxg"/>
                                                         </constraints>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="19"/>
                                                         <state key="normal" title="Try YesGraph">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dJ1-Ux-oMm"/>
-                                                            <segue destination="fFq-mp-1bk" kind="show" id="wz8-BL-9nd"/>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="kEO-lC-47L"/>
                                                         </connections>
                                                     </button>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="YesGraph Boosts Your App’s Viral Growth" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9v-hk-toU">
-                                                        <rect key="frame" x="40" y="40" width="521" height="60"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YesGraph Boosts Your App’s Viral Growth" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u9v-hk-toU">
+                                                        <rect key="frame" x="40" y="40" width="296" height="71"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
+                                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="26"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -195,82 +99,40 @@ You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                     <constraint firstItem="aan-qq-fxp" firstAttribute="centerX" secondItem="jL5-E6-oy6" secondAttribute="centerX" id="Cxp-SN-eSl"/>
                                                     <constraint firstItem="u9v-hk-toU" firstAttribute="centerX" secondItem="jL5-E6-oy6" secondAttribute="centerX" id="GtL-ul-vv7"/>
                                                     <constraint firstItem="aan-qq-fxp" firstAttribute="centerX" secondItem="2c0-gB-a5i" secondAttribute="centerX" id="Waa-E7-NXi"/>
+                                                    <constraint firstItem="2c0-gB-a5i" firstAttribute="leading" secondItem="jL5-E6-oy6" secondAttribute="leading" constant="15" id="bLW-a8-AkV"/>
                                                     <constraint firstItem="2c0-gB-a5i" firstAttribute="leading" secondItem="jL5-E6-oy6" secondAttribute="leading" constant="8" id="edt-4e-zX3"/>
                                                     <constraint firstAttribute="trailing" secondItem="2c0-gB-a5i" secondAttribute="trailing" constant="8" id="fOA-Hh-VuW"/>
                                                     <constraint firstItem="aan-qq-fxp" firstAttribute="top" secondItem="2c0-gB-a5i" secondAttribute="bottom" constant="30" id="nTj-iV-czH"/>
                                                     <constraint firstAttribute="bottom" secondItem="aan-qq-fxp" secondAttribute="bottom" constant="30" id="rjy-fd-0XI"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2c0-gB-a5i" secondAttribute="trailing" constant="15" id="uKO-bW-mW8"/>
                                                 </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="edt-4e-zX3"/>
+                                                        <exclude reference="fOA-Hh-VuW"/>
+                                                        <exclude reference="Waa-E7-NXi"/>
+                                                    </mask>
+                                                </variation>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvm-L2-pOd" userLabel="Section2">
-                                                <rect key="frame" x="0.0" y="335" width="600" height="445"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvm-L2-pOd" userLabel="Section2">
+                                                <rect key="frame" x="0.0" y="369" width="375" height="457.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6D-TX-lyu">
-                                                        <rect key="frame" x="17" y="128" width="566" height="160"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6D-TX-lyu">
+                                                        <rect key="frame" x="17" y="128" width="341" height="172.5"/>
                                                         <animations/>
-                                                        <attributedString key="attributedText">
-                                                            <fragment>
-                                                                <string key="content">YesGraph can recommend exactly who you should invite. We do this with machine learning and data crunching. 
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="14" name="ArialMT"/>
-                                                                    <real key="NSKern" value="0.0"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="48" headIndent="48" minimumLineHeight="20" defaultTabInterval="36">
-                                                                        <tabStops/>
-                                                                    </paragraphStyle>
-                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment>
-                                                                <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="14" name="ArialMT"/>
-                                                                    <real key="NSKern" value="0.0"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                                        <tabStops/>
-                                                                    </paragraphStyle>
-                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment>
-                                                                <string key="content">1. Our flow uses industry best practices.
+                                                        <string key="text">YesGraph can recommend exactly who you should invite. We do this with machine learning and data crunching. 
+
+1. Our flow uses industry best practices.
 2. Save engineering time and focus on your app.
 3. Improve your virality metrics, like conversion rate and # invites sent.
 4. Personalized suggestions make for a better user experience.
-</string>
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="14" name="ArialMT"/>
-                                                                    <real key="NSKern" value="0.0"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="48" headIndent="48" minimumLineHeight="20" defaultTabInterval="36">
-                                                                        <tabStops/>
-                                                                    </paragraphStyle>
-                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                            <fragment content="5. Our SDK is easy to integrate.">
-                                                                <attributes>
-                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                                    <font key="NSFont" size="14" name="ArialMT"/>
-                                                                    <real key="NSKern" value="0.0"/>
-                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
-                                                                        <tabStops/>
-                                                                    </paragraphStyle>
-                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
-                                                                    <real key="NSStrokeWidth" value="0.0"/>
-                                                                </attributes>
-                                                            </fragment>
-                                                        </attributedString>
+5. Our SDK is easy to integrate.</string>
+                                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                                        <color key="textColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcW-X2-lkY">
-                                                        <rect key="frame" x="230" y="351" width="140" height="40"/>
+                                                        <rect key="frame" x="117" y="363" width="140" height="40"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -282,11 +144,11 @@ Cg
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uq9-ny-4xg"/>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="Spe-Tg-apJ"/>
                                                         </connections>
                                                     </button>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cwK-4N-46g" userLabel="Headline">
-                                                        <rect key="frame" x="200" y="44" width="200" height="30"/>
+                                                        <rect key="frame" x="87" y="44" width="200" height="30"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -332,11 +194,11 @@ Cg
                                                     <constraint firstAttribute="bottom" secondItem="qcW-X2-lkY" secondAttribute="bottom" constant="54" id="wGR-8D-5hs"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z4J-vX-sPk" userLabel="Section3">
-                                                <rect key="frame" x="0.0" y="780" width="600" height="405"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4J-vX-sPk" userLabel="Section3">
+                                                <rect key="frame" x="0.0" y="827" width="375" height="455.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LtL-ip-jqU" userLabel="Headline">
-                                                        <rect key="frame" x="200" y="32" width="200" height="30"/>
+                                                        <rect key="frame" x="87" y="32" width="200" height="30"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -360,7 +222,7 @@ Cg
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAd-6U-UFg">
-                                                        <rect key="frame" x="17" y="83" width="566" height="234"/>
+                                                        <rect key="frame" x="17" y="83" width="341" height="284.5"/>
                                                         <animations/>
                                                         <string key="text">YesGraph learns the patterns in your app automatically using past successful invitations to train a filter. We extract features about what kind of relationships and people are good for your app. 
 
@@ -377,7 +239,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-Zm-45h">
-                                                        <rect key="frame" x="230" y="325" width="140" height="40"/>
+                                                        <rect key="frame" x="117" y="375" width="140" height="40"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -389,7 +251,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oav-bY-9Gq"/>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="Uba-jc-XUi"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -407,11 +269,11 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                     <constraint firstItem="bAd-6U-UFg" firstAttribute="centerX" secondItem="z4J-vX-sPk" secondAttribute="centerX" id="tHi-Vw-q2C"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-oX-uXg" userLabel="Section4">
-                                                <rect key="frame" x="0.0" y="1185" width="600" height="550"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-oX-uXg" userLabel="Section4">
+                                                <rect key="frame" x="0.0" y="1283" width="375" height="550"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Tx-CB-wJg" userLabel="Headline">
-                                                        <rect key="frame" x="189" y="30" width="222" height="30"/>
+                                                        <rect key="frame" x="76" y="30" width="222" height="30"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -435,14 +297,14 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="YesGraph’s SDK can power your invite flow. Try it out if you haven’t already!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szu-6L-1VR">
-                                                        <rect key="frame" x="17" y="81" width="566" height="17"/>
+                                                        <rect key="frame" x="17" y="81" width="341" height="33.5"/>
                                                         <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.71764705882352942" green="0.72941176470588232" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaI-OS-ugG">
-                                                        <rect key="frame" x="230" y="147" width="140" height="40"/>
+                                                        <rect key="frame" x="117" y="163" width="140" height="40"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -454,11 +316,11 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vgK-Zo-Evc"/>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="gfZ-Vi-pbJ"/>
                                                         </connections>
                                                     </button>
                                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLS-ma-afc">
-                                                        <rect key="frame" x="17" y="219" width="566" height="301"/>
+                                                        <rect key="frame" x="17" y="235" width="341" height="284.5"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
@@ -516,19 +378,33 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="leading" secondItem="Oou-HP-TO7" secondAttribute="leading" id="3kR-Pj-f4b"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="height" secondItem="Oou-HP-TO7" secondAttribute="height" id="Rst-V6-xCs"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="VOT-sj-jw3"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="X13-pZ-S1v"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="YEY-ZF-Y7L"/>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="el0-WY-UgU"/>
                             <constraint firstItem="zc2-g4-pOh" firstAttribute="top" secondItem="Quk-aY-xyK" secondAttribute="bottom" id="iVC-7L-iQQ"/>
                             <constraint firstAttribute="trailing" secondItem="Quk-aY-xyK" secondAttribute="trailing" id="mKJ-CU-XHb"/>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="ruG-u1-4fP"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="tMV-kN-tgy"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="yc0-O4-iXx"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Rst-V6-xCs"/>
+                                <exclude reference="VOT-sj-jw3"/>
+                                <exclude reference="X13-pZ-S1v"/>
+                                <exclude reference="el0-WY-UgU"/>
+                                <exclude reference="tMV-kN-tgy"/>
+                                <exclude reference="yc0-O4-iXx"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="XW4-Hv-aGZ"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="2300"/>
+                    <size key="freeformSize" width="375" height="1900"/>
                     <connections>
-                        <outlet property="sectionFourWebView" destination="pLS-ma-afc" id="uG9-Lf-xpw"/>
-                        <outlet property="sectionOneAdditionalInfoLabel" destination="2c0-gB-a5i" id="2CX-q1-5ox"/>
-                        <outlet property="sectionOneHeaderLabel" destination="u9v-hk-toU" id="6So-Jn-7li"/>
-                        <outlet property="sectionOneTryButton" destination="aan-qq-fxp" id="ZLc-h6-q7E"/>
+                        <outlet property="webView" destination="pLS-ma-afc" id="phs-B9-eLn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOc-bs-NrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -536,7 +412,4 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
             <point key="canvasLocation" x="15" y="-367"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="launch-logo" width="100" height="100"/>
-    </resources>
 </document>

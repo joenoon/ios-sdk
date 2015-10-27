@@ -15,5 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *additionalNotesView;
 @property (weak, nonatomic) IBOutlet UILabel *additionalInfoLabel;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
