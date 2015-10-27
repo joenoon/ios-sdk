@@ -138,26 +138,26 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     for (YSGContact *contact in entries)
     {
-        if (contact.phones.count)
-        {
-            [phoneContacts addObject:contact];
-        }
-        else if (contact.emails.count)
+        if (contact.emails.count)
         {
             [emailContacts addObject:contact];
+        }
+        else if (contact.phones.count)
+        {
+            [phoneContacts addObject:contact];
         }
     }
     
     self.emailContacts = emailContacts.copy;
     self.phoneContacts = phoneContacts.copy;
 
-    if (phoneContacts.count)
-    {
-        [self triggerMessageWithContacts:phoneContacts.copy];
-    }
-    else if (emailContacts.count)
+    if (emailContacts.count)
     {
         [self triggerEmailWithContacts:emailContacts.copy];
+    }
+    else if (phoneContacts.count)
+    {
+        [self triggerMessageWithContacts:phoneContacts.copy];
     }
 }
 
@@ -355,9 +355,16 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     //
     [controller dismissViewControllerAnimated:NO completion:^
     {
-        [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Selected contacts were successfully invited.", @"Successful invitation") userInfo:nil];
-        
-        [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
+        if (self.phoneContacts.count)
+        {
+            [self triggerMessageWithContacts:self.phoneContacts];
+        }
+        else
+        {
+            [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Selected contacts were successfully invited.", @"Successful invitation") userInfo:nil];
+            
+            [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
+        }
     }];
 }
 
