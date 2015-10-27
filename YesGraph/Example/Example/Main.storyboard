@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fFq-mp-1bk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="up5-qv-S28">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -127,7 +127,422 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2aS-Uo-Efc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="60" y="-332"/>
+            <point key="canvasLocation" x="835" y="-771"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="e8b-1o-4as">
+            <objects>
+                <viewController id="up5-qv-S28" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Twb-S1-vzz"/>
+                        <viewControllerLayoutGuide type="bottom" id="zc2-g4-pOh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oou-HP-TO7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="2300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Quk-aY-xyK">
+                                <rect key="frame" x="0.0" y="20" width="600" height="2280"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMN-h3-DRZ" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1900"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jL5-E6-oy6" userLabel="Section1">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-gB-a5i">
+                                                        <rect key="frame" x="17" y="116" width="566" height="160"/>
+                                                        <string key="text">Welcome to YesGraph’s example app! We’ll show you how you grow faster and how YesGraph works. You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aan-qq-fxp">
+                                                        <rect key="frame" x="230" y="338" width="140" height="40"/>
+                                                        <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="2cM-BK-07D"/>
+                                                            <constraint firstAttribute="width" constant="140" id="eTZ-lP-Sxg"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <state key="normal" title="Try YesGraph">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dJ1-Ux-oMm"/>
+                                                            <segue destination="fFq-mp-1bk" kind="show" id="wz8-BL-9nd"/>
+                                                        </connections>
+                                                    </button>
+                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mVP-rr-zI6" userLabel="Headline">
+                                                        <rect key="frame" x="131" y="50" width="338" height="30"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="8y2-LZ-HZt"/>
+                                                            <constraint firstAttribute="width" constant="310" id="IYS-3H-NR8"/>
+                                                            <constraint firstAttribute="width" constant="338" id="ael-B3-GS3"/>
+                                                            <constraint firstAttribute="height" constant="30" id="jZQ-9s-sv9"/>
+                                                        </constraints>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="YesGraph Boosts Your App’s Viral Growth">
+                                                                <attributes>
+                                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <font key="NSFont" size="16" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="8y2-LZ-HZt"/>
+                                                                <exclude reference="IYS-3H-NR8"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="aan-qq-fxp" firstAttribute="centerX" secondItem="jL5-E6-oy6" secondAttribute="centerX" id="Cxp-SN-eSl"/>
+                                                    <constraint firstItem="mVP-rr-zI6" firstAttribute="centerX" secondItem="jL5-E6-oy6" secondAttribute="centerX" id="IT2-3M-TrC"/>
+                                                    <constraint firstAttribute="height" constant="450" id="W1B-xX-3Qw"/>
+                                                    <constraint firstItem="aan-qq-fxp" firstAttribute="centerX" secondItem="2c0-gB-a5i" secondAttribute="centerX" id="Waa-E7-NXi"/>
+                                                    <constraint firstItem="2c0-gB-a5i" firstAttribute="leading" secondItem="jL5-E6-oy6" secondAttribute="leading" constant="17" id="edt-4e-zX3"/>
+                                                    <constraint firstAttribute="trailing" secondItem="2c0-gB-a5i" secondAttribute="trailing" constant="17" id="fOA-Hh-VuW"/>
+                                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="aan-qq-fxp" secondAttribute="bottom" constant="72" id="jJA-Wg-4fQ"/>
+                                                    <constraint firstItem="aan-qq-fxp" firstAttribute="top" secondItem="2c0-gB-a5i" secondAttribute="bottom" constant="62" id="s7p-2X-TFX"/>
+                                                    <constraint firstItem="mVP-rr-zI6" firstAttribute="top" secondItem="jL5-E6-oy6" secondAttribute="top" constant="50" id="vZL-1x-EA8"/>
+                                                    <constraint firstItem="2c0-gB-a5i" firstAttribute="top" secondItem="mVP-rr-zI6" secondAttribute="bottom" constant="36" id="vev-E9-oHI"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvm-L2-pOd" userLabel="Section2">
+                                                <rect key="frame" x="0.0" y="450" width="600" height="450"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6D-TX-lyu">
+                                                        <rect key="frame" x="17" y="128" width="566" height="165"/>
+                                                        <attributedString key="attributedText">
+                                                            <fragment>
+                                                                <string key="content">YesGraph can recommend exactly who you should invite. We do this with machine learning and data crunching. 
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="14" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="48" headIndent="48" minimumLineHeight="20" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="14" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment>
+                                                                <string key="content">1. Our flow uses industry best practices.
+2. Save engineering time and focus on your app.
+3. Improve your virality metrics, like conversion rate and # invites sent.
+4. Personalized suggestions make for a better user experience.
+</string>
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="14" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" firstLineHeadIndent="48" headIndent="48" minimumLineHeight="20" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                            <fragment content="5. Our SDK is easy to integrate.">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.67450980392156867" green="0.67843137254901964" blue="0.68627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="14" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcW-X2-lkY">
+                                                        <rect key="frame" x="230" y="356" width="140" height="40"/>
+                                                        <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="140" id="ayB-lT-I23"/>
+                                                            <constraint firstAttribute="height" constant="40" id="hyu-3L-7OE"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <state key="normal" title="Try YesGraph">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uq9-ny-4xg"/>
+                                                        </connections>
+                                                    </button>
+                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cwK-4N-46g" userLabel="Headline">
+                                                        <rect key="frame" x="200" y="44" width="200" height="30"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="200" id="2vh-K4-BfN"/>
+                                                            <constraint firstAttribute="height" constant="30" id="RAF-Zn-S9k"/>
+                                                            <constraint firstAttribute="height" constant="30" id="Xc9-kT-XGo"/>
+                                                            <constraint firstAttribute="width" constant="310" id="xLk-IF-qXN"/>
+                                                        </constraints>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="Why Choose YesGraph">
+                                                                <attributes>
+                                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <font key="NSFont" size="16" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="RAF-Zn-S9k"/>
+                                                                <exclude reference="xLk-IF-qXN"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.10196078431372549" green="0.11372549019607843" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="p6D-TX-lyu" firstAttribute="leading" secondItem="tvm-L2-pOd" secondAttribute="leading" constant="17" id="E0m-DL-t5Y"/>
+                                                    <constraint firstItem="cwK-4N-46g" firstAttribute="top" secondItem="tvm-L2-pOd" secondAttribute="top" constant="44" id="GAs-AU-cr2"/>
+                                                    <constraint firstItem="qcW-X2-lkY" firstAttribute="top" secondItem="p6D-TX-lyu" secondAttribute="bottom" constant="63" id="MTF-L3-miY"/>
+                                                    <constraint firstItem="p6D-TX-lyu" firstAttribute="centerX" secondItem="tvm-L2-pOd" secondAttribute="centerX" id="T1t-yO-5fe"/>
+                                                    <constraint firstAttribute="trailing" secondItem="p6D-TX-lyu" secondAttribute="trailing" constant="17" id="aBj-CS-EAj"/>
+                                                    <constraint firstItem="qcW-X2-lkY" firstAttribute="centerX" secondItem="tvm-L2-pOd" secondAttribute="centerX" id="cBJ-M6-3hI"/>
+                                                    <constraint firstItem="p6D-TX-lyu" firstAttribute="top" secondItem="cwK-4N-46g" secondAttribute="bottom" constant="54" id="hhf-bm-7LC"/>
+                                                    <constraint firstAttribute="height" constant="450" id="qRu-nG-ewA"/>
+                                                    <constraint firstItem="cwK-4N-46g" firstAttribute="centerX" secondItem="tvm-L2-pOd" secondAttribute="centerX" id="qyQ-ST-OrU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="qcW-X2-lkY" secondAttribute="bottom" constant="54" id="wGR-8D-5hs"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4J-vX-sPk" userLabel="Section3">
+                                                <rect key="frame" x="0.0" y="900" width="600" height="450"/>
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LtL-ip-jqU" userLabel="Headline">
+                                                        <rect key="frame" x="200" y="32" width="200" height="30"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="4GQ-9X-27n"/>
+                                                            <constraint firstAttribute="width" constant="200" id="vmy-h8-Huc"/>
+                                                        </constraints>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="How YesGraph Works">
+                                                                <attributes>
+                                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <font key="NSFont" size="16" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAd-6U-UFg">
+                                                        <rect key="frame" x="17" y="83" width="566" height="306"/>
+                                                        <mutableString key="text">YesGraph learns the patterns in your app automatically using past successful invitations to train a filter. We extract features about what kind of relationships and people are good for your app. 
+
+What might we look for? Here are some examples.
+
+Many social apps involve close family members, so matching last names matter. 
+
+Phone number area codes contain some location information, and some apps send invites to people in your same town.
+
+B2B apps often involve collaboration with coworkers, so having the a matching email domain matters.
+</mutableString>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-Zm-45h">
+                                                        <rect key="frame" x="230" y="397" width="140" height="40"/>
+                                                        <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="LZT-1O-UuB"/>
+                                                            <constraint firstAttribute="width" constant="140" id="nGe-ju-dfn"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <state key="normal" title="Try YesGraph">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oav-bY-9Gq"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="wYh-Zm-45h" firstAttribute="top" secondItem="bAd-6U-UFg" secondAttribute="bottom" constant="8" id="1R6-d3-Xf1"/>
+                                                    <constraint firstAttribute="trailing" secondItem="bAd-6U-UFg" secondAttribute="trailing" constant="17" id="LOh-i0-GHD"/>
+                                                    <constraint firstItem="wYh-Zm-45h" firstAttribute="centerX" secondItem="z4J-vX-sPk" secondAttribute="centerX" id="Lld-we-unW"/>
+                                                    <constraint firstItem="bAd-6U-UFg" firstAttribute="top" secondItem="LtL-ip-jqU" secondAttribute="bottom" constant="21" id="MLf-35-Aib"/>
+                                                    <constraint firstAttribute="height" constant="450" id="RBz-sr-cWL"/>
+                                                    <constraint firstAttribute="bottom" secondItem="wYh-Zm-45h" secondAttribute="bottom" constant="13" id="Sg9-BH-U1x"/>
+                                                    <constraint firstItem="LtL-ip-jqU" firstAttribute="top" secondItem="z4J-vX-sPk" secondAttribute="top" constant="32" id="UTd-3A-qSZ"/>
+                                                    <constraint firstItem="bAd-6U-UFg" firstAttribute="leading" secondItem="z4J-vX-sPk" secondAttribute="leading" constant="17" id="o7e-hu-hYp"/>
+                                                    <constraint firstItem="LtL-ip-jqU" firstAttribute="centerX" secondItem="z4J-vX-sPk" secondAttribute="centerX" id="sHH-8j-1uK"/>
+                                                    <constraint firstItem="bAd-6U-UFg" firstAttribute="centerX" secondItem="z4J-vX-sPk" secondAttribute="centerX" id="tHi-Vw-q2C"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-oX-uXg" userLabel="Section4">
+                                                <rect key="frame" x="0.0" y="1350" width="600" height="550"/>
+                                                <subviews>
+                                                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Tx-CB-wJg" userLabel="Headline">
+                                                        <rect key="frame" x="189" y="30" width="222" height="30"/>
+                                                        <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="LD6-Wm-pP9"/>
+                                                            <constraint firstAttribute="width" constant="222" id="nuZ-aX-iPG"/>
+                                                        </constraints>
+                                                        <attributedString key="attributedText">
+                                                            <fragment content="Using YesGraph’s iOS SDK">
+                                                                <attributes>
+                                                                    <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <font key="NSFont" size="16" name="ArialMT"/>
+                                                                    <real key="NSKern" value="0.0"/>
+                                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36">
+                                                                        <tabStops/>
+                                                                    </paragraphStyle>
+                                                                    <color key="NSStrokeColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                                                                    <real key="NSStrokeWidth" value="0.0"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="YesGraph’s SDK can power your invite flow. Try it out if you haven’t already!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szu-6L-1VR">
+                                                        <rect key="frame" x="17" y="81" width="566" height="17"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" red="0.71764705882352942" green="0.72941176470588232" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaI-OS-ugG">
+                                                        <rect key="frame" x="230" y="147" width="140" height="40"/>
+                                                        <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="140" id="2IY-gG-f4B"/>
+                                                            <constraint firstAttribute="height" constant="40" id="2VE-b1-3mh"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <state key="normal" title="Try YesGraph">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vgK-Zo-Evc"/>
+                                                        </connections>
+                                                    </button>
+                                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLS-ma-afc">
+                                                        <rect key="frame" x="17" y="219" width="566" height="300"/>
+                                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                                        <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
+                                                    </webView>
+                                                </subviews>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="6Tx-CB-wJg" firstAttribute="centerX" secondItem="aY8-oX-uXg" secondAttribute="centerX" id="0sG-1J-ArK"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Szu-6L-1VR" secondAttribute="trailing" constant="17" id="BTp-GM-ZUx"/>
+                                                    <constraint firstItem="qaI-OS-ugG" firstAttribute="centerX" secondItem="aY8-oX-uXg" secondAttribute="centerX" id="E9X-KG-Oc3"/>
+                                                    <constraint firstItem="pLS-ma-afc" firstAttribute="leading" secondItem="aY8-oX-uXg" secondAttribute="leading" constant="17" id="Gg7-Ll-C2h"/>
+                                                    <constraint firstItem="qaI-OS-ugG" firstAttribute="top" secondItem="Szu-6L-1VR" secondAttribute="bottom" constant="49" id="Tex-i6-Koa"/>
+                                                    <constraint firstAttribute="height" constant="550" id="Vhg-8X-ua0"/>
+                                                    <constraint firstItem="6Tx-CB-wJg" firstAttribute="top" secondItem="aY8-oX-uXg" secondAttribute="top" constant="30" id="Vuc-C4-0mD"/>
+                                                    <constraint firstItem="pLS-ma-afc" firstAttribute="top" secondItem="qaI-OS-ugG" secondAttribute="bottom" constant="32" id="ZXR-kJ-PwB"/>
+                                                    <constraint firstItem="Szu-6L-1VR" firstAttribute="centerX" secondItem="aY8-oX-uXg" secondAttribute="centerX" id="cd6-vt-byU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pLS-ma-afc" secondAttribute="bottom" constant="31" id="ekl-SV-lol"/>
+                                                    <constraint firstAttribute="trailing" secondItem="pLS-ma-afc" secondAttribute="trailing" constant="17" id="g40-ay-3ya"/>
+                                                    <constraint firstItem="Szu-6L-1VR" firstAttribute="leading" secondItem="aY8-oX-uXg" secondAttribute="leading" constant="17" id="nOT-Dj-BNx"/>
+                                                    <constraint firstItem="Szu-6L-1VR" firstAttribute="top" secondItem="6Tx-CB-wJg" secondAttribute="bottom" constant="21" id="pXT-IB-pY9"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="aY8-oX-uXg" firstAttribute="leading" secondItem="z4J-vX-sPk" secondAttribute="leading" id="4SW-Z5-GAI"/>
+                                            <constraint firstItem="aY8-oX-uXg" firstAttribute="trailing" secondItem="z4J-vX-sPk" secondAttribute="trailing" id="5fe-Rh-PJY"/>
+                                            <constraint firstAttribute="bottom" secondItem="aY8-oX-uXg" secondAttribute="bottom" constant="-102" id="6RB-vs-2m3"/>
+                                            <constraint firstItem="jL5-E6-oy6" firstAttribute="top" secondItem="yMN-h3-DRZ" secondAttribute="top" id="7yX-SK-diQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="z4J-vX-sPk" secondAttribute="trailing" id="8eN-2a-AyW"/>
+                                            <constraint firstItem="tvm-L2-pOd" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="BeB-Tm-AVb"/>
+                                            <constraint firstAttribute="bottom" secondItem="tvm-L2-pOd" secondAttribute="bottom" constant="592" id="CaF-nQ-48V"/>
+                                            <constraint firstItem="z4J-vX-sPk" firstAttribute="top" secondItem="tvm-L2-pOd" secondAttribute="bottom" id="Cjl-yT-bSg"/>
+                                            <constraint firstItem="jL5-E6-oy6" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="Kgp-cZ-Vax"/>
+                                            <constraint firstItem="z4J-vX-sPk" firstAttribute="top" secondItem="tvm-L2-pOd" secondAttribute="bottom" id="LYP-ia-bkC"/>
+                                            <constraint firstAttribute="bottom" secondItem="tvm-L2-pOd" secondAttribute="bottom" constant="450" id="TYh-Zx-hou"/>
+                                            <constraint firstItem="aY8-oX-uXg" firstAttribute="top" secondItem="z4J-vX-sPk" secondAttribute="bottom" id="XEk-Wq-kJP"/>
+                                            <constraint firstItem="z4J-vX-sPk" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="k7Y-8Y-2WG"/>
+                                            <constraint firstAttribute="bottom" secondItem="z4J-vX-sPk" secondAttribute="bottom" constant="550" id="m9G-PY-xdO"/>
+                                            <constraint firstItem="tvm-L2-pOd" firstAttribute="top" secondItem="jL5-E6-oy6" secondAttribute="bottom" id="q3d-pM-aIc"/>
+                                            <constraint firstAttribute="trailing" secondItem="tvm-L2-pOd" secondAttribute="trailing" id="s75-hk-pz9"/>
+                                            <constraint firstAttribute="trailing" secondItem="jL5-E6-oy6" secondAttribute="trailing" id="y4K-Ke-ceu"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="CaF-nQ-48V"/>
+                                                <exclude reference="TYh-Zx-hou"/>
+                                                <exclude reference="6RB-vs-2m3"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="yMN-h3-DRZ" firstAttribute="leading" secondItem="Quk-aY-xyK" secondAttribute="leading" id="CHc-Y7-eqP"/>
+                                    <constraint firstAttribute="bottom" secondItem="yMN-h3-DRZ" secondAttribute="bottom" constant="380" id="O6C-9t-335"/>
+                                    <constraint firstAttribute="trailing" secondItem="yMN-h3-DRZ" secondAttribute="trailing" id="OTc-Ip-Ont"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="leading" secondItem="Oou-HP-TO7" secondAttribute="leading" id="3kR-Pj-f4b"/>
+                            <constraint firstItem="yMN-h3-DRZ" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="TCT-JO-h3L"/>
+                            <constraint firstItem="yMN-h3-DRZ" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="U3Q-V0-2Ry"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="d7L-Wz-jpc"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="el0-WY-UgU"/>
+                            <constraint firstItem="zc2-g4-pOh" firstAttribute="top" secondItem="Quk-aY-xyK" secondAttribute="bottom" id="iVC-7L-iQQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Quk-aY-xyK" secondAttribute="trailing" id="mKJ-CU-XHb"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="2300"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jOc-bs-NrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="15" y="-367"/>
         </scene>
     </scenes>
     <resources>
