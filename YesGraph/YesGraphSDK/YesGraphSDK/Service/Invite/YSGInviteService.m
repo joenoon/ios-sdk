@@ -215,6 +215,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     NSDictionary *data = [self shareDataForUserInfo:@{ YSGInvitePhoneContactsKey : entries }];
     
+    messageController.subject = data[YSGShareSheetSubjectKey];
     messageController.body = data[YSGShareSheetMessageKey];
     messageController.recipients = recipients.copy;
     
@@ -258,6 +259,11 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     }
     
     NSDictionary *data = [self shareDataForUserInfo:@{ YSGInviteEmailContactsKey : entries }];
+    
+    if (data[YSGShareSheetSubjectKey])
+    {
+        [messageController setSubject:data[YSGShareSheetSubjectKey]];
+    }
     
     [messageController setMessageBody:data[YSGShareSheetMessageKey] isHTML:[data[YSGInviteEmailIsHTMLKey] boolValue]];
     [messageController setToRecipients:recipients];
