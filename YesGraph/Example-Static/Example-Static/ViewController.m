@@ -63,13 +63,13 @@
     }
     else
     {
-        [self.shareButton setTitle:@"  Configuring YesGraph...  " forState:UIControlStateNormal];
-        self.shareButton.enabled = NO;
+        [sender setTitle:@"  Configuring YesGraph...  " forState:UIControlStateNormal];
+        sender.enabled = NO;
         
         [self configureYesGraphWithCompletion:^(BOOL success, NSError *error)
         {
-            [self.shareButton setTitle:@"Share" forState:UIControlStateNormal];
-            self.shareButton.enabled = YES;
+            [sender setTitle:@"Share" forState:UIControlStateNormal];
+            sender.enabled = YES;
             
             if (success)
             {
@@ -90,6 +90,7 @@
     [YesGraph shared].theme = self.theme;
     [YesGraph shared].numberOfSuggestions = 5;
     [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
+    [YesGraph shared].shareSheetText = @"Demo our SDK by sharing YesGraph with your contacts";
     
     YSGShareSheetController *shareController  = [[YesGraph shared] shareSheetControllerForAllServicesWithDelegate:self];
     

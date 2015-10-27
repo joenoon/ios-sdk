@@ -142,6 +142,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         YesGraph.shared().theme = self.theme
         YesGraph.shared().numberOfSuggestions = 5
         YesGraph.shared().contactAccessPromptMessage = "Share contacts with Example to invite friends?"
+        YesGraph.shared().shareSheetText = "Demo our SDK by sharing YesGraph with your contacts"
         
         let shareController = YesGraph.shared().shareSheetControllerForAllServicesWithDelegate(self)
         

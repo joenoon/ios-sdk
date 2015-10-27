@@ -10,8 +10,6 @@
 
 @interface ViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIButton *shareButton;
-
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

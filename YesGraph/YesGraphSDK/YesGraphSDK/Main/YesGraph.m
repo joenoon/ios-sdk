@@ -40,6 +40,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
  * Settings
  */
 @property (nonatomic, assign) NSUInteger numberOfSuggestions;
+@property (nullable, nonatomic, copy) NSString *shareSheetText;
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 @property (nonatomic, assign) NSTimeInterval contactBookTimePeriod;
 
@@ -316,6 +317,11 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         YSG_LWARN(@"No contact access prompt message is set.");
     }
     
+    if (!self.shareSheetText.length) {
+        YSG_LWARN(@"No share sheet text is set.");
+    }
+    
+    
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
     
@@ -354,6 +360,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     [services addObject:inviteService];
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:services.copy delegate:delegate theme:self.theme];
+    shareController.shareText = self.shareSheetText;
     return shareController;
 }
 
