@@ -37,7 +37,7 @@
 {
     for (NSUInteger index = 0; index < 2; ++index)
     {
-        XCTAssertEqual(expected.AlphaPair[index], actual.AlphaPair[index], @"Alpha fade factor at index '%lu' was '%f' but '%f' was expected", index, actual.AlphaPair[index], expected.AlphaPair[index]);
+        XCTAssertEqual(expected.AlphaPair[index], actual.AlphaPair[index], @"Alpha fade factor at index '%lu' was '%f' but '%f' was expected", (unsigned long)index, actual.AlphaPair[index], expected.AlphaPair[index]);
     }
 }
 

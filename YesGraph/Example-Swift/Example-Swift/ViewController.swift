@@ -181,7 +181,12 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
             return [YSGShareSheetMessageKey : "This message will be posted to Twitter."]
         }
         else if let _ = service as? YSGInviteService {
-            return [YSGShareSheetMessageKey : "This message will be posted to SMS."]
+            if let _ = userInfo?[YSGInviteEmailContactsKey] {
+                return [YSGShareSheetMessageKey : "This message will be posted to Email."]
+            }
+            else {
+                return [YSGShareSheetMessageKey : "This message will be posted to SMS."]
+            }
         }
         
         return [YSGShareSheetMessageKey : ""]

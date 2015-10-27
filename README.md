@@ -24,7 +24,7 @@ The easiest way to integrate is with **CocoaPods**. Add the following Pod to you
 pod 'YesGraph-iOS-SDK'
 ```
 
-An alternate way to integrate is using **Carthage**. Add the following link to your **CartFile**:
+An alternate way to integrate is using **Carthage**. Add the following link to your **Cartfile**:
 
 ```
 github "YesGraph/ios-sdk"

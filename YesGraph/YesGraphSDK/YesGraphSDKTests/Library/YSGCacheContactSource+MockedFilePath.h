@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSString *filePath;
 
+- (void)setMockedFilePath:(NSString *)mockedFilePath;
+
 @end

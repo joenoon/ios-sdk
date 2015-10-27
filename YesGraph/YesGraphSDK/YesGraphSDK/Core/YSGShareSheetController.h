@@ -18,6 +18,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString * const YSGShareSheetSubjectKey;
 extern NSString * const YSGShareSheetMessageKey;
 
 @protocol YSGShareSheetDelegate <NSObject>
