@@ -12,7 +12,7 @@
 
 @import Social;
 
-@interface ViewController () <YSGShareSheetDelegate>
+@interface ViewController () <YSGShareSheetDelegate, UIWebViewDelegate>
 
 @property (nullable, nonatomic, strong) YSGTheme *theme;
 
@@ -24,12 +24,35 @@
 {
     [super viewDidLoad];
     
-    self.title = @"Welcome";
+    self.title = @"Home";
     
     self.theme = [YSGTheme new];
     
-    [self styleView];
+    [self setWebViewContent];
     
+    self.webView.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
+}
+
+- (void)setWebViewContent
+{
+    NSString* htmlString= @"<style>a:link {color:#487EA8; text-decoration:none}\
+    a:visited {color:#487EA8; text-decoration:none}\
+    </style><body style=\"font-family: 'Open Sans'; font-size: 15px; margin: 0; background-color: #1F2124; text-align: left; color: #C4C6C7;\">It’s open source. <a href=\"https://github.com/YesGraph/ios-sdk\">Find it on Github here</a>. <br><br>\
+    If you use CocoaPods, you can integrate with: pod 'YesGraph-iOS-SDK' Or with Carthage: github \"YesGraph/ios-sdk\" <br><br>\
+    We have example applications using <a href=\"https://github.com/YesGraph/ios-sdk#example-applications\">(Parse, Swift, and Objective-C)</a> on Github.<br><br>\
+    You’ll need a YesGraph account. <a href=\"https://www.yesgraph.com/\">Sign up and create an app to configure the SDK</a>.<br><br>\
+    The documentation online is extensive, but if you have any trouble, email <a href=\"mailto:support@yesgraph.com\">support@yesgraph.com</a>.</body>";
+    [self.webView loadHTMLString:htmlString baseURL:nil];
 }
 
 - (IBAction)shareButtonTap:(UIButton *)sender
@@ -112,15 +135,6 @@
     }
 }
 
-- (void)styleView
-{
-    self.additionalInfoLabel.font = [UIFont fontWithName:@"OpenSans" size:16];
-    self.introTextField.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
-    self.shareButton.titleLabel.font = [UIFont fontWithName:@"OpenSans" size:20];
-    
-    self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height/10;
-}
-
 #pragma - mark YSGShareSheetControllerDelegate
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
@@ -148,6 +162,20 @@
     }
     
     return @{ YSGShareSheetMessageKey : @"" };
+}
+
+#pragma mark - WebViewDelegate
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked)
+    {
+        [[UIApplication sharedApplication] openURL:request.URL];
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
 }
 
 @end
