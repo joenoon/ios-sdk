@@ -141,25 +141,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="2300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Quk-aY-xyK">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Quk-aY-xyK">
                                 <rect key="frame" x="0.0" y="20" width="600" height="2280"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMN-h3-DRZ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1900"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="1735"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jL5-E6-oy6" userLabel="Section1">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="335"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-gB-a5i">
-                                                        <rect key="frame" x="17" y="116" width="566" height="160"/>
+                                                        <rect key="frame" x="17" y="116" width="566" height="67"/>
                                                         <animations/>
-                                                        <string key="text">Welcome to YesGraph’s example app! We’ll show you how you grow faster and how YesGraph works. You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
+                                                        <string key="text">Welcome to YesGraph’s example app! We’ll show you how you grow faster and how YesGraph works.
+
+You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aan-qq-fxp">
-                                                        <rect key="frame" x="230" y="338" width="140" height="40"/>
+                                                        <rect key="frame" x="230" y="245" width="140" height="40"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -213,21 +215,20 @@
                                                 <constraints>
                                                     <constraint firstItem="aan-qq-fxp" firstAttribute="centerX" secondItem="jL5-E6-oy6" secondAttribute="centerX" id="Cxp-SN-eSl"/>
                                                     <constraint firstItem="mVP-rr-zI6" firstAttribute="centerX" secondItem="jL5-E6-oy6" secondAttribute="centerX" id="IT2-3M-TrC"/>
-                                                    <constraint firstAttribute="height" constant="450" id="W1B-xX-3Qw"/>
                                                     <constraint firstItem="aan-qq-fxp" firstAttribute="centerX" secondItem="2c0-gB-a5i" secondAttribute="centerX" id="Waa-E7-NXi"/>
                                                     <constraint firstItem="2c0-gB-a5i" firstAttribute="leading" secondItem="jL5-E6-oy6" secondAttribute="leading" constant="17" id="edt-4e-zX3"/>
                                                     <constraint firstAttribute="trailing" secondItem="2c0-gB-a5i" secondAttribute="trailing" constant="17" id="fOA-Hh-VuW"/>
-                                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="aan-qq-fxp" secondAttribute="bottom" constant="72" id="jJA-Wg-4fQ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="aan-qq-fxp" secondAttribute="bottom" constant="50" id="jJA-Wg-4fQ"/>
                                                     <constraint firstItem="aan-qq-fxp" firstAttribute="top" secondItem="2c0-gB-a5i" secondAttribute="bottom" constant="62" id="s7p-2X-TFX"/>
                                                     <constraint firstItem="mVP-rr-zI6" firstAttribute="top" secondItem="jL5-E6-oy6" secondAttribute="top" constant="50" id="vZL-1x-EA8"/>
                                                     <constraint firstItem="2c0-gB-a5i" firstAttribute="top" secondItem="mVP-rr-zI6" secondAttribute="bottom" constant="36" id="vev-E9-oHI"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvm-L2-pOd" userLabel="Section2">
-                                                <rect key="frame" x="0.0" y="450" width="600" height="450"/>
+                                                <rect key="frame" x="0.0" y="335" width="600" height="445"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6D-TX-lyu">
-                                                        <rect key="frame" x="17" y="128" width="566" height="165"/>
+                                                        <rect key="frame" x="17" y="128" width="566" height="160"/>
                                                         <animations/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
@@ -292,7 +293,7 @@ Cg
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcW-X2-lkY">
-                                                        <rect key="frame" x="230" y="356" width="140" height="40"/>
+                                                        <rect key="frame" x="230" y="351" width="140" height="40"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -350,13 +351,12 @@ Cg
                                                     <constraint firstAttribute="trailing" secondItem="p6D-TX-lyu" secondAttribute="trailing" constant="17" id="aBj-CS-EAj"/>
                                                     <constraint firstItem="qcW-X2-lkY" firstAttribute="centerX" secondItem="tvm-L2-pOd" secondAttribute="centerX" id="cBJ-M6-3hI"/>
                                                     <constraint firstItem="p6D-TX-lyu" firstAttribute="top" secondItem="cwK-4N-46g" secondAttribute="bottom" constant="54" id="hhf-bm-7LC"/>
-                                                    <constraint firstAttribute="height" constant="450" id="qRu-nG-ewA"/>
                                                     <constraint firstItem="cwK-4N-46g" firstAttribute="centerX" secondItem="tvm-L2-pOd" secondAttribute="centerX" id="qyQ-ST-OrU"/>
                                                     <constraint firstAttribute="bottom" secondItem="qcW-X2-lkY" secondAttribute="bottom" constant="54" id="wGR-8D-5hs"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4J-vX-sPk" userLabel="Section3">
-                                                <rect key="frame" x="0.0" y="900" width="600" height="450"/>
+                                                <rect key="frame" x="0.0" y="780" width="600" height="405"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LtL-ip-jqU" userLabel="Headline">
                                                         <rect key="frame" x="200" y="32" width="200" height="30"/>
@@ -383,7 +383,7 @@ Cg
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAd-6U-UFg">
-                                                        <rect key="frame" x="17" y="83" width="566" height="306"/>
+                                                        <rect key="frame" x="17" y="83" width="566" height="234"/>
                                                         <animations/>
                                                         <string key="text">YesGraph learns the patterns in your app automatically using past successful invitations to train a filter. We extract features about what kind of relationships and people are good for your app. 
 
@@ -400,7 +400,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-Zm-45h">
-                                                        <rect key="frame" x="230" y="397" width="140" height="40"/>
+                                                        <rect key="frame" x="230" y="325" width="140" height="40"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -423,8 +423,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                     <constraint firstAttribute="trailing" secondItem="bAd-6U-UFg" secondAttribute="trailing" constant="17" id="LOh-i0-GHD"/>
                                                     <constraint firstItem="wYh-Zm-45h" firstAttribute="centerX" secondItem="z4J-vX-sPk" secondAttribute="centerX" id="Lld-we-unW"/>
                                                     <constraint firstItem="bAd-6U-UFg" firstAttribute="top" secondItem="LtL-ip-jqU" secondAttribute="bottom" constant="21" id="MLf-35-Aib"/>
-                                                    <constraint firstAttribute="height" constant="450" id="RBz-sr-cWL"/>
-                                                    <constraint firstAttribute="bottom" secondItem="wYh-Zm-45h" secondAttribute="bottom" constant="13" id="Sg9-BH-U1x"/>
+                                                    <constraint firstAttribute="bottom" secondItem="wYh-Zm-45h" secondAttribute="bottom" constant="40" id="Sg9-BH-U1x"/>
                                                     <constraint firstItem="LtL-ip-jqU" firstAttribute="top" secondItem="z4J-vX-sPk" secondAttribute="top" constant="32" id="UTd-3A-qSZ"/>
                                                     <constraint firstItem="bAd-6U-UFg" firstAttribute="leading" secondItem="z4J-vX-sPk" secondAttribute="leading" constant="17" id="o7e-hu-hYp"/>
                                                     <constraint firstItem="LtL-ip-jqU" firstAttribute="centerX" secondItem="z4J-vX-sPk" secondAttribute="centerX" id="sHH-8j-1uK"/>
@@ -432,7 +431,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-oX-uXg" userLabel="Section4">
-                                                <rect key="frame" x="0.0" y="1350" width="600" height="550"/>
+                                                <rect key="frame" x="0.0" y="1185" width="600" height="550"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Tx-CB-wJg" userLabel="Headline">
                                                         <rect key="frame" x="189" y="30" width="222" height="30"/>
@@ -482,7 +481,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         </connections>
                                                     </button>
                                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLS-ma-afc">
-                                                        <rect key="frame" x="17" y="219" width="566" height="300"/>
+                                                        <rect key="frame" x="17" y="219" width="566" height="301"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
@@ -496,11 +495,11 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                     <constraint firstItem="qaI-OS-ugG" firstAttribute="centerX" secondItem="aY8-oX-uXg" secondAttribute="centerX" id="E9X-KG-Oc3"/>
                                                     <constraint firstItem="pLS-ma-afc" firstAttribute="leading" secondItem="aY8-oX-uXg" secondAttribute="leading" constant="17" id="Gg7-Ll-C2h"/>
                                                     <constraint firstItem="qaI-OS-ugG" firstAttribute="top" secondItem="Szu-6L-1VR" secondAttribute="bottom" constant="49" id="Tex-i6-Koa"/>
-                                                    <constraint firstAttribute="height" constant="550" id="Vhg-8X-ua0"/>
+                                                    <constraint firstAttribute="height" constant="550" id="Vc7-xA-Q6f"/>
                                                     <constraint firstItem="6Tx-CB-wJg" firstAttribute="top" secondItem="aY8-oX-uXg" secondAttribute="top" constant="30" id="Vuc-C4-0mD"/>
                                                     <constraint firstItem="pLS-ma-afc" firstAttribute="top" secondItem="qaI-OS-ugG" secondAttribute="bottom" constant="32" id="ZXR-kJ-PwB"/>
                                                     <constraint firstItem="Szu-6L-1VR" firstAttribute="centerX" secondItem="aY8-oX-uXg" secondAttribute="centerX" id="cd6-vt-byU"/>
-                                                    <constraint firstAttribute="bottom" secondItem="pLS-ma-afc" secondAttribute="bottom" constant="31" id="ekl-SV-lol"/>
+                                                    <constraint firstAttribute="bottom" secondItem="pLS-ma-afc" secondAttribute="bottom" constant="30" id="ekl-SV-lol"/>
                                                     <constraint firstAttribute="trailing" secondItem="pLS-ma-afc" secondAttribute="trailing" constant="17" id="g40-ay-3ya"/>
                                                     <constraint firstItem="Szu-6L-1VR" firstAttribute="leading" secondItem="aY8-oX-uXg" secondAttribute="leading" constant="17" id="nOT-Dj-BNx"/>
                                                     <constraint firstItem="Szu-6L-1VR" firstAttribute="top" secondItem="6Tx-CB-wJg" secondAttribute="bottom" constant="21" id="pXT-IB-pY9"/>
@@ -512,15 +511,14 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                         <constraints>
                                             <constraint firstItem="aY8-oX-uXg" firstAttribute="leading" secondItem="z4J-vX-sPk" secondAttribute="leading" id="4SW-Z5-GAI"/>
                                             <constraint firstItem="aY8-oX-uXg" firstAttribute="trailing" secondItem="z4J-vX-sPk" secondAttribute="trailing" id="5fe-Rh-PJY"/>
+                                            <constraint firstAttribute="bottom" secondItem="aY8-oX-uXg" secondAttribute="bottom" id="6EU-6M-8ni"/>
                                             <constraint firstItem="jL5-E6-oy6" firstAttribute="top" secondItem="yMN-h3-DRZ" secondAttribute="top" id="7yX-SK-diQ"/>
                                             <constraint firstAttribute="trailing" secondItem="z4J-vX-sPk" secondAttribute="trailing" id="8eN-2a-AyW"/>
                                             <constraint firstItem="tvm-L2-pOd" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="BeB-Tm-AVb"/>
                                             <constraint firstItem="z4J-vX-sPk" firstAttribute="top" secondItem="tvm-L2-pOd" secondAttribute="bottom" id="Cjl-yT-bSg"/>
                                             <constraint firstItem="jL5-E6-oy6" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="Kgp-cZ-Vax"/>
-                                            <constraint firstItem="z4J-vX-sPk" firstAttribute="top" secondItem="tvm-L2-pOd" secondAttribute="bottom" id="LYP-ia-bkC"/>
                                             <constraint firstItem="aY8-oX-uXg" firstAttribute="top" secondItem="z4J-vX-sPk" secondAttribute="bottom" id="XEk-Wq-kJP"/>
                                             <constraint firstItem="z4J-vX-sPk" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="k7Y-8Y-2WG"/>
-                                            <constraint firstAttribute="bottom" secondItem="z4J-vX-sPk" secondAttribute="bottom" constant="550" id="m9G-PY-xdO"/>
                                             <constraint firstItem="tvm-L2-pOd" firstAttribute="top" secondItem="jL5-E6-oy6" secondAttribute="bottom" id="q3d-pM-aIc"/>
                                             <constraint firstAttribute="trailing" secondItem="tvm-L2-pOd" secondAttribute="trailing" id="s75-hk-pz9"/>
                                             <constraint firstAttribute="trailing" secondItem="jL5-E6-oy6" secondAttribute="trailing" id="y4K-Ke-ceu"/>
@@ -531,6 +529,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                 <constraints>
                                     <constraint firstItem="yMN-h3-DRZ" firstAttribute="top" secondItem="Quk-aY-xyK" secondAttribute="top" id="91e-UL-JVq"/>
                                     <constraint firstItem="yMN-h3-DRZ" firstAttribute="leading" secondItem="Quk-aY-xyK" secondAttribute="leading" id="CHc-Y7-eqP"/>
+                                    <constraint firstItem="yMN-h3-DRZ" firstAttribute="width" secondItem="Quk-aY-xyK" secondAttribute="width" id="EVl-ob-sHb"/>
                                     <constraint firstAttribute="bottom" secondItem="yMN-h3-DRZ" secondAttribute="bottom" constant="380" id="O6C-9t-335"/>
                                     <constraint firstAttribute="trailing" secondItem="yMN-h3-DRZ" secondAttribute="trailing" id="OTc-Ip-Ont"/>
                                 </constraints>
@@ -540,11 +539,10 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="leading" secondItem="Oou-HP-TO7" secondAttribute="leading" id="3kR-Pj-f4b"/>
-                            <constraint firstItem="yMN-h3-DRZ" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="TCT-JO-h3L"/>
-                            <constraint firstItem="Quk-aY-xyK" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="d7L-Wz-jpc"/>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="el0-WY-UgU"/>
                             <constraint firstItem="zc2-g4-pOh" firstAttribute="top" secondItem="Quk-aY-xyK" secondAttribute="bottom" id="iVC-7L-iQQ"/>
                             <constraint firstAttribute="trailing" secondItem="Quk-aY-xyK" secondAttribute="trailing" id="mKJ-CU-XHb"/>
+                            <constraint firstItem="Quk-aY-xyK" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="ruG-u1-4fP"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
