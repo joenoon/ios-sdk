@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.navigationBarHidden = YES;
     
     self.theme = [YSGTheme new];
     
@@ -41,6 +41,16 @@
     The documentation online is extensive, but if you have any trouble, email <a href=\"mailto:support@yesgraph.com\">support@yesgraph.com</a>.</body>";
     [self.webView loadHTMLString:htmlString baseURL:nil];
     self.webView.delegate = self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [super viewWillDisappear:animated];
 }
 
 - (BOOL)isAvailableTwit:(NSString *)empty
