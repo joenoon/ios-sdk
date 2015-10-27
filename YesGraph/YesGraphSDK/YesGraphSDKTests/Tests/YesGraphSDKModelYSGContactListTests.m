@@ -78,7 +78,7 @@
     list.entries = [YSGTestMockData mockContactList].entries;
     NSArray *trimmedList = [list removeDuplicatedContactsFromSuggestions:list.entries numberOfSuggestions:numberOfSuggestions];
     XCTAssertNotNil(trimmedList, @"Trimmed suggestions list shouldn't be nil");
-    XCTAssertEqual(trimmedList.count, numberOfSuggestions, @"The trimmed list should contain only '%lu' contacts, not '%lu'", numberOfSuggestions, trimmedList.count);
+    XCTAssertEqual(trimmedList.count, numberOfSuggestions, @"The trimmed list should contain only '%lu' contacts, not '%lu'", (unsigned long)numberOfSuggestions, (unsigned long)trimmedList.count);
 }
 
 @end

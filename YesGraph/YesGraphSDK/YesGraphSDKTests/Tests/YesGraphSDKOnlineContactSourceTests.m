@@ -46,11 +46,11 @@
      {
          XCTAssertNil(error, @"Error is supposed to be nil, not '%@'", error);
          XCTAssertNotNil(returnedContacts, @"Returned contacts shouldn't be nil");
-         XCTAssertEqual(returnedContacts.entries.count, mockedList.entries.count, @"Number of returned contacts '%lu' not the same as '%lu'", (unsigned long)returnedContacts.entries.count, mockedList.entries.count);
+         XCTAssertEqual(returnedContacts.entries.count, mockedList.entries.count, @"Number of returned contacts '%lu' not the same as '%lu'", (unsigned long)returnedContacts.entries.count, (unsigned long)mockedList.entries.count);
          // can't directly compare with isEqualToArray
          for (NSUInteger index = 0; index < returnedContacts.entries.count; ++index)
          {
-             XCTAssert([mockedList.entries[index].contactString isEqualToString:returnedContacts.entries[index].contactString], @"Contact string '%@' in returned array is not the same as '%@' at index '%lu'", returnedContacts.entries[index].contactString, mockedList.entries[index].contactString, index);
+             XCTAssert([mockedList.entries[index].contactString isEqualToString:returnedContacts.entries[index].contactString], @"Contact string '%@' in returned array is not the same as '%@' at index '%lu'", returnedContacts.entries[index].contactString, mockedList.entries[index].contactString, (unsigned long)index);
          }
          [expectation fulfill];
      }];

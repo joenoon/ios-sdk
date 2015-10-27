@@ -44,10 +44,10 @@
                 break;
         }
         NSString *localizedErrorDescription = YSGLocalizedErrorDescriptionForErrorCode(errorCode);
-        XCTAssert([localizedErrorDescription isEqualToString:expectedErrorDescription], @"Expected error description for code '%ld' to be '%@' not '%@'", errorCode, expectedErrorDescription, localizedErrorDescription);
+        XCTAssert([localizedErrorDescription isEqualToString:expectedErrorDescription], @"Expected error description for code '%ld' to be '%@' not '%@'", (long)errorCode, expectedErrorDescription, localizedErrorDescription);
         NSError *errorWithCode = YSGErrorWithErrorCode(errorCode);
-        XCTAssertNotNil(errorWithCode, @"Error with code '%ld' shouldn't be nil", errorCode);
-        XCTAssertEqual(errorWithCode.code, errorCode, @"Error code '%ld' in error not the same as '%ld'", errorWithCode.code, errorCode);
+        XCTAssertNotNil(errorWithCode, @"Error with code '%ld' shouldn't be nil", (long)errorCode);
+        XCTAssertEqual(errorWithCode.code, errorCode, @"Error code '%ld' in error not the same as '%ld'", (long)errorWithCode.code, (long)errorCode);
         XCTAssert([errorWithCode.domain isEqualToString:YSGErrorDomain], @"Error domain expected to be '%@' not '%@'", YSGErrorDomain, errorWithCode.domain);
         NSString *localizedDescriptionInfo = errorWithCode.userInfo[NSLocalizedDescriptionKey];
         XCTAssert([localizedDescriptionInfo isEqualToString:expectedErrorDescription], @"User info should contain the expected localized error description '%@' not '%@'", expectedErrorDescription, localizedDescriptionInfo);

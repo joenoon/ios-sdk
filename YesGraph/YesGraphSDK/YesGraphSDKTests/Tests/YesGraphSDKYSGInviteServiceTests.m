@@ -40,7 +40,7 @@
     __weak YesGraphSDKYSGInviteServiceTests *preventRetainCycle = self;
     preventRetainCycle.service.triggeredForEmailContacts = ^(NSArray <YSGContact *> *entries)
     {
-        XCTAssertEqual(contacts.count, entries.count, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        XCTAssertEqual(contacts.count, entries.count, @"Received entries count '%lu' does not match the sent count '%lu'", (unsigned long)entries.count, (unsigned long)contacts.count);
         __weak YSGContact *firstSent = contacts[0];
         __weak YSGContact *firstRec = entries[0];
         XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
@@ -56,7 +56,7 @@
     __weak YesGraphSDKYSGInviteServiceTests *preventRetainCycle = self;
     preventRetainCycle.service.triggeredPhoneContacts = ^(NSArray <YSGContact *> *entries)
     {
-        XCTAssertEqual(contacts.count, entries.count, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        XCTAssertEqual(contacts.count, entries.count, @"Received entries count '%lu' does not match the sent count '%lu'", (unsigned long)entries.count, (unsigned long)contacts.count);
         __weak YSGContact *firstSent = contacts[0];
         __weak YSGContact *firstRec = entries[0];
         XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
@@ -75,14 +75,14 @@
     __weak YesGraphSDKYSGInviteServiceTests *preventRetainCycle = self;
     preventRetainCycle.service.triggeredForEmailContacts = ^(NSArray <YSGContact *> *entries)
     {
-        XCTAssertEqual(entries.count, 1, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        XCTAssertEqual(entries.count, 1, @"Received entries count '%lu' does not match the sent count '%lu'", (unsigned long)entries.count, (unsigned long)contacts.count);
         __weak YSGContact *firstSent = contacts[0];
         __weak YSGContact *firstRec = entries[0];
         XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
     };
     preventRetainCycle.service.triggeredPhoneContacts = ^(NSArray <YSGContact *> *entries)
     {
-        XCTAssertEqual(entries.count, 1, @"Received entries count '%lu' does not match the sent count '%lu'", entries.count, contacts.count);
+        XCTAssertEqual(entries.count, 1, @"Received entries count '%lu' does not match the sent count '%lu'", (unsigned long)entries.count, (unsigned long)contacts.count);
         __weak YSGContact *firstSent = contacts[1];
         __weak YSGContact *firstRec = entries[0];
         XCTAssert([firstSent.description isEqualToString:firstRec.description], @"Description of received contact '%@' does not match the description of the sent contact '%@'", firstSent.description, firstRec.description);
