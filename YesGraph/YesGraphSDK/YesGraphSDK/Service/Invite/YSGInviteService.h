@@ -31,12 +31,6 @@ extern NSString * const YSGInviteEmailIsHTMLKey;
  */
 @property (nonatomic, readonly) NSString *userId;
 
-/*!
- *  This message is displayed to the user before entries permissions is requested. If user agrees with the message,
- *  the user is asked for permission to Address Book.
- */
-@property (nonatomic, copy) NSString *requestContactPermissionMessage;
-
 #pragma mark - Invite configuration
 
 /*!
