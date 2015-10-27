@@ -199,8 +199,12 @@
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        return @{ YSGShareSheetMessageKey : @"This message will be posted to SMS." };
-        //return @"This message will be posted to Email.";
+        if ([userInfo valueForKey:YSGInviteEmailContactsKey]) {
+            return @{ YSGShareSheetMessageKey : @"This message will be posted to Email." };
+        }
+        else {
+            return @{ YSGShareSheetMessageKey : @"This message will be posted to SMS." };
+        }
     }
     
     return @{ YSGShareSheetMessageKey : @"" };

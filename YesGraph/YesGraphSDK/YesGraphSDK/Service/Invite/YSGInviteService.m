@@ -208,8 +208,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     NSMutableArray<NSString *> * recipients = [NSMutableArray array];
     
-    for (YSGContact *contact in entries
-            )
+    for (YSGContact *contact in entries)
     {
         [recipients addObject:contact.phones.firstObject];
     }
@@ -253,8 +252,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     NSMutableArray<NSString *>* recipients = [NSMutableArray array];
     
-    for (YSGContact *contact in entries
-            )
+    for (YSGContact *contact in entries)
     {
         [recipients addObject:contact.emails.firstObject];
     }
