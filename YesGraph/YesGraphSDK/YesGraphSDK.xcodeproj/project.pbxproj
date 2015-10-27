@@ -277,6 +277,8 @@
 		67E64EEE1155E1FF9FE14BC0 /* YSGFacebookService.h in Headers */ = {isa = PBXBuildFile; fileRef = 67E640CDA38C1801103AEEF6 /* YSGFacebookService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67E64F24AA6529C333D9A552 /* YSGContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E6488C19F203A44EA85DD3 /* YSGContactList.m */; };
 		E80044771BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m in Sources */ = {isa = PBXBuildFile; fileRef = E80044761BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m */; };
+		E8105DC91BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */; };
+		E8105DCC1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DCB1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m */; };
 		E824881E1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E824881D1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m */; };
 		E82A8B791BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E82A8B7A1BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = E82A8B751BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m */; };
@@ -534,6 +536,10 @@
 		67E64F479EC3C3C13DC44FC3 /* YSGOnlineContactSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGOnlineContactSource.h; sourceTree = "<group>"; };
 		E80044751BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGNetworkResponse+ParsingMock.h"; sourceTree = "<group>"; };
 		E80044761BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGNetworkResponse+ParsingMock.m"; sourceTree = "<group>"; };
+		E8105DC71BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGUIAlertController+YSGDisplayOverride.h"; sourceTree = "<group>"; };
+		E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGUIAlertController+YSGDisplayOverride.m"; sourceTree = "<group>"; };
+		E8105DCA1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGMessageCenter+RemoveAlertController.h"; sourceTree = "<group>"; };
+		E8105DCB1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGMessageCenter+RemoveAlertController.m"; sourceTree = "<group>"; };
 		E824881D1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKNetworkResponseTests.m; sourceTree = "<group>"; };
 		E82A8B741BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGThemeConstants+AddressBook.h"; sourceTree = "<group>"; };
 		E82A8B751BB9EFB9001A26A7 /* YSGThemeConstants+AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGThemeConstants+AddressBook.m"; sourceTree = "<group>"; };
@@ -727,6 +733,10 @@
 				E8A7D9971BDEC99900C80501 /* YSGInviteService+OverridenMethods.m */,
 				E8A7D9991BDED17900C80501 /* YSGLocalContactSource+ExposePrivateMethods.h */,
 				E8A7D9A01BDED7B600C80501 /* YSGContactList+ExposedPrivate.h */,
+				E8105DC71BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.h */,
+				E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */,
+				E8105DCA1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.h */,
+				E8105DCB1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1384,8 +1394,10 @@
 				E80044771BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m in Sources */,
 				38343AE91BC6A67400DD635B /* YesGraphSDKCacheTests.m in Sources */,
 				38343AE81BC6A67400DD635B /* YesGraphSDKAddressBookTests.m in Sources */,
+				E8105DCC1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m in Sources */,
 				E8CB678E1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m in Sources */,
 				E8B1ED1A1BDA6B1B00F92FFE /* YSGCacheContactSource+MockedFilePath.m in Sources */,
+				E8105DC91BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m in Sources */,
 				E8D319321BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.m in Sources */,
 				38343AED1BC6A67400DD635B /* YesGraphSDKSuggestionsShownTests.m in Sources */,
 				E8B1ED1D1BDA79D500F92FFE /* YSGLocalContactSource+OverrideContactStore.m in Sources */,
