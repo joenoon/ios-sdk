@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "YSGLocalContactSource+ExposePrivateMethods.h"
+#import "YSGLocalContactSource+OverrideContactStore.h"
 #import "YSGContactList.h"
 #import "YSGTestMockData.h"
 
@@ -20,6 +21,7 @@
 - (void)setUp
 {
     [super setUp];
+    [YSGLocalContactSource shouldReturnNil:YES];
     self.localSource = [YSGLocalContactSource new];
 }
 

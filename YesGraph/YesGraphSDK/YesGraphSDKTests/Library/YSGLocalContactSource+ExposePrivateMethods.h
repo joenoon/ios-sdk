@@ -11,5 +11,5 @@
 @interface YSGLocalContactSource (ExposePrivateMethods)
 
 + (NSUserDefaults *)userDefaults;
-//- (NSString *)contactAccessPromptTitle;
+
 @end
