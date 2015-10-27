@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="up5-qv-S28">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="up5-qv-S28">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -152,6 +152,7 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2c0-gB-a5i">
                                                         <rect key="frame" x="17" y="116" width="566" height="160"/>
+                                                        <animations/>
                                                         <string key="text">Welcome to YesGraph’s example app! We’ll show you how you grow faster and how YesGraph works. You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -159,6 +160,7 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aan-qq-fxp">
                                                         <rect key="frame" x="230" y="338" width="140" height="40"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="2cM-BK-07D"/>
@@ -175,6 +177,7 @@
                                                     </button>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mVP-rr-zI6" userLabel="Headline">
                                                         <rect key="frame" x="131" y="50" width="338" height="30"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="8y2-LZ-HZt"/>
@@ -205,6 +208,7 @@
                                                         </variation>
                                                     </textField>
                                                 </subviews>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="aan-qq-fxp" firstAttribute="centerX" secondItem="jL5-E6-oy6" secondAttribute="centerX" id="Cxp-SN-eSl"/>
@@ -224,6 +228,7 @@
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6D-TX-lyu">
                                                         <rect key="frame" x="17" y="128" width="566" height="165"/>
+                                                        <animations/>
                                                         <attributedString key="attributedText">
                                                             <fragment>
                                                                 <string key="content">YesGraph can recommend exactly who you should invite. We do this with machine learning and data crunching. 
@@ -288,6 +293,7 @@ Cg
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcW-X2-lkY">
                                                         <rect key="frame" x="230" y="356" width="140" height="40"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="140" id="ayB-lT-I23"/>
@@ -303,6 +309,7 @@ Cg
                                                     </button>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cwK-4N-46g" userLabel="Headline">
                                                         <rect key="frame" x="200" y="44" width="200" height="30"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="200" id="2vh-K4-BfN"/>
@@ -333,6 +340,7 @@ Cg
                                                         </variation>
                                                     </textField>
                                                 </subviews>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.10196078431372549" green="0.11372549019607843" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="p6D-TX-lyu" firstAttribute="leading" secondItem="tvm-L2-pOd" secondAttribute="leading" constant="17" id="E0m-DL-t5Y"/>
@@ -352,6 +360,7 @@ Cg
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LtL-ip-jqU" userLabel="Headline">
                                                         <rect key="frame" x="200" y="32" width="200" height="30"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="4GQ-9X-27n"/>
@@ -375,7 +384,8 @@ Cg
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAd-6U-UFg">
                                                         <rect key="frame" x="17" y="83" width="566" height="306"/>
-                                                        <mutableString key="text">YesGraph learns the patterns in your app automatically using past successful invitations to train a filter. We extract features about what kind of relationships and people are good for your app. 
+                                                        <animations/>
+                                                        <string key="text">YesGraph learns the patterns in your app automatically using past successful invitations to train a filter. We extract features about what kind of relationships and people are good for your app. 
 
 What might we look for? Here are some examples.
 
@@ -384,13 +394,14 @@ Many social apps involve close family members, so matching last names matter.
 Phone number area codes contain some location information, and some apps send invites to people in your same town.
 
 B2B apps often involve collaboration with coworkers, so having the a matching email domain matters.
-</mutableString>
+</string>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-Zm-45h">
                                                         <rect key="frame" x="230" y="397" width="140" height="40"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="LZT-1O-UuB"/>
@@ -405,6 +416,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         </connections>
                                                     </button>
                                                 </subviews>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="wYh-Zm-45h" firstAttribute="top" secondItem="bAd-6U-UFg" secondAttribute="bottom" constant="8" id="1R6-d3-Xf1"/>
@@ -424,6 +436,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Tx-CB-wJg" userLabel="Headline">
                                                         <rect key="frame" x="189" y="30" width="222" height="30"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="LD6-Wm-pP9"/>
@@ -447,12 +460,14 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="YesGraph’s SDK can power your invite flow. Try it out if you haven’t already!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szu-6L-1VR">
                                                         <rect key="frame" x="17" y="81" width="566" height="17"/>
+                                                        <animations/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" red="0.71764705882352942" green="0.72941176470588232" blue="0.73333333333333328" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaI-OS-ugG">
                                                         <rect key="frame" x="230" y="147" width="140" height="40"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="140" id="2IY-gG-f4B"/>
@@ -468,10 +483,12 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                     </button>
                                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pLS-ma-afc">
                                                         <rect key="frame" x="17" y="219" width="566" height="300"/>
+                                                        <animations/>
                                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                                         <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                                                     </webView>
                                                 </subviews>
+                                                <animations/>
                                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="6Tx-CB-wJg" firstAttribute="centerX" secondItem="aY8-oX-uXg" secondAttribute="centerX" id="0sG-1J-ArK"/>
@@ -490,19 +507,17 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                 </constraints>
                                             </view>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="aY8-oX-uXg" firstAttribute="leading" secondItem="z4J-vX-sPk" secondAttribute="leading" id="4SW-Z5-GAI"/>
                                             <constraint firstItem="aY8-oX-uXg" firstAttribute="trailing" secondItem="z4J-vX-sPk" secondAttribute="trailing" id="5fe-Rh-PJY"/>
-                                            <constraint firstAttribute="bottom" secondItem="aY8-oX-uXg" secondAttribute="bottom" constant="-102" id="6RB-vs-2m3"/>
                                             <constraint firstItem="jL5-E6-oy6" firstAttribute="top" secondItem="yMN-h3-DRZ" secondAttribute="top" id="7yX-SK-diQ"/>
                                             <constraint firstAttribute="trailing" secondItem="z4J-vX-sPk" secondAttribute="trailing" id="8eN-2a-AyW"/>
                                             <constraint firstItem="tvm-L2-pOd" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="BeB-Tm-AVb"/>
-                                            <constraint firstAttribute="bottom" secondItem="tvm-L2-pOd" secondAttribute="bottom" constant="592" id="CaF-nQ-48V"/>
                                             <constraint firstItem="z4J-vX-sPk" firstAttribute="top" secondItem="tvm-L2-pOd" secondAttribute="bottom" id="Cjl-yT-bSg"/>
                                             <constraint firstItem="jL5-E6-oy6" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="Kgp-cZ-Vax"/>
                                             <constraint firstItem="z4J-vX-sPk" firstAttribute="top" secondItem="tvm-L2-pOd" secondAttribute="bottom" id="LYP-ia-bkC"/>
-                                            <constraint firstAttribute="bottom" secondItem="tvm-L2-pOd" secondAttribute="bottom" constant="450" id="TYh-Zx-hou"/>
                                             <constraint firstItem="aY8-oX-uXg" firstAttribute="top" secondItem="z4J-vX-sPk" secondAttribute="bottom" id="XEk-Wq-kJP"/>
                                             <constraint firstItem="z4J-vX-sPk" firstAttribute="leading" secondItem="yMN-h3-DRZ" secondAttribute="leading" id="k7Y-8Y-2WG"/>
                                             <constraint firstAttribute="bottom" secondItem="z4J-vX-sPk" secondAttribute="bottom" constant="550" id="m9G-PY-xdO"/>
@@ -510,27 +525,22 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                             <constraint firstAttribute="trailing" secondItem="tvm-L2-pOd" secondAttribute="trailing" id="s75-hk-pz9"/>
                                             <constraint firstAttribute="trailing" secondItem="jL5-E6-oy6" secondAttribute="trailing" id="y4K-Ke-ceu"/>
                                         </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="CaF-nQ-48V"/>
-                                                <exclude reference="TYh-Zx-hou"/>
-                                                <exclude reference="6RB-vs-2m3"/>
-                                            </mask>
-                                        </variation>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <constraints>
+                                    <constraint firstItem="yMN-h3-DRZ" firstAttribute="top" secondItem="Quk-aY-xyK" secondAttribute="top" id="91e-UL-JVq"/>
                                     <constraint firstItem="yMN-h3-DRZ" firstAttribute="leading" secondItem="Quk-aY-xyK" secondAttribute="leading" id="CHc-Y7-eqP"/>
                                     <constraint firstAttribute="bottom" secondItem="yMN-h3-DRZ" secondAttribute="bottom" constant="380" id="O6C-9t-335"/>
                                     <constraint firstAttribute="trailing" secondItem="yMN-h3-DRZ" secondAttribute="trailing" id="OTc-Ip-Ont"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="leading" secondItem="Oou-HP-TO7" secondAttribute="leading" id="3kR-Pj-f4b"/>
                             <constraint firstItem="yMN-h3-DRZ" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="TCT-JO-h3L"/>
-                            <constraint firstItem="yMN-h3-DRZ" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="U3Q-V0-2Ry"/>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="width" secondItem="Oou-HP-TO7" secondAttribute="width" id="d7L-Wz-jpc"/>
                             <constraint firstItem="Quk-aY-xyK" firstAttribute="top" secondItem="Twb-S1-vzz" secondAttribute="bottom" id="el0-WY-UgU"/>
                             <constraint firstItem="zc2-g4-pOh" firstAttribute="top" secondItem="Quk-aY-xyK" secondAttribute="bottom" id="iVC-7L-iQQ"/>
