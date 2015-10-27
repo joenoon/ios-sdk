@@ -10,6 +10,7 @@
 #import "YSGInviteService+OverridenMethods.h"
 #import "YSGTestMockData.h"
 #import "YSGTestImageData.h"
+#import "YSGShareSheetControllerMockedPresentView.h"
 
 @interface YesGraphSDKYSGInviteServiceTests : XCTestCase
 @property (strong, nonatomic) YSGInviteService *service;
@@ -109,6 +110,25 @@
     NSData *data = CFBridgingRelease(CGDataProviderCopyData(imageProvider));
     XCTAssertEqual(data.length, imageData.length, @"Length of the pixel byte arrays are not the same");
     XCTAssert([data isEqualToData:imageData], @"Generated image and image from bundled data file are not the same");
+}
+
+- (void)testOpenInviteController
+{
+    YSGShareSheetControllerMockedPresentView *viewController = [YSGShareSheetControllerMockedPresentView new];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting View Controller To Be Presented"];
+    __weak YSGShareSheetControllerMockedPresentView *preventRetainCycle = viewController;
+    viewController.triggerOnPresent = ^(void)
+    {
+        XCTAssertNotNil(preventRetainCycle.currentPresentingViewController, @"Current presenting view controller shouldn't be nil");
+        XCTAssert([preventRetainCycle.currentPresentingViewController isKindOfClass:[UINavigationController class]], @"Current presenting view controller should be of type UINavigationController");
+        [expectation fulfill];
+    };
+    [self.service openInviteControllerWithController:viewController];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+    {
+        XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
+    }];
+
 }
 
 @end

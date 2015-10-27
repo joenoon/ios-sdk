@@ -19,6 +19,10 @@
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
 {
     self.currentPresentingViewController = viewControllerToPresent;
+    if (self.triggerOnPresent)
+    {
+        self.triggerOnPresent();
+    }
 }
 
 @end
