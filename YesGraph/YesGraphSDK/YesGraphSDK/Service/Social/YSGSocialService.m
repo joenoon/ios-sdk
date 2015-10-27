@@ -25,7 +25,7 @@
 
 - (void)triggerServiceWithViewController:(nonnull YSGShareSheetController *)viewController
 {
-    if ([SLComposeViewController isAvailableForServiceType:self.serviceType])
+    if ([self isAvailable])
     {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:self.serviceType];
         
