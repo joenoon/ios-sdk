@@ -201,6 +201,7 @@
 		38FBA0B11BC7C64F0030C473 /* YSGShareButtonFadeFactors.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E82A8B761BB9EFB9001A26A7 /* YSGShareButtonFadeFactors.h */; };
 		3E0636891BB3454A002FD11F /* YSGShareAddressBookTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = E8881D051BB21310005DCBF1 /* YSGShareAddressBookTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E06368A1BB34557002FD11F /* YSGShareAddressBookTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = E8881D061BB21310005DCBF1 /* YSGShareAddressBookTheme.m */; };
+		3E96521B1BDA2CE300F5385E /* YesGraphSDKConvenienceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E96521A1BDA2CE300F5385E /* YesGraphSDKConvenienceTests.m */; };
 		3EAFEFB81BA993EE00D2548D /* YesGraphSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CC16C21B831606008477C7 /* YesGraphSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFB91BA993EE00D2548D /* YSGAddressBookViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64C81B831CA900C55F60 /* YSGAddressBookViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFBA1BA993EE00D2548D /* YSGAddressBookCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 380937401B84D1AA00FBF888 /* YSGAddressBookCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -507,6 +508,7 @@
 		38EF2BBF1BA30B0800AF2AE0 /* YSGUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGUtility.h; sourceTree = "<group>"; };
 		38EF2BC01BA30B0800AF2AE0 /* YSGUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGUtility.m; sourceTree = "<group>"; };
 		38FBA09F1BC7B2A90030C473 /* YSGAddressBook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSGAddressBook.h; sourceTree = "<group>"; };
+		3E96521A1BDA2CE300F5385E /* YesGraphSDKConvenienceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKConvenienceTests.m; sourceTree = "<group>"; };
 		67E6406BB63F2FBF78AC69B4 /* YSGRankedContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGRankedContact.m; sourceTree = "<group>"; };
 		67E640CDA38C1801103AEEF6 /* YSGFacebookService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGFacebookService.h; sourceTree = "<group>"; };
 		67E64153EABB93B703EB7B5E /* YSGSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGSource.m; sourceTree = "<group>"; };
@@ -648,6 +650,7 @@
 		38343AD51BC6A34800DD635B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				3E96521A1BDA2CE300F5385E /* YesGraphSDKConvenienceTests.m */,
 				38343AE11BC6A67400DD635B /* YesGraphSDKAddressBookTests.m */,
 				38343AE21BC6A67400DD635B /* YesGraphSDKCacheTests.m */,
 				38343AE31BC6A67400DD635B /* YesGraphSDKInviteTests.m */,
@@ -1368,6 +1371,7 @@
 				E84798821BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m in Sources */,
 				38343AEA1BC6A67400DD635B /* YesGraphSDKInviteTests.m in Sources */,
 				E84798861BD6F43800BDA3B8 /* YesGraphSDKThemeButtonFadeFactorTests.m in Sources */,
+				3E96521B1BDA2CE300F5385E /* YesGraphSDKConvenienceTests.m in Sources */,
 				E8A7D9981BDEC99900C80501 /* YSGInviteService+OverridenMethods.m in Sources */,
 				E87949991BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m in Sources */,
 				E8E845A41BCF027E008E227B /* YesGraphSDKModelContactTests.m in Sources */,

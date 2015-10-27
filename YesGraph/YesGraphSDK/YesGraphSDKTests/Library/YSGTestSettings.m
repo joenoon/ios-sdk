@@ -11,7 +11,7 @@
 //
 // TODO: Enter your client key to run tests
 //
-NSString *const YSGTestClientKey = @"";
+NSString *const YSGTestClientKey = @"test-client-key";
 NSString *const YSGTestClientID = @"1234";
 
 NS_RETURNS_RETAINED NSString *getCombinedAuthHeader(void)
