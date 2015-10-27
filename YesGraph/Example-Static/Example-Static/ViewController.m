@@ -96,7 +96,7 @@
     // OPTIONAL
     
     // set referralURL if you have one
-    shareController.referralURL = @"your-site.com/referral";
+    shareController.referralURL = @"www.yesgraph.com/#iosg";
     
     //
     // PRESENT MODALLY - un/comment next 2 lines
@@ -144,20 +144,21 @@
         //
         // Facebook actually ignores this message, even in the popup.
         //
-        
-        return @{ YSGShareSheetMessageKey : @"This message will be posted to Facebook." };
+        return @{ YSGShareSheetMessageKey : @"YesGraph helps your app grow. Check it out! www.yesgraph.com/#iosfb" };
     }
     else if ([service isKindOfClass:[YSGTwitterService class]])
     {
-        return @{ YSGShareSheetMessageKey : @"This message will be posted to Twitter." };
+        return @{ YSGShareSheetMessageKey : @"YesGraph helps your app grow. Check it out! www.yesgraph.com/#iosfb" };
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        if ([userInfo valueForKey:YSGInviteEmailContactsKey]) {
-            return @{ YSGShareSheetMessageKey : @"This message will be posted to Email." };
+        if ([userInfo valueForKey:YSGInviteEmailContactsKey])
+        {
+            return @{ YSGShareSheetSubjectKey : @"We should check out YesGraph",
+                      YSGShareSheetMessageKey : @"Check out YesGraph, they help apps grow: www.yesgraph.com/#iosce" };
         }
         else {
-            return @{ YSGShareSheetMessageKey : @"This message will be posted to SMS." };
+            return @{ YSGShareSheetMessageKey : @"Check out YesGraph, they help apps grow: www.yesgraph.com/#ioscs" };
         }
     }
     

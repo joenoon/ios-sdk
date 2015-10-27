@@ -45,7 +45,7 @@
         <!--View Controller-->
         <scene sceneID="e8b-1o-4as">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="up5-qv-S28" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="up5-qv-S28" customClass="ViewController" customModule="Example_Swift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Twb-S1-vzz"/>
                         <viewControllerLayoutGuide type="bottom" id="zc2-g4-pOh"/>
@@ -98,6 +98,9 @@ You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                         <state key="normal" title="Try YesGraph">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="gNR-sd-ExH"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <animations/>
@@ -165,6 +168,9 @@ You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                         <state key="normal" title="Try YesGraph">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="9Wn-ng-zrP"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <animations/>
@@ -232,6 +238,9 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         <state key="normal" title="Try YesGraph">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="egD-sd-ObH"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <animations/>
@@ -295,6 +304,9 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         <state key="normal" title="Try YesGraph">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="shareButtonTap:" destination="up5-qv-S28" eventType="touchUpInside" id="W1o-4O-0eF"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <animations/>
@@ -386,6 +398,9 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                     <navigationItem key="navigationItem" id="XW4-Hv-aGZ"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="2300"/>
+                    <connections>
+                        <outlet property="webView" destination="pLS-ma-afc" id="DMw-l2-l2o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jOc-bs-NrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
