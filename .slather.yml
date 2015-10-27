@@ -1,5 +1,6 @@
 coverage_service: coveralls
 xcodeproj: YesGraph/YesGraphSDK/YesGraphSDK.xcodeproj
+input-format: profdata
 ignore:
   - YesGraph/Example/*
   - YesGraph/Example-Static/*
