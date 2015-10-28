@@ -91,7 +91,9 @@
          NSDictionary *meta = (NSDictionary *)respParsed[@"meta"];
          XCTAssertNotNil(meta[@"app_name"], @"App name should not be nil");
          XCTAssert([meta[@"app_name"] isEqualToString:@"demo"], @"App name should be 'demo'");
-         [expectation fulfill];
+         dispatch_async(dispatch_get_main_queue(), ^{
+             [expectation fulfill];;
+         });
      }];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
