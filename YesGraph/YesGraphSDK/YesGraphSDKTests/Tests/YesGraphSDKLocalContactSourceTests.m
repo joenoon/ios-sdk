@@ -6,7 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 #import "YSGLocalContactSource+ExposePrivateMethods.h"
 #import "YSGLocalContactSource+OverrideContactStore.h"
 #import "YSGContactList.h"
