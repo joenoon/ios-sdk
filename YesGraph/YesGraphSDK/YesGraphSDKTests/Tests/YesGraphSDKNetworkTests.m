@@ -178,7 +178,9 @@
     YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
         XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
-        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'POST' method");
+        NSLog(@"HTTPMethod: %@", [request.HTTPMethod uppercaseString]);
+        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'POST' method but got '%@'", [request.HTTPMethod uppercaseString]);
+        NSLog(@"Auth headers: %@", request.allHTTPHeaderFields);
         NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
         XCTAssertNotNil(authHeader, @"Authorization header is missing");
         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
