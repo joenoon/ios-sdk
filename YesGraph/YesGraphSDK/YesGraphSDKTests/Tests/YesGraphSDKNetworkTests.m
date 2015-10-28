@@ -34,7 +34,6 @@
     [super tearDown];
     
     self.client = nil;
-    [OHHTTPStubs removeAllStubs];
 }
 
 - (void)testClientKey
@@ -88,6 +87,7 @@
         XCTAssertNil(error, @"Error should be nil: %@", error);
         XCTAssert(clientKey.length > 0, @"Client key should be at least 1 character long");
         [expectation fulfill];
+        [OHHTTPStubs removeAllStubs];
     }];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
@@ -164,6 +164,7 @@
              XCTFail(@"Expectation timed-out with error: %@", error);
          }
          scoped = nil; // this isn't needed, it's used to remove compiler warnings
+         [OHHTTPStubs removeAllStubs];
      }];
 }
 
@@ -231,6 +232,7 @@
              XCTFail(@"Expectation timed-out with error: %@", error);
          }
          scoped = nil; // this isn't needed, it's used to remove compiler warnings
+         [OHHTTPStubs removeAllStubs];
      }];
 }
 
