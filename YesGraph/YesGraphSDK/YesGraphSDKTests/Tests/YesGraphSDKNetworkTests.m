@@ -34,6 +34,7 @@
     [super tearDown];
     
     self.client = nil;
+    [OHHTTPStubs removeAllStubs];
 }
 
 - (void)testClientKey
