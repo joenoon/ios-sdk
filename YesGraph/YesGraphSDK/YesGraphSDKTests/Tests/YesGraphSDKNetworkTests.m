@@ -98,9 +98,6 @@
 
 - (void)testClientGETRequestWithoutKey
 {
-    // we expect to get a 401 response with
-    // this body:
-    
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Unauthorized Test"];
     NSString *testPath = @"https://api.yesgraph.com/v0/test"; // same URL as documentation example, but we won't set the key header
 
@@ -118,14 +115,12 @@
             XCTFail(@"Expectation timed-out with error: %@", error);
         }
     }];
-    
-    //scoped = nil; // this isn't needed, it's used to remove compiler warnings
 }
 
 - (void)testClientGETRequestHeaders
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Headers Test"];
-    YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
         // check the headers for completeness
         // /test endpoint specifies the Authorization header
@@ -167,22 +162,19 @@
          {
              XCTFail(@"Expectation timed-out with error: %@", error);
          }
+         scoped = nil; // this isn't needed, it's used to remove compiler warnings
      }];
-    
-    scoped = nil; // this isn't needed, it's used to remove compiler warnings
 }
 
 - (void)testClientPOSTRequest
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Post Test"];
-    YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
         XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
-        NSLog(@"HTTPMethod: %@", [request.HTTPMethod uppercaseString]);
         XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'POST' method but got '%@'", [request.HTTPMethod uppercaseString]);
-        NSLog(@"Auth headers: %@", request.allHTTPHeaderFields);
         NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
-        XCTAssertNotNil(authHeader, @"Authorization header is missing");
+        XCTAssertNotNil(authHeader, @"Authorization header is missing from header fields: '%@'", request.allHTTPHeaderFields);
         XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
         return YES;
      }
@@ -237,9 +229,8 @@
          {
              XCTFail(@"Expectation timed-out with error: %@", error);
          }
+         scoped = nil; // this isn't needed, it's used to remove compiler warnings
      }];
-    
-    scoped = nil; // this isn't needed, it's used to remove compiler warnings
 }
 
 
