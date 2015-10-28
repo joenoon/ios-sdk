@@ -17,13 +17,14 @@
 		380FD83E1BC6851D00162D85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 380FD83D1BC6851D00162D85 /* LaunchScreen.storyboard */; };
 		38C77C571B8C77E100D14E05 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; };
 		38C77C581B8C77E100D14E05 /* YesGraphSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		38FBA0AA1BC7C4E30030C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA0A91BC7C4E30030C473 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
-		E8DCAE8B1BD5800200581AE6 /* CommonTexts.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE841BD5800200581AE6 /* CommonTexts.m */; settings = {ASSET_TAGS = (); }; };
-		E8DCAE8C1BD5800200581AE6 /* ExampleContactsOnlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE851BD5800200581AE6 /* ExampleContactsOnlyTests.m */; settings = {ASSET_TAGS = (); }; };
-		E8DCAE8D1BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE861BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m */; settings = {ASSET_TAGS = (); }; };
-		E8DCAE8E1BD5800200581AE6 /* HammerTheAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE871BD5800200581AE6 /* HammerTheAppTests.m */; settings = {ASSET_TAGS = (); }; };
-		E8DCAE8F1BD5800200581AE6 /* TwitterAndContacsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE881BD5800200581AE6 /* TwitterAndContacsTests.m */; settings = {ASSET_TAGS = (); }; };
-		E8DCAE901BD5800200581AE6 /* YSGTestMockData.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE8A1BD5800200581AE6 /* YSGTestMockData.m */; settings = {ASSET_TAGS = (); }; };
+		38FBA0AA1BC7C4E30030C473 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38FBA0A91BC7C4E30030C473 /* Main.storyboard */; };
+		8F5163671BDFB2F000715338 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F5163661BDFB2F000715338 /* OpenSans-Bold.ttf */; };
+		E8DCAE8B1BD5800200581AE6 /* CommonTexts.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE841BD5800200581AE6 /* CommonTexts.m */; };
+		E8DCAE8C1BD5800200581AE6 /* ExampleContactsOnlyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE851BD5800200581AE6 /* ExampleContactsOnlyTests.m */; };
+		E8DCAE8D1BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE861BD5800200581AE6 /* FacebookAndTwitterAndContactsTests.m */; };
+		E8DCAE8E1BD5800200581AE6 /* HammerTheAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE871BD5800200581AE6 /* HammerTheAppTests.m */; };
+		E8DCAE8F1BD5800200581AE6 /* TwitterAndContacsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE881BD5800200581AE6 /* TwitterAndContacsTests.m */; };
+		E8DCAE901BD5800200581AE6 /* YSGTestMockData.m in Sources */ = {isa = PBXBuildFile; fileRef = E8DCAE8A1BD5800200581AE6 /* YSGTestMockData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		380FD83D1BC6851D00162D85 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ../../Resources/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38C77C531B8C776B00D14E05 /* YesGraphSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = YesGraphSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38FBA0A91BC7C4E30030C473 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8F5163661BDFB2F000715338 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "../../Resources/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		E8DCAE791BD57FD900581AE6 /* ExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8DCAE7D1BD57FD900581AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8DCAE831BD5800200581AE6 /* CommonTexts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonTexts.h; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 		303358931BBB5B9C002F5E92 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				8F5163661BDFB2F000715338 /* OpenSans-Bold.ttf */,
 				3033589B1BBB5BAD002F5E92 /* OpenSans-Regular.ttf */,
 				3033589C1BBB5BAD002F5E92 /* OpenSans-Semibold.ttf */,
 			);
@@ -312,9 +315,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F5163671BDFB2F000715338 /* OpenSans-Bold.ttf in Resources */,
 				303358A61BBB5BAD002F5E92 /* OpenSans-Semibold.ttf in Resources */,
-				38FBA0AA1BC7C4E30030C473 /* Main.storyboard in Resources */,
 				303358A51BBB5BAD002F5E92 /* OpenSans-Regular.ttf in Resources */,
+				38FBA0AA1BC7C4E30030C473 /* Main.storyboard in Resources */,
 				3805E1691B831B1B004463B8 /* Images.xcassets in Resources */,
 				380FD83E1BC6851D00162D85 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -589,6 +593,7 @@
 				E8DCAE821BD57FD900581AE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

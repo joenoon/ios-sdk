@@ -137,6 +137,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 
 /*!
+ *  This text is displayed on the share sheet
+ */
+@property (nullable, nonatomic, copy) NSString *shareSheetText;
+
+/*!
  *  Every time that application is activated, it is checked when was the last time that 
  *  address book was uploaded to YesGraph API. If this time had passed, address book will be uploaded again
  *  automatically in the background.

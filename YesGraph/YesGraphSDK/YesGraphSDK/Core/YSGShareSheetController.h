@@ -77,6 +77,13 @@ extern NSString * const YSGShareSheetMessageKey;
 @property (nullable, nonatomic, copy) NSString *referralURL;
 
 /*!
+ *  Text that is displayed on the share sheet.
+ *
+ *  @discussion: If it is not set default message will be displayed
+ */
+@property (nullable, nonatomic, strong) NSString *shareText;
+
+/*!
  *  Image that is displayed on the share sheet.
  *
  *  @discussion: If it is nil, no image view is generated

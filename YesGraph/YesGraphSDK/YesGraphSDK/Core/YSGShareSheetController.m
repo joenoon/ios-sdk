@@ -41,6 +41,14 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 @implementation YSGShareSheetController
 
 #pragma mark - Getters and Setters
+- (NSString *)shareText
+{
+    if (!_shareText)
+    {
+        return NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
+    }
+    return _shareText;
+}
 
 #pragma mark - Initialization
 
@@ -154,7 +162,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     // Share text view
     
     self.shareLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    self.shareLabel.text = NSLocalizedString(@"Share this app with friends to get our eternal gratitude", @"");
+    self.shareLabel.text = self.shareText;
     self.shareLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareLabelFontSize];
     self.shareLabel.adjustsFontSizeToFitWidth = YES;
     
