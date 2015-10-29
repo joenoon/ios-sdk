@@ -48,8 +48,8 @@
 - (void)testMockedSuggestionsShown
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Send Shown Suggestions to API Mocked Responses"];
-    NSString *stubId = GENERATE_STUB_ID();
-    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithID:stubId andRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Shown suggestions should be sent with the POST method");
          XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/suggested-seen"], @"Suggestions not sent to the right URL");
