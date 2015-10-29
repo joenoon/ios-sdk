@@ -155,7 +155,7 @@
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        if (userInfoYSGInviteEmailContactsKey])
+        if (userInfo[YSGInviteEmailContactsKey])
         {
             return @{ YSGShareSheetSubjectKey : @"We should check out YesGraph",
                       YSGShareSheetMessageKey : @"Check out YesGraph, they help apps grow: www.yesgraph.com/#iosce" };
