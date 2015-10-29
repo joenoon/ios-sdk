@@ -8,6 +8,7 @@
 
 #import "YSGLocalContactSource.h"
 @import Contacts;
+@import AddressBook;
 
 @interface YSGLocalContactSource (OverrideContactStore)
 
@@ -18,3 +19,5 @@
 @interface YSGTestMockCNContactStore : CNContactStore
 
 @end
+
+

@@ -6,7 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 #import "YSGIconDrawings.h"
 #import "YSGTestImageData.h"
 

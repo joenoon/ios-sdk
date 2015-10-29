@@ -37,6 +37,11 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     return [CNContactStore new];
 }
 
+- (ABAddressBookRef)addressBookRefWithError:(CFErrorRef *)err
+{
+    return ABAddressBookCreateWithOptions(NULL, err);
+}
+
 - (NSString *)contactAccessPromptTitle
 {
     if (!_contactAccessPromptTitle)
@@ -274,7 +279,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 - (NSArray <YSGContact *> *)contactListFromAddressBook:(NSError **)error
 {
     CFErrorRef err = NULL;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &err);
+    ABAddressBookRef addressBook = [self addressBookRefWithError:&err];
     
     if (addressBook != nil)
     {

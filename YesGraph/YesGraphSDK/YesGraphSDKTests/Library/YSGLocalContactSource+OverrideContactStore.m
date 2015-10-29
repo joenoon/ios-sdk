@@ -18,6 +18,15 @@ static BOOL shouldReturnNilContactStore = YES;
     return [YSGTestMockCNContactStore new];
 }
 
+- (ABAddressBookRef)addressBookRefWithError:(CFErrorRef *)err
+{
+    if (shouldReturnNilContactStore)
+    {
+        return nil;
+    }
+    return ABAddressBookCreateWithOptions(NULL, err);
+}
+
 + (void)shouldReturnNil:(BOOL)returnNil
 {
     shouldReturnNilContactStore = returnNil;
@@ -31,9 +40,8 @@ static BOOL shouldReturnNilContactStore = YES;
 {
     if (!shouldReturnNilContactStore)
     {
-        
+        return [super enumerateContactsWithFetchRequest:fetchRequest error:error usingBlock:block];
     }
-    
     return YES;
 }
 

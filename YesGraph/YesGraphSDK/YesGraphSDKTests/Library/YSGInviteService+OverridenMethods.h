@@ -8,6 +8,8 @@
 
 #import "YSGInviteService.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 
 @interface YSGInviteService (OverridenMethods)
@@ -16,3 +18,11 @@ typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 @property (strong, nonatomic) TriggeredHandler triggeredPhoneContacts;
 
 @end
+
+@interface YSGInviteService()
+
+- (void)openInviteControllerWithController:(YSGShareSheetController *)viewController;
+
+@end
+
+NS_ASSUME_NONNULL_END
