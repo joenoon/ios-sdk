@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.license                   = { :type => "MIT", :file => "LICENSE" }
   s.author                    = 'YesGraph'
 
-  s.documentation_url         = "https://github.com/yesgraph/ios/wiki"
+  s.documentation_url         = "https://github.com/yesgraph/ios-sdk/wiki"
   s.social_media_url          = "https://twitter.com/yesgraph"
   s.platform                  = :ios, "9.0"
 
