@@ -52,6 +52,8 @@
     We have example applications using <a href=\"https://github.com/YesGraph/ios-sdk#example-applications\">(Parse, Swift, and Objective-C)</a> on Github.<br><br>\
     You’ll need a YesGraph account. <a href=\"https://www.yesgraph.com/\">Sign up and create an app to configure the SDK</a>.<br><br>\
     The documentation online is extensive, but if you have any trouble, email <a href=\"mailto:support@yesgraph.com\">support@yesgraph.com</a>.</body>";
+    self.webView.opaque = NO;
+    self.webView.backgroundColor = [UIColor clearColor];
     [self.webView loadHTMLString:htmlString baseURL:nil];
 }
 
@@ -149,7 +151,7 @@
     }
     else if ([service isKindOfClass:[YSGTwitterService class]])
     {
-        return @{ YSGShareSheetMessageKey : @"YesGraph helps your app grow. Check it out! www.yesgraph.com/#iosfb" };
+        return @{ YSGShareSheetMessageKey : @"YesGraph helps your app grow. Check it out! www.yesgraph.com/#iostw" };
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
