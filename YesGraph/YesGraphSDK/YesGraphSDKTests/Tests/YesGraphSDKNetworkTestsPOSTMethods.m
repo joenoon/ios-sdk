@@ -52,7 +52,6 @@
     andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
      {
         NSString *payloadData = [NSString stringWithFormat:@"{\"user_id\":\"%@\",\"test_parameter\":%@}", YSGTestClientID, [NSNumber numberWithFloat:13.5f]];
-        // XCTAssert([request.HTTPBody isEqualToData:[payloadData dataUsingEncoding:NSUTF8StringEncoding]]); // NOTE: tule vprasat, ce ma kdo kako idejo zakaj je httpbody enak nil, ceprav je v YSGClient requestForMethod nastavljeno vse...
 
         XCTAssertNotNil(request.HTTPBodyStream, @"Body stream shouldn't be nil");
         NSInputStream *istream = request.HTTPBodyStream;
