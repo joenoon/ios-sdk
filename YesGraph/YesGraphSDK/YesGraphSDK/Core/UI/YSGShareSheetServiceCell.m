@@ -20,44 +20,52 @@
 
 #pragma mark - Getters and Setters
 
-- (void)setText:(NSString *)text {
+- (void)setText:(NSString *)text
+{
     _text = text;
     self.textLabel.text = text;
 }
 
-- (void)setFont:(UIFont *)font {
+- (void)setFont:(UIFont *)font
+{
     _font = font;
     self.textLabel.font = font;
 }
 
-- (void)setShape:(YSGShareSheetServiceCellShape)shape {
-    
+- (void)setShape:(YSGShareSheetServiceCellShape)shape
+{
     _shape = shape;
     
-    if (_shape == YSGShareSheetServiceCellShapeSquare) {
+    if (_shape == YSGShareSheetServiceCellShapeSquare)
+    {
         self.serviceLogo.layer.cornerRadius = 0;
     }
-    else if (_shape == YSGShareSheetServiceCellShapeRoundedSquare) {
-        self.serviceLogo.layer.cornerRadius = self.serviceLogo.frame.size.height/10;
+    else if (_shape == YSGShareSheetServiceCellShapeRoundedSquare)
+    {
+        self.serviceLogo.layer.cornerRadius = self.serviceLogo.frame.size.height / 10;
     }
-    else {
-        self.serviceLogo.layer.cornerRadius = self.serviceLogo.frame.size.height/2;
+    else
+    {
+        self.serviceLogo.layer.cornerRadius = self.serviceLogo.frame.size.height / 2;
     }
 }
 
-- (void)setIcon:(UIImage *)iconImage {
+- (void)setIcon:(UIImage *)iconImage
+{
     _icon = iconImage;
     
     [self setImageViewWithIcon:_icon];
 }
 
-- (void)setIconWithString:(NSString *)iconImageString {
+- (void)setIconWithString:(NSString *)iconImageString
+{
     _icon = [UIImage imageNamed:iconImageString];
     
     [self setImageViewWithIcon:_icon];
 }
 
-- (void)setTextColor:(UIColor *)textColor {
+- (void)setTextColor:(UIColor *)textColor
+{
     _textColor = textColor;
     self.textLabel.textColor = _textColor;
 }
@@ -132,12 +140,13 @@
 
 #pragma mark - Helpers
 
-- (void)setImageViewWithIcon:(UIImage *)icon {
-    
+- (void)setImageViewWithIcon:(UIImage *)icon
+{
     self.imageView.image = _icon;
 }
 
-- (float)heightForLabelWithFont:(UIFont *)font {
+- (float)heightForLabelWithFont:(UIFont *)font
+{
     CGSize labelSize = [[self text] sizeWithAttributes:@{NSFontAttributeName:font}];
     
     return labelSize.height;
