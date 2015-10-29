@@ -49,8 +49,8 @@
 - (void)testUpdateInviteSent
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Mocked Invites Sent To Selected Contacts"];
-
-    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    NSString *stubId = GENERATE_STUB_ID();
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithID:stubId andRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Invites should be sent with the POST method");
          XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/invites-sent"], @"Invite not being sent to the right URL");

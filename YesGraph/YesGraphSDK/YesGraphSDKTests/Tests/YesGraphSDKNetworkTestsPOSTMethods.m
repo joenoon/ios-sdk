@@ -40,14 +40,18 @@
 - (void)testClientPOSTRequest
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Client Post Test"];
-    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    NSString *stubId = GENERATE_STUB_ID();
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithID: stubId andRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
-        XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
-        XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'POST' method but got '%@'", [request.HTTPMethod uppercaseString]);
-        NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
-        XCTAssertNotNil(authHeader, @"Authorization header is missing from header fields: '%@'", request.allHTTPHeaderFields);
-        XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
-        return YES;
+         if ([stubId isEqualToString:scoped.stubID])
+         {
+            XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/test"], @"Unexpected URL");
+            XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Expected a 'POST' method but got '%@'", [request.HTTPMethod uppercaseString]);
+            NSString *authHeader = request.allHTTPHeaderFields[@"Authorization"];
+            XCTAssertNotNil(authHeader, @"Authorization header is missing from header fields: '%@'", request.allHTTPHeaderFields);
+            XCTAssert([authHeader isEqualToString:getCombinedAuthHeader()], @"Authorization header is incomplete");
+         }
+         return YES;
      }
     andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
      {
@@ -92,7 +96,7 @@
          XCTAssertNotNil(meta[@"app_name"], @"App name should not be nil");
          XCTAssert([meta[@"app_name"] isEqualToString:@"demo"], @"App name should be 'demo'");
          dispatch_async(dispatch_get_main_queue(), ^{
-             [expectation fulfill];;
+             [expectation fulfill];
          });
      }];
     

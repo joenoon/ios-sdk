@@ -103,8 +103,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Fetched Mocked Data"];    
     NSData *response = [self buildMockedAddressBookJSONResponse];
-    
-    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    NSString *stubId = GENERATE_STUB_ID();
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithID:stubId andRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"GET"], @"Request type for mocked data should be GET");
          XCTAssert([request.URL.absoluteString isEqualToString:[self getCombinedURL:@"https://api.yesgraph.com/v0/address-book"]], @"Unexpected URL");
@@ -131,8 +131,8 @@
 - (void)testUpdateAddressBook
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Mocked Update"];
-
-    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
+    NSString *stubId = GENERATE_STUB_ID();
+    __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithID:stubId andRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Request type for mocked data should be POST");
          XCTAssert([request.URL.absoluteString isEqualToString:@"https://api.yesgraph.com/v0/address-book"], @"Unexpected URL");
