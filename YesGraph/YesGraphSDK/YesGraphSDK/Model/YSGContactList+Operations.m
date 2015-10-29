@@ -58,9 +58,10 @@
             }
         }
         
-        if (letter.length)
+        if (letter.length && (contact.phones.count > 0 || contact.emails.count > 0))
         {
             letter = letter.uppercaseString;
+            
             if (!contactList[letter])
             {
                 contactList[letter] = [NSMutableArray array];
@@ -94,7 +95,7 @@
     NSMutableArray <YSGContact *> *contactsWithEmails = [NSMutableArray array];
     NSMutableArray <YSGContact *> *contactsWithPhones = [NSMutableArray array];
     
-    for (NSUInteger i = 0; i< number; i++)
+    for (NSUInteger i = 0; i < number; i++)
     {
         if (contacts.count <= i)
         {
@@ -112,7 +113,7 @@
             if (sameNamePhoneContacts.count)
             {
                 [contactsWithPhones removeObjectsInArray:sameNamePhoneContacts];
-                number ++;
+                number++;
             }
         }
         
