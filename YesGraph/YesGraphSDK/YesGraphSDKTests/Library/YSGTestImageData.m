@@ -6,6 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+@import UIKit;
+
 #import "YSGTestImageData.h"
 
 @implementation YSGTestImageData

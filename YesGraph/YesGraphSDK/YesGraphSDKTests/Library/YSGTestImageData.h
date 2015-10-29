@@ -6,9 +6,9 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-@import XCTest;
+@import Foundation;
 
-@interface YSGTestImageData : XCTestCase
+@interface YSGTestImageData : NSObject
 
 + (NSData *)getDataForImageFile:(NSString *)fileName;
 
