@@ -18,6 +18,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString * const YSGShareSheetSubjectKey;
 extern NSString * const YSGShareSheetMessageKey;
 
 @protocol YSGShareSheetDelegate <NSObject>
@@ -74,6 +75,13 @@ extern NSString * const YSGShareSheetMessageKey;
  *  @discussion: If this is nil, no copy box is displayed.
  */
 @property (nullable, nonatomic, copy) NSString *referralURL;
+
+/*!
+ *  Text that is displayed on the share sheet.
+ *
+ *  @discussion: If it is not set default message will be displayed
+ */
+@property (nullable, nonatomic, strong) NSString *shareText;
 
 /*!
  *  Image that is displayed on the share sheet.

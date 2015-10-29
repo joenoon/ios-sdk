@@ -25,7 +25,10 @@
     
     if (numberOfSuggestions > 0)
     {
-        entries = [self.entries subarrayWithRange:NSMakeRange(numberOfSuggestions, self.entries.count - numberOfSuggestions)];
+        if (numberOfSuggestions <= self.entries.count)
+        {
+            entries = [self.entries subarrayWithRange:NSMakeRange(numberOfSuggestions, self.entries.count - numberOfSuggestions)];
+        }
     }
     else
     {
@@ -42,11 +45,23 @@
 
         if (!letter.length || ![[NSCharacterSet letterCharacterSet] characterIsMember:[letter characterAtIndex:0]])
         {
-            letter = @"#";
+            //
+            // If name is empty check if email is available
+            //
+            if (!letter.length && contact.email.length)
+            {
+                letter = [contact.email substringToIndex:1];
+            }
+            else
+            {
+                letter = @"#";
+            }
         }
         
-        if (letter.length)
+        if (letter.length && (contact.phones.count > 0 || contact.emails.count > 0))
         {
+            letter = letter.uppercaseString;
+            
             if (!contactList[letter])
             {
                 contactList[letter] = [NSMutableArray array];
@@ -56,15 +71,13 @@
         }
     }
     
-    NSSortDescriptor *ascDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    
     NSMutableDictionary <NSString *, NSArray <YSGContact *> *> *sortedList = [NSMutableDictionary dictionary];
     
     for (NSString* letter in contactList)
     {
         NSArray *sortedContacts = contactList[letter];
         
-        sortedList[letter] = [sortedContacts sortedArrayUsingDescriptors:@[ ascDescriptor ]];
+        sortedList[letter] = [sortedContacts sortedArrayUsingFunction:contactsSort context:nil];
     }
     
     return sortedList.copy;
@@ -82,7 +95,7 @@
     NSMutableArray <YSGContact *> *contactsWithEmails = [NSMutableArray array];
     NSMutableArray <YSGContact *> *contactsWithPhones = [NSMutableArray array];
     
-    for (NSUInteger i = 0; i< number; i++)
+    for (NSUInteger i = 0; i < number; i++)
     {
         if (contacts.count <= i)
         {
@@ -100,7 +113,7 @@
             if (sameNamePhoneContacts.count)
             {
                 [contactsWithPhones removeObjectsInArray:sameNamePhoneContacts];
-                number ++;
+                number++;
             }
         }
         
@@ -127,5 +140,23 @@
     return filteredContacts.copy;
 }
 
+NSInteger contactsSort(YSGContact *contact1, YSGContact *contact2, void *context)
+{
+    // We order contacts without name by email
+    if (contact1.name.length == 0 && contact2.name.length > 0)
+    {
+        return [contact1.email caseInsensitiveCompare:contact2.name];
+    }
+    else if (contact1.name.length > 0 && contact2.name.length == 0)
+    {
+        return [contact1.name caseInsensitiveCompare:contact2.email];
+    }
+    else if (contact1.name.length == 0 && contact2.name.length == 0)
+    {
+        return [contact1.email caseInsensitiveCompare:contact2.email];
+    }
+    
+    return [contact1.name caseInsensitiveCompare:contact2.name];
+}
 
 @end

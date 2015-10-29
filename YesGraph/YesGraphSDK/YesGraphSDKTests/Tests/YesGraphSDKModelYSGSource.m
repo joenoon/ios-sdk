@@ -6,7 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 #import "YSGSource.h"
 
 @interface YesGraphSDKModelYSGSource : XCTestCase
@@ -39,16 +39,16 @@
         YSGSource *source1 = [YSGSource ysg_objectWithDictionary:sourceDictionary1];
         XCTAssertNotNil(source1, @"Parsed source shouldn't be nil");
 
-        NSString *name = [sourceDictionary1 objectForKey:@"name"];
+        NSString *name = sourceDictionary1[@"name"];
         XCTAssert([source1.name isEqualToString:name], @"Source's name '%@' isn't the same as '%@'", source1.name, name);
 
-        NSString *email = [sourceDictionary1 objectForKey:@"email"];
+        NSString *email = sourceDictionary1[@"email"];
         XCTAssert([source1.email isEqualToString:email], @"Source's email '%@' isn't the same as '%@'", source1.email, email);
 
-        NSString *phone = [sourceDictionary1 objectForKey:@"phone"];
+        NSString *phone = sourceDictionary1[@"phone"];
         XCTAssert([source1.phone isEqualToString:phone], @"Source's phone '%@' isn't the same as '%@'", source1.phone, phone);
 
-        NSString *type = [sourceDictionary1 objectForKey:@"type"];
+        NSString *type = sourceDictionary1[@"type"];
         XCTAssert([source1.type isEqualToString:type], @"Source's type '%@' isn't the same as '%@'", source1.type, type);
     }
     {
@@ -62,13 +62,13 @@
         YSGSource *source1 = [YSGSource ysg_objectWithDictionary:sourceDictionary1];
         XCTAssertNotNil(source1, @"Parsed source shouldn't be nil");
 
-        NSString *name = [sourceDictionary1 objectForKey:@"name"];
+        NSString *name = sourceDictionary1[@"name"];
         XCTAssert([source1.name isEqualToString:name], @"Source's name '%@' isn't the same as '%@'", source1.name, name);
 
-        NSString *email = [sourceDictionary1 objectForKey:@"email"];
+        NSString *email = sourceDictionary1[@"email"];
         XCTAssert([source1.email isEqualToString:email], @"Source's email '%@' isn't the same as '%@'", source1.email, email);
 
-        NSString *phone = [sourceDictionary1 objectForKey:@"phone"];
+        NSString *phone = sourceDictionary1[@"phone"];
         XCTAssert([source1.phone isEqualToString:phone], @"Source's phone '%@' isn't the same as '%@'", source1.phone, phone);
 
         XCTAssertNil(source1.type, @"Source's type '%@' should be nil", source1.type);

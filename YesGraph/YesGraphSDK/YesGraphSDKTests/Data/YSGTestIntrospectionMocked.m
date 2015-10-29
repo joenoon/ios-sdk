@@ -49,10 +49,10 @@
 {
     NSDictionary *parentProps = [TestClassForIntrospectionExpected1 expectedIntrospectionProperties];
     NSMutableDictionary *ret = [NSMutableDictionary dictionaryWithDictionary:parentProps];
-    [ret setObject:[NSData class] forKeyedSubscript:@"prop4"];
-    [ret setObject:[TestCClassType class] forKeyedSubscript:@"prop5"];
-    [ret setObject:[TestCClassType class] forKeyedSubscript:@"prop6"];
-    [ret setObject:[TestCClassType class] forKeyedSubscript:@"prop7"];
+    ret[@"prop4"] = [NSData class];
+    ret[@"prop5"] = [TestCClassType class];
+    ret[@"prop6"] = [TestCClassType class];
+    ret[@"prop7"] = [TestCClassType class];
     return ret;
 }
 

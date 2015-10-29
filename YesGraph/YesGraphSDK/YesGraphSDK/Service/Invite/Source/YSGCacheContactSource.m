@@ -13,6 +13,7 @@
 @interface YSGCacheContactSource ()
 
 @property (nonatomic, strong) NSFileManager *fileManager;
+@property (nonatomic, strong) NSString *filePath;
 
 @end
 
@@ -100,7 +101,11 @@
 
 - (NSString *)filePath
 {
-    return [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, @"com.yesgraph.contact/ContactListCache.plist"];
+    if (!_filePath)
+    {
+         _filePath = [NSString stringWithFormat:@"%@/%@", self.cacheDirectory, @"com.yesgraph.contact/ContactListCache.plist"];
+    }
+    return _filePath;
 }
 
 @end

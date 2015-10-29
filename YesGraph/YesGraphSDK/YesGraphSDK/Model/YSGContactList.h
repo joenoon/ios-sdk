@@ -12,6 +12,8 @@
 #import "YSGSource.h"
 #import "YSGParsing.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Wraps contact list for storage and serialization
  */
@@ -19,8 +21,10 @@
 
 @property (nonatomic, assign) BOOL useSuggestions;
 
-@property (nonnull, nonatomic, copy) NSArray <YSGContact *> *entries;
+@property (nonatomic, copy) NSArray <YSGContact *> *entries;
 
 @property (nullable, nonatomic, strong) YSGSource *source;
 
 @end
+
+NS_ASSUME_NONNULL_END

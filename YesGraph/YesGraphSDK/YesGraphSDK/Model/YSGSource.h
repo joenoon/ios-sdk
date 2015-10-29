@@ -10,16 +10,20 @@
 
 #import "YSGParsing.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 /*!
  *  Represents a contact source
  */
 @interface YSGSource : YSGParsableModel <YSGParsable>
 
-@property (nonnull, nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *email;
 @property (nullable, nonatomic, copy) NSString *phone;
-@property (nonnull, nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *type;
 
 + (nonnull instancetype)userSource;
 
 @end
+
+NS_ASSUME_NONNULL_END

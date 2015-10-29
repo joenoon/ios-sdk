@@ -32,6 +32,16 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     return [NSUserDefaults standardUserDefaults];
 }
 
+- (CNContactStore *)contactStore
+{
+    return [CNContactStore new];
+}
+
+- (ABAddressBookRef)addressBookRefWithError:(CFErrorRef *)err
+{
+    return ABAddressBookCreateWithOptions(NULL, err);
+}
+
 - (NSString *)contactAccessPromptTitle
 {
     if (!_contactAccessPromptTitle)
@@ -127,8 +137,6 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     }
 }
 
-
-
 #pragma mark - Permissions
 
 - (void)requestContactPermission:(void (^)(BOOL granted, NSError *error))completion
@@ -194,7 +202,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 - (void)requestContactsPermissionWithCompletion:(void (^)(BOOL granted, NSError *error))completion
 {
-    CNContactStore *store = [[CNContactStore alloc] init];
+    CNContactStore *store = [self contactStore];
     [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error)
     {
         if (completion)
@@ -208,7 +216,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 {
     NSArray <NSString *> *keysToFetch = @[ [CNContactFormatter descriptorForRequiredKeysForStyle:CNContactFormatterStyleFullName], CNContactEmailAddressesKey, CNContactPhoneNumbersKey ];
     
-    CNContactStore *store = [[CNContactStore alloc] init];
+    CNContactStore *store = [self contactStore];
     
     CNContactFetchRequest *fetchRequest = [[CNContactFetchRequest alloc] initWithKeysToFetch:keysToFetch];
     
@@ -271,7 +279,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 - (NSArray <YSGContact *> *)contactListFromAddressBook:(NSError **)error
 {
     CFErrorRef err = NULL;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &err);
+    ABAddressBookRef addressBook = [self addressBookRefWithError:&err];
     
     if (addressBook != nil)
     {

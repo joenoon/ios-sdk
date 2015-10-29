@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+@import XCTest;
 
 @interface ExampleTests : XCTestCase
 

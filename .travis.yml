@@ -1,6 +1,6 @@
 language: objective-c
 sudo: false
-osx_image: xcode7
+osx_image: xcode7.1
 script:
 - curl -fsSL https://raw.githubusercontent.com/legoless/Dominus/master/install.sh | sh
 env:
@@ -10,6 +10,6 @@ env:
   - ACTION=build SCHEME='Example'
   - ACTION=build SCHEME='Example-Static'
   - ACTION=build SCHEME='Example-Swift'
-  - ACTION=test SCHEME='YesGraphSDK'
+  - ACTION=test SCHEME='YesGraphSDK' TEST_DEVICE='iPhone 6 (9.1)'
   global:
-  - SDK=9.0
+  - SDK=9.1

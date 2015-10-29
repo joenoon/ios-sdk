@@ -134,7 +134,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     if (contactList.entries.count)
     {
         self.sortedContacts = [contactList sortedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions];
-        self.letters = [self.sortedContacts.allKeys sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+        self.letters = [self.sortedContacts.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
     }
     else
     {
@@ -301,6 +301,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     id barButtonAppearanceInSearchBar = [UIBarButtonItem appearanceWhenContainedIn:[UISearchBar class], nil];
     
     [barButtonAppearanceInSearchBar setTitle:@"Done"];
+    
+    [self.searchController loadViewIfNeeded];
 }
 
 #pragma mark - View Transitions
@@ -396,6 +398,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     return [self contactsForSection:section].count;
 }
 
+
 - (UIView *)cellBackgroundViewForColor:(UIColor *)color
 {
     if (!color)
@@ -406,6 +409,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     UIView *view = [UIView new];
     view.backgroundColor = color;
     return view;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.theme.shareAddressBookTheme.cellBackground)
+    {
+        cell.backgroundColor = self.theme.shareAddressBookTheme.cellBackground;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -420,8 +431,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         {
             cell.textLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellFontSize];
             cell.detailTextLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellDetailFontSize];
-            cell.backgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellBackground];
-            cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellSelectedBackground];
             cell.textLabel.backgroundColor = [UIColor clearColor];
             cell.detailTextLabel.backgroundColor = [UIColor clearColor];
         }
@@ -483,6 +492,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    YSGAddressBookCell *cell = (YSGAddressBookCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    cell.selectedBackgroundView = [self cellBackgroundViewForColor:self.theme.shareAddressBookTheme.cellSelectedBackground];
+    
     YSGContact *contact = [self contactForIndexPath:indexPath];
     
     [self.selectedContacts addObject:contact];
@@ -529,5 +541,20 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 }
 
 #pragma mark - Private Methods
+
+NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context)
+{
+    // We force "#" section to the bottom of the list
+    if ([letter2 isEqualToString:@"#"])
+    {
+        return NSOrderedAscending;
+    }
+    else if ([letter1 isEqualToString:@"#"])
+    {
+        return NSOrderedDescending;
+    }
+    
+    return [letter1 caseInsensitiveCompare:letter2];
+}
 
 @end

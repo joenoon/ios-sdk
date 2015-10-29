@@ -6,7 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 #import "YSGTestMockData.h"
 
 @interface YesGraphSDKModelContactTests : XCTestCase
@@ -40,18 +40,22 @@
         }
         NSString *contactString = contact.email ?: contact.phone;
         XCTAssert([contact.contactString isEqualToString:contactString], @"Contact string should be either an email or a phone number if no emails are present");
-        NSString *sanitizedNameString = [contact.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        XCTAssert([contact.sanitizedName isEqualToString:sanitizedNameString], @"Contact's sanitized name string shouldn't include any whitespaces or newlines");
+        
+        if (contact.name)
+        {
+            NSString *sanitizedNameString = [contact.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            XCTAssert([contact.sanitizedName isEqualToString:sanitizedNameString], @"Contact's sanitized name string shouldn't include any whitespaces or newlines");
+        }
     }
 }
 
 - (void)compareContact:(YSGContact *)contact withDictionary:(NSDictionary *)dictionary
 {
     XCTAssertNotNil(contact, @"Contact should not be nil after parsing values from: %@", dictionary);
-    NSString *name = [dictionary objectForKey:@"name"];
+    NSString *name = dictionary[@"name"];
     XCTAssert([contact.name isEqualToString:name], @"Contact name '%@' is not the same as '%@'", contact.name, name);
 
-    id emailObject = [dictionary objectForKey:@"emails"];
+    id emailObject = dictionary[@"emails"];
 
     if ([emailObject isKindOfClass:[NSArray class]])
     {
@@ -70,7 +74,7 @@
     }
 
 
-    id phoneObject = [dictionary objectForKey:@"phones"];
+    id phoneObject = dictionary[@"phones"];
 
     if ([phoneObject isKindOfClass:[NSArray class]])
     {
@@ -131,7 +135,7 @@
         YSGContact *invalidContact1 = [YSGContact ysg_objectWithDictionary:invalidContactValues1];
         // it should only contain the name
         XCTAssertNotNil(invalidContact1, @"The contact shouldn't be nil even though it has an invalid state");
-        NSString *name = [invalidContactValues1 objectForKey:@"name"];
+        NSString *name = invalidContactValues1[@"name"];
         XCTAssert([invalidContact1.name isEqualToString:name], @"Invalid contact's name '%@' is not the same as '%@'", invalidContact1.name, name);
         XCTAssertNil(invalidContact1.emails, @"Emails should be nil");
         XCTAssertNil(invalidContact1.phones, @"Phones should be nil");
@@ -141,12 +145,49 @@
         YSGContact *invalidContact3 = [YSGContact ysg_objectWithDictionary:invalidContactValues3];
         // it should only contain the name
         XCTAssertNotNil(invalidContact3, @"The contact shouldn't be nil even though it has an invalid state");
-        NSString *name = [invalidContactValues3 objectForKey:@"name"];
+        NSString *name = invalidContactValues3[@"name"];
         XCTAssert([invalidContact3.name isEqualToString:name], @"Invalid contact's name '%@' is not the same as '%@'", invalidContact3.name, name);
         XCTAssertNil(invalidContact3.emails, @"Emails should be nil");
         XCTAssertNil(invalidContact3.phones, @"Phones should be nil");
     }
+}
 
+- (void)testContactDescription
+{
+    {
+        YSGContact *testContactPhoneOnly = [YSGContact new];
+        testContactPhoneOnly.name = @"Test Name";
+        testContactPhoneOnly.phones = @[ @"+1 111 111 111" ];
+        NSString *expected = [NSString stringWithFormat:@"%@ - %@", testContactPhoneOnly.name, testContactPhoneOnly.phones.firstObject];
+        XCTAssert([expected isEqualToString:testContactPhoneOnly.description], @"Contact description '%@' is not the same as expected '%@'", testContactPhoneOnly.description, expected);
+    }
+    {
+        YSGContact *testContactEmailOnly = [YSGContact new];
+        testContactEmailOnly.name = @"Test Name";
+        testContactEmailOnly.emails = @[ @"test@email.com" ];
+        NSString *expected = [NSString stringWithFormat:@"%@ - %@", testContactEmailOnly.name, testContactEmailOnly.emails.firstObject];
+        XCTAssert([expected isEqualToString:testContactEmailOnly.description], @"Contact description '%@' is not the same as expected '%@'", testContactEmailOnly.description, expected);
+    }
+    {
+        YSGContact *testContactBoth = [YSGContact new];
+        testContactBoth.name = @"Test Name";
+        testContactBoth.emails = @[ @"test@email.com" ];
+        testContactBoth.phones = @[ @"+1 111 111 111" ];
+        NSString *expected = [NSString stringWithFormat:@"%@ - %@", testContactBoth.name, testContactBoth.emails.firstObject];
+        XCTAssert([expected isEqualToString:testContactBoth.description], @"Contact description '%@' is not the same as expected '%@'", testContactBoth.description, expected);
+    }
+    {
+        YSGContact *testContactNoName = [YSGContact new];
+        testContactNoName.emails = @[ @"test@email.com" ];
+        testContactNoName.phones = @[ @"+1 111 111 111" ];
+        NSString *expected = [NSString stringWithFormat:@"(null) - %@", testContactNoName.emails.firstObject];
+        XCTAssert([expected isEqualToString:testContactNoName.description], @"Contact description '%@' is not the same as expected '%@'", testContactNoName.description, expected);
+    }
+    {
+        YSGContact *testContactNone = [YSGContact new];
+        NSString *expected = @"(null) - (null)";
+        XCTAssert([expected isEqualToString:testContactNone.description], @"Contact description '%@' is not the same as expected '%@'", testContactNone.description, expected);
+    }
 }
 
 @end

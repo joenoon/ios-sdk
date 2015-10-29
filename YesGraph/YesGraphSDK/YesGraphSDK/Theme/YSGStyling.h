@@ -6,6 +6,8 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
+NS_ASSUME_NONNULL_BEGIN
+
 @import Foundation;
 
 @class YSGTheme;
@@ -14,6 +16,8 @@
 
 @property (nullable, nonatomic, strong) YSGTheme *theme;
 
-- (void)applyTheme:(nonnull YSGTheme *)theme;
+- (void)applyTheme:(YSGTheme *)theme;
 
 @end
+
+NS_ASSUME_NONNULL_END

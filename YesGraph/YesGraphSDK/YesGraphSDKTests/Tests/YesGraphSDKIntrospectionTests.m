@@ -6,7 +6,7 @@
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import <XCTest/XCTest.h>
+@import XCTest;
 #import "NSObject+YSGIntrospection.h"
 #import "YSGTestIntrospectionMocked.h"
 
@@ -34,7 +34,7 @@
     for (NSString *propName in properties)
     {
         XCTAssertNotNil(propName, @"Property names can't be nil");
-        XCTAssertNotNil([expectedProperties objectForKeyedSubscript:propName], @"Property '%@' not found in expected properties '%@'", propName, expectedProperties);
+        XCTAssertNotNil(expectedProperties[propName], @"Property '%@' not found in expected properties '%@'", propName, expectedProperties);
     }
 }
 
@@ -59,7 +59,7 @@
     for (NSString *propName in properties)
     {
         Class propType = [type ysg_classForPropertyName:propName];
-        Class expectedType = [expectedProperties objectForKeyedSubscript:propName];
+        Class expectedType = expectedProperties[propName];
         if (propType == nil)
         {
             XCTAssert(expectedType == [TestCClassType class], @"Expected a '%@' when property type is nil, but got: '%@'", [TestCClassType class], propType);

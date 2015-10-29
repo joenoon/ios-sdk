@@ -10,25 +10,49 @@ import UIKit
 import YesGraphSDK
 import Social
 
-class ViewController: UIViewController, YSGShareSheetDelegate {
+class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate {
 
     var theme = YSGTheme()
-    
-    @IBOutlet weak var introTextField: UITextField!
-    @IBOutlet weak var additionalInfoLabel: UILabel!
 
-    @IBOutlet weak var shareButton: UIButton!
-
-    @IBOutlet weak var additionalNotesView: UIView!
+    @IBOutlet weak var webView: UIWebView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        styleView()
+        self.title = "Home"
+        
+        self.setWebViewContent()
+        
+        self.webView.delegate = self
         
         nastyHacksForUITests()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
+    }
+    
+    func setWebViewContent() -> Void {
+
+        let htmlString = "<style>a:link {color:#487EA8; text-decoration:none}a:visited {color:#487EA8; text-decoration:none}</style>" +
+        "<body style=\"font-family: 'Open Sans'; font-size: 15px; margin: 0; background-color: #1F2124; text-align: left; color: #C4C6C7;\">It’s open source. <a href=\"https://github.com/YesGraph/ios-sdk\">Find it on Github here</a>. <br><br>" +
+        "If you use CocoaPods, you can integrate with: pod 'YesGraph-iOS-SDK' Or with Carthage: github \"YesGraph/ios-sdk\" <br><br>" +
+        "We have example applications using <a href=\"https://github.com/YesGraph/ios-sdk#example-applications\">(Parse, Swift, and Objective-C)</a> on Github.<br><br>" +
+        "You’ll need a YesGraph account. <a href=\"https://www.yesgraph.com/\">Sign up and create an app to configure the SDK</a>.<br><br>" +
+        "The documentation online is extensive, but if you have any trouble, email <a href=\"mailto:support@yesgraph.com\">support@yesgraph.com</a>.</body>"
+        
+        self.webView.loadHTMLString(htmlString, baseURL: nil)
+        
+    }
+    
+    
     
     func isAvailableTwit(empty: String) -> Bool {
         return empty == SLServiceTypeTwitter
@@ -85,9 +109,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         }
     }
 
-    @IBAction func shareButtonTap(sender: AnyObject) {
-        let localSource = YSGLocalContactSource()
-        localSource.contactAccessPromptMessage = "Share contacts with Example-Swift to invite friends?"
+    @IBAction func shareButtonTap(sender: UIButton) {
         
         if YesGraph.shared().isConfigured
         {
@@ -95,12 +117,12 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         }
         else
         {
-            self.shareButton.setTitle("  Configuring YesGraph...  ", forState: UIControlState.Normal);
-            self.shareButton.enabled = false;
-            
+            sender.setTitle("  Configuring YesGraph...  ", forState: UIControlState.Normal);
+            sender.enabled = false;
+
             self.configureYesGraphWithCompletion({ (success, error) -> Void in
-                self.shareButton.setTitle("Share", forState: UIControlState.Normal)
-                self.shareButton.enabled = true;
+                sender.setTitle("Try YesGraph", forState: UIControlState.Normal)
+                sender.enabled = true;
                 
                 if (success)
                 {
@@ -120,13 +142,14 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         YesGraph.shared().theme = self.theme
         YesGraph.shared().numberOfSuggestions = 5
         YesGraph.shared().contactAccessPromptMessage = "Share contacts with Example to invite friends?"
+        YesGraph.shared().shareSheetText = "Demo our SDK by sharing YesGraph with your contacts"
         
         let shareController = YesGraph.shared().shareSheetControllerForAllServicesWithDelegate(self)
         
         // OPTIONAL
         
         // set referralURL if you have one
-        shareController!.referralURL = "your-site.com/referral";
+        shareController!.referralURL = "www.yesgraph.com/#iosg";
         
         //
         // PRESENT MODALLY
@@ -164,27 +187,39 @@ class ViewController: UIViewController, YSGShareSheetDelegate {
         }
     }
     
-    func styleView() {
-        self.additionalInfoLabel.font = UIFont(name: "OpenSans", size: 16)
-        self.introTextField.font = UIFont(name: "OpenSans-Semibold", size: 18)
-        self.shareButton.titleLabel?.font = UIFont(name: "OpenSans", size: 20)
-        
-        self.shareButton.layer.cornerRadius = self.shareButton.frame.size.height / 10
-    }
-    
     func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [String : AnyObject]?) -> [String : AnyObject] {
         
         if let _ = service as? YSGFacebookService {
-            return [YSGShareSheetMessageKey : "This message will be posted to Facebook."]
+            return [YSGShareSheetMessageKey : "YesGraph helps your app grow. Check it out! www.yesgraph.com/#iosfb"]
         }
         else if let _ = service as? YSGTwitterService {
-            return [YSGShareSheetMessageKey : "This message will be posted to Twitter."]
+            return [YSGShareSheetMessageKey : "YesGraph helps your app grow. Check it out! www.yesgraph.com/#iosfb"]
         }
         else if let _ = service as? YSGInviteService {
-            return [YSGShareSheetMessageKey : "This message will be posted to SMS."]
+            if let _ = userInfo?[YSGInviteEmailContactsKey] {
+                return [YSGShareSheetSubjectKey : "We should check out YesGraph",
+                        YSGShareSheetMessageKey : "Check out YesGraph, they help apps grow: www.yesgraph.com/#iosce"]
+            }
+            else {
+                return [YSGShareSheetMessageKey : "Check out YesGraph, they help apps grow: www.yesgraph.com/#iosce"]
+            }
         }
         
         return [YSGShareSheetMessageKey : ""]
     }
+    
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool
+    {
+        if navigationType == .LinkClicked
+        {
+            UIApplication.sharedApplication().openURL(request.URL!)
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
 }
 

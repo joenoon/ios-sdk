@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) YSGLogLevel currentLogLevel;
 
-@property (nonnull, nonatomic, readonly) NSArray <YSGLog *>* logs;
+@property (nonatomic, readonly) NSArray <YSGLog *>* logs;
 
 + (nonnull instancetype)shared;
 
@@ -30,14 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Convenience API's
 
-+ (void)logLevel:(YSGLogLevel)level file:(const char * _Nonnull)file function:(const char  * _Nonnull )function line:(NSUInteger)line format:(nonnull NSString *)format, ...;
++ (void)logLevel:(YSGLogLevel)level file:(const char *)file function:(const char *)function line:(NSUInteger)line format:(NSString *)format, ...;
 
 /*!
  *  Method should be called when error is being logged
  *
  *  @param error to be logged
  */
-+ (void)logError:(nonnull NSError *)error file:(const char *_Nonnull )file function:(const char  * _Nonnull )function line:(NSUInteger)line;
++ (void)logError:(nonnull NSError *)error file:(const char *)file function:(const char *)function line:(NSUInteger)line;
 
 @end
 
