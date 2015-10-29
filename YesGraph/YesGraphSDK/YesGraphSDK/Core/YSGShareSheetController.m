@@ -166,7 +166,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     self.shareLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareLabelFontSize];
     self.shareLabel.adjustsFontSizeToFitWidth = YES;
     
-    self.shareLabel.textColor = self.theme.mainColor;
+    self.shareLabel.textColor = self.theme.textColor;
     self.shareLabel.lineBreakMode = NSLineBreakByClipping;
     self.shareLabel.numberOfLines = 0;
     self.shareLabel.textAlignment = self.theme.shareLabelTextAlignment;
