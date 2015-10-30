@@ -51,4 +51,17 @@
     XCTAssertEqual(itemsInSection, self.controller.services.count, @"Number of items in section should always be 3, not '%lu'", (unsigned long)itemsInSection);
 }
 
+- (void)testOtherInitializers
+{
+    YSGShareSheetController *notDefault = [YSGShareSheetController new];
+    XCTAssertEqual(notDefault.services.count, 0, @"Controller initialised through other helper initialisers should contain no services");
+    YSGShareSheetController *withCoder = [[YSGShareSheetController alloc] initWithCoder:[NSCoder new]];
+    XCTAssertEqual(withCoder.services.count, 0, @"Controller initialised through other helper initialisers should contain no services");
+    YSGShareSheetController *withNib = [[YSGShareSheetController alloc] initWithNibName:nil bundle:nil];
+    XCTAssertEqual(withNib.services.count, 0, @"Controller initialised through other helper initialisers should contain no services");
+    
+    YSGShareSheetController *classInitialiser = [YSGShareSheetController shareSheetControllerWithServices:self.controller.services];
+    XCTAssertEqual(classInitialiser.services.count, self.controller.services.count, @"Controller initalised via the class helper function with services should contain '%lu' entries not '%lu'", (unsigned long)self.controller.services.count, (unsigned long)classInitialiser.services.count);
+}
+
 @end
