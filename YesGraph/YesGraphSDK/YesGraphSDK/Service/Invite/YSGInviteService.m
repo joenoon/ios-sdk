@@ -31,6 +31,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 @interface YSGInviteService () <MFMessageComposeViewControllerDelegate, MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong, readwrite) id<YSGContactSource> contactSource;
+@property (nonatomic, strong, readwrite) NSString *userId;
 
 @property (nonatomic, weak) YSGShareSheetController *viewController;
 @property (nonatomic, weak) UINavigationController *addressBookNavigationController;
@@ -79,7 +80,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         self.nativeMessageSheet = YES;
         self.nativeEmailSheet = YES;
         
-        _userId = userId;
+        self.userId = userId;
     }
     
     return self;
