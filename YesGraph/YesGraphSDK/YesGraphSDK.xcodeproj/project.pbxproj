@@ -129,7 +129,6 @@
 		38B20AE61B9884ED00AE3DED /* YSGServices.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B20AE51B9884ED00AE3DED /* YSGServices.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38B20AE81B9886E700AE3DED /* YSGSources.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B20AE71B9886E700AE3DED /* YSGSources.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38B20AEA1B988C2300AE3DED /* YSGMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 38B20AE91B988C2300AE3DED /* YSGMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		38B6DD421BC67E35001B70BC /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B6DD411BC67E35001B70BC /* OHHTTPStubs.framework */; };
 		38C581C31B9EE435008676F0 /* YSGLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581C21B9EE435008676F0 /* YSGLogging.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		38C581C81B9EE6FF008676F0 /* YSGLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 38C581C61B9EE6FF008676F0 /* YSGLogger.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		38C581C91B9EE6FF008676F0 /* YSGLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C581C71B9EE6FF008676F0 /* YSGLogger.m */; };
@@ -332,6 +331,8 @@
 		E8E845A61BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A51BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m */; };
 		E8E845A81BCF17FF008E227B /* YesGraphSDKModelYSGSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */; };
 		E8EC98511BE3ACFB00676A1A /* YesGraphSDKShareSheetControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8EC98501BE3ACFB00676A1A /* YesGraphSDKShareSheetControllerTests.m */; };
+		E8EC985A1BE3BF2B00676A1A /* OHHTTPStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38B6DD411BC67E35001B70BC /* OHHTTPStubs.framework */; };
+		E8EC985E1BE3C0F900676A1A /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8EC98551BE3BA8000676A1A /* OCMock.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -608,6 +609,7 @@
 		E8E845A71BCF17FF008E227B /* YesGraphSDKModelYSGSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKModelYSGSource.m; sourceTree = "<group>"; };
 		E8EC98501BE3ACFB00676A1A /* YesGraphSDKShareSheetControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKShareSheetControllerTests.m; sourceTree = "<group>"; };
 		E8EC98521BE3B14200676A1A /* YSGShareSheetController+ExposedPrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGShareSheetController+ExposedPrivateMethods.h"; sourceTree = "<group>"; };
+		E8EC98551BE3BA8000676A1A /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = YesGraphSDKTests/OCMock.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,8 +624,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8EC985E1BE3C0F900676A1A /* OCMock.framework in Frameworks */,
+				E8EC985A1BE3BF2B00676A1A /* OHHTTPStubs.framework in Frameworks */,
 				38CC16C91B831606008477C7 /* YesGraphSDK.framework in Frameworks */,
-				38B6DD421BC67E35001B70BC /* OHHTTPStubs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1066,6 +1069,7 @@
 		787FF5130F9A3AB7911C70A3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E8EC98551BE3BA8000676A1A /* OCMock.framework */,
 				38B6DD411BC67E35001B70BC /* OHHTTPStubs.framework */,
 			);
 			name = Frameworks;

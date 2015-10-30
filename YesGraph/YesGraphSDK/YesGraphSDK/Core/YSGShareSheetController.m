@@ -50,6 +50,11 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     return _shareText;
 }
 
+- (UIPasteboard *)getPasteBoard
+{
+    return [UIPasteboard generalPasteboard];
+}
+
 #pragma mark - Initialization
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
@@ -379,7 +384,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 
 - (void)copy:(UIButton *)sender
 {
-    UIPasteboard *gpBoard = [UIPasteboard generalPasteboard];
+    UIPasteboard *gpBoard = [self getPasteBoard];
     NSString *referralString = self.referralURL;
     
     if (referralString)
