@@ -32,8 +32,6 @@
     [self setWebViewContent];
     
     self.webView.delegate = self;
-    
-    [self nastyHacksForUITests];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -80,43 +78,6 @@
 {
     NSLog(@"Set string called with %@ from %s", str, __FILE__);
 }
-
-- (void)nastyHacksForUITests
-{
-    NSArray *cmdArgs = [NSProcessInfo processInfo].arguments;
-    for (NSUInteger index = 1; index < cmdArgs.count; ++index)
-    {
-        SEL originalSel = nil, swizSel = nil;
-        Class replClass;
-        Method original = nil, swiz = nil;
-        
-        if([cmdArgs[index] isEqualToString:@"mocked_pasteboard"] == YES)
-        {
-            originalSel = @selector(setString:);
-            swizSel = @selector(setString:);
-            replClass = [[UIPasteboard generalPasteboard] class];
-            original = class_getInstanceMethod(replClass, originalSel);
-            swiz = class_getInstanceMethod([self class], swizSel);
-        }
-        else if ([cmdArgs[index] isEqualToString:@"mocked_twitter"]  == YES || [cmdArgs[index] isEqualToString:@"mocked_both"]  == YES || [cmdArgs[index] isEqualToString:@"mocked_contacts"] == YES)
-        {
-            replClass = [SLComposeViewController class];
-            originalSel = @selector(isAvailableForServiceType:);
-            swizSel = ([cmdArgs[index] isEqualToString:@"mocked_twitter"]  == YES ?
-                       @selector(isAvailableTwit:) :
-                       ([cmdArgs[index] isEqualToString:@"mocked_contacts"]) ?
-                       @selector(isAvailableNone:) :
-                       @selector(isAvailableBoth:));
-            original = class_getClassMethod(replClass, originalSel);
-            swiz = class_getInstanceMethod([self class], swizSel);
-        }
-        assert(originalSel && swizSel && original && swiz);
-        
-        IMP swizImp = method_getImplementation(swiz);
-        method_setImplementation(original, swizImp);
-    }
-}
-
 
 - (IBAction)shareButtonTap:(UIButton *)sender
 {

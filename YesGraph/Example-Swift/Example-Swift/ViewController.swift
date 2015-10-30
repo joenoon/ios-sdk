@@ -25,8 +25,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         self.setWebViewContent()
         
         self.webView.delegate = self
-        
-        nastyHacksForUITests()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -67,45 +65,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
     
     func setString(str: String) {
         NSLog("Set string called with %@ from %s", str, __FILE__)
-    }
-    
-    func nastyHacksForUITests() {
-        let cmdArgs = NSProcessInfo.processInfo().arguments
-        for index in 1..<cmdArgs.count {
-            let arg: String = cmdArgs[index]
-            var originalSel: Selector? = nil
-            var swizSel: Selector? = nil
-            var replClass: AnyClass? = nil
-            var original: Method? = nil
-            var swiz: Method? = nil
-            
-            if arg == "mocked_pasteboard" {
-                originalSel = Selector("setString:")
-                swizSel = Selector("setString:")
-                replClass = UIPasteboard.self
-                original = class_getInstanceMethod(replClass, originalSel!)
-                swiz = class_getInstanceMethod(ViewController.self, swizSel!)
-            }
-            else if arg == "mocked_contacts" || arg == "mocked_twitter" || arg == "mocked_both" {
-                replClass = SLComposeViewController.self
-                originalSel = Selector("isAvailableForServiceType:")
-                switch arg {
-                case "mocked_contacts":
-                    swizSel = Selector("isAvailableNone:")
-                    break
-                case "mocked_twitter":
-                    swizSel = Selector("isAvailableTwit:")
-                    break
-                default:
-                    swizSel = Selector("isAvailableBoth:")
-                    break
-                }
-                original = class_getClassMethod(replClass, originalSel!)
-                swiz = class_getInstanceMethod(ViewController.self, swizSel!)
-            }
-            let swizImp = method_getImplementation(swiz!)
-            method_setImplementation(original!, swizImp)
-        }
     }
 
     @IBAction func shareButtonTap(sender: UIButton) {
