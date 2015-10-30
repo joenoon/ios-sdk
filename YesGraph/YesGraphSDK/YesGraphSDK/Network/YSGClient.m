@@ -85,7 +85,7 @@
         
         if (completion)
         {
-            YSGNetworkResponse* networkResponse = [[YSGNetworkResponse alloc] initWithDataTask:task response:response data:data error:error];
+            YSGNetworkResponse* networkResponse = [[YSGNetworkResponse alloc] initWithResponse:response data:data error:error];
             completion(networkResponse, networkResponse.error);
         }
     }];
