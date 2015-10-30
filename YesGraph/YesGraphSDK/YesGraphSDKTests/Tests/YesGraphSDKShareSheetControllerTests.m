@@ -76,15 +76,34 @@
     XCTAssertNil(self.controller.shareLabel, @"Share label should be nil at this point");
     
     [self.controller setupHeader];
+    
     XCTAssertNotNil(self.controller.header, @"Header shouldn't be nil at this point");
     XCTAssertNotNil(self.controller.logoView, @"Logo view shouldn't be nil at this point");
     XCTAssertNotNil(self.controller.shareLabel, @"Share label shouldn't be nil at this point");
     
     XCTAssert([self.controller.shareLabel.text isEqualToString:self.controller.shareText], @"Share text '%@' expected to be '%@'", self.controller.shareLabel.text, self.controller.shareText);
     XCTAssert(self.controller.shareLabel.textAlignment == self.controller.theme.shareLabelTextAlignment, @"Share label text alignment is incorrect");
-    XCTAssertEqual(self.controller.header.subviews.count, 2, @"Header view should contain 2 subviews, not '%lu'", self.controller.header.subviews.count);
+    XCTAssertEqual(self.controller.header.subviews.count, 2, @"Header view should contain 2 subviews, not '%lu'", (unsigned long)self.controller.header.subviews.count);
     XCTAssertTrue([self.controller.header.subviews containsObject:self.controller.shareLabel], @"Header view should hold shareLabel in its subview collection");
     XCTAssertTrue([self.controller.header.subviews containsObject:self.controller.logoView], @"Header view should hold logoView in its subview collection");
+}
+
+- (void)testSetupFooter
+{
+    XCTAssertNil(self.controller.footer, @"Footer should be nil at this point");
+    XCTAssertNil(self.controller.referralLabel, @"Referral label should be nil at this point");
+    XCTAssertNil(self.controller.cpyButton, @"Copy button should be nil at this point");
+    
+    self.controller.referralURL = @"http://www.test.url.com/ref?q=%20space";
+    [self.controller setupFooter];
+    
+    XCTAssertNotNil(self.controller.footer, @"Footer shouldn't be nil at this point");
+    XCTAssertNotNil(self.controller.referralLabel, @"Referral label shouldn't be nil at this point");
+    XCTAssertNotNil(self.controller.cpyButton, @"Copy button shouldn't be nil at this point");
+    XCTAssert([self.controller.referralLabel.text isEqualToString:self.controller.referralURL], @"Referral URL '%@' in label not the same as '%@'", self.controller.referralLabel.text, self.controller.referralURL);
+    XCTAssert(self.controller.referralLabel.textAlignment == NSTextAlignmentCenter, @"Referral label text alignment is not center");
+    XCTAssert([self.controller.referralLabel.textColor isEqual:[UIColor blackColor]], @"Referral label text color is not black");
+    XCTAssert([self.controller.cpyButton.titleLabel.text isEqualToString:@"copy"], @"Copy button title should be copy");
 }
 
 @end
