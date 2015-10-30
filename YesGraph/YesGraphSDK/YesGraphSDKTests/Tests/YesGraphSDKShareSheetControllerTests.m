@@ -82,7 +82,9 @@
     
     XCTAssert([self.controller.shareLabel.text isEqualToString:self.controller.shareText], @"Share text '%@' expected to be '%@'", self.controller.shareLabel.text, self.controller.shareText);
     XCTAssert(self.controller.shareLabel.textAlignment == self.controller.theme.shareLabelTextAlignment, @"Share label text alignment is incorrect");
-    
+    XCTAssertEqual(self.controller.header.subviews.count, 2, @"Header view should contain 2 subviews, not '%lu'", self.controller.header.subviews.count);
+    XCTAssertTrue([self.controller.header.subviews containsObject:self.controller.shareLabel], @"Header view should hold shareLabel in its subview collection");
+    XCTAssertTrue([self.controller.header.subviews containsObject:self.controller.logoView], @"Header view should hold logoView in its subview collection");
 }
 
 @end
