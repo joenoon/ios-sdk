@@ -46,6 +46,8 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         "The documentation online is extensive, but if you have any trouble, email <a href=\"mailto:support@yesgraph.com\">support@yesgraph.com</a>.</body>"
         self.webView.opaque = false
         self.webView.backgroundColor = UIColor.clearColor()
+        self.webView.scrollView.scrollEnabled = false
+        self.webView.scrollView.bounces = false
         self.webView.loadHTMLString(htmlString, baseURL: nil)
     }
 

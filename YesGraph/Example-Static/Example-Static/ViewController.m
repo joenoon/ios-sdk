@@ -56,6 +56,8 @@
     The documentation online is extensive, but if you have any trouble, email <a href=\"mailto:support@yesgraph.com\">support@yesgraph.com</a>.</body>";
     self.webView.opaque = NO;
     self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.scrollView.scrollEnabled = NO;
+    self.webView.scrollView.bounces = NO;
     [self.webView loadHTMLString:htmlString baseURL:nil];
 }
 
