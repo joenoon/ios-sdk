@@ -38,12 +38,12 @@
 #import "YSGParsable.h"
 #import "YSGValueTransformer.h"
 #import "NSObject+YSGIntrospection.h"
-#import "NSArray+YSGParsable.h"
+#import "NSArray+YSGParsing.h"
 
 #import "NSObject+YSGParsable.h"
 
 
-@interface NSDictionary (YSGParsable)
+@interface NSDictionary (YSGParsing)
 
 + (NSDictionary *)ysg_mappableDictionaryForKeyPaths:(NSArray *)keyPaths;
 
@@ -250,7 +250,7 @@ static NSString * const YSGSeparator = @"@";
 
 #pragma mark - Dictionary
 
-@implementation NSDictionary (YSGParsable)
+@implementation NSDictionary (YSGParsing)
 
 + (NSDictionary *)ysg_mappableDictionaryForKeyPaths:(NSArray *)keyPaths
 {

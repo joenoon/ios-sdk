@@ -48,24 +48,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         self.webView.backgroundColor = UIColor.clearColor()
         self.webView.loadHTMLString(htmlString, baseURL: nil)
     }
-    
-    
-    
-    func isAvailableTwit(empty: String) -> Bool {
-        return empty == SLServiceTypeTwitter
-    }
-    
-    func isAvailableBoth(empty: String) -> Bool {
-        return true
-    }
-    
-    func isAvailableNone(empty: String) -> Bool {
-        return false
-    }
-    
-    func setString(str: String) {
-        NSLog("Set string called with %@ from %s", str, __FILE__)
-    }
 
     @IBAction func shareButtonTap(sender: UIButton) {
         

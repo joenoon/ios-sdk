@@ -7,10 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "objc/runtime.h"
 
 @import YesGraphSDK;
-@import Social;
 
 @interface ViewController () <YSGShareSheetDelegate, UIWebViewDelegate>
 
@@ -34,12 +32,14 @@
     self.webView.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
@@ -56,27 +56,6 @@
     self.webView.opaque = NO;
     self.webView.backgroundColor = [UIColor clearColor];
     [self.webView loadHTMLString:htmlString baseURL:nil];
-}
-
-
-- (BOOL)isAvailableTwit:(NSString *)empty
-{
-    return [empty isEqualToString:SLServiceTypeTwitter];
-}
-
-- (BOOL)isAvailableBoth:(NSString *)empty
-{
-    return YES;
-}
-
-- (BOOL)isAvailableNone:(NSString *)empty
-{
-    return NO;
-}
-
-- (void)setString:(NSString *)str
-{
-    NSLog(@"Set string called with %@ from %s", str, __FILE__);
 }
 
 - (IBAction)shareButtonTap:(UIButton *)sender
@@ -162,7 +141,7 @@
     }
 }
 
-#pragma - mark YSGShareSheetControllerDelegate
+#pragma mark - YSGShareSheetControllerDelegate
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
 {
@@ -192,12 +171,14 @@
     return @{ YSGShareSheetMessageKey : @"" };
 }
 
-#pragma mark - WebViewDelegate
+#pragma mark - UIWebViewDelegate
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
     {
         [[UIApplication sharedApplication] openURL:request.URL];
+        
         return NO;
     }
     else

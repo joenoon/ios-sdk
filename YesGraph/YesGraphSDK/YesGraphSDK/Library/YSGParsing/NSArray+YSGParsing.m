@@ -1,5 +1,5 @@
 //
-//  NSArray+YSGParsable.m
+//  NSArray+YSGParsing.m
 //  YesGraphSDK
 //
 //  Created by Dal Rupnik on 26/08/15.
@@ -33,11 +33,11 @@
 // THE SOFTWARE.
 //
 
-#import "NSArray+YSGParsable.h"
+#import "NSArray+YSGParsing.h"
 #import "NSObject+YSGParsable.h"
 #import "YSGParsable.h"
 
-@implementation NSArray (YSGParsable)
+@implementation NSArray (YSGParsing)
 
 - (NSArray *)ysg_arrayOfObjectsOfClass:(Class)classForMap
 {

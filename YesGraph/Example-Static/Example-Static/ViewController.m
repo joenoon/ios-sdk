@@ -8,9 +8,8 @@
 
 #import "ViewController.h"
 #import <YesGraphSDK/YesGraphSDK.h>
-#import <objc/runtime.h>
 
-@import Social;
+@import YesGraphSDK;
 
 @interface ViewController () <YSGShareSheetDelegate, UIWebViewDelegate>
 
@@ -25,6 +24,7 @@
     [super viewDidLoad];
     
     self.title = @"Home";
+    self.navigationController.navigationBarHidden = YES;
     
     self.theme = [YSGTheme new];
     
@@ -33,12 +33,14 @@
     self.webView.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
@@ -69,21 +71,23 @@
         sender.enabled = NO;
         
         [self configureYesGraphWithCompletion:^(BOOL success, NSError *error)
-        {
-            [sender setTitle:@"Share" forState:UIControlStateNormal];
-            sender.enabled = YES;
-            
-            if (success)
-            {
-                [self presentShareSheetController];
-            }
-            else
-            {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-                [self presentViewController:alert animated:YES completion:nil];
-            }
-        }];
+         {
+             [sender setTitle:@"Try YesGraph" forState:UIControlStateNormal];
+             sender.enabled = YES;
+             
+             if (success)
+             {
+                 [self presentShareSheetController];
+             }
+             else
+             {
+                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" preferredStyle:UIAlertControllerStyleAlert];
+                 [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+                 [self presentViewController:alert animated:YES completion:nil];
+             }
+             
+         }];
+        
     }
 }
 
@@ -138,7 +142,7 @@
     }
 }
 
-#pragma - mark YSGShareSheetControllerDelegate
+#pragma mark - YSGShareSheetControllerDelegate
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
 {
@@ -168,12 +172,14 @@
     return @{ YSGShareSheetMessageKey : @"" };
 }
 
-#pragma mark - WebViewDelegate
+#pragma mark - UIWebViewDelegate
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
     {
         [[UIApplication sharedApplication] openURL:request.URL];
+        
         return NO;
     }
     else
