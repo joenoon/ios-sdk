@@ -7,7 +7,6 @@
 //
 
 @import XCTest;
-@import OCMock;
 
 #import "YSGShareSheetController+ExposedPrivateMethods.h"
 #import "YSGFacebookService.h"
@@ -63,23 +62,6 @@
     
     YSGShareSheetController *classInitialiser = [YSGShareSheetController shareSheetControllerWithServices:self.controller.services];
     XCTAssertEqual(classInitialiser.services.count, self.controller.services.count, @"Controller initalised via the class helper function with services should contain '%lu' entries not '%lu'", (unsigned long)self.controller.services.count, (unsigned long)classInitialiser.services.count);
-}
-
-- (void)testCopyButton
-{
-    NSString *referalUrl = @"http://test.url.com/referal?q=20%space";
-    XCTAssertNil(self.controller.referralURL, @"Referral URL should be nil at this point");
-    self.controller.referralURL = referalUrl;
-    XCTAssert([self.controller.referralURL isEqualToString:referalUrl], @"Referral URL should not be '%@' not '%@'", referalUrl, self.controller.referralURL);
-    
-    id clip = OCMClassMock([UIPasteboard class]);
-//    clip.string = nil;
-//    id clip = OCMClassMock([UIPasteboard class]);
-//    XCTAssertNil(clip.string, @"Clipboard shouldn't contain any strings yet, but found '%@'", clip.string);
-
-//    [self.controller copy:nil];
-    
-//    XCTAssert([clip.string isEqualToString:referalUrl], @"Clipboard should contain a string '%@', but found '%@'", referalUrl, clip.string);
 }
 
 @end
