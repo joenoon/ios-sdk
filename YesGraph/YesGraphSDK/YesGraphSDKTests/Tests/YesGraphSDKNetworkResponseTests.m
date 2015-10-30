@@ -35,7 +35,7 @@
 
 - (void)testResponseObjectSerialization
 {
-    YSGNetworkResponse *response = [[YSGNetworkResponse alloc] initWithDataTask:nil response:nil data:nil error:nil];
+    YSGNetworkResponse *response = [[YSGNetworkResponse alloc] initWithResponse:nil data:nil error:nil];
     YSGContact *contact = [YSGTestMockData mockContactList].entries.firstObject;
     [response setResponseObject:[contact ysg_toDictionary]];
     

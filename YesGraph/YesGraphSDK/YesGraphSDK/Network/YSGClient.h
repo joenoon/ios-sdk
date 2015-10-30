@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSURL* baseURL;
 @property (nonatomic, copy, nullable) NSString *clientKey;
 
+- (instancetype)initWithClientKey:(NSString *)clientKey;
 - (instancetype)initWithBaseURL:(NSURL *)baseURL NS_DESIGNATED_INITIALIZER;
 
 

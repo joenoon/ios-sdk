@@ -15,7 +15,6 @@
 //
 // Received Data
 //
-@property (nonatomic, strong, readwrite) NSURLSessionDataTask *dataTask;
 @property (nonatomic, strong, readwrite) NSURLResponse *response;
 @property (nonatomic, copy, readwrite) NSData *data;
 
@@ -36,22 +35,21 @@
 {
     [[NSException exceptionWithName:@"Invalid call" reason:@"Cannot initialize empty network response." userInfo:nil] raise];
     
-    return [self initWithDataTask:nil response:nil data:nil error:nil];
+    return [self initWithResponse:nil data:nil error:nil];
 }
 
-- (instancetype)initWithDataTask:(NSURLSessionDataTask *)dataTask response:(NSURLResponse *)response data:(NSData *)data error:(nullable NSError *)error
+- (instancetype)initWithResponse:(NSURLResponse *)response data:(NSData *)data error:(NSError *)error
 {
     self = [super init];
     
     if (self)
     {
-        self.dataTask = dataTask;
         self.data = data;
         self.response = response;
         
-        if (error || dataTask.error)
+        if (error)
         {
-            self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeNetwork userInfo:@{ NSUnderlyingErrorKey : (error ?: dataTask.error) }];
+            self.error = [NSError errorWithDomain:YSGErrorDomain code:YSGErrorCodeNetwork userInfo:@{ NSUnderlyingErrorKey : error }];
         }
         else if (data.length)
         {

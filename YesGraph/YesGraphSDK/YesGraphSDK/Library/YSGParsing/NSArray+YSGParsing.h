@@ -1,5 +1,5 @@
 //
-//  NSArray+YSGParsable.h
+//  NSArray+YSGParsing.h
 //  YesGraphSDK
 //
 //  Created by Dal Rupnik on 26/08/15.
@@ -11,7 +11,7 @@
 /*!
  *  This category defines the mapping procedures for NSArray to convert from and to Json
  */
-@interface NSArray (YSGParsable)
+@interface NSArray (YSGParsing)
 
 /*!
  *  Map an array to a specific object class 

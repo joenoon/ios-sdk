@@ -12,7 +12,7 @@
 
 + (nonnull UIColor *)defaultMainColor
 {
-    return [UIColor colorWithRed:0.9 green:0.11 blue:0.17 alpha:1];
+    return [UIColor colorWithRed:0.00 green:0.47 blue:0.74 alpha:1];
 }
 
 + (nonnull UIColor *)defaultTwitterColor
@@ -27,12 +27,12 @@
 
 + (nonnull UIColor *)defaultBackgroundColor
 {
-    return [UIColor whiteColor];
+    return [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 }
 
 + (nonnull UIColor *)defaultTextColor
 {
-    return [UIColor colorWithRed:0.33 green:0.33 blue:0.33 alpha:1];
+    return [UIColor colorWithRed:0.10 green:0.11 blue:0.13 alpha:1];
 }
 
 + (nonnull NSString *)defaultFontFamily

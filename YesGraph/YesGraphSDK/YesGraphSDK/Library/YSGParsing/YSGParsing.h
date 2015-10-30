@@ -9,5 +9,5 @@
 #import "YSGParsable.h"
 #import "NSObject+YSGParsable.h"
 #import "YSGParsableModel.h"
-#import "NSArray+YSGParsable.h"
+#import "NSArray+YSGParsing.h"
 #import "YSGValueTransformer.h"

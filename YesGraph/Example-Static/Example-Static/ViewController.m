@@ -8,9 +8,6 @@
 
 #import "ViewController.h"
 #import <YesGraphSDK/YesGraphSDK.h>
-#import <objc/runtime.h>
-
-@import Social;
 
 @interface ViewController () <YSGShareSheetDelegate, UIWebViewDelegate>
 
@@ -25,6 +22,7 @@
     [super viewDidLoad];
     
     self.title = @"Home";
+    self.navigationController.navigationBarHidden = YES;
     
     self.theme = [YSGTheme new];
     
@@ -33,12 +31,14 @@
     self.webView.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated
+{
     [self.navigationController setNavigationBarHidden:NO animated:animated];
     [super viewWillDisappear:animated];
 }
@@ -52,6 +52,10 @@
     We have example applications using <a href=\"https://github.com/YesGraph/ios-sdk#example-applications\">(Parse, Swift, and Objective-C)</a> on Github.<br><br>\
     You’ll need a YesGraph account. <a href=\"https://www.yesgraph.com/\">Sign up and create an app to configure the SDK</a>.<br><br>\
     The documentation online is extensive, but if you have any trouble, email <a href=\"mailto:support@yesgraph.com\">support@yesgraph.com</a>.</body>";
+    self.webView.opaque = NO;
+    self.webView.backgroundColor = [UIColor clearColor];
+    self.webView.scrollView.scrollEnabled = NO;
+    self.webView.scrollView.bounces = NO;
     [self.webView loadHTMLString:htmlString baseURL:nil];
 }
 
@@ -63,25 +67,27 @@
     }
     else
     {
-        [sender setTitle:@"  Configuring YesGraph...  " forState:UIControlStateNormal];
+        [sender setTitle:@"setting up..." forState:UIControlStateNormal];
         sender.enabled = NO;
         
         [self configureYesGraphWithCompletion:^(BOOL success, NSError *error)
-        {
-            [sender setTitle:@"Share" forState:UIControlStateNormal];
-            sender.enabled = YES;
-            
-            if (success)
-            {
-                [self presentShareSheetController];
-            }
-            else
-            {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-                [self presentViewController:alert animated:YES completion:nil];
-            }
-        }];
+         {
+             [sender setTitle:@"Try YesGraph" forState:UIControlStateNormal];
+             sender.enabled = YES;
+             
+             if (success)
+             {
+                 [self presentShareSheetController];
+             }
+             else
+             {
+                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" preferredStyle:UIAlertControllerStyleAlert];
+                 [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+                 [self presentViewController:alert animated:YES completion:nil];
+             }
+             
+         }];
+        
     }
 }
 
@@ -136,7 +142,7 @@
     }
 }
 
-#pragma - mark YSGShareSheetControllerDelegate
+#pragma mark - YSGShareSheetControllerDelegate
 
 - (nonnull NSDictionary *)shareSheetController:(nonnull YSGShareSheetController *)shareSheetController messageForService:(nonnull YSGShareService *)service userInfo:(nullable NSDictionary *)userInfo
 {
@@ -149,11 +155,11 @@
     }
     else if ([service isKindOfClass:[YSGTwitterService class]])
     {
-        return @{ YSGShareSheetMessageKey : @"YesGraph helps your app grow. Check it out! www.yesgraph.com/#iosfb" };
+        return @{ YSGShareSheetMessageKey : @"YesGraph helps your app grow. Check it out! www.yesgraph.com/#iostw" };
     }
     else if ([service isKindOfClass:[YSGInviteService class]])
     {
-        if ([userInfo valueForKey:YSGInviteEmailContactsKey])
+        if (userInfo[YSGInviteEmailContactsKey])
         {
             return @{ YSGShareSheetSubjectKey : @"We should check out YesGraph",
                       YSGShareSheetMessageKey : @"Check out YesGraph, they help apps grow: www.yesgraph.com/#iosce" };
@@ -166,12 +172,14 @@
     return @{ YSGShareSheetMessageKey : @"" };
 }
 
-#pragma mark - WebViewDelegate
+#pragma mark - UIWebViewDelegate
+
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
 {
     if (navigationType == UIWebViewNavigationTypeLinkClicked)
     {
         [[UIApplication sharedApplication] openURL:request.URL];
+        
         return NO;
     }
     else

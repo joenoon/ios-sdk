@@ -26,6 +26,18 @@
     return [self initWithBaseURL:[NSURL URLWithString:YSGClientAPIURL]];
 }
 
+- (instancetype)initWithClientKey:(NSString *)clientKey
+{
+    self = [self init];
+    
+    if (self)
+    {
+        self.clientKey = clientKey;
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
 {
     self = [super init];
@@ -85,7 +97,7 @@
         
         if (completion)
         {
-            YSGNetworkResponse* networkResponse = [[YSGNetworkResponse alloc] initWithDataTask:task response:response data:data error:error];
+            YSGNetworkResponse* networkResponse = [[YSGNetworkResponse alloc] initWithResponse:response data:data error:error];
             completion(networkResponse, networkResponse.error);
         }
     }];
