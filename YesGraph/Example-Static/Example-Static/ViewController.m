@@ -9,8 +9,6 @@
 #import "ViewController.h"
 #import <YesGraphSDK/YesGraphSDK.h>
 
-@import YesGraphSDK;
-
 @interface ViewController () <YSGShareSheetDelegate, UIWebViewDelegate>
 
 @property (nullable, nonatomic, strong) YSGTheme *theme;
