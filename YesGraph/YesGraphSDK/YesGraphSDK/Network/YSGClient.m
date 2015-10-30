@@ -26,6 +26,18 @@
     return [self initWithBaseURL:[NSURL URLWithString:YSGClientAPIURL]];
 }
 
+- (instancetype)initWithClientKey:(NSString *)clientKey
+{
+    self = [self init];
+    
+    if (self)
+    {
+        self.clientKey = clientKey;
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
 {
     self = [super init];
