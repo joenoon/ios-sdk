@@ -64,4 +64,25 @@
     XCTAssertEqual(classInitialiser.services.count, self.controller.services.count, @"Controller initalised via the class helper function with services should contain '%lu' entries not '%lu'", (unsigned long)self.controller.services.count, (unsigned long)classInitialiser.services.count);
 }
 
+- (void)testModal
+{
+    XCTAssertTrue(self.controller.isModal, @"Controller should be modal");
+}
+
+- (void)testSetupHeader
+{
+    XCTAssertNil(self.controller.header, @"Header should be nil at this point");
+    XCTAssertNil(self.controller.logoView, @"Logo view should be nil at this point");
+    XCTAssertNil(self.controller.shareLabel, @"Share label should be nil at this point");
+    
+    [self.controller setupHeader];
+    XCTAssertNotNil(self.controller.header, @"Header shouldn't be nil at this point");
+    XCTAssertNotNil(self.controller.logoView, @"Logo view shouldn't be nil at this point");
+    XCTAssertNotNil(self.controller.shareLabel, @"Share label shouldn't be nil at this point");
+    
+    XCTAssert([self.controller.shareLabel.text isEqualToString:self.controller.shareText], @"Share text '%@' expected to be '%@'", self.controller.shareLabel.text, self.controller.shareText);
+    XCTAssert(self.controller.shareLabel.textAlignment == self.controller.theme.shareLabelTextAlignment, @"Share label text alignment is incorrect");
+    
+}
+
 @end

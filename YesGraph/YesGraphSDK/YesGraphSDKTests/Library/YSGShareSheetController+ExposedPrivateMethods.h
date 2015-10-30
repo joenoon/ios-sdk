@@ -12,6 +12,14 @@
 
 @interface YSGShareSheetController (ExposedPrivateMethods)
 
+@property (nonatomic, strong) UIView *header;
+@property (nonatomic, strong) UILabel *shareLabel;
+@property (nonatomic, strong) UIImageView *logoView;
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (nonatomic, strong) UIView *footer;
+@property (nonatomic, strong) UILabel *referralLabel;
+@property (nonatomic, strong) UIButton *cpyButton;
+
 - (void)viewDidLoad;
 - (void)setupHeader;
 - (void)setupShareServicesView;
