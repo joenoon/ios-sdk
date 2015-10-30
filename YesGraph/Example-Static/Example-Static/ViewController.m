@@ -65,7 +65,7 @@
     }
     else
     {
-        [sender setTitle:@"  Configuring YesGraph...  " forState:UIControlStateNormal];
+        [sender setTitle:@"setting up..." forState:UIControlStateNormal];
         sender.enabled = NO;
         
         [self configureYesGraphWithCompletion:^(BOOL success, NSError *error)

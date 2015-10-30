@@ -75,7 +75,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         }
         else
         {
-            sender.setTitle("  Configuring YesGraph...  ", forState: UIControlState.Normal);
+            sender.setTitle("setting up...", forState: UIControlState.Normal);
             sender.enabled = false;
 
             self.configureYesGraphWithCompletion({ (success, error) -> Void in
