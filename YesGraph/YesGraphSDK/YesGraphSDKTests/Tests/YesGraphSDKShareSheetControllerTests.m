@@ -12,6 +12,7 @@
 #import "YSGFacebookService.h"
 #import "YSGTwitterService.h"
 #import "YSGShareService.h"
+#import "YSGShareSheetServiceCell.h"
 
 @interface YesGraphSDKShareSheetControllerTests : XCTestCase
 @property (strong, nonatomic) YSGShareSheetController *controller;
@@ -136,9 +137,16 @@
     Class layoutExpected = [UICollectionViewFlowLayout class];
     Class layoutActual = [self.controller.collectionView.collectionViewLayout class];
     XCTAssert(layoutActual == layoutExpected, @"Collection view layout should be of type '%@' not '%@'", layoutActual, layoutExpected);
+    UICollectionViewFlowLayout *flowLayout = (UICollectionViewFlowLayout *)self.controller.collectionView.collectionViewLayout;
+    XCTAssert(flowLayout.scrollDirection == UICollectionViewScrollDirectionHorizontal, @"Scroll direction of the collection view should be horizontal");
     UIColor *actualColor = self.controller.collectionView.backgroundColor;
     UIColor *expectedColor = [UIColor clearColor];
     XCTAssert([actualColor isEqual:expectedColor], @"Background color of the collection view should be '%@' not '%@'", expectedColor, actualColor);
+    XCTAssertFalse(self.controller.collectionView.translatesAutoresizingMaskIntoConstraints, @"Translates autoresizing mask into contraint property should be set to NO");
+    NSString *YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifier";
+    UICollectionViewCell *dequeuedCell = [self.controller.collectionView dequeueReusableCellWithReuseIdentifier:YSGShareSheetCellIdentifier forIndexPath:[NSIndexPath indexPathWithIndex:1]];
+    XCTAssertNotNil(dequeuedCell, @"Dequeued cell with identiifer '%@' shouldn't be nil", YSGShareSheetCellIdentifier);
+    XCTAssert([dequeuedCell class] == [YSGShareSheetServiceCell class], @"Dequeued cell should be of type '%@' not '%@'", [YSGShareSheetServiceCell class], [dequeuedCell class]);
     
 }
 
