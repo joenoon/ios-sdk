@@ -69,14 +69,15 @@
     XCTAssertTrue(self.controller.isModal, @"Controller should be modal");
 }
 
-- (void)testSetupHeader
+- (void)headerChecksForNil
 {
     XCTAssertNil(self.controller.header, @"Header should be nil at this point");
     XCTAssertNil(self.controller.logoView, @"Logo view should be nil at this point");
     XCTAssertNil(self.controller.shareLabel, @"Share label should be nil at this point");
-    
-    [self.controller setupHeader];
-    
+}
+
+- (void)headerChecksForCompleteness
+{
     XCTAssertNotNil(self.controller.header, @"Header shouldn't be nil at this point");
     XCTAssertNotNil(self.controller.logoView, @"Logo view shouldn't be nil at this point");
     XCTAssertNotNil(self.controller.shareLabel, @"Share label shouldn't be nil at this point");
@@ -88,22 +89,55 @@
     XCTAssertTrue([self.controller.header.subviews containsObject:self.controller.logoView], @"Header view should hold logoView in its subview collection");
 }
 
-- (void)testSetupFooter
+- (void)testSetupHeader
+{
+    [self headerChecksForNil];
+    [self.controller setupHeader];
+    [self headerChecksForCompleteness];
+}
+
+- (void)footerChecksForNil
 {
     XCTAssertNil(self.controller.footer, @"Footer should be nil at this point");
     XCTAssertNil(self.controller.referralLabel, @"Referral label should be nil at this point");
     XCTAssertNil(self.controller.cpyButton, @"Copy button should be nil at this point");
-    
-    self.controller.referralURL = @"http://www.test.url.com/ref?q=%20space";
-    [self.controller setupFooter];
-    
+}
+
+- (void)footerChecksForCompletenessWithExpectedUrl:(NSString *)expectedUrl
+{
     XCTAssertNotNil(self.controller.footer, @"Footer shouldn't be nil at this point");
     XCTAssertNotNil(self.controller.referralLabel, @"Referral label shouldn't be nil at this point");
     XCTAssertNotNil(self.controller.cpyButton, @"Copy button shouldn't be nil at this point");
-    XCTAssert([self.controller.referralLabel.text isEqualToString:self.controller.referralURL], @"Referral URL '%@' in label not the same as '%@'", self.controller.referralLabel.text, self.controller.referralURL);
+    XCTAssert([self.controller.referralLabel.text isEqualToString:expectedUrl], @"Referral URL '%@' in label not the same as '%@'", self.controller.referralLabel.text, expectedUrl);
     XCTAssert(self.controller.referralLabel.textAlignment == NSTextAlignmentCenter, @"Referral label text alignment is not center");
     XCTAssert([self.controller.referralLabel.textColor isEqual:[UIColor blackColor]], @"Referral label text color is not black");
     XCTAssert([self.controller.cpyButton.titleLabel.text isEqualToString:@"copy"], @"Copy button title should be copy");
+}
+
+- (void)testSetupFooter
+{
+    [self footerChecksForNil];
+    NSString *expectedUrl = @"http://www.test.url.com/ref?q=%20space";
+    self.controller.referralURL = expectedUrl;
+    [self.controller setupFooter];
+    [self footerChecksForCompletenessWithExpectedUrl:expectedUrl];
+}
+
+- (void)shareServicesViewChecksForNil
+{
+    XCTAssertNil(self.controller.collectionView, @"Collection view should be nil at this point");
+}
+
+- (void)shareServicesViewChecksForCompleteness
+{
+    
+}
+
+- (void)testSetupShareServicesView
+{
+    [self shareServicesViewChecksForNil];
+    [self.controller setupShareServicesView];
+    [self shareServicesViewChecksForCompleteness];
 }
 
 @end
