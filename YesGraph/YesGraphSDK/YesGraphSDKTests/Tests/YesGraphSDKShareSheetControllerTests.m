@@ -130,6 +130,15 @@
 
 - (void)shareServicesViewChecksForCompleteness
 {
+    Class expected = [UICollectionView class];
+    Class actual = [self.controller.collectionView class];
+    XCTAssert(actual == expected, @"Collection view should be of type '%@' not '%@'", expected, actual);
+    Class layoutExpected = [UICollectionViewFlowLayout class];
+    Class layoutActual = [self.controller.collectionView.collectionViewLayout class];
+    XCTAssert(layoutActual == layoutExpected, @"Collection view layout should be of type '%@' not '%@'", layoutActual, layoutExpected);
+    UIColor *actualColor = self.controller.collectionView.backgroundColor;
+    UIColor *expectedColor = [UIColor clearColor];
+    XCTAssert([actualColor isEqual:expectedColor], @"Background color of the collection view should be '%@' not '%@'", expectedColor, actualColor);
     
 }
 
