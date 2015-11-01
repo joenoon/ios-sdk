@@ -128,7 +128,12 @@
 
 - (void)testContactListOperationsSuggestionsZero
 {
+    YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
+    mockedContacts.useSuggestions = YES;
+    NSUInteger suggestionCount = 0;
     
+    NSArray <YSGContact *> *sortedEntries = [mockedContacts suggestedEntriesWithNumberOfSuggestions:suggestionCount];
+    XCTAssertEqual(sortedEntries.count, 0, @"There shouldn't be any suggestions when the count is set to 0");
 }
 
 @end
