@@ -147,7 +147,8 @@
     UICollectionViewCell *dequeuedCell = [self.controller.collectionView dequeueReusableCellWithReuseIdentifier:YSGShareSheetCellIdentifier forIndexPath:[NSIndexPath indexPathWithIndex:1]];
     XCTAssertNotNil(dequeuedCell, @"Dequeued cell with identiifer '%@' shouldn't be nil", YSGShareSheetCellIdentifier);
     XCTAssert([dequeuedCell class] == [YSGShareSheetServiceCell class], @"Dequeued cell should be of type '%@' not '%@'", [YSGShareSheetServiceCell class], [dequeuedCell class]);
-    
+    XCTAssertNotNil(self.controller.collectionView.delegate, @"Delegate of the collection view shouldn't be nil");
+    XCTAssertNotNil(self.controller.collectionView.dataSource, @"Data source of the collection view shouldn't be nil");
 }
 
 - (void)testSetupShareServicesView
