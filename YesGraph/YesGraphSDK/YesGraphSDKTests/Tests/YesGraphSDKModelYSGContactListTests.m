@@ -62,7 +62,7 @@
     YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
     mockedContacts.useSuggestions = YES;
     NSArray <YSGContact *> *suggestions = [mockedContacts suggestedEntriesWithNumberOfSuggestions:expected];
-    XCTAssertEqual(suggestions.count, expected, @"The number of returned suggestions '%lu' is not '%lu'", suggestions.count, expected);
+    XCTAssertEqual(suggestions.count, expected, @"The number of returned suggestions '%lu' is not '%lu'", (unsigned long)suggestions.count, (unsigned long)expected);
 }
 
 - (void)testNumericValidityOfReturnedSuggestions
