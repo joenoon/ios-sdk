@@ -13,6 +13,7 @@
 #import "YSGTwitterService.h"
 #import "YSGShareService.h"
 #import "YSGShareSheetServiceCell.h"
+#import "YSGMockedPasteboard.h"
 
 @interface YesGraphSDKShareSheetControllerTests : XCTestCase
 @property (strong, nonatomic) YSGShareSheetController *controller;
@@ -156,6 +157,19 @@
     [self shareServicesViewChecksForNil];
     [self.controller setupShareServicesView];
     [self shareServicesViewChecksForCompleteness];
+}
+
+- (void)testCopy
+{
+    YSGMockedPasteboard *mockedPasteboard = [YSGMockedPasteboard new]; // this class will replace the UIPasteboard methods with mocked ones on init
+    NSString *expectedUrl = @"http://www.test.url.com/ref?q=%20space";
+    self.controller.referralURL = expectedUrl;
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    XCTAssertNil(pasteBoard.string, @"String should be nil before copy is invoked");
+    [self.controller copy:nil];
+    XCTAssertNotNil(pasteBoard.string, @"String shouldn't be nil after copy is invoked");
+    XCTAssert([pasteBoard.string isEqualToString:expectedUrl], @"Pasteboard's string should be '%@' not '%@'", pasteBoard.string, expectedUrl);
+    mockedPasteboard = nil; // cleanup, so UIPasteboard methods are switched back to the originals
 }
 
 @end

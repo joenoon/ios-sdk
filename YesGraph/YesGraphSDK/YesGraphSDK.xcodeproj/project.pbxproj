@@ -277,6 +277,7 @@
 		67E64EEE1155E1FF9FE14BC0 /* YSGFacebookService.h in Headers */ = {isa = PBXBuildFile; fileRef = 67E640CDA38C1801103AEEF6 /* YSGFacebookService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		67E64F24AA6529C333D9A552 /* YSGContactList.m in Sources */ = {isa = PBXBuildFile; fileRef = 67E6488C19F203A44EA85DD3 /* YSGContactList.m */; };
 		E80044771BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m in Sources */ = {isa = PBXBuildFile; fileRef = E80044761BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m */; };
+		E805266C1BE6CC8C00EDD26F /* YSGMockedPasteboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E805266B1BE6CC8C00EDD26F /* YSGMockedPasteboard.m */; };
 		E8105DC91BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */; };
 		E8105DCC1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DCB1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m */; };
 		E8105DCF1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E8105DCE1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m */; };
@@ -540,6 +541,8 @@
 		67E64F479EC3C3C13DC44FC3 /* YSGOnlineContactSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGOnlineContactSource.h; sourceTree = "<group>"; };
 		E80044751BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGNetworkResponse+ParsingMock.h"; sourceTree = "<group>"; };
 		E80044761BDA918E0050D420 /* YSGNetworkResponse+ParsingMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGNetworkResponse+ParsingMock.m"; sourceTree = "<group>"; };
+		E805266A1BE6CC8C00EDD26F /* YSGMockedPasteboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGMockedPasteboard.h; sourceTree = "<group>"; };
+		E805266B1BE6CC8C00EDD26F /* YSGMockedPasteboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGMockedPasteboard.m; sourceTree = "<group>"; };
 		E8105DC71BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGUIAlertController+YSGDisplayOverride.h"; sourceTree = "<group>"; };
 		E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGUIAlertController+YSGDisplayOverride.m"; sourceTree = "<group>"; };
 		E8105DCA1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGMessageCenter+RemoveAlertController.h"; sourceTree = "<group>"; };
@@ -755,6 +758,8 @@
 				E896D6C61BE2C58700D84A59 /* YSGTestClientWithID.h */,
 				E896D6C71BE2C58700D84A59 /* YSGTestClientWithID.m */,
 				E8EC98521BE3B14200676A1A /* YSGShareSheetController+ExposedPrivateMethods.h */,
+				E805266A1BE6CC8C00EDD26F /* YSGMockedPasteboard.h */,
+				E805266B1BE6CC8C00EDD26F /* YSGMockedPasteboard.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1413,6 +1418,7 @@
 				E8105DCF1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m in Sources */,
 				38343AE91BC6A67400DD635B /* YesGraphSDKCacheTests.m in Sources */,
 				E896D6C81BE2C58700D84A59 /* YSGTestClientWithID.m in Sources */,
+				E805266C1BE6CC8C00EDD26F /* YSGMockedPasteboard.m in Sources */,
 				38343AE81BC6A67400DD635B /* YesGraphSDKAddressBookTests.m in Sources */,
 				E8105DCC1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m in Sources */,
 				E8CB678E1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m in Sources */,
