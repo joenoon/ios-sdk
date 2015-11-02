@@ -50,4 +50,6 @@
 
 - (void)updateUI;
 
+extern NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context);
+
 @end
