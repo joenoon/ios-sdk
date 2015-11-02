@@ -94,6 +94,16 @@
 
 - (void)presentShareSheetController
 {
+//    self.theme.mainColor = [UIColor orangeColor];
+//    self.theme.baseColor = [UIColor colorWithRed:0/256.f green:132/256.f blue:63/256.f alpha:1.0];
+//    self.theme.textColor = [UIColor whiteColor];
+//    self.theme.fontFamily = @"Avenir";
+//    self.theme.buttonFont = [UIFont fontWithName:@"Avenir-Bold" size:16];
+//    self.theme.shareButtonShape = YSGShareSheetServiceCellShapeSquare;
+//    self.theme.facebookColor = [UIColor orangeColor];
+//    self.theme.twitterColor = [UIColor orangeColor];
+//    self.theme.referralButtonColor = [UIColor orangeColor];
+    
     [YesGraph shared].theme = self.theme;
     [YesGraph shared].numberOfSuggestions = 5;
     [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
@@ -128,7 +138,7 @@
     //
     // Client key should be retrieved from your trusted backend.
     //
-    [[YesGraph shared] configureWithClientKey:@""];
+    [[YesGraph shared] configureWithClientKey:@"live-WzEsMCwibGVhIl0.CQCE_g.DMOwr3YUg2zwiuPMJnInVa1D3ZI"];
     
     if (completion)
     {

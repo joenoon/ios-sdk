@@ -35,9 +35,29 @@
     return [UIColor colorWithRed:0.10 green:0.11 blue:0.13 alpha:1];
 }
 
++ (nonnull UIColor *)defaultReferralTextColor
+{
+    return [UIColor colorWithRed:0.10 green:0.11 blue:0.13 alpha:1];
+}
+
++ (nonnull UIColor *)defaultReferralButtonColor
+{
+    return [UIColor colorWithRed:0.00 green:0.47 blue:0.74 alpha:1];
+}
+
++ (nonnull UIColor *)defaultReferralBannerColor
+{
+    return [UIColor whiteColor];
+}
+
 + (nonnull NSString *)defaultFontFamily
 {
-    return [UIFont systemFontOfSize:12].familyName;
+    return [UIFont systemFontOfSize:14].familyName;
+}
+
++ (nonnull UIFont *)defaultButtonFont
+{
+    return [UIFont boldSystemFontOfSize:16];
 }
 
 + (CGFloat)defaultShareLabelFontSize
