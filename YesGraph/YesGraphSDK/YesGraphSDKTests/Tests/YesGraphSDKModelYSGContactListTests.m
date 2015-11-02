@@ -57,6 +57,22 @@
     }
 }
 
+- (void)checkNumberOfSuggestionsReturnedFor:(NSUInteger)expected
+{
+    YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
+    mockedContacts.useSuggestions = YES;
+    NSArray <YSGContact *> *suggestions = [mockedContacts suggestedEntriesWithNumberOfSuggestions:expected];
+    XCTAssertEqual(suggestions.count, expected, @"The number of returned suggestions '%lu' is not '%lu'", (unsigned long)suggestions.count, (unsigned long)expected);
+}
+
+- (void)testNumericValidityOfReturnedSuggestions
+{
+    for (NSUInteger expect = 0; expect <= 5; ++expect)
+    {
+        [self checkNumberOfSuggestionsReturnedFor:expect];
+    }
+}
+
 - (void)testContactListOperationsSortedNumberOfSuggestionsBiggerThanEntriesCount
 {
     YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
@@ -69,6 +85,35 @@
     XCTAssertEqual(sortedEntries.count, 0, @"The number of returned entries '%lu' is not '%d'", (unsigned long)sortedEntries.count, 0);
 }
 
+- (void)testContactListOperationsSortedNumberOfSuggestionsSmallerThanCount
+{
+    YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
+    mockedContacts.useSuggestions = YES;
+    NSUInteger suggestionCount = 1;
+    NSDictionary <NSString *, NSNumber *> *expectedEntryCounts = @
+    {
+        @"M": @1,
+        @"R": @1,
+        @"P": @1,
+        @"S": @2,
+        @"T": @1,
+        @"C": @3,
+        @"H": @1,
+        @"#": @9
+    };
+    NSUInteger expectedCount = expectedEntryCounts.count;
+    
+    XCTAssertNoThrow([mockedContacts sortedEntriesWithNumberOfSuggestions:suggestionCount], @"Exception was thrown while sorting contact list.");
+    
+    NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedEntries = [mockedContacts sortedEntriesWithNumberOfSuggestions:suggestionCount];
+    XCTAssertEqual(sortedEntries.count, expectedCount, @"The number of returned entries '%lu' is not '%lu'", (unsigned long)sortedEntries.count, (unsigned long)expectedCount);
+    for (NSString *key in expectedEntryCounts.allKeys)
+    {
+        NSNumber *expected = expectedEntryCounts[key];
+        XCTAssertEqual(expected.integerValue, sortedEntries[key].count, @"Expected '%@' entries for key '%@', got '%lu'", expected, key, (unsigned long)sortedEntries[key].count);
+    }
+}
+
 - (void)testContactListRemoveDuplicate
 {
     YSGContactList *list = [YSGContactList new];
@@ -79,6 +124,16 @@
     NSArray *trimmedList = [list removeDuplicatedContactsFromSuggestions:list.entries numberOfSuggestions:numberOfSuggestions];
     XCTAssertNotNil(trimmedList, @"Trimmed suggestions list shouldn't be nil");
     XCTAssertEqual(trimmedList.count, numberOfSuggestions, @"The trimmed list should contain only '%lu' contacts, not '%lu'", (unsigned long)numberOfSuggestions, (unsigned long)trimmedList.count);
+}
+
+- (void)testContactListOperationsSuggestionsZero
+{
+    YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
+    mockedContacts.useSuggestions = YES;
+    NSUInteger suggestionCount = 0;
+    
+    NSArray <YSGContact *> *sortedEntries = [mockedContacts suggestedEntriesWithNumberOfSuggestions:suggestionCount];
+    XCTAssertEqual(sortedEntries.count, 0, @"There shouldn't be any suggestions when the count is set to 0");
 }
 
 @end
