@@ -50,6 +50,10 @@
 
 - (void)updateUI;
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
+
 extern NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context);
 
 @end

@@ -128,4 +128,37 @@
     [self runContactListAllChecksWith:mockedList];
 }
 
+- (void)testContactForIndexPath
+{
+    YSGContactList *mockedList = [YSGTestMockData mockContactList];
+    self.controller.contactList = mockedList;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSDictionary <NSString *, NSArray <YSGContact *> *> *sorted = [mockedList sortedEntriesWithNumberOfSuggestions:self.controller.service.numberOfSuggestions];
+    NSArray <NSString *> *sortedSections = [sorted.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
+    NSString *key = sortedSections[indexPath.section];
+    YSGContact *contact = sorted[key][indexPath.row];
+    XCTAssertNotNil(contact, @"Expected contact shouldn't be nil for index path '%@'", indexPath);
+    YSGContact *foundContact = [self.controller contactForIndexPath:indexPath];
+    XCTAssertNotNil(foundContact, @"Found contact shouldn't be nil");
+    XCTAssert([foundContact.description isEqualToString:contact.description], @"Description string '%@' does not match '%@'", foundContact.description, contact.description);
+}
+
+- (void)testSelectContacts
+{
+    YSGContactList *mockedList = [YSGTestMockData mockContactList];
+    self.controller.contactList = mockedList;
+    XCTAssertEqual(self.controller.selectedContacts.count, 0, @"Shouldn't be any selected contacts yet");
+    NSIndexPath *firstRowIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    [self.controller tableView:self.controller.tableView didSelectRowAtIndexPath:firstRowIndexPath];
+    XCTAssertEqual(self.controller.selectedContacts.count, 1, @"There should be 1 contact selected");
+    NSIndexPath *secondRowIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+    [self.controller tableView:self.controller.tableView didSelectRowAtIndexPath:secondRowIndexPath];
+    XCTAssertEqual(self.controller.selectedContacts.count, 2, @"There should be 2 contacts selected");
+    YSGContact *firstExpected = [self.controller contactForIndexPath:firstRowIndexPath];
+    YSGContact *secondExpected = [self.controller contactForIndexPath:secondRowIndexPath];
+    XCTAssertTrue([self.controller.selectedContacts containsObject:firstExpected], @"Selected contacts set '%@' does not contain '%@'", self.controller.selectedContacts, firstExpected);
+    XCTAssertTrue([self.controller.selectedContacts containsObject:secondExpected], @"Selected contacts set '%@' does not contain '%@'", self.controller.selectedContacts, secondExpected);
+}
+
+
 @end
