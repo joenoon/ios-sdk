@@ -54,6 +54,8 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+
 extern NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context);
 
 @end

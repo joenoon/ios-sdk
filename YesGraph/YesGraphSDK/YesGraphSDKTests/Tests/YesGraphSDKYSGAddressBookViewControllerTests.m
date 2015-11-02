@@ -12,6 +12,7 @@
 #import "YSGTestMockData.h"
 #import "YSGMockedInviteService.h"
 #import "YSGMockedOnlineContactSource.h"
+#import "YSGAddressBookCell.h"
 
 @interface YesGraphSDKYSGAddressBookViewControllerTests : XCTestCase
 
@@ -165,5 +166,24 @@
     XCTAssertFalse([self.controller.selectedContacts containsObject:firstExpected], @"Selected contacts set '%@' should not contain '%@'", self.controller.selectedContacts, firstExpected);
 }
 
+- (void)testTableViewCell
+{
+    YSGContactList *mockedList = [YSGTestMockData mockContactList];
+    self.controller.contactList = mockedList;
+    [self.controller viewDidLoad];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:3];
+    YSGContact *expected = [self.controller contactForIndexPath:indexPath];
+    UITableViewCell *cell = [self.controller tableView:self.controller.tableView cellForRowAtIndexPath:indexPath];
+    XCTAssertNotNil(cell, @"Retrieved cell shouldn't be nil for index path '%@'", indexPath);
+    XCTAssert([cell isKindOfClass:[YSGAddressBookCell class]], @"Retrieved cell should be of class '%@' not '%@'", [YSGAddressBookCell class], [cell class]);
+    YSGAddressBookCell *retrievedCell = (YSGAddressBookCell *)cell;
+    XCTAssert([retrievedCell.textLabel.text isEqualToString:expected.name], @"Cell text label should be '%@' not '%@'", expected.name, retrievedCell.textLabel.text);
+    XCTAssert([retrievedCell.detailTextLabel.text isEqualToString:expected.contactString], @"Detail text label should be '%@' not '%@'", expected.contactString, retrievedCell.detailTextLabel.text);
+    XCTAssertFalse(retrievedCell.selected, @"Retrieved cell shouldn't be selected");
+    
+    [self.controller tableView:self.controller.tableView didSelectRowAtIndexPath:indexPath];
+    YSGAddressBookCell *retrievedSameCell = (YSGAddressBookCell *)[self.controller tableView:self.controller.tableView cellForRowAtIndexPath:indexPath];
+    XCTAssertTrue(retrievedSameCell.selected, @"Retrieved cell should be selected");
+}
 
 @end
