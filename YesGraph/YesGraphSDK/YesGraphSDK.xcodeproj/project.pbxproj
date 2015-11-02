@@ -300,6 +300,8 @@
 		E84798881BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E84798871BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m */; };
 		E84BD7F21BE804FD00E6AE02 /* YesGraphSDKYSGAddressBookViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E84BD7F11BE804FD00E6AE02 /* YesGraphSDKYSGAddressBookViewControllerTests.m */; };
 		E84BD7F51BE8083A00E6AE02 /* YSGAddressBookViewController+ExposedPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = E84BD7F41BE8083A00E6AE02 /* YSGAddressBookViewController+ExposedPrivate.m */; };
+		E84BD7F81BE81A0400E6AE02 /* YSGMockedOnlineContactSource.m in Sources */ = {isa = PBXBuildFile; fileRef = E84BD7F71BE81A0400E6AE02 /* YSGMockedOnlineContactSource.m */; };
+		E84BD7FB1BE81CC800E6AE02 /* YSGMockedInviteService.m in Sources */ = {isa = PBXBuildFile; fileRef = E84BD7FA1BE81CC800E6AE02 /* YSGMockedInviteService.m */; };
 		E857C0DD1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */; };
 		E87949991BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E87949981BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m */; };
 		E87949A01BDD9262008B781D /* YesGraphSDKFacebookServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E879499F1BDD9262008B781D /* YesGraphSDKFacebookServiceTests.m */; };
@@ -571,6 +573,10 @@
 		E84BD7F11BE804FD00E6AE02 /* YesGraphSDKYSGAddressBookViewControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKYSGAddressBookViewControllerTests.m; sourceTree = "<group>"; };
 		E84BD7F31BE8083A00E6AE02 /* YSGAddressBookViewController+ExposedPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGAddressBookViewController+ExposedPrivate.h"; sourceTree = "<group>"; };
 		E84BD7F41BE8083A00E6AE02 /* YSGAddressBookViewController+ExposedPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGAddressBookViewController+ExposedPrivate.m"; sourceTree = "<group>"; };
+		E84BD7F61BE81A0400E6AE02 /* YSGMockedOnlineContactSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGMockedOnlineContactSource.h; sourceTree = "<group>"; };
+		E84BD7F71BE81A0400E6AE02 /* YSGMockedOnlineContactSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGMockedOnlineContactSource.m; sourceTree = "<group>"; };
+		E84BD7F91BE81CC800E6AE02 /* YSGMockedInviteService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGMockedInviteService.h; sourceTree = "<group>"; };
+		E84BD7FA1BE81CC800E6AE02 /* YSGMockedInviteService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGMockedInviteService.m; sourceTree = "<group>"; };
 		E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKUtilityDateTests.m; sourceTree = "<group>"; };
 		E87949981BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKShareServiceTests.m; sourceTree = "<group>"; };
 		E879499F1BDD9262008B781D /* YesGraphSDKFacebookServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKFacebookServiceTests.m; sourceTree = "<group>"; };
@@ -768,6 +774,10 @@
 				E805266B1BE6CC8C00EDD26F /* YSGMockedPasteboard.m */,
 				E84BD7F31BE8083A00E6AE02 /* YSGAddressBookViewController+ExposedPrivate.h */,
 				E84BD7F41BE8083A00E6AE02 /* YSGAddressBookViewController+ExposedPrivate.m */,
+				E84BD7F61BE81A0400E6AE02 /* YSGMockedOnlineContactSource.h */,
+				E84BD7F71BE81A0400E6AE02 /* YSGMockedOnlineContactSource.m */,
+				E84BD7F91BE81CC800E6AE02 /* YSGMockedInviteService.h */,
+				E84BD7FA1BE81CC800E6AE02 /* YSGMockedInviteService.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1417,6 +1427,7 @@
 				E8A7D9981BDEC99900C80501 /* YSGInviteService+OverridenMethods.m in Sources */,
 				E87949991BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m in Sources */,
 				E84BD7F51BE8083A00E6AE02 /* YSGAddressBookViewController+ExposedPrivate.m in Sources */,
+				E84BD7F81BE81A0400E6AE02 /* YSGMockedOnlineContactSource.m in Sources */,
 				E8E845A41BCF027E008E227B /* YesGraphSDKModelContactTests.m in Sources */,
 				E8CB67961BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m in Sources */,
 				38343ADA1BC6A65A00DD635B /* YSGTestMockData.m in Sources */,
@@ -1452,6 +1463,7 @@
 				E8D76BE71BD128A2006435BD /* YSGTestIntrospectionMocked.m in Sources */,
 				E87949A01BDD9262008B781D /* YesGraphSDKFacebookServiceTests.m in Sources */,
 				E8D76BE41BD126CC006435BD /* YesGraphSDKIntrospectionTests.m in Sources */,
+				E84BD7FB1BE81CC800E6AE02 /* YSGMockedInviteService.m in Sources */,
 				E8EC98511BE3ACFB00676A1A /* YesGraphSDKShareSheetControllerTests.m in Sources */,
 				E8D319341BDEBF0500D1CECD /* YesGraphSDKCacheContactSourceFileTests.m in Sources */,
 				E84798881BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m in Sources */,

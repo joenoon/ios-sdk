@@ -10,6 +10,8 @@
 
 #import "YSGAddressBookViewController+ExposedPrivate.h"
 #import "YSGTestMockData.h"
+#import "YSGMockedInviteService.h"
+#import "YSGMockedOnlineContactSource.h"
 
 @interface YesGraphSDKYSGAddressBookViewControllerTests : XCTestCase
 
@@ -67,23 +69,63 @@
     NSDictionary <NSString *, NSArray <YSGContact *> *> *sorted = [contactsList sortedEntriesWithNumberOfSuggestions:self.controller.service.numberOfSuggestions];
     XCTAssertEqual(self.controller.letters.count, sorted.allKeys.count, @"Number of sorted entry sections '%lu' not the same as '%lu'", (unsigned long)self.controller.letters.count, (unsigned long)sorted.allKeys.count);
     
-    NSArray <NSString *> *sortedSections = [sorted.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
-    XCTAssert([sortedSections isEqualToArray:self.controller.letters], @"Sections '%@' not the same as '%@'", self.controller.letters, sortedSections);
-    XCTAssertEqual(self.controller.tableView.numberOfSections, sortedSections.count, @"Number of sections in table view '%lu' not the same as '%lu'", (unsigned long)self.controller.tableView.numberOfSections, (unsigned long)sortedSections.count);
-    for (NSUInteger index = 0; index < sortedSections.count; ++index)
+    if (sorted.count)
     {
-        NSString *key = sortedSections[index];
-        unsigned long numberOfEntries = [self.controller.tableView numberOfRowsInSection:index];
-        unsigned long expectedEntries = sorted[key].count;
-        XCTAssertEqual(numberOfEntries, expectedEntries, @"Expected '%lu' number of entries in table view for section '%lu' ('%@'), not '%lu'", expectedEntries, (unsigned long)index, key, numberOfEntries);
+        NSArray <NSString *> *sortedSections = [sorted.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
+        XCTAssert([sortedSections isEqualToArray:self.controller.letters], @"Sections '%@' not the same as '%@'", self.controller.letters, sortedSections);
+        unsigned long tableViewSections = self.controller.tableView.numberOfSections;
+        if (contactsList.useSuggestions)
+        {
+            // remove 1 section from the count if suggestions are to be shown (first section is reserved for suggestions)
+            --tableViewSections;
+        }
+        XCTAssertEqual(tableViewSections, sortedSections.count, @"Number of sections in table view '%lu' not the same as '%lu'", tableViewSections, (unsigned long)sortedSections.count);
+        for (NSUInteger index = 0; index < sortedSections.count; ++index)
+        {
+            NSString *key = sortedSections[index];
+            unsigned long numberOfEntries = [self.controller.tableView numberOfRowsInSection:contactsList.useSuggestions ? index + 1 : index]; // if we're showing suggestions, we have to offest the tableview index by 1 (first one reserved for suggestions)
+            unsigned long expectedEntries = sorted[key].count;
+            XCTAssertEqual(numberOfEntries, expectedEntries, @"Expected '%lu' number of entries in table view for section '%lu' ('%@'), not '%lu'", expectedEntries, (unsigned long)index, key, numberOfEntries);
+        }
     }
 }
 
-- (void)testContactList
+- (void)testContactListWithoutService
 {
     [self runContactListNilChecks];
     YSGContactList *mockedList = [YSGTestMockData mockContactList];
     self.controller.contactList = mockedList;
     [self runContactListAllChecksWith:mockedList];
 }
+
+- (void)testContactListWithOnlineService
+{
+    [self runContactListNilChecks];
+    __weak YesGraphSDKYSGAddressBookViewControllerTests *preventRetainCycle = self;
+    YSGMockedOnlineContactSource *mockedOnlineSource = [YSGMockedOnlineContactSource new];
+    XCTestExpectation *expectation = [preventRetainCycle expectationWithDescription:@"Expected Suggestions Shown Handler Invoked"];
+    mockedOnlineSource.suggestionsShown = ^(NSArray <YSGContact *> *suggestions)
+    {
+        XCTAssert([preventRetainCycle.controller.suggestions isEqualToArray:suggestions], @"Controller suggestions '%@' do not match sent suggestions '%@'", preventRetainCycle.controller.suggestions, suggestions);
+        [expectation fulfill];
+    };
+    YSGMockedInviteService *mockedService = [[YSGMockedInviteService alloc] initWithContactSource:mockedOnlineSource];
+    self.controller.service = mockedService;
+    YSGContactList *mockedList = [YSGTestMockData mockContactList];
+    mockedList.useSuggestions = YES;
+    self.controller.contactList = mockedList;
+    [self runContactListAllChecksWith:mockedList];
+    [preventRetainCycle waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        XCTAssertNil(error, @"Error while waiting for expectation: %@", error);
+    }];
+}
+
+- (void)testContactListWithZeroAssign
+{
+    [self runContactListNilChecks];
+    YSGContactList *mockedList = [YSGContactList new];
+    self.controller.contactList = mockedList;
+    [self runContactListAllChecksWith:mockedList];
+}
+
 @end
