@@ -30,6 +30,10 @@
 
 @property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
 
+@end
+
+@interface YSGAddressBookViewController ()
+
 - (UITableView *)tableView;
 
 - (NSMutableSet <YSGContact *> *)selectedContacts;

@@ -10,4 +10,15 @@
 
 @implementation YSGAddressBookViewController (ExposedPrivate)
 
+@dynamic searchController;
+@dynamic searchContainerView;
+@dynamic tableView;
+@dynamic suggestions;
+@dynamic contactList;
+@dynamic sortedContacts;
+@dynamic letters;
+@dynamic selectedContacts;
+@dynamic emptyView;
+@dynamic searchResults;
+
 @end
