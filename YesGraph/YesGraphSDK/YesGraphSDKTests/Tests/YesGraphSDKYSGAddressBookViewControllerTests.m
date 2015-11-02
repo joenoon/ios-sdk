@@ -158,6 +158,11 @@
     YSGContact *secondExpected = [self.controller contactForIndexPath:secondRowIndexPath];
     XCTAssertTrue([self.controller.selectedContacts containsObject:firstExpected], @"Selected contacts set '%@' does not contain '%@'", self.controller.selectedContacts, firstExpected);
     XCTAssertTrue([self.controller.selectedContacts containsObject:secondExpected], @"Selected contacts set '%@' does not contain '%@'", self.controller.selectedContacts, secondExpected);
+    
+    [self.controller tableView:self.controller.tableView didDeselectRowAtIndexPath:firstRowIndexPath];
+    XCTAssertEqual(self.controller.selectedContacts.count, 1, @"There should be 1 contact selected");
+    XCTAssertTrue([self.controller.selectedContacts containsObject:secondExpected], @"Selected contacts set '%@' does not contain '%@'", self.controller.selectedContacts, secondExpected);
+    XCTAssertFalse([self.controller.selectedContacts containsObject:firstExpected], @"Selected contacts set '%@' should not contain '%@'", self.controller.selectedContacts, firstExpected);
 }
 
 
