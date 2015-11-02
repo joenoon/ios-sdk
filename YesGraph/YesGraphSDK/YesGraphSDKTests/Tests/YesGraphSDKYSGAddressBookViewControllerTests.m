@@ -69,7 +69,7 @@
     
     NSArray <NSString *> *sortedSections = [sorted.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
     XCTAssert([sortedSections isEqualToArray:self.controller.letters], @"Sections '%@' not the same as '%@'", self.controller.letters, sortedSections);
-    XCTAssertEqual(self.controller.tableView.numberOfSections, sortedSections.count, @"Number of sections in table view '%lu' not the same as '%lu'", (unsigned long)self.controller.tableView.numberOfSections, sortedSections.count);
+    XCTAssertEqual(self.controller.tableView.numberOfSections, sortedSections.count, @"Number of sections in table view '%lu' not the same as '%lu'", (unsigned long)self.controller.tableView.numberOfSections, (unsigned long)sortedSections.count);
     for (NSUInteger index = 0; index < sortedSections.count; ++index)
     {
         NSString *key = sortedSections[index];
