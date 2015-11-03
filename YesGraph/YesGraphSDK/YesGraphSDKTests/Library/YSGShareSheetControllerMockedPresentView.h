@@ -8,12 +8,13 @@
 
 #import <YesGraphSDK/YesGraphSDK.h>
 
-typedef void (^TriggerOnPresentCallback)(void);
+typedef void (^TriggerOnCallCallback)(void);
 
-@interface YSGShareSheetControllerMockedPresentView : YSGShareSheetController
+@interface YSGShareSheetControllerMockedPresentView : YSGShareSheetController<YSGShareSheetDelegate>
 
 @property (strong, nonatomic) UIViewController * currentPresentingViewController;
-@property (strong, nonatomic) TriggerOnPresentCallback triggerOnPresent;
+@property (strong, nonatomic) TriggerOnCallCallback triggerOnPresent;
+@property (strong, nonatomic) TriggerOnCallCallback triggerOnDidShare;
 
 - (instancetype)initEmpty;
 
