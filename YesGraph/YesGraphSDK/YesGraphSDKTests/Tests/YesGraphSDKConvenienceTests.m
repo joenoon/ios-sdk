@@ -131,4 +131,15 @@
     XCTAssertNil([YesGraph shared].lastFetchDate, @"Date should be nil");
 }
 
+- (void)testYesGraphConfigurationFromUserDefaults
+{
+    [YesGraph shared].userId = nil;
+    
+    XCTAssertEqual([YesGraph shared].userId, YSGTestClientID, @"UserId should still be fetched from UserDefaults");
+    
+    [YesGraph shared].clientKey = nil;
+    
+    XCTAssertEqual([YesGraph shared].clientKey, YSGTestClientKey, @"ClientKey should still be fetched from UserDefaults");
+}
+
 @end

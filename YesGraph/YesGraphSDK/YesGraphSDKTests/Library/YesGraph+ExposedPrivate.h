@@ -12,6 +12,9 @@
 
 @interface YesGraph (ExposedPrivate)
 
+@property (nonatomic, readwrite, copy) NSString *userId;
+@property (nonatomic, readwrite, copy) NSString *clientKey;
+
 @property (nonatomic, copy) NSDate* lastFetchDate;
 
 - (YSGLocalContactSource *)localSource;

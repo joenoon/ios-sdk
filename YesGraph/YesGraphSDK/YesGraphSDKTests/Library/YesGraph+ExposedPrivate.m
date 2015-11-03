@@ -10,6 +10,8 @@
 
 @implementation YesGraph (ExposedPrivate)
 
+@dynamic userId;
+@dynamic clientKey;
 @dynamic lastFetchDate;
 
 @end
