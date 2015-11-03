@@ -7,7 +7,7 @@
 //
 
 @import XCTest;
-#import "YesGraph.h"
+#import "YesGraph+ExposedPrivate.h"
 #import "YSGMessaging.h"
 #import "YSGInviteService.h"
 #import "YSGSources.h"
@@ -110,6 +110,12 @@
     YSGLocalContactSource *localContactSource = onlineContactSource.localSource;
     
     XCTAssert([localContactSource.contactAccessPromptMessage isEqualToString:testContactAccessPromptMessage], @"Invite contact permissions message \"%@\" is not the same as configured \"%@\".", localContactSource.contactAccessPromptMessage, testContactAccessPromptMessage);
+}
+
+- (void)testYesGraphContactSources
+{
+    XCTAssertNotNil([YesGraph shared].localSource, @"Local source shouldn't be nil");
+    XCTAssertNotNil([YesGraph shared].cacheSource, @"Cache source shouldn't be nil");
 }
 
 @end
