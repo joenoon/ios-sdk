@@ -10,4 +10,6 @@
 
 @implementation YesGraph (ExposedPrivate)
 
+@dynamic lastFetchDate;
+
 @end

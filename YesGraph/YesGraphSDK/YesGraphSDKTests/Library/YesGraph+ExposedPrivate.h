@@ -12,6 +12,8 @@
 
 @interface YesGraph (ExposedPrivate)
 
+@property (nonatomic, copy) NSDate* lastFetchDate;
+
 - (YSGLocalContactSource *)localSource;
 - (YSGCacheContactSource *)cacheSource;
 

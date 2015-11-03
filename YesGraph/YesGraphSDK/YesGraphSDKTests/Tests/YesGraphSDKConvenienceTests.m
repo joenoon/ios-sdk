@@ -118,4 +118,17 @@
     XCTAssertNotNil([YesGraph shared].cacheSource, @"Cache source shouldn't be nil");
 }
 
+- (void)testYesGraphLastFetchDate
+{
+    NSDate *testDate = [NSDate date];
+    
+    [[YesGraph shared] setLastFetchDate:testDate];
+    
+    XCTAssertEqualObjects(testDate, [YesGraph shared].lastFetchDate, @"Dates do not match!");
+    
+    [[YesGraph shared] setLastFetchDate:nil];
+
+    XCTAssertNil([YesGraph shared].lastFetchDate, @"Date should be nil");
+}
+
 @end
