@@ -1,7 +1,6 @@
 # YesGraph iOS SDK
 
 [![Travis](https://travis-ci.org/YesGraph/ios-sdk.svg)](https://travis-ci.org/YesGraph/ios-sdk)
-[![CocoaPods](https://img.shields.io/cocoapods/v/YesGraph-iOS-SDK.svg?style=flat)](http://cocoapods.org/?q=)
 [![Coverage Status](https://coveralls.io/repos/YesGraph/ios-sdk/badge.svg?branch=develop&service=github)](https://coveralls.io/github/YesGraph/ios-sdk?branch=develop)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Pod Version](http://img.shields.io/cocoapods/v/YesGraph-iOS-SDK.svg?style=flat)](http://cocoadocs.org/docsets/YesGraph-iOS-SDK/)
@@ -16,7 +15,7 @@ Find detailed documentation about YesGraph on [yesgraph.com](https://docs.yesgra
 
 The SDK is compatible with iOS apps with iOS 8 and above. It requires Xcode 7.x and iOS 9.x SDK to build the source.
 
-## Integration
+## Installation
 
 The easiest way to integrate is with **CocoaPods**. Add the following Pod to your **Podfile**:
 
