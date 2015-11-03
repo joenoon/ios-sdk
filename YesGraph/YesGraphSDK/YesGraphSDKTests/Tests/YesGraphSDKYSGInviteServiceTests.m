@@ -13,6 +13,7 @@
 #import "YSGShareSheetControllerMockedPresentView.h"
 #import "YSGMockedMessageComposeViewController.h"
 #import "YSGShareSheetControllerMockedPresentView.h"
+#import "YSGAddressBookMockController.h"
 
 @interface YesGraphSDKYSGInviteServiceTests : XCTestCase
 @property (strong, nonatomic) YSGInviteServiceOverridenMethods *service;
@@ -153,22 +154,23 @@
 
 - (void)testTriggerMessageWithContacts
 {
-    YSGShareSheetControllerMockedPresentView *mockedController = [YSGShareSheetControllerMockedPresentView new];
+    YSGAddressBookMockController *mockedController = [YSGAddressBookMockController new];
     XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting View Controller To Be Presented"];
-    __weak YSGShareSheetControllerMockedPresentView *preventRetainCycle = mockedController;
+    __weak YSGAddressBookMockController *preventRetainCycle = mockedController;
     mockedController.triggerOnPresent = ^(void)
     {
         XCTAssertNotNil(preventRetainCycle.currentPresentingViewController, @"Current presenting view controller shouldn't be nil");
-        XCTAssert([preventRetainCycle.currentPresentingViewController isKindOfClass:[UINavigationController class]], @"Current presenting view controller should be of type UINavigationController");
+        XCTAssert([preventRetainCycle.currentPresentingViewController isKindOfClass:[MFMessageComposeViewController class]], @"Current presenting view controller should be of type UINavigationController");
         [expectation fulfill];
     };
-    
+
     NSArray <YSGContact *> *contacts = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 3)];
     YSGMockedMessageComposeViewController *mockedMessageController = [YSGMockedMessageComposeViewController new];
     [YSGMockedMessageComposeViewController setCanSendText:YES];
     self.service.messageComposeViewController = mockedMessageController;
     self.service.triggerFakeImplementation = NO;
     self.service.messageComposeViewController = [YSGMockedMessageComposeViewController new];
+    self.service.addressBookNavigationController = mockedController;
     [self.service triggerMessageWithContacts:contacts];
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
      {
