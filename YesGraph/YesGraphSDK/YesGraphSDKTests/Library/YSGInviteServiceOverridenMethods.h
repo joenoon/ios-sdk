@@ -8,20 +8,31 @@
 
 #import "YSGInviteService.h"
 
+@import MessageUI;
+
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 
-@interface YSGInviteService (OverridenMethods)
+@interface YSGInviteServiceOverridenMethods : YSGInviteService
 
 @property (strong, nonatomic) TriggeredHandler triggeredForEmailContacts;
 @property (strong, nonatomic) TriggeredHandler triggeredPhoneContacts;
+@property (nonatomic) BOOL triggerFakeImplementation;
 
 @end
 
 @interface YSGInviteService()
 
+@property (strong, nonatomic) MFMessageComposeViewController *messageComposeViewController;
+
+@property (nonatomic, strong, readwrite) id<YSGContactSource> contactSource;
+
 - (void)openInviteControllerWithController:(YSGShareSheetController *)viewController;
+
+- (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries;
+
+- (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)entries;
 
 @end
 

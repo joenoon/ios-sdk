@@ -7,13 +7,15 @@
 //
 
 @import XCTest;
-#import "YSGInviteService+OverridenMethods.h"
+#import "YSGInviteServiceOverridenMethods.h"
 #import "YSGTestMockData.h"
 #import "YSGTestImageData.h"
 #import "YSGShareSheetControllerMockedPresentView.h"
+#import "YSGMockedMessageComposeViewController.h"
+#import "YSGShareSheetControllerMockedPresentView.h"
 
 @interface YesGraphSDKYSGInviteServiceTests : XCTestCase
-@property (strong, nonatomic) YSGInviteService *service;
+@property (strong, nonatomic) YSGInviteServiceOverridenMethods *service;
 @property (strong, nonatomic) YSGTheme *theme;
 @end
 
@@ -22,7 +24,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.service = [YSGInviteService new];
+    self.service = [YSGInviteServiceOverridenMethods new];
     self.theme = [YSGTheme new];
     self.service.theme = self.theme;
 }
@@ -143,6 +145,31 @@
         [expectation fulfill];
     };
     [self.service triggerServiceWithViewController:mockedController];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
+     }];
+}
+
+- (void)testTriggerMessageWithContacts
+{
+    YSGShareSheetControllerMockedPresentView *mockedController = [YSGShareSheetControllerMockedPresentView new];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting View Controller To Be Presented"];
+    __weak YSGShareSheetControllerMockedPresentView *preventRetainCycle = mockedController;
+    mockedController.triggerOnPresent = ^(void)
+    {
+        XCTAssertNotNil(preventRetainCycle.currentPresentingViewController, @"Current presenting view controller shouldn't be nil");
+        XCTAssert([preventRetainCycle.currentPresentingViewController isKindOfClass:[UINavigationController class]], @"Current presenting view controller should be of type UINavigationController");
+        [expectation fulfill];
+    };
+    
+    NSArray <YSGContact *> *contacts = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 3)];
+    YSGMockedMessageComposeViewController *mockedMessageController = [YSGMockedMessageComposeViewController new];
+    [YSGMockedMessageComposeViewController setCanSendText:YES];
+    self.service.messageComposeViewController = mockedMessageController;
+    self.service.triggerFakeImplementation = NO;
+    self.service.messageComposeViewController = [YSGMockedMessageComposeViewController new];
+    [self.service triggerMessageWithContacts:contacts];
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
      {
          XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);

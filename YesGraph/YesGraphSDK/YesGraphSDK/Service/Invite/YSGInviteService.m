@@ -42,6 +42,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 @property (nonatomic, copy) NSArray <YSGContact *> *emailContacts;
 @property (nonatomic, copy) NSArray <YSGContact *> *phoneContacts;
 
+@property (strong, nonatomic) MFMessageComposeViewController *messageComposeViewController;
+
 @end
 
 @implementation YSGInviteService
@@ -59,6 +61,24 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 - (UIImage *)serviceImage
 {
     return [YSGIconDrawings phoneImage];
+}
+
+- (MFMessageComposeViewController *)mailComposeViewController
+{
+    if (!_messageComposeViewController)
+    {
+        _messageComposeViewController = [MFMessageComposeViewController new];
+    }
+    return _messageComposeViewController;
+}
+
+- (BOOL)canSendText
+{
+    if (_messageComposeViewController)
+    {
+        return [[_messageComposeViewController class] canSendText];
+    }
+    return [MFMessageComposeViewController canSendText];
 }
 
 - (instancetype)init
@@ -181,7 +201,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     NSError* error;
     
-    if (![MFMessageComposeViewController canSendText])
+    if (![self canSendText])
     {
         error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageUnavailable);
         
@@ -189,7 +209,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Unable to send a message. Can you check your message settings?", @"Unable to send a message. Can you check your message settings?") userInfo:nil];
     }
 
-    if (!self.nativeMessageSheet || ![MFMessageComposeViewController canSendText])
+    if (!self.nativeMessageSheet || ![self canSendText])
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
@@ -200,7 +220,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         return;
     }
     
-    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    MFMessageComposeViewController *messageController = self.messageComposeViewController;
     messageController.messageComposeDelegate = self;
     
     //
