@@ -13,6 +13,7 @@
 #import "YSGMockedInviteService.h"
 #import "YSGMockedOnlineContactSource.h"
 #import "YSGAddressBookCell.h"
+#import "YSGMockedUISearchController.h"
 
 @interface YesGraphSDKYSGAddressBookViewControllerTests : XCTestCase
 
@@ -133,6 +134,7 @@
 {
     YSGContactList *mockedList = [YSGTestMockData mockContactList];
     self.controller.contactList = mockedList;
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
     NSDictionary <NSString *, NSArray <YSGContact *> *> *sorted = [mockedList sortedEntriesWithNumberOfSuggestions:self.controller.service.numberOfSuggestions];
     NSArray <NSString *> *sortedSections = [sorted.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
@@ -148,6 +150,7 @@
 {
     YSGContactList *mockedList = [YSGTestMockData mockContactList];
     self.controller.contactList = mockedList;
+    
     XCTAssertEqual(self.controller.selectedContacts.count, 0, @"Shouldn't be any selected contacts yet");
     NSIndexPath *firstRowIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
     [self.controller tableView:self.controller.tableView didSelectRowAtIndexPath:firstRowIndexPath];
@@ -171,6 +174,7 @@
     YSGContactList *mockedList = [YSGTestMockData mockContactList];
     self.controller.contactList = mockedList;
     [self.controller viewDidLoad];
+    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:3];
     YSGContact *expected = [self.controller contactForIndexPath:indexPath];
     UITableViewCell *cell = [self.controller tableView:self.controller.tableView cellForRowAtIndexPath:indexPath];
@@ -182,8 +186,45 @@
     XCTAssertFalse(retrievedCell.selected, @"Retrieved cell shouldn't be selected");
     
     [self.controller tableView:self.controller.tableView didSelectRowAtIndexPath:indexPath];
-    YSGAddressBookCell *retrievedSameCell = (YSGAddressBookCell *)[self.controller tableView:self.controller.tableView cellForRowAtIndexPath:indexPath];
+    YSGAddressBookCell *retrievedSameCell = (YSGAddressBookCell *)[self.controller tableView:nil cellForRowAtIndexPath:indexPath]; // by passing nil as tableView, we can test the if (!cell) { ... } branch of the code at the same time
     XCTAssertTrue(retrievedSameCell.selected, @"Retrieved cell should be selected");
+}
+
+- (void)testSectionIndex
+{
+    YSGContactList *mockedList = [YSGTestMockData mockContactList];
+    self.controller.contactList = mockedList;
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:1];
+    NSDictionary <NSString *, NSArray <YSGContact *> *> *sorted = [mockedList sortedEntriesWithNumberOfSuggestions:self.controller.service.numberOfSuggestions];
+    NSArray <NSString *> *sortedSections = [sorted.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
+    NSString *key = sortedSections[indexPath.section];
+    
+    NSInteger foundSection = [self.controller tableView:self.controller.tableView sectionForSectionIndexTitle:key atIndex:0];
+    XCTAssertEqual(foundSection, indexPath.section, @"Expected section '%ld' not '%ld'", (long)foundSection, (long)indexPath.section);
+}
+
+- (void)testSearchBar
+{
+    YSGContactList *mockedList = [YSGTestMockData mockContactList];
+    self.controller.contactList = mockedList;
+    [self.controller viewDidLoad];
+    NSString *searchFor = @"m";
+    YSGMockedUISearchController *mockedController = [[YSGMockedUISearchController alloc] initWithSearch:searchFor];
+    XCTAssertEqual(self.controller.searchResults.count, 0, @"There shouldn't be any search entries yet");
+    [self.controller updateSearchResultsForSearchController:mockedController];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(sanitizedName CONTAINS[c] %@)", searchFor];
+    NSArray <YSGContact *> *expectedFound = [mockedList.entries filteredArrayUsingPredicate:predicate];
+    XCTAssertEqual(expectedFound.count, self.controller.searchResults.count, @"Expected search results to contain '%lu' entries, not '%lu'", (unsigned long)expectedFound.count, (unsigned long)self.controller.searchResults.count);
+    NSArray <YSGContact *> *expectedSorted = [expectedFound sortedArrayUsingFunction:compareContactNames context:nil];
+    NSArray <YSGContact *> *foundSorted = [self.controller.searchResults sortedArrayUsingFunction:compareContactNames context:nil];
+    XCTAssert([expectedSorted isEqualToArray:foundSorted], @"Expected entries '%@' not same as found '%@'", expectedSorted, foundSorted);
+}
+
+NSInteger compareContactNames(YSGContact *first, YSGContact *second, void *context)
+{
+    return [first.sanitizedName caseInsensitiveCompare:second.sanitizedName];
 }
 
 @end

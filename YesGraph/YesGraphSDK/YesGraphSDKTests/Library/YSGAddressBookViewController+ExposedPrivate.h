@@ -56,6 +56,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
+
+- (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
+
 extern NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context);
 
 @end
