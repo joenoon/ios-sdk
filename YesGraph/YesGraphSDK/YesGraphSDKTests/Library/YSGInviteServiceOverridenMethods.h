@@ -26,6 +26,8 @@ typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 
 @property (strong, nonatomic) MFMessageComposeViewController *messageComposeViewController;
 
+@property (strong, nonatomic) MFMailComposeViewController *mailComposeViewController;
+
 @property (strong, nonatomic) UINavigationController *addressBookNavigationController;
 
 @property (nonatomic, strong, readwrite) id<YSGContactSource> contactSource;

@@ -14,6 +14,7 @@
 #import "YSGMockedMessageComposeViewController.h"
 #import "YSGShareSheetControllerMockedPresentView.h"
 #import "YSGAddressBookMockController.h"
+#import "YSGMockedMailComposeViewController.h"
 
 @interface YesGraphSDKYSGInviteServiceTests : XCTestCase
 @property (strong, nonatomic) YSGInviteServiceOverridenMethods *service;
@@ -165,9 +166,7 @@
     };
 
     NSArray <YSGContact *> *contacts = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 3)];
-    YSGMockedMessageComposeViewController *mockedMessageController = [YSGMockedMessageComposeViewController new];
     [YSGMockedMessageComposeViewController setCanSendText:YES];
-    self.service.messageComposeViewController = mockedMessageController;
     self.service.triggerFakeImplementation = NO;
     self.service.messageComposeViewController = [YSGMockedMessageComposeViewController new];
     self.service.addressBookNavigationController = mockedController;
@@ -197,6 +196,44 @@
     self.service.viewController = mockedViewController;
     self.service.viewController.delegate = mockedViewController;
     [self.service triggerMessageWithContacts:contacts];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
+     }];
+}
+
+- (void)testTriggerEmailWithContactsCanSend
+{
+    YSGAddressBookMockController *mockedController = [YSGAddressBookMockController new];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting View Controller To Be Presented"];
+    __weak YSGAddressBookMockController *preventRetainCycle = mockedController;
+    mockedController.triggerOnPresent = ^(void)
+    {
+        XCTAssertNotNil(preventRetainCycle.currentPresentingViewController, @"Current presenting view controller shouldn't be nil");
+        XCTAssert([preventRetainCycle.currentPresentingViewController isKindOfClass:[MFMailComposeViewController class]], @"Current presenting view controller should be of type UINavigationController");
+        [expectation fulfill];
+    };
+    
+    NSUInteger capacity = 3;
+    NSMutableArray <YSGContact *> *contacts = [NSMutableArray arrayWithCapacity:capacity];
+    
+    for (YSGContact *contact in [YSGTestMockData mockContactList].entries)
+    {
+        if (contact.email)
+        {
+            [contacts addObject:contact];
+            --capacity;
+            if (capacity == 0)
+            {
+                break;
+            }
+        }
+    }
+    [YSGMockedMailComposeViewController setCanSendMail:YES];
+    self.service.mailComposeViewController = [YSGMockedMailComposeViewController new];
+    self.service.triggerFakeImplementation = NO;
+    self.service.addressBookNavigationController = mockedController;
+    [self.service triggerEmailWithContacts:contacts];
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
      {
          XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);

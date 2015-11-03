@@ -325,6 +325,7 @@
 		E8B1ED1D1BDA79D500F92FFE /* YSGLocalContactSource+OverrideContactStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B1ED1C1BDA79D500F92FFE /* YSGLocalContactSource+OverrideContactStore.m */; };
 		E8B9C8A81BE9580F0080EA40 /* YSGMockedMessageComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B9C8A71BE9580F0080EA40 /* YSGMockedMessageComposeViewController.m */; };
 		E8B9C8B31BE96B8C0080EA40 /* YSGAddressBookMockController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B9C8B21BE96B8C0080EA40 /* YSGAddressBookMockController.m */; };
+		E8B9C8B61BE9754A0080EA40 /* YSGMockedMailComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B9C8B51BE9754A0080EA40 /* YSGMockedMailComposeViewController.m */; };
 		E8CB678E1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CB678D1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m */; };
 		E8CB67941BD81891005CBD19 /* YSGMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CB67931BD81891005CBD19 /* YSGMockClient.m */; };
 		E8CB67961BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CB67951BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m */; };
@@ -610,6 +611,8 @@
 		E8B9C8A71BE9580F0080EA40 /* YSGMockedMessageComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGMockedMessageComposeViewController.m; sourceTree = "<group>"; };
 		E8B9C8B11BE96B8C0080EA40 /* YSGAddressBookMockController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGAddressBookMockController.h; sourceTree = "<group>"; };
 		E8B9C8B21BE96B8C0080EA40 /* YSGAddressBookMockController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGAddressBookMockController.m; sourceTree = "<group>"; };
+		E8B9C8B41BE9754A0080EA40 /* YSGMockedMailComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGMockedMailComposeViewController.h; sourceTree = "<group>"; };
+		E8B9C8B51BE9754A0080EA40 /* YSGMockedMailComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGMockedMailComposeViewController.m; sourceTree = "<group>"; };
 		E8CB678D1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKOnlineContactSourceTests.m; sourceTree = "<group>"; };
 		E8CB67921BD81891005CBD19 /* YSGMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGMockClient.h; sourceTree = "<group>"; };
 		E8CB67931BD81891005CBD19 /* YSGMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGMockClient.m; sourceTree = "<group>"; };
@@ -793,6 +796,8 @@
 				E8B9C8A71BE9580F0080EA40 /* YSGMockedMessageComposeViewController.m */,
 				E8B9C8B11BE96B8C0080EA40 /* YSGAddressBookMockController.h */,
 				E8B9C8B21BE96B8C0080EA40 /* YSGAddressBookMockController.m */,
+				E8B9C8B41BE9754A0080EA40 /* YSGMockedMailComposeViewController.h */,
+				E8B9C8B51BE9754A0080EA40 /* YSGMockedMailComposeViewController.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1472,6 +1477,7 @@
 				E84798841BD6E76000BDA3B8 /* YesGraphSDKMessageCenterTests.m in Sources */,
 				E8E845A61BCF0D54008E227B /* YesGraphSDKModelYSGContactListTests.m in Sources */,
 				E8AC912B1BE18C63001B0855 /* YesGraphSDKNetworkTestsGETMethods.m in Sources */,
+				E8B9C8B61BE9754A0080EA40 /* YSGMockedMailComposeViewController.m in Sources */,
 				E8D76BEF1BD14327006435BD /* YSGObjectParsableMocked.m in Sources */,
 				E8CB67941BD81891005CBD19 /* YSGMockClient.m in Sources */,
 				E8A7D9A41BDEDD3D00C80501 /* YesGraphSDKErrorCodeTests.m in Sources */,
