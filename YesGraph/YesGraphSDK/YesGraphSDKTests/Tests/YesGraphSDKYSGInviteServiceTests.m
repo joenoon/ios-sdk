@@ -131,4 +131,22 @@
 
 }
 
+- (void)testTriggerServiceWithViewControllerGrantedPermissions
+{
+    YSGShareSheetControllerMockedPresentView *mockedController = [YSGShareSheetControllerMockedPresentView new];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting View Controller To Be Presented"];
+    __weak YSGShareSheetControllerMockedPresentView *preventRetainCycle = mockedController;
+    mockedController.triggerOnPresent = ^(void)
+    {
+        XCTAssertNotNil(preventRetainCycle.currentPresentingViewController, @"Current presenting view controller shouldn't be nil");
+        XCTAssert([preventRetainCycle.currentPresentingViewController isKindOfClass:[UINavigationController class]], @"Current presenting view controller should be of type UINavigationController");
+        [expectation fulfill];
+    };
+    [self.service triggerServiceWithViewController:mockedController];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
+     }];
+}
+
 @end
