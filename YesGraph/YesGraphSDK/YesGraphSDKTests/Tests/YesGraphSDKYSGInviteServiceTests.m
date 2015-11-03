@@ -187,9 +187,7 @@
     };
     YSGAddressBookMockController *mockedController = [YSGAddressBookMockController new];
     NSArray <YSGContact *> *contacts = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 3)];
-    YSGMockedMessageComposeViewController *mockedMessageController = [YSGMockedMessageComposeViewController new];
     [YSGMockedMessageComposeViewController setCanSendText:NO];
-    self.service.messageComposeViewController = mockedMessageController;
     self.service.triggerFakeImplementation = NO;
     self.service.messageComposeViewController = [YSGMockedMessageComposeViewController new];
     self.service.addressBookNavigationController = mockedController;
@@ -234,6 +232,29 @@
     self.service.triggerFakeImplementation = NO;
     self.service.addressBookNavigationController = mockedController;
     [self.service triggerEmailWithContacts:contacts];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
+     }];
+}
+
+- (void)testTriggerEmailWithContactsCannotSend
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting View Controller To Be Presented"];
+    YSGShareSheetControllerMockedPresentView *mockedViewController = [YSGShareSheetControllerMockedPresentView new];
+    mockedViewController.triggerOnDidShare = ^(void)
+    {
+        [expectation fulfill];
+    };
+    YSGAddressBookMockController *mockedController = [YSGAddressBookMockController new];
+    NSArray <YSGContact *> *contacts = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 3)];
+    [YSGMockedMailComposeViewController setCanSendMail:NO];
+    self.service.triggerFakeImplementation = NO;
+    self.service.mailComposeViewController = [YSGMockedMailComposeViewController new];
+    self.service.addressBookNavigationController = mockedController;
+    self.service.viewController = mockedViewController;
+    self.service.viewController.delegate = mockedViewController;
+    [self.service triggerMessageWithContacts:contacts];
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
      {
          XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
