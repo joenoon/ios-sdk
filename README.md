@@ -15,7 +15,7 @@ Find detailed documentation about YesGraph on [yesgraph.com](https://docs.yesgra
 
 The SDK is compatible with iOS apps with iOS 8 and above. It requires Xcode 7.x and iOS 9.x SDK to build the source.
 
-## Integration
+## Installation
 
 The easiest way to integrate is with **CocoaPods**. Add the following Pod to your **Podfile**:
 
