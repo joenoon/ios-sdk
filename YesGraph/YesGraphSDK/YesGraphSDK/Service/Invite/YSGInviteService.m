@@ -33,7 +33,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 @property (nonatomic, strong, readwrite) id<YSGContactSource> contactSource;
 @property (nonatomic, strong, readwrite) NSString *userId;
 
-@property (nonatomic, weak) YSGShareSheetController *viewController;
+@property (nonatomic, weak) UIViewController *viewController;
 @property (nonatomic, weak) UINavigationController *addressBookNavigationController;
 
 /*!
@@ -125,7 +125,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     return self;
 }
 
-- (void)triggerServiceWithViewController:(nonnull YSGShareSheetController *)viewController
+- (void)triggerServiceWithViewController:(UIViewController *)viewController
 {
     [self.contactSource requestContactPermission:^(BOOL granted, NSError *error)
     {
@@ -140,7 +140,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     }];
 }
 
-- (void)openInviteControllerWithController:(nonnull YSGShareSheetController *)viewController
+- (void)openInviteControllerWithController:(nonnull UIViewController *)viewController
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         YSGAddressBookViewController *addressBookViewController = [[YSGAddressBookViewController alloc] init];
@@ -230,10 +230,9 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
     if (!self.nativeMessageSheet || ![self canSendText])
     {
-        if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+        if ([self.delegate respondsToSelector:@selector(shareService:didShareWithUserInfo:error:)])
         {
-            
-            [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
+            [self.delegate shareService:self didShareWithUserInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
         
         return;
@@ -280,9 +279,9 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     if (!self.nativeEmailSheet || ![self canSendMail])
     {
-        if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+        if ([self.delegate respondsToSelector:@selector(shareService:didShareWithUserInfo:error:)])
         {
-            [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
+            [self.delegate shareService:self didShareWithUserInfo:@{ YSGInvitePhoneContactsKey : entries } error:error];
         }
         
         return;
@@ -319,9 +318,9 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     {
         data = self.shareDataBlock(self, userInfo);
     }
-    else if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:messageForService:userInfo:)])
+    else if ([self.delegate respondsToSelector:@selector(shareService:messageWithUserInfo:)])
     {
-        data = [self.viewController.delegate shareSheetController:self.viewController messageForService:self userInfo:userInfo];
+        data = [self.delegate shareService:self messageWithUserInfo:userInfo];
     }
 
     return data;
@@ -341,9 +340,9 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
     }
     
-    if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    if ([self.delegate respondsToSelector:@selector(shareService:didShareWithUserInfo:error:)])
     {
-        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInvitePhoneContactsKey : self.phoneContacts } error:error];
+        [self.delegate shareService:self didShareWithUserInfo:@{ YSGInvitePhoneContactsKey : self.phoneContacts } error:error];
     }
 
     if (result != MessageComposeResultSent)
@@ -382,9 +381,9 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Something went wrong. Please try again.", @"Something went wrong. Please try again.") userInfo:nil];
     }
 
-    if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    if ([self.delegate respondsToSelector:@selector(shareService:didShareWithUserInfo:error:)])
     {
-        [self.viewController.delegate shareSheetController:self.viewController didShareToService:self userInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:ysgError];
+        [self.delegate shareService:self didShareWithUserInfo:@{ YSGInviteEmailContactsKey : self.emailContacts } error:ysgError];
     }
     
     if (result != MFMailComposeResultSaved && result != MFMailComposeResultSent)

@@ -23,7 +23,7 @@
     return @"Unknown";
 }
 
-- (void)triggerServiceWithViewController:(nonnull YSGShareSheetController *)viewController
+- (void)triggerServiceWithViewController:(UIViewController *)viewController
 {
     if ([self isAvailable])
     {
@@ -31,9 +31,9 @@
         
         NSString *message = nil;
         
-        if ([viewController.delegate respondsToSelector:@selector(shareSheetController:messageForService:userInfo:)])
+        if ([self.delegate respondsToSelector:@selector(shareService:messageWithUserInfo:)])
         {
-            NSDictionary *info = [viewController.delegate shareSheetController:viewController messageForService:self userInfo:nil];
+            NSDictionary *info = [self.delegate shareService:self messageWithUserInfo:nil];
             message = info[YSGShareSheetMessageKey];
         }
         
