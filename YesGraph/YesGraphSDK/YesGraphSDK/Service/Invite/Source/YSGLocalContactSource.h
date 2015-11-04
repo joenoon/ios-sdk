@@ -14,6 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YSGLocalContactSource : NSObject <YSGContactSource>
 
+/*!
+ *  Stores metadata of the local contact source
+ */
+@property (nullable, nonatomic, strong) YSGSource* contactSourceMetadata;
+
 #pragma mark - Contact Access Prompt
 
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptTitle;
