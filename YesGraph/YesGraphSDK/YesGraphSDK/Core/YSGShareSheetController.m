@@ -20,7 +20,7 @@ NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
 static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifier";
 
-@interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate, YSGShareServiceDelegate>
 
 @property (nonatomic, copy, readwrite)  NSArray <YSGShareService *> *services;
 
@@ -342,6 +342,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [self.delegate shareSheetController:self didSelectService:service];
     }
     
+    service.delegate = self;
+    
     [service triggerServiceWithViewController:self];
     
     [self unfadeCell:cell forService:service];
@@ -360,6 +362,30 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     return UIEdgeInsetsMake(verticalEdgeInset, horizontalEdgeInset, verticalEdgeInset, horizontalEdgeInset);
 }
 
+#pragma mark - YSGShareServiceDelegate
+
+//
+// This code only redirects the messages to YSGShareSheetDelegate
+//
+
+- (nullable NSDictionary<NSString *, id> *)shareService:(YSGShareService *)shareService messageWithUserInfo:(nullable NSDictionary <NSString *, id>*)userInfo
+{
+    if ([self.delegate respondsToSelector:@selector(shareSheetController:messageForService:userInfo:)])
+    {
+        return [self.delegate shareSheetController:self messageForService:shareService userInfo:userInfo];
+    }
+    
+    return nil;
+}
+
+- (void)shareService:(YSGShareService *)shareService didShareWithUserInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error
+{
+    if ([self.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    {
+        [self.delegate shareSheetController:self didShareToService:shareService userInfo:userInfo error:error];
+    }
+}
+
 
 #pragma mark - Helpers
 
@@ -367,17 +393,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 - (void)fadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
 {
     [UIView animateWithDuration:0.2 animations:^
-     {
-         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
-     }];
+    {
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
+    }];
 }
 
 - (void)unfadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
 {
     [UIView animateWithDuration:0.4 animations:^
-     {
-         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
-     }];
+    {
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
+    }];
 }
 
 - (void)copy:(UIButton *)sender

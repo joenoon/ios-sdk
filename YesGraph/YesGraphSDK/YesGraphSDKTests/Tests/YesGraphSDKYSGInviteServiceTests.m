@@ -192,7 +192,9 @@
     self.service.messageComposeViewController = [YSGMockedMessageComposeViewController new];
     self.service.addressBookNavigationController = mockedController;
     self.service.viewController = mockedViewController;
-    self.service.viewController.delegate = mockedViewController;
+    self.service.delegate = mockedViewController;
+    mockedViewController.delegate = mockedViewController;
+    
     [self.service triggerMessageWithContacts:contacts];
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
      {
@@ -268,7 +270,9 @@
     self.service.mailComposeViewController = [YSGMockedMailComposeViewController new];
     self.service.addressBookNavigationController = mockedController;
     self.service.viewController = mockedViewController;
-    self.service.viewController.delegate = mockedViewController;
+    self.service.delegate = mockedViewController;
+    mockedViewController.delegate = mockedViewController;
+    
     [self.service triggerEmailWithContacts:contacts];
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
      {

@@ -10,7 +10,7 @@
 
 typedef void (^TriggerOnCallCallback)(void);
 
-@interface YSGShareSheetControllerMockedPresentView : YSGShareSheetController<YSGShareSheetDelegate>
+@interface YSGShareSheetControllerMockedPresentView : YSGShareSheetController<YSGShareSheetDelegate, YSGShareServiceDelegate>
 
 @property (strong, nonatomic) UIViewController * currentPresentingViewController;
 @property (strong, nonatomic) TriggerOnCallCallback triggerOnPresent;

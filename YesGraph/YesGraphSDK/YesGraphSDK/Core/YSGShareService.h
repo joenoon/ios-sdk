@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol YSGShareServiceDelegate <NSObject>
 
+@optional
+
 /*!
  *  If share service does not have a message block set, the delegate is asked to provide a message.
  *  @warning: If no message is available, an exception will be raised.
@@ -26,9 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param service              service that needs message
  *  @param userInfo             additional information about the user from service
  *
- *  @return dictionary with at least "message" key, use
+ *  @return dictionary "message" key, or nil if no message available
  */
-- (nonnull NSDictionary<NSString *, id> *)shareService:(YSGShareService *)shareService messageWithUserInfo:(nullable NSDictionary <NSString *, id>*)userInfo;
+- (nullable NSDictionary<NSString *, id> *)shareService:(YSGShareService *)shareService messageWithUserInfo:(nullable NSDictionary <NSString *, id>*)userInfo;
 
 /*!
  *  Called when share sheet invited entries

@@ -32,9 +32,9 @@ typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 
 @property (nonatomic, strong, readwrite) id<YSGContactSource> contactSource;
 
-@property (nonatomic, weak) YSGShareSheetController *viewController;
+@property (nonatomic, weak) UIViewController *viewController;
 
-- (void)openInviteControllerWithController:(YSGShareSheetController *)viewController;
+- (void)openInviteControllerWithController:(UIViewController *)viewController;
 
 - (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries;
 
