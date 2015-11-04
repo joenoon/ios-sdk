@@ -385,4 +385,46 @@
      }];
 }
 
+- (void)testMailDidFinishWithFailResult
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting Mail Controller To Finish Successfully"];
+    YSGShareSheetControllerMockedPresentView *mockedViewController = [YSGShareSheetControllerMockedPresentView new];
+    mockedViewController.triggerOnDidShareUserInfo = ^(NSError *error)
+    {
+        XCTAssertNotNil(error, @"Error shouldn't be nil when MessageComposeResult is set to failed");
+        [expectation fulfill];
+    };
+    
+    NSUInteger capacity = 3;
+    NSMutableArray <YSGContact *> *contacts = [NSMutableArray arrayWithCapacity:capacity];
+    
+    for (YSGContact *contact in [YSGTestMockData mockContactList].entries)
+    {
+        if (contact.email)
+        {
+            [contacts addObject:contact];
+            --capacity;
+            if (capacity == 0)
+            {
+                break;
+            }
+        }
+    }
+    YSGAddressBookMockController *mockedController = [YSGAddressBookMockController new];
+    self.service.triggerFakeImplementation = NO;
+    self.service.addressBookNavigationController = mockedController;
+    self.service.viewController = mockedViewController;
+    self.service.delegate = mockedViewController;
+    self.service.emailContacts = contacts;
+    mockedViewController.delegate = mockedViewController;
+    
+    YSGMockedMailComposeViewController *mailController = [YSGMockedMailComposeViewController new];
+    NSError *err = [NSError errorWithDomain:@"test domain" code:-2 userInfo:nil];
+    [self.service mailComposeController:mailController didFinishWithResult:MFMailComposeResultFailed error:err];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
+     }];
+}
+
 @end

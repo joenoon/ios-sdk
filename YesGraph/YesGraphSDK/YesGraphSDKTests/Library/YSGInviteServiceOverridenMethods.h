@@ -46,6 +46,8 @@ typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result;
 
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error;
+
 @end
 
 NS_ASSUME_NONNULL_END
