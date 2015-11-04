@@ -11,7 +11,6 @@
 
 #import "YSGThemeConstants.h"
 #import "YSGThemeConstants+AddressBook.h"
-
 #import "YSGShareCellShapeEnum.h"
 #import "YSGShareAddressBookTheme.h"
 #import "YSGShareButtonFadeFactors.h"
@@ -55,11 +54,39 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *baseColor;
 
 /*!
+ *  Referral banner background color
+ *  @discussion: Default: White color
+ *
+ */
+@property (nonatomic, strong) UIColor *referralBannerColor;
+
+/*!
+ *  Referral text color
+ *  @discussion: Default: Black
+ *
+ */
+@property (nonatomic, strong) UIColor *referralTextColor;
+
+/*!
+ *  Referral button text color
+ *  @discussion: Default: White color
+ *
+ */
+@property (nonatomic, strong) UIColor *referralButtonColor;
+
+/*!
  *  Font family of the Share UI
  *
  *  @discussion: Default: System font
  */
 @property (nonatomic, copy) NSString *fontFamily;
+
+/*!
+ *  Font family of the Share UI for text Buttons
+ *
+ *  @discussion: Default: Bold system Font
+ */
+@property (nonatomic, copy) NSString *buttonFontFamily;
 
 /*!
  *  Share text font size
