@@ -10,8 +10,8 @@
 
 @interface YSGMockedMailComposeViewController : MFMailComposeViewController
 
-+ (void)setCanSendMail:(BOOL)canSend;
+- (instancetype)init;
 
-+ (BOOL)canSendMail;
++ (void)setCanSendMail:(BOOL)canSend;
 
 @end

@@ -84,7 +84,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (BOOL)canSendMail
 {
-    if (self.mailComposeViewController)
+    if (_mailComposeViewController)
     {
         return [[_mailComposeViewController class] canSendMail];
     }

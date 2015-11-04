@@ -246,15 +246,30 @@
     {
         [expectation fulfill];
     };
+    
+    NSUInteger capacity = 3;
+    NSMutableArray <YSGContact *> *contacts = [NSMutableArray arrayWithCapacity:capacity];
+    
+    for (YSGContact *contact in [YSGTestMockData mockContactList].entries)
+    {
+        if (contact.email)
+        {
+            [contacts addObject:contact];
+            --capacity;
+            if (capacity == 0)
+            {
+                break;
+            }
+        }
+    }
     YSGAddressBookMockController *mockedController = [YSGAddressBookMockController new];
-    NSArray <YSGContact *> *contacts = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 3)];
     [YSGMockedMailComposeViewController setCanSendMail:NO];
     self.service.triggerFakeImplementation = NO;
     self.service.mailComposeViewController = [YSGMockedMailComposeViewController new];
     self.service.addressBookNavigationController = mockedController;
     self.service.viewController = mockedViewController;
     self.service.viewController.delegate = mockedViewController;
-    [self.service triggerMessageWithContacts:contacts];
+    [self.service triggerEmailWithContacts:contacts];
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
      {
          XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
