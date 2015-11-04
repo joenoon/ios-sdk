@@ -42,6 +42,9 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 @property (nonatomic, copy) NSArray <YSGContact *> *emailContacts;
 @property (nonatomic, copy) NSArray <YSGContact *> *phoneContacts;
 
+@property (strong, nonatomic) MFMessageComposeViewController *messageComposeViewController;
+@property (strong, nonatomic) MFMailComposeViewController *mailComposeViewController;
+
 @end
 
 @implementation YSGInviteService
@@ -59,6 +62,42 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 - (UIImage *)serviceImage
 {
     return [YSGIconDrawings phoneImage];
+}
+
+- (MFMessageComposeViewController *)messageComposeViewController
+{
+    if (!_messageComposeViewController)
+    {
+        _messageComposeViewController = [MFMessageComposeViewController new];
+    }
+    return _messageComposeViewController;
+}
+
+- (BOOL)canSendText
+{
+    if (_messageComposeViewController)
+    {
+        return [[_messageComposeViewController class] canSendText];
+    }
+    return [MFMessageComposeViewController canSendText];
+}
+
+- (BOOL)canSendMail
+{
+    if (_mailComposeViewController)
+    {
+        return [[_mailComposeViewController class] canSendMail];
+    }
+    return [MFMailComposeViewController canSendMail];
+}
+
+- (MFMailComposeViewController *)mailComposeViewController
+{
+    if (!_mailComposeViewController)
+    {
+        _mailComposeViewController = [MFMailComposeViewController new];
+    }
+    return _mailComposeViewController;
 }
 
 - (instancetype)init
@@ -181,7 +220,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     NSError* error;
     
-    if (![MFMessageComposeViewController canSendText])
+    if (![self canSendText])
     {
         error = YSGErrorWithErrorCode(YSGErrorCodeInviteMessageUnavailable);
         
@@ -189,7 +228,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Unable to send a message. Can you check your message settings?", @"Unable to send a message. Can you check your message settings?") userInfo:nil];
     }
 
-    if (!self.nativeMessageSheet || ![MFMessageComposeViewController canSendText])
+    if (!self.nativeMessageSheet || ![self canSendText])
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
@@ -200,7 +239,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         return;
     }
     
-    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    MFMessageComposeViewController *messageController = self.messageComposeViewController;
     messageController.messageComposeDelegate = self;
     
     //
@@ -211,7 +250,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     for (YSGContact *contact in entries)
     {
-        [recipients addObject:contact.phones.firstObject];
+        [recipients addObject:contact.phone];
     }
     
     NSDictionary *data = [self shareDataForUserInfo:@{ YSGInvitePhoneContactsKey : entries }];
@@ -231,7 +270,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     
     NSError* error;
     
-    if (![MFMailComposeViewController canSendMail])
+    if (![self canSendMail])
     {
         error = YSGErrorWithErrorCode(YSGErrorCodeInviteMailUnavailable);
         
@@ -239,7 +278,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         [[YSGMessageCenter shared] sendMessage:NSLocalizedString(@"Unable to send email. Can you check your email settings?", @"Unable to send email. Can you check your email settings?") userInfo:nil];
     }
     
-    if (!self.nativeEmailSheet || ![MFMailComposeViewController canSendMail])
+    if (!self.nativeEmailSheet || ![self canSendMail])
     {
         if ([self.viewController.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
         {
@@ -249,14 +288,14 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         return;
     }
     
-    MFMailComposeViewController *messageController = [[MFMailComposeViewController alloc] init];
+    MFMailComposeViewController *messageController = self.mailComposeViewController;
     messageController.mailComposeDelegate = self;
     
     NSMutableArray<NSString *>* recipients = [NSMutableArray array];
     
     for (YSGContact *contact in entries)
     {
-        [recipients addObject:contact.emails.firstObject];
+        [recipients addObject:contact.email];
     }
     
     NSDictionary *data = [self shareDataForUserInfo:@{ YSGInviteEmailContactsKey : entries }];

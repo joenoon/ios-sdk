@@ -25,4 +25,12 @@
     }
 }
 
+- (void)shareSheetController:(YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService *)service userInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error
+{
+    if (self.triggerOnDidShare)
+    {
+        self.triggerOnDidShare();
+    }
+}
+
 @end
