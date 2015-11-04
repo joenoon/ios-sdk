@@ -34,11 +34,17 @@ typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 
 @property (nonatomic, weak) UIViewController *viewController;
 
+@property (nonatomic, copy) NSArray <YSGContact *> *emailContacts;
+
+@property (nonatomic, copy) NSArray <YSGContact *> *phoneContacts;
+
 - (void)openInviteControllerWithController:(UIViewController *)viewController;
 
 - (void)triggerMessageWithContacts:(NSArray<YSGContact *> *)entries;
 
 - (void)triggerEmailWithContacts:(NSArray<YSGContact *> *)entries;
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result;
 
 @end
 

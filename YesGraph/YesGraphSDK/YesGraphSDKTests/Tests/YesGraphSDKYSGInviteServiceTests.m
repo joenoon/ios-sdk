@@ -280,4 +280,33 @@
      }];
 }
 
+- (void)testMessageDidFinishWithFailResult
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting Mail Controller To Finish Successfully"];
+    YSGShareSheetControllerMockedPresentView *mockedViewController = [YSGShareSheetControllerMockedPresentView new];
+    mockedViewController.triggerOnDidShareUserInfo = ^(NSError *error)
+    {
+        XCTAssertNotNil(error, @"Error shouldn't be nil when MessageComposeResult is set to failed");
+        [expectation fulfill];
+    };
+    
+    YSGAddressBookMockController *mockedController = [YSGAddressBookMockController new];
+    [YSGMockedMessageComposeViewController setCanSendText:NO];
+    self.service.triggerFakeImplementation = NO;
+    self.service.addressBookNavigationController = mockedController;
+    self.service.viewController = mockedViewController;
+    self.service.delegate = mockedViewController;
+    self.service.phoneContacts = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 3)];
+    mockedViewController.delegate = mockedViewController;
+    
+    YSGMockedMessageComposeViewController *messageController = [YSGMockedMessageComposeViewController new];
+    [self.service messageComposeViewController:messageController didFinishWithResult:MessageComposeResultFailed];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error encountered while waiting for expectation: '%@'", error);
+     }];
+
+    
+}
+
 @end
