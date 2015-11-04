@@ -8,7 +8,11 @@
 
 @import MessageUI;
 
+typedef void (^TriggerOnDismissWithCompletion)(BOOL hasCompletion);
+
 @interface YSGMockedMessageComposeViewController : MFMessageComposeViewController
+
+@property (strong, nonatomic) TriggerOnDismissWithCompletion triggeredOnDismissed;
 
 + (void)setCanSendText:(BOOL)canSend;
 

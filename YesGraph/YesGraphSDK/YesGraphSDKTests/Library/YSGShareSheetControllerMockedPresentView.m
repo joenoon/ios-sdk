@@ -37,4 +37,12 @@
     }
 }
 
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    if (completion)
+    {
+        completion();
+    }
+}
+
 @end
