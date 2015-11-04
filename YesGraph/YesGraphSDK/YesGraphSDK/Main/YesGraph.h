@@ -10,6 +10,7 @@
 #import "YSGLoggingConstants.h"
 #import "YSGShareSheetController.h"
 #import "YSGTheme.h"
+#import "YSGSource.h"
 
 @import Foundation;
 
@@ -30,6 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  User ID used with YesGraph SDK
  */
 @property (nullable, nonatomic, readonly, copy) NSString *userId;
+
+/*!
+ *  To achieve better suggestion rankings, set the contact owner metadata (name, email, phone)
+ */
+@property (nullable, nonatomic, strong) YSGSource *contactOwnerMetadata;
 
 /*!
  *  Shared instance to YesGraph

@@ -131,7 +131,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     {
         YSGContactList *contactList = [[YSGContactList alloc] init];
         contactList.entries = entries;
-        contactList.source = self.contactSourceMetadata ?: [YSGSource userSource];
+        contactList.source = self.contactSourceMetadata ?: [YSGSource new];
         
         completion (contactList, error);
     }

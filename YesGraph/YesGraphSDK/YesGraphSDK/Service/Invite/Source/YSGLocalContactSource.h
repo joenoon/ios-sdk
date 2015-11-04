@@ -9,6 +9,7 @@
 @import Foundation;
 
 #import "YSGContactSource.h"
+#import "YSGSource.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

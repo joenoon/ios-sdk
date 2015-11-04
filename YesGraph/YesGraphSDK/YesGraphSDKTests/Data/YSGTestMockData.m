@@ -15,7 +15,7 @@
 {
     YSGContactList *contactList = [[YSGContactList alloc] init];
 
-    contactList.source = [YSGSource userSource];
+    contactList.source = [YSGSource new];
     
     NSDictionary *contact1 = @{ @"name" : @"Milton Fuller", @"emails" : @[ @"milton.fuller@mymockdata.com", @"milton.fuller95@example.com" ], @"phones" : @[ @"+1 (956)-886-4918", @"+22 (956)-886-4918" ] };
     

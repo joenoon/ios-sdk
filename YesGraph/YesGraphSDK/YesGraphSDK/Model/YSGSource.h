@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSString *email;
 @property (nullable, nonatomic, copy) NSString *phone;
-@property (nonatomic, copy) NSString *type;
 
-+ (nonnull instancetype)userSource;
+// Do not modify
+@property (nonatomic, copy) NSString *type;
 
 @end
 
