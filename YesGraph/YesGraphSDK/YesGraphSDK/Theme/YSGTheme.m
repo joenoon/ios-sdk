@@ -30,7 +30,7 @@
         // set default share button alpha factors for both states
         self.shareButtonFadeFactors = [YSGThemeConstants defaultShareButtonAlphaFactors]; 
         self.shareAddressBookTheme = [YSGShareAddressBookTheme new];
-        self.buttonFont = [YSGThemeConstants defaultButtonFont];
+        self.buttonFontFamily = [YSGThemeConstants defaultButtonFontFamily];
         self.referralBannerColor = [YSGThemeConstants defaultReferralBannerColor];
         self.referralTextColor = [YSGThemeConstants defaultReferralTextColor];
         self.referralButtonColor = [YSGThemeConstants defaultReferralButtonColor];

@@ -81,18 +81,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
     }
     
     func presentShareSheetController() {
-        
-        self.theme.shareButtonShape = .Square;
-        self.theme.mainColor = UIColor(red: 0/256.0, green: 24/256.0, blue: 76/256.0, alpha: 1.0)
-        self.theme.shareLabelFontSize = 40.0;
-        self.theme.fontFamily = "Avenir";
-        self.theme.buttonFont = UIFont(name: "Avenir-Heavy", size: 18)!
-        self.theme.referralBannerColor = self.theme.mainColor
-        self.theme.textColor = UIColor.whiteColor()
-        self.theme.referralTextColor = UIColor.whiteColor()
-        self.theme.referralButtonColor = UIColor.whiteColor()
-        self.theme.baseColor = UIColor(red: 131/256.0, green: 143/256.0, blue: 168/256.0, alpha: 1.0)
-        
+
         YesGraph.shared().theme = self.theme
         YesGraph.shared().numberOfSuggestions = 5
         YesGraph.shared().contactAccessPromptMessage = "Share contacts with Example to invite friends?"

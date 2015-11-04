@@ -47,7 +47,7 @@
 
 + (nonnull UIColor *)defaultReferralBannerColor
 {
-    return [UIColor whiteColor];
+    return [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 }
 
 + (nonnull NSString *)defaultFontFamily
@@ -55,9 +55,9 @@
     return [UIFont systemFontOfSize:14].familyName;
 }
 
-+ (nonnull UIFont *)defaultButtonFont
++ (nonnull NSString *)defaultButtonFontFamily
 {
-    return [UIFont boldSystemFontOfSize:16];
+    return [UIFont boldSystemFontOfSize:14].familyName;
 }
 
 + (CGFloat)defaultShareLabelFontSize

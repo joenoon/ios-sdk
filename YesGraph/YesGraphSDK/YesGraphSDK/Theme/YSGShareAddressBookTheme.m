@@ -17,9 +17,9 @@
     {
         // set default address list font sizes (compiler already initializes this to 0 in optimized builds ?)
         // NOTE: should this be done via the [UIFont prefferedFont..] ?
-        self.cellDetailFontSize = [YSGThemeConstants cellDefaultFontSize];
+        self.cellDetailFontSize = [YSGThemeConstants cellDefaultDetailFontSize];
         self.cellFontSize = [YSGThemeConstants cellDefaultFontSize];
-        self.sectionFontSize = [YSGThemeConstants cellDefaultFontSize];
+        self.sectionFontSize = [YSGThemeConstants cellDefaultSectionFontSize];
         self.viewBackground = [YSGThemeConstants defaultBackgroundColor];
     }
     return self;

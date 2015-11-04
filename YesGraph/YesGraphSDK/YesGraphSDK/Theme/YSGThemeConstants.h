@@ -78,18 +78,18 @@ NS_ASSUME_NONNULL_BEGIN
 // Font settings
 
 /*!
- *  Default font FAMILY
+ *  Default font family
  *  @Discussion: Default: System, size 12
  *
  */
 + (NSString *)defaultFontFamily;
 
 /*!
- *  Default text button font
+ *  Default text button font family
  *  @Discussion: Default: Bold System, size 12
  *
  */
-+ (UIFont *)defaultButtonFont;
++ (NSString *)defaultButtonFontFamily;
 
 /*!
  *  Default share button cell size

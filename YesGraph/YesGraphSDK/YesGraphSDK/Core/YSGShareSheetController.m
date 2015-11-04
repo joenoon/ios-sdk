@@ -230,7 +230,7 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         
         [self.cpyButton setTitleColor:self.theme.referralButtonColor forState:UIControlStateNormal];
         [self.cpyButton setTitleColor:[self.theme.referralButtonColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
-        self.cpyButton.titleLabel.font = self.theme.buttonFont;
+        self.cpyButton.titleLabel.font = [UIFont fontWithName:self.theme.buttonFontFamily size:14];
         [self.cpyButton sizeToFit];
     }
 }

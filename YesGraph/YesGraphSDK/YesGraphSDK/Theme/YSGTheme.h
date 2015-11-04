@@ -11,7 +11,6 @@
 
 #import "YSGThemeConstants.h"
 #import "YSGThemeConstants+AddressBook.h"
-
 #import "YSGShareCellShapeEnum.h"
 #import "YSGShareAddressBookTheme.h"
 #import "YSGShareButtonFadeFactors.h"
@@ -83,11 +82,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *fontFamily;
 
 /*!
- *  Font of the Share UI for text Buttons
+ *  Font family of the Share UI for text Buttons
  *
  *  @discussion: Default: Bold system Font
  */
-@property (nonatomic, copy) UIFont *buttonFont;
+@property (nonatomic, copy) NSString *buttonFontFamily;
 
 /*!
  *  Share text font size
