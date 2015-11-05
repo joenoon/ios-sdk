@@ -31,7 +31,7 @@
     }
 }
 
-- (void)updateSuggestionsSeen:(NSArray<YSGContact *> *)suggestionsShown forUserId:(NSString *)userId withCompletion:(void (^)(NSError * _Nullable))completion
+- (void)updateSuggestionsSeen:(NSArray<YSGContact *> *)suggestionsShown forUserId:(NSString *)userId completion:(void (^)(NSError * _Nullable))completion
 {
     if (self.shouldSucceed && self.completionHandler)
     {
