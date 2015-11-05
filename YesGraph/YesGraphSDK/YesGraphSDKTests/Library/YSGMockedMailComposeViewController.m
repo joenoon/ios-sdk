@@ -33,4 +33,16 @@ static BOOL _canSend = NO;
     return _canSend;
 }
 
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    if (self.triggeredOnDismissed)
+    {
+        self.triggeredOnDismissed(completion != nil);
+    }
+    if (completion)
+    {
+        completion();
+    }
+}
+
 @end

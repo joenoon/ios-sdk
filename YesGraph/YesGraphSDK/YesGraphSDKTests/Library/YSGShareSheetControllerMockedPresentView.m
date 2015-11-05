@@ -25,11 +25,23 @@
     }
 }
 
-- (void)shareSheetController:(YSGShareSheetController *)shareSheetController didShareToService:(YSGShareService *)service userInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error
+- (void)shareService:(YSGShareService *)shareService didShareWithUserInfo:(NSDictionary<NSString *,id> *)userInfo error:(NSError *)error
 {
     if (self.triggerOnDidShare)
     {
         self.triggerOnDidShare();
+    }
+    if (self.triggerOnDidShareUserInfo)
+    {
+        self.triggerOnDidShareUserInfo(error);
+    }
+}
+
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    if (completion)
+    {
+        completion();
     }
 }
 

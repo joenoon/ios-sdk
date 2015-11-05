@@ -8,7 +8,11 @@
 
 @import MessageUI;
 
+typedef void (^TriggerOnDismissWithCompletion)(BOOL hasCompletion);
+
 @interface YSGMockedMailComposeViewController : MFMailComposeViewController
+
+@property (strong, nonatomic) TriggerOnDismissWithCompletion triggeredOnDismissed;
 
 - (instancetype)init;
 
