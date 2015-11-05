@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSURLSessionDataTask *)POST:(NSString *)path parameters:(nullable NSDictionary *)parameters completion:(nullable YSGNetworkRequestCompletion)completion;
 - (nullable NSURLSessionDataTask *)sendRequest:(NSURLRequest *)request completion:(nullable YSGNetworkRequestCompletion)completion;
 
-- ( NSURLRequest *)requestForMethod:(NSString *)method path:(NSString *)path parameters:(nullable NSDictionary *)parameters key:(nullable NSString *)key error:(NSError *__autoreleasing  __nullable * __nullable)error;
+- (NSURLRequest *)requestForMethod:(NSString *)method path:(NSString *)path parameters:(nullable NSDictionary *)parameters key:(nullable NSString *)key error:(NSError *__autoreleasing  __nullable * __nullable)error;
 
 @end
 
