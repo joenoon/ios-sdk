@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  *  Default overall color of the theme  
- *  @Discussion: Default: r: 0.9, g: 0.11, b: 0.17
+ *  @Discussion: Default: r: 0.0, g: 0.46, b: 0.75
  *
  */
 + (UIColor *)defaultMainColor;
@@ -53,6 +53,28 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (UIColor *)defaultTextColor;
 
+/*!
+ *  Default referral text color
+ *  @Discussion: Default: r: 0.33, g: 0.33, b:0.33
+ *
+ */
++ (UIColor *)defaultReferralTextColor;
+
+/*!
+ *  Default referral button text color
+ *  @Discussion: Default: r: 0.0, g: 0.46, b: 0.75
+ *
+ */
+
++ (UIColor *)defaultReferralButtonColor;
+
+/*!
+ *  Default referral banner color
+ *  @Discussion: Default: white
+ *
+ */
++ (UIColor *)defaultReferralBannerColor;
+
 // Font settings
 
 /*!
@@ -61,6 +83,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 + (NSString *)defaultFontFamily;
+
+/*!
+ *  Default text button font family
+ *  @Discussion: Default: Bold System, size 12
+ *
+ */
++ (NSString *)defaultButtonFontFamily;
 
 /*!
  *  Default share button cell size

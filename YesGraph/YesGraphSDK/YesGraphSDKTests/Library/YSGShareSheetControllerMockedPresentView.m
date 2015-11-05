@@ -25,4 +25,24 @@
     }
 }
 
+- (void)shareService:(YSGShareService *)shareService didShareWithUserInfo:(NSDictionary<NSString *,id> *)userInfo error:(NSError *)error
+{
+    if (self.triggerOnDidShare)
+    {
+        self.triggerOnDidShare();
+    }
+    if (self.triggerOnDidShareUserInfo)
+    {
+        self.triggerOnDidShareUserInfo(error);
+    }
+}
+
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    if (completion)
+    {
+        completion();
+    }
+}
+
 @end

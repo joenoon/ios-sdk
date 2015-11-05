@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface YSGOnlineContactSource : NSObject <YSGContactSource>
 
+/*!
+ *  User ID to connects to contact list
+ */
 @property (nullable, nonatomic, copy) NSString *userId;
 
 /*!

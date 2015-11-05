@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param  completion       called when completed
  *
  */
-- (void)updateSuggestionsSeen:(NSArray <YSGContact *> *)suggestionsShown forUserId:(NSString *)userId withCompletion:(nullable void (^)(NSError * _Nullable error))completion;
+- (void)updateSuggestionsSeen:(NSArray <YSGContact *> *)suggestionsShown forUserId:(NSString *)userId completion:(nullable void (^)(NSError * _Nullable error))completion;
 
 @end
 

@@ -429,14 +429,14 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     if (!cell)
     {
         cell = [[YSGAddressBookCell alloc] initWithReuseIdentifier:YSGAddressBookCellIdentifier];
-        
-        if (self.theme.shareAddressBookTheme)
-        {
-            cell.textLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellFontSize];
-            cell.detailTextLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellDetailFontSize];
-            cell.textLabel.backgroundColor = [UIColor clearColor];
-            cell.detailTextLabel.backgroundColor = [UIColor clearColor];
-        }
+    }
+    
+    if (self.theme.shareAddressBookTheme)
+    {
+        cell.textLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellFontSize];
+        cell.detailTextLabel.font = [UIFont fontWithName:self.theme.fontFamily size:self.theme.shareAddressBookTheme.cellDetailFontSize];
+        cell.textLabel.backgroundColor = [UIColor clearColor];
+        cell.detailTextLabel.backgroundColor = [UIColor clearColor];
     }
     
     //

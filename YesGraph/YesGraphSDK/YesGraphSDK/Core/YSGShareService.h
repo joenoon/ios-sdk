@@ -16,6 +16,34 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol YSGShareServiceDelegate <NSObject>
+
+@optional
+
+/*!
+ *  If share service does not have a message block set, the delegate is asked to provide a message.
+ *  @warning: If no message is available, an exception will be raised.
+ *
+ *  @param shareSheetController instance
+ *  @param service              service that needs message
+ *  @param userInfo             additional information about the user from service
+ *
+ *  @return dictionary "message" key, or nil if no message available
+ */
+- (nullable NSDictionary<NSString *, id> *)shareService:(YSGShareService *)shareService messageWithUserInfo:(nullable NSDictionary <NSString *, id>*)userInfo;
+
+/*!
+ *  Called when share sheet invited entries
+ *
+ *  @param shareSheetController instance
+ *  @param service              share service that did the invite
+ *  @param userInfo             userInfo that were selected (if available and no error)
+ *  @param error                error during sharing
+ */
+- (void)shareService:(YSGShareService *)shareService didShareWithUserInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error;
+
+@end
+
 /*!
  *  Share data block is called every time share service needs data
  *
@@ -48,7 +76,9 @@ typedef NSDictionary * _Nonnull (^YSGShareDataBlock)(YSGShareService* _Nonnull s
 
 @property (nonatomic, strong) YSGTheme *theme;
 
-- (void)triggerServiceWithViewController:(YSGShareSheetController *)viewController;
+@property (nullable, nonatomic, weak) id<YSGShareServiceDelegate> delegate;
+
+- (void)triggerServiceWithViewController:(UIViewController *)viewController;
 
 @end
 

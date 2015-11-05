@@ -109,7 +109,7 @@
 
 - (void)sendShownSuggestions:(NSArray <YSGContact *> *)contacts
 {
-    [self.client updateSuggestionsSeen:contacts forUserId:self.userId withCompletion:^(NSError * _Nullable error)
+    [self.client updateSuggestionsSeen:contacts forUserId:self.userId completion:^(NSError * _Nullable error)
     {
         if (error)
         {

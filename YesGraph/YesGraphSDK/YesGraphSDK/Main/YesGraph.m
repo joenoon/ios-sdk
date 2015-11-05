@@ -177,6 +177,16 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     return _theme;
 }
 
+- (YSGSource *)contactOwnerMetadata
+{
+    return self.localSource.contactSourceMetadata;
+}
+
+- (void)setContactOwnerMetadata:(YSGSource *)contactOwnerMetadata
+{
+    self.localSource.contactSourceMetadata = contactOwnerMetadata;
+}
+
 #pragma mark - Initialization
 
 + (void)load
@@ -324,6 +334,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     
     YSGLocalContactSource *localSource = [YSGLocalContactSource new];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
+    localSource.contactSourceMetadata = self.contactOwnerMetadata;
     
     YSGCacheContactSource* cacheSource = [[YSGCacheContactSource alloc] init];
     

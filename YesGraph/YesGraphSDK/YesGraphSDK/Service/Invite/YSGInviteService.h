@@ -12,9 +12,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const YSGInvitePhoneContactsKey;
-extern NSString * const YSGInviteEmailContactsKey;
-extern NSString * const YSGInviteEmailIsHTMLKey;
+extern NSString* const YSGInvitePhoneContactsKey;
+extern NSString* const YSGInviteEmailContactsKey;
+extern NSString* const YSGInviteEmailIsHTMLKey;
 
 /*!
  *  Invite service prepared to send email and sms entries

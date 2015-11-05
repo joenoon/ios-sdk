@@ -34,7 +34,7 @@
     return ret;
 }
 
-- (void)updateSuggestionsSeen:(NSArray <YSGContact *> *)suggestionsShown forUserId:(NSString *)userId withCompletion:(nullable void (^)(NSError * _Nullable error))completion
+- (void)updateSuggestionsSeen:(NSArray <YSGContact *> *)suggestionsShown forUserId:(NSString *)userId completion:(nullable void (^)(NSError * _Nullable error))completion
 {
     NSDictionary *parameters = @
     {

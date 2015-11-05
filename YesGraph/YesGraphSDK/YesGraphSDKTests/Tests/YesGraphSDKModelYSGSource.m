@@ -71,13 +71,13 @@
         NSString *phone = sourceDictionary1[@"phone"];
         XCTAssert([source1.phone isEqualToString:phone], @"Source's phone '%@' isn't the same as '%@'", source1.phone, phone);
 
-        XCTAssertNil(source1.type, @"Source's type '%@' should be nil", source1.type);
+        XCTAssert([source1.type isEqualToString:@"ios"], @"Source's type '%@' should be ios", source1.type);
     }
 }
 
 - (void)testUserSource
 {
-    YSGSource *source = [YSGSource userSource];
+    YSGSource *source = [YSGSource new];
     XCTAssertNotNil(source, @"YSGSource shouldn't be nil");
     XCTAssert([source.type isEqualToString:@"ios"], @"The type of the generated source '%@' should be ios", source.type);
 }

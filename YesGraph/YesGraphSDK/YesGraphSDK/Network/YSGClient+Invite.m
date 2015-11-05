@@ -48,9 +48,7 @@
     return ret;
 }
 
-- (void)updateInvitesSent:(nonnull NSArray <YSGContact *> *)invites
-                forUserId:(nonnull NSString *)userId
-           withCompletion:(nullable void (^)(NSError *_Nullable error))completion
+- (void)updateInvitesSent:(nonnull NSArray <YSGContact *> *)invites forUserId:(nonnull NSString *)userId completion:(nullable void (^)(NSError *_Nullable error))completion
 {
     NSDictionary *payload = @
     {

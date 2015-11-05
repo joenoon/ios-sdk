@@ -20,7 +20,7 @@ NSString *_Nonnull const YSGShareSheetMessageKey = @"YSGShareSheetMessageKey";
 
 static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifier";
 
-@interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface YSGShareSheetController () <UICollectionViewDataSource, UICollectionViewDelegate, YSGShareServiceDelegate>
 
 @property (nonatomic, copy, readwrite)  NSArray <YSGShareService *> *services;
 
@@ -216,18 +216,21 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         self.footer.layer.borderColor = self.theme.mainColor.CGColor;
         self.footer.layer.borderWidth = 1.5f;
         self.footer.layer.cornerRadius = 20;
+        self.footer.backgroundColor = self.theme.referralBannerColor;
         
         self.referralLabel.text = self.referralURL;
-        self.referralLabel.textColor = [UIColor blackColor];
+        self.referralLabel.textColor = self.theme.referralTextColor;
         self.referralLabel.textAlignment = NSTextAlignmentCenter;
+        self.referralLabel.font = [UIFont fontWithName:self.theme.fontFamily size:14];
         
         [self.referralLabel sizeToFit];
         
         [self.cpyButton setTitle:NSLocalizedString(@"copy", @"copy") forState:UIControlStateNormal];
         [self.cpyButton addTarget:self action:@selector(copy:) forControlEvents:UIControlEventTouchDown];
         
-        [self.cpyButton setTitleColor:[YSGThemeConstants defaultMainColor] forState:UIControlStateNormal];
-        [self.cpyButton setTitleColor:[self.theme.mainColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        [self.cpyButton setTitleColor:self.theme.referralButtonColor forState:UIControlStateNormal];
+        [self.cpyButton setTitleColor:[self.theme.referralButtonColor colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+        self.cpyButton.titleLabel.font = [UIFont fontWithName:self.theme.buttonFontFamily size:14];
         [self.cpyButton sizeToFit];
     }
 }
@@ -339,6 +342,8 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
         [self.delegate shareSheetController:self didSelectService:service];
     }
     
+    service.delegate = self;
+    
     [service triggerServiceWithViewController:self];
     
     [self unfadeCell:cell forService:service];
@@ -357,6 +362,30 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
     return UIEdgeInsetsMake(verticalEdgeInset, horizontalEdgeInset, verticalEdgeInset, horizontalEdgeInset);
 }
 
+#pragma mark - YSGShareServiceDelegate
+
+//
+// This code only redirects the messages to YSGShareSheetDelegate
+//
+
+- (nullable NSDictionary<NSString *, id> *)shareService:(YSGShareService *)shareService messageWithUserInfo:(nullable NSDictionary <NSString *, id>*)userInfo
+{
+    if ([self.delegate respondsToSelector:@selector(shareSheetController:messageForService:userInfo:)])
+    {
+        return [self.delegate shareSheetController:self messageForService:shareService userInfo:userInfo];
+    }
+    
+    return nil;
+}
+
+- (void)shareService:(YSGShareService *)shareService didShareWithUserInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error
+{
+    if ([self.delegate respondsToSelector:@selector(shareSheetController:didShareToService:userInfo:error:)])
+    {
+        [self.delegate shareSheetController:self didShareToService:shareService userInfo:userInfo error:error];
+    }
+}
+
 
 #pragma mark - Helpers
 
@@ -364,17 +393,17 @@ static NSString *const YSGShareSheetCellIdentifier = @"YSGShareSheetCellIdentifi
 - (void)fadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
 {
     [UIView animateWithDuration:0.2 animations:^
-     {
-         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
-     }];
+    {
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:0.8];
+    }];
 }
 
 - (void)unfadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service
 {
     [UIView animateWithDuration:0.4 animations:^
-     {
-         cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
-     }];
+    {
+        cell.backgroundColor = [cell.backgroundColor colorWithAlphaComponent:1.0];
+    }];
 }
 
 - (void)copy:(UIButton *)sender

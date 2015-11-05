@@ -38,7 +38,7 @@
 {
     NSArray *shownSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
     
-    [self.client updateSuggestionsSeen:shownSuggestions forUserId:YSGTestClientID withCompletion:^(NSError * _Nullable error)
+    [self.client updateSuggestionsSeen:shownSuggestions forUserId:YSGTestClientID completion:^(NSError * _Nullable error)
     {
         XCTAssertNil(error, @"Error should be nil: %@", error);
         [expectation fulfill];
