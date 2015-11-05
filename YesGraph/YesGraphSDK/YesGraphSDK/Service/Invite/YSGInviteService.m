@@ -211,7 +211,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     {
         YSGOnlineContactSource* contactSource = (YSGOnlineContactSource *)self.contactSource;
         
-        [contactSource.client updateInvitesSent:entries forUserId:self.userId withCompletion:nil];
+        [contactSource.client updateInvitesSent:entries forUserId:self.userId completion:nil];
     }
         
     //
