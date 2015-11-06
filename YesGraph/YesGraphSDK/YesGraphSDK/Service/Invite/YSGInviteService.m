@@ -220,7 +220,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     }
     
     MFMessageComposeViewController *messageController = self.messageComposeViewController;
-    messageController.messageComposeDelegate = nil;
+    messageController.messageComposeDelegate = self;
     
     //
     // Set message
