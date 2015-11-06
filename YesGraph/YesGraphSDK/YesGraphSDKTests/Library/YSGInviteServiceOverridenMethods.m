@@ -46,3 +46,56 @@
 }
 
 @end
+
+static MFMailComposeViewController *_mailComposeViewController = nil;
+static MFMessageComposeViewController *_messageComposeViewController = nil;
+
+@implementation YSGInviteService (MockMessagingControllers)
+
+- (void)setMailComposeViewController:(MFMailComposeViewController *)mailComposeViewController
+{
+    _mailComposeViewController = mailComposeViewController;
+}
+
+- (MFMailComposeViewController *)mailComposeViewController
+{
+    if (_mailComposeViewController)
+    {
+        return _mailComposeViewController;
+    }
+    return [MFMailComposeViewController new];
+}
+
+- (void)setMessageComposeViewController:(MFMessageComposeViewController *)messageComposeViewController
+{
+    _messageComposeViewController = messageComposeViewController;
+}
+
+- (MFMessageComposeViewController *)messageComposeViewController
+{
+    if (_messageComposeViewController)
+    {
+        return _messageComposeViewController;
+    }
+    return [MFMessageComposeViewController new];
+}
+
+- (BOOL)canSendText
+{
+    if (_messageComposeViewController)
+    {
+        return [[_messageComposeViewController class] canSendText];
+    }
+    return [MFMessageComposeViewController canSendText];
+}
+
+- (BOOL)canSendMail
+{
+    if (_mailComposeViewController)
+    {
+        return [[_mailComposeViewController class] canSendMail];
+    }
+    return [MFMailComposeViewController canSendMail];
+}
+
+@end

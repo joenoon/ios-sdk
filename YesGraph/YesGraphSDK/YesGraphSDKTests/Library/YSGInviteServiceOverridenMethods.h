@@ -22,11 +22,15 @@ typedef void (^TriggeredHandler)(NSArray <YSGContact *> *contacts);
 
 @end
 
-@interface YSGInviteService()
+@interface YSGInviteService (MockMessagingControllers)
 
 @property (strong, nonatomic) MFMessageComposeViewController *messageComposeViewController;
 
 @property (strong, nonatomic) MFMailComposeViewController *mailComposeViewController;
+
+@end
+
+@interface YSGInviteService()
 
 @property (strong, nonatomic) UINavigationController *addressBookNavigationController;
 

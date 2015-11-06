@@ -42,9 +42,6 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 @property (nonatomic, copy) NSArray <YSGContact *> *emailContacts;
 @property (nonatomic, copy) NSArray <YSGContact *> *phoneContacts;
 
-@property (strong, nonatomic) MFMessageComposeViewController *messageComposeViewController;
-@property (strong, nonatomic) MFMailComposeViewController *mailComposeViewController;
-
 @end
 
 @implementation YSGInviteService
@@ -66,38 +63,22 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (MFMessageComposeViewController *)messageComposeViewController
 {
-    if (!_messageComposeViewController)
-    {
-        _messageComposeViewController = [MFMessageComposeViewController new];
-    }
-    return _messageComposeViewController;
+    return [MFMessageComposeViewController new];
 }
 
 - (BOOL)canSendText
 {
-    if (_messageComposeViewController)
-    {
-        return [[_messageComposeViewController class] canSendText];
-    }
     return [MFMessageComposeViewController canSendText];
 }
 
 - (BOOL)canSendMail
 {
-    if (_mailComposeViewController)
-    {
-        return [[_mailComposeViewController class] canSendMail];
-    }
     return [MFMailComposeViewController canSendMail];
 }
 
 - (MFMailComposeViewController *)mailComposeViewController
 {
-    if (!_mailComposeViewController)
-    {
-        _mailComposeViewController = [MFMailComposeViewController new];
-    }
-    return _mailComposeViewController;
+    return [MFMailComposeViewController new];
 }
 
 - (instancetype)init
@@ -288,6 +269,7 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
     }
     
     MFMailComposeViewController *messageController = self.mailComposeViewController;
+    
     messageController.mailComposeDelegate = self;
     
     NSMutableArray<NSString *>* recipients = [NSMutableArray array];
