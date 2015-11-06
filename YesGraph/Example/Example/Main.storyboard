@@ -57,8 +57,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Quk-aY-xyK">
                                 <rect key="frame" x="0.0" y="64" width="375" height="2236"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yMN-h3-DRZ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2266"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yMN-h3-DRZ" userLabel="ContentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="2264.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jL5-E6-oy6" userLabel="Section1">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="369"/>
@@ -135,12 +135,12 @@ You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                 <rect key="frame" x="0.0" y="369" width="375" height="517"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vtm-kq-NnH">
-                                                        <rect key="frame" x="35" y="35" width="305" height="46"/>
+                                                        <rect key="frame" x="35" y="35" width="305" height="45.5"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why Choose YesGraph" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILj-93-hCH">
-                                                        <rect key="frame" x="40" y="40" width="295" height="36"/>
+                                                        <rect key="frame" x="40" y="40" width="295" height="35.5"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="26"/>
@@ -148,7 +148,7 @@ You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p6D-TX-lyu">
-                                                        <rect key="frame" x="15" y="100" width="345" height="307"/>
+                                                        <rect key="frame" x="15" y="100.5" width="345" height="306.5"/>
                                                         <animations/>
                                                         <string key="text">YesGraph can recommend exactly who you should invite. We do this with machine learning and data crunching. 
 
@@ -203,15 +203,15 @@ You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4J-vX-sPk" userLabel="Section3">
-                                                <rect key="frame" x="0.0" y="886" width="375" height="625"/>
+                                                <rect key="frame" x="0.0" y="886" width="375" height="624.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KHP-C4-VjW">
-                                                        <rect key="frame" x="35" y="35" width="305" height="46"/>
+                                                        <rect key="frame" x="35" y="35" width="305" height="45.5"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     </view>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How YesGraph Works" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxk-Pi-XMd">
-                                                        <rect key="frame" x="40" y="40" width="295" height="36"/>
+                                                        <rect key="frame" x="40" y="40" width="295" height="35.5"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.88235294119999996" green="0.1215686275" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="26"/>
@@ -219,7 +219,7 @@ You can try our our SDK just by clicking “Try YesGraph” anytime.</string>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAd-6U-UFg">
-                                                        <rect key="frame" x="15" y="105" width="345" height="409"/>
+                                                        <rect key="frame" x="15" y="105.5" width="345" height="409"/>
                                                         <animations/>
                                                         <string key="text">YesGraph learns the patterns in your app automatically using past successful invitations to train a filter. We extract features about what kind of relationships and people are good for your app. 
 
@@ -236,7 +236,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-Zm-45h">
-                                                        <rect key="frame" x="118" y="544" width="140" height="50"/>
+                                                        <rect key="frame" x="118" y="544.5" width="140" height="50"/>
                                                         <animations/>
                                                         <color key="backgroundColor" red="0.1019607843" green="0.47843137250000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
@@ -273,7 +273,7 @@ B2B apps often involve collaboration with coworkers, so having the a matching em
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aY8-oX-uXg" userLabel="Section4">
-                                                <rect key="frame" x="0.0" y="1511" width="375" height="754"/>
+                                                <rect key="frame" x="0.0" y="1510.5" width="375" height="754"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FeF-sW-AGW">
                                                         <rect key="frame" x="35" y="35" width="305" height="81"/>
