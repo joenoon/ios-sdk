@@ -318,4 +318,12 @@
     XCTAssert([self.localSource.contactAccessPromptMessage isEqualToString:expected], @"Expected prompt message to be '%@', but got '%@'", expected, self.localSource.contactAccessPromptMessage);
 }
 
+- (void)testSetDidAskForPermission
+{
+    [[self.localSource class] setDidAskForPermission:NO];
+    XCTAssertFalse([[self.localSource class] didAskForPermission], @"Did as for permission should be set to NO");
+    [[self.localSource class] setDidAskForPermission:YES];
+    XCTAssertTrue([[self.localSource class] didAskForPermission], @"Did as for permission should be set to YES");
+}
+
 @end
