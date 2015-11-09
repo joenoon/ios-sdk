@@ -25,6 +25,8 @@
 {
     [super setUp];
     
+    //[YesGraph shared].userDefaults =
+    
     //[[YesGraph shared] configureWithClientKey:YSGTestClientKey];
     //[[YesGraph shared] configureWithUserId:YSGTestClientID];
     

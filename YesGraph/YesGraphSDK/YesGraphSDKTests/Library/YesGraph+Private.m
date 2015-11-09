@@ -14,5 +14,7 @@
 @dynamic clientKey;
 @dynamic lastFetchDate;
 @dynamic userDefaults;
+@dynamic localSource;
+@dynamic cacheSource;
 
 @end

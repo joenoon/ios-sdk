@@ -12,13 +12,13 @@
 
 @interface YesGraph (Private)
 
-@property (nonatomic, readwrite, strong) NSUserDefaults *userDefaults;
-@property (nonatomic, readwrite, copy) NSString *userId;
-@property (nonatomic, readwrite, copy) NSString *clientKey;
+@property (nonatomic, strong) NSUserDefaults *userDefaults;
+@property (nonatomic, copy) NSString *userId;
+@property (nonatomic, copy) NSString *clientKey;
+
+@property (nonatomic, strong) YSGLocalContactSource *localSource;
+@property (nonatomic, strong) YSGCacheContactSource *cacheSource;
 
 @property (nonatomic, copy) NSDate* lastFetchDate;
-
-- (YSGLocalContactSource *)localSource;
-- (YSGCacheContactSource *)cacheSource;
 
 @end
