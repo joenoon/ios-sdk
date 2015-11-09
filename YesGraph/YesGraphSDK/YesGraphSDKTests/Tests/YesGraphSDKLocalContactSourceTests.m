@@ -245,7 +245,7 @@
     OCMStub([mock didAskForPermission]).andReturn(NO);
     OCMStub([mock contactAccessPromptTitle]).andReturn(@"Mocked Title");
     OCMStub([mock contactAccessPromptMessage]).andReturn(@"Mocked message");
-    OCMStub([mock setDidAskForPermission:[OCMArg any]]);
+    OCMStub([mock setDidAskForPermission:YES]);
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Expected UIAlertController To Show"];
     
