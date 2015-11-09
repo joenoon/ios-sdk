@@ -10,6 +10,7 @@
 @import XCTest;
 #import "YSGLocalContactSource+ExposePrivateMethods.h"
 #import "YSGLocalContactSource+OverrideContactStore.h"
+#import "YSGLocalContactSource+OverrideAddressBook.h"
 #import "YSGContactList.h"
 #import "YSGTestMockData.h"
 #import "YSGPointerPair.h"
@@ -169,6 +170,7 @@
 
 - (void)testYSGContactFromAddressBook
 {
+    [[self.localSource class] shouldReturnNil:NO];
     NSError *err = nil;
     NSArray <YSGContact *> *parsedContacts = [self.localSource contactListFromAddressBook:&err];
     XCTAssertNil(err, @"Error should be nil, but got '%@'", err);
