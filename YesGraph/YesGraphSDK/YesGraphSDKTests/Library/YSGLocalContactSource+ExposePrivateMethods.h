@@ -30,4 +30,6 @@
 
 + (void)setDidAskForPermission:(BOOL)didAskForPermission;
 
++ (BOOL)useContactsFramework;
+
 @end

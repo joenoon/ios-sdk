@@ -284,4 +284,18 @@
      }];
 }
 
+- (void)testPermissionsDidAskAddressBook
+{
+    id mock = [OCMockObject partialMockForObject:self.localSource];
+    OCMStub([mock hasPermission]).andReturn(NO);
+    OCMStub([mock didAskForPermission]).andReturn(YES);
+    OCMStub([mock useContactsFramework]).andReturn(NO);
+    
+    [self.localSource requestContactPermission:^(BOOL granted, NSError * _Nullable error)
+     {
+         XCTAssertFalse(granted);
+         XCTAssertNil(error);
+     }];
+}
+
 @end
