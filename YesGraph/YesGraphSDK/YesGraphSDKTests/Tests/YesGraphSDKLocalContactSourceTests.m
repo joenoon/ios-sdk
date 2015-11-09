@@ -13,10 +13,12 @@
 #import "YSGLocalContactSource+OverrideAddressBook.h"
 #import "YSGContactList.h"
 #import "YSGTestMockData.h"
-#import "YSGPointerPair.h"
 
 @interface YesGraphSDKLocalContactSourceTests : XCTestCase
 @property (strong, nonatomic) YSGLocalContactSource *localSource;
+@property (strong, nonatomic) NSMutableArray <YSGContact *> *expectedContactsSequence;
+@property (strong, nonatomic) NSArray <NSString *> *mockedEmailAddressSequences;
+@property (strong, nonatomic) NSArray <NSString *> *mockedPhoneNumberSequences;
 @end
 
 @implementation YesGraphSDKLocalContactSourceTests
@@ -26,6 +28,36 @@
     [super setUp];
     [YSGLocalContactSource shouldReturnNil:YES];
     self.localSource = [YSGLocalContactSource new];
+    self.expectedContactsSequence = [NSMutableArray new];
+    self.mockedEmailAddressSequences = @[ @"full.name@email.com", @"fullname@email.com" ];
+    self.mockedPhoneNumberSequences = @[ @"+1 111 111 111", @"+6 111 111 111" ];
+    
+    YSGContact *expectedFullName = [YSGContact new];
+    expectedFullName.name = @"Full Entire Name";
+    expectedFullName.emails = self.mockedEmailAddressSequences.copy;
+    expectedFullName.phones = self.mockedPhoneNumberSequences.copy;
+    [self.expectedContactsSequence addObject:expectedFullName];
+    
+    YSGContact *expectednoMiddleName = [YSGContact new];
+    expectednoMiddleName.name = @"Full Name";
+    expectednoMiddleName.emails = self.mockedEmailAddressSequences.copy;
+    expectednoMiddleName.phones = self.mockedPhoneNumberSequences.copy;
+    [self.expectedContactsSequence addObject:expectednoMiddleName];
+    
+    YSGContact *expectednoEmails = [YSGContact new];
+    expectednoEmails.name = @"Full Name";
+    expectednoEmails.phones = self.mockedPhoneNumberSequences.copy;
+    [self.expectedContactsSequence addObject:expectednoEmails];
+    
+    YSGContact *expectedjustEmails = [YSGContact new];
+    expectedjustEmails.emails = self.mockedEmailAddressSequences.copy;
+    [self.expectedContactsSequence addObject:expectedjustEmails];
+    
+    YSGContact *expectedjustPhones = [YSGContact new];
+    expectedjustPhones.phones = self.mockedPhoneNumberSequences.copy;
+    [self.expectedContactsSequence addObject:expectedjustPhones];
+    
+    [self.expectedContactsSequence addObject:[YSGContact new]];
 }
 
 - (void)tearDown
@@ -82,30 +114,21 @@
     return values;
 }
 
-- (NSArray <YSGPointerPair *> *)generateCNContactsList
+- (NSArray <CNContact *> *)generateCNContactsList
 {
-    NSMutableArray <YSGPointerPair *> *contacts = [NSMutableArray arrayWithCapacity:6];
-    
-    NSArray <NSString *> *emails = @[ @"full.name@email.com", @"fullname@email.com" ];
-    NSArray <NSString *> *phones = @[ @"+1 111 111 111", @"+6 111 111 111" ];
-    
-    NSArray <CNLabeledValue *> *emailValues = [self convertToLabeledValues:emails withLabel:CNLabelEmailiCloud];
-    NSArray <CNLabeledValue *> *phoneValues = [self convertToPhoneNumberValues:phones];
+    NSMutableArray <CNContact *> *contacts = [NSMutableArray arrayWithCapacity:6];
+
+    NSArray <CNLabeledValue *> *emailValues = [self convertToLabeledValues:self.mockedEmailAddressSequences withLabel:CNLabelEmailiCloud];
+    NSArray <CNLabeledValue *> *phoneValues = [self convertToPhoneNumberValues:self.mockedPhoneNumberSequences];
     
     CNMutableContact *fullName = [CNMutableContact new];
-    fullName.namePrefix = @"Dr.";
-    fullName.nameSuffix = @"phd.";
     fullName.givenName = @"Full";
     fullName.middleName = @"Entire";
     fullName.familyName = @"Name";
     fullName.nickname = @"fname";
     fullName.emailAddresses = emailValues;
     fullName.phoneNumbers = phoneValues;
-    YSGContact *expectedFullName = [YSGContact new];
-    expectedFullName.name = @"Dr. Full Entire Name phd.";
-    expectedFullName.emails = emails.copy;
-    expectedFullName.phones = phones.copy;
-    [contacts addObject:[[YSGPointerPair alloc] initWith:fullName and:expectedFullName]];
+    [contacts addObject:fullName];
     
     CNMutableContact *noMiddleName = [CNMutableContact new];
     noMiddleName.givenName = @"Full";
@@ -113,68 +136,82 @@
     noMiddleName.nickname = @"nomiddlename";
     noMiddleName.emailAddresses = emailValues;
     noMiddleName.phoneNumbers = phoneValues;
-    YSGContact *expectednoMiddleName = [YSGContact new];
-    expectednoMiddleName.name = @"Full Name";
-    expectednoMiddleName.emails = emails.copy;
-    expectednoMiddleName.phones = phones.copy;
-    [contacts addObject:[[YSGPointerPair alloc] initWith:noMiddleName and:expectednoMiddleName]];
+    [contacts addObject:noMiddleName];
     
     CNMutableContact *noEmails = [CNMutableContact new];
     noEmails.givenName = @"Full";
     noEmails.familyName = @"Name";
     noEmails.nickname = @"noemails";
     noEmails.phoneNumbers = phoneValues;
-    YSGContact *expectednoEmails = [YSGContact new];
-    expectednoEmails.name = @"Full Name";
-    expectednoEmails.phones = phones.copy;
-    [contacts addObject:[[YSGPointerPair alloc] initWith:noEmails and:expectednoEmails]];
+    [contacts addObject:noEmails];
     
     CNMutableContact *justEmails = [CNMutableContact new];
     justEmails.emailAddresses = emailValues;
-    YSGContact *expectedjustEmails = [YSGContact new];
-    expectedjustEmails.emails = emails.copy;
-    [contacts addObject:[[YSGPointerPair alloc] initWith:justEmails and:expectedjustEmails]];
-    
+    [contacts addObject:justEmails];
     
     CNMutableContact *justPhones = [CNMutableContact new];
     justPhones.phoneNumbers = phoneValues;
-    YSGContact *expectedjustPhones = [YSGContact new];
-    expectedjustPhones.phones = phones.copy;
-    [contacts addObject:[[YSGPointerPair alloc] initWith:justPhones and:expectedjustPhones]];
+    [contacts addObject:justPhones];
     
     CNContact *empty = [CNContact new];
-    [contacts addObject:[[YSGPointerPair alloc] initWith:empty and:[YSGContact new]]];
+    [contacts addObject:empty];
     
     return contacts;
 }
 
+- (void)compareYsgContact:(YSGContact *)expected with:(YSGContact *)compared
+{
+    XCTAssertNotNil(compared, @"Parsed contact shouldn't be nil'");
+    if (expected.name)
+    {
+        XCTAssert([compared.name isEqualToString:expected.name], @"Parsed name '%@' not the same as expected '%@'", compared.name, expected.name);
+    }
+    else
+    {
+        XCTAssert(!expected.name && !compared.name, @"Expected a nil name, but parsed '%@'", compared.name);
+    }
+    XCTAssertEqual(compared.phones.count, expected.phones.count, @"Parsed phone list count '%lu' not the same as expected '%lu'", (unsigned long)compared.phones.count, (unsigned long)expected.phones.count);
+    XCTAssertEqual(compared.emails.count, expected.emails.count, @"Parsed emails list count '%lu' not the same as expected '%lu'", (unsigned long)compared.emails.count, (unsigned long)expected.emails.count);
+    if (expected.phones.count != 0)
+    {
+        XCTAssert([compared.phones isEqualToArray:expected.phones], @"Phone number list expected to be '%@' not '%@'", expected.phones, compared.phones);
+    }
+    if (expected.emails.count != 0)
+    {
+        XCTAssert([compared.emails isEqualToArray:expected.emails], @"Email address list expected to be '%@' not '%@'", expected.emails, compared.emails);
+    }
+}
+
 - (void)testYSGContactFromCNContact
 {
-    for (YSGPointerPair *pair in [self generateCNContactsList])
+    NSArray <CNContact *> *generatedContactsList = [self generateCNContactsList];
+    XCTAssertEqual(generatedContactsList.count, self.expectedContactsSequence.count, @"Generated contacts list is not the same size as the expected contacts list");
+    
+    for (NSUInteger index = 0; index < generatedContactsList.count; ++index)
     {
-        YSGContact *parsedContact = [self.localSource contactFromContact:(CNContact *)pair.item1];
-        XCTAssertNotNil(parsedContact, @"Parsed contact shouldn't be nil for '%@'", pair.item1);
-        YSGContact *expected = (YSGContact *)pair.item2;
-        if (expected.name)
-        {
-            XCTAssert([parsedContact.name isEqualToString:expected.name], @"Parsed name '%@' not the same as expected '%@'", parsedContact.name, expected.name);
-        }
-        else
-        {
-            XCTAssert(!expected.name && !parsedContact.name, @"Expected a nil name, but parsed '%@'", parsedContact.name);
-        }
-        XCTAssertEqual(parsedContact.phones.count, expected.phones.count, @"Parsed phone list count '%lu' not the same as expected '%lu'", (unsigned long)parsedContact.phones.count, (unsigned long)expected.phones.count);
-        XCTAssertEqual(parsedContact.emails.count, expected.emails.count, @"Parsed emails list count '%lu' not the same as expected '%lu'", (unsigned long)parsedContact.emails.count, (unsigned long)expected.emails.count);
+        YSGContact *parsedContact = [self.localSource contactFromContact:generatedContactsList[index]];
+        [self compareYsgContact:self.expectedContactsSequence[index] with:parsedContact];
     }
 }
 
 - (void)testYSGContactFromAddressBook
 {
     [[self.localSource class] shouldReturnNil:NO];
+    NSMutableArray <YSGContact *> *seperatedContacts = [NSMutableArray new];
+    // we have to 'prep' the expected array since the contactListFromAddressBook does this as well and we'll have 8
+    // entries instead of 6
+    for (YSGContact *actualContact in self.expectedContactsSequence)
+    {
+        [seperatedContacts addObjectsFromArray:[self.localSource separatedContactsForContact:actualContact]];
+    }
     NSError *err = nil;
     NSArray <YSGContact *> *parsedContacts = [self.localSource contactListFromAddressBook:&err];
     XCTAssertNil(err, @"Error should be nil, but got '%@'", err);
-    XCTAssertNotEqual(parsedContacts.count, 0, @"Parsed contacts shouldn't be empty");
+    XCTAssertEqual(parsedContacts.count, seperatedContacts.count, @"Expected '%lu' contacts from address book, not '%lu'", (unsigned long)seperatedContacts.count, (unsigned long)parsedContacts.count);
+    for (NSUInteger index = 0; index < seperatedContacts.count; ++index)
+    {
+        [self compareYsgContact:seperatedContacts[index] with:parsedContacts[index]];
+    }
 }
 
 - (void)testYSGSeperatedContactsFromYSGContact

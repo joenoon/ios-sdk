@@ -300,7 +300,17 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             
             NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonFirstNameProperty);
             NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonLastNameProperty);
-            NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonMiddleNameProperty);
+            NSString *fullName = nil;
+            
+            if (middleName)
+            {
+                fullName = [NSString stringWithFormat:@"%@ %@ %@", firstName, middleName, lastName];
+            }
+            else if (firstName || lastName)
+            {
+                fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            }
             
             contact.name = fullName;
             

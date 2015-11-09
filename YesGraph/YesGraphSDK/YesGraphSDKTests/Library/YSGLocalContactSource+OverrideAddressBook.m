@@ -34,7 +34,6 @@
     ABRecordSetValue(fullName, kABPersonEmailProperty, emailValues, nil);
     [contacts addObject:(__bridge id _Nonnull)(fullName)];
     
-    
     ABRecordRef noMiddleName = ABPersonCreate();
     ABRecordSetValue(noMiddleName, kABPersonFirstNameProperty, @"Full", nil);
     ABRecordSetValue(noMiddleName, kABPersonLastNameProperty, @"Name", nil);
