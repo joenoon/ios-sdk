@@ -272,7 +272,7 @@
     }];
 }
 
-- (void)testPermissionsDidAsk
+- (void)testPermissionsDidAskContactStore
 {
     id mock = [OCMockObject partialMockForObject:self.localSource];
     OCMStub([mock hasPermission]).andReturn(NO);
