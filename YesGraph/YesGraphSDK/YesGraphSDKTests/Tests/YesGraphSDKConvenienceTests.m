@@ -25,8 +25,11 @@
 {
     [super setUp];
     
-    [[YesGraph shared] configureWithClientKey:YSGTestClientKey];
-    [[YesGraph shared] configureWithUserId:YSGTestClientID];
+    //[[YesGraph shared] configureWithClientKey:YSGTestClientKey];
+    //[[YesGraph shared] configureWithUserId:YSGTestClientID];
+    
+    [NSUserDefaults resetStandardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)tearDown
@@ -34,14 +37,14 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
     
-    [[YesGraph shared] configureWithUserId:@""];
-    [[YesGraph shared] configureWithClientKey:@""];
+    [NSUserDefaults resetStandardUserDefaults];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)testYesGraphInitialization
 {
-    [[YesGraph shared] configureWithUserId:@""];
-    [[YesGraph shared] configureWithClientKey:@""];
+    //[[YesGraph shared] configureWithUserId:@""];
+    //[[YesGraph shared] configureWithClientKey:@""];
     
     [[YesGraph shared] configureWithClientKey:YSGTestClientKey];
     
@@ -133,13 +136,9 @@
 
 - (void)testYesGraphConfigurationFromUserDefaults
 {
-    [YesGraph shared].userId = nil;
+    XCTAssertEqual([YesGraph shared].userId, nil, @"UserId should still be fetched from UserDefaults");
     
-    XCTAssertEqual([YesGraph shared].userId, YSGTestClientID, @"UserId should still be fetched from UserDefaults");
-    
-    [YesGraph shared].clientKey = nil;
-    
-    XCTAssertEqual([YesGraph shared].clientKey, YSGTestClientKey, @"ClientKey should still be fetched from UserDefaults");
+    XCTAssertEqual([YesGraph shared].clientKey, nil, @"ClientKey should still be fetched from UserDefaults");
 }
 
 @end

@@ -244,18 +244,24 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 - (void)configureWithClientKey:(NSString *)clientKey
 {
-    self.clientKey = clientKey;
-    
-    [self.userDefaults setObject:clientKey forKey:YSGConfigurationClientKey];
-    [self.userDefaults synchronize];
+    if (clientKey.length)
+    {
+        self.clientKey = clientKey;
+        
+        [self.userDefaults setObject:clientKey forKey:YSGConfigurationClientKey];
+        [self.userDefaults synchronize];
+    }
 }
 
 - (void)configureWithUserId:(NSString *)userId
 {
-    self.userId = userId;
-    
-    [self.userDefaults setObject:userId forKey:YSGConfigurationUserIdKey];
-    [self.userDefaults synchronize];
+    if (userId.length)
+    {
+        self.userId = userId;
+        
+        [self.userDefaults setObject:userId forKey:YSGConfigurationUserIdKey];
+        [self.userDefaults synchronize];
+    }
 }
 
 - (BOOL)isConfigured
