@@ -7,7 +7,7 @@
 //
 
 @import XCTest;
-#import "YesGraph+ExposedPrivate.h"
+#import "YesGraph+Private.h"
 #import "YSGMessaging.h"
 #import "YSGInviteService.h"
 #import "YSGSources.h"

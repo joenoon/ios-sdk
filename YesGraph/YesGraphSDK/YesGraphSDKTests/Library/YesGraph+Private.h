@@ -1,5 +1,5 @@
 //
-//  YesGraph+ExposedPrivate.h
+//  YesGraph+Private.h
 //  YesGraphSDK
 //
 //  Created by Gasper Rebernak on 03/11/15.
@@ -10,8 +10,9 @@
 #import "YSGLocalContactSource.h"
 #import "YSGCacheContactSource.h"
 
-@interface YesGraph (ExposedPrivate)
+@interface YesGraph (Private)
 
+@property (nonatomic, readwrite, strong) NSUserDefaults *userDefaults;
 @property (nonatomic, readwrite, copy) NSString *userId;
 @property (nonatomic, readwrite, copy) NSString *clientKey;
 

@@ -1,17 +1,18 @@
 //
-//  YesGraph+ExposedPrivate.m
+//  YesGraph+Private.m
 //  YesGraphSDK
 //
 //  Created by Gasper Rebernak on 03/11/15.
 //  Copyright © 2015 YesGraph. All rights reserved.
 //
 
-#import "YesGraph+ExposedPrivate.h"
+#import "YesGraph+Private.h"
 
-@implementation YesGraph (ExposedPrivate)
+@implementation YesGraph (Private)
 
 @dynamic userId;
 @dynamic clientKey;
 @dynamic lastFetchDate;
+@dynamic userDefaults;
 
 @end
