@@ -231,7 +231,7 @@
     XCTAssertEqual(copiedSeperateContact.phones.count, 0, @"Phone contacts shouldn't be copied by the parsed contact");
     XCTAssert([multiContact.name isEqualToString:modifiedOriginalContact.name] && [multiContact.name isEqualToString:copiedSeperateContact.name], @"Contact names should match '%@', but got '%@' and '%@'", multiContact.name, modifiedOriginalContact.name, copiedSeperateContact.name);
     YSGContact *firstContact = [YSGTestMockData mockContactList].entries.firstObject;
-    XCTAssertEqual(copiedSeperateContact.emails.count, firstContact.emails.count, @"Number of emails should be '%lu' not '%lu'", (unsigned long)firstContact.emails.count, copiedSeperateContact.emails.count);
+    XCTAssertEqual(copiedSeperateContact.emails.count, firstContact.emails.count, @"Number of emails should be '%lu' not '%lu'", (unsigned long)firstContact.emails.count, (unsigned long)copiedSeperateContact.emails.count);
     XCTAssert([copiedSeperateContact.emails isEqualToArray:firstContact.emails], @"Emails in the second entry should be '%@' not '%@'", firstContact.emails, copiedSeperateContact.emails);
 }
 
