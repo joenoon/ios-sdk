@@ -272,4 +272,16 @@
     }];
 }
 
+- (void)testPermissionsDidAsk
+{
+    id mock = [OCMockObject partialMockForObject:self.localSource];
+    OCMStub([mock hasPermission]).andReturn(NO);
+    OCMStub([mock didAskForPermission]).andReturn(YES);
+    [self.localSource requestContactPermission:^(BOOL granted, NSError * _Nullable error)
+     {
+         XCTAssertTrue(granted);
+         XCTAssertNil(error);
+     }];
+}
+
 @end
