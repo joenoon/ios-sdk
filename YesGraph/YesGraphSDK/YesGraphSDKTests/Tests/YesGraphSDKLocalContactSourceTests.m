@@ -298,4 +298,24 @@
      }];
 }
 
+- (void)testContactAccessPromptMessageLong
+{
+    id mock = [OCMockObject partialMockForObject:[NSBundle mainBundle]];
+    NSString *mockedBundleDisplayName = @"MockedBundleDisplayName";
+    OCMStub([mock objectForInfoDictionaryKey:@"CFBundleDisplayName"]).andReturn(mockedBundleDisplayName);
+    NSString *mockedBundleName = @"MockedBundle";
+    OCMStub([mock objectForInfoDictionaryKey:@"CFBundleName"]).andReturn(mockedBundleName);
+    NSString *expected = [NSString stringWithFormat:@"Share entries with %@ app to find friends to invite?", mockedBundleName];
+    XCTAssert([self.localSource.contactAccessPromptMessage isEqualToString:expected], @"Expected prompt message to be '%@', but got '%@'", expected, self.localSource.contactAccessPromptMessage);
+}
+
+- (void)testContactAccessPromptMessageShort
+{
+    id mock = [OCMockObject partialMockForObject:[NSBundle mainBundle]];
+    OCMStub([mock objectForInfoDictionaryKey:@"CFBundleDisplayName"]).andReturn(@"");
+    OCMStub([mock objectForInfoDictionaryKey:@"CFBundleName"]).andReturn(@"");
+    NSString *expected = @"Share entries to find friends to invite?";
+    XCTAssert([self.localSource.contactAccessPromptMessage isEqualToString:expected], @"Expected prompt message to be '%@', but got '%@'", expected, self.localSource.contactAccessPromptMessage);
+}
+
 @end
