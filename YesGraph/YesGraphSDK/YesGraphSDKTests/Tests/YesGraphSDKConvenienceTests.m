@@ -71,7 +71,10 @@
     //
     // YSGMessageHandler
     //
-    [self.sharedGraph setMessageHandler:^(NSString *message, NSDictionary *userInfo) {
+    
+    __weak YesGraph *weakSelf = self.sharedGraph;
+
+    [weakSelf setMessageHandler:^(NSString *message, NSDictionary *userInfo) {
         XCTAssert([message isEqualToString:sentMessage], @"The sent message '%@' and received message '%@' are not the same", sentMessage, message);
         XCTAssertNil(userInfo, @"User info should be nil, not '%@'", userInfo);
     }];
@@ -85,7 +88,7 @@
     //
     NSError *sentError = [NSError errorWithDomain:@"com.yesgraph" code:-1 userInfo:nil];
 
-    [self.sharedGraph setErrorHandler:^(NSError *error) {
+    [weakSelf setErrorHandler:^(NSError *error) {
         XCTAssert([error.domain isEqualToString:sentError.domain], @"The error domain '%@' and received error domain '%@' are not the same", sentError.domain, error.domain);
         XCTAssert(error.userInfo.count == 0, @"User info should be empty, not '%@'", error.userInfo);
     }];
