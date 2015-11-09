@@ -8,9 +8,11 @@
 
 @import Contacts;
 @import XCTest;
+@import OCMock;
 #import "YSGLocalContactSource+ExposePrivateMethods.h"
 #import "YSGLocalContactSource+OverrideContactStore.h"
 #import "YSGLocalContactSource+OverrideAddressBook.h"
+#import "YSGUIAlertController+YSGDisplayOverride.h"
 #import "YSGContactList.h"
 #import "YSGTestMockData.h"
 
@@ -64,6 +66,7 @@
 {   
     [super tearDown];
     self.localSource = nil;
+    [UIAlertController setYsgShowWasTriggered:nil];
 }
 
 - (void)testLocalContactStoreFetchNil
@@ -233,6 +236,40 @@
     YSGContact *firstContact = [YSGTestMockData mockContactList].entries.firstObject;
     XCTAssertEqual(copiedSeperateContact.emails.count, firstContact.emails.count, @"Number of emails should be '%lu' not '%lu'", (unsigned long)firstContact.emails.count, (unsigned long)copiedSeperateContact.emails.count);
     XCTAssert([copiedSeperateContact.emails isEqualToArray:firstContact.emails], @"Emails in the second entry should be '%@' not '%@'", firstContact.emails, copiedSeperateContact.emails);
+}
+
+- (void)testPermissionsDidNotAsk
+{
+    id mock = [OCMockObject partialMockForObject:self.localSource];
+    OCMStub([mock hasPermission]).andReturn(NO);
+    OCMStub([mock didAskForPermission]).andReturn(NO);
+    OCMStub([mock contactAccessPromptTitle]).andReturn(@"Mocked Title");
+    OCMStub([mock contactAccessPromptMessage]).andReturn(@"Mocked message");
+    OCMStub([mock setDidAskForPermission:[OCMArg any]]);
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expected UIAlertController To Show"];
+    
+    [UIAlertController setYsgShowWasTriggered:^(BOOL withAnimationArgument, UIAlertController *controller)
+    {
+        XCTAssertNotNil(controller, @"Displayed controller shouldn't be nil");
+        XCTAssertEqual(controller.actions.count, 2, @"There should be 2 actions associated with alert controller");
+        NSString *expectedDontAllow = @"Don't allow";
+        NSString *expectedOk = @"Ok";
+        XCTAssert([controller.actions.firstObject.title isEqualToString:expectedDontAllow], @"First controller action should have the title '%@', but title was '%@'", expectedDontAllow, controller.actions.firstObject.title);
+        XCTAssert([controller.actions.lastObject.title isEqualToString:expectedOk], @"Second controller action should have the title '%@', but title was '%@'", expectedOk, controller.actions.lastObject.title);
+        XCTAssert([controller.title isEqualToString:[self.localSource contactAccessPromptTitle]], @"Controller's title should be '%@', but was '%@'", [self.localSource contactAccessPromptTitle], controller.title);
+        [expectation fulfill];
+    }];
+    
+    [self.localSource requestContactPermission:^(BOOL granted, NSError * _Nullable error)
+    {
+        XCTAssertTrue(granted);
+        XCTAssertNil(error);
+    }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        XCTAssertNil(error, @"Expectation timed-out with error '%@'", error);
+    }];
 }
 
 @end

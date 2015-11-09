@@ -24,4 +24,10 @@
 
 - (NSArray<YSGContact *> *)separatedContactsForContact:(YSGContact *)contact;
 
++ (BOOL)hasPermission;
+
++ (BOOL)didAskForPermission;
+
++ (void)setDidAskForPermission:(BOOL)didAskForPermission;
+
 @end
