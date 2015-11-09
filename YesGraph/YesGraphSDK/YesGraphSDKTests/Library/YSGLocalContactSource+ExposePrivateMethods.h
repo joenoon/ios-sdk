@@ -7,9 +7,21 @@
 //
 
 #import "YSGLocalContactSource.h"
+#import "YSGContact.h"
+@import Contacts;
 
 @interface YSGLocalContactSource (ExposePrivateMethods)
 
 + (NSUserDefaults *)userDefaults;
+
+@end
+
+@interface YSGLocalContactSource ()
+
+- (YSGContact *)contactFromContact:(CNContact *)contact;
+
+- (NSArray <YSGContact *> *)contactListFromAddressBook:(NSError **)error;
+
+- (NSArray<YSGContact *> *)separatedContactsForContact:(YSGContact *)contact;
 
 @end

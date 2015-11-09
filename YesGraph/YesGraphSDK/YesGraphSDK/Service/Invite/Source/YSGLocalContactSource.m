@@ -276,6 +276,11 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     });
 }
 
+- (NSArray *)copyArrayOfAllPeopleFor:(ABAddressBookRef)addressBook
+{
+    return (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+}
+
 - (NSArray <YSGContact *> *)contactListFromAddressBook:(NSError **)error
 {
     CFErrorRef err = NULL;
@@ -283,7 +288,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     
     if (addressBook != nil)
     {
-        NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        NSArray *allContacts = [self copyArrayOfAllPeopleFor:addressBook];
 
         NSMutableArray <YSGContact *> *entries = [NSMutableArray array];
         
