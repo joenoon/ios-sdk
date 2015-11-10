@@ -108,6 +108,7 @@
 		385B64CB1B831CA900C55F60 /* YSGAddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64C91B831CA900C55F60 /* YSGAddressBookViewController.m */; };
 		385B64CF1B831D4800C55F60 /* YesGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = 385B64CD1B831D4800C55F60 /* YesGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		385B64D01B831D4800C55F60 /* YesGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 385B64CE1B831D4800C55F60 /* YesGraph.m */; };
+		3865A5C71BF2203800B56314 /* YesGraphSDKUIAlertControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3865A5C61BF2203800B56314 /* YesGraphSDKUIAlertControllerTests.m */; };
 		387DC5041B8E349500E78114 /* YSGParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 389ABFC21B8E1D1A00E4E3F1 /* YSGParsing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		387DC5051B8E349900E78114 /* YSGParsable.h in Headers */ = {isa = PBXBuildFile; fileRef = 389ABFC71B8E242600E4E3F1 /* YSGParsable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38827CA71BCE995100A6610E /* YSGContactList+Operations.h in Headers */ = {isa = PBXBuildFile; fileRef = 38827CA51BCE995100A6610E /* YSGContactList+Operations.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -480,6 +481,7 @@
 		385B64C91B831CA900C55F60 /* YSGAddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGAddressBookViewController.m; sourceTree = "<group>"; };
 		385B64CD1B831D4800C55F60 /* YesGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesGraph.h; sourceTree = "<group>"; };
 		385B64CE1B831D4800C55F60 /* YesGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraph.m; sourceTree = "<group>"; };
+		3865A5C61BF2203800B56314 /* YesGraphSDKUIAlertControllerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKUIAlertControllerTests.m; sourceTree = "<group>"; };
 		38827CA51BCE995100A6610E /* YSGContactList+Operations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGContactList+Operations.h"; sourceTree = "<group>"; };
 		38827CA61BCE995100A6610E /* YSGContactList+Operations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGContactList+Operations.m"; sourceTree = "<group>"; };
 		388422C31BF0BAF600EA4A26 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = YesGraphSDKTests/OCMock.framework; sourceTree = "<group>"; };
@@ -735,6 +737,7 @@
 				E8AC912A1BE18C63001B0855 /* YesGraphSDKNetworkTestsGETMethods.m */,
 				E8EC98501BE3ACFB00676A1A /* YesGraphSDKShareSheetControllerTests.m */,
 				E84BD7F11BE804FD00E6AE02 /* YesGraphSDKYSGAddressBookViewControllerTests.m */,
+				3865A5C61BF2203800B56314 /* YesGraphSDKUIAlertControllerTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1460,6 +1463,7 @@
 				38343AEA1BC6A67400DD635B /* YesGraphSDKInviteTests.m in Sources */,
 				E84798861BD6F43800BDA3B8 /* YesGraphSDKThemeButtonFadeFactorTests.m in Sources */,
 				3E96521B1BDA2CE300F5385E /* YesGraphSDKConvenienceTests.m in Sources */,
+				3865A5C71BF2203800B56314 /* YesGraphSDKUIAlertControllerTests.m in Sources */,
 				E8A7D9981BDEC99900C80501 /* YSGInviteServiceOverridenMethods.m in Sources */,
 				E8B9C8A81BE9580F0080EA40 /* YSGMockedMessageComposeViewController.m in Sources */,
 				E87949991BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m in Sources */,
@@ -1600,8 +1604,6 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1649,8 +1651,6 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

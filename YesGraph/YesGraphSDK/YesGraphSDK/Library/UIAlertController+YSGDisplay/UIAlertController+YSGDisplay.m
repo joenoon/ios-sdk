@@ -71,11 +71,30 @@
 
 - (void)ysg_show:(BOOL)animated
 {
-    self.ysg_alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.ysg_alertWindow.rootViewController = [[UIViewController alloc] init];
-    self.ysg_alertWindow.windowLevel = UIWindowLevelAlert + 1;
+    [self ysg_show:animated completion:nil];
+}
+
+- (void)ysg_show:(BOOL)animated completion:(void (^ _Nullable)(void))completion
+{
+    [self ysg_createWindow];
+    
     [self.ysg_alertWindow makeKeyAndVisible];
-    [self.ysg_alertWindow.rootViewController presentViewController:self animated:animated completion:nil];
+    [self.ysg_alertWindow.rootViewController presentViewController:self animated:animated completion:completion];
+}
+
+- (void)ysg_createWindow
+{
+    if (!self.ysg_alertWindow)
+    {
+        self.ysg_alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    }
+    
+    if (!self.ysg_alertWindow.rootViewController)
+    {
+        self.ysg_alertWindow.rootViewController = [[UIViewController alloc] init];
+    }
+    
+    self.ysg_alertWindow.windowLevel = UIWindowLevelAlert + 1;
 }
 
 @end

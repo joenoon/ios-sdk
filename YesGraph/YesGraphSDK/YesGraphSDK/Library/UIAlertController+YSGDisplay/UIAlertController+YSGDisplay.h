@@ -15,5 +15,6 @@
 
 - (void)ysg_show;
 - (void)ysg_show:(BOOL)animated;
+- (void)ysg_show:(BOOL)animated completion:(void (^ __nullable)(void))completion;
 
 @end
