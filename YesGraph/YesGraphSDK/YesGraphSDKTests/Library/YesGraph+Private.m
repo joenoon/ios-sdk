@@ -8,6 +8,9 @@
 
 #import "YesGraph+Private.h"
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincomplete-implementation"
+
 @implementation YesGraph (Private)
 
 @dynamic userId;
@@ -18,3 +21,5 @@
 @dynamic cacheSource;
 
 @end
+
+#pragma clang diagnostic pop

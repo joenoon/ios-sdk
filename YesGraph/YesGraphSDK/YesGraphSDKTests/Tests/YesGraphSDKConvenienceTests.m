@@ -136,6 +136,43 @@
     XCTAssertNotNil(self.sharedGraph.cacheSource, @"Cache source shouldn't be nil");
 }
 
+- (void)testYesGraphContactOwnerMetadata
+{
+    self.sharedGraph.contactOwnerMetadata = [[YSGSource alloc] init];
+    self.sharedGraph.contactOwnerMetadata.name = @"MyTestName";
+    
+    XCTAssert([self.sharedGraph.contactOwnerMetadata.name isEqualToString:@"MyTestName"], @"Contact owner metadata should match");
+    
+    self.sharedGraph.contactOwnerMetadata = nil;
+    
+    XCTAssertNil(self.sharedGraph.contactOwnerMetadata, @"Contact owner metadata should be nil");
+}
+
+- (void)testYesGraphApplicationNotification
+{
+    NSDate *distantPast = [NSDate distantPast];
+    [self.sharedGraph setLastFetchDate:distantPast];
+    
+    OCMStub([self.sharedGraph.userDefaults objectForKey:@"YSGLocalContactFetchDateKey"]).andReturn(distantPast);
+    
+    id classMock = OCMClassMock([self.sharedGraph.localSource class]);
+    OCMStub([classMock hasPermission]).andReturn(YES);
+    
+    id mockLocalSource = OCMPartialMock(self.sharedGraph.localSource);
+    OCMStub([mockLocalSource fetchContactListWithCompletion:nil]);
+    
+    self.sharedGraph.localSource = mockLocalSource;
+    
+    id sharedMock = OCMPartialMock(self.sharedGraph);
+    
+    [self.sharedGraph applicationNotification:nil];
+    
+    OCMVerify([sharedMock updateContactList:[OCMArg isNotNil]]);
+    
+    OCMVerify([mockLocalSource fetchContactListWithCompletion:[OCMArg isNotNil]]);
+    
+}
+
 - (void)testYesGraphLastFetchDate
 {
     NSDate *testDate = [NSDate date];

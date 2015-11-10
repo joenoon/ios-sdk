@@ -231,23 +231,28 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
-        if (contactList.entries.count)
-        {
-            YSGClient* client = [[YSGClient alloc] init];
-            client.clientKey = self.clientKey;
-
-            [client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
-            {
-                if (!error)
-                {
-                    //
-                    // Store last fetch date
-                    //
-                    self.lastFetchDate = [NSDate date];
-                }
-            }];
-        }
+        [self updateContactList:contactList];
     }];
+}
+
+- (void)updateContactList:(YSGContactList *)contactList
+{
+    if (contactList.entries.count)
+    {
+        YSGClient* client = [[YSGClient alloc] init];
+        client.clientKey = self.clientKey;
+        
+        [client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+         {
+             if (!error)
+             {
+                 //
+                 // Store last fetch date
+                 //
+                 self.lastFetchDate = [NSDate date];
+             }
+         }];
+    }
 }
 
 #pragma mark - Configuration
