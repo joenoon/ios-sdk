@@ -26,16 +26,7 @@
 {
     id object = [NSObject new];
     XCTAssertEqualObjects([YSGValueTransformer transformToValue:object], object, @"Transformed objects should be equal");
-    
-    @try
-    {
-        [YSGValueTransformer transformFromValue:object inContext:nil];
-        XCTAssertTrue(false, @"The call above must throw an exception");
-    }
-    @catch (NSException *exception)
-    {
-        XCTAssertTrue(true, @"The call above must throw an exception");
-    }
+    XCTAssertThrows([YSGValueTransformer transformFromValue:object inContext:nil], @"The transformation should throw an exception");
 }
 
 @end
