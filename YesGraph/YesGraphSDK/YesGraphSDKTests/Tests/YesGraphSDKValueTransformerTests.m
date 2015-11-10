@@ -14,11 +14,6 @@
 
 @implementation YSGValueTransformer (Override)
 
-+ (id)transformFromValue:(id)fromValue
-{
-    return fromValue;
-}
-
 @end
 
 @interface YesGraphSDKValueTransformerTests : XCTestCase
@@ -31,7 +26,16 @@
 {
     id object = [NSObject new];
     XCTAssertEqualObjects([YSGValueTransformer transformToValue:object], object, @"Transformed objects should be equal");
-    XCTAssertEqualObjects([YSGValueTransformer transformFromValue:object], object, @"Transformed objects should be equal");
+    
+    @try
+    {
+        [YSGValueTransformer transformFromValue:object inContext:nil];
+        XCTAssertTrue(false, @"The call above must throw an exception");
+    }
+    @catch (NSException *exception)
+    {
+        XCTAssertTrue(true, @"The call above must throw an exception");
+    }
 }
 
 @end
