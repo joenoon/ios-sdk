@@ -332,6 +332,7 @@
 		E8CB678E1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CB678D1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m */; };
 		E8CB67941BD81891005CBD19 /* YSGMockClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CB67931BD81891005CBD19 /* YSGMockClient.m */; };
 		E8CB67961BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8CB67951BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m */; };
+		E8D254BE1BF12AFB00C74538 /* YSGLocalContactSource+OverrideAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D254BD1BF12AFB00C74538 /* YSGLocalContactSource+OverrideAddressBook.m */; };
 		E8D319321BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D319311BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.m */; };
 		E8D319341BDEBF0500D1CECD /* YesGraphSDKCacheContactSourceFileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D319331BDEBF0500D1CECD /* YesGraphSDKCacheContactSourceFileTests.m */; };
 		E8D61B051BE82DAC0060302B /* YSGMockedUISearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D61B041BE82DAC0060302B /* YSGMockedUISearchController.m */; };
@@ -624,6 +625,8 @@
 		E8CB67921BD81891005CBD19 /* YSGMockClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGMockClient.h; sourceTree = "<group>"; };
 		E8CB67931BD81891005CBD19 /* YSGMockClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGMockClient.m; sourceTree = "<group>"; };
 		E8CB67951BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKCacheContactSourceTests.m; sourceTree = "<group>"; };
+		E8D254BC1BF12AFB00C74538 /* YSGLocalContactSource+OverrideAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGLocalContactSource+OverrideAddressBook.h"; sourceTree = "<group>"; };
+		E8D254BD1BF12AFB00C74538 /* YSGLocalContactSource+OverrideAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGLocalContactSource+OverrideAddressBook.m"; sourceTree = "<group>"; };
 		E8D319301BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGCacheContactSource+ExposeFileProperties.h"; sourceTree = "<group>"; };
 		E8D319311BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGCacheContactSource+ExposeFileProperties.m"; sourceTree = "<group>"; };
 		E8D319331BDEBF0500D1CECD /* YesGraphSDKCacheContactSourceFileTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKCacheContactSourceFileTests.m; sourceTree = "<group>"; };
@@ -761,6 +764,8 @@
 		38343AD71BC6A5B500DD635B /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				E8D254BC1BF12AFB00C74538 /* YSGLocalContactSource+OverrideAddressBook.h */,
+				E8D254BD1BF12AFB00C74538 /* YSGLocalContactSource+OverrideAddressBook.m */,
 				38343ADB1BC6A66300DD635B /* YSGStubRequestsScoped.h */,
 				38343ADC1BC6A66300DD635B /* YSGStubRequestsScoped.m */,
 				38343ADD1BC6A66300DD635B /* YSGTestSettings.h */,
@@ -1491,6 +1496,7 @@
 				E8AC912B1BE18C63001B0855 /* YesGraphSDKNetworkTestsGETMethods.m in Sources */,
 				E8B9C8B61BE9754A0080EA40 /* YSGMockedMailComposeViewController.m in Sources */,
 				E8D76BEF1BD14327006435BD /* YSGObjectParsableMocked.m in Sources */,
+				E8D254BE1BF12AFB00C74538 /* YSGLocalContactSource+OverrideAddressBook.m in Sources */,
 				E8CB67941BD81891005CBD19 /* YSGMockClient.m in Sources */,
 				E8A7D9A41BDEDD3D00C80501 /* YesGraphSDKErrorCodeTests.m in Sources */,
 				38343ADF1BC6A66300DD635B /* YSGStubRequestsScoped.m in Sources */,
