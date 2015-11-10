@@ -122,18 +122,18 @@
 
 - (void)setup
 {
-    CGFloat serviceLogoSize = (self.frame.size.width > self.frame.size.height) ? self.frame.size.height : self.frame.size.width;
-    
+    CGFloat serviceLogoSize = fmin(self.frame.size.width, self.frame.size.height);
     self.serviceLogo = [[UIView alloc] initWithFrame:CGRectMake(0, 0, serviceLogoSize, serviceLogoSize)];
     [self addSubview:self.serviceLogo];
     
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.serviceLogo.frame.size.width * 0.6, self.serviceLogo.frame.size.height * 0.6)];
-    self.imageView.center = CGPointMake(self.serviceLogo.frame.size.width/2, self.serviceLogo.frame.size.height/2);
+    self.imageView.center = CGPointMake(serviceLogoSize / 2.0, serviceLogoSize / 2.0);
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.imageView.backgroundColor = [UIColor clearColor];
     [self.serviceLogo addSubview:self.imageView];
     
-    self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.serviceLogo.frame.size.height, self.frame.size.width, self.frame.size.height - self.serviceLogo.frame.size.height)];
+    CGFloat textLabelHeight = 25.0;
+    self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.serviceLogo.frame.size.height, serviceLogoSize, textLabelHeight)];
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     [self addSubview:self.textLabel];
 }
