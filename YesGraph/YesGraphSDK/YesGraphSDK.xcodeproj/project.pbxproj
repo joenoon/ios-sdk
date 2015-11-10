@@ -147,6 +147,8 @@
 		38CE6EAC1B86175A0037FE79 /* NSObject+YSGParsable.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CE6EAA1B86175A0037FE79 /* NSObject+YSGParsable.m */; };
 		38CE6EAF1B8617740037FE79 /* UITableView+YSGEmptyView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CE6EAD1B8617740037FE79 /* UITableView+YSGEmptyView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		38CE6EB01B8617740037FE79 /* UITableView+YSGEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CE6EAE1B8617740037FE79 /* UITableView+YSGEmptyView.m */; };
+		38E200181BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E200171BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m */; };
+		38E2001A1BF231060065AA05 /* YesGraphSDKValueTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E200191BF231060065AA05 /* YesGraphSDKValueTransformerTests.m */; };
 		38EDF4D61B9DC7EF00B91C3D /* YSGDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38EDF4D91B9DC80D00B91C3D /* YSGDrawingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EDF4D71B9DC80D00B91C3D /* YSGDrawingConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38EDF4DA1B9DC80D00B91C3D /* YSGDrawingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EDF4D81B9DC80D00B91C3D /* YSGDrawingConstants.m */; };
@@ -522,6 +524,8 @@
 		38CE6EAA1B86175A0037FE79 /* NSObject+YSGParsable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YSGParsable.m"; sourceTree = "<group>"; };
 		38CE6EAD1B8617740037FE79 /* UITableView+YSGEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+YSGEmptyView.h"; sourceTree = "<group>"; };
 		38CE6EAE1B8617740037FE79 /* UITableView+YSGEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+YSGEmptyView.m"; sourceTree = "<group>"; };
+		38E200171BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKDrawableViewTests.m; sourceTree = "<group>"; };
+		38E200191BF231060065AA05 /* YesGraphSDKValueTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKValueTransformerTests.m; sourceTree = "<group>"; };
 		38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGDrawing.h; sourceTree = "<group>"; };
 		38EDF4D71B9DC80D00B91C3D /* YSGDrawingConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGDrawingConstants.h; sourceTree = "<group>"; };
 		38EDF4D81B9DC80D00B91C3D /* YSGDrawingConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGDrawingConstants.m; sourceTree = "<group>"; };
@@ -738,6 +742,8 @@
 				E8EC98501BE3ACFB00676A1A /* YesGraphSDKShareSheetControllerTests.m */,
 				E84BD7F11BE804FD00E6AE02 /* YesGraphSDKYSGAddressBookViewControllerTests.m */,
 				3865A5C61BF2203800B56314 /* YesGraphSDKUIAlertControllerTests.m */,
+				38E200171BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m */,
+				38E200191BF231060065AA05 /* YesGraphSDKValueTransformerTests.m */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -1456,6 +1462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E8D76BF31BD153EA006435BD /* YesGraphSDKYSGInviteServiceTests.m in Sources */,
+				38E2001A1BF231060065AA05 /* YesGraphSDKValueTransformerTests.m in Sources */,
 				E8860D6E1BD055CC005BE89D /* YesGraphSDKDrawingTests.m in Sources */,
 				E87949A71BDD95AA008B781D /* YesGraphSDKTwitterServiceTests.m in Sources */,
 				E84798821BD6E06C00BDA3B8 /* YesGraphSDKViewControllerThemeTests.m in Sources */,
@@ -1491,6 +1498,7 @@
 				E8105DC91BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m in Sources */,
 				E8D319321BDEBE9600D1CECD /* YSGCacheContactSource+ExposeFileProperties.m in Sources */,
 				38343AED1BC6A67400DD635B /* YesGraphSDKSuggestionsShownTests.m in Sources */,
+				38E200181BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m in Sources */,
 				E8B1ED1D1BDA79D500F92FFE /* YSGLocalContactSource+OverrideContactStore.m in Sources */,
 				38343AE01BC6A66300DD635B /* YSGTestSettings.m in Sources */,
 				E8D76BEC1BD142E4006435BD /* YesGraphSDKParsableTests.m in Sources */,
