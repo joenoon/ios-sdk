@@ -1,5 +1,5 @@
 //
-//  YesGraphSDKErrorCodeTests.m
+//  YesGraphSDKGlobalTests.m
 //  YesGraphSDK
 //
 //  Created by Nejc Vivod on 26/10/15.
@@ -8,25 +8,15 @@
 
 @import XCTest;
 #import "YSGConstants.h"
+#import "YSGLogging.h"
 
-@interface YesGraphSDKErrorCodeTests : XCTestCase
+@interface YesGraphSDKGlobalTests : XCTestCase
 
 @end
 
-@implementation YesGraphSDKErrorCodeTests
+@implementation YesGraphSDKGlobalTests
 
-- (void)setUp
-{
-    [super setUp];
-
-}
-
-- (void)tearDown
-{
-    [super tearDown];
-}
-
-- (void)testYSGErrorWithErrorCode
+- (void)testErrorWithErrorCode
 {
     // NOTE: this loop can fail if the values in the enum are not sequential!
     for (NSInteger errorCode = YSGErrorCodeNetwork; errorCode < YSGErrorCodeCacheWriteFailure; ++errorCode)
@@ -58,6 +48,16 @@
         NSError *customErrorWithCode = YSGErrorWithErrorCodeWithError(errorCode, underlying);
         XCTAssert([customErrorWithCode.userInfo[NSUnderlyingErrorKey] isEqual:underlying], @"Underlying error '%@' not the same as expected '%@'", customErrorWithCode.userInfo[NSUnderlyingErrorKey], underlying);
     }
+}
+
+- (void)testLogging
+{
+    XCTAssertNotNil(YSGLogLevelString(YSGLogLevelNone), @"Should not be nil");
+    XCTAssertNotNil(YSGLogLevelString(YSGLogLevelError), @"Should not be nil");
+    XCTAssertNotNil(YSGLogLevelString(YSGLogLevelWarning), @"Should not be nil");
+    XCTAssertNotNil(YSGLogLevelString(YSGLogLevelInfo), @"Should not be nil");
+    XCTAssertNotNil(YSGLogLevelString(YSGLogLevelDebug), @"Should not be nil");
+    XCTAssertNotNil(YSGLogLevelString(YSGLogLevelTrace), @"Should not be nil");
 }
 
 @end
