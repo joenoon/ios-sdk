@@ -19,6 +19,7 @@
 @dynamic userDefaults;
 @dynamic localSource;
 @dynamic cacheSource;
+@dynamic client;
 
 @end
 

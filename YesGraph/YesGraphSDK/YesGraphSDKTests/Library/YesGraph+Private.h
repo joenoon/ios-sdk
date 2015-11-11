@@ -7,6 +7,8 @@
 //
 
 #import "YesGraph.h"
+#import "YSGClient.h"
+#import "YSGClient+AddressBook.h"
 #import "YSGLocalContactSource.h"
 #import "YSGCacheContactSource.h"
 
@@ -15,6 +17,7 @@
 @property (nonatomic, strong) NSUserDefaults *userDefaults;
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *clientKey;
+@property (nonatomic, strong) YSGClient* client;
 
 @property (nonatomic, strong) YSGLocalContactSource *localSource;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;

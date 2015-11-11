@@ -7,6 +7,7 @@
 //
 
 @import XCTest;
+@import Social;
 
 #import <OCMock/OCMock.h>
 
@@ -62,6 +63,13 @@
     OCMStub([self.sharedGraph.userDefaults stringForKey:@"YSGConfigurationUserIdKey"]).andReturn(YSGTestClientID);
     
     XCTAssertTrue(self.sharedGraph.isConfigured, @"If both user ID and client key are set isConfigured should return true");
+}
+
+- (void)testDefaults
+{
+    XCTAssertNotNil(self.sharedGraph.userDefaults, @"User Defaults should not be nil");
+    self.sharedGraph.userDefaults = nil;
+    XCTAssertNotNil(self.sharedGraph.userDefaults, @"User Defaults should not be nil");
 }
 
 - (void)testYesGraphMessaging
@@ -130,6 +138,37 @@
     XCTAssert([localContactSource.contactAccessPromptMessage isEqualToString:testContactAccessPromptMessage], @"Invite contact permissions message \"%@\" is not the same as configured \"%@\".", localContactSource.contactAccessPromptMessage, testContactAccessPromptMessage);
 }
 
+- (void)testYesGraphShareSheetInitialization
+{
+    YSGShareSheetController* controller = [self.sharedGraph shareSheetControllerForAllServices];
+    
+    XCTAssertNil(controller, @"Missing client key, share sheet controller should be nil");
+    
+    self.sharedGraph.clientKey = YSGTestClientKey;
+    
+    controller = [self.sharedGraph shareSheetControllerForAllServicesWithDelegate:nil];
+    
+    XCTAssertNil(controller, @"Missing user ID, share sheet controller should be nil");
+    
+    self.sharedGraph.userId = YSGTestClientID;
+    
+    controller = [self.sharedGraph shareSheetControllerForInviteServiceWithDelegate:nil];
+    
+    XCTAssertNotNil(controller, @"Controller should be created.");
+    
+    //
+    // Mock availability method on social service, to ensure
+    //
+    
+    id mockComposeViewController = OCMClassMock([SLComposeViewController class]);
+    
+    OCMStub([mockComposeViewController isAvailableForServiceType:[OCMArg any]]).andReturn(YES);
+    
+    controller = [self.sharedGraph shareSheetControllerForAllServices];
+    
+    XCTAssertNotNil(controller, @"Controller should be created for all services.");
+}
+
 - (void)testYesGraphContactSources
 {
     XCTAssertNotNil(self.sharedGraph.localSource, @"Local source shouldn't be nil");
@@ -150,12 +189,24 @@
 
 - (void)testYesGraphApplicationNotification
 {
+    // Checking if checks are correct
+    self.sharedGraph.lastFetchDate = [NSDate date];
+    
+    [self.sharedGraph applicationNotification:nil];
+    
     NSDate *distantPast = [NSDate distantPast];
     [self.sharedGraph setLastFetchDate:distantPast];
     
     OCMStub([self.sharedGraph.userDefaults objectForKey:@"YSGLocalContactFetchDateKey"]).andReturn(distantPast);
     
     id classMock = OCMClassMock([self.sharedGraph.localSource class]);
+    OCMStub([classMock hasPermission]).andReturn(NO);
+    
+    //
+    // Check if permission check is correct
+    //
+    [self.sharedGraph applicationNotification:nil];
+    
     OCMStub([classMock hasPermission]).andReturn(YES);
     
     id mockLocalSource = OCMPartialMock(self.sharedGraph.localSource);
@@ -170,7 +221,42 @@
     OCMVerify([sharedMock updateContactList:[OCMArg isNotNil]]);
     
     OCMVerify([mockLocalSource fetchContactListWithCompletion:[OCMArg isNotNil]]);
+}
+
+- (void)testYesGraphUpdateContactList
+{
+    YSGContactList *contactList = [YSGTestMockData mockContactList];
     
+    //XCTestExpectation *expectation = [self expectationWithDescription:@"Expect completion block to be provided and called."];
+    
+    XCTAssertNil(self.sharedGraph.lastFetchDate, @"Last fetch date must be nil before calling update.");
+    
+    id mockedClient = OCMStrictClassMock([YSGClient class]);
+    
+    OCMStub([mockedClient setClientKey:[OCMArg any]]);
+    
+    id mockedGraph = OCMPartialMock(self.sharedGraph);
+    OCMExpect([mockedGraph setLastFetchDate:[OCMArg isNotNil]]);
+    OCMStub([mockedGraph lastFetchDate]).andReturn([NSDate date]);
+    
+    OCMStub([mockedClient updateAddressBookWithContactList:[OCMArg isNotNil] forUserId:[OCMArg any] completion:[OCMArg any]]).andDo(^(NSInvocation *invocation)
+    {
+        void (^completion)(id, NSError *) = nil;
+        [invocation getArgument:&completion atIndex:4];
+        
+        // Run the completion it should invoke setLastFetchDate
+        completion(nil, nil);
+        
+        // Check if last fetch date returns a value
+        
+        XCTAssertNotNil(self.sharedGraph.lastFetchDate);
+    });
+    
+    self.sharedGraph.client = mockedClient;
+    
+    [mockedGraph updateContactList:contactList];
+    
+    OCMVerifyAll(mockedGraph);
 }
 
 - (void)testYesGraphLastFetchDate

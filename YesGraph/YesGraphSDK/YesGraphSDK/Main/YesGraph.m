@@ -30,6 +30,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
 
 @property (nonatomic, strong) YSGMessageCenter *messageCenter;
+@property (nonatomic, strong) YSGClient* client;
 
 /*!
  * Customization
@@ -148,6 +149,16 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     self.messageCenter.errorHandler = errorHandler;
 }
 
+- (YSGClient *)client
+{
+    if (!_client)
+    {
+        _client = [[YSGClient alloc] init];
+    }
+    
+    return _client;
+}
+
 - (NSString *)clientKey
 {
     if (!_clientKey)
@@ -239,10 +250,9 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 {
     if (contactList.entries.count)
     {
-        YSGClient* client = [[YSGClient alloc] init];
-        client.clientKey = self.clientKey;
+        self.client.clientKey = self.clientKey;
         
-        [client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+        [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
          {
              if (!error)
              {
@@ -262,6 +272,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     if (clientKey.length)
     {
         self.clientKey = clientKey;
+        self.client.clientKey = clientKey;
         
         [self.userDefaults setObject:clientKey forKey:YSGConfigurationClientKey];
         [self.userDefaults synchronize];
