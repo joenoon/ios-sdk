@@ -145,12 +145,4 @@
     self.imageView.image = _icon;
 }
 
-- (float)heightForLabelWithFont:(UIFont *)font
-{
-    CGSize labelSize = [[self text] sizeWithAttributes:@{NSFontAttributeName:font}];
-    
-    return labelSize.height;
-}
-
-
 @end
