@@ -58,6 +58,10 @@
     XCTAssertNotNil(YSGLogLevelString(YSGLogLevelInfo), @"Should not be nil");
     XCTAssertNotNil(YSGLogLevelString(YSGLogLevelDebug), @"Should not be nil");
     XCTAssertNotNil(YSGLogLevelString(YSGLogLevelTrace), @"Should not be nil");
+    
+    YSG_LDEBUG(@"Logging test");
+    
+    XCTAssert([YSGLogger shared].logs.count > 0, @"There should be at least one log in the pool");
 }
 
 @end
