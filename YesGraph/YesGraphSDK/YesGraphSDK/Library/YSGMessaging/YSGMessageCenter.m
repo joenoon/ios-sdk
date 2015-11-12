@@ -29,7 +29,7 @@ NSString *const YSGMessageAlertButtonArrayKey = @"YSGMessageAlertButtonArrayKey"
 
     dispatch_once(&onceToken, ^
     {
-      shared = [[self alloc] init];
+        shared = [[self alloc] init];
     });
 
     return shared;

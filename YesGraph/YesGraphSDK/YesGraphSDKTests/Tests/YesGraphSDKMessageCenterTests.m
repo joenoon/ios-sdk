@@ -108,7 +108,7 @@
     __block BOOL wasTriggered = NO;
     NSDictionary *userInfo = @
     {
-        YSGMessageAlertButtonArrayKey: @[ @"Custom Alert Button 1", @"Custom Alert Button 2" ]
+        YSGMessageAlertButtonArrayKey: @[ @"Custom Alert Button 1", @"Custom Alert Button 2", [UIAlertAction actionWithTitle:@"Test" style:UIAlertActionStyleDefault handler:nil] ]
     };
     [UIAlertController setYsgShowWasTriggered:^(BOOL withAnimationArgument, UIAlertController *controller)
      {
