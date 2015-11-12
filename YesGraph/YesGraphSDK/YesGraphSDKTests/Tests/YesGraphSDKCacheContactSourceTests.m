@@ -66,7 +66,12 @@
              {
                  NSString *gotString = contactList.entries[index].contactString;
                  NSString *expectedString = list.entries[index].contactString;
-                 XCTAssert([gotString isEqualToString:expectedString], @"Expected contact string '%@' but got '%@'", expectedString, gotString);
+                 
+                 if (gotString && expectedString)
+                 {
+                     XCTAssert([gotString isEqualToString:expectedString], @"Expected contact string '%@' but got '%@'", expectedString, gotString);
+                 }
+                 
              }
          }
          else
