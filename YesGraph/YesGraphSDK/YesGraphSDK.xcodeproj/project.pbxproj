@@ -96,6 +96,7 @@
 		384D39841B8F1A8F0080BA48 /* YSGClient+AddressBook.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D39821B8F1A8F0080BA48 /* YSGClient+AddressBook.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		384D39851B8F1A8F0080BA48 /* YSGClient+AddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = 384D39831B8F1A8F0080BA48 /* YSGClient+AddressBook.m */; };
 		384D398D1B8F27C30080BA48 /* YSGModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 384D398C1B8F27C30080BA48 /* YSGModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38526B231BF4A6A80054CBD7 /* YesGraphSDKNetworkClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38526B221BF4A6A80054CBD7 /* YesGraphSDKNetworkClientTests.m */; };
 		38533E831BCCF6A2003CC926 /* OHHTTPStubs.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38B6DD411BC67E35001B70BC /* OHHTTPStubs.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		385766C31BC7EC6E00A84512 /* YSGIconDrawings.m in Sources */ = {isa = PBXBuildFile; fileRef = 30420E511BAC763900C1D614 /* YSGIconDrawings.m */; };
 		385766C41BC7EC6E00A84512 /* YSGThemeConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E89CA8A91BC1BE52008365EF /* YSGThemeConstants.m */; };
@@ -475,6 +476,7 @@
 		384D39831B8F1A8F0080BA48 /* YSGClient+AddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "YSGClient+AddressBook.m"; sourceTree = "<group>"; };
 		384D398C1B8F27C30080BA48 /* YSGModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGModel.h; sourceTree = "<group>"; };
 		384D398E1B8F47500080BA48 /* YSGNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YSGNetwork.h; sourceTree = "<group>"; };
+		38526B221BF4A6A80054CBD7 /* YesGraphSDKNetworkClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKNetworkClientTests.m; sourceTree = "<group>"; };
 		385B64AF1B831BAE00C55F60 /* YSGClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGClient.h; sourceTree = "<group>"; };
 		385B64B01B831BAE00C55F60 /* YSGClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGClient.m; sourceTree = "<group>"; };
 		385B64B31B831C0B00C55F60 /* YSGShareService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGShareService.h; sourceTree = "<group>"; };
@@ -714,7 +716,6 @@
 				38343AE11BC6A67400DD635B /* YesGraphSDKAddressBookTests.m */,
 				38343AE21BC6A67400DD635B /* YesGraphSDKCacheTests.m */,
 				38343AE31BC6A67400DD635B /* YesGraphSDKInviteTests.m */,
-				38343AE41BC6A67400DD635B /* YesGraphSDKNetworkTestsPOSTMethods.m */,
 				38343AE51BC6A67400DD635B /* YesGraphSDKParseTests.m */,
 				38343AE61BC6A67400DD635B /* YesGraphSDKSuggestionsShownTests.m */,
 				E857C0DC1BCDA636003CBC49 /* YesGraphSDKUtilityDateTests.m */,
@@ -731,14 +732,16 @@
 				E84798871BD6FC7400BDA3B8 /* YesGraphSDKLocalContactSourceTests.m */,
 				E8CB678D1BD81755005CBD19 /* YesGraphSDKOnlineContactSourceTests.m */,
 				E8CB67951BD839FE005CBD19 /* YesGraphSDKCacheContactSourceTests.m */,
-				E824881D1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m */,
 				E87949981BDD7D4E008B781D /* YesGraphSDKShareServiceTests.m */,
 				E879499F1BDD9262008B781D /* YesGraphSDKFacebookServiceTests.m */,
 				E87949A61BDD95AA008B781D /* YesGraphSDKTwitterServiceTests.m */,
 				E87949A81BDD97D2008B781D /* YesGraphSDKSocialServiceTests.m */,
 				E8D319331BDEBF0500D1CECD /* YesGraphSDKCacheContactSourceFileTests.m */,
 				E8A7D9A31BDEDD3D00C80501 /* YesGraphSDKGlobalTests.m */,
+				E824881D1BDA8734002D6473 /* YesGraphSDKNetworkResponseTests.m */,
+				38526B221BF4A6A80054CBD7 /* YesGraphSDKNetworkClientTests.m */,
 				E8AC912A1BE18C63001B0855 /* YesGraphSDKNetworkTestsGETMethods.m */,
+				38343AE41BC6A67400DD635B /* YesGraphSDKNetworkTestsPOSTMethods.m */,
 				E8EC98501BE3ACFB00676A1A /* YesGraphSDKShareSheetControllerTests.m */,
 				E84BD7F11BE804FD00E6AE02 /* YesGraphSDKYSGAddressBookViewControllerTests.m */,
 				3865A5C61BF2203800B56314 /* YesGraphSDKUIAlertControllerTests.m */,
@@ -1489,6 +1492,7 @@
 				E8105DCF1BE0339700E51461 /* YSGShareSheetControllerMockedPresentView.m in Sources */,
 				38343AE91BC6A67400DD635B /* YesGraphSDKCacheTests.m in Sources */,
 				E896D6C81BE2C58700D84A59 /* YSGTestClientWithID.m in Sources */,
+				38526B231BF4A6A80054CBD7 /* YesGraphSDKNetworkClientTests.m in Sources */,
 				E805266C1BE6CC8C00EDD26F /* YSGMockedPasteboard.m in Sources */,
 				38343AE81BC6A67400DD635B /* YesGraphSDKAddressBookTests.m in Sources */,
 				E8105DCC1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.m in Sources */,

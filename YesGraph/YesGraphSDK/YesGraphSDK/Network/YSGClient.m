@@ -28,7 +28,7 @@
 
 - (instancetype)initWithClientKey:(NSString *)clientKey
 {
-    self = [self init];
+    self = [self initWithBaseURL:[NSURL URLWithString:YSGClientAPIURL]];
     
     if (self)
     {
@@ -120,7 +120,20 @@
     
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    if (parameters)
+    //
+    // Return nil and error if invalid JSON object
+    //
+    if (parameters && ![NSJSONSerialization isValidJSONObject:parameters])
+    {
+        if (error)
+        {
+            *error = YSGErrorWithErrorCode(YSGErrorCodeParse);
+        }
+        
+        return nil;
+    }
+    
+    if (parameters && [NSJSONSerialization isValidJSONObject:parameters])
     {
         request.HTTPBody = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:error];
     }

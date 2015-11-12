@@ -19,6 +19,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 @interface YSGLocalContactSource ()
 
+@property (nonatomic, strong) CNContactStore *contactStore;
 @property (nonatomic, strong) CNContactFormatter *formatter;
 
 @end
@@ -34,7 +35,12 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 - (CNContactStore *)contactStore
 {
-    return [CNContactStore new];
+    if (!_contactStore)
+    {
+        _contactStore = [CNContactStore new];
+    }
+    
+    return _contactStore;
 }
 
 - (ABAddressBookRef)addressBookRefWithError:(CFErrorRef *)err

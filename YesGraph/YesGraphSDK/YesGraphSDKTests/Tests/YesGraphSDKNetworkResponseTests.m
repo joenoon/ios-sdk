@@ -9,6 +9,7 @@
 @import XCTest;
 #import "YSGNetworkResponse+ParsingMock.h"
 #import "YSGTestMockData.h"
+#import "YSGConstants.h"
 
 @import Contacts;
 
@@ -18,19 +19,16 @@
 
 @implementation YesGraphSDKNetworkResponseTests
 
-- (void)setUp
-{
-    [super setUp];
-}
-
-- (void)tearDown
-{
-    [super tearDown];
-}
-
 - (void)testNetworkResponseInit
 {
     XCTAssertThrows([[YSGNetworkResponse alloc] init], @"The constructor should throw an exception");
+    
+    NSError* error = [NSError errorWithDomain:@"com.yesgraph.sdk.tests" code:1 userInfo:nil];
+    
+    YSGNetworkResponse *response = [[YSGNetworkResponse alloc] initWithResponse:nil data:nil error:error];
+    
+    XCTAssert(response.error.code == YSGErrorCodeNetwork, @"Initializing with error should create a network error code");
+    XCTAssertEqualObjects(response.error.userInfo[NSUnderlyingErrorKey], error, @"Initialized error should be placed into user dictionary");
 }
 
 - (void)testResponseObjectSerialization
@@ -45,6 +43,13 @@
     
     YSGContact *invalidParse = [response responseObjectSerializedToClass:[CNContact class]];
     XCTAssertNil(invalidParse, @"Parsed CNContact should be nil, got: '%@'", invalidParse);
+    
+    //
+    // Invalid JSON response
+    //
+    response = [[YSGNetworkResponse alloc] initWithResponse:nil data:[@"{FailJSON}" dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+    
+    XCTAssert(response.error.code == YSGErrorCodeParse, @"Network response should display parse error code");
 }
 
 @end
