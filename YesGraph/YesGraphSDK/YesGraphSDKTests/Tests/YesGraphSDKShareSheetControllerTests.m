@@ -7,6 +7,7 @@
 //
 
 @import XCTest;
+@import OCMock;
 
 #import "YSGShareSheetController+ExposedPrivateMethods.h"
 #import "YSGFacebookService.h"
@@ -170,6 +171,47 @@
     XCTAssertNotNil(pasteBoard.string, @"String shouldn't be nil after copy is invoked");
     XCTAssert([pasteBoard.string isEqualToString:expectedUrl], @"Pasteboard's string should be '%@' not '%@'", pasteBoard.string, expectedUrl);
     mockedPasteboard = nil; // cleanup, so UIPasteboard methods are switched back to the originals
+}
+
+- (void)runCollectionSelectionTestForService:(YSGShareService *)service andIndexPath:(NSIndexPath *)path
+{
+    id mocked = [OCMockObject partialMockForObject:self.controller];
+    id mockedService = [OCMockObject partialMockForObject:service];
+    
+    __block BOOL fadeInvoked = NO;
+    __block BOOL didTriggerService = NO;
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expecting Fade Unfade And Trigger Invokes"];
+    OCMStub([mocked fadeCell:[OCMArg any] forService:service]).andDo(^(NSInvocation *invocation)
+    {
+        fadeInvoked = YES;
+    });
+    OCMStub([mocked unfadeCell:[OCMArg any] forService:service]).andDo(^(NSInvocation *invocation)
+    {
+        if (fadeInvoked && didTriggerService)
+        {
+            [expectation fulfill];
+        }
+    });
+    OCMStub([mockedService triggerServiceWithViewController:[OCMArg any]]).andDo(^(NSInvocation *invocation)
+    {
+        didTriggerService = YES;
+    });
+    [self.controller collectionView:self.controller.collectionView didSelectItemAtIndexPath:path];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Expectation timed-out with error '%@'", error);
+     }];
+    [mocked stopMocking];
+    [mockedService stopMocking];
+}
+
+- (void)testCollectionViewSelection
+{
+    [self.controller setupShareServicesView];
+    for (NSUInteger index = 0; index < self.controller.services.count; ++index)
+    {
+        [self runCollectionSelectionTestForService:self.controller.services[index] andIndexPath:[NSIndexPath indexPathForRow:index inSection:1]];
+    }
 }
 
 @end
