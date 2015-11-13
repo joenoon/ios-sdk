@@ -9,6 +9,7 @@
 #import "YSGShareSheetController.h"
 
 @import Foundation;
+@class YSGShareSheetServiceCell;
 
 @interface YSGShareSheetController (ExposedPrivateMethods)
 
@@ -34,7 +35,8 @@
 - (void)copy:(UIButton *)sender;
 - (BOOL)isModal;
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator;
-
+- (void)fadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service;
+- (void)unfadeCell:(YSGShareSheetServiceCell *)cell forService:(YSGShareService *)service;
 
 @end
 
