@@ -222,6 +222,40 @@
     XCTAssert([expectedSorted isEqualToArray:foundSorted], @"Expected entries '%@' not same as found '%@'", expectedSorted, foundSorted);
 }
 
+- (void)runTestForDisplayHeaders
+{
+    [self.controller setContactList:[YSGTestMockData mockContactList]];
+    for (NSInteger section = 0; section < self.controller.tableView.numberOfSections; ++section)
+    {
+        UITableViewHeaderFooterView *view = [UITableViewHeaderFooterView new];
+        [self.controller tableView:self.controller.tableView willDisplayHeaderView:view forSection:section];
+        XCTAssert([view.textLabel.font.familyName isEqualToString:self.controller.theme.fontFamily], @"Expected font family '%@', but found '%@'", self.controller.theme.fontFamily, view.textLabel.font.familyName);
+        XCTAssertEqual(view.textLabel.font.pointSize, self.controller.theme.shareAddressBookTheme.sectionFontSize, @"Expected font size to be '%f' not '%f'", self.controller.theme.shareAddressBookTheme.sectionFontSize, view.textLabel.font.pointSize);
+        if (self.controller.theme.shareAddressBookTheme && self.controller.theme.shareAddressBookTheme.sectionBackground)
+        {
+            XCTAssert([view.backgroundView.backgroundColor isEqual:self.controller.theme.shareAddressBookTheme.sectionBackground], @"Background of the section view should be '%@', but found '%@'", self.controller.theme.shareAddressBookTheme.sectionBackground, view.backgroundView.backgroundColor);
+        }
+        else
+        {
+            XCTAssertNil(view.backgroundView, @"When the theme has no section background color, there should be no background view in the section header");
+        }
+    }
+}
+
+- (void)testTtableViewDisplayHeaderWithSectionBackground
+{
+    self.controller.theme = [YSGTheme new];
+    self.controller.theme.shareAddressBookTheme.sectionBackground = [UIColor redColor];
+    [self runTestForDisplayHeaders];
+}
+
+- (void)testTtableViewDisplayHeaderWithoutSectionBackground
+{
+    self.controller.theme = [YSGTheme new];
+    self.controller.theme.shareAddressBookTheme.sectionBackground = nil;
+    [self runTestForDisplayHeaders];
+}
+
 NSInteger compareContactNames(YSGContact *first, YSGContact *second, void *context)
 {
     return [first.sanitizedName caseInsensitiveCompare:second.sanitizedName];
