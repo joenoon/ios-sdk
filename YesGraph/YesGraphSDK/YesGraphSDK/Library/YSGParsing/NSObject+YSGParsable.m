@@ -95,7 +95,8 @@ static NSString * const YSGSeparator = @"@";
         {
             id defaultVal = defaults[propertyNamePath];
             
-            if (defaultVal) {
+            if (defaultVal)
+            {
                 [self setValue:defaultVal forKeyPath:propertyNamePath];
             }
             
@@ -103,46 +104,13 @@ static NSString * const YSGSeparator = @"@";
         }
         
         Class mappableClass;
-        Class transformerClass;
-        
-        // If components == 2, then the user has declared either a transformer or a mappable class in addition.
-        if (components.count == 2)
+        Class propertyClass = [self ysg_classForPropertyName:propertyNamePath];
+        if ([propertyClass conformsToProtocol:@protocol(YSGParsable)])
         {
-            NSString *classOrTransformer = components.lastObject;
-            Class class = NSClassFromString(classOrTransformer);
-            
-            if (!class)
-            {
-                class = [self ysg_swiftClassForName:classOrTransformer];
-            }
-            
-            if ([class conformsToProtocol:@protocol(YSGParsable)])
-            {
-                mappableClass = class;
-            }
-            else if ([class isSubclassOfClass:[YSGValueTransformer class]])
-            {
-                transformerClass = class;
-            }
+            mappableClass = propertyClass;
         }
         
-        // Attempt introspection
-        if (!mappableClass)
-        {
-            Class propertyClass = [self ysg_classForPropertyName:propertyNamePath];
-            
-            if ([propertyClass conformsToProtocol:@protocol(YSGParsable)])
-            {
-                mappableClass = propertyClass;
-            }
-        }
-        
-        // Transformer class takes precedence.
-        if (transformerClass)
-        {
-            associatedValue = [transformerClass transformFromValue:associatedValue inContext:responseContext];
-        }
-        else if (mappableClass)
+        if (mappableClass)
         {
             if ([associatedValue isKindOfClass:[NSArray class]])
             {
