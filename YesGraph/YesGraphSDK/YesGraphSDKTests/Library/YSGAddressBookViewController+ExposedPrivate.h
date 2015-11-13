@@ -61,7 +61,9 @@
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section;
- 
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+
 extern NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context);
 
 @end

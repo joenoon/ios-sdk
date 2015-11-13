@@ -256,6 +256,43 @@
     [self runTestForDisplayHeaders];
 }
 
+- (void)runTestForDisplayCell
+{
+    [self.controller setContactList:[YSGTestMockData mockContactList]];
+    for (NSInteger section = 0; section < self.controller.tableView.numberOfSections; ++ section)
+    {
+        for (NSInteger contact = 0; contact < [self.controller.tableView numberOfRowsInSection:section]; ++contact)
+        {
+            NSIndexPath *path = [NSIndexPath indexPathForRow:contact inSection:section];
+            UITableViewCell *cell = [UITableViewCell new];
+            [self.controller tableView:self.controller.tableView willDisplayCell:cell forRowAtIndexPath:path];
+            XCTAssertNotNil(cell, @"Table view cell shouldn't be nil for index path '%@'", path);
+            if (self.controller.theme.shareAddressBookTheme.cellBackground)
+            {
+                XCTAssert([cell.backgroundColor isEqual:self.controller.theme.shareAddressBookTheme.cellBackground], @"Expected cell background to be set to '%@', but found '%@'", self.controller.theme.shareAddressBookTheme.cellBackground, cell.backgroundColor);
+            }
+            else
+            {
+                XCTAssertNil(cell.backgroundColor, @"Cell's background color should be nil, not '%@'", cell.backgroundColor);
+            }
+        }
+    }
+}
+
+- (void)testWillDisplayCellWithBackground
+{
+    self.controller.theme = [YSGTheme new];
+    self.controller.theme.shareAddressBookTheme.cellBackground = [UIColor redColor];
+    [self runTestForDisplayCell];
+}
+
+- (void)testWillDisplayCellWithoutBackground
+{
+    self.controller.theme = [YSGTheme new];
+    self.controller.theme.shareAddressBookTheme.cellBackground = nil;
+    [self runTestForDisplayCell];
+}
+
 NSInteger compareContactNames(YSGContact *first, YSGContact *second, void *context)
 {
     return [first.sanitizedName caseInsensitiveCompare:second.sanitizedName];
