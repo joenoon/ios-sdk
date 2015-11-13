@@ -293,6 +293,16 @@
     [self runTestForDisplayCell];
 }
 
+- (void)testSearchButtons
+{
+    self.controller.searchResults = [YSGTestMockData mockContactList].entries;
+    [self.controller searchBarTextDidBeginEditing:self.controller.searchController.searchBar];
+    XCTAssertNil(self.controller.searchResults, @"After the searchbar is activated, searchResults should've been emptied, but found '%lu' entries", (unsigned long)self.controller.searchResults.count);
+    self.controller.searchResults = [YSGTestMockData mockContactList].entries;
+    [self.controller searchBarCancelButtonClicked:self.controller.searchController.searchBar];
+    XCTAssertNil(self.controller.searchResults, @"After the searchbar cancel button is tapped, searchResults should've been emptied, but found '%lu' entries", (unsigned long)self.controller.searchResults.count);
+}
+
 NSInteger compareContactNames(YSGContact *first, YSGContact *second, void *context)
 {
     return [first.sanitizedName caseInsensitiveCompare:second.sanitizedName];
