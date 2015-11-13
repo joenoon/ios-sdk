@@ -138,36 +138,13 @@ static NSString * const YSGSeparator = @"@";
     for (NSString *propertyNameKey in mapping.allKeys)
     {
         NSArray *components = [propertyNameKey componentsSeparatedByString:YSGSeparator];
-        
-        Class transformerClass;
-        
-        if (components.count == 2)
-        {
-            NSString *classString = components.lastObject;
-            Class possibleTransformerClass = NSClassFromString(classString);
-            
-            if (!possibleTransformerClass)
-            {
-                possibleTransformerClass = [self ysg_swiftClassForName:classString];
-            }
-            
-            if ([possibleTransformerClass isSubclassOfClass:[YSGValueTransformer class]])
-            {
-                transformerClass = possibleTransformerClass;
-            }
-        }
-        
         NSString *propertyName = components.firstObject;
         
         id val = [self valueForKeyPath:propertyName];
         
         if (val)
         {
-            if (transformerClass)
-            {
-                val = [transformerClass transformToValue:val];
-            }
-            else if ([val conformsToProtocol:@protocol(YSGParsable)])
+            if ([val conformsToProtocol:@protocol(YSGParsable)])
             {
                 val = [val ysg_toDictionary];
             }
