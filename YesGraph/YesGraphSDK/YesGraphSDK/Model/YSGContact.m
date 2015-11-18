@@ -8,6 +8,8 @@
 
 #import "YSGContact.h"
 
+NSString* const YSGContactSuggestedKey = @"suggested";
+
 @implementation YSGContact
 
 - (NSString *)description
@@ -33,6 +35,30 @@
 - (NSString *)sanitizedName
 {
     return [self.name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+- (BOOL)wasSuggested
+{
+    return [self.data[YSGContactSuggestedKey] boolValue];
+}
+
+- (void)setSuggested:(BOOL)suggested
+{
+    NSMutableDictionary *data = [self.data mutableCopy];
+    
+    if (data)
+    {
+        data = [NSMutableDictionary dictionary];
+    }
+    
+    if (suggested)
+    {
+        data[YSGContactSuggestedKey] = @(YES);
+    }
+    else
+    {
+        [data removeObjectForKey:YSGContactSuggestedKey];
+    }
 }
 
 @end
