@@ -85,38 +85,33 @@
      }];
 }
 
-//- (void)testSendShownSuggestions
-//{
-//    __weak YSGContactList *mockedList = [YSGTestMockData mockContactList];
-//    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Update Online Contact List"];
-//    
-//    id cacheSource = [OCMockObject partialMockForObject:[YSGCacheContactSource new]];
-//    OCMStub([cacheSource fetchContactListWithCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation)
-//    {
-//        void (^completionBlock)(YSGContactList *, NSError *);
-//        [invocation getArgument:&completionBlock atIndex:2];
-//        XCTAssertNotNil(completionBlock, @"Completion block shouldn't be nil for invocation '%@'", invocation);
-//        
-//        completionBlock(mockedList, nil);
-//    });
-//    
-//    YSGMockClient *mockedClient = [YSGMockClient createMockedClient:YES];
-//    mockedClient.completionHandler = ^(NSArray <YSGContact *> *contactList, NSString *userId, ErrorCompletion completion)
-//     {
-//         XCTAssertEqual(mockedList.entries.count, contactList.count, @"The received entries list '%@' is not the same length as '%@'", contactList, mockedList.entries);
-//         XCTAssertNotNil(completion, @"Completion handler block shouldn't be nil");
-//         completion(nil);
-//         [expectation fulfill];
-//     };
-//    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:mockedClient localSource:self.localSource cacheSource:cacheSource];
-//
-//    __weak YSGOnlineContactSource *preventRetainCycleInstance = onlineSource;
-//
-//    [preventRetainCycleInstance updateShownSuggestions:mockedList.entries contactList:mockedList];
-//    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
-//     {
-//         XCTAssertNil(error, @"Error should be nil not '%@', otherwise the message handler was never invoked", error);
-//     }];
-//}
+- (void)testUpdateShownSuggestions
+{
+    __weak YSGContactList *mockedList = [YSGTestMockData mockContactList];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Update Online Contact List"];
+    YSGMockClient *mockedClient = [YSGMockClient createMockedClient:YES];
+    mockedClient.completionHandler = ^(NSArray <YSGContact *> *contactList, NSString *userId, ErrorCompletion completion)
+     {
+         XCTAssertEqual(mockedList.entries.count, contactList.count, @"The received entries list '%@' is not the same length as '%@'", contactList, mockedList.entries);
+         XCTAssertNotNil(completion, @"Completion handler block shouldn't be nil");
+         completion(nil);
+         
+         [self.cacheSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+         {
+             XCTAssertEqual(contactList.entries.count, mockedList.entries.count, @"All the contacts should have the property 'wasSuggested' set to YES, result was '%lu' out of '%lu'", (unsigned long)contactList.entries.count, (unsigned long)mockedList.entries.count);
+             [expectation fulfill];
+         }];
+     };
+    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:mockedClient localSource:self.localSource cacheSource:self.cacheSource];
+
+    __weak YSGOnlineContactSource *preventRetainCycleInstance = onlineSource;
+
+    [preventRetainCycleInstance updateShownSuggestions:mockedList.entries contactList:mockedList];
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil not '%@', otherwise the message handler was never invoked", error);
+     }];
+}
+
 
 @end
