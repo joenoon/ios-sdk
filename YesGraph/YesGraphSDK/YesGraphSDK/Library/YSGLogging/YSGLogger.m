@@ -34,6 +34,16 @@
 
 #pragma mark - Getters and Setters
 
+- (NSMutableArray <YSGLog *> *)logPool
+{
+    if (!_logPool)
+    {
+        _logPool = [NSMutableArray array];
+    }
+    
+    return _logPool;
+}
+
 - (NSArray <YSGLog *>*)logs
 {
     return self.logPool.copy;

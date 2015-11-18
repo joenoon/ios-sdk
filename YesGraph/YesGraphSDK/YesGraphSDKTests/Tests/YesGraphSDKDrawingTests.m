@@ -7,6 +7,9 @@
 //
 
 @import XCTest;
+
+#import <OCMock/OCMock.h>
+
 #import "YSGIconDrawings.h"
 #import "YSGTestImageData.h"
 
@@ -54,6 +57,34 @@
 {
     UIImage *twitterImage = [YSGIconDrawings twitterImage];
     [self runTestForImage:twitterImage andFile:@"twitterImageData"];
+}
+
+- (void)testTargets
+{
+    id mockObject = OCMStrictClassMock([UIImageView class]);
+    //OCMStub([mockObject setImage:[OCMArg isNotNil]]);
+    OCMExpect([mockObject setImage:[OCMArg any]]);
+    
+    YSGIconDrawings* drawings = [[YSGIconDrawings alloc] init];
+    drawings.phoneTargets = @[ mockObject ];
+    
+    OCMVerifyAll(mockObject);
+    
+    mockObject = OCMStrictClassMock([UIImageView class]);
+    //OCMStub([mockObject setImage:[OCMArg isNotNil]]);
+    OCMExpect([mockObject setImage:[OCMArg any]]);
+    
+    drawings.facebookTargets = @[ mockObject ];
+    
+    OCMVerifyAll(mockObject);
+    
+    mockObject = OCMStrictClassMock([UIImageView class]);
+    //OCMStub([mockObject setImage:[OCMArg isNotNil]]);
+    OCMExpect([mockObject setImage:[OCMArg any]]);
+    
+    drawings.twitterTargets = @[ mockObject ];
+    
+    OCMVerifyAll(mockObject);
 }
 
 @end

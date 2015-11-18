@@ -45,4 +45,12 @@ static BOOL shouldReturnNilContactStore = YES;
     return YES;
 }
 
+- (void)requestAccessForEntityType:(CNEntityType)entityType completionHandler:(void (^)(BOOL, NSError * _Nullable))completionHandler
+{
+    if (completionHandler)
+    {
+        completionHandler(YES, nil);
+    }
+}
+
 @end

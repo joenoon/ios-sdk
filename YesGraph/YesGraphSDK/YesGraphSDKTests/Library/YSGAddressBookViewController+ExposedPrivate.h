@@ -8,6 +8,8 @@
 
 #import "YSGAddressBookViewController.h"
 
+@class UISearchController;
+
 @interface YSGAddressBookViewController (ExposedPrivate)
 
 @property (nonatomic, strong) UISearchController *searchController;
@@ -29,6 +31,7 @@
 @property (nonatomic, strong) UIView *emptyView;
 
 @property (nonatomic, copy) NSArray <YSGContact *> *searchResults;
+
 
 @end
 
@@ -59,6 +62,14 @@
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index;
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController;
+
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section;
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath;
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar;
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar;
 
 extern NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context);
 

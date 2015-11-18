@@ -17,6 +17,11 @@ static ShowTriggered _ysgShowWasTriggered;
     _ysgShowWasTriggered = ysgShowWasTriggered;
 }
 
+/*!
+ *  Overrides the main show method, so it does not display the alert controller.
+ *
+ *  @param animated parameter
+ */
 - (void)ysg_show:(BOOL)animated
 {
     if (_ysgShowWasTriggered)

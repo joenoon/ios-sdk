@@ -7,7 +7,11 @@
 //
 
 @import XCTest;
-#import "YesGraph.h"
+@import Social;
+
+#import <OCMock/OCMock.h>
+
+#import "YesGraph+Private.h"
 #import "YSGMessaging.h"
 #import "YSGInviteService.h"
 #import "YSGSources.h"
@@ -17,6 +21,8 @@
 
 @interface YesGraphSDKConvenienceTests : XCTestCase
 
+@property (nonatomic, strong) YesGraph* sharedGraph;
+
 @end
 
 @implementation YesGraphSDKConvenienceTests
@@ -25,8 +31,16 @@
 {
     [super setUp];
     
-    [[YesGraph shared] configureWithClientKey:YSGTestClientKey];
-    [[YesGraph shared] configureWithUserId:YSGTestClientID];
+    //
+    // Each test is run with a seperate shared instance, not using the same one
+    // so parallelization fails.
+    //
+    self.sharedGraph = [[YesGraph alloc] init];
+    
+    //
+    // Create a mock for the user defaults
+    //
+    self.sharedGraph.userDefaults = OCMClassMock([NSUserDefaults class]);
 }
 
 - (void)tearDown
@@ -34,22 +48,28 @@
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
     
-    [[YesGraph shared] configureWithUserId:@""];
-    [[YesGraph shared] configureWithClientKey:@""];
+    self.sharedGraph = nil;
 }
 
 - (void)testYesGraphInitialization
 {
-    [[YesGraph shared] configureWithUserId:@""];
-    [[YesGraph shared] configureWithClientKey:@""];
+    [self.sharedGraph configureWithClientKey:YSGTestClientKey];
     
-    [[YesGraph shared] configureWithClientKey:YSGTestClientKey];
+    OCMStub([self.sharedGraph.userDefaults stringForKey:@"YSGConfigurationClientKey"]).andReturn(YSGTestClientKey);
+    XCTAssertFalse(self.sharedGraph.isConfigured, @"If user ID is not set isConfigured should return false");
     
-    XCTAssertFalse([YesGraph shared].isConfigured, @"If user ID is not set isConfigured should return false");
+    [self.sharedGraph configureWithUserId:YSGTestClientID];
     
-    [[YesGraph shared] configureWithUserId:YSGTestClientID];
+    OCMStub([self.sharedGraph.userDefaults stringForKey:@"YSGConfigurationUserIdKey"]).andReturn(YSGTestClientID);
     
-    XCTAssertTrue([YesGraph shared].isConfigured, @"If both user ID and client key are set isConfigured should return true");
+    XCTAssertTrue(self.sharedGraph.isConfigured, @"If both user ID and client key are set isConfigured should return true");
+}
+
+- (void)testDefaults
+{
+    XCTAssertNotNil(self.sharedGraph.userDefaults, @"User Defaults should not be nil");
+    self.sharedGraph.userDefaults = nil;
+    XCTAssertNotNil(self.sharedGraph.userDefaults, @"User Defaults should not be nil");
 }
 
 - (void)testYesGraphMessaging
@@ -59,12 +79,15 @@
     //
     // YSGMessageHandler
     //
-    [[YesGraph shared] setMessageHandler:^(NSString *message, NSDictionary *userInfo) {
+    
+    __weak YesGraph *weakSelf = self.sharedGraph;
+
+    [weakSelf setMessageHandler:^(NSString *message, NSDictionary *userInfo) {
         XCTAssert([message isEqualToString:sentMessage], @"The sent message '%@' and received message '%@' are not the same", sentMessage, message);
         XCTAssertNil(userInfo, @"User info should be nil, not '%@'", userInfo);
     }];
     
-    XCTAssertNotNil([YesGraph shared].messageHandler, @"Message handler shouldn't be nil.");
+    XCTAssertNotNil(self.sharedGraph.messageHandler, @"Message handler shouldn't be nil.");
     
     [[YSGMessageCenter shared] sendMessage:sentMessage userInfo:nil];
 
@@ -73,12 +96,12 @@
     //
     NSError *sentError = [NSError errorWithDomain:@"com.yesgraph" code:-1 userInfo:nil];
 
-    [[YesGraph shared] setErrorHandler:^(NSError *error) {
+    [weakSelf setErrorHandler:^(NSError *error) {
         XCTAssert([error.domain isEqualToString:sentError.domain], @"The error domain '%@' and received error domain '%@' are not the same", sentError.domain, error.domain);
         XCTAssert(error.userInfo.count == 0, @"User info should be empty, not '%@'", error.userInfo);
     }];
     
-    XCTAssertNotNil([YesGraph shared].errorHandler, @"Error handler shouldn't be nil.");
+    XCTAssertNotNil(self.sharedGraph.errorHandler, @"Error handler shouldn't be nil.");
     
     [[YSGMessageCenter shared] sendError:sentError];
 }
@@ -89,17 +112,20 @@
     NSString *testContactAccessPromptMessage = @"Test prompt";
     NSTimeInterval testContactBookTimePeriod = 1.0;
     
-    [[YesGraph shared] setNumberOfSuggestions:testNumberOfSuggestions];
-    [[YesGraph shared] setContactAccessPromptMessage:testContactAccessPromptMessage];
-    [[YesGraph shared] setContactBookTimePeriod:testContactBookTimePeriod];
+    [self.sharedGraph configureWithClientKey:YSGTestClientKey];
+    [self.sharedGraph configureWithUserId:YSGTestClientID];
     
-    XCTAssertTrue(([YesGraph shared].contactBookTimePeriod == testContactBookTimePeriod), @"YesGraph contactBookTimePeriod \"%f\" does not match contactBookTimePeriod that was set \"%f\".", [YesGraph shared].contactBookTimePeriod, testContactBookTimePeriod);
+    [self.sharedGraph setNumberOfSuggestions:testNumberOfSuggestions];
+    [self.sharedGraph setContactAccessPromptMessage:testContactAccessPromptMessage];
+    [self.sharedGraph setContactBookTimePeriod:testContactBookTimePeriod];
     
-    YSGShareSheetController *shareSheetController = [[YesGraph shared] shareSheetControllerForInviteService];
+    XCTAssertTrue((self.sharedGraph.contactBookTimePeriod == testContactBookTimePeriod), @"YesGraph contactBookTimePeriod \"%f\" does not match contactBookTimePeriod that was set \"%f\".", self.sharedGraph.contactBookTimePeriod, testContactBookTimePeriod);
+    
+    YSGShareSheetController *shareSheetController = [self.sharedGraph shareSheetControllerForInviteService];
     
     XCTAssert(shareSheetController.services.count == 1, @"YSGShareSheetController should only have 1 service when YesGrapy shareSheetControllerForInviteService is invoked, not '%lu'", (unsigned long)shareSheetController.services.count);
     
-    YSGInviteService *inviteService = (YSGInviteService*)shareSheetController.services.firstObject;
+    YSGInviteService *inviteService = (YSGInviteService *)shareSheetController.services.firstObject;
 
     XCTAssertTrue([inviteService isKindOfClass:[YSGInviteService class]], @"Expected YSGInviteService class, not %@", [inviteService class]);
     
@@ -110,6 +136,154 @@
     YSGLocalContactSource *localContactSource = onlineContactSource.localSource;
     
     XCTAssert([localContactSource.contactAccessPromptMessage isEqualToString:testContactAccessPromptMessage], @"Invite contact permissions message \"%@\" is not the same as configured \"%@\".", localContactSource.contactAccessPromptMessage, testContactAccessPromptMessage);
+}
+
+- (void)testYesGraphShareSheetInitialization
+{
+    YSGShareSheetController* controller = [self.sharedGraph shareSheetControllerForAllServices];
+    
+    XCTAssertNil(controller, @"Missing client key, share sheet controller should be nil");
+    
+    self.sharedGraph.clientKey = YSGTestClientKey;
+    
+    controller = [self.sharedGraph shareSheetControllerForAllServicesWithDelegate:nil];
+    
+    XCTAssertNil(controller, @"Missing user ID, share sheet controller should be nil");
+    
+    self.sharedGraph.userId = YSGTestClientID;
+    
+    controller = [self.sharedGraph shareSheetControllerForInviteServiceWithDelegate:nil];
+    
+    XCTAssertNotNil(controller, @"Controller should be created.");
+    
+    //
+    // Mock availability method on social service, to ensure
+    //
+    
+    id mockComposeViewController = OCMClassMock([SLComposeViewController class]);
+    
+    OCMStub([mockComposeViewController isAvailableForServiceType:[OCMArg any]]).andReturn(YES);
+    
+    controller = [self.sharedGraph shareSheetControllerForAllServices];
+    
+    XCTAssertNotNil(controller, @"Controller should be created for all services.");
+}
+
+- (void)testYesGraphContactSources
+{
+    XCTAssertNotNil(self.sharedGraph.localSource, @"Local source shouldn't be nil");
+    XCTAssertNotNil(self.sharedGraph.cacheSource, @"Cache source shouldn't be nil");
+}
+
+- (void)testYesGraphContactOwnerMetadata
+{
+    self.sharedGraph.contactOwnerMetadata = [[YSGSource alloc] init];
+    self.sharedGraph.contactOwnerMetadata.name = @"MyTestName";
+    
+    XCTAssert([self.sharedGraph.contactOwnerMetadata.name isEqualToString:@"MyTestName"], @"Contact owner metadata should match");
+    
+    self.sharedGraph.contactOwnerMetadata = nil;
+    
+    XCTAssertNil(self.sharedGraph.contactOwnerMetadata, @"Contact owner metadata should be nil");
+}
+
+- (void)testYesGraphApplicationNotification
+{
+    // Checking if checks are correct
+    self.sharedGraph.lastFetchDate = [NSDate date];
+    
+    [self.sharedGraph applicationNotification:nil];
+    
+    NSDate *distantPast = [NSDate distantPast];
+    [self.sharedGraph setLastFetchDate:distantPast];
+    
+    OCMStub([self.sharedGraph.userDefaults objectForKey:@"YSGLocalContactFetchDateKey"]).andReturn(distantPast);
+    
+    id classMock = OCMClassMock([self.sharedGraph.localSource class]);
+    OCMStub([classMock hasPermission]).andReturn(NO);
+    
+    //
+    // Check if permission check is correct
+    //
+    [self.sharedGraph applicationNotification:nil];
+    
+    OCMStub([classMock hasPermission]).andReturn(YES);
+    
+    id mockLocalSource = OCMPartialMock(self.sharedGraph.localSource);
+    OCMStub([mockLocalSource fetchContactListWithCompletion:nil]);
+    
+    self.sharedGraph.localSource = mockLocalSource;
+    
+    id sharedMock = OCMPartialMock(self.sharedGraph);
+    
+    [self.sharedGraph applicationNotification:nil];
+    
+    OCMVerify([sharedMock updateContactList:[OCMArg isNotNil]]);
+    
+    OCMVerify([mockLocalSource fetchContactListWithCompletion:[OCMArg isNotNil]]);
+}
+
+- (void)testYesGraphUpdateContactList
+{
+    YSGContactList *contactList = [YSGTestMockData mockContactList];
+    
+    //XCTestExpectation *expectation = [self expectationWithDescription:@"Expect completion block to be provided and called."];
+    
+    XCTAssertNil(self.sharedGraph.lastFetchDate, @"Last fetch date must be nil before calling update.");
+    
+    id mockedClient = OCMStrictClassMock([YSGClient class]);
+    
+    OCMStub([mockedClient setClientKey:[OCMArg any]]);
+    
+    id mockedGraph = OCMPartialMock(self.sharedGraph);
+    OCMExpect([mockedGraph setLastFetchDate:[OCMArg isNotNil]]);
+    OCMStub([mockedGraph lastFetchDate]).andReturn([NSDate date]);
+    
+    OCMStub([mockedClient updateAddressBookWithContactList:[OCMArg isNotNil] forUserId:[OCMArg any] completion:[OCMArg any]]).andDo(^(NSInvocation *invocation)
+    {
+        void (^completion)(id, NSError *) = nil;
+        [invocation getArgument:&completion atIndex:4];
+        
+        // Run the completion it should invoke setLastFetchDate
+        completion(nil, nil);
+        
+        // Check if last fetch date returns a value
+        
+        XCTAssertNotNil(self.sharedGraph.lastFetchDate);
+    });
+    
+    self.sharedGraph.client = mockedClient;
+    
+    [mockedGraph updateContactList:contactList];
+    
+    OCMVerifyAll(mockedGraph);
+}
+
+- (void)testYesGraphLastFetchDate
+{
+    NSDate *testDate = [NSDate date];
+    
+    [self.sharedGraph setLastFetchDate:testDate];
+    
+    OCMStub([self.sharedGraph.userDefaults objectForKey:@"YSGLocalContactFetchDateKey"]).andReturn(testDate);
+    
+    XCTAssertEqualObjects(testDate, self.sharedGraph.lastFetchDate, @"Dates do not match!");
+    
+    self.sharedGraph.userDefaults = OCMClassMock([NSUserDefaults class]);
+    
+    [self.sharedGraph setLastFetchDate:nil];
+
+    XCTAssertNil(self.sharedGraph.lastFetchDate, @"Date should be nil");
+}
+
+- (void)testYesGraphConfigurationFromUserDefaults
+{
+    OCMStub([self.sharedGraph.userDefaults objectForKey:@"YSGConfigurationClientKey"]).andReturn(YSGTestClientKey);
+    OCMStub([self.sharedGraph.userDefaults objectForKey:@"YSGConfigurationUserIdKey"]).andReturn(YSGTestClientID);
+    
+    XCTAssertEqual(self.sharedGraph.userId, YSGTestClientID, @"UserId should still be fetched from UserDefaults");
+    
+    XCTAssertEqual(self.sharedGraph.clientKey, YSGTestClientKey, @"ClientKey should still be fetched from UserDefaults");
 }
 
 @end

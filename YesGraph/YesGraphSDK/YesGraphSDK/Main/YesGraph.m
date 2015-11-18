@@ -30,6 +30,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
 
 @property (nonatomic, strong) YSGMessageCenter *messageCenter;
+@property (nonatomic, strong) YSGClient* client;
 
 /*!
  * Customization
@@ -148,6 +149,16 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     self.messageCenter.errorHandler = errorHandler;
 }
 
+- (YSGClient *)client
+{
+    if (!_client)
+    {
+        _client = [[YSGClient alloc] init];
+    }
+    
+    return _client;
+}
+
 - (NSString *)clientKey
 {
     if (!_clientKey)
@@ -231,41 +242,52 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
-        if (contactList.entries.count)
-        {
-            YSGClient* client = [[YSGClient alloc] init];
-            client.clientKey = self.clientKey;
-
-            [client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
-            {
-                if (!error)
-                {
-                    //
-                    // Store last fetch date
-                    //
-                    self.lastFetchDate = [NSDate date];
-                }
-            }];
-        }
+        [self updateContactList:contactList];
     }];
+}
+
+- (void)updateContactList:(YSGContactList *)contactList
+{
+    if (contactList.entries.count)
+    {
+        self.client.clientKey = self.clientKey;
+        
+        [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+         {
+             if (!error)
+             {
+                 //
+                 // Store last fetch date
+                 //
+                 self.lastFetchDate = [NSDate date];
+             }
+         }];
+    }
 }
 
 #pragma mark - Configuration
 
 - (void)configureWithClientKey:(NSString *)clientKey
 {
-    self.clientKey = clientKey;
-    
-    [self.userDefaults setObject:clientKey forKey:YSGConfigurationClientKey];
-    [self.userDefaults synchronize];
+    if (clientKey.length)
+    {
+        self.clientKey = clientKey;
+        self.client.clientKey = clientKey;
+        
+        [self.userDefaults setObject:clientKey forKey:YSGConfigurationClientKey];
+        [self.userDefaults synchronize];
+    }
 }
 
 - (void)configureWithUserId:(NSString *)userId
 {
-    self.userId = userId;
-    
-    [self.userDefaults setObject:userId forKey:YSGConfigurationUserIdKey];
-    [self.userDefaults synchronize];
+    if (userId.length)
+    {
+        self.userId = userId;
+        
+        [self.userDefaults setObject:userId forKey:YSGConfigurationUserIdKey];
+        [self.userDefaults synchronize];
+    }
 }
 
 - (BOOL)isConfigured

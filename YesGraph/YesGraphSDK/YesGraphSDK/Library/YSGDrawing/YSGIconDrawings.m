@@ -186,9 +186,9 @@ static UIImage* _phoneImage = nil;
 
 #pragma mark Customization Infrastructure
 
-- (void)setTwitterTargets: (NSArray*)targets
+- (void)setTwitterTargets:(NSArray*)targets
 {
-    self.twitterTargets = targets;
+    _twitterTargets = targets;
 
     for (id target in self.twitterTargets)
     {
@@ -198,9 +198,9 @@ static UIImage* _phoneImage = nil;
 
 - (void)setFacebookTargets:(NSArray *)targets
 {
-    self.facebookTargets = targets;
+    _facebookTargets = targets;
     
-    for (id target in self.facebookTargets)
+    for (id target in _facebookTargets)
     {
         [target performSelector:@selector(setImage:) withObject:YSGIconDrawings.facebookImage];
     }
@@ -208,9 +208,9 @@ static UIImage* _phoneImage = nil;
 
 - (void)setPhoneTargets:(NSArray *)targets
 {
-    self.phoneTargets = targets;
+    _phoneTargets = targets;
     
-    for (id target in self.phoneTargets)
+    for (id target in _phoneTargets)
     {
         [target performSelector:@selector(setImage:) withObject:YSGIconDrawings.phoneImage];
     }

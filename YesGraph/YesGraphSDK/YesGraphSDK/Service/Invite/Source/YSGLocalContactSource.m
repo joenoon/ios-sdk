@@ -19,6 +19,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 @interface YSGLocalContactSource ()
 
+@property (nonatomic, strong) CNContactStore *contactStore;
 @property (nonatomic, strong) CNContactFormatter *formatter;
 
 @end
@@ -34,7 +35,12 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
 
 - (CNContactStore *)contactStore
 {
-    return [CNContactStore new];
+    if (!_contactStore)
+    {
+        _contactStore = [CNContactStore new];
+    }
+    
+    return _contactStore;
 }
 
 - (ABAddressBookRef)addressBookRefWithError:(CFErrorRef *)err
@@ -276,6 +282,11 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     });
 }
 
+- (NSArray *)copyArrayOfAllPeopleFor:(ABAddressBookRef)addressBook
+{
+    return (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+}
+
 - (NSArray <YSGContact *> *)contactListFromAddressBook:(NSError **)error
 {
     CFErrorRef err = NULL;
@@ -283,7 +294,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     
     if (addressBook != nil)
     {
-        NSArray *allContacts = (__bridge_transfer NSArray *)ABAddressBookCopyArrayOfAllPeople(addressBook);
+        NSArray *allContacts = [self copyArrayOfAllPeopleFor:addressBook];
 
         NSMutableArray <YSGContact *> *entries = [NSMutableArray array];
         
@@ -295,7 +306,17 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
             
             NSString *firstName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonFirstNameProperty);
             NSString *lastName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonLastNameProperty);
-            NSString *fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            NSString *middleName = (__bridge_transfer NSString *)ABRecordCopyValue(contactPerson, kABPersonMiddleNameProperty);
+            NSString *fullName = nil;
+            
+            if (middleName)
+            {
+                fullName = [NSString stringWithFormat:@"%@ %@ %@", firstName, middleName, lastName];
+            }
+            else if (firstName || lastName)
+            {
+                fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+            }
             
             contact.name = fullName;
             

@@ -44,9 +44,3 @@ NSString* YSGLocalizedErrorDescriptionForErrorCode (YSGErrorCode errorCode)
             return NSLocalizedString(@"Unknown error", @"");
     }
 }
-
-NSString * YSGGetDefaultContactAccessPromptMessagee()
-{
-    YSGDefaultContactAccessPromptMessage = NSLocalizedString(@"Share contacts to invite friends?", @"");
-    return YSGDefaultContactAccessPromptMessage;
-}
