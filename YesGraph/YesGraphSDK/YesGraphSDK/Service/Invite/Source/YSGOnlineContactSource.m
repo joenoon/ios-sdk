@@ -48,59 +48,33 @@
 
 - (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
 {
-    [self.client fetchAddressBookForUserId:self.userId completion:^(YSGContactList *contactList, NSError * _Nullable error)
+    [self.cacheSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
         if (!contactList.entries.count || error)
         {
-            if (self.cacheSource)
+            [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
             {
-                [self.cacheSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
+                if (contactList.entries.count)
                 {
-                    if (!contactList.entries.count || error)
+                    [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
                     {
-                        [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+                        [self.cacheSource updateCacheWithContactList:contactList completion:nil];
+                        
+                        if (completion)
                         {
-                            if (contactList.entries.count)
-                            {
-                                [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:nil];
-                            }
-                            
-                            if (completion)
-                            {
-                                completion(contactList, error);
-                            }
-                        }];
-                    }
-                    else
-                    {
-                        completion(contactList, nil);
-                    }
-                }];
-            }
-            else
-            {
-                [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+                            completion(contactList, error);
+                        }
+                    }];
+                }
+                else if (completion)
                 {
-                    if (contactList)
-                    {
-                        [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:nil];
-                    }
-                    
-                    if (completion)
-                    {
-                        completion(contactList, error);
-                    }
-                }];
-            }
+                    completion(contactList, error);
+                }
+            }];
         }
         else if (completion)
         {
-            if (self.cacheSource)
-            {
-                [self.cacheSource updateCacheWithContactList:contactList completion:nil];
-            }
-            
-            completion(contactList, nil);
+            completion(contactList, error);
         }
     }];
 }
