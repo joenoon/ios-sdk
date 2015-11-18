@@ -103,23 +103,13 @@
 - (void)testContactListWithOnlineService
 {
     [self runContactListNilChecks];
-    __weak YesGraphSDKYSGAddressBookViewControllerTests *preventRetainCycle = self;
     YSGMockedOnlineContactSource *mockedOnlineSource = [YSGMockedOnlineContactSource new];
-    XCTestExpectation *expectation = [preventRetainCycle expectationWithDescription:@"Expected Suggestions Shown Handler Invoked"];
-    mockedOnlineSource.suggestionsShown = ^(NSArray <YSGContact *> *suggestions)
-    {
-        XCTAssert([preventRetainCycle.controller.suggestions isEqualToArray:suggestions], @"Controller suggestions '%@' do not match sent suggestions '%@'", preventRetainCycle.controller.suggestions, suggestions);
-        [expectation fulfill];
-    };
     YSGMockedInviteService *mockedService = [[YSGMockedInviteService alloc] initWithContactSource:mockedOnlineSource];
     self.controller.service = mockedService;
     YSGContactList *mockedList = [YSGTestMockData mockContactList];
     mockedList.useSuggestions = YES;
     self.controller.contactList = mockedList;
     [self runContactListAllChecksWith:mockedList];
-    [preventRetainCycle waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        XCTAssertNil(error, @"Error while waiting for expectation: %@", error);
-    }];
 }
 
 - (void)testContactListWithZeroAssign
