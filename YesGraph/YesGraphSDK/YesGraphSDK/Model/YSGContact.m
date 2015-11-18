@@ -59,6 +59,8 @@ NSString* const YSGContactSuggestedKey = @"suggested";
     {
         [data removeObjectForKey:YSGContactSuggestedKey];
     }
+    
+    self.data = [data copy];
 }
 
 @end

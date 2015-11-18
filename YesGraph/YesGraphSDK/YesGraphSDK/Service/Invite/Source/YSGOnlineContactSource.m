@@ -9,6 +9,7 @@
 #import "YSGOnlineContactSource.h"
 #import "YSGNetwork.h"
 #import "YSGClient+SuggestionsShown.h"
+#import "YSGContactList+Operations.h"
 #import "YSGLogging.h"
 
 @interface YSGOnlineContactSource ()
@@ -54,7 +55,7 @@
         {
             [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable unrankedContactList, NSError * _Nullable error)
             {
-                if (contactList.entries.count)
+                if (unrankedContactList.entries.count)
                 {
                     [self.client updateAddressBookWithContactList:unrankedContactList forUserId:self.userId completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
                     {
@@ -86,10 +87,33 @@
 
 - (void)updateShownSuggestions:(NSArray <YSGContact *> *)contacts contactList:(YSGContactList *)contactList
 {
+    NSArray <YSGContact *> *shownSuggestions = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 1"]];
+    
     for (YSGContact *contact in contacts)
     {
         [contact setSuggested:YES];
     }
+    
+    //
+    // Check if there are any contacts left that were not suggested
+    //
+    
+    NSArray <YSGContact *>* notSuggested = [[contactList removeDuplicatedContacts:contactList.entries] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 0"]];
+    
+    if (notSuggested.count == 0)
+    {
+        // Reset suggested flag, so we keep showing them
+        [contactList.entries makeObjectsPerformSelector:@selector(setSuggested:) withObject:@(NO)];
+        
+        for (YSGContact *contact in shownSuggestions)
+        {
+            [contact setSuggested:YES];
+        }
+    }
+
+    //
+    // Update cache
+    //
     
     [self.cacheSource updateCacheWithContactList:contactList completion:nil];
     
