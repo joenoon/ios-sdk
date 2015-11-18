@@ -81,8 +81,15 @@
 
 #pragma mark - Suggestions shown implementation
 
-- (void)sendShownSuggestions:(NSArray <YSGContact *> *)contacts
+- (void)updateShownSuggestions:(NSArray <YSGContact *> *)contacts contactList:(YSGContactList *)contactList
 {
+    for (YSGContact *contact in contacts)
+    {
+        [contact setSuggested:YES];
+    }
+    
+    [self.cacheSource updateCacheWithContactList:contactList completion:nil];
+    
     [self.client updateSuggestionsSeen:contacts forUserId:self.userId completion:^(NSError * _Nullable error)
     {
         if (error)

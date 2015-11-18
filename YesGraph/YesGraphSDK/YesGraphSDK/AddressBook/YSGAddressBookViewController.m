@@ -144,7 +144,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     if (self.suggestions.count > 0 && [self.service.contactSource isKindOfClass:[YSGOnlineContactSource class]])
     {
-        [((YSGOnlineContactSource *)self.service.contactSource) sendShownSuggestions:self.suggestions];
+        [((YSGOnlineContactSource *)self.service.contactSource) updateShownSuggestions:self.suggestions contactList:contactList];
     }
     
     self.searchResults = nil;

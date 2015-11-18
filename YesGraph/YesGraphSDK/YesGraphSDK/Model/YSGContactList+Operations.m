@@ -25,10 +25,14 @@
     
     if (numberOfSuggestions > 0)
     {
-        if (numberOfSuggestions <= self.entries.count)
-        {
-            entries = [self.entries subarrayWithRange:NSMakeRange(numberOfSuggestions, self.entries.count - numberOfSuggestions)];
-        }
+        NSArray *suggestedEntries = [self removeDuplicatedContactsFromSuggestions:self.entries numberOfSuggestions:numberOfSuggestions];
+        
+        NSMutableArray* allEntries = [self.entries mutableCopy];
+        
+        // Remove suggestions
+        [allEntries removeObjectsInArray:suggestedEntries];
+        
+        entries = [allEntries copy];
     }
     else
     {
@@ -92,21 +96,27 @@
         return nil;
     }
     
+    //
+    // Skip contacts that had already been suggested
+    //
+    
+    NSArray <YSGContact *> *currentContacts = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 0"]];
+    
     NSMutableArray <YSGContact *> *contactsWithEmails = [NSMutableArray array];
     NSMutableArray <YSGContact *> *contactsWithPhones = [NSMutableArray array];
     
     for (NSUInteger i = 0; i < number; i++)
     {
-        if (contacts.count <= i)
+        if (currentContacts.count <= i)
         {
             break;
         }
         
-        if(contacts[i].emails.count > 0)
+        if (currentContacts[i].emails.count > 0)
         {
-            [contactsWithEmails addObject:contacts[i]];
+            [contactsWithEmails addObject:currentContacts[i]];
             
-            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
+            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", currentContacts[i].name];
             
             NSArray <YSGContact *> *sameNamePhoneContacts = [contactsWithPhones filteredArrayUsingPredicate:sameNamePredicate];
             
@@ -117,9 +127,9 @@
             }
         }
         
-        else if (contacts[i].phones.count > 0)
+        else if (currentContacts[i].phones.count > 0)
         {
-            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
+            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", currentContacts[i].name];
             
             if ([contactsWithEmails filteredArrayUsingPredicate:sameNamePredicate].count)
             {
@@ -127,7 +137,7 @@
             }
             else
             {
-                [contactsWithPhones addObject:contacts[i]];
+                [contactsWithPhones addObject:currentContacts[i]];
             }
         }
     }

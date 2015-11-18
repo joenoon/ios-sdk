@@ -53,12 +53,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class YSGContact;
                                 
-@interface YSGOnlineContactSource (SuggestionsSHown)
+@interface YSGOnlineContactSource (SuggestionsShown)
 
 /*!
  *  Every time the suggestions list is shown, it is sent to the YesGraph API
  */
-- (void)sendShownSuggestions:(NSArray <YSGContact *> *)contacts;
+- (void)updateShownSuggestions:(NSArray <YSGContact *> *)contacts contactList:(YSGContactList *)contactList;
 
 @end
                                 
