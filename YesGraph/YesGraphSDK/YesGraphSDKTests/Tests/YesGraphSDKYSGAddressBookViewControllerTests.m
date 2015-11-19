@@ -69,6 +69,13 @@
     XCTAssertNil(self.controller.searchResults, @"Search results weren't reset to nil");
     XCTAssertEqual(self.controller.selectedContacts.count, 0, @"Selected contacts weren't reset to 0");
     
+    // we'll reset the suggested contacts on each run, since we're not really interested
+    // in the local state
+    for (YSGContact *reset in [self.controller.contactList.entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 1"]])
+    {
+        [reset setSuggested:NO];
+    }
+    
     NSDictionary <NSString *, NSArray <YSGContact *> *> *sorted = [contactsList sortedEntriesWithNumberOfSuggestions:self.controller.service.numberOfSuggestions];
     XCTAssertEqual(self.controller.letters.count, sorted.allKeys.count, @"Number of sorted entry sections '%lu' not the same as '%lu'", (unsigned long)self.controller.letters.count, (unsigned long)sorted.allKeys.count);
     
