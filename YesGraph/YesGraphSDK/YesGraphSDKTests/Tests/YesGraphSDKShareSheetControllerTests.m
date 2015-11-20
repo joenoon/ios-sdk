@@ -214,4 +214,38 @@
     }
 }
 
+- (void)testFadeCell
+{
+    
+    YSGShareSheetServiceCell *cell = [YSGShareSheetServiceCell new];
+    id uiview = OCMClassMock([UIView class]);
+    XCTestExpectation *expecation = [self expectationWithDescription:@"Expect Animation With Duration 0.2 Called"];
+    OCMStub(ClassMethod([uiview animateWithDuration:0.2 animations:[OCMArg any]])).andDo(^(NSInvocation *invocation)
+    {
+        [expecation fulfill];
+    });
+    [self.controller fadeCell:cell forService:nil];
+    [self waitForExpectationsWithTimeout:5 handler:^(NSError * _Nullable error)
+    {
+        XCTAssertNil(error, @"Error should be nil, not '%@'", error);
+    }];
+}
+
+- (void)testUnfadeCell
+{
+    
+    YSGShareSheetServiceCell *cell = [YSGShareSheetServiceCell new];
+    id uiview = OCMClassMock([UIView class]);
+    XCTestExpectation *expecation = [self expectationWithDescription:@"Expect Animation With Duration 0.4 Called"];
+    OCMStub(ClassMethod([uiview animateWithDuration:0.4 animations:[OCMArg any]])).andDo(^(NSInvocation *invocation)
+                                                                                         {
+                                                                                             [expecation fulfill];
+                                                                                         });
+    [self.controller unfadeCell:cell forService:nil];
+    [self waitForExpectationsWithTimeout:5 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil, not '%@'", error);
+     }];
+}
+
 @end
