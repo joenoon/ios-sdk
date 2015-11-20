@@ -57,13 +57,18 @@
     [self runCheckForShape:YSGShareSheetServiceCellShapeSquare];
     [self runCheckForShape:YSGShareSheetServiceCellShapeRoundedSquare];
 }
-- (void)testEmptyInit
+
+- (void)checZerokDimensionsForCell:(YSGShareSheetServiceCell *)cell
 {
-    YSGShareSheetServiceCell *cell = [YSGShareSheetServiceCell new];
     XCTAssertNotNil(cell, @"Cell shouldn't be nil when default init is called");
     XCTAssertEqual(cell.frame.size.height, 0, @"Frame should be 0 points in height, but found '%f'", cell.frame.size.height);
     XCTAssertEqual(cell.frame.size.width, 0, @"Frame should be 0 points in width, but found '%f'", cell.frame.size.width);
 }
 
+- (void)testEmptyInit
+{
+    YSGShareSheetServiceCell *cell = [YSGShareSheetServiceCell new];
+    [self checZerokDimensionsForCell:cell];
+}
 
 @end
