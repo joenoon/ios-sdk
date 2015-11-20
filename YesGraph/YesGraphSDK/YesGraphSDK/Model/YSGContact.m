@@ -46,7 +46,7 @@ NSString* const YSGContactSuggestedKey = @"suggested";
 {
     NSMutableDictionary *data = [self.data mutableCopy];
     
-    if (data)
+    if (!data)
     {
         data = [NSMutableDictionary dictionary];
     }

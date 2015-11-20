@@ -7,10 +7,11 @@
 //
 
 @import XCTest;
-#import "YSGContactList+ExposedPrivate.h"
 #import "YSGTestMockData.h"
 
 @interface YesGraphSDKModelYSGContactListTests : XCTestCase
+
+@property (nonatomic) NSUInteger numberOfUniqueContacts;
 
 @end
 
@@ -19,6 +20,7 @@
 - (void)setUp
 {
     [super setUp];
+    self.numberOfUniqueContacts = 19;
 }
 
 - (void)tearDown
@@ -78,11 +80,12 @@
     YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
     mockedContacts.useSuggestions = YES;
     NSUInteger suggestionCount = mockedContacts.entries.count + 1;
+    NSUInteger expectedSuggestions = mockedContacts.entries.count - self.numberOfUniqueContacts;
     
     XCTAssertNoThrow([mockedContacts sortedEntriesWithNumberOfSuggestions:suggestionCount], @"Exception was thrown while sorting contact list.");
     
     NSDictionary <NSString *, NSArray <YSGContact *> *> *sortedEntries = [mockedContacts sortedEntriesWithNumberOfSuggestions:suggestionCount];
-    XCTAssertEqual(sortedEntries.count, 0, @"The number of returned entries '%lu' is not '%d'", (unsigned long)sortedEntries.count, 0);
+    XCTAssertEqual(sortedEntries.count, expectedSuggestions, @"The number of returned entries '%lu' is not '%lu'", (unsigned long)sortedEntries.count, (unsigned long)expectedSuggestions);
 }
 
 - (void)testContactListOperationsSortedNumberOfSuggestionsSmallerThanCount
@@ -116,14 +119,12 @@
 
 - (void)testContactListRemoveDuplicate
 {
-    YSGContactList *list = [YSGContactList new];
-    NSUInteger numberOfSuggestions = 1;
-    XCTAssertNil([list removeDuplicatedContactsFromSuggestions:nil numberOfSuggestions:numberOfSuggestions], @"Remove duplicate should return nil when the contacts list is empty");
+    YSGContactList *list = [YSGTestMockData mockContactList];
+    NSUInteger expectedNumberOfTrimmedContacts = self.numberOfUniqueContacts;
     
-    list.entries = [YSGTestMockData mockContactList].entries;
-    NSArray *trimmedList = [list removeDuplicatedContactsFromSuggestions:list.entries numberOfSuggestions:numberOfSuggestions];
-    XCTAssertNotNil(trimmedList, @"Trimmed suggestions list shouldn't be nil");
-    XCTAssertEqual(trimmedList.count, numberOfSuggestions, @"The trimmed list should contain only '%lu' contacts, not '%lu'", (unsigned long)numberOfSuggestions, (unsigned long)trimmedList.count);
+    NSArray *trimmedList = [list removeDuplicatedContacts:list.entries];
+    XCTAssertNotNil(trimmedList, @"Trimmed list shouldn't be nil");
+    XCTAssertEqual(trimmedList.count, expectedNumberOfTrimmedContacts, @"The trimmed list should contain '%lu' contacts, not '%lu'", (unsigned long)expectedNumberOfTrimmedContacts, (unsigned long)trimmedList.count);
 }
 
 - (void)testContactListOperationsSuggestionsZero

@@ -14,4 +14,6 @@ typedef void (^SendShownSuggestionsHandler)(NSArray <YSGContact *> *sentSuggesti
 
 @property (strong, nonatomic) SendShownSuggestionsHandler suggestionsShown;
 
+@property (nonatomic, strong) YSGCacheContactSource *cacheSource;
+
 @end

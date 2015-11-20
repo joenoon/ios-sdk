@@ -14,6 +14,7 @@
 #import "YSGMockedOnlineContactSource.h"
 #import "YSGAddressBookCell.h"
 #import "YSGMockedUISearchController.h"
+#import "YSGMockClient.h"
 
 @interface YesGraphSDKYSGAddressBookViewControllerTests : XCTestCase
 
@@ -68,6 +69,13 @@
     XCTAssertNil(self.controller.searchResults, @"Search results weren't reset to nil");
     XCTAssertEqual(self.controller.selectedContacts.count, 0, @"Selected contacts weren't reset to 0");
     
+    // we'll reset the suggested contacts on each run, since we're not really interested
+    // in the local state
+    for (YSGContact *reset in [self.controller.contactList.entries filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 1"]])
+    {
+        [reset setSuggested:NO];
+    }
+    
     NSDictionary <NSString *, NSArray <YSGContact *> *> *sorted = [contactsList sortedEntriesWithNumberOfSuggestions:self.controller.service.numberOfSuggestions];
     XCTAssertEqual(self.controller.letters.count, sorted.allKeys.count, @"Number of sorted entry sections '%lu' not the same as '%lu'", (unsigned long)self.controller.letters.count, (unsigned long)sorted.allKeys.count);
     
@@ -103,23 +111,13 @@
 - (void)testContactListWithOnlineService
 {
     [self runContactListNilChecks];
-    __weak YesGraphSDKYSGAddressBookViewControllerTests *preventRetainCycle = self;
     YSGMockedOnlineContactSource *mockedOnlineSource = [YSGMockedOnlineContactSource new];
-    XCTestExpectation *expectation = [preventRetainCycle expectationWithDescription:@"Expected Suggestions Shown Handler Invoked"];
-    mockedOnlineSource.suggestionsShown = ^(NSArray <YSGContact *> *suggestions)
-    {
-        XCTAssert([preventRetainCycle.controller.suggestions isEqualToArray:suggestions], @"Controller suggestions '%@' do not match sent suggestions '%@'", preventRetainCycle.controller.suggestions, suggestions);
-        [expectation fulfill];
-    };
     YSGMockedInviteService *mockedService = [[YSGMockedInviteService alloc] initWithContactSource:mockedOnlineSource];
     self.controller.service = mockedService;
     YSGContactList *mockedList = [YSGTestMockData mockContactList];
     mockedList.useSuggestions = YES;
     self.controller.contactList = mockedList;
     [self runContactListAllChecksWith:mockedList];
-    [preventRetainCycle waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        XCTAssertNil(error, @"Error while waiting for expectation: %@", error);
-    }];
 }
 
 - (void)testContactListWithZeroAssign
@@ -301,6 +299,64 @@
     self.controller.searchResults = [YSGTestMockData mockContactList].entries;
     [self.controller searchBarCancelButtonClicked:self.controller.searchController.searchBar];
     XCTAssertNil(self.controller.searchResults, @"After the searchbar cancel button is tapped, searchResults should've been emptied, but found '%lu' entries", (unsigned long)self.controller.searchResults.count);
+}
+
+- (void)testSuggestionsSmallContactsList
+{
+    YSGMockedOnlineContactSource *mockedOnlineSource = [YSGMockedOnlineContactSource new];
+    YSGMockedInviteService *mockedService = [[YSGMockedInviteService alloc] initWithContactSource:mockedOnlineSource];
+    mockedService.numberOfSuggestions = 5;
+    self.controller.service = mockedService;
+    NSArray <YSGContact *> *uniqueContacts = [[[YSGTestMockData mockContactList] removeDuplicatedContacts:[YSGTestMockData mockContactList].entries] subarrayWithRange:NSMakeRange(0, 1)];
+    YSGContactList *smallContactsList = [YSGContactList new];
+    smallContactsList.entries = uniqueContacts;
+    smallContactsList.useSuggestions = YES;
+    [self.controller setContactList:smallContactsList];
+    XCTAssertEqual(self.controller.suggestions.count, smallContactsList.entries.count, @"Suggestions count should be '%lu' not '%lu'", (unsigned long)smallContactsList.entries.count, (unsigned long)self.controller.suggestions.count);
+}
+
+// TODO:
+//  - check if suggestion flags are reset when every contact has been suggested (or count > contacts.count)
+//  - check suggestions shown when contacts.count < numberOfSuggestions
+//  - check if multiple suggestion updates always show not-yet-updated contacts (unless wraparound happens)
+
+- (void)testSuggestionsMixing
+{
+    // we'll test if the suggestions correctly mix (non-repeat) until the
+    // contact list is exhausted
+    YSGMockClient *mockedClient = [YSGMockClient new];
+    mockedClient.shouldSucceed = YES;
+    
+    YSGCacheContactSource *cacheSource = [YSGCacheContactSource new];
+    YSGOnlineContactSource *mockedOnlineSource = [[YSGOnlineContactSource alloc] initWithClient:mockedClient localSource:[YSGLocalContactSource new] cacheSource:cacheSource];
+    YSGMockedInviteService *mockedService = [[YSGMockedInviteService alloc] initWithContactSource:mockedOnlineSource];
+    mockedService.numberOfSuggestions = 5;
+    self.controller.service = mockedService;
+    
+    NSArray <YSGContact *> *uniqueContacts = [[YSGTestMockData mockContactList] removeDuplicatedContacts:[YSGTestMockData mockContactList].entries];
+    YSGContactList *fullList = [YSGContactList new];
+    fullList.entries = uniqueContacts;
+    fullList.useSuggestions = YES;
+    [cacheSource updateCacheWithContactList:fullList completion:nil];
+    
+    NSInteger iterations = (NSInteger)floor(uniqueContacts.count / mockedService.numberOfSuggestions);
+    NSMutableArray <YSGContact *> *suggested = [[NSMutableArray alloc] initWithCapacity:uniqueContacts.count];
+    while (iterations > 0)
+    {
+        [cacheSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+         {
+             self.controller.suggestions = nil;
+             self.controller.contactList = contactList;
+             XCTAssertEqual(self.controller.suggestions.count, mockedService.numberOfSuggestions, @"Number of suggestions should be '%lu' not '%lu'", (unsigned long)mockedService.numberOfSuggestions, (unsigned long)self.controller.suggestions.count);
+             for (YSGContact *contact in self.controller.suggestions)
+             {
+                 XCTAssertTrue(contact.wasSuggested, @"Contact '%@' does not have the property 'wasSuggested' set to true", contact);
+                 XCTAssertFalse([suggested containsObject:contact], @"Contact '%@' shouldn't be among the selected '%@'", contact, suggested);
+             }
+             [suggested addObjectsFromArray:self.controller.suggestions];
+         }];
+        --iterations;
+    }
 }
 
 NSInteger compareContactNames(YSGContact *first, YSGContact *second, void *context)

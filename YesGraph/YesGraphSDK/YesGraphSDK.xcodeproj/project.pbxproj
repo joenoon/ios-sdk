@@ -616,7 +616,6 @@
 		E8A7D9961BDEC99900C80501 /* YSGInviteServiceOverridenMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGInviteServiceOverridenMethods.h; sourceTree = "<group>"; };
 		E8A7D9971BDEC99900C80501 /* YSGInviteServiceOverridenMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YSGInviteServiceOverridenMethods.m; sourceTree = "<group>"; };
 		E8A7D9991BDED17900C80501 /* YSGLocalContactSource+ExposePrivateMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGLocalContactSource+ExposePrivateMethods.h"; sourceTree = "<group>"; };
-		E8A7D9A01BDED7B600C80501 /* YSGContactList+ExposedPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGContactList+ExposedPrivate.h"; sourceTree = "<group>"; };
 		E8A7D9A31BDEDD3D00C80501 /* YesGraphSDKGlobalTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKGlobalTests.m; sourceTree = "<group>"; };
 		E8AC912A1BE18C63001B0855 /* YesGraphSDKNetworkTestsGETMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKNetworkTestsGETMethods.m; sourceTree = "<group>"; };
 		E8B1ED181BDA6B1B00F92FFE /* YSGCacheContactSource+MockedFilePath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "YSGCacheContactSource+MockedFilePath.h"; sourceTree = "<group>"; };
@@ -797,7 +796,6 @@
 				E8A7D9961BDEC99900C80501 /* YSGInviteServiceOverridenMethods.h */,
 				E8A7D9971BDEC99900C80501 /* YSGInviteServiceOverridenMethods.m */,
 				E8A7D9991BDED17900C80501 /* YSGLocalContactSource+ExposePrivateMethods.h */,
-				E8A7D9A01BDED7B600C80501 /* YSGContactList+ExposedPrivate.h */,
 				E8105DC71BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.h */,
 				E8105DC81BE0167600E51461 /* YSGUIAlertController+YSGDisplayOverride.m */,
 				E8105DCA1BE02C6600E51461 /* YSGMessageCenter+RemoveAlertController.h */,
