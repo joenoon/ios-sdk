@@ -96,4 +96,26 @@
     [self.cacheSource fetchContactListWithCompletion:nil];
 }
 
+- (void)testCacheContactSourceFileNotExist
+{
+    NSString *directoryPath = [[self.cacheSource filePath] stringByDeletingLastPathComponent];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *err = nil;
+    [fileManager removeItemAtPath:directoryPath error:&err];
+    XCTAssertNil(err, @"There shouldn't be any errors while removing directory at path '%@'", directoryPath);
+    
+    {
+        BOOL isDirectory;
+        BOOL exists = [fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory];
+        XCTAssert(!(isDirectory || exists), @"The directory shouldn't exist at path '%@' after it's been removed", directoryPath);
+    }
+    [self.cacheSource updateCacheWithContactList:[YSGTestMockData mockContactList] completion:nil];
+    
+    {
+        BOOL isDirectory;
+        BOOL exists = [fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory];
+        XCTAssert(isDirectory && exists, @"The directory shouldn exist at path '%@' after the cache list has been updated", directoryPath);
+    }
+}
+
 @end
