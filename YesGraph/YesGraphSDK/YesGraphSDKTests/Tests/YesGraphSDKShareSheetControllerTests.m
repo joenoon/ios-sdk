@@ -238,9 +238,9 @@
     id uiview = OCMClassMock([UIView class]);
     XCTestExpectation *expecation = [self expectationWithDescription:@"Expect Animation With Duration 0.4 Called"];
     OCMStub(ClassMethod([uiview animateWithDuration:0.4 animations:[OCMArg any]])).andDo(^(NSInvocation *invocation)
-                                                                                         {
-                                                                                             [expecation fulfill];
-                                                                                         });
+    {
+        [expecation fulfill];
+    });
     [self.controller unfadeCell:cell forService:nil];
     [self waitForExpectationsWithTimeout:5 handler:^(NSError * _Nullable error)
      {
