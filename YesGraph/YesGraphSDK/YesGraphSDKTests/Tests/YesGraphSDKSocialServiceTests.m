@@ -7,28 +7,10 @@
 //
 
 @import XCTest;
+@import Social;
 #import "YSGSocialService.h"
 #import "YSGShareSheetControllerMockedPresentView.h"
-
-@import Social;
-
-@interface YSGShareSheetControllerMock : NSObject <YSGShareServiceDelegate>
-
-@end
-
-@implementation YSGShareSheetControllerMock
-
-- (nullable NSDictionary<NSString *, id> *)shareService:(YSGShareService *)shareService messageWithUserInfo:(nullable NSDictionary <NSString *, id>*)userInfo
-{
-    return nil;
-}
-
-- (void)shareService:(YSGShareService *)shareService didShareWithUserInfo:(nullable NSDictionary <NSString *, id> *)userInfo error:(nullable NSError *)error
-{
-    
-}
-
-@end
+#import "YSGShareSheetControllerMock.h"
 
 @interface YesGraphSDKSocialServiceTests : XCTestCase
 @property (strong, nonatomic) YSGSocialService *service;
