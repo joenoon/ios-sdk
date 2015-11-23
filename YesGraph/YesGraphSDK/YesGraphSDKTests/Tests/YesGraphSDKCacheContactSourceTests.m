@@ -7,9 +7,11 @@
 //
 
 @import XCTest;
+@import OCMock;
 #import "YSGCacheContactSource.h"
 #import "YSGCacheContactSource+MockedFilePath.h"
 #import "YSGTestMockData.h"
+#import "YSGConstants.h"
 
 @interface YesGraphSDKCacheContactSourceTests : XCTestCase
 @property (strong, nonatomic) YSGCacheContactSource *cacheSource;
@@ -94,6 +96,44 @@
 {
     [self cleanUpFile];
     [self.cacheSource fetchContactListWithCompletion:nil];
+}
+
+- (void)testCacheContactSourceFileNotExist
+{
+    NSString *directoryPath = [[self.cacheSource filePath] stringByDeletingLastPathComponent];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *err = nil;
+    [fileManager removeItemAtPath:directoryPath error:&err];
+    XCTAssertNil(err, @"There shouldn't be any errors while removing directory at path '%@'", directoryPath);
+    
+    {
+        BOOL isDirectory;
+        BOOL exists = [fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory];
+        XCTAssert(!(isDirectory || exists), @"The directory shouldn't exist at path '%@' after it's been removed", directoryPath);
+    }
+    [self.cacheSource updateCacheWithContactList:[YSGTestMockData mockContactList] completion:nil];
+    
+    {
+        BOOL isDirectory;
+        BOOL exists = [fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory];
+        XCTAssert(isDirectory && exists, @"The directory shouldn exist at path '%@' after the cache list has been updated", directoryPath);
+    }
+}
+
+- (void)testNSKeyedArchiverFailure
+{
+    id mockedArchiver = OCMClassMock([NSKeyedArchiver class]);
+    OCMStub(ClassMethod([mockedArchiver archiveRootObject:[OCMArg any] toFile:[OCMArg any]])).andReturn(NO
+                                                                                                        );
+    [self.cacheSource updateCacheWithContactList:[YSGTestMockData mockContactList] completion:^(NSError * _Nullable error)
+    {
+        XCTAssertNotNil(error, @"Error shouldn't be nil when NSKeyedArchiver fails to archive the list");
+        NSError *expected = YSGErrorWithErrorCode(YSGErrorCodeCacheWriteFailure);
+        XCTAssertEqual(error.code, expected.code, @"Expected error code to be '%ld' not '%ld'", (long)expected.code, (long)error.code);
+        XCTAssert([error.domain isEqualToString:expected.domain], @"Expected error domain to be '%@' not '%@'", expected.domain, error.domain);
+        XCTAssert([error.description isEqualToString:expected.description], @"Expected error description to be '%@' not '%@'", expected.description, error.description);
+        [mockedArchiver stopMocking];
+    }];
 }
 
 @end
