@@ -39,6 +39,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)sanitizedName;
 
+/*!
+ *  Returns YES, if the contact was suggested in the past
+ *
+ *  @return YES if contact was already suggested in the past
+ */
+- (BOOL)wasSuggested;
+
+/*!
+ *  Sets (marks) contact as suggested
+ *
+ *  @param suggested
+ */
+- (void)setSuggested:(BOOL)suggested;
+
 @end
 
 NS_ASSUME_NONNULL_END

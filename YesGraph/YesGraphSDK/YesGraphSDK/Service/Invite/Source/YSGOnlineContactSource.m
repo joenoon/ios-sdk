@@ -9,6 +9,7 @@
 #import "YSGOnlineContactSource.h"
 #import "YSGNetwork.h"
 #import "YSGClient+SuggestionsShown.h"
+#import "YSGContactList+Operations.h"
 #import "YSGLogging.h"
 
 @interface YSGOnlineContactSource ()
@@ -48,67 +49,74 @@
 
 - (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
 {
-    [self.client fetchAddressBookForUserId:self.userId completion:^(YSGContactList *contactList, NSError * _Nullable error)
+    [self.cacheSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
     {
         if (!contactList.entries.count || error)
         {
-            if (self.cacheSource)
+            [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable unrankedContactList, NSError * _Nullable error)
             {
-                [self.cacheSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
+                if (unrankedContactList.entries.count)
                 {
-                    if (!contactList.entries.count || error)
+                    [self.client updateAddressBookWithContactList:unrankedContactList forUserId:self.userId completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
                     {
-                        [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+                        if (rankedContactList)
                         {
-                            if (contactList.entries.count)
-                            {
-                                [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:nil];
-                            }
-                            
-                            if (completion)
-                            {
-                                completion(contactList, error);
-                            }
-                        }];
-                    }
-                    else
-                    {
-                        completion(contactList, nil);
-                    }
-                }];
-            }
-            else
-            {
-                [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+                            [self.cacheSource updateCacheWithContactList:rankedContactList completion:nil];
+                        }
+                        
+                        if (completion)
+                        {
+                            completion(rankedContactList ?: unrankedContactList, error);
+                        }
+                    }];
+                }
+                else if (completion)
                 {
-                    if (contactList)
-                    {
-                        [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:nil];
-                    }
-                    
-                    if (completion)
-                    {
-                        completion(contactList, error);
-                    }
-                }];
-            }
+                    completion(nil, error);
+                }
+            }];
         }
         else if (completion)
         {
-            if (self.cacheSource)
-            {
-                [self.cacheSource updateCacheWithContactList:contactList completion:nil];
-            }
-            
-            completion(contactList, nil);
+            completion(contactList, error);
         }
     }];
 }
 
 #pragma mark - Suggestions shown implementation
 
-- (void)sendShownSuggestions:(NSArray <YSGContact *> *)contacts
+- (void)updateShownSuggestions:(NSArray <YSGContact *> *)contacts contactList:(YSGContactList *)contactList
 {
+    NSArray <YSGContact *> *shownSuggestions = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 1"]];
+    
+    for (YSGContact *contact in contacts)
+    {
+        [contact setSuggested:YES];
+    }
+    
+    //
+    // Check if there are any contacts left that were not suggested
+    //
+    
+    NSArray <YSGContact *>* notSuggested = [[contactList removeDuplicatedContacts:contactList.entries] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 0"]];
+    
+    if (notSuggested.count == 0)
+    {
+        // Reset suggested flag, so we keep showing them
+        [contactList.entries makeObjectsPerformSelector:@selector(setSuggested:) withObject:@(NO)];
+        
+        for (YSGContact *contact in shownSuggestions)
+        {
+            [contact setSuggested:YES];
+        }
+    }
+
+    //
+    // Update cache
+    //
+    
+    [self.cacheSource updateCacheWithContactList:contactList completion:nil];
+    
     [self.client updateSuggestionsSeen:contacts forUserId:self.userId completion:^(NSError * _Nullable error)
     {
         if (error)

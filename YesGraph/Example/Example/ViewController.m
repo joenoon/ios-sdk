@@ -128,7 +128,7 @@
     //
     // Client key should be retrieved from your trusted backend.
     //
-    [[YesGraph shared] configureWithClientKey:@"asdasdasdsa"];
+    [[YesGraph shared] configureWithClientKey:@""];
     
     if (completion)
     {

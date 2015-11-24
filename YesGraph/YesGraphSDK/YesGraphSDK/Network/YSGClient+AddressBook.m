@@ -20,21 +20,7 @@
         {
             if (!error)
             {
-                NSMutableArray <YSGRankedContact *> *contacts = [NSMutableArray array];
-                
-                for (id object in response.responseObject[@"data"])
-                {
-                    YSGRankedContact* rankedContact = [YSGRankedContact ysg_objectWithDictionary:object];
-                    
-                    if (rankedContact)
-                    {
-                        [contacts addObject:rankedContact];
-                    }
-                }
-                
-                YSGContactList *contactList = [[YSGContactList alloc] init];
-                contactList.entries = contacts.copy;
-                contactList.useSuggestions = YES;
+                YSGContactList *contactList = [self contactListForResponseDictionary:response.responseObject[@"data"]];
                 
                 completion(contactList, error);
             }
@@ -55,9 +41,39 @@
     {
         if (completion)
         {
-            completion(response.responseObject, error);
+            if (!error)
+            {
+                YSGContactList *contactList = [self contactListForResponseDictionary:response.responseObject[@"data"]];
+                
+                completion(contactList, error);
+            }
+            else
+            {
+                completion(nil, error);
+            }
         }
     }];
+}
+
+- (YSGContactList *)contactListForResponseDictionary:(NSDictionary *)data
+{
+    NSMutableArray <YSGRankedContact *> *contacts = [NSMutableArray array];
+    
+    for (id object in data)
+    {
+        YSGRankedContact* rankedContact = [YSGRankedContact ysg_objectWithDictionary:object];
+        
+        if (rankedContact)
+        {
+            [contacts addObject:rankedContact];
+        }
+    }
+    
+    YSGContactList *contactList = [[YSGContactList alloc] init];
+    contactList.entries = contacts.copy;
+    contactList.useSuggestions = YES;
+    
+    return contactList;
 }
 
 @end

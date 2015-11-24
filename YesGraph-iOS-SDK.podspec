@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                      = "YesGraph-iOS-SDK"
-  s.version                   = "0.9.4"
+  s.version                   = "0.9.5"
   s.summary                   = "Official YesGraph SDK for iOS to access YesGraph API and integrate YesGraph Invite Flow"
 
   s.description               = <<-DESC

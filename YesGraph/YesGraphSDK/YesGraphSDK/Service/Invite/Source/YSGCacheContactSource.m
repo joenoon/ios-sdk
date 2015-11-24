@@ -85,7 +85,7 @@
     }
     
     YSGContactList *contactList = [NSKeyedUnarchiver unarchiveObjectWithFile:[self filePath]];
-    contactList.useSuggestions = NO;
+    contactList.useSuggestions = YES;
     
     if (contactList)
     {

@@ -7,10 +7,10 @@
 //
 
 @import XCTest;
+@import Social;
 #import "YSGSocialService.h"
 #import "YSGShareSheetControllerMockedPresentView.h"
-
-@import Social;
+#import "YSGShareSheetControllerMock.h"
 
 @interface YesGraphSDKSocialServiceTests : XCTestCase
 @property (strong, nonatomic) YSGSocialService *service;
@@ -47,6 +47,18 @@
 - (void)testTriggerServiceWithViewController
 {
     YSGShareSheetControllerMockedPresentView *viewController = [YSGShareSheetControllerMockedPresentView new];
+    YSGShareSheetControllerMock *mockedDelegate = [YSGShareSheetControllerMock new];
+    self.service.delegate = mockedDelegate;
+    [self.service triggerServiceWithViewController:viewController];
+    XCTAssertTrue(self.service.isAvailable, @"Should be available for '%@'", self.service.serviceType);
+    XCTAssertNil(viewController.currentPresentingViewController, @"Presented view controller should be nil when social service is called directly");
+}
+
+- (void)testTriggerServiceWithViewControllerAndDelegateResponds
+{
+    YSGShareSheetControllerMockedPresentView *viewController = [YSGShareSheetControllerMockedPresentView new];
+    YSGShareSheetControllerMock *mockedDelegate = [YSGShareSheetControllerMock new];
+    self.service.delegate = mockedDelegate;
     [self.service triggerServiceWithViewController:viewController];
     XCTAssertTrue(self.service.isAvailable, @"Should be available for '%@'", self.service.serviceType);
     XCTAssertNil(viewController.currentPresentingViewController, @"Presented view controller should be nil when social service is called directly");

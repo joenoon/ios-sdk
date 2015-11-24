@@ -78,6 +78,16 @@ Before you can use any of the example apps, you need to configure the app with y
    ```
 5. Run the desired Example app.
 
+## Building
+
+We provide a simple script to build YesGraph SDK locally:
+
+```bash
+./Scripts/build-all.sh
+```
+
+This script will build both Framework and a Static library.
+
 ## Tests
 
 YesGraph iOS SDK contains unit tests that can be executed in Xcode.
