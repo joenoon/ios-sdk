@@ -127,13 +127,16 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)setContactList:(YSGContactList *)contactList
 {
-    if (self.service.inviteServiceType == YSGInviteServiceTypeEmail) {
+    if (self.service.inviteServiceType == YSGInviteServiceTypeEmail)
+    {
         _contactList = [contactList emailEntries];
     }
-    else if (self.service.inviteServiceType == YSGInviteServiceTypePhone) {
+    else if (self.service.inviteServiceType == YSGInviteServiceTypePhone)
+    {
         _contactList = [contactList phoneEntries];
     }
-    else {
+    else
+    {
         _contactList = contactList;
     }
     
@@ -141,7 +144,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
     if (contactList.entries.count)
     {
-        // sorted contacts
         self.sortedContacts = [contactList sortedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions];
         self.letters = [self.sortedContacts.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
     }
@@ -260,9 +262,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     [self.service.contactSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-
             self.contactList = contactList;
-
         });
     }];
 

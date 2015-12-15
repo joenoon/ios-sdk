@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		300922FE1C1F927100C82816 /* YSGInviteServiceType.h in Headers */ = {isa = PBXBuildFile; fileRef = 300922FD1C1F927100C82816 /* YSGInviteServiceType.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		300922FF1C1F927100C82816 /* YSGInviteServiceType.h in Headers */ = {isa = PBXBuildFile; fileRef = 300922FD1C1F927100C82816 /* YSGInviteServiceType.h */; };
+		300922FF1C1F927100C82816 /* YSGInviteServiceType.h in Headers */ = {isa = PBXBuildFile; fileRef = 300922FD1C1F927100C82816 /* YSGInviteServiceType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		30420E521BAC763900C1D614 /* YSGIconDrawings.h in Headers */ = {isa = PBXBuildFile; fileRef = 30420E501BAC763900C1D614 /* YSGIconDrawings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		30420E531BAC763900C1D614 /* YSGIconDrawings.m in Sources */ = {isa = PBXBuildFile; fileRef = 30420E511BAC763900C1D614 /* YSGIconDrawings.m */; };
 		3800EE961B83769C007E0C43 /* YSGShareSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3800EE941B83769C007E0C43 /* YSGShareSheetController.h */; settings = {ATTRIBUTES = (Public, ); }; };
