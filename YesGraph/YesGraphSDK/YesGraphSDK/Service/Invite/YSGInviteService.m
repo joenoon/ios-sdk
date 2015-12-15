@@ -46,19 +46,38 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 @implementation YSGInviteService
 
+@synthesize name = _name;
+@synthesize backgroundColor = _backgroundColor;
+@synthesize serviceImage = _serviceImage;
+
 - (NSString *)name
 {
-    return @"Contacts";
+    if (_name) {
+        return _name;
+    }
+    else {
+        return @"Contacts";
+    }
 }
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.mainColor;
+    if (_backgroundColor) {
+        return _backgroundColor;
+    }
+    else {
+        return self.theme.mainColor;
+    }
 }
 
 - (UIImage *)serviceImage
 {
-    return [YSGIconDrawings phoneImage];
+    if (_serviceImage) {
+        return _serviceImage;
+    }
+    else {
+        return [YSGIconDrawings phoneImage];
+    }
 }
 
 - (MFMessageComposeViewController *)messageComposeViewController

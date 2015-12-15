@@ -46,7 +46,7 @@
     
     for (int i = 0; i < self.entries.count; i++) {
         YSGContact *contact = self.entries[i];
-        if (contact.emails.count < 1) {
+        if (contact.phones.count < 1) {
             [phoneEntriesToRemove addObject:contact];
         }
     }
