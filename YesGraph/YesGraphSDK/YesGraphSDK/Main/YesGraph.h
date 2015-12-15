@@ -11,9 +11,8 @@
 #import "YSGShareSheetController.h"
 #import "YSGTheme.h"
 #import "YSGSource.h"
-#import "YSGContactList.h"
-#import "YSGInviteServiceType.h"
 #import "YSGInviteService.h"
+#import "YSGInviteServiceType.h"
 
 @import Foundation;
 
@@ -151,13 +150,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *shareSheetText;
 
 /*!
- *  The type of the invite service - phone, email or bothO
+ *  The type of the invite service - phone, email or both
  */
 @property (nonatomic, assign) YSGInviteServiceType inviteServiceType;
-
-// LMS
-@property (nonatomic, strong) YSGInviteService *phoneInviteService;
-@property (nonatomic, strong) YSGInviteService *emailInviteService;
 
 /*!
  *  Every time that application is activated, it is checked when was the last time that 

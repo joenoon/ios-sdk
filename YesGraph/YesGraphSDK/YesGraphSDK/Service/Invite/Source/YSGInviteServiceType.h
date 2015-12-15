@@ -14,12 +14,6 @@ typedef NS_ENUM(NSInteger, YSGInviteServiceType)
      *  Display both phone & email contacts together
      */
     YSGInviteServiceTypeBoth,
-    
-    /*!
-     *  Display only phone contacts
-     */
-    YSGInviteServiceTypeBothSeparate,
-
     /*!
      *  Display only phone contacts
      */

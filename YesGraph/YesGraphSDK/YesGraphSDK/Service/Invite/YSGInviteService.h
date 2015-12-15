@@ -83,7 +83,11 @@ extern NSString* const YSGInviteEmailIsHTMLKey;
  */
 @property (nonatomic, assign) BOOL allowSearch;
 
-// LMS stuff
+/*!
+ *  Whether invite service will contain contacts with phones, emails or both
+ *
+ *  @discussion: Default value is: BOTH
+ */
 
 @property (nonatomic, assign) YSGInviteServiceType inviteServiceType;
 

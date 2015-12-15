@@ -46,8 +46,6 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 @property (nonatomic, assign) NSTimeInterval contactBookTimePeriod;
 @property (nonatomic, assign) YSGInviteServiceType inviteServiceType;
-@property (nonatomic, strong) YSGInviteService *phoneInviteService;
-@property (nonatomic, strong) YSGInviteService *emailInviteService;
 
 /*!
  * Logging
@@ -390,10 +388,6 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         }
     }
     
-    if (self.phoneInviteService && self.emailInviteService) {
-        
-    }
-        
     switch (self.inviteServiceType) {
         case YSGInviteServiceTypeBoth: {
             // call method for both together
