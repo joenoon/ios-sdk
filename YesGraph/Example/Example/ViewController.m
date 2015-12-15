@@ -99,31 +99,7 @@
     [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     [YesGraph shared].shareSheetText = @"Demo our SDK by sharing YesGraph with your contacts";
 
-//    YSGShareSheetController *shareController  = [[YesGraph shared] shareSheetControllerForAllServicesWithDelegate:self];
-    
-    YSGLocalContactSource *localContactSource = [[YSGLocalContactSource alloc] init];
-    localContactSource.contactAccessPromptMessage = @"Share contacts with MyApp to invite friends?";
-    
-    YSGClient *client = [[YSGClient alloc] init];
-    client.clientKey = @"live-WzEsMCwibGVhIl0.CQCE_g.DMOwr3YUg2zwiuPMJnInVa1D3ZI";
-    
-    YSGOnlineContactSource *onlineContactSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localContactSource cacheSource:[YSGCacheContactSource new]];
-    onlineContactSource.userId = [[NSUserDefaults standardUserDefaults] objectForKey:@"YSGConfigurationUserIdKey"];
-    
-    YSGInviteService *phoneInviteService = [[YSGInviteService alloc] initWithContactSource:onlineContactSource userId:onlineContactSource.userId];
-    phoneInviteService.numberOfSuggestions = 5;
-    phoneInviteService.inviteServiceType = YSGInviteServiceTypePhone;
-    phoneInviteService.name = @"Phone";
-    
-    YSGInviteService *emailInviteService = [[YSGInviteService alloc] initWithContactSource:onlineContactSource userId:onlineContactSource.userId];
-    emailInviteService.numberOfSuggestions = 5;
-    emailInviteService.inviteServiceType = YSGInviteServiceTypeEmail;
-    emailInviteService.serviceImage = [UIImage imageNamed:@"logoRed"];
-    emailInviteService.backgroundColor = [UIColor purpleColor];
-    
-    
-    YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:@[ phoneInviteService, emailInviteService ] delegate:self theme:self.theme];
-    
+    YSGShareSheetController *shareController  = [[YesGraph shared] shareSheetControllerForAllServicesWithDelegate:self];
 
     // OPTIONAL
     
@@ -152,7 +128,7 @@
     //
     // Client key should be retrieved from your trusted backend.
     //
-    [[YesGraph shared] configureWithClientKey:@"live-WzEsMCwibGVhIl0.CQCE_g.DMOwr3YUg2zwiuPMJnInVa1D3ZI"];
+    [[YesGraph shared] configureWithClientKey:@""];
     
     if (completion)
     {
