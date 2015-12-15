@@ -9,6 +9,7 @@
 #import "YSGShareService.h"
 #import "YSGContactSource.h"
 #import "YSGContact.h"
+#import "YSGInviteServiceType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -81,6 +82,10 @@ extern NSString* const YSGInviteEmailIsHTMLKey;
  *  @discussion: Default value is: YES
  */
 @property (nonatomic, assign) BOOL allowSearch;
+
+// LMS stuff
+
+@property (nonatomic, assign) YSGInviteServiceType inviteServiceType;
 
 #pragma mark - Initialization
 

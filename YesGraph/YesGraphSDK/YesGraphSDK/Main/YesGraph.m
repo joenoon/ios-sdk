@@ -16,6 +16,7 @@
 #import "YSGClient+AddressBook.h"
 
 #import "YSGClient+SuggestionsShown.h"
+#import "YSGInviteServiceType.h"
 
 static NSString *const YSGLocalContactFetchDateKey = @"YSGLocalContactFetchDateKey";
 static NSString *const YSGConfigurationClientKey = @"YSGConfigurationClientKey";
@@ -44,6 +45,9 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 @property (nullable, nonatomic, copy) NSString *shareSheetText;
 @property (nullable, nonatomic, copy) NSString *contactAccessPromptMessage;
 @property (nonatomic, assign) NSTimeInterval contactBookTimePeriod;
+@property (nonatomic, assign) YSGInviteServiceType inviteServiceType;
+@property (nonatomic, strong) YSGInviteService *phoneInviteService;
+@property (nonatomic, strong) YSGInviteService *emailInviteService;
 
 /*!
  * Logging
@@ -366,10 +370,6 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localSource cacheSource:cacheSource];
     onlineSource.userId = self.userId;
     
-    YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:self.userId];
-    inviteService.numberOfSuggestions = self.numberOfSuggestions;
-    inviteService.theme = self.theme;
-    
     //
     // Check if social services such as Facebook & Twitter are available
     //
@@ -390,7 +390,35 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         }
     }
     
-    [services addObject:inviteService];
+    if (self.phoneInviteService && self.emailInviteService) {
+        
+    }
+        
+    switch (self.inviteServiceType) {
+        case YSGInviteServiceTypeBoth: {
+            // call method for both together
+            YSGInviteService *inviteService = [self inviteServiceWithContactSource:onlineSource andServiceType:YSGInviteServiceTypeBoth];
+            [services addObject:inviteService];
+        }
+            break;
+        case YSGInviteServiceTypeEmail: {
+            // call method for just email
+            YSGInviteService *inviteService = [self inviteServiceWithContactSource:onlineSource andServiceType:YSGInviteServiceTypeEmail];
+            [services addObject:inviteService];
+        }
+            break;
+        case YSGInviteServiceTypePhone: {
+            // call method for just phone
+            YSGInviteService *inviteService = [self inviteServiceWithContactSource:onlineSource andServiceType:YSGInviteServiceTypePhone];
+            [services addObject:inviteService];
+        }
+            break;
+        default: {
+            YSGInviteService *inviteService = [self inviteServiceWithContactSource:onlineSource andServiceType:YSGInviteServiceTypeBoth];
+            [services addObject:inviteService];
+        }
+            break;
+    }
     
     YSGShareSheetController *shareController = [[YSGShareSheetController alloc] initWithServices:services.copy delegate:delegate theme:self.theme];
     shareController.shareText = self.shareSheetText;
@@ -398,5 +426,16 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 }
 
 #pragma mark - Private Methods
+
+- (YSGInviteService *)inviteServiceWithContactSource:(YSGOnlineContactSource *) onlineSource andServiceType:(YSGInviteServiceType) serviceType {
+    
+    YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:self.userId];
+    inviteService.numberOfSuggestions = self.numberOfSuggestions;
+    inviteService.theme = self.theme;
+    inviteService.inviteServiceType = serviceType;
+    
+    return inviteService;
+}
+
 
 @end

@@ -25,6 +25,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, strong) YSGSource *source;
 
+- (YSGContactList *)emailEntries;
+- (YSGContactList *)phoneEntries;
+
 @end
 
 NS_ASSUME_NONNULL_END
