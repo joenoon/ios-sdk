@@ -115,6 +115,56 @@
     return sortedList.copy;
 }
 
+
+- (YSGContactList *)emailEntries
+{
+    YSGContactList *emailContactList = [YSGContactList new];
+    emailContactList.source = self.source;
+    emailContactList.useSuggestions = self.useSuggestions;
+    
+    NSMutableArray <YSGContact *> *emailEntries = [self.entries mutableCopy];
+    NSMutableArray <YSGContact *> *emailEntriesToRemove = [NSMutableArray new];
+    
+    for (YSGContact* contact in self.entries)
+    {
+        if (contact.emails.count < 1)
+        {
+            [emailEntriesToRemove addObject:contact];
+        }
+    }
+    
+    [emailEntries removeObjectsInArray:emailEntriesToRemove];
+    
+    emailContactList.entries = emailEntries;
+    
+    return emailContactList;
+}
+
+- (YSGContactList *)phoneEntries
+{
+    YSGContactList *phoneContactList = [YSGContactList new];
+    phoneContactList.source = self.source;
+    phoneContactList.useSuggestions = self.useSuggestions;
+    
+    NSMutableArray <YSGContact *> *phoneEntries = [self.entries mutableCopy];
+    NSMutableArray <YSGContact *> *phoneEntriesToRemove = [NSMutableArray new];
+    
+    for (YSGContact* contact in self.entries)
+    {
+        if (contact.phones.count < 1)
+        {
+            [phoneEntriesToRemove addObject:contact];
+        }
+    }
+    
+    [phoneEntries removeObjectsInArray:phoneEntriesToRemove];
+    
+    phoneContactList.entries = phoneEntries;
+    
+    return phoneContactList;
+}
+
+
 #pragma mark - Private Methods
 
 - (NSArray <YSGContact *> *)removeDuplicatedContacts:(NSArray <YSGContact *> *)contacts

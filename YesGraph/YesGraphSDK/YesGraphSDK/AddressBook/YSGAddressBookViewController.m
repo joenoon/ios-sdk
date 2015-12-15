@@ -127,7 +127,18 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)setContactList:(YSGContactList *)contactList
 {
-    _contactList = contactList;
+    if (self.service.inviteServiceType == YSGInviteServiceTypeEmail)
+    {
+        _contactList = [contactList emailEntries];
+    }
+    else if (self.service.inviteServiceType == YSGInviteServiceTypePhone)
+    {
+        _contactList = [contactList phoneEntries];
+    }
+    else
+    {
+        _contactList = contactList;
+    }
     
     self.suggestions = (contactList.useSuggestions) ? [contactList suggestedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions] : nil;
 

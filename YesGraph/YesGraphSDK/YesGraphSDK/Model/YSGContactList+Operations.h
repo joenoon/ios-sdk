@@ -17,6 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray <YSGContact *> *)removeDuplicatedContacts:(NSArray <YSGContact *> *)contacts;
 
+/*!
+ *  Returns a new copy of the contact list with only Email entries
+ *
+ *  @return new contact list instance with entries that have Email
+ */
+- (YSGContactList *)emailEntries;
+
+/*!
+ *  Returns a new copy of the contact list with only Phone number entries
+ *
+ *  @return new contact list instance with entries that have Phone number
+ */
+- (YSGContactList *)phoneEntries;
+
 @end
 
 NS_ASSUME_NONNULL_END

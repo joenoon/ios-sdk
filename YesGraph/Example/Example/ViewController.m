@@ -98,7 +98,7 @@
     [YesGraph shared].numberOfSuggestions = 5;
     [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     [YesGraph shared].shareSheetText = @"Demo our SDK by sharing YesGraph with your contacts";
-    
+
     YSGShareSheetController *shareController  = [[YesGraph shared] shareSheetControllerForAllServicesWithDelegate:self];
 
     // OPTIONAL
