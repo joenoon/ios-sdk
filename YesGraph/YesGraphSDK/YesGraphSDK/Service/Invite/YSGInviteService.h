@@ -92,6 +92,17 @@ extern NSString* const YSGInviteEmailIsHTMLKey;
 
 - (void)triggerInviteFlowWithContacts:(NSArray <YSGContact *> *)entries;
 
+#pragma mark - Contact details
+
+/*!
+ *  Method returns a contact detail string, displayed under the name of the contact, usually containing phone or email.
+ *
+ *  @param contact with details
+ *
+ *  @return string with contact information to be displayed.
+ */
+- (NSString *)contactDetailStringForContact:(YSGContact *)contact;
+
 @end
 
 NS_ASSUME_NONNULL_END

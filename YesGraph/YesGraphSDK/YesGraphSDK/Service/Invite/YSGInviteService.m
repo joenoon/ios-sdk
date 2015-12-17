@@ -121,6 +121,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         self.nativeMessageSheet = YES;
         self.nativeEmailSheet = YES;
         
+        self.inviteServiceType = YSGInviteServiceTypeBoth;
+        
         self.userId = userId;
     }
     
@@ -412,6 +414,28 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
             [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
         }
     }];
+}
+
+#pragma mark - Contact Details
+
+- (NSString *)contactDetailStringForContact:(YSGContact *)contact
+{
+    NSString* contactDetail = nil;
+    
+    //
+    // If we have a phone list, we try to use the phone
+    //
+    if (self.inviteServiceType == YSGInviteServiceTypePhone)
+    {
+        contactDetail = contact.phone;
+    }
+    
+    if (!contactDetail)
+    {
+        contactDetail = contact.contactString;
+    }
+    
+    return contactDetail;
 }
 
 #pragma mark - Private Methods

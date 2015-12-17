@@ -127,24 +127,25 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)setContactList:(YSGContactList *)contactList
 {
+    YSGContactList* displayedList = contactList;
+    
     if (self.service.inviteServiceType == YSGInviteServiceTypeEmail)
     {
-        _contactList = [contactList emailEntries];
+        displayedList = [contactList emailEntries];
     }
     else if (self.service.inviteServiceType == YSGInviteServiceTypePhone)
     {
-        _contactList = [contactList phoneEntries];
+        displayedList = [contactList phoneEntries];
     }
-    else
-    {
-        _contactList = contactList;
-    }
-    
-    self.suggestions = (contactList.useSuggestions) ? [contactList suggestedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions] : nil;
 
-    if (contactList.entries.count)
+    _contactList = displayedList;
+
+    
+    self.suggestions = (displayedList.useSuggestions) ? [displayedList suggestedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions] : nil;
+
+    if (displayedList.entries.count)
     {
-        self.sortedContacts = [contactList sortedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions];
+        self.sortedContacts = [displayedList sortedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions];
         self.letters = [self.sortedContacts.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
     }
     else
@@ -457,7 +458,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     YSGContact *contact = [self contactForIndexPath:indexPath];
     
     cell.textLabel.text = contact.name;
-    cell.detailTextLabel.text = contact.contactString;
+
+    cell.detailTextLabel.text = [self.service contactDetailStringForContact:contact] ?: contact.contactString;
     cell.selected = [self.selectedContacts containsObject:contact];
     
     if ([self.selectedContacts containsObject:contact])
