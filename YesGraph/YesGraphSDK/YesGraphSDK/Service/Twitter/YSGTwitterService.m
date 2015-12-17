@@ -15,22 +15,43 @@
 
 - (NSString *)name
 {
-    return @"Tweet";
+    if ([super name])
+    {
+        return [super name];
+    }
+    else
+    {
+        return @"Twitter";
+    }
 }
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.twitterColor;
+    if ([super backgroundColor])
+    {
+        return [super backgroundColor];
+    }
+    else
+    {
+        return self.theme.twitterColor;
+    }
+}
+
+- (UIImage *)serviceImage
+{
+    if ([super serviceImage])
+    {
+        return [super serviceImage];
+    }
+    else
+    {
+        return [YSGIconDrawings twitterImage];
+    }
 }
 
 - (NSString *)serviceType
 {
     return SLServiceTypeTwitter;
-}
-
-- (UIImage *)serviceImage
-{
-    return [YSGIconDrawings twitterImage];
 }
 
 @end
