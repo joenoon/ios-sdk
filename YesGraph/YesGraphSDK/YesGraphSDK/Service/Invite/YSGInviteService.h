@@ -35,20 +35,6 @@ extern NSString* const YSGInviteEmailIsHTMLKey;
 #pragma mark - Invite configuration
 
 /*!
- *  If phone number entries should be displayed.
- *
- *  @discussion: Default value: YES
- */
-@property (nonatomic, assign) BOOL usePhone;
-
-/*!
- *  If email entries should be displayed.
- *
- *  @discussion: Default value: YES
- */
-@property (nonatomic, assign) BOOL useEmail;
-
-/*!
  *  If invite service should support multiple selection of user entries.
  *
  *  @discussion: Default value: YES
