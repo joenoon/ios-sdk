@@ -22,7 +22,6 @@
     [super viewDidLoad];
     
     self.title = @"Home";
-    self.navigationController.navigationBarHidden = YES;
     
     self.theme = [YSGTheme new];
     

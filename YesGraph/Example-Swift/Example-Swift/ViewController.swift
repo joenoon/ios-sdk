@@ -59,24 +59,9 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         }
         else
         {
-            sender.setTitle("setting up...", forState: UIControlState.Normal);
-            sender.enabled = false;
-
-            self.configureYesGraphWithCompletion({ (success, error) -> Void in
-                sender.setTitle("Try YesGraph", forState: UIControlState.Normal)
-                sender.enabled = true;
-                
-                if (success)
-                {
-                    self.presentShareSheetController()
-                }
-                else
-                {
-                    let alert = UIAlertController(title: "Error!", message: "YesGraphSDK must be configured before presenting ShareSheet", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-            })
+            let alert = UIAlertController(title: "Error!", message: "YesGraphSDK must be configured before presenting ShareSheet", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
         }
     }
     
@@ -106,28 +91,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         //
         
         self.navigationController?.pushViewController(shareController!, animated: true)
-    }
-
-    func configureYesGraphWithCompletion(completion: ((success: Bool, error: NSError?) -> Void)?) {
-        if YesGraph.shared().userId == nil {
-            YesGraph.shared().configureWithUserId(YSGUtility.randomUserId())
-        }
-        
-        YesGraph.shared().configureWithClientKey("")
-        
-        //
-        // Client key should be retrieved from your trusted backend.
-        //
-        if completion != nil {
-            if YesGraph.shared().isConfigured
-            {
-                completion!(success: true, error: nil);
-            }
-            else
-            {
-                completion!(success: false, error: nil);
-            }
-        }
     }
     
     func shareSheetController(shareSheetController: YSGShareSheetController, messageForService service: YSGShareService, userInfo: [String : AnyObject]?) -> [String : AnyObject] {
