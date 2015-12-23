@@ -68,27 +68,9 @@
     }
     else
     {
-        [sender setTitle:@"setting up..." forState:UIControlStateNormal];
-        sender.enabled = NO;
-        
-        [self configureYesGraphWithCompletion:^(BOOL success, NSError *error)
-        {
-            [sender setTitle:@"Try YesGraph" forState:UIControlStateNormal];
-            sender.enabled = YES;
-            
-            if (success)
-            {
-                [self presentShareSheetController];
-            }
-            else
-            {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" preferredStyle:UIAlertControllerStyleAlert];
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
-                [self presentViewController:alert animated:YES completion:nil];
-            }
-            
-        }];
-    
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error!" message:@"YesGraphSDK must be configured before presenting ShareSheet" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
@@ -98,7 +80,7 @@
     [YesGraph shared].numberOfSuggestions = 5;
     [YesGraph shared].contactAccessPromptMessage = @"Share contacts with Example to invite friends?";
     [YesGraph shared].shareSheetText = @"Demo our SDK by sharing YesGraph with your contacts";
-    
+
     YSGShareSheetController *shareController  = [[YesGraph shared] shareSheetControllerForAllServicesWithDelegate:self];
 
     // OPTIONAL
@@ -116,31 +98,6 @@
     // PRESENT ON NAVIGATION STACK - un/comment next 1 line
     //
     [self.navigationController pushViewController:shareController animated:YES];
-}
-
-- (void)configureYesGraphWithCompletion:(void (^)(BOOL success, NSError *error))completion
-{
-    if (![YesGraph shared].userId.length)
-    {
-        [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
-    }
-    
-    //
-    // Client key should be retrieved from your trusted backend.
-    //
-    [[YesGraph shared] configureWithClientKey:@""];
-    
-    if (completion)
-    {
-        if ([YesGraph shared].isConfigured)
-        {
-            completion(YES, nil);
-        }
-        else
-        {
-            completion(NO, nil);
-        }
-    }
 }
 
 #pragma mark - YSGShareSheetControllerDelegate
