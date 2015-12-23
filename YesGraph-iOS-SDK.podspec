@@ -25,7 +25,4 @@ Pod::Spec.new do |s|
   s.source                    = { :git => "https://github.com/yesgraph/ios-sdk.git", :tag => "#{s.version}" }
 
   s.source_files              = "YesGraph/YesGraphSDK/YesGraphSDK/**/*.{h,m}"
-  #s.public_header_files       = "YesGraph/YesGraphSDK/YesGraphSDK/**/*.{h,m}"
-  #s.header_dir                = "YesGraph/YesGraphSDK/YesGraphSDK/**/*.{h,m}"
-
 end
