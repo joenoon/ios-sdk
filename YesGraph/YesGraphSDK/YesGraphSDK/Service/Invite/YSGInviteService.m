@@ -48,17 +48,38 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
 
 - (NSString *)name
 {
-    return @"Contacts";
+    if ([super name])
+    {
+        return [super name];
+    }
+    else
+    {
+        return @"Contacts";
+    }
 }
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.mainColor;
+    if ([super backgroundColor])
+    {
+        return [super backgroundColor];
+    }
+    else
+    {
+        return self.theme.mainColor;
+    }
 }
 
 - (UIImage *)serviceImage
 {
-    return [YSGIconDrawings phoneImage];
+    if ([super serviceImage])
+    {
+        return [super serviceImage];
+    }
+    else
+    {
+        return [YSGIconDrawings phoneImage];
+    }
 }
 
 - (MFMessageComposeViewController *)messageComposeViewController
@@ -99,6 +120,8 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
         
         self.nativeMessageSheet = YES;
         self.nativeEmailSheet = YES;
+        
+        self.inviteServiceType = YSGInviteServiceTypeBoth;
         
         self.userId = userId;
     }
@@ -391,6 +414,28 @@ NSString *_Nonnull const YSGInviteEmailIsHTMLKey = @"YSGInviteEmailIsHTMLKey";
             [self.addressBookNavigationController dismissViewControllerAnimated:YES completion:nil];
         }
     }];
+}
+
+#pragma mark - Contact Details
+
+- (NSString *)contactDetailStringForContact:(YSGContact *)contact
+{
+    NSString* contactDetail = nil;
+    
+    //
+    // If we have a phone list, we try to use the phone
+    //
+    if (self.inviteServiceType == YSGInviteServiceTypePhone)
+    {
+        contactDetail = contact.phone;
+    }
+    
+    if (!contactDetail)
+    {
+        contactDetail = contact.contactString;
+    }
+    
+    return contactDetail;
 }
 
 #pragma mark - Private Methods

@@ -127,13 +127,25 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 
 - (void)setContactList:(YSGContactList *)contactList
 {
-    _contactList = contactList;
+    YSGContactList* displayedList = contactList;
     
-    self.suggestions = (contactList.useSuggestions) ? [contactList suggestedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions] : nil;
-
-    if (contactList.entries.count)
+    if (self.service.inviteServiceType == YSGInviteServiceTypeEmail)
     {
-        self.sortedContacts = [contactList sortedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions];
+        displayedList = [contactList emailEntries];
+    }
+    else if (self.service.inviteServiceType == YSGInviteServiceTypePhone)
+    {
+        displayedList = [contactList phoneEntries];
+    }
+
+    _contactList = displayedList;
+
+    
+    self.suggestions = (displayedList.useSuggestions) ? [displayedList suggestedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions] : nil;
+
+    if (displayedList.entries.count)
+    {
+        self.sortedContacts = [displayedList sortedEntriesWithNumberOfSuggestions:self.service.numberOfSuggestions];
         self.letters = [self.sortedContacts.allKeys sortedArrayUsingFunction:contactLettersSort context:nil];
     }
     else
@@ -144,7 +156,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     if (self.suggestions.count > 0 && [self.service.contactSource isKindOfClass:[YSGOnlineContactSource class]])
     {
-        [((YSGOnlineContactSource *)self.service.contactSource) sendShownSuggestions:self.suggestions];
+        [((YSGOnlineContactSource *)self.service.contactSource) updateShownSuggestions:self.suggestions contactList:contactList];
     }
     
     self.searchResults = nil;
@@ -446,7 +458,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     YSGContact *contact = [self contactForIndexPath:indexPath];
     
     cell.textLabel.text = contact.name;
-    cell.detailTextLabel.text = contact.contactString;
+
+    cell.detailTextLabel.text = [self.service contactDetailStringForContact:contact] ?: contact.contactString;
     cell.selected = [self.selectedContacts containsObject:contact];
     
     if ([self.selectedContacts containsObject:contact])

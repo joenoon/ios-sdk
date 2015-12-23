@@ -64,13 +64,13 @@ typedef NSDictionary * _Nonnull (^YSGShareDataBlock)(YSGShareService* _Nonnull s
 
 @property (nullable, nonatomic, strong) UIImage *serviceImage;
 
-@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, strong) NSString *name;
 
-@property (nonatomic, readonly) UIColor *backgroundColor;
+@property (nonatomic, strong) UIColor *backgroundColor;
 
-@property (nonatomic, readonly) UIColor *textColor;
+@property (nonatomic, strong) UIColor *textColor;
 
-@property (nonatomic, readonly) NSString *fontFamily;
+@property (nonatomic, strong) NSString *fontFamily;
 
 @property (nonatomic) YSGShareSheetServiceCellShape shape;
 

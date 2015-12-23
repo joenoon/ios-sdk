@@ -241,9 +241,9 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     }
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
-    {
-        [self updateContactList:contactList];
-    }];
+     {
+         [self updateContactList:contactList];
+     }];
 }
 
 - (void)updateContactList:(YSGContactList *)contactList

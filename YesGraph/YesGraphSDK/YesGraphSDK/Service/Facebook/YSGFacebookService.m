@@ -15,22 +15,43 @@
 
 - (NSString *)name
 {
-    return @"Facebook";
+    if ([super name])
+    {
+        return [super name];
+    }
+    else
+    {
+        return @"Facebook";
+    }
 }
 
 - (UIColor *)backgroundColor
 {
-    return self.theme.facebookColor;
+    if ([super backgroundColor])
+    {
+        return [super backgroundColor];
+    }
+    else
+    {
+        return self.theme.facebookColor;
+    }
+}
+
+- (UIImage *)serviceImage
+{
+    if ([super serviceImage])
+    {
+        return [super serviceImage];
+    }
+    else
+    {
+        return [YSGIconDrawings facebookImage];
+    }
 }
 
 - (NSString *)serviceType
 {
     return SLServiceTypeFacebook;
-}
-
-- (UIImage *)serviceImage
-{
-    return [YSGIconDrawings facebookImage];
 }
 
 @end

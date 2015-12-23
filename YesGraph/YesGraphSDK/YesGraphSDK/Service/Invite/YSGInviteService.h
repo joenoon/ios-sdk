@@ -9,6 +9,7 @@
 #import "YSGShareService.h"
 #import "YSGContactSource.h"
 #import "YSGContact.h"
+#import "YSGInviteServiceType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -32,20 +33,6 @@ extern NSString* const YSGInviteEmailIsHTMLKey;
 @property (nonatomic, readonly) NSString *userId;
 
 #pragma mark - Invite configuration
-
-/*!
- *  If phone number entries should be displayed.
- *
- *  @discussion: Default value: YES
- */
-@property (nonatomic, assign) BOOL usePhone;
-
-/*!
- *  If email entries should be displayed.
- *
- *  @discussion: Default value: YES
- */
-@property (nonatomic, assign) BOOL useEmail;
 
 /*!
  *  If invite service should support multiple selection of user entries.
@@ -82,6 +69,14 @@ extern NSString* const YSGInviteEmailIsHTMLKey;
  */
 @property (nonatomic, assign) BOOL allowSearch;
 
+/*!
+ *  Whether invite service will contain contacts with phones, emails or both
+ *
+ *  @discussion: Default value is: BOTH
+ */
+
+@property (nonatomic, assign) YSGInviteServiceType inviteServiceType;
+
 #pragma mark - Initialization
 
 /*!
@@ -96,6 +91,17 @@ extern NSString* const YSGInviteEmailIsHTMLKey;
 #pragma mark - Triggers
 
 - (void)triggerInviteFlowWithContacts:(NSArray <YSGContact *> *)entries;
+
+#pragma mark - Contact details
+
+/*!
+ *  Method returns a contact detail string, displayed under the name of the contact, usually containing phone or email.
+ *
+ *  @param contact with details
+ *
+ *  @return string with contact information to be displayed.
+ */
+- (NSString *)contactDetailStringForContact:(YSGContact *)contact;
 
 @end
 

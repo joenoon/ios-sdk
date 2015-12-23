@@ -17,7 +17,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
- *  This class is the main entry point into YesGraph SDK and acts as the main customization point and exposes custom 
+ *  This class is the main entry point into YesGraph SDK and acts as the main customization point and exposes custom
  *  properties that can be used to read state of YesGraph SDK.
  */
 @interface YesGraph : NSObject
@@ -148,7 +148,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *shareSheetText;
 
 /*!
- *  Every time that application is activated, it is checked when was the last time that 
+ *  Every time that application is activated, it is checked when was the last time that
  *  address book was uploaded to YesGraph API. If this time had passed, address book will be uploaded again
  *  automatically in the background.
  *

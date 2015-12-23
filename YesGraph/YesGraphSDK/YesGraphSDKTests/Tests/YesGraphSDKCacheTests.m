@@ -38,6 +38,7 @@
     contactSource.cacheDirectory = paths.firstObject;
     
     YSGContactList *contactList = [YSGTestMockData mockContactList];
+    contactList.useSuggestions = YES;
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Cache contact fetch"];
     

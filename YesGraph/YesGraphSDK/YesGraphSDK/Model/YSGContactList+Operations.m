@@ -14,7 +14,35 @@
 
 - (NSArray<YSGContact *> *)suggestedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions
 {
-    return [[self removeDuplicatedContactsFromSuggestions:self.entries numberOfSuggestions:numberOfSuggestions] copy];
+    //
+    // Remove duplicates
+    //
+    NSArray <YSGContact *>* contacts = [self removeDuplicatedContacts:self.entries];
+    
+    //
+    // Skip contacts that had already been suggested
+    //
+    
+    NSArray <YSGContact *> *currentContacts = [contacts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 0"]];
+    
+    //
+    // If there are less currentContacts than there are number of suggestions
+    //
+    if (currentContacts.count < numberOfSuggestions && contacts.count > currentContacts.count)
+    {
+        currentContacts = [currentContacts arrayByAddingObjectsFromArray:contacts];
+    }
+    
+    //
+    // Strip array to ensure correct number of suggestions
+    //
+    
+    if (currentContacts.count > numberOfSuggestions)
+    {
+        currentContacts = [currentContacts subarrayWithRange:NSMakeRange(0, numberOfSuggestions)];
+    }
+    
+    return currentContacts;
 }
 
 - (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions
@@ -25,10 +53,14 @@
     
     if (numberOfSuggestions > 0)
     {
-        if (numberOfSuggestions <= self.entries.count)
-        {
-            entries = [self.entries subarrayWithRange:NSMakeRange(numberOfSuggestions, self.entries.count - numberOfSuggestions)];
-        }
+        NSArray <YSGContact *> *suggestedEntries = [self suggestedEntriesWithNumberOfSuggestions:numberOfSuggestions];
+        
+        NSMutableArray <YSGContact *> *allEntries = [self.entries mutableCopy];
+        
+        // Remove suggestions
+        [allEntries removeObjectsInArray:suggestedEntries];
+        
+        entries = [allEntries copy];
     }
     else
     {
@@ -83,59 +115,86 @@
     return sortedList.copy;
 }
 
+
+- (YSGContactList *)emailEntries
+{
+    YSGContactList *emailContactList = [YSGContactList new];
+    emailContactList.source = self.source;
+    emailContactList.useSuggestions = self.useSuggestions;
+    
+    NSMutableArray <YSGContact *> *emailEntries = [self.entries mutableCopy];
+    NSMutableArray <YSGContact *> *emailEntriesToRemove = [NSMutableArray new];
+    
+    for (YSGContact* contact in self.entries)
+    {
+        if (contact.emails.count < 1)
+        {
+            [emailEntriesToRemove addObject:contact];
+        }
+    }
+    
+    [emailEntries removeObjectsInArray:emailEntriesToRemove];
+    
+    emailContactList.entries = emailEntries;
+    
+    return emailContactList;
+}
+
+- (YSGContactList *)phoneEntries
+{
+    YSGContactList *phoneContactList = [YSGContactList new];
+    phoneContactList.source = self.source;
+    phoneContactList.useSuggestions = self.useSuggestions;
+    
+    NSMutableArray <YSGContact *> *phoneEntries = [self.entries mutableCopy];
+    NSMutableArray <YSGContact *> *phoneEntriesToRemove = [NSMutableArray new];
+    
+    for (YSGContact* contact in self.entries)
+    {
+        if (contact.phones.count < 1)
+        {
+            [phoneEntriesToRemove addObject:contact];
+        }
+    }
+    
+    [phoneEntries removeObjectsInArray:phoneEntriesToRemove];
+    
+    phoneContactList.entries = phoneEntries;
+    
+    return phoneContactList;
+}
+
+
 #pragma mark - Private Methods
 
-- (NSArray <YSGContact *> *)removeDuplicatedContactsFromSuggestions:(NSArray <YSGContact *> *)contacts numberOfSuggestions:(NSUInteger)number
+- (NSArray <YSGContact *> *)removeDuplicatedContacts:(NSArray <YSGContact *> *)contacts
 {
     if (!contacts.count)
     {
         return nil;
     }
     
-    NSMutableArray <YSGContact *> *contactsWithEmails = [NSMutableArray array];
-    NSMutableArray <YSGContact *> *contactsWithPhones = [NSMutableArray array];
-    
-    for (NSUInteger i = 0; i < number; i++)
-    {
-        if (contacts.count <= i)
-        {
-            break;
-        }
-        
-        if(contacts[i].emails.count > 0)
-        {
-            [contactsWithEmails addObject:contacts[i]];
-            
-            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
-            
-            NSArray <YSGContact *> *sameNamePhoneContacts = [contactsWithPhones filteredArrayUsingPredicate:sameNamePredicate];
-            
-            if (sameNamePhoneContacts.count)
-            {
-                [contactsWithPhones removeObjectsInArray:sameNamePhoneContacts];
-                number++;
-            }
-        }
-        
-        else if (contacts[i].phones.count > 0)
-        {
-            NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
-            
-            if ([contactsWithEmails filteredArrayUsingPredicate:sameNamePredicate].count)
-            {
-                number++;
-            }
-            else
-            {
-                [contactsWithPhones addObject:contacts[i]];
-            }
-        }
-    }
-    
     NSMutableArray <YSGContact *> *filteredContacts = [NSMutableArray array];
     
-    [filteredContacts addObjectsFromArray:contactsWithEmails];
-    [filteredContacts addObjectsFromArray:contactsWithPhones];
+    for (NSUInteger i = 0; i < contacts.count; i++)
+    {
+        NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
+        
+        NSArray <YSGContact *> *sameContacts = [filteredContacts filteredArrayUsingPredicate:sameNamePredicate];
+        
+        //
+        // If existing contact has phone, we will replace it with current, if current is email
+        //
+        
+        if ( (contacts[i].emails.count > 0) && (sameContacts.firstObject.phones.count > 0) )
+        {
+            [filteredContacts replaceObjectAtIndex:[filteredContacts indexOfObject:sameContacts.firstObject] withObject:contacts[i]];
+        }
+        else if ( (contacts[i].emails.count > 0) || (contacts[i].phones.count > 0) )
+        {
+            [filteredContacts addObject:contacts[i]];
+        }
+    }
     
     return filteredContacts.copy;
 }
