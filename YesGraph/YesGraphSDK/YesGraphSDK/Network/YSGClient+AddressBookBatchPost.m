@@ -6,7 +6,7 @@
 //  Copyright © 2016 YesGraph. All rights reserved.
 //
 
-#import "YSGClient+BatchPost.h"
+#import "YSGClient+AddressBookBatchPost.h"
 #import "YSGClient+AddressBook.h"
 
 @implementation YSGClient (BatchPost)

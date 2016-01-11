@@ -15,7 +15,7 @@
 
 #import "YSGStubRequestsScoped.h" // scoped OHHTTPStubs setup / teardown done via constructors / destructors
 
-#import "YSGClient+BatchPost.h"
+#import "YSGClient+AddressBookBatchPost.h"
 
 @interface YesGraphSDKAddressBookTests : XCTestCase
 
