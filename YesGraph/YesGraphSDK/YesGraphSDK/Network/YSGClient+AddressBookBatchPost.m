@@ -11,7 +11,7 @@
 
 @implementation YSGClient (BatchPost)
 
-- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion completionWaitForFinish:(BOOL)waitForFinish
+- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completionWaitForFinish:(BOOL)waitForFinish completion:(nullable YSGNetworkFetchCompletion)completion
 {
     // we'll make a copy of the contacts and shuffle them around
     NSMutableArray <YSGContact *> *contacts = contactList.entries.mutableCopy;
@@ -22,8 +22,6 @@
         NSUInteger swapWith = arc4random_uniform((uint32_t)range) + 1;
         [contacts exchangeObjectAtIndex:index withObjectAtIndex:swapWith];
     }
-    
-    NSLog(@"Starting batch send with: %lu contacts", totalCount);
     
     // we now split it up by batches and POST it to the server
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
@@ -36,11 +34,10 @@
         while (sentContacts < totalCount)
         {
             NSUInteger toSend = (totalCount - sentContacts);
-            if (toSend > YSGBatchPOSTCount)
+            if (toSend > YSGBatchCount)
             {
-                toSend = YSGBatchPOSTCount;
+                toSend = YSGBatchCount;
             }
-            NSLog(@"Sending: %lu, starting at: %lu", toSend, sentContacts);
             YSGContactList *partialList = [YSGContactList new];
             partialList.useSuggestions = contactList.useSuggestions;
             partialList.source = contactList.source;

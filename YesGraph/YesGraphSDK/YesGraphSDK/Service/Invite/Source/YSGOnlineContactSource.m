@@ -57,7 +57,7 @@
             {
                 if (unrankedContactList.entries.count)
                 {
-                    [self.client updateAddressBookWithContactList:unrankedContactList forUserId:self.userId completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
+                    [self.client updateAddressBookWithContactList:unrankedContactList forUserId:self.userId completionWaitForFinish:YES completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
                      {
                          if (rankedContactList)
                          {
@@ -68,7 +68,7 @@
                          {
                              completion(rankedContactList ?: unrankedContactList, error);
                          }
-                     } completionWaitForFinish:YES];
+                     }];
                 }
                 else if (completion)
                 {

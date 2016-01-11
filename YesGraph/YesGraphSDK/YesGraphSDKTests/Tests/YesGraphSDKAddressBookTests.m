@@ -199,8 +199,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Upload Batches Test"];
     
-    NSUInteger overflow = YSGBatchPOSTCount / 2;
-    NSUInteger desiredSize = YSGBatchPOSTCount * 2 + overflow;
+    NSUInteger overflow = YSGBatchCount / 2;
+    NSUInteger desiredSize = YSGBatchCount * 2 + overflow;
     YSGContactList *mockedLargeList = [self createBigContactList:desiredSize];
     
     __block BOOL wasInvoked = NO; // this must be set to YES before all the contacts are uploaded
@@ -254,12 +254,12 @@
      }];
     
     self.client.clientKey = YSGTestClientKey;
-    [self.client updateAddressBookWithContactList:mockedLargeList forUserId:YSGTestClientID completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+    [self.client updateAddressBookWithContactList:mockedLargeList forUserId:YSGTestClientID completionWaitForFinish:NO completion:^(id  _Nullable responseObject, NSError * _Nullable error)
     {
         XCTAssertNotNil(responseObject, @"Response shouldn't be nil");
         XCTAssertNil(error, @"Error should be nil");
         wasInvoked = YES;
-    } completionWaitForFinish:NO];
+    }];
     
     [self waitForExpectationsWithTimeout:20.0 handler:^(NSError * _Nullable error)
     {
@@ -272,8 +272,8 @@
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Address Book Upload Batches Test With Final Completion"];
     
-    NSUInteger overflow = YSGBatchPOSTCount / 2;
-    NSUInteger desiredSize = YSGBatchPOSTCount * 2 + overflow;
+    NSUInteger overflow = YSGBatchCount / 2;
+    NSUInteger desiredSize = YSGBatchCount * 2 + overflow;
     YSGContactList *mockedLargeList = [self createBigContactList:desiredSize];
     
     __block NSUInteger totalRec = 0; // total received contacts (by the server)
@@ -321,7 +321,7 @@
          return [OHHTTPStubsResponse responseWithData:[mockResponseString dataUsingEncoding:NSUTF8StringEncoding] statusCode:200 headers:nil];
      }];
     self.client.clientKey = YSGTestClientKey;
-    [self.client updateAddressBookWithContactList:mockedLargeList forUserId:YSGTestClientID completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+    [self.client updateAddressBookWithContactList:mockedLargeList forUserId:YSGTestClientID completionWaitForFinish:YES completion:^(id  _Nullable responseObject, NSError * _Nullable error)
      {
          XCTAssertNotNil(responseObject, @"Response shouldn't be nil");
          XCTAssertNil(error, @"Error should be nil");
@@ -331,7 +331,7 @@
          {
              [expectation fulfill];
          }
-     } completionWaitForFinish:YES];
+     }];
     
     [self waitForExpectationsWithTimeout:20.0 handler:^(NSError * _Nullable error)
      {

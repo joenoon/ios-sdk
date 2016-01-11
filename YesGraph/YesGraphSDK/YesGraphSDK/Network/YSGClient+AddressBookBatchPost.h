@@ -11,13 +11,13 @@
 #import "YSGClient+Private.h"
 #import "YSGContactList.h"
 
-static const NSUInteger YSGBatchPOSTCount = 2000;
+static const NSUInteger YSGBatchCount = 2000;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface YSGClient (BatchPost)
 
-- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completion:(nullable YSGNetworkFetchCompletion)completion completionWaitForFinish:(BOOL)waitForFinish;
+- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completionWaitForFinish:(BOOL)waitForFinish completion:(nullable YSGNetworkFetchCompletion)completion;
 
 @end
 
