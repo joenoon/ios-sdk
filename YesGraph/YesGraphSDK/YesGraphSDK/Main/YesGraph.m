@@ -251,17 +251,13 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     if (contactList.entries.count)
     {
         self.client.clientKey = self.clientKey;
-        
         [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
-         {
-             if (!error)
-             {
-                 //
-                 // Store last fetch date
-                 //
-                 self.lastFetchDate = [NSDate date];
-             }
-         }];
+        {
+            if (!error)
+            {
+                self.lastFetchDate = [NSDate date];
+            }
+        } completionWaitForFinish:YES];
     }
 }
 

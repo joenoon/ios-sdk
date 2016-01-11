@@ -8,6 +8,7 @@
 
 #import "YSGClient.h"
 #import "YSGContactList.h"
+#import "YSGClient+BatchPost.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

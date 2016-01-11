@@ -239,19 +239,19 @@
     OCMExpect([mockedGraph setLastFetchDate:[OCMArg isNotNil]]);
     OCMStub([mockedGraph lastFetchDate]).andReturn([NSDate date]);
     
-    OCMStub([mockedClient updateAddressBookWithContactList:[OCMArg isNotNil] forUserId:[OCMArg any] completion:[OCMArg any]]).andDo(^(NSInvocation *invocation)
+    OCMStub([mockedClient updateAddressBookWithContactList:[OCMArg isNotNil] forUserId:[OCMArg any] completion:[OCMArg any] completionWaitForFinish:YES]).andDo(^(NSInvocation *invocation)
     {
         void (^completion)(id, NSError *) = nil;
         [invocation getArgument:&completion atIndex:4];
-        
+                                                                                                                                                        
         // Run the completion it should invoke setLastFetchDate
         completion(nil, nil);
-        
+                                                                                                                                                        
         // Check if last fetch date returns a value
-        
+                                                                                                                                                        
         XCTAssertNotNil(self.sharedGraph.lastFetchDate);
     });
-    
+
     self.sharedGraph.client = mockedClient;
     
     [mockedGraph updateContactList:contactList];
