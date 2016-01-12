@@ -13,17 +13,24 @@
 
 - (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completionWaitForFinish:(BOOL)waitForFinish completion:(nullable YSGNetworkFetchCompletion)completion
 {
-    // we'll make a copy of the contacts and shuffle them around
+    //
+    // We'll make a copy of the contacts and shuffle them around
+    //
+    
     NSMutableArray <YSGContact *> *contacts = contactList.entries.mutableCopy;
     NSUInteger totalCount = contactList.entries.count;
     NSUInteger range = totalCount - 1;
+    
     for (NSUInteger index = 0; index < totalCount; ++index)
     {
         NSUInteger swapWith = arc4random_uniform((uint32_t)range) + 1;
         [contacts exchangeObjectAtIndex:index withObjectAtIndex:swapWith];
     }
     
-    // we now split it up by batches and POST it to the server
+    //
+    // We now split it up by batches and POST it to the server
+    //
+    
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(queue, ^
     {
@@ -34,14 +41,17 @@
         while (sentContacts < totalCount)
         {
             NSUInteger toSend = (totalCount - sentContacts);
+            
             if (toSend > YSGBatchCount)
             {
                 toSend = YSGBatchCount;
             }
+            
             YSGContactList *partialList = [YSGContactList new];
             partialList.useSuggestions = contactList.useSuggestions;
             partialList.source = contactList.source;
             partialList.entries = [contacts subarrayWithRange:NSMakeRange(sentContacts, toSend)];
+            
             [self updateAddressBookWithContactList:partialList forUserId:userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
             {
                 if (!wasInvoked && completion && !waitForFinish)
@@ -56,6 +66,7 @@
                 }
                 dispatch_semaphore_signal(waitingLock);
             }];
+            
             dispatch_semaphore_wait(waitingLock, DISPATCH_TIME_FOREVER);
             sentContacts += toSend;
         }
