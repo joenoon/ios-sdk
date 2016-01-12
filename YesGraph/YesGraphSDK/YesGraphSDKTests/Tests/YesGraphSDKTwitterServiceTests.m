@@ -31,7 +31,7 @@
 
 - (void)testServiceName
 {
-    XCTAssert([self.service.name isEqualToString:@"Tweet"], @"Service name '%@' not expected", self.service.name);
+    XCTAssert([self.service.name isEqualToString:@"Twitter"], @"Service name '%@' not expected", self.service.name);
 }
 
 - (void)testServiceType
