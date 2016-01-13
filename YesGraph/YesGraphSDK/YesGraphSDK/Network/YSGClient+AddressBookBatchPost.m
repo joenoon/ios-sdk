@@ -8,6 +8,7 @@
 
 #import "YSGClient+AddressBookBatchPost.h"
 #import "YSGClient+AddressBook.h"
+#import "YSGContactPostOperation.h"
 
 @implementation YSGClient (BatchPost)
 
@@ -30,47 +31,40 @@
     //
     // We now split it up by batches and POST it to the server
     //
-    
-    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
-    dispatch_async(queue, ^
-    {
-        __block BOOL wasInvoked = NO;
-        dispatch_semaphore_t waitingLock = dispatch_semaphore_create(0);
-        NSUInteger sentContacts = 0;
 
-        while (sentContacts < totalCount)
+    NSOperationQueue *queue = [NSOperationQueue new]; // background thread
+    [queue setMaxConcurrentOperationCount:1];
+    NSUInteger sentContacts = 0;
+    while (sentContacts < totalCount)
+    {
+        BOOL isFirst = sentContacts == 0;
+        NSUInteger toSend = (totalCount - sentContacts);
+        if (toSend > YSGBatchCount)
         {
-            NSUInteger toSend = (totalCount - sentContacts);
-            
-            if (toSend > YSGBatchCount)
-            {
-                toSend = YSGBatchCount;
-            }
-            
-            YSGContactList *partialList = [YSGContactList new];
-            partialList.useSuggestions = contactList.useSuggestions;
-            partialList.source = contactList.source;
-            partialList.entries = [contacts subarrayWithRange:NSMakeRange(sentContacts, toSend)];
-            
-            [self updateAddressBookWithContactList:partialList forUserId:userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)
-            {
-                if (!wasInvoked && completion && !waitForFinish)
-                {
-                    completion(responseObject, error);
-                    wasInvoked = YES;
-                }
-                else if (!wasInvoked && completion && waitForFinish && (sentContacts + toSend) == totalCount)
-                {
-                    completion(responseObject, error);
-                    wasInvoked = YES;
-                }
-                dispatch_semaphore_signal(waitingLock);
-            }];
-            
-            dispatch_semaphore_wait(waitingLock, DISPATCH_TIME_FOREVER);
-            sentContacts += toSend;
+            toSend = YSGBatchCount;
         }
-    });
+        BOOL isLast = (sentContacts + toSend) == totalCount;
+        
+        YSGContactList *partialList = [YSGContactList new];
+        partialList.useSuggestions = contactList.useSuggestions;
+        partialList.source = contactList.source;
+        partialList.entries = [contacts subarrayWithRange:NSMakeRange(sentContacts, toSend)];
+        
+        YSGContactPostOperation *op = [[YSGContactPostOperation alloc] initWithClient:self contactsList:partialList andUserId:userId];
+        if ((isFirst && !waitForFinish) || (isLast && waitForFinish))
+        {
+            __weak YSGContactPostOperation *weakOp = op;
+            op.completionBlock = ^(void)
+            {
+                if (completion)
+                {
+                    completion(weakOp.responseObject, weakOp.responseError);
+                }
+            };
+        }
+        [queue addOperation:op];
+        sentContacts += toSend;
+    }
 }
 
 

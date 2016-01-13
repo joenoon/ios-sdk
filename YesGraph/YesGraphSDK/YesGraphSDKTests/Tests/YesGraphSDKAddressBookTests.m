@@ -205,7 +205,6 @@
     
     __block BOOL wasInvoked = NO; // this must be set to YES before all the contacts are uploaded
     __block NSUInteger totalRec = 0; // total received contacts (by the server)
-    __block NSArray <YSGContact *> *receivedContacts = nil;
     __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Request type for mocked data should be POST");
@@ -235,15 +234,12 @@
          NSMutableDictionary *mockDic = [NSMutableDictionary dictionaryWithDictionary:[[YSGTestMockData mockContactList] ysg_toDictionary]];
          mockDic[@"user_id"] = YSGTestClientID;
          NSArray <YSGContact *> *contacts = parsedResponse[@"entries"];
-         if (![receivedContacts isEqualToArray:contacts])
+         totalRec += contacts.count;
+         NSLog(@"Total rec now: %lu", totalRec);
+         // the post request is fired twice, so we divide by 2
+         if ((totalRec/2) == desiredSize && wasInvoked)
          {
-             totalRec += contacts.count;
-             NSLog(@"Total rec now: %lu", totalRec);
-             if (totalRec == desiredSize && wasInvoked)
-             {
-                 [expectation fulfill];
-             }
-             receivedContacts = contacts;
+             [expectation fulfill];
          }
          return YES;
      }
@@ -277,7 +273,6 @@
     YSGContactList *mockedLargeList = [self createBigContactList:desiredSize];
     
     __block NSUInteger totalRec = 0; // total received contacts (by the server)
-    __block NSArray <YSGContact *> *receivedContacts = nil;
     __block YSGStubRequestsScoped *scoped = [YSGStubRequestsScoped StubWithRequestBlock:^BOOL(NSURLRequest * _Nonnull request)
      {
          XCTAssert([[request.HTTPMethod uppercaseString] isEqualToString:@"POST"], @"Request type for mocked data should be POST");
@@ -307,12 +302,8 @@
          NSMutableDictionary *mockDic = [NSMutableDictionary dictionaryWithDictionary:[[YSGTestMockData mockContactList] ysg_toDictionary]];
          mockDic[@"user_id"] = YSGTestClientID;
          NSArray <YSGContact *> *contacts = parsedResponse[@"entries"];
-         if (![receivedContacts isEqualToArray:contacts])
-         {
-             totalRec += contacts.count;
-             NSLog(@"Total rec now: %lu", totalRec);
-             receivedContacts = contacts;
-         }
+         totalRec += contacts.count;
+         NSLog(@"Total rec now: %lu", totalRec);
          return YES;
      }
    andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
@@ -325,7 +316,7 @@
      {
          XCTAssertNotNil(responseObject, @"Response shouldn't be nil");
          XCTAssertNil(error, @"Error should be nil");
-         BOOL allUploaded = totalRec == desiredSize;
+         BOOL allUploaded = (totalRec / 2) == desiredSize;
          XCTAssert(allUploaded, @"Completion handler called before the last batch has been uploaded");
          if (allUploaded)
          {
