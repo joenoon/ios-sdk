@@ -57,6 +57,10 @@
         [self setIsFinished];
         return;
     }
+    if ([self isExecuting])
+    {
+        return;
+    }
     [self willChangeValueForKey:@"isExecuting"];
     __weak YSGContactPostOperation *postOp = self;
     [self.client updateAddressBookWithContactList:self.contactList forUserId:self.userId completion:^(id  _Nullable responseObject, NSError * _Nullable error)

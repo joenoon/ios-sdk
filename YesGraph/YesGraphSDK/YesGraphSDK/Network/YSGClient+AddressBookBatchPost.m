@@ -33,6 +33,7 @@
     //
 
     NSOperationQueue *queue = [NSOperationQueue new]; // background thread
+    [queue setMaxConcurrentOperationCount:1];
     NSUInteger sentContacts = 0;
     while (sentContacts < totalCount)
     {
@@ -50,15 +51,7 @@
         partialList.entries = [contacts subarrayWithRange:NSMakeRange(sentContacts, toSend)];
         
         YSGContactPostOperation *op = [[YSGContactPostOperation alloc] initWithClient:self contactsList:partialList andUserId:userId];
-        
-        // the Queue operates as FILO, so we have to invert the choice; when we
-        // want the completion to fire when all the operations are done, we have to push
-        // the completion block as part of the "first" operation - it's first to be added
-        // to the queue, but it'll be executed last;
-        // when we want to execute the completion block when the first operation is dones,
-        // we have to push it last - as that operation is executed first
-        
-        if ((isFirst && waitForFinish) || (isLast && !waitForFinish))
+        if ((isFirst && !waitForFinish) || (isLast && waitForFinish))
         {
             __weak YSGContactPostOperation *weakOp = op;
             op.completionBlock = ^(void)
