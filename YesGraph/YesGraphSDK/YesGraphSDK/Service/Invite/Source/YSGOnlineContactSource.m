@@ -57,18 +57,18 @@
             {
                 if (unrankedContactList.entries.count)
                 {
-                    [self.client updateAddressBookWithContactList:unrankedContactList forUserId:self.userId completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
-                    {
-                        if (rankedContactList)
-                        {
-                            [self.cacheSource updateCacheWithContactList:rankedContactList completion:nil];
-                        }
-                        
-                        if (completion)
-                        {
-                            completion(rankedContactList ?: unrankedContactList, error);
-                        }
-                    }];
+                    [self.client updateAddressBookWithContactList:unrankedContactList forUserId:self.userId completionWaitForFinish:YES completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
+                     {
+                         if (rankedContactList)
+                         {
+                             [self.cacheSource updateCacheWithContactList:rankedContactList completion:nil];
+                         }
+                         
+                         if (completion)
+                         {
+                             completion(rankedContactList ?: unrankedContactList, error);
+                         }
+                     }];
                 }
                 else if (completion)
                 {
