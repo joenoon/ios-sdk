@@ -22,10 +22,12 @@
     NSUInteger totalCount = contactList.entries.count;
     NSUInteger range = totalCount - 1;
     
-    for (NSUInteger index = 0; index < totalCount; ++index)
-    {
-        NSUInteger swapWith = arc4random_uniform((uint32_t)range) + 1;
-        [contacts exchangeObjectAtIndex:index withObjectAtIndex:swapWith];
+    if (contacts.count > 1) {
+        for (NSUInteger index = 0; index < totalCount; ++index)
+        {
+            NSUInteger swapWith = arc4random_uniform((uint32_t)range) + 1;
+            [contacts exchangeObjectAtIndex:index withObjectAtIndex:swapWith];
+        }
     }
     
     //
