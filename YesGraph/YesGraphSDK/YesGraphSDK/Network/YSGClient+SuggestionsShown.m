@@ -16,7 +16,6 @@
     NSMutableArray *ret = [[NSMutableArray alloc] initWithCapacity:suggestions.count];
     NSArray *emptyArray = [NSArray new];
     NSString *seenAt = [YSGUtility iso8601dateStringFromDate:[NSDate date]];
-    
     for (YSGContact *contact in suggestions)
     {
         NSDictionary *seenContact = @

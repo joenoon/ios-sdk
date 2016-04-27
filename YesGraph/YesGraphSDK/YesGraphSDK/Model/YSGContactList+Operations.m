@@ -72,9 +72,13 @@
         //
         // Check if name is empty
         //
-        
-        NSString *letter = [contact.name substringToIndex:1];
-
+		NSString *letter;
+		@try {
+			letter = [contact.name substringToIndex:1];
+		}
+		@catch (NSException *exception) {
+			continue;
+		}
         if (!letter.length || ![[NSCharacterSet letterCharacterSet] characterIsMember:[letter characterAtIndex:0]])
         {
             //

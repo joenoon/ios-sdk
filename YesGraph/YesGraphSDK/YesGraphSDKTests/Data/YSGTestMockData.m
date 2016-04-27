@@ -25,7 +25,7 @@
     
     NSDictionary *contact4 = @{ @"name" : @"Samantha Howard", @"emails" : @[ ], @"phones" : @[ @"+1 5(130)-663-8780", @"+22 (130)-344-8780" ] };
     
-    NSDictionary *contact5 = @{ @"name" : @"Troy Bell", @"emails" : @[ @"troy.bell87@mymockdata.com", @"troy.bell897@mymockdata.com" ] };
+    NSDictionary *contact5 = @{ @"name" : @"", @"emails" : @[ @"troy.bell87@mymockdata.com", @"troy.bell897@mymockdata.com" ] };
     
     NSDictionary *contact6 = @{ @"name" : @"Sue Reed", @"emails" : @[ @"sue.reed37@mymockdata.com", @"sue.reed372@mymockdata.com" ], @"phones" : @[ ] };
     

@@ -33,7 +33,7 @@
     YSGContactList *mockedContacts = [YSGTestMockData mockContactList];
     NSDictionary <NSString *, NSArray <YSGContact *> *> *noSuggestions = [mockedContacts sortedEntriesWithNumberOfSuggestions:0];
     XCTAssertNotNil(noSuggestions, @"Sorted contacts shouldn't be nil");
-    NSArray *expectedSections = @[ @{ @"#": @9 }, @{ @"M": @2 }, @{ @"R": @1 }, @{ @"P": @1 }, @{ @"S": @3 }, @{ @"T": @1 }, @{ @"H": @1 }, @{ @"C": @3 } ];
+    NSArray *expectedSections = @[ @{ @"#": @9 }, @{ @"M": @2 }, @{ @"R": @1 }, @{ @"P": @1 }, @{ @"S": @3 }, @{ @"H": @1 }, @{ @"C": @3 } ];
     XCTAssertEqual(noSuggestions.allKeys.count, expectedSections.count, @"There should be '%lu' groups in contacts, but found '%lu'", (unsigned long)expectedSections.count, (unsigned long)noSuggestions.allKeys.count);
     for (NSUInteger index = 0; index < expectedSections.count; ++index)
     {
@@ -99,7 +99,6 @@
         @"R": @1,
         @"P": @1,
         @"S": @3,
-        @"T": @1,
         @"C": @3,
         @"H": @1,
         @"#": @9
