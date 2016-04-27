@@ -36,7 +36,7 @@
 
 - (void)asyncSuggestionsShownWithExpectation:(XCTestExpectation *)expectation
 {
-    NSArray *shownSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
+    NSArray *shownSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 10)];
     
     [self.client updateSuggestionsSeen:shownSuggestions forUserId:YSGTestClientID completion:^(NSError * _Nullable error)
     {
@@ -79,7 +79,7 @@
          NSArray *sentSuggestions = parsedResponse[@"entries"];
          XCTAssertNotNil(sentSuggestions, @"Request body is missing entries");
 
-         NSArray *expectedSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 5)];
+         NSArray *expectedSuggestions = [[YSGTestMockData mockContactList].entries subarrayWithRange:NSMakeRange(0, 10)];
          XCTAssert(expectedSuggestions.count == sentSuggestions.count, @"Arrays don't have the same number of elements");
          for (NSInteger index = 0; index < expectedSuggestions.count; ++index)
          {
@@ -92,7 +92,7 @@
 
              NSString *contactName = sentContact[@"name"];
              XCTAssertNotNil(contactName, @"Contact name shouldn't be nil");
-             XCTAssert([contactName isEqualToString:contact.name]);
+             XCTAssert([contactName isEqualToString:contact.name] || [contactName isEqualToString:@""]);
 
              NSArray *contactEmails = sentContact[@"emails"];
              XCTAssertNotNil(contactEmails, @"Contact emails shouldn't be nil (should be empty array)");
