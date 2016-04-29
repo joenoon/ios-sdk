@@ -20,7 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Configures YesGraph with a specific User ID and Source, so we know where are contacts from.
         //
         if YesGraph.shared().userId == nil {
-            YesGraph.shared().configureWithUserId(YSGUtility.randomUserId())
+            
+            // Give your user a unique UserID here. This should be unique for each user of your app.
+            let userId: String = YSGUtility.randomUserId()
+            YesGraph.shared().configureWithUserId(userId)
             
             //
             // Configuring the source of contacts really helps us working with contacts.
@@ -32,31 +35,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             YesGraph.shared().contactOwnerMetadata = source
             
+        }
+        if YesGraph.shared().clientKey == nil {
             
             let urlPath: String = "https://yesgraph-client-key-test.herokuapp.com/client-key/" + YesGraph.shared().userId!
             let url: NSURL = NSURL(string: urlPath)!
-            let request1: NSURLRequest = NSURLRequest(URL: url)
-            let queue:NSOperationQueue = NSOperationQueue()
-            NSURLConnection.sendAsynchronousRequest(request1, queue: queue, completionHandler:{ (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+            let request: NSURLRequest = NSURLRequest(URL: url)
+            let session: NSURLSession = NSURLSession.sharedSession()
+            let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+                
                 let jsonResult: NSDictionary = try! (NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary)!
                 print("AsSynchronous\(jsonResult)")
                 
                 YesGraph.shared().configureWithClientKey(jsonResult["message"] as! String)
                 
-                //
-                // Client key should be retrieved from your trusted backend.
-                //
-                return;
-                
-            })
-            
+            });
+            task.resume()
+
         }
-        
-        //
-        // Client key should be retrieved from your trusted backend and is cached in the YesGraph SDK.
-        // If user logins with another user ID, new client key must be configured.
-        //
-        
         
         return true
     }

@@ -13,8 +13,15 @@
 + (YSGContactList *)mockContactList
 {
     YSGContactList *contactList = [[YSGContactList alloc] init];
-    
-    contactList.source = [YSGSource userSource];    
+    NSDictionary *sourceDictionary1 = @
+    {
+        @"name": @"test name",
+        @"email": @"test.email@string.com",
+        @"phone": @"+386 01 111 111",
+        @"type": @"not ios"
+    };
+
+    contactList.source = [YSGSource ysg_objectWithDictionary:sourceDictionary1];
     YSGContact *c1 = [YSGContact ysg_objectWithDictionary:@{ @"name": @"Daniel Higgins Jr.", @"emails:" : @[ @"d-higgins@mac.com"] }];
     YSGContact *c2 = [YSGContact ysg_objectWithDictionary:@{ @"name": @"Anna Haro", @"emails:" : @[ @"anna-haro@mac.com"] }];
     YSGContact *c3 = [YSGContact ysg_objectWithDictionary:@{ @"name": @"Hank M. Zakroff", @"emails:" : @[ @"hank-zakroff@mac.com"] }];

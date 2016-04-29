@@ -33,6 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, readonly, copy) NSString *userId;
 
 /*!
+ *  Client Key used with YesGraph SDK
+ */
+@property (nullable, nonatomic, readonly, copy) NSString *clientKey;
+
+/*!
  *  To achieve better suggestion rankings, set the contact owner metadata (name, email, phone)
  */
 @property (nullable, nonatomic, strong) YSGSource *contactOwnerMetadata;

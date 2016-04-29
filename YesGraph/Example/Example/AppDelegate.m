@@ -23,24 +23,47 @@
     //
     if (![YesGraph shared].userId.length)
     {
-        [[YesGraph shared] configureWithUserId:@"kendall"];
+        // Give your user a unique UserID here. This should be unique for each user of your app.
+        NSString *userId = [YSGUtility randomUserId];
+        [[YesGraph shared] configureWithUserId:userId];
         
         //
         // Configuring the source of contacts really helps us working with contacts.
         //
-        /*YSGSource* source = [[YSGSource alloc] init];
+        YSGSource* source = [[YSGSource alloc] init];
         source.name = @"Name";
         source.email = @"Email";
         source.phone = @"+1 123 123 123";
         
-        [[YesGraph shared] setContactOwnerMetadata:source];*/
+        [[YesGraph shared] setContactOwnerMetadata:source];
     }
     
     //
     // Client key should be retrieved from your trusted backend and is cached in the YesGraph SDK.
     // If user logins with another user ID, new client key must be configured.
-    //
-    [[YesGraph shared] configureWithClientKey:@"WzEsMCwicGFyaWJ1cyIsImtlbmRhbGwiXQ.CXmmBA.lUWMZDo_QkXr6kABc2pD0mZ95Z8"];
+    
+    if (![YesGraph shared].clientKey.length)
+    {
+
+        // Replace this URL with your server URL to retrieve the client key from your server
+        NSString *urlPath = [NSString stringWithFormat:@"https://yesgraph-client-key-test.herokuapp.com/client-key/%@", [YesGraph shared].userId];
+        NSURL *url = [NSURL URLWithString: urlPath];
+        NSURLSession *session = [NSURLSession sharedSession];
+        
+        [[session dataTaskWithURL:url
+                completionHandler:^(NSData *data,
+                                    NSURLResponse *response,
+                                    NSError *error) {
+                    NSError *jsonError;
+                    NSDictionary *jsonResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&jsonError];
+                    
+                    NSString *clientKey = [jsonResult objectForKey:@"message"];
+                    
+                    [[YesGraph shared] configureWithClientKey:clientKey];
+                    
+                }] resume];
+        
+    }
     
     return YES;
 }
