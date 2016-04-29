@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38130D1F1B9F110100AA2AA8"
-               BuildableName = "Example-Swift.app"
-               BlueprintName = "Example-Swift"
-               ReferencedContainer = "container:Example-Swift.xcodeproj">
+               BuildableName = "example.app"
+               BlueprintName = "example"
+               ReferencedContainer = "container:example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38130D331B9F110100AA2AA8"
-               BuildableName = "Example-SwiftTests.xctest"
-               BlueprintName = "Example-SwiftTests"
-               ReferencedContainer = "container:Example-Swift.xcodeproj">
+               BuildableName = "example.xctest"
+               BlueprintName = "exampleTests"
+               ReferencedContainer = "container:example.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E8DCAE6A1BD57FCF00581AE6"
-               BuildableName = "Example-SwiftUITests.xctest"
-               BlueprintName = "Example-SwiftUITests"
-               ReferencedContainer = "container:Example-Swift.xcodeproj">
+               BuildableName = "example.xctest"
+               BlueprintName = "exampleUITests"
+               ReferencedContainer = "container:example.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38130D1F1B9F110100AA2AA8"
-            BuildableName = "Example-Swift.app"
-            BlueprintName = "Example-Swift"
-            ReferencedContainer = "container:Example-Swift.xcodeproj">
+            BuildableName = "example.app"
+            BlueprintName = "example"
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38130D1F1B9F110100AA2AA8"
-            BuildableName = "Example-Swift.app"
-            BlueprintName = "Example-Swift"
-            ReferencedContainer = "container:Example-Swift.xcodeproj">
+            BuildableName = "example.app"
+            BlueprintName = "example"
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38130D1F1B9F110100AA2AA8"
-            BuildableName = "Example-Swift.app"
-            BlueprintName = "Example-Swift"
-            ReferencedContainer = "container:Example-Swift.xcodeproj">
+            BuildableName = "example.app"
+            BlueprintName = "example"
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

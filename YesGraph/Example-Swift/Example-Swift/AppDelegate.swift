@@ -25,19 +25,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //
             // Configuring the source of contacts really helps us working with contacts.
             //
-            /*let source = YSGSource()
+            let source = YSGSource()
             source.name = "Name"
             source.email = "Email"
             source.phone = "+1 123 123 123"
             
-            YesGraph.shared().contactOwnerMetadata = source*/
+            YesGraph.shared().contactOwnerMetadata = source
+            
+            
+            let urlPath: String = "https://yesgraph-client-key-test.herokuapp.com/client-key/" + YesGraph.shared().userId!
+            let url: NSURL = NSURL(string: urlPath)!
+            let request1: NSURLRequest = NSURLRequest(URL: url)
+            let queue:NSOperationQueue = NSOperationQueue()
+            NSURLConnection.sendAsynchronousRequest(request1, queue: queue, completionHandler:{ (response: NSURLResponse?, data: NSData?, error: NSError?) -> Void in
+                let jsonResult: NSDictionary = try! (NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary)!
+                print("AsSynchronous\(jsonResult)")
+                
+                YesGraph.shared().configureWithClientKey(jsonResult["message"] as! String)
+                
+                //
+                // Client key should be retrieved from your trusted backend.
+                //
+                return;
+                
+            })
+            
         }
         
         //
         // Client key should be retrieved from your trusted backend and is cached in the YesGraph SDK.
         // If user logins with another user ID, new client key must be configured.
         //
-        YesGraph.shared().configureWithClientKey("")
+        
         
         return true
     }

@@ -23,7 +23,7 @@
     //
     if (![YesGraph shared].userId.length)
     {
-        [[YesGraph shared] configureWithUserId:[YSGUtility randomUserId]];
+        [[YesGraph shared] configureWithUserId:@"kendall"];
         
         //
         // Configuring the source of contacts really helps us working with contacts.
@@ -40,7 +40,7 @@
     // Client key should be retrieved from your trusted backend and is cached in the YesGraph SDK.
     // If user logins with another user ID, new client key must be configured.
     //
-    [[YesGraph shared] configureWithClientKey:@""];
+    [[YesGraph shared] configureWithClientKey:@"WzEsMCwicGFyaWJ1cyIsImtlbmRhbGwiXQ.CXmmBA.lUWMZDo_QkXr6kABc2pD0mZ95Z8"];
     
     return YES;
 }
