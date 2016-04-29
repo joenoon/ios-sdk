@@ -38,6 +38,7 @@
     [queue setMaxConcurrentOperationCount:1];
     NSUInteger sentContacts = 0;
     while (sentContacts < totalCount)
+        
     {
         BOOL isFirst = sentContacts == 0;
         NSUInteger toSend = (totalCount - sentContacts);

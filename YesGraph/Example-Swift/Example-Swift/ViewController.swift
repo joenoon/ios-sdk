@@ -9,10 +9,12 @@
 import UIKit
 import YesGraphSDK
 import Social
+import AddressBook
 
 class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate {
 
     var theme = YSGTheme()
+    let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 
     @IBOutlet weak var webView: UIWebView!
     
@@ -25,6 +27,12 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         self.setWebViewContent()
         
         self.webView.delegate = self
+        
+        
+        //promptForAddressBookRequestAccess()
+        //for i in 1...2000 {
+        //    self.makeAndAddTestRecord(i)
+        //}
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -127,5 +135,63 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         }
     }
 
+    
+    
+    func promptForAddressBookRequestAccess() {
+        //var err: Unmanaged<CFError>? = nil
+        
+        ABAddressBookRequestAccessWithCompletion(addressBookRef) {
+            (granted: Bool, error: CFError!) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if !granted {
+                    print("Just denied")
+                } else {
+                    print("Just authorized")
+                    self.makeAndAddTestRecord(1)
+                }
+            }
+        }
+    }
+    
+    
+    func makeAndAddTestRecord(count: Int) -> ABRecordRef {
+        let firstname = String(format: "kendall%d", count)
+        let lastname = String(format: "yesgraphtest%d", count)
+        let email = String(format: "%@.%@@yesgraph.com", firstname, lastname)
+        
+        let testRecord: ABRecordRef = ABPersonCreate().takeRetainedValue()
+        ABRecordSetValue(testRecord, kABPersonFirstNameProperty, firstname, nil)
+        ABRecordSetValue(testRecord, kABPersonLastNameProperty, lastname, nil)
+        
+        
+        let emailMultiValue: ABMultiValueRef = ABMultiValueCreateMutable(ABPropertyType(kABPersonEmailProperty)).takeRetainedValue()
+        
+        ABMultiValueAddValueAndLabel(emailMultiValue, email, kABHomeLabel, nil)
+        
+        // add the home email
+        ABRecordSetValue(testRecord, kABPersonEmailProperty, emailMultiValue, nil)
+
+        //ABMultiValueAddValueAndLabel(email, "john.doe@test.com", kABHomeLabel, nil)
+        //ABRecordSetValue(record, kABPersonEmailProperty, email, nil)
+
+        ABAddressBookAddRecord(addressBookRef, testRecord, nil)
+        saveAddressBookChanges()
+        
+        return testRecord
+    }
+    
+    func saveAddressBookChanges() {
+        if ABAddressBookHasUnsavedChanges(addressBookRef){
+            var err: Unmanaged<CFErrorRef>? = nil
+            let savedToAddressBook = ABAddressBookSave(addressBookRef, &err)
+            if savedToAddressBook {
+                print("Successully saved changes.")
+            } else {
+                print("Couldn't save changes.")
+            }
+        } else {
+            print("No changes occurred.")
+        }
+    }
 }
 

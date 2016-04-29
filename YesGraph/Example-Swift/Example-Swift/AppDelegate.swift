@@ -20,24 +20,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Configures YesGraph with a specific User ID and Source, so we know where are contacts from.
         //
         if YesGraph.shared().userId == nil {
-            YesGraph.shared().configureWithUserId(YSGUtility.randomUserId())
+            
+            // Give your user a unique UserID here. This should be unique for each user of your app.
+            let userId: String = YSGUtility.randomUserId()
+            YesGraph.shared().configureWithUserId(userId)
             
             //
             // Configuring the source of contacts really helps us working with contacts.
             //
-            /*let source = YSGSource()
+            let source = YSGSource()
             source.name = "Name"
             source.email = "Email"
             source.phone = "+1 123 123 123"
             
-            YesGraph.shared().contactOwnerMetadata = source*/
+            YesGraph.shared().contactOwnerMetadata = source
+            
         }
-        
-        //
-        // Client key should be retrieved from your trusted backend and is cached in the YesGraph SDK.
-        // If user logins with another user ID, new client key must be configured.
-        //
-        YesGraph.shared().configureWithClientKey("")
+        if YesGraph.shared().clientKey == nil {
+            
+            let urlPath: String = "https://yesgraph-client-key-test.herokuapp.com/client-key/" + YesGraph.shared().userId!
+            let url: NSURL = NSURL(string: urlPath)!
+            let request: NSURLRequest = NSURLRequest(URL: url)
+            let session: NSURLSession = NSURLSession.sharedSession()
+            let task = session.dataTaskWithRequest(request, completionHandler: {(data, response, error) in
+                
+                let jsonResult: NSDictionary = try! (NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as? NSDictionary)!
+                print("AsSynchronous\(jsonResult)")
+                
+                YesGraph.shared().configureWithClientKey(jsonResult["message"] as! String)
+                
+            });
+            task.resume()
+
+        }
         
         return true
     }
