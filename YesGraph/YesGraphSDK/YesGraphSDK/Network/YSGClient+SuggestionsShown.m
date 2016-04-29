@@ -19,10 +19,21 @@
     
     for (YSGContact *contact in suggestions)
     {
-        NSDictionary *seenContact = @
+		//
+		// Check if name is empty
+		//
+		
+		NSString *contact_name = contact.name;
+		
+		if (!contact_name)
+		{
+			contact_name = @"";
+		}
+		
+		NSDictionary *seenContact = @
         {
             @"user_id": userId,
-            @"name": contact.name,
+            @"name": contact_name,
             @"emails": contact.emails ?: emptyArray,
             @"phones": contact.phones ?: emptyArray,
             @"seen_at": seenAt
