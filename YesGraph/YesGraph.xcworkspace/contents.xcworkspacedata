@@ -11,6 +11,6 @@
       location = "group:Example-Static/Example-Static.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:/Users/kendall/Dropbox/Current_Projects/YesGraph/ios-sdk/YesGraph/Example-Swift/example.xcodeproj">
+      location = "group:/Users/kendall/Dropbox/Current_Projects/YesGraph/ios-sdk/YesGraph/Example-Swift/Example-Swift.xcodeproj">
    </FileRef>
 </Workspace>

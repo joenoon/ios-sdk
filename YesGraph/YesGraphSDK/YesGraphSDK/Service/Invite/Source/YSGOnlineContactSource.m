@@ -61,6 +61,11 @@
                      {
                          if (rankedContactList)
                          {
+                             if (YSGBatchCount < unrankedContactList.entries.count) {
+                                 NSArray <YSGContact *> *lowerContacts;
+                                 lowerContacts = [unrankedContactList.entries subarrayWithRange:NSMakeRange(YSGBatchCount, unrankedContactList.entries.count - YSGBatchCount)];
+                                 rankedContactList.entries = [rankedContactList.entries arrayByAddingObjectsFromArray:lowerContacts];
+                             }
                              [self.cacheSource updateCacheWithContactList:rankedContactList completion:nil];
                          }
                          
