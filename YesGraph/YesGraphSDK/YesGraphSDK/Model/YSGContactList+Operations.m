@@ -174,27 +174,34 @@
         return nil;
     }
     
+    NSMutableDictionary *duplicatesDict = [[NSMutableDictionary alloc] init];
     NSMutableArray <YSGContact *> *filteredContacts = [NSMutableArray array];
-    
+
     for (NSUInteger i = 0; i < contacts.count; i++)
     {
-        NSPredicate *sameNamePredicate = [NSPredicate predicateWithFormat:@"name = %@", contacts[i].name];
-        
-        NSArray <YSGContact *> *sameContacts = [filteredContacts filteredArrayUsingPredicate:sameNamePredicate];
-        
-        //
-        // If existing contact has phone, we will replace it with current, if current is email
-        //
-        
-        if ( (contacts[i].emails.count > 0) && (sameContacts.firstObject.phones.count > 0) )
-        {
-            [filteredContacts replaceObjectAtIndex:[filteredContacts indexOfObject:sameContacts.firstObject] withObject:contacts[i]];
-        }
-        else if ( (contacts[i].emails.count > 0) || (contacts[i].phones.count > 0) )
-        {
+        if (contacts[i].name == nil || [contacts[i].name isEqual: @""]) {
             [filteredContacts addObject:contacts[i]];
         }
+        else if (duplicatesDict[contacts[i].name]) {
+            YSGContact *currentContact = duplicatesDict[contacts[i].name];
+            // Do merging
+            if (contacts[i].emails != currentContact.emails) {
+                NSSet *set1 = [NSSet setWithArray:contacts[i].emails];
+                NSSet *set2 = [NSSet setWithArray:currentContact.emails];
+                currentContact.emails = [[set1 setByAddingObjectsFromSet:set2] allObjects];
+            }
+            if (contacts[i].phones != currentContact.phones) {
+                NSSet *set1 = [NSSet setWithArray:contacts[i].phones];
+                NSSet *set2 = [NSSet setWithArray:currentContact.phones];
+                currentContact.phones = [[set1 setByAddingObjectsFromSet:set2] allObjects];
+            }
+        }
+        else {
+            [duplicatesDict setObject:contacts[i] forKey:contacts[i].name];
+        }
     }
+
+    [filteredContacts addObjectsFromArray:[duplicatesDict allValues]];
     
     return filteredContacts.copy;
 }

@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Example_Swift
+@testable import Example-Swift
 
 class Example_SwiftTests: XCTestCase {
     
