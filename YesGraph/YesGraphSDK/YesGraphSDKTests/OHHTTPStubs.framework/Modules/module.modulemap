@@ -1,5 +1,5 @@
 framework module OHHTTPStubs {
-  umbrella header "OHHTTPStubs.h"
+  umbrella header "OHHTTPStubsUmbrella.h"
 
   export *
   module * { export * }
