@@ -11,7 +11,7 @@
 #import "YSGClient+Private.h"
 #import "YSGContactList.h"
 
-static const NSUInteger YSGBatchCount = 1000;
+static const NSUInteger YSGBatchCount = 500;
 
 NS_ASSUME_NONNULL_BEGIN
 
