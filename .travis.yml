@@ -12,4 +12,4 @@ env:
   - ACTION=build SCHEME='Example-Swift'
   - ACTION=test SCHEME='YesGraphSDK' TEST_DEVICE='iPhone 6 (9.3)'
   global:
-  - SDK=9.1
+  - SDK=9.3

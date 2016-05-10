@@ -46,7 +46,7 @@
     NSDictionary *contact18 = @{ @"name" : @"15512 Some Address", @"phones" : @[ @"+1 (495)-331-4222" ] };
     NSDictionary *contact19 = @{ @"name" : @"441 Some Address", @"phones" : @[ @"+1 (555)-119-4222" ] };
     NSDictionary *contact20 = @{ @"name" : @"*$%/( Random name", @"phones" : @[ @"+1 (555)-119-3355" ] };
-    NSDictionary *contact21 = @{ @"name" : @"Sue Reed", @"emails" : @[ ], @"phones" : @[ ] };
+    NSDictionary *contact21 = @{ @"name" : @"Sue Reed", @"emails" : @[ @"sue.reed12357@mymockdata.com"], @"phones" : @[ ] };
     NSDictionary *contact22 = @{ @"name" : @"Sue Reed", @"emails" : @[ @"sue.reed12357@mymockdata.com", @"sue.reed555@mymockdata.com" ], @"phones" : @[ @"+1 (123)-123-3312" ] };
     
     YSGContact *parsedContact1 = [YSGContact ysg_objectWithDictionary:contact1];
@@ -69,10 +69,10 @@
     YSGContact *parsedContact18 = [YSGContact ysg_objectWithDictionary:contact18];
     YSGContact *parsedContact19 = [YSGContact ysg_objectWithDictionary:contact19];
     YSGContact *parsedContact20 = [YSGContact ysg_objectWithDictionary:contact20];
-    //YSGContact *parsedContact21 = [YSGContact ysg_objectWithDictionary:contact21];
+    YSGContact *parsedContact21 = [YSGContact ysg_objectWithDictionary:contact21];
     YSGContact *parsedContact22 = [YSGContact ysg_objectWithDictionary:contact22];
     
-    contactList.entries = @[ parsedContact1, parsedContact2, parsedContact3, parsedContact4, parsedContact5, parsedContact6, parsedContact7, parsedContact8, parsedContact9, parsedContact10, parsedContact11, parsedContact12, parsedContact13, parsedContact14, parsedContact15, parsedContact16, parsedContact17, parsedContact18, parsedContact19, parsedContact20, parsedContact22 ];
+    contactList.entries = @[ parsedContact1, parsedContact2, parsedContact3, parsedContact4, parsedContact5, parsedContact6, parsedContact7, parsedContact8, parsedContact9, parsedContact10, parsedContact11, parsedContact12, parsedContact13, parsedContact14, parsedContact15, parsedContact16, parsedContact17, parsedContact18, parsedContact19, parsedContact20, parsedContact21, parsedContact22 ];
     
     return contactList;
 }

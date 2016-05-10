@@ -339,7 +339,7 @@
     fullList.useSuggestions = YES;
     [cacheSource updateCacheWithContactList:fullList completion:nil];
     
-    NSInteger iterations = (NSInteger)floor(uniqueContacts.count / mockedService.numberOfSuggestions);
+    NSInteger iterations = (NSInteger)floor(uniqueContacts.count / mockedService.numberOfSuggestions) - 1;
     NSMutableArray <YSGContact *> *suggested = [[NSMutableArray alloc] initWithCapacity:uniqueContacts.count];
     while (iterations > 0)
     {
