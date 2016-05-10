@@ -49,7 +49,6 @@
                 
                 if (completion)
                 {
-                    NSLog([[[[weakOp responseObject] entries] objectAtIndex:0] name]);
                     completion(weakOp.responseObject, weakOp.responseError);
                 }
             };
