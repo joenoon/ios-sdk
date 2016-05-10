@@ -14,10 +14,7 @@
 
 - (NSArray<YSGContact *> *)suggestedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions
 {
-    //
-    // Remove duplicates
-    //
-    NSArray <YSGContact *>* contacts = [self removeDuplicatedContacts:self.entries];
+    NSArray <YSGContact *>* contacts = self.entries;
     
     //
     // Skip contacts that had already been suggested
@@ -198,10 +195,11 @@
         }
         else {
             [duplicatesDict setObject:contacts[i] forKey:contacts[i].name];
+            [filteredContacts addObject:contacts[i]];
         }
     }
 
-    [filteredContacts addObjectsFromArray:[duplicatesDict allValues]];
+    //[filteredContacts addObjectsFromArray:[duplicatesDict allValues]];
     
     return filteredContacts.copy;
 }

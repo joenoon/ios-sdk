@@ -68,10 +68,13 @@
                              }
                              [self.cacheSource updateCacheWithContactList:rankedContactList completion:nil];
                          }
-                         
                          if (completion)
                          {
                              completion(rankedContactList ?: unrankedContactList, error);
+                         }
+                         else {
+                             [self.cacheSource updateCacheWithContactList:(rankedContactList ?: unrankedContactList) completion:nil];
+                             NSLog(@"Error with HTTP request");
                          }
                      }];
                 }
