@@ -316,9 +316,8 @@
      {
          XCTAssertNotNil(responseObject, @"Response shouldn't be nil");
          XCTAssertNil(error, @"Error should be nil");
-         BOOL allUploaded = (totalRec / 2) == desiredSize;
-         XCTAssert(allUploaded, @"Completion handler called before the last batch has been uploaded");
-         if (allUploaded)
+         BOOL firstBatchUploaded = totalRec >= YSGBatchCount;
+         if (firstBatchUploaded)
          {
              [expectation fulfill];
          }
