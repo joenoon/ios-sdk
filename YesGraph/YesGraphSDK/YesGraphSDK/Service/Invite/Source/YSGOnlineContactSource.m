@@ -61,6 +61,8 @@
                      {
                          if (rankedContactList)
                          {
+                             // If the addressbook is too large, we should break it into batches and get the first result right away, while getting the rest of the results
+                             // in the background. So we have something to show to the user while the rest of the addressbook is posting.
                              if (YSGBatchCount < unrankedContactList.entries.count) {
                                  NSArray <YSGContact *> *lowerContacts;
                                  lowerContacts = [unrankedContactList.entries subarrayWithRange:NSMakeRange(YSGBatchCount, unrankedContactList.entries.count - YSGBatchCount)];
