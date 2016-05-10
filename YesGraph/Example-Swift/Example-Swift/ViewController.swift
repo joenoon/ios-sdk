@@ -30,9 +30,9 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         
         
         promptForAddressBookRequestAccess()
-        for i in 1...3000 {
-            self.makeAndAddTestRecord(i)
-        }
+        //for i in 1...3000 {
+        //    self.makeAndAddTestRecord(i)
+        //}
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -26,7 +26,6 @@
     [queue setMaxConcurrentOperationCount:1];
     NSUInteger sentContacts = 0;
     while (sentContacts < totalCount)
-        
     {
         BOOL isFirst = sentContacts == 0;
         NSUInteger toSend = (totalCount - sentContacts);
@@ -47,8 +46,10 @@
             __weak YSGContactPostOperation *weakOp = op;
             op.completionBlock = ^(void)
             {
+                
                 if (completion)
                 {
+                    NSLog([[[[weakOp responseObject] entries] objectAtIndex:0] name]);
                     completion(weakOp.responseObject, weakOp.responseError);
                 }
             };
