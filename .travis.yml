@@ -2,7 +2,7 @@ language: objective-c
 sudo: false
 osx_image: xcode7.1
 script:
-- curl -fsSL https://raw.githubusercontent.com/legoless/Dominus/master/install.sh | sh
+- curl -fsSL https://raw.githubusercontent.com/YesGraph/Dominus/master/install.sh | sh
 env:
   matrix:
   - ACTION=build SCHEME='YesGraphSDK'
