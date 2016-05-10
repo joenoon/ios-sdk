@@ -46,7 +46,7 @@
     NSDictionary *contact18 = @{ @"name" : @"15512 Some Address", @"phones" : @[ @"+1 (495)-331-4222" ] };
     NSDictionary *contact19 = @{ @"name" : @"441 Some Address", @"phones" : @[ @"+1 (555)-119-4222" ] };
     NSDictionary *contact20 = @{ @"name" : @"*$%/( Random name", @"phones" : @[ @"+1 (555)-119-3355" ] };
-    //NSDictionary *contact21 = @{ @"name" : @"Sue Reed", @"emails" : @[ ], @"phones" : @[ ] };
+    NSDictionary *contact21 = @{ @"name" : @"Sue Reed", @"emails" : @[ ], @"phones" : @[ ] };
     NSDictionary *contact22 = @{ @"name" : @"Sue Reed", @"emails" : @[ @"sue.reed12357@mymockdata.com", @"sue.reed555@mymockdata.com" ], @"phones" : @[ @"+1 (123)-123-3312" ] };
     
     YSGContact *parsedContact1 = [YSGContact ysg_objectWithDictionary:contact1];

@@ -20,7 +20,7 @@
 - (void)setUp
 {
     [super setUp];
-    self.numberOfUniqueContacts = 19;
+    self.numberOfUniqueContacts = 20;
 }
 
 - (void)tearDown
