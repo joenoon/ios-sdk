@@ -235,7 +235,7 @@
          mockDic[@"user_id"] = YSGTestClientID;
          NSArray <YSGContact *> *contacts = parsedResponse[@"entries"];
          totalRec += contacts.count;
-         NSLog(@"Total rec now: %lu", totalRec);
+         NSLog(@"Total rec now: %lu", (unsigned long)totalRec);
          // the post request is fired twice, so we divide by 2
          if ((totalRec/2) == desiredSize && wasInvoked)
          {
@@ -303,7 +303,7 @@
          mockDic[@"user_id"] = YSGTestClientID;
          NSArray <YSGContact *> *contacts = parsedResponse[@"entries"];
          totalRec += contacts.count;
-         NSLog(@"Total rec now: %lu", totalRec);
+         NSLog(@"Total rec now: %lu", (unsigned long)totalRec);
          return YES;
      }
    andStubResponseBlock:^OHHTTPStubsResponse * _Nonnull(NSURLRequest * _Nonnull request)
@@ -316,9 +316,8 @@
      {
          XCTAssertNotNil(responseObject, @"Response shouldn't be nil");
          XCTAssertNil(error, @"Error should be nil");
-         BOOL allUploaded = (totalRec / 2) == desiredSize;
-         XCTAssert(allUploaded, @"Completion handler called before the last batch has been uploaded");
-         if (allUploaded)
+         BOOL firstBatchUploaded = totalRec >= YSGBatchCount;
+         if (firstBatchUploaded)
          {
              [expectation fulfill];
          }

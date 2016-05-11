@@ -28,6 +28,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 @property (nonatomic, strong) YSGLocalContactSource *localSource;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
+@property (nonatomic, strong) YSGCacheContactSource *onlineSource;
 
 @property (nonatomic, strong) YSGMessageCenter *messageCenter;
 @property (nonatomic, strong) YSGClient* client;
@@ -350,13 +351,13 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     }
     
     
-    YSGLocalContactSource *localSource = [YSGLocalContactSource new];
+    YSGLocalContactSource *localSource = [self localSource];
     localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
     localSource.contactSourceMetadata = self.contactOwnerMetadata;
     
-    YSGCacheContactSource* cacheSource = [[YSGCacheContactSource alloc] init];
+    YSGCacheContactSource* cacheSource = [self cacheSource];
     
-    YSGClient* client = [[YSGClient alloc] init];
+    YSGClient* client = [self client];
     client.clientKey = self.clientKey;
     
     YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localSource cacheSource:cacheSource];

@@ -10,111 +10,217 @@
 		</data>
 		<key>Headers/OHHTTPStubs+Mocktail.h</key>
 		<data>
-		QeQESLh6tOKMac+rzb5hQpI6QBA=
+		HBJXiONzOSGXUVvXPMBlYqcc5H4=
 		</data>
 		<key>Headers/OHHTTPStubs-Swift.h</key>
 		<data>
-		5rKbju6NYpoOkx95zLvq4dg8gTw=
+		iZ0p4ETGiHGHsyB+ARNvtYaUckw=
 		</data>
 		<key>Headers/OHHTTPStubs.h</key>
 		<data>
-		q7aX5zR6R517+kevLqaWOxLYUZM=
+		RoBHEilAFpOE08MkLhruCObzkxE=
 		</data>
 		<key>Headers/OHHTTPStubsResponse+HTTPMessage.h</key>
 		<data>
-		8mTZt7FXcs2TGd9QA2DlnFQ1Qus=
+		Enx6SMaPOMycboO11lKEIKC01AE=
 		</data>
 		<key>Headers/OHHTTPStubsResponse+JSON.h</key>
 		<data>
-		Hj/JeqXzjLu42YRoMyfhKjzBb3o=
+		+bLHNatq/iqFBhJGW0RmLtR3N40=
 		</data>
 		<key>Headers/OHHTTPStubsResponse.h</key>
 		<data>
-		sv0b+UoLnwso9qk/u78OdOYTFmg=
+		yIKj490Pp0CAUhrrAC4OFgE0jzY=
+		</data>
+		<key>Headers/OHHTTPStubsUmbrella.h</key>
+		<data>
+		Rxc8lmqTXeCRpHS9Kc4BRCnm2LI=
 		</data>
 		<key>Headers/OHPathHelpers.h</key>
 		<data>
-		gTTt2mHzEL2wV2HtiBVBQOQCOBs=
+		B17Akw7QSUK/lthHy7MKcadqSmE=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ookthzyGOYj+uoJBtYtejdVPkOc=
+		YeKkYdoHLxxiy5+xJT+VxUmoAFY=
 		</data>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm.swiftdoc</key>
 		<data>
-		SP/adN2qhYZPhoZkgnpJRdDgzXQ=
+		bkZKhQhtUj1D8OpHnVpzI6bAqFw=
 		</data>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm.swiftmodule</key>
 		<data>
-		+wWoYc3WeJH/SdWHEJ3stBiOCUE=
+		ZLjYdrAdzklF/u7DpB5JqkO70G0=
 		</data>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		0U4fVRXOXpkLWkRdwm8HEf6gCVk=
+		wYilY0spJZ3TWtYoAyg8Hh343iY=
 		</data>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		RdGSz5qZ76llWLhxX1hAuX5wdqQ=
+		XO+PG/K7xP28HGYzwTLqKDiKAzc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
-		fAYjMujOXHzB8/nmD/T+SM6P3/o=
+		k8VNvarfrqeHppQF+R0Z46r6bqE=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
 		<key>Headers/Compatibility.h</key>
-		<data>
-		nemLhJiiA6nuG4OxoVs57Y5zqGo=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			nemLhJiiA6nuG4OxoVs57Y5zqGo=
+			</data>
+			<key>hash2</key>
+			<data>
+			m4D+FqZi5EMZxsTr80tSkbaiHWGb5CkHoe0lyZw7XE8=
+			</data>
+		</dict>
 		<key>Headers/OHHTTPStubs+Mocktail.h</key>
-		<data>
-		QeQESLh6tOKMac+rzb5hQpI6QBA=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			HBJXiONzOSGXUVvXPMBlYqcc5H4=
+			</data>
+			<key>hash2</key>
+			<data>
+			Qp9ZvdlDoyxw+LAFH/wB8MONfsUg0TO/JXmJ/shmv/8=
+			</data>
+		</dict>
 		<key>Headers/OHHTTPStubs-Swift.h</key>
-		<data>
-		5rKbju6NYpoOkx95zLvq4dg8gTw=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			iZ0p4ETGiHGHsyB+ARNvtYaUckw=
+			</data>
+			<key>hash2</key>
+			<data>
+			zx9+NsTcEQEgcGXb18XTP7cZ2UWpOTg2RsMCdm/f6X0=
+			</data>
+		</dict>
 		<key>Headers/OHHTTPStubs.h</key>
-		<data>
-		q7aX5zR6R517+kevLqaWOxLYUZM=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			RoBHEilAFpOE08MkLhruCObzkxE=
+			</data>
+			<key>hash2</key>
+			<data>
+			745NpmUw36jvbBH+GBMymztfrPTN3bU4vyun2AlRIJs=
+			</data>
+		</dict>
 		<key>Headers/OHHTTPStubsResponse+HTTPMessage.h</key>
-		<data>
-		8mTZt7FXcs2TGd9QA2DlnFQ1Qus=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Enx6SMaPOMycboO11lKEIKC01AE=
+			</data>
+			<key>hash2</key>
+			<data>
+			2lHSqwu+jIyaFm/HWHjq2z4tKgfW3sbRkQpLyxJpYlY=
+			</data>
+		</dict>
 		<key>Headers/OHHTTPStubsResponse+JSON.h</key>
-		<data>
-		Hj/JeqXzjLu42YRoMyfhKjzBb3o=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			+bLHNatq/iqFBhJGW0RmLtR3N40=
+			</data>
+			<key>hash2</key>
+			<data>
+			Bp7Kt3XDAfkOFOS18pRCodGuMpBKzeKLERxYCx1Yzi4=
+			</data>
+		</dict>
 		<key>Headers/OHHTTPStubsResponse.h</key>
-		<data>
-		sv0b+UoLnwso9qk/u78OdOYTFmg=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			yIKj490Pp0CAUhrrAC4OFgE0jzY=
+			</data>
+			<key>hash2</key>
+			<data>
+			2NJ7JkCK46Ug0F60way9rnMWM+PqAOhJMqOaMJZpsNk=
+			</data>
+		</dict>
+		<key>Headers/OHHTTPStubsUmbrella.h</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Rxc8lmqTXeCRpHS9Kc4BRCnm2LI=
+			</data>
+			<key>hash2</key>
+			<data>
+			UWIm66tE4z7XOZCoG6+V/Hq6Uk1UntUq462oQN0tnhQ=
+			</data>
+		</dict>
 		<key>Headers/OHPathHelpers.h</key>
-		<data>
-		gTTt2mHzEL2wV2HtiBVBQOQCOBs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			B17Akw7QSUK/lthHy7MKcadqSmE=
+			</data>
+			<key>hash2</key>
+			<data>
+			5m1CuwhLdPmp6Y8QBfXWk2IUnrZNHddRupsMIiex24Y=
+			</data>
+		</dict>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm.swiftdoc</key>
-		<data>
-		SP/adN2qhYZPhoZkgnpJRdDgzXQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			bkZKhQhtUj1D8OpHnVpzI6bAqFw=
+			</data>
+			<key>hash2</key>
+			<data>
+			OzvyO05OWpk/0p6nj3rBtK72IwV+vlC00IpJTvgdl3A=
+			</data>
+		</dict>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm.swiftmodule</key>
-		<data>
-		+wWoYc3WeJH/SdWHEJ3stBiOCUE=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ZLjYdrAdzklF/u7DpB5JqkO70G0=
+			</data>
+			<key>hash2</key>
+			<data>
+			ZWG7lMMchfPigw1/zASJRLwuAZgQInbRfmIt7IrGM9w=
+			</data>
+		</dict>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm64.swiftdoc</key>
-		<data>
-		0U4fVRXOXpkLWkRdwm8HEf6gCVk=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			wYilY0spJZ3TWtYoAyg8Hh343iY=
+			</data>
+			<key>hash2</key>
+			<data>
+			RaJL2/jCoGlFHdk9qfO1J3wSj5nBgCsBXOcOky5supE=
+			</data>
+		</dict>
 		<key>Modules/OHHTTPStubs.swiftmodule/arm64.swiftmodule</key>
-		<data>
-		RdGSz5qZ76llWLhxX1hAuX5wdqQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			XO+PG/K7xP28HGYzwTLqKDiKAzc=
+			</data>
+			<key>hash2</key>
+			<data>
+			31dt+EMoWxe34TsCywUn0dzRDAdHy5Of+KX2qbDHYVY=
+			</data>
+		</dict>
 		<key>Modules/module.modulemap</key>
-		<data>
-		fAYjMujOXHzB8/nmD/T+SM6P3/o=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			k8VNvarfrqeHppQF+R0Z46r6bqE=
+			</data>
+			<key>hash2</key>
+			<data>
+			27duDWEuoTqjEdHtxBmBQfJs8A9IaAg8veiYQdDs6AY=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
