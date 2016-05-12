@@ -47,6 +47,8 @@
     [self.localSource requestContactPermission:completion];
 }
 
+// This retrieves the contact list from the app cache if it exists, otherwise it retrieves it from the phone. Then it uploads to
+// YesGraph and runs the completion on the results.
 - (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
 {
     [self.cacheSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
@@ -57,28 +59,7 @@
             {
                 if (unrankedContactList.entries.count)
                 {
-                    [self.client updateAddressBookWithContactList:unrankedContactList forUserId:self.userId completionWaitForFinish:YES completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
-                     {
-                         if (rankedContactList)
-                         {
-                             // If the addressbook is too large, we should break it into batches and get the first result right away, while getting the rest of the results
-                             // in the background. So we have something to show to the user while the rest of the addressbook is posting.
-                             if (YSGBatchCount < unrankedContactList.entries.count) {
-                                 NSArray <YSGContact *> *lowerContacts;
-                                 lowerContacts = [unrankedContactList.entries subarrayWithRange:NSMakeRange(YSGBatchCount, unrankedContactList.entries.count - YSGBatchCount)];
-                                 rankedContactList.entries = [rankedContactList.entries arrayByAddingObjectsFromArray:lowerContacts];
-                             }
-                             [self.cacheSource updateCacheWithContactList:rankedContactList completion:nil];
-                         }
-                         if (completion)
-                         {
-                             completion(rankedContactList ?: unrankedContactList, error);
-                         }
-                         else {
-                             [self.cacheSource updateCacheWithContactList:(rankedContactList ?: unrankedContactList) completion:nil];
-                             NSLog(@"Error with HTTP request");
-                         }
-                     }];
+                    [self uploadContactList:unrankedContactList completion:completion];
                 }
                 else if (completion)
                 {
@@ -92,6 +73,43 @@
         }
     }];
 }
+
+// This method retrieves the contact list from the phone, uploads them to YesGraph, and runs the completion on the response
+- (void)updateAndUploadContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
+{
+    [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
+     {
+         [self uploadContactList:contactList completion:completion];
+     }];
+}
+
+- (void)uploadContactList:(YSGContactList *)contactList completion:(void (^)(YSGContactList *, NSError *))completion
+{
+    [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completionWaitForFinish:YES completion:^(YSGContactList*  _Nullable rankedContactList, NSError * _Nullable error)
+     {
+         if (rankedContactList)
+         {
+             // If the addressbook is too large, we should break it into batches and get the first result right away, while getting the rest of the results
+             // in the background. So we have something to show to the user while the rest of the addressbook is posting.
+             if (YSGBatchCount < contactList.entries.count) {
+                 NSArray <YSGContact *> *lowerContacts;
+                 lowerContacts = [contactList.entries subarrayWithRange:NSMakeRange(YSGBatchCount, contactList.entries.count - YSGBatchCount)];
+                 rankedContactList.entries = [rankedContactList.entries arrayByAddingObjectsFromArray:lowerContacts];
+             }
+             [self.cacheSource updateCacheWithContactList:rankedContactList completion:nil];
+         }
+         if (completion)
+         {
+             completion(rankedContactList ?: contactList, error);
+         }
+         else {
+             [self.cacheSource updateCacheWithContactList:(rankedContactList ?: contactList) completion:nil];
+             NSLog(@"Error with HTTP request");
+         }
+     }];
+
+}
+
 
 #pragma mark - Suggestions shown implementation
 

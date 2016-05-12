@@ -25,6 +25,6 @@
 @property (nonatomic, copy) NSDate* lastFetchDate;
 
 - (void)applicationNotification:(NSNotification *)notification;
-- (void)updateContactList:(YSGContactList *)contactList;
+- (void)updateYesGraphWithContactList:(YSGContactList *)contactList;
 
 @end

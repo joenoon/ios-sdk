@@ -9,6 +9,7 @@
 #import "YSGMockClient.h"
 #import "YSGClient+AddressBook.h"
 #import "YSGClient+SuggestionsShown.h"
+#import "YSGClient+AddressBookBatchPost.h"
 #import "YSGTestMockData.h"
 #import "YSGTestSettings.h"
 #import "objc/runtime.h"
@@ -30,6 +31,39 @@
         }
     }
 }
+
+- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completion:(YSGNetworkFetchCompletion)completion
+{
+    if (completion)
+    {
+        if (self.shouldSucceed)
+        {
+            completion([YSGTestMockData mockContactList], nil);
+        }
+        else
+        {
+            NSError *sentError = [NSError errorWithDomain:@"YesGraphSDKDomain" code:2 userInfo:nil];
+            completion(nil, sentError);
+        }
+    }
+}
+
+- (void)updateAddressBookWithContactList:(YSGContactList *)contactList forUserId:(NSString *)userId completionWaitForFinish:(BOOL)waitForFinish completion:(nullable YSGNetworkFetchCompletion)completion
+{
+    if (completion)
+    {
+        if (self.shouldSucceed)
+        {
+            completion([YSGTestMockData mockContactList], nil);
+        }
+        else
+        {
+            NSError *sentError = [NSError errorWithDomain:@"YesGraphSDKDomain" code:2 userInfo:nil];
+            completion(nil, sentError);
+        }
+    }
+}
+
 
 - (void)updateSuggestionsSeen:(NSArray<YSGContact *> *)suggestionsShown forUserId:(NSString *)userId completion:(void (^)(NSError * _Nullable))completion
 {
