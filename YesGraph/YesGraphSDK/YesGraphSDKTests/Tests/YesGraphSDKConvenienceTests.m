@@ -189,6 +189,9 @@
 
 - (void)testYesGraphApplicationNotification
 {
+    [self.sharedGraph configureWithUserId:@"TEST_USER_ID"];
+    [self.sharedGraph configureWithClientKey:@"TEST_CLIENT_KEY"];
+
     // Checking if checks are correct
     self.sharedGraph.lastFetchDate = [NSDate date];
     
@@ -211,22 +214,21 @@
     
     id mockLocalSource = OCMPartialMock(self.sharedGraph.localSource);
     OCMStub([mockLocalSource fetchContactListWithCompletion:nil]);
-    
+
     self.sharedGraph.localSource = mockLocalSource;
     
     id sharedMock = OCMPartialMock(self.sharedGraph);
-    
+    OCMStub([sharedMock fetchContactListWithCompletion:nil]);
+
     [self.sharedGraph applicationNotification:nil];
     
-    OCMVerify([sharedMock updateContactList:[OCMArg isNotNil]]);
-    
+    XCTAssertTrue([sharedMock isConfigured]);
+        
     OCMVerify([mockLocalSource fetchContactListWithCompletion:[OCMArg isNotNil]]);
 }
 
 - (void)testYesGraphUpdateContactList
 {
-    YSGContactList *contactList = [YSGTestMockData mockContactList];
-    
     //XCTestExpectation *expectation = [self expectationWithDescription:@"Expect completion block to be provided and called."];
     
     XCTAssertNil(self.sharedGraph.lastFetchDate, @"Last fetch date must be nil before calling update.");
@@ -236,10 +238,9 @@
     OCMStub([mockedClient setClientKey:[OCMArg any]]);
     
     id mockedGraph = OCMPartialMock(self.sharedGraph);
-    OCMExpect([mockedGraph setLastFetchDate:[OCMArg isNotNil]]);
     OCMStub([mockedGraph lastFetchDate]).andReturn([NSDate date]);
 
-    OCMStub([mockedClient updateAddressBookWithContactList:[OCMArg isNotNil] forUserId:[OCMArg any] completionWaitForFinish:YES completion:[OCMArg any]]).andDo(^(NSInvocation *invocation)
+    OCMStub([mockedGraph fetchContactListWithCompletion:[OCMArg any]]).andDo(^(NSInvocation *invocation)
     {
         void (^completion)(id, NSError *) = nil;
         [invocation getArgument:&completion atIndex:5];
@@ -253,8 +254,6 @@
     });
 
     self.sharedGraph.client = mockedClient;
-    
-    [mockedGraph updateContactList:contactList];
 
     OCMVerifyAll(mockedGraph);
 }

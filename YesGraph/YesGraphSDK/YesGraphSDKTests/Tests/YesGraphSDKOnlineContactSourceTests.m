@@ -7,6 +7,8 @@
 //
 
 @import XCTest;
+@import OCMock;
+
 #import "YSGMockClient.h"
 #import "YSGOnlineContactSource.h"
 #import "YSGCacheContactSource.h"
@@ -84,6 +86,30 @@
          XCTAssertNil(error, @"Error should be nil not '%@', otherwise the message handler was never invoked", error);
      }];
 }
+
+- (void)testUploadContactList
+{
+    YSGMockClient *mockedClient = [YSGMockClient createMockedClient:YES];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Expect Fetch Online Contact List"];
+    __weak YSGContactList *expectedContactsList = [YSGTestMockData mockContactList];
+    
+    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:mockedClient localSource:self.localSource cacheSource:self.cacheSource];
+    __weak YSGOnlineContactSource *preventRetainCycleInstance = onlineSource;
+
+    [preventRetainCycleInstance uploadContactList: expectedContactsList completion:^(YSGContactList *returnedContacts, NSError *error)
+     {
+         XCTAssertNil(error, @"Error is supposed to be nil, not '%@'", error);
+         XCTAssertEqual(returnedContacts.entries.count, expectedContactsList.entries.count, @"Returned contacts should contain '%lu' entries, not '%lu'", (unsigned long)expectedContactsList.entries.count, (unsigned long)returnedContacts.entries.count);
+         [expectation fulfill];
+     }];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error)
+     {
+         XCTAssertNil(error, @"Error should be nil not '%@', otherwise the message handler was never invoked", error);
+     }];
+}
+
 
 - (void)testUpdateShownSuggestions
 {

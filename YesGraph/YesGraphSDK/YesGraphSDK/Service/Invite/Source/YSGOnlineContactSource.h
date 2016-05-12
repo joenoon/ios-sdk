@@ -55,6 +55,23 @@ NS_ASSUME_NONNULL_BEGIN
                                 
 @interface YSGOnlineContactSource (SuggestionsShown)
 
+
+/*!
+ *  This retrieves the contact list from the app cache if it exists, otherwise it retrieves it from the phone. Then it uploads
+ * to YesGraph and runs the completion on the results.
+ */
+- (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion;
+
+/*!
+ *  This method retrieves the contact list from the phone, uploads them to YesGraph, and runs the completion on the response
+ */
+- (void)updateAndUploadContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion;
+
+/*!
+ * This method uploads a contact list to YesGraph.
+ */
+- (void)uploadContactList:(YSGContactList *)contactList completion:(void (^)(YSGContactList *, NSError *))completion;
+
 /*!
  *  Every time the suggestions list is shown, it is sent to the YesGraph API
  */

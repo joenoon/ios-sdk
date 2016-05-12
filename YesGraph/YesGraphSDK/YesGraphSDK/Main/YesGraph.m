@@ -28,7 +28,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 @property (nonatomic, strong) YSGLocalContactSource *localSource;
 @property (nonatomic, strong) YSGCacheContactSource *cacheSource;
-@property (nonatomic, strong) YSGCacheContactSource *onlineSource;
+@property (nonatomic, strong) YSGOnlineContactSource *onlineSource;
 
 @property (nonatomic, strong) YSGMessageCenter *messageCenter;
 @property (nonatomic, strong) YSGClient* client;
@@ -128,6 +128,20 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     }
     
     return _cacheSource;
+}
+
+
+- (YSGOnlineContactSource *)onlineSource
+{
+    if (!_onlineSource)
+    {
+        if ([self isConfigured]) {
+            _onlineSource = [[YSGOnlineContactSource alloc] initWithClient:self.client localSource:self.localSource cacheSource:self.cacheSource];
+        }
+
+    }
+    
+    return _onlineSource;
 }
 
 - (YSGMessageHandlerBlock)messageHandler
@@ -243,22 +257,27 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     
     [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error)
      {
-         [self updateContactList:contactList];
+         [self updateAndUploadContactList:contactList completion:nil];
      }];
 }
 
-- (void)updateContactList:(YSGContactList *)contactList
+
+#pragma mark - Private Methods
+- (void)updateAndUploadContactList:(YSGContactList *)contactList completion:(void (^)(YSGContactList *, NSError *))completion
 {
-    if (contactList.entries.count)
-    {
-        self.client.clientKey = self.clientKey;
-        [self.client updateAddressBookWithContactList:contactList forUserId:self.userId completionWaitForFinish:YES completion:^(id  _Nullable responseObject, NSError * _Nullable error)
+    if ([self isConfigured]) {
+        if (contactList.entries.count)
         {
-            if (!error)
-            {
-                self.lastFetchDate = [NSDate date];
-            }
-        }];
+            [self.onlineSource uploadContactList:contactList completion:completion];
+        }
+        else
+        {
+            YSG_LWARN(@"No contacts to upload.");
+        }
+    }
+    else
+    {
+        YSG_LWARN(@"YesGraph is not configured.");
     }
 }
 
@@ -289,17 +308,50 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 - (BOOL)isConfigured
 {
-    if (self.userId.length && self.clientKey.length)
+    
+    //
+    // No client key, cannot create the share sheet.
+    //
+    if (!self.clientKey.length)
     {
-        return YES;
-    }
-    else
-    {
+        YSG_LWARN(@"No client key was set for share sheet. Call configureWithClientKey first.");
         return NO;
     }
+    //
+    // No user id, cannot create the share sheet.
+    //
+    if (!self.userId.length)
+    {
+        YSG_LWARN(@"No userId was set for share sheet. Call configureWithUserId first.");
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark - Public Methods
+
+// This retrieves the contact list from the app cache if it exists, otherwise it retrieves it from the phone. Then it uploads to
+// YesGraph and runs the completion on the results.
+- (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion
+{
+
+    if ([self isConfigured]) {
+        [self.onlineSource fetchContactListWithCompletion:^(YSGContactList *contactList, NSError *error){
+            if (!error) {
+                [self setLastFetchDate:[NSDate date]];
+            }
+            if (completion) {
+                completion(contactList, error);
+            }
+        }];
+    }
+    else
+    {
+        YSG_LWARN(@"YesGraph is not configured. Please check that the userId and clientKey are set.");
+    }
+}
+
+
 
 - (YSGShareSheetController *)shareSheetControllerForAllServices
 {
@@ -324,21 +376,9 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 - (YSGShareSheetController *)shareSheetControllerForServicesWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate socialServices:(BOOL)socialServices
 {
-    //
-    // No client key, cannot create the share sheet.
-    //
-    if (!self.clientKey.length)
-    {
-        YSG_LERR(@"No client key was set for share sheet. Call configureWithClientKey: first.");
-        return nil;
-    }
-    
-    //
-    // No user id, cannot create the share sheet.
-    //
-    if (!self.userId.length)
-    {
-        YSG_LERR(@"No client key was set for share sheet. Call configureWithUserId: first.");
+    if (!self.isConfigured) {
+        
+        YSG_LERR(@"Error: YesGraph is not configured. Please check that the clientKey and userId are set");
         return nil;
     }
     
@@ -350,20 +390,11 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
         YSG_LWARN(@"No share sheet text is set.");
     }
     
+    // Initialize the invite messages
+    self.localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
+    self.localSource.contactSourceMetadata = self.contactOwnerMetadata;
     
-    YSGLocalContactSource *localSource = [self localSource];
-    localSource.contactAccessPromptMessage = self.contactAccessPromptMessage;
-    localSource.contactSourceMetadata = self.contactOwnerMetadata;
-    
-    YSGCacheContactSource* cacheSource = [self cacheSource];
-    
-    YSGClient* client = [self client];
-    client.clientKey = self.clientKey;
-    
-    YSGOnlineContactSource *onlineSource = [[YSGOnlineContactSource alloc] initWithClient:client localSource:localSource cacheSource:cacheSource];
-    onlineSource.userId = self.userId;
-    
-    YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:onlineSource userId:self.userId];
+    YSGInviteService *inviteService = [[YSGInviteService alloc] initWithContactSource:self.onlineSource userId:self.userId];
     inviteService.numberOfSuggestions = self.numberOfSuggestions;
     inviteService.theme = self.theme;
     
@@ -394,6 +425,5 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     return shareController;
 }
 
-#pragma mark - Private Methods
 
 @end
