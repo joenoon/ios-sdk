@@ -11,7 +11,7 @@
 NSString *const YSGErrorDomain                          = @"YSGErrorDomain";
 NSString *const YSGErrorNetworkStatusCodeKey            = @"YSGErrorNetworkStatusCodeKey";
 
-NSUInteger const YSGInviteNumberOfSuggestions           = 5;
+NSUInteger const YSGDefaultInviteNumberOfSuggestions           = 5;
 
 NSString *const YSGClientAPIURL                         = @"https://api.yesgraph.com/v0/";
 
