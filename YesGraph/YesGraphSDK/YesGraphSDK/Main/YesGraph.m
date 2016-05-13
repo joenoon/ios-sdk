@@ -351,8 +351,6 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     }
 }
 
-
-
 - (YSGShareSheetController *)shareSheetControllerForAllServices
 {
     return [self shareSheetControllerForServicesWithDelegate:nil socialServices:YES];

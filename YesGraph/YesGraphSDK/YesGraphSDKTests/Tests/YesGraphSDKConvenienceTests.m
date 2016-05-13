@@ -213,12 +213,12 @@
     OCMStub([classMock hasPermission]).andReturn(YES);
     
     id mockLocalSource = OCMPartialMock(self.sharedGraph.localSource);
-    OCMStub([mockLocalSource fetchContactListWithCompletion:nil]);
+    OCMStub([mockLocalSource fetchContactListWithCompletion:[OCMArg isNotNil]]);
 
     self.sharedGraph.localSource = mockLocalSource;
     
     id sharedMock = OCMPartialMock(self.sharedGraph);
-    OCMStub([sharedMock fetchContactListWithCompletion:nil]);
+    OCMStub([sharedMock fetchContactListWithCompletion:[OCMArg isNotNil]]);
 
     [self.sharedGraph applicationNotification:nil];
     

@@ -11,6 +11,7 @@
 #import "YSGShareSheetController.h"
 #import "YSGTheme.h"
 #import "YSGSource.h"
+#import "YSGContactList.h"
 
 @import Foundation;
 
@@ -111,6 +112,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable YSGShareSheetController *)shareSheetControllerForInviteServiceWithDelegate:(nullable id<YSGShareSheetDelegate>)delegate;
 
 @end
+
+
+@interface YesGraph (Fetch)
+
+/*!
+ *  This retrieves the contact list from the app cache if it exists, otherwise it retrieves it from the phone. Then it uploads
+ * to YesGraph and runs the completion on the results.
+ */
+- (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion;
+
+@end
+
 
 @interface YesGraph (Customization)
 
