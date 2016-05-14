@@ -126,7 +126,7 @@
     // Check if there are any contacts left that were not suggested
     //
     
-    NSArray <YSGContact *>* notSuggested = [[contactList removeDuplicatedContacts:contactList.entries] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 0"]];
+    NSArray <YSGContact *>* notSuggested = [[YSGContactList removeDuplicatedContacts:contactList.entries] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"wasSuggested == 0"]];
     
     if (notSuggested.count == 0)
     {

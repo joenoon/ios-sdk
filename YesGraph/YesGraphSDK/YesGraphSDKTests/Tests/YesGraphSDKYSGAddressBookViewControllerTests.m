@@ -307,7 +307,7 @@
     YSGMockedInviteService *mockedService = [[YSGMockedInviteService alloc] initWithContactSource:mockedOnlineSource];
     mockedService.numberOfSuggestions = 5;
     self.controller.service = mockedService;
-    NSArray <YSGContact *> *uniqueContacts = [[[YSGTestMockData mockContactList] removeDuplicatedContacts:[YSGTestMockData mockContactList].entries] subarrayWithRange:NSMakeRange(0, 1)];
+    NSArray <YSGContact *> *uniqueContacts = [[YSGContactList removeDuplicatedContacts:[YSGTestMockData mockContactList].entries] subarrayWithRange:NSMakeRange(0, 1)];
     YSGContactList *smallContactsList = [YSGContactList new];
     smallContactsList.entries = uniqueContacts;
     smallContactsList.useSuggestions = YES;
@@ -333,7 +333,7 @@
     mockedService.numberOfSuggestions = 5;
     self.controller.service = mockedService;
     
-    NSArray <YSGContact *> *uniqueContacts = [[YSGTestMockData mockContactList] removeDuplicatedContacts:[YSGTestMockData mockContactList].entries];
+    NSArray <YSGContact *> *uniqueContacts = [YSGContactList removeDuplicatedContacts:[YSGTestMockData mockContactList].entries];
     YSGContactList *fullList = [YSGContactList new];
     fullList.entries = uniqueContacts;
     fullList.useSuggestions = YES;

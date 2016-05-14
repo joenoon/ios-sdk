@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSArray<YSGContact *> *)suggestedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions;
 - (NSDictionary <NSString *, NSArray <YSGContact *> *> *)sortedEntriesWithNumberOfSuggestions:(NSUInteger)numberOfSuggestions;
 
-- (NSArray <YSGContact *> *)removeDuplicatedContacts:(NSArray <YSGContact *> *)contacts;
+// Class Method
+// Takes a list and removes the duplicated contacts from the list
++ (NSArray <YSGContact *> *)removeDuplicatedContacts:(NSArray <YSGContact *> *)contacts;
 
 /*!
  *  Returns a new copy of the contact list with only Email entries

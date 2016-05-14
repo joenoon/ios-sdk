@@ -122,7 +122,7 @@
     YSGContactList *list = [YSGTestMockData mockContactList];
     NSUInteger expectedNumberOfTrimmedContacts = self.numberOfUniqueContacts;
     
-    NSArray *trimmedList = [list removeDuplicatedContacts:list.entries];
+    NSArray *trimmedList = [YSGContactList removeDuplicatedContacts:list.entries];
     XCTAssertNotNil(trimmedList, @"Trimmed list shouldn't be nil");
     XCTAssertEqual(trimmedList.count, expectedNumberOfTrimmedContacts, @"The trimmed list should contain '%lu' contacts, not '%lu'", (unsigned long)expectedNumberOfTrimmedContacts, (unsigned long)trimmedList.count);
 }

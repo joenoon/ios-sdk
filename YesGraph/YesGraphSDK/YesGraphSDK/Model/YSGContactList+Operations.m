@@ -162,9 +162,7 @@
 }
 
 
-#pragma mark - Private Methods
-
-- (NSArray <YSGContact *> *)removeDuplicatedContacts:(NSArray <YSGContact *> *)contacts
++ (NSArray <YSGContact *> *)removeDuplicatedContacts:(NSArray <YSGContact *> *)contacts
 {
     if (!contacts.count)
     {
@@ -203,6 +201,9 @@
     
     return filteredContacts.copy;
 }
+
+
+#pragma mark - Private Methods
 
 NSInteger contactsSort(YSGContact *contact1, YSGContact *contact2, void *context)
 {
