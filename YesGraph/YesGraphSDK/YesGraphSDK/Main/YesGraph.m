@@ -137,6 +137,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     {
         if ([self isConfigured]) {
             _onlineSource = [[YSGOnlineContactSource alloc] initWithClient:self.client localSource:self.localSource cacheSource:self.cacheSource];
+            _onlineSource.userId = self.userId;
         }
 
     }
@@ -189,6 +190,10 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     if (!_userId)
     {
         _userId = [self.userDefaults objectForKey:YSGConfigurationUserIdKey];
+    }
+    if (_onlineSource)
+    {
+        self.onlineSource.userId = _userId;
     }
     
     return _userId;
