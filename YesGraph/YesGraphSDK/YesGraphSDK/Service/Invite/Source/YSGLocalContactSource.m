@@ -170,7 +170,7 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
         UIAlertController *controller = [UIAlertController alertControllerWithTitle:self.contactAccessPromptTitle message:self.contactAccessPromptMessage preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *dontAllowAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Don't allow", @"") style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
         {
-            
+            return completion(NO, nil);
         }];
         
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Ok", @"") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)

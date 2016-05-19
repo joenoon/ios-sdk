@@ -236,7 +236,6 @@
     id mockedClient = OCMStrictClassMock([YSGClient class]);
     
     OCMStub([mockedClient setClientKey:[OCMArg any]]);
-    
     id mockedGraph = OCMPartialMock(self.sharedGraph);
     OCMStub([mockedGraph lastFetchDate]).andReturn([NSDate date]);
 
