@@ -31,7 +31,6 @@ class ExampleContactsOnlyTests: XCTestCase {
     }
     
     func mainScreen() {
-        XCTAssert(self.application!.otherElements.containingType(XCUIElementType.NavigationBar, identifier: navWelcomeIdent).count == 1, "Application does not have a navigation controller with ident \(navWelcomeIdent)")
         
         let imageViews = self.application!.images
         findOneViewFromQuery(imageViews, identifier: logoIdent)
@@ -46,7 +45,7 @@ class ExampleContactsOnlyTests: XCTestCase {
         
         let button = self.application!.buttons[btnText]
         XCTAssertNotNil(button)
-        XCTAssert(button.respondsToSelector(Selector("tap")), "Found button does not respond to the 'tap' selector")
+        XCTAssert(button.respondsToSelector(#selector(XCUIElement.tap)), "Found button does not respond to the 'tap' selector")
     }
     
     /*!

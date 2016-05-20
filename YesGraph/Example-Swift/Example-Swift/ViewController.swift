@@ -14,7 +14,7 @@ import AddressBook
 class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate {
 
     var theme = YSGTheme()
-    let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
+    //let addressBookRef: ABAddressBook = ABAddressBookCreateWithOptions(nil, nil).takeRetainedValue()
 
     @IBOutlet weak var webView: UIWebView!
     
@@ -29,7 +29,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
         self.webView.delegate = self
         
         
-        promptForAddressBookRequestAccess()
+        //promptForAddressBookRequestAccess()
         //for i in 1...3000 {
         //    self.makeAndAddTestRecord(i)
         //}
@@ -136,7 +136,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
     }
 
     
-    
+    /*
     func promptForAddressBookRequestAccess() {
         //var err: Unmanaged<CFError>? = nil
         
@@ -152,7 +152,6 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
             }
         }
     }
-    
     
     func makeAndAddTestRecord(count: Int) -> ABRecordRef {
         let firstname = String(format: "kendall%d", count)
@@ -193,5 +192,7 @@ class ViewController: UIViewController, YSGShareSheetDelegate, UIWebViewDelegate
             print("No changes occurred.")
         }
     }
+     
+     */
 }
 
