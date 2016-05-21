@@ -18,7 +18,6 @@
 #import "YSGTheme.h"
 #import "YSGContactList.h"
 #import "YSGContactList+Operations.h"
-#import "UITableView+YSGEmptyView.h"
 #import "YSGOnlineContactSource.h"
 
 CGFloat const YSGSearchBarHeight = 44.0;
@@ -61,6 +60,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 //
 
 @property (nonatomic, strong) UIView *emptyView;
+@property (nonatomic, assign) UITableViewCellSeparatorStyle ysg_previousSeparatorStyle;
+@property (nonatomic, assign) BOOL ysg_hideSeparatorLinesWhenShowingEmptyView;
+
 
 //
 // Search
@@ -162,7 +164,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     self.searchResults = nil;
     self.selectedContacts = nil;
     
-    [self.tableView reloadData];
+    [self ysg_reloadData];
     
     [self updateUI];
 }
@@ -242,8 +244,9 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     self.tableView.tableHeaderView = [UIView new];
     self.tableView.tableFooterView = [UIView new];
     
-    self.tableView.ysg_emptyView = self.emptyView;
-    self.tableView.ysg_hideSeparatorLinesWhenShowingEmptyView = YES;
+    //self.tableView.ysg_emptyView = self.emptyView;
+    [self ysg_updateEmptyView];
+    self.ysg_hideSeparatorLinesWhenShowingEmptyView = YES;
     
     //
     // Add navigation buttons
@@ -358,8 +361,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     {
         self.searchResults = nil;
         
-        [self.tableView reloadData];
-        
+        [self ysg_reloadData];
+
         return;
     }
     
@@ -367,7 +370,8 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     
     self.searchResults = [self.contactList.entries filteredArrayUsingPredicate:predicate];
     
-    [self.tableView reloadData];
+    [self ysg_reloadData];
+
 }
 
 #pragma mark - UISearchBarDelegate
@@ -376,14 +380,16 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 {
     self.searchResults = nil;
     
-    [self.tableView reloadData];
+    [self ysg_reloadData];
+
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     self.searchResults = nil;
     
-    [self.tableView reloadData];
+    [self ysg_reloadData];
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -549,6 +555,92 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
     }
 }
 
+
+#pragma mark Properties
+
+- (BOOL)ysg_hasRowsToDisplay;
+{
+    NSUInteger numberOfRows = 0;
+    
+    for (NSInteger sectionIndex = 0; sectionIndex < self.tableView.numberOfSections; sectionIndex++)
+    {
+        numberOfRows += [self.tableView numberOfRowsInSection:sectionIndex];
+    }
+    
+    return (numberOfRows > 0);
+}
+
+#pragma mark Updating
+
+- (void)ysg_updateEmptyView;
+{
+    UIView *emptyView = self.emptyView;
+    
+    if (!emptyView)
+    {
+        return;
+    }
+    
+    
+    if (emptyView.superview != self)
+    {
+        [self.tableView addSubview:emptyView];
+    }
+    
+    // setup empty view frame
+    CGRect frame = self.tableView.bounds;
+    frame.origin = CGPointMake(0, 0);
+    frame = UIEdgeInsetsInsetRect(frame, UIEdgeInsetsMake(CGRectGetHeight(self.tableView.tableHeaderView.frame), 0, 0, 0));
+    frame.size.height -= self.tableView.contentInset.top;
+    emptyView.frame = frame;
+    emptyView.autoresizingMask = (UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth);
+    
+    // check available data
+    BOOL emptyViewShouldBeShown = (self.ysg_hasRowsToDisplay == NO);
+    
+    // hide tableView separators, if present
+    if (self.ysg_hideSeparatorLinesWhenShowingEmptyView) {
+        if (emptyViewShouldBeShown) {
+            if (self.tableView.separatorStyle != UITableViewCellSeparatorStyleNone) {
+                self.ysg_previousSeparatorStyle = self.tableView.separatorStyle;
+                self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            }
+        } else {
+            if (self.tableView.separatorStyle != self.ysg_previousSeparatorStyle) {
+                // we've seen an issue with the separator color not being correct when setting separator style during layoutSubviews
+                // that's why we schedule the call on the next runloop cycle
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.tableView.separatorStyle = self.ysg_previousSeparatorStyle;
+                });
+                
+            }
+        }
+    }
+    
+    // show / hide empty view
+    dispatch_async(dispatch_get_main_queue(), ^{
+        emptyView.hidden = !emptyViewShouldBeShown;
+    });
+}
+
+
+- (void)ysg_reloadData;
+{
+    // this calls the original reloadData implementation
+    [self.tableView reloadData];
+    
+    [self ysg_updateEmptyView];
+}
+
+- (void)ysg_layoutSubviews;
+{
+    // this calls the original layoutSubviews implementation
+    [self ysg_layoutSubviews];
+    
+    [self ysg_updateEmptyView];
+}
+
+
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -572,5 +664,6 @@ NSInteger contactLettersSort(NSString *letter1, NSString *letter2, void *context
     
     return [letter1 caseInsensitiveCompare:letter2];
 }
+
 
 @end

@@ -25,7 +25,6 @@
 		38132D641BC6B8D400E93527 /* YSGShareSheetController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3800EE941B83769C007E0C43 /* YSGShareSheetController.h */; };
 		38132D651BC6B8D400E93527 /* YSGConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 388AFD251B98808D00629D35 /* YSGConstants.h */; };
 		38132D661BC6B8D400E93527 /* UIAlertController+YSGDisplay.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 388D0D551B8C838400C17DA7 /* UIAlertController+YSGDisplay.h */; };
-		38132D671BC6B8D400E93527 /* UITableView+YSGEmptyView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38CE6EAD1B8617740037FE79 /* UITableView+YSGEmptyView.h */; };
 		38132D691BC6B8D400E93527 /* YSGDrawing.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */; };
 		38132D6A1BC6B8D400E93527 /* YSGDrawingConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38EDF4D71B9DC80D00B91C3D /* YSGDrawingConstants.h */; };
 		38132D6B1BC6B8D400E93527 /* YSGDrawableView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 38EDF4DB1B9DC88200B91C3D /* YSGDrawableView.h */; };
@@ -148,8 +147,6 @@
 		38CC16C91B831606008477C7 /* YesGraphSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CC16BD1B831606008477C7 /* YesGraphSDK.framework */; };
 		38CE6EAB1B86175A0037FE79 /* NSObject+YSGParsable.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CE6EA91B86175A0037FE79 /* NSObject+YSGParsable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38CE6EAC1B86175A0037FE79 /* NSObject+YSGParsable.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CE6EAA1B86175A0037FE79 /* NSObject+YSGParsable.m */; };
-		38CE6EAF1B8617740037FE79 /* UITableView+YSGEmptyView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CE6EAD1B8617740037FE79 /* UITableView+YSGEmptyView.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		38CE6EB01B8617740037FE79 /* UITableView+YSGEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CE6EAE1B8617740037FE79 /* UITableView+YSGEmptyView.m */; };
 		38E200181BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E200171BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m */; };
 		38E2001A1BF231060065AA05 /* YesGraphSDKValueTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E200191BF231060065AA05 /* YesGraphSDKValueTransformerTests.m */; };
 		38EDF4D61B9DC7EF00B91C3D /* YSGDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -163,7 +160,6 @@
 		38EF2B9C1BA30A8100AF2AE0 /* YSGShareSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3800EE951B83769C007E0C43 /* YSGShareSheetController.m */; };
 		38EF2B9D1BA30A8100AF2AE0 /* YSGConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3817840A1B877370008B8315 /* YSGConstants.m */; };
 		38EF2B9E1BA30A8100AF2AE0 /* UIAlertController+YSGDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 388D0D561B8C838400C17DA7 /* UIAlertController+YSGDisplay.m */; };
-		38EF2B9F1BA30A8100AF2AE0 /* UITableView+YSGEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38CE6EAE1B8617740037FE79 /* UITableView+YSGEmptyView.m */; };
 		38EF2BA01BA30A8100AF2AE0 /* YSGDrawingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EDF4D81B9DC80D00B91C3D /* YSGDrawingConstants.m */; };
 		38EF2BA11BA30A8100AF2AE0 /* YSGDrawableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38EDF4DC1B9DC88200B91C3D /* YSGDrawableView.m */; };
 		38EF2BA21BA30A8100AF2AE0 /* YSGLoggingConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 38C581D21B9EF35C008676F0 /* YSGLoggingConstants.m */; };
@@ -219,7 +215,6 @@
 		3EAFEFBD1BA993EE00D2548D /* YSGShareSheetController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3800EE941B83769C007E0C43 /* YSGShareSheetController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFBE1BA993EE00D2548D /* YSGConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 388AFD251B98808D00629D35 /* YSGConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFBF1BA9946D00D2548D /* UIAlertController+YSGDisplay.h in Headers */ = {isa = PBXBuildFile; fileRef = 388D0D551B8C838400C17DA7 /* UIAlertController+YSGDisplay.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3EAFEFC01BA9946D00D2548D /* UITableView+YSGEmptyView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38CE6EAD1B8617740037FE79 /* UITableView+YSGEmptyView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFC11BA9946D00D2548D /* YSGDrawing.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFC21BA9947C00D2548D /* YSGDrawingConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EDF4D71B9DC80D00B91C3D /* YSGDrawingConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3EAFEFC31BA9947C00D2548D /* YSGDrawableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 38EDF4DB1B9DC88200B91C3D /* YSGDrawableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -401,7 +396,6 @@
 				38132D641BC6B8D400E93527 /* YSGShareSheetController.h in CopyFiles */,
 				38132D651BC6B8D400E93527 /* YSGConstants.h in CopyFiles */,
 				38132D661BC6B8D400E93527 /* UIAlertController+YSGDisplay.h in CopyFiles */,
-				38132D671BC6B8D400E93527 /* UITableView+YSGEmptyView.h in CopyFiles */,
 				38132D691BC6B8D400E93527 /* YSGDrawing.h in CopyFiles */,
 				38132D6A1BC6B8D400E93527 /* YSGDrawingConstants.h in CopyFiles */,
 				38132D6B1BC6B8D400E93527 /* YSGDrawableView.h in CopyFiles */,
@@ -534,8 +528,6 @@
 		38CC16CE1B831606008477C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38CE6EA91B86175A0037FE79 /* NSObject+YSGParsable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+YSGParsable.h"; sourceTree = "<group>"; };
 		38CE6EAA1B86175A0037FE79 /* NSObject+YSGParsable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+YSGParsable.m"; sourceTree = "<group>"; };
-		38CE6EAD1B8617740037FE79 /* UITableView+YSGEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+YSGEmptyView.h"; sourceTree = "<group>"; };
-		38CE6EAE1B8617740037FE79 /* UITableView+YSGEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+YSGEmptyView.m"; sourceTree = "<group>"; };
 		38E200171BF22F3A0065AA05 /* YesGraphSDKDrawableViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKDrawableViewTests.m; sourceTree = "<group>"; };
 		38E200191BF231060065AA05 /* YesGraphSDKValueTransformerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesGraphSDKValueTransformerTests.m; sourceTree = "<group>"; };
 		38EDF4D51B9DC7EF00B91C3D /* YSGDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YSGDrawing.h; sourceTree = "<group>"; };
@@ -910,7 +902,6 @@
 			isa = PBXGroup;
 			children = (
 				388D0D541B8C836300C17DA7 /* UIAlertController+YSGDisplay */,
-				38CE6EA61B8616B10037FE79 /* UITableView+YSGEmptyView */,
 				38EDF4D41B9DC79300B91C3D /* YSGDrawing */,
 				38C581C11B9EE3FB008676F0 /* YSGLogging */,
 				383B4F271BA07F4E00F3CB42 /* YSGMessaging */,
@@ -982,15 +973,6 @@
 				38CC16CE1B831606008477C7 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		38CE6EA61B8616B10037FE79 /* UITableView+YSGEmptyView */ = {
-			isa = PBXGroup;
-			children = (
-				38CE6EAD1B8617740037FE79 /* UITableView+YSGEmptyView.h */,
-				38CE6EAE1B8617740037FE79 /* UITableView+YSGEmptyView.m */,
-			);
-			path = "UITableView+YSGEmptyView";
 			sourceTree = "<group>";
 		};
 		38CE6EA71B8616DF0037FE79 /* YSGParsing */ = {
@@ -1223,7 +1205,6 @@
 				38FBA0A01BC7B2AD0030C473 /* YSGAddressBook.h in Headers */,
 				384D39841B8F1A8F0080BA48 /* YSGClient+AddressBook.h in Headers */,
 				E87C23141BC31E2300364C0C /* YSGClient+SuggestionsShown.h in Headers */,
-				38CE6EAF1B8617740037FE79 /* UITableView+YSGEmptyView.h in Headers */,
 				E8ECAA3D1C43AFC500B8D8E3 /* YSGClient+AddressBookBatchPost.h in Headers */,
 				30420E521BAC763900C1D614 /* YSGIconDrawings.h in Headers */,
 				300922FE1C1F927100C82816 /* YSGInviteServiceType.h in Headers */,
@@ -1269,7 +1250,6 @@
 				3EAFEFD61BA9954200D2548D /* YSGRankedContact.h in Headers */,
 				3EAFEFE71BA9954200D2548D /* YSGStyling.h in Headers */,
 				383257001BD8FE7B003E106A /* YSGShareSheetServiceCell.h in Headers */,
-				3EAFEFC01BA9946D00D2548D /* UITableView+YSGEmptyView.h in Headers */,
 				3EAFEFD11BA9954200D2548D /* YSGUtility.h in Headers */,
 				3EAFEFE21BA9954200D2548D /* YSGCacheContactSource.h in Headers */,
 				38FBA0A11BC7B2AE0030C473 /* YSGAddressBook.h in Headers */,
@@ -1444,7 +1424,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3800EE971B83769C007E0C43 /* YSGShareSheetController.m in Sources */,
-				38CE6EB01B8617740037FE79 /* UITableView+YSGEmptyView.m in Sources */,
 				385B64D01B831D4800C55F60 /* YesGraph.m in Sources */,
 				38C581CF1B9EEDDA008676F0 /* YSGLog.m in Sources */,
 				383257011BD8FE7B003E106A /* YSGShareSheetServiceCell.m in Sources */,
@@ -1576,7 +1555,6 @@
 				38EF2B9C1BA30A8100AF2AE0 /* YSGShareSheetController.m in Sources */,
 				38EF2B9D1BA30A8100AF2AE0 /* YSGConstants.m in Sources */,
 				38EF2B9E1BA30A8100AF2AE0 /* UIAlertController+YSGDisplay.m in Sources */,
-				38EF2B9F1BA30A8100AF2AE0 /* UITableView+YSGEmptyView.m in Sources */,
 				38EF2BA01BA30A8100AF2AE0 /* YSGDrawingConstants.m in Sources */,
 				38EF2BA11BA30A8100AF2AE0 /* YSGDrawableView.m in Sources */,
 				38EF2BA21BA30A8100AF2AE0 /* YSGLoggingConstants.m in Sources */,

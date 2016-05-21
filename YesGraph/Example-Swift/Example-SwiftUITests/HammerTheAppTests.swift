@@ -44,8 +44,8 @@ class HammerTheAppTests: XCTestCase {
         XCTAssertNotNil(self.application!.otherElements.staticTexts[lbContactsText], "Label not found, expected text: '\(lbContactsText)'");
     
     
-        let facebookButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1).childrenMatchingType(XCUIElementType.Image).element;
-        XCTAssert(facebookButton.respondsToSelector(Selector("tap")), "Twitter image does not respond to tap");
+        let facebookButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1);
+        XCTAssert(facebookButton.respondsToSelector(#selector(XCUIElement.tap)), "Twitter image does not respond to tap");
         facebookButton.tap();
         
         let facebookTitleBar = self.application!.staticTexts.elementMatchingType(XCUIElementType.StaticText, identifier: "Facebook");
@@ -63,7 +63,7 @@ class HammerTheAppTests: XCTestCase {
     
     
         let twitterButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(3).childrenMatchingType(XCUIElementType.Image).element;
-        XCTAssert(twitterButton.respondsToSelector(Selector("tap")), "Twitter image does not respond to tap");
+        XCTAssert(twitterButton.respondsToSelector(#selector(XCUIElement.tap)), "Twitter image does not respond to tap");
         twitterButton.tap();
     
         let twitterTitleBar = self.application!.staticTexts.elementMatchingType(XCUIElementType.StaticText, identifier: "Twitter")
@@ -78,7 +78,7 @@ class HammerTheAppTests: XCTestCase {
         cancelButton2.tap();
         
         let contactsButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(5).childrenMatchingType(XCUIElementType.Image).element;
-        XCTAssert(contactsButton.respondsToSelector(Selector("tap")), "Contacts button image does not respond to tap");
+        XCTAssert(contactsButton.respondsToSelector(#selector(XCUIElement.tap)), "Contacts button image does not respond to tap");
         contactsButton.tap();
         
         let list = self.application!.tables.element;

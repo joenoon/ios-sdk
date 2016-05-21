@@ -27,7 +27,9 @@ class TwitterAndContactsTests: XCTestCase {
     
     func shareScreen() {
         self.application!.buttons[btnText].tap()
-        XCTAssert(self.application!.otherElements.containingType(XCUIElementType.NavigationBar, identifier: navShareIdent).count == 1, "Application does not have a navigation controller with ident \(navShareIdent)")
+        XCTAssertEqual(self.application!.navigationBars.element.identifier, navShareIdent, "Application does not have a navigation controller with ident \(navShareIdent)")
+
+        //XCTAssert(self.application!.otherElements.containingType(XCUIElementType.NavigationBar, identifier: navShareIdent).count == 1, "Application does not have a navigation controller with ident \(navShareIdent)")
         XCTAssert(self.application!.buttons.count == 3, "Share sheet should only contain 3 buttons, not \(self.application!.buttons.count)")
         XCTAssertNotNil(self.application!.buttons[btnWelcome], "Welcome button is missing")
         XCTAssertNotNil(self.application!.buttons[btnBack], "Back button is missing")
@@ -36,13 +38,13 @@ class TwitterAndContactsTests: XCTestCase {
         self.application!.buttons[btnCopy].tap()
         XCTAssert(self.application!.buttons[btnCopied].label == btnCopied, "Copy button did not change text after tap")
         
-        let numberOfShareLabels: UInt = UInt(5)
+        let numberOfShareLabels: UInt = UInt(6)
         XCTAssert(self.application!.otherElements.staticTexts.count == numberOfShareLabels, "Number of labels is not \(numberOfShareLabels): \(self.application!.otherElements.staticTexts.count)")
         XCTAssertNotNil(self.application!.otherElements.staticTexts[lbShareText], "Label not found, expected text: \(lbShareText)")
         XCTAssertNotNil(self.application!.otherElements.staticTexts[lbContactsText], "Label not found, expected text: \(lbContactsText)")
         
-        let twitterButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1).childrenMatchingType(XCUIElementType.Image).element
-        XCTAssert(twitterButton.respondsToSelector(Selector("tap")), "Twitter button image does not respond to tap")
+        let twitterButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1)
+        XCTAssert(twitterButton.respondsToSelector(#selector(XCUIElement.tap)), "Twitter button image does not respond to tap")
         twitterButton.tap()
         
         let twitterTitleBar = self.application!.staticTexts.elementMatchingType(XCUIElementType.StaticText, identifier: "Twitter")

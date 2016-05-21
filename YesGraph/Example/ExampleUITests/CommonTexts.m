@@ -12,9 +12,9 @@ NSString *navWelcomeIdent       = @"Welcome";
 NSString *logoIdent             = @"launch-logo";
 NSString *bgIdent               = @"background";
 
-NSString *txGrowStaticText      = @"YesGraph Helps Your App Grow";
+NSString *txGrowStaticText      = @"YesGraph Boosts Your App's Viral Growth";
 NSString *lblBoostText          = @"Boost the performance of sharing and invite flows by recommending exactly who users should invite. ";
-NSString *btnText               = @"SHARE NOW";
+NSString *btnText               = @"Try YesGraph";
 
 NSString *navShareIdent         = @"Share";
 NSString *btnWelcome            = @"Welcome";

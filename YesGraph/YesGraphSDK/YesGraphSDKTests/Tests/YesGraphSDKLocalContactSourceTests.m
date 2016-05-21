@@ -238,14 +238,14 @@
     XCTAssert([copiedSeperateContact.emails isEqualToArray:firstContact.emails], @"Emails in the second entry should be '%@' not '%@'", firstContact.emails, copiedSeperateContact.emails);
 }
 
-- (void)testPermissionsDidNotAsk
+- (void)testPermissionsDidNotAskGrantedFalse
 {
     id mock = [OCMockObject partialMockForObject:self.localSource];
     OCMStub([mock hasPermission]).andReturn(NO);
     OCMStub([mock didAskForPermission]).andReturn(NO);
     OCMStub([mock contactAccessPromptTitle]).andReturn(@"Mocked Title");
     OCMStub([mock contactAccessPromptMessage]).andReturn(@"Mocked message");
-    OCMStub([mock setDidAskForPermission:YES]);
+    //OCMStub([mock setDidAskForPermission:YES]);
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Expected UIAlertController To Show"];
     
@@ -259,11 +259,21 @@
         XCTAssert([controller.actions.lastObject.title isEqualToString:expectedOk], @"Second controller action should have the title '%@', but title was '%@'", expectedOk, controller.actions.lastObject.title);
         XCTAssert([controller.title isEqualToString:[self.localSource contactAccessPromptTitle]], @"Controller's title should be '%@', but was '%@'", [self.localSource contactAccessPromptTitle], controller.title);
         [expectation fulfill];
+        
+        // Following code from http://stackoverflow.com/questions/36926827/how-can-you-test-the-contents-of-a-uialertaction-handler-with-ocmock
+        //Get the "Don't Allow" button
+        UIAlertAction *action = controller.actions[0];
+        
+        //Cast the pointer of the handle block into a form that we can execute
+        void (^someBlock)(id obj) = [action valueForKey:@"handler"];
+        
+        //Execute the code of the join button
+        someBlock(action);
     }];
     
     [self.localSource requestContactPermission:^(BOOL granted, NSError * _Nullable error)
     {
-        XCTAssertTrue(granted);
+        XCTAssertFalse(granted);
         XCTAssertNil(error);
     }];
     
@@ -271,6 +281,36 @@
         XCTAssertNil(error, @"Expectation timed-out with error '%@'", error);
     }];
 }
+
+
+- (void)testPermissionsDidNotAskGrantedTrue
+{
+    id mock = [OCMockObject partialMockForObject:self.localSource];
+    OCMStub([mock hasPermission]).andReturn(NO);
+    OCMStub([mock didAskForPermission]).andReturn(NO);
+    OCMStub([mock contactAccessPromptTitle]).andReturn(@"Mocked Title");
+    OCMStub([mock contactAccessPromptMessage]).andReturn(@"Mocked message");
+    //OCMStub([mock setDidAskForPermission:YES]);
+    
+    [UIAlertController setYsgShowWasTriggered:^(BOOL withAnimationArgument, UIAlertController *controller)
+     {
+         XCTAssertNotNil(controller, @"Displayed controller shouldn't be nil");
+         XCTAssertEqual(controller.actions.count, 2, @"There should be 2 actions associated with alert controller");
+         NSString *expectedDontAllow = @"Don't allow";
+         NSString *expectedOk = @"Ok";
+         XCTAssert([controller.actions.firstObject.title isEqualToString:expectedDontAllow], @"First controller action should have the title '%@', but title was '%@'", expectedDontAllow, controller.actions.firstObject.title);
+         XCTAssert([controller.actions.lastObject.title isEqualToString:expectedOk], @"Second controller action should have the title '%@', but title was '%@'", expectedOk, controller.actions.lastObject.title);
+         XCTAssert([controller.title isEqualToString:[self.localSource contactAccessPromptTitle]], @"Controller's title should be '%@', but was '%@'", [self.localSource contactAccessPromptTitle], controller.title);
+
+     }];
+    
+    [self.localSource requestContactPermission:^(BOOL granted, NSError * _Nullable error)
+     {
+         XCTAssertTrue(granted);
+         XCTAssertNil(error);
+     }];
+}
+
 
 - (void)testPermissionsDidAskContactStore
 {
@@ -297,6 +337,7 @@
          XCTAssertNil(error);
      }];
 }
+
 
 - (void)testContactAccessPromptMessageLong
 {
