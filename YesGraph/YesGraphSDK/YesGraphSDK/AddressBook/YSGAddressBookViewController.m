@@ -581,8 +581,7 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
         return;
     }
     
-    
-    if (emptyView.superview != self)
+    if (emptyView.superview != self.tableView)
     {
         [self.tableView addSubview:emptyView];
     }
