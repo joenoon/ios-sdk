@@ -624,8 +624,6 @@ static NSString *const YSGAddressBookCellIdentifier = @"YSGAddressBookCellIdenti
 }
 
 
-#pragma mark Swizzle methods
-
 - (void)ysg_reloadData;
 {
     // this calls the original reloadData implementation

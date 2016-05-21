@@ -14,7 +14,7 @@ let bgIdent = "background";
 
 let txGrowStaticText = "YesGraph Helps Your App Grow";
 let lblBoostText = "Boost the performance of sharing and invite flows by recommending exactly who users should invite. ";
-let btnText = "SHARE NOW";
+let btnText = "try_yesgraph";
 
 let navShareIdent = "Share";
 let btnWelcome = "Welcome";

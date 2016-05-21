@@ -41,8 +41,8 @@ class FacebookAndTwitterAndContactsTests: XCTestCase {
             XCTAssertNotNil(self.application!.otherElements.staticTexts[lbShareText], "Label not found, expected text: \(lbShareText)")
             XCTAssertNotNil(self.application!.otherElements.staticTexts[lbContactsText], "Label not found, expected text: \(lbContactsText)")
             
-            let facebookButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1).childrenMatchingType(XCUIElementType.Image).element
-            XCTAssert(facebookButton.respondsToSelector(Selector("tap")), "Twitter button image does not respond to tap")
+            let facebookButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1)
+            XCTAssert(facebookButton.respondsToSelector(#selector(XCUIElement.tap)), "Twitter button image does not respond to tap")
             facebookButton.tap()
             
             let facebookTitleBar = self.application!.staticTexts.elementMatchingType(XCUIElementType.StaticText, identifier: "Facebook")

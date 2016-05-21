@@ -44,7 +44,7 @@ class HammerTheAppTests: XCTestCase {
         XCTAssertNotNil(self.application!.otherElements.staticTexts[lbContactsText], "Label not found, expected text: '\(lbContactsText)'");
     
     
-        let facebookButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1).childrenMatchingType(XCUIElementType.Image).element;
+        let facebookButton = self.application!.collectionViews.cells.childrenMatchingType(XCUIElementType.Other).elementBoundByIndex(1);
         XCTAssert(facebookButton.respondsToSelector(#selector(XCUIElement.tap)), "Twitter image does not respond to tap");
         facebookButton.tap();
         
