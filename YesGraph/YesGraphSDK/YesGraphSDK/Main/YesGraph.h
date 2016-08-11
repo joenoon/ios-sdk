@@ -49,6 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return instance of YesGraph SDK
  */
 + (instancetype)shared;
+- (void)setLastFetchDate:(NSDate *)lastFetchDate;
 
 @end
 
