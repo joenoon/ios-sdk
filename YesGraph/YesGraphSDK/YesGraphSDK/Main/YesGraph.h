@@ -122,6 +122,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)fetchContactListWithCompletion:(void (^)(YSGContactList *, NSError *))completion;
 
+// Custom
+- (void)fetchLocalContactListAndUploadOnlyIfAllowed:(BOOL)onlyIfAllowed onlyIfNeeded:(BOOL)onlyIfNeeded completion:(void (^)(YSGContactList *, NSError *))completion;
+
 @end
 
 

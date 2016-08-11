@@ -222,7 +222,7 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 + (void)load
 {
-    [[NSNotificationCenter defaultCenter] addObserver:[self shared] selector:@selector(applicationNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:[self shared] selector:@selector(applicationNotification:) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (instancetype)init
@@ -268,6 +268,41 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
 
 
 #pragma mark - Private Methods
+
+- (void)fetchLocalContactListAndUploadOnlyIfAllowed:(BOOL)onlyIfAllowed onlyIfNeeded:(BOOL)onlyIfNeeded completion:(void (^)(YSGContactList *, NSError *))completion
+{
+  if (onlyIfNeeded) {
+    if (fabs([self.lastFetchDate timeIntervalSinceNow]) < self.contactBookTimePeriod)
+    {
+      if (completion) {
+        completion(nil, nil);
+      }
+      return;
+    }
+  }
+  
+  if (onlyIfAllowed) {
+    if (![[self.localSource class] hasPermission])
+    {
+      if (completion) {
+        completion(nil, nil);
+      }
+      return;
+    }
+  }
+  
+  [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error) {
+    [self updateAndUploadContactList:contactList completion:^(YSGContactList *contactList, NSError *error) {
+      if (!error) {
+        [self setLastFetchDate:[NSDate date]];
+      }
+      if (completion) {
+        completion(contactList, error);
+      }
+    }];
+  }];
+}
+
 - (void)updateAndUploadContactList:(YSGContactList *)contactList completion:(void (^)(YSGContactList *, NSError *))completion
 {
     if ([self isConfigured]) {

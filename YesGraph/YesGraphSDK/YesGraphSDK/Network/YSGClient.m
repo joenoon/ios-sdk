@@ -119,7 +119,11 @@
     }
     
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
+
+    NSLocale *locale = [NSLocale currentLocale];
+    NSString *countryCode = [locale objectForKey: NSLocaleCountryCode];
+    [request addValue:countryCode forHTTPHeaderField:@"x-ios-country-code"];
+
     //
     // Return nil and error if invalid JSON object
     //
