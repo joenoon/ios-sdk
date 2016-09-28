@@ -204,6 +204,32 @@ static NSString *const YSGLocalContactSourcePermissionKey = @"YSGLocalContactSou
     }
 }
 
+- (void)requestContactPermission2:(void (^)(BOOL granted, NSError *error))completion
+{
+    //
+    // If we already have permission, we do not request it again and just return
+    //
+  
+    if ([self class].hasPermission)
+    {
+        if (completion)
+        {
+            completion([self class].hasPermission, nil);
+        }
+        
+        return;
+    }
+    
+    if ([self class].useContactsFramework)
+    {
+        [self requestContactsPermissionWithCompletion:completion];
+    }
+    else
+    {
+        [self requestAddressBookPermissionWithCompletion:completion];
+    }
+}
+
 #pragma mark - Private Methods
 
 #pragma mark - Contacts Framework

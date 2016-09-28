@@ -291,15 +291,19 @@ static NSString *const YSGConfigurationUserIdKey = @"YSGConfigurationUserIdKey";
     }
   }
   
-  [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error) {
-    [self updateAndUploadContactList:contactList completion:^(YSGContactList *contactList, NSError *error) {
-      if (!error) {
-        [self setLastFetchDate:[NSDate date]];
-      }
-      if (completion) {
-        completion(contactList, error);
-      }
-    }];
+  [self.localSource requestContactPermission2:^(BOOL granted, NSError *error) {
+    if (granted) {
+      [self.localSource fetchContactListWithCompletion:^(YSGContactList * _Nullable contactList, NSError * _Nullable error) {
+        [self updateAndUploadContactList:contactList completion:^(YSGContactList *contactList, NSError *error) {
+          if (!error) {
+            [self setLastFetchDate:[NSDate date]];
+          }
+          if (completion) {
+            completion(contactList, error);
+          }
+        }];
+      }];
+    }
   }];
 }
 

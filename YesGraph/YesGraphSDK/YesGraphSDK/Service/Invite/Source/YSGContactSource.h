@@ -16,5 +16,6 @@
 
 @optional
 - (void)requestContactPermission:(nullable void (^)(BOOL granted, NSError * _Nullable error))completion;
+- (void)requestContactPermission2:(nullable void (^)(BOOL granted, NSError * _Nullable error))completion;
 
 @end
